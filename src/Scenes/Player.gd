@@ -11,15 +11,22 @@ const RUN_ACCEL = 400.0
 const WALK_MAX = 230.0
 # Maximum horizontal speed
 const RUN_MAX = 320.0
+# Backflip horizontal speed
+const BACKFLIP_SPEED = -128
 
 # Acceleration when holding the opposite direction
 const TURN_ACCEL = 900.0
 # Speed which Tux slows down
+const SKID_ACCEL = 950.0
+# Speed which Tux skids
 const FRICTION = 0.93
 # Speed Tux slows down skidding
 const SKID_TIME = 18
+
 # Jump velocity
-const JUMP_POWER = 555.0
+const JUMP_POWER = 565.0
+# Running Jump / Backflip velocity
+const RUNJUMP_POWER = 630.0
 # Gravity
 const GRAVITY = 20.0
 
@@ -28,7 +35,11 @@ const FLOOR = Vector2(0, -1)
 var velocity = Vector2()
 var on_ground = false
 var jumpheld = 0 # Time the jump key has been held
+var running = 0 # If horizontal speed is higher than walk max
 var skid = 0 # Time skidding
+var ducking = 0 # Ducking
+var backflip = 0 # Backflipping
+var backflip_rotation = 0 # Backflip rotation
 
 #=============================================================================
 # PHYSICS
@@ -36,37 +47,41 @@ var skid = 0 # Time skidding
 func _physics_process(delta):
 	
 	# Horizontal movement
-	if Input.is_action_pressed("move_right") and not Input.is_action_pressed("duck"):
+	if Input.is_action_pressed("move_right") and (ducking == 0 or on_ground == false) and backflip == 0:
 		$Animation.flip_h = false
 		if skid <= 0 and velocity.x >= 0:
 			if velocity.x == 0:
 				velocity.x += WALK_ADD
-			if velocity.x >= WALK_MAX:
+			if running == 1:
 					velocity.x += RUN_ACCEL / 60
 			else: velocity.x += WALK_ACCEL / 60
 			
 			# Skidding and air turning
 		if velocity.x < 0:
-			velocity.x += TURN_ACCEL / 60
-			if on_ground == true and skid == 0 and velocity.x <= WALK_MAX:
-				skid = SKID_TIME
+			if on_ground == true:
+				velocity.x += SKID_ACCEL / 60
+				if skid == 0 and velocity.x <= -WALK_MAX:
+					skid = SKID_TIME
+			else: velocity.x += TURN_ACCEL / 60
 		
-	else: if Input.is_action_pressed("move_left") and not Input.is_action_pressed("duck"):
+	else: if Input.is_action_pressed("move_left") and (ducking == 0 or on_ground == false) and backflip == 0:
 		$Animation.flip_h = true
 		if skid <= 0 and velocity.x <= 0:
 			if velocity.x == 0:
 				velocity.x -= WALK_ADD
-			if velocity.x <= -WALK_MAX:
+			if running == 1:
 					velocity.x -= RUN_ACCEL / 60
 			else: velocity.x -= WALK_ACCEL / 60
 			
 		# Skidding and air turning
 		if velocity.x > 0:
-			velocity.x -= TURN_ACCEL / 60
-			if on_ground == true and skid == 0 and velocity.x >= WALK_MAX:
-				skid = SKID_TIME
+			if on_ground == true:
+				velocity.x -= SKID_ACCEL / 60
+				if skid == 0 and velocity.x >= WALK_MAX:
+					skid = SKID_TIME
+			else: velocity.x -= TURN_ACCEL / 60
 		
-	else: velocity.x *= FRICTION
+	else: if backflip == 0: velocity.x *= FRICTION
 	
 	# Speedcap
 	if velocity.x >= RUN_MAX:
@@ -86,25 +101,27 @@ func _physics_process(delta):
 	# Gravity
 	velocity.y += GRAVITY
 	
+	velocity = move_and_slide(velocity, FLOOR)
+	
 	# Floor check
 	if is_on_floor():
 		on_ground = true
+		if backflip == 1:
+			backflip = 0
+			velocity.x = 0
 	else:
 		on_ground = false
 	
-	velocity = move_and_slide(velocity, FLOOR)
+	# Running
+	if abs(velocity.x) > WALK_MAX:
+		running = 1
+	else: running = 0
 	
-		# Animations
-	if Input.is_action_pressed("duck"):
-		$Animation.play("duck")
-	else:
-		if on_ground == true:
-			if skid > 0:
-				$Animation.play("skid")
-			else: if abs(velocity.x) >= 20:
-				$Animation.play("walk")
-			else: $Animation.play("idle")
-		else: $Animation.play("jump")
+	# Ducking
+	if not Input.is_action_pressed("duck"):
+		ducking = 0
+	if on_ground == true and Input.is_action_pressed("duck"):
+			ducking = 1
 	
 	# Jump buffering
 	if Input.is_action_pressed("jump"):
@@ -116,10 +133,40 @@ func _physics_process(delta):
 	if Input.is_action_pressed("jump"):
 		if jumpheld <= 15:
 			if on_ground == true:
-				velocity.y = -JUMP_POWER
+				if running == 1 or ducking == 1:
+					velocity.y = -RUNJUMP_POWER
+					if ducking == 1 and abs(velocity.x) <= 20:
+						backflip = 1
+						backflip_rotation = 0
+				else: velocity.y = -JUMP_POWER
 				on_ground = false
 	
 	# Jump cancelling
-	if on_ground == false and not Input.is_action_pressed("jump"):
+	if on_ground == false and not Input.is_action_pressed("jump") and backflip == 0:
 		if velocity.y < 0:
 			velocity.y *= 0.7
+	
+	# Backflip speed and rotation
+	$Animation.rotation_degrees = 0
+	if backflip == 1:
+		if $Animation.flip_h == false:
+			velocity.x = BACKFLIP_SPEED
+			backflip_rotation -= 15
+		else:
+			velocity.x = -BACKFLIP_SPEED
+			backflip_rotation += 15
+		$Animation.rotation_degrees = backflip_rotation
+	
+	# Animations
+	if backflip == 1:
+		$Animation.play("backflip")
+	elif ducking == 1:
+		$Animation.play("duck")
+	else:
+		if on_ground == true:
+			if skid > 0:
+				$Animation.play("skid")
+			else: if abs(velocity.x) >= 20:
+				$Animation.play("walk")
+			else: $Animation.play("idle")
+		else: $Animation.play("jump")
