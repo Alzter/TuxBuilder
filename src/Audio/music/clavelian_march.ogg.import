@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/clavelian_march.ogg-0b32e066f780648f2c2586a50c745462.oggstr"
+
+[deps]
+
+source_file="res://Audio/music/clavelian_march.ogg"
+dest_files=[ "res://.import/clavelian_march.ogg-0b32e066f780648f2c2586a50c745462.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

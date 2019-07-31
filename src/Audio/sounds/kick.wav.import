@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/kick.wav-9fded80b59828f4f301e3a9ad0082b0a.sample"
+
+[deps]
+
+source_file="res://Audio/sounds/kick.wav"
+dest_files=[ "res://.import/kick.wav-9fded80b59828f4f301e3a9ad0082b0a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

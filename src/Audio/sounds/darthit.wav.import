@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/darthit.wav-2ee1e8f7af2e7dfc5021dfd68f38b0fa.sample"
+
+[deps]
+
+source_file="res://Audio/sounds/darthit.wav"
+dest_files=[ "res://.import/darthit.wav-2ee1e8f7af2e7dfc5021dfd68f38b0fa.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

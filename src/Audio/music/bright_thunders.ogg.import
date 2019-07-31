@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/bright_thunders.ogg-c938f6f5b661ccfd06691d5bfbedd1e0.oggstr"
+
+[deps]
+
+source_file="res://Audio/music/bright_thunders.ogg"
+dest_files=[ "res://.import/bright_thunders.ogg-c938f6f5b661ccfd06691d5bfbedd1e0.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

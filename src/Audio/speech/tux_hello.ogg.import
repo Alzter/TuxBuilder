@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/tux_hello.ogg-ab6bb5879fcf8f0296d72754950a6b43.oggstr"
+
+[deps]
+
+source_file="res://Audio/speech/tux_hello.ogg"
+dest_files=[ "res://.import/tux_hello.ogg-ab6bb5879fcf8f0296d72754950a6b43.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

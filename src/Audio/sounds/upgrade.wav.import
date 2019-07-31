@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/upgrade.wav-b77e49a8fb28bbb296e354e1f8807a94.sample"
+
+[deps]
+
+source_file="res://Audio/sounds/upgrade.wav"
+dest_files=[ "res://.import/upgrade.wav-b77e49a8fb28bbb296e354e1f8807a94.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

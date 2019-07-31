@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/grunts.ogg-816a97b22da46917801cfb6958d57cef.oggstr"
+
+[deps]
+
+source_file="res://Audio/sounds/grunts.ogg"
+dest_files=[ "res://.import/grunts.ogg-816a97b22da46917801cfb6958d57cef.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

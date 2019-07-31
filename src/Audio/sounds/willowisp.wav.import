@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/willowisp.wav-10efd0fa7ba29f524015c5d1353972da.sample"
+
+[deps]
+
+source_file="res://Audio/sounds/willowisp.wav"
+dest_files=[ "res://.import/willowisp.wav-10efd0fa7ba29f524015c5d1353972da.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

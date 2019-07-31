@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/yeti_gna.wav-71a7bf5202196c885d6882f8ae96c9d8.sample"
+
+[deps]
+
+source_file="res://Audio/sounds/yeti_gna.wav"
+dest_files=[ "res://.import/yeti_gna.wav-71a7bf5202196c885d6882f8ae96c9d8.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

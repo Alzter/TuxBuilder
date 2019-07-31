@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/invincible.ogg-ec4a487908d234e033166f9a807e8fc6.oggstr"
+
+[deps]
+
+source_file="res://Audio/music/invincible.ogg"
+dest_files=[ "res://.import/invincible.ogg-ec4a487908d234e033166f9a807e8fc6.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

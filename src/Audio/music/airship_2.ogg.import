@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/airship_2.ogg-c3507208e49076979ef4cff0865a4f32.oggstr"
+
+[deps]
+
+source_file="res://Audio/music/airship_2.ogg"
+dest_files=[ "res://.import/airship_2.ogg-c3507208e49076979ef4cff0865a4f32.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

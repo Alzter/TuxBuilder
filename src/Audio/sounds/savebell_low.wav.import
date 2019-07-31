@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/savebell_low.wav-776161907e679c177a9de74b0b97eff8.sample"
+
+[deps]
+
+source_file="res://Audio/sounds/savebell_low.wav"
+dest_files=[ "res://.import/savebell_low.wav-776161907e679c177a9de74b0b97eff8.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

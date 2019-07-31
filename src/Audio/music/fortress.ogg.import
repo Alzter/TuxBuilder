@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/fortress.ogg-2ee4ff8ee3c38c44d958d6b8b33bc0f4.oggstr"
+
+[deps]
+
+source_file="res://Audio/music/fortress.ogg"
+dest_files=[ "res://.import/fortress.ogg-2ee4ff8ee3c38c44d958d6b8b33bc0f4.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/locked.ogg-3464e0f858083f333fe39bfc4d7938fa.oggstr"
+
+[deps]
+
+source_file="res://Audio/sounds/locked.ogg"
+dest_files=[ "res://.import/locked.ogg-3464e0f858083f333fe39bfc4d7938fa.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

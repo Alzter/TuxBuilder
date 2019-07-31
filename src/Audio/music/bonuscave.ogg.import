@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/bonuscave.ogg-ef7eb71f61b2963e3600601ef1b1222b.oggstr"
+
+[deps]
+
+source_file="res://Audio/music/bonuscave.ogg"
+dest_files=[ "res://.import/bonuscave.ogg-ef7eb71f61b2963e3600601ef1b1222b.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

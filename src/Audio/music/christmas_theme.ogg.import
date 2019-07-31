@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/christmas_theme.ogg-03fcebad26083791f5861c6b0baba09b.oggstr"
+
+[deps]
+
+source_file="res://Audio/music/christmas_theme.ogg"
+dest_files=[ "res://.import/christmas_theme.ogg-03fcebad26083791f5861c6b0baba09b.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

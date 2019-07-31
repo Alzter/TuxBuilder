@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/icecrash.ogg-58b4ba963430499f83c4c8d8f662193b.oggstr"
+
+[deps]
+
+source_file="res://Audio/sounds/icecrash.ogg"
+dest_files=[ "res://.import/icecrash.ogg-58b4ba963430499f83c4c8d8f662193b.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/greatgigantic.ogg-34671dab119d71a8d638084a9dc33418.oggstr"
+
+[deps]
+
+source_file="res://Audio/music/greatgigantic.ogg"
+dest_files=[ "res://.import/greatgigantic.ogg-34671dab119d71a8d638084a9dc33418.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

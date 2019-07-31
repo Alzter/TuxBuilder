@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/beneath_the_rabbit_hole.ogg-6371ed5506f4feddac5478680ad287c2.oggstr"
+
+[deps]
+
+source_file="res://Audio/music/beneath_the_rabbit_hole.ogg"
+dest_files=[ "res://.import/beneath_the_rabbit_hole.ogg-6371ed5506f4feddac5478680ad287c2.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

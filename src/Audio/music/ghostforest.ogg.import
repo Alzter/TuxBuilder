@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/ghostforest.ogg-e624f24999691cc68f054ed2787d25a1.oggstr"
+
+[deps]
+
+source_file="res://Audio/music/ghostforest.ogg"
+dest_files=[ "res://.import/ghostforest.ogg-e624f24999691cc68f054ed2787d25a1.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

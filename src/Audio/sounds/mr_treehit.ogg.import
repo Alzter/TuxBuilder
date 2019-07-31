@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/mr_treehit.ogg-1b77c5a0c0396a30a96cf143eeb1feea.oggstr"
+
+[deps]
+
+source_file="res://Audio/sounds/mr_treehit.ogg"
+dest_files=[ "res://.import/mr_treehit.ogg-1b77c5a0c0396a30a96cf143eeb1feea.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

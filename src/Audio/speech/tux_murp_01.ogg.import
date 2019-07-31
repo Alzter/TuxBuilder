@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/tux_murp_01.ogg-db941be6203ba89a1db1567681afcba7.oggstr"
+
+[deps]
+
+source_file="res://Audio/speech/tux_murp_01.ogg"
+dest_files=[ "res://.import/tux_murp_01.ogg-db941be6203ba89a1db1567681afcba7.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

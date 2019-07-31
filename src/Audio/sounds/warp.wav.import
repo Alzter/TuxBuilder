@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/warp.wav-d755ff535b4130f07faa68b8387b056f.sample"
+
+[deps]
+
+source_file="res://Audio/sounds/warp.wav"
+dest_files=[ "res://.import/warp.wav-d755ff535b4130f07faa68b8387b056f.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

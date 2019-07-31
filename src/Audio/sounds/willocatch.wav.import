@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/willocatch.wav-eb63b81523f9d1c1b73c2053131dd418.sample"
+
+[deps]
+
+source_file="res://Audio/sounds/willocatch.wav"
+dest_files=[ "res://.import/willocatch.wav-eb63b81523f9d1c1b73c2053131dd418.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

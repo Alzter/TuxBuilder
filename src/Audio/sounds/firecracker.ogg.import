@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/firecracker.ogg-9b772998627df76b8288c108209071a3.oggstr"
+
+[deps]
+
+source_file="res://Audio/sounds/firecracker.ogg"
+dest_files=[ "res://.import/firecracker.ogg-9b772998627df76b8288c108209071a3.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

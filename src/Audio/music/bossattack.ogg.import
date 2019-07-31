@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/bossattack.ogg-07b876546c724f1bdd60bae04904f8cf.oggstr"
+
+[deps]
+
+source_file="res://Audio/music/bossattack.ogg"
+dest_files=[ "res://.import/bossattack.ogg-07b876546c724f1bdd60bae04904f8cf.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

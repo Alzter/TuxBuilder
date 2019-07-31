@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/wisphunt.ogg-558a00a4eca6ffd898fdc816ec079bea.oggstr"
+
+[deps]
+
+source_file="res://Audio/music/wisphunt.ogg"
+dest_files=[ "res://.import/wisphunt.ogg-558a00a4eca6ffd898fdc816ec079bea.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

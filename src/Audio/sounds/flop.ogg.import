@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/flop.ogg-4e6b25a0e50477afd23c5f6eeea71473.oggstr"
+
+[deps]
+
+source_file="res://Audio/sounds/flop.ogg"
+dest_files=[ "res://.import/flop.ogg-4e6b25a0e50477afd23c5f6eeea71473.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

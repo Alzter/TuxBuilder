@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/waterfall.wav-ebf7f3796f0a4605f9a5ecbd8e88cea4.sample"
+
+[deps]
+
+source_file="res://Audio/sounds/waterfall.wav"
+dest_files=[ "res://.import/waterfall.wav-ebf7f3796f0a4605f9a5ecbd8e88cea4.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

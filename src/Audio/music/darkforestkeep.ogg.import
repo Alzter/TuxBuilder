@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/darkforestkeep.ogg-763e21d567688d78b5106587a7cbda83.oggstr"
+
+[deps]
+
+source_file="res://Audio/music/darkforestkeep.ogg"
+dest_files=[ "res://.import/darkforestkeep.ogg-763e21d567688d78b5106587a7cbda83.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

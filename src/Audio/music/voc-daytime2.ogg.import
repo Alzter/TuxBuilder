@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/voc-daytime2.ogg-9e2eb8aa09b465c059a9f4c04b3e2bce.oggstr"
+
+[deps]
+
+source_file="res://Audio/music/voc-daytime2.ogg"
+dest_files=[ "res://.import/voc-daytime2.ogg-9e2eb8aa09b465c059a9f4c04b3e2bce.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

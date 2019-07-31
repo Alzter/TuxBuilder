@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/turnkey.ogg-1b23e0a40ca9785cd3388d8048a79176.oggstr"
+
+[deps]
+
+source_file="res://Audio/sounds/turnkey.ogg"
+dest_files=[ "res://.import/turnkey.ogg-1b23e0a40ca9785cd3388d8048a79176.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
