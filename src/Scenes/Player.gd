@@ -3,7 +3,7 @@ extends KinematicBody2D
 # Instant speed when starting walk
 const WALK_ADD = 120.0
 # Speed Tux accelerates per second when walking
-const WALK_ACCEL = 320.0
+const WALK_ACCEL = 350.0
 # Speed Tux accelerates per second when running
 const RUN_ACCEL = 400.0
 
@@ -21,27 +21,29 @@ const SKID_ACCEL = 950.0
 # Speed which Tux skids
 const FRICTION = 0.93
 # Speed Tux slows down skidding
-const SKID_TIME = 18
+const SKID_TIME = 12
 
 # Jump velocity
-const JUMP_POWER = 565.0
+const JUMP_POWER = 580
 # Running Jump / Backflip velocity
-const RUNJUMP_POWER = 630.0
+const RUNJUMP_POWER = 640
 # Gravity
 const GRAVITY = 20.0
 
 const FLOOR = Vector2(0, -1)
 
+const LEDGE_JUMP = 3 # Amount of frames Tux can still jump after falling off a ledge
+
 var velocity = Vector2()
-var on_ground = false
+var on_ground = 0 # Frames Tux has been in air (0 if grounded)
 var jumpheld = 0 # Time the jump key has been held
 var running = 0 # If horizontal speed is higher than walk max
 var skid = 0 # Time skidding
-var ducking = 0 # Ducking
+var ducking = false # Ducking
 var backflip = 0 # Backflipping
 var backflip_rotation = 0 # Backflip rotation
 
-var use_effect = true # For skidding sound effect
+var state = "large" # Tux's power-up state
 
 #=============================================================================
 # PHYSICS
@@ -49,7 +51,7 @@ var use_effect = true # For skidding sound effect
 func _physics_process(delta):
 	
 	# Horizontal movement
-	if Input.is_action_pressed("move_right") and (ducking == 0 or on_ground == false) and backflip == 0:
+	if Input.is_action_pressed("move_right") and (ducking == false or on_ground != 0) and backflip == 0:
 		$Animation.flip_h = false
 		if skid <= 0 and velocity.x >= 0:
 			if velocity.x == 0:
@@ -60,13 +62,13 @@ func _physics_process(delta):
 			
 			# Skidding and air turning
 		if velocity.x < 0:
-			if on_ground == true:
+			if on_ground == 0:
 				velocity.x += SKID_ACCEL / 60
 				if skid == 0 and velocity.x <= -WALK_MAX:
 					skid = SKID_TIME
 			else: velocity.x += TURN_ACCEL / 60
 		
-	else: if Input.is_action_pressed("move_left") and (ducking == 0 or on_ground == false) and backflip == 0:
+	else: if Input.is_action_pressed("move_left") and (ducking == false or on_ground != 0) and backflip == 0:
 		$Animation.flip_h = true
 		if skid <= 0 and velocity.x <= 0:
 			if velocity.x == 0:
@@ -77,7 +79,7 @@ func _physics_process(delta):
 			
 		# Skidding and air turning
 		if velocity.x > 0:
-			if on_ground == true:
+			if on_ground == 0:
 				velocity.x -= SKID_ACCEL / 60
 				if skid == 0 and velocity.x >= WALK_MAX:
 					skid = SKID_TIME
@@ -97,13 +99,11 @@ func _physics_process(delta):
 	
 	# Skid
 	if skid > 0:
-		skid -= 1
-		if use_effect == true:
+		if skid == SKID_TIME:
 			$SFX/Skid.play()
-			use_effect = false
+		skid -= 1
 	else:
 		skid = 0
-		use_effect = true
 	
 	# Gravity
 	velocity.y += GRAVITY
@@ -112,12 +112,12 @@ func _physics_process(delta):
 	
 	# Floor check
 	if is_on_floor():
-		on_ground = true
+		on_ground = 0
 		if backflip == 1:
 			backflip = 0
 			velocity.x = 0
 	else:
-		on_ground = false
+		on_ground += 1
 	
 	# Running
 	if abs(velocity.x) > WALK_MAX:
@@ -126,9 +126,9 @@ func _physics_process(delta):
 	
 	# Ducking
 	if not Input.is_action_pressed("duck"):
-		ducking = 0
-	if on_ground == true and Input.is_action_pressed("duck"):
-			ducking = 1
+		ducking = false
+	if on_ground == 0 and Input.is_action_pressed("duck") or ($StandWindow.is_colliding() == true and state != "small"):
+			ducking = true
 	
 	# Jump buffering
 	if Input.is_action_pressed("jump"):
@@ -139,24 +139,24 @@ func _physics_process(delta):
 	# Jumping
 	if Input.is_action_pressed("jump"):
 		if jumpheld <= 15:
-			if on_ground == true:
-				if running == 1 or ducking == 1:
+			if on_ground <= LEDGE_JUMP:
+				if running == 1 or (state != "small" and Input.is_action_pressed("duck") == true and Input.is_action_pressed("move_left") == false and Input.is_action_pressed("move_right") == false):
 					velocity.y = -RUNJUMP_POWER
-					if ducking == 1 and abs(velocity.x) <= 20:
+					if ducking == true:
 						backflip = 1
 						backflip_rotation = 0
 						$SFX/Flip.play()
-					else:
-						$SFX/Jump.play()
 				else: 
 					velocity.y = -JUMP_POWER
+				if state == "small":
 					$SFX/Jump.play()
-				on_ground = false
-	
+				else: $SFX/BigJump.play()
+				on_ground = LEDGE_JUMP + 1
+			jumpheld = 16
 	# Jump cancelling
-	if on_ground == false and not Input.is_action_pressed("jump") and backflip == 0:
+	if on_ground != 0 and not Input.is_action_pressed("jump") and backflip == 0:
 		if velocity.y < 0:
-			velocity.y *= 0.7
+			velocity.y *= 0.5
 	
 	# Backflip speed and rotation
 	$Animation.rotation_degrees = 0
@@ -172,13 +172,20 @@ func _physics_process(delta):
 	# Animations
 	if backflip == 1:
 		$Animation.play("backflip")
-	elif ducking == 1:
+	elif ducking == true:
 		$Animation.play("duck")
 	else:
-		if on_ground == true:
+		if on_ground == 0:
 			if skid > 0:
 				$Animation.play("skid")
 			else: if abs(velocity.x) >= 20:
 				$Animation.play("walk")
 			else: $Animation.play("idle")
 		else: $Animation.play("jump")
+		
+	if ducking == true or state == "small":
+		$BigHitbox.disabled = true
+		$SmallHitbox.disabled = false
+	else:
+		$BigHitbox.disabled = false
+		$SmallHitbox.disabled = true
