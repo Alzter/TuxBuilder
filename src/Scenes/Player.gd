@@ -41,6 +41,8 @@ var ducking = 0 # Ducking
 var backflip = 0 # Backflipping
 var backflip_rotation = 0 # Backflip rotation
 
+var use_effect = true # For skidding sound effect
+
 #=============================================================================
 # PHYSICS
 
@@ -96,7 +98,12 @@ func _physics_process(delta):
 	# Skid
 	if skid > 0:
 		skid -= 1
-	else: skid = 0
+		if use_effect == true:
+			$SFX/Skid.play()
+			use_effect = false
+	else:
+		skid = 0
+		use_effect = true
 	
 	# Gravity
 	velocity.y += GRAVITY
@@ -138,7 +145,12 @@ func _physics_process(delta):
 					if ducking == 1 and abs(velocity.x) <= 20:
 						backflip = 1
 						backflip_rotation = 0
-				else: velocity.y = -JUMP_POWER
+						$SFX/Flip.play()
+					else:
+						$SFX/Jump.play()
+				else: 
+					velocity.y = -JUMP_POWER
+					$SFX/Jump.play()
 				on_ground = false
 	
 	# Jump cancelling
