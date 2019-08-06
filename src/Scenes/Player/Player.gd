@@ -45,7 +45,7 @@ var ducking = false # Ducking
 var backflip = false # Backflipping
 var backflip_rotation = 0 # Backflip rotation
 
-var state = "large" # Tux's power-up state
+var state = "fire" # Tux's power-up state
 
 #=============================================================================
 # PHYSICS
@@ -193,7 +193,7 @@ func _physics_process(delta):
 		$SmallHitbox.disabled = true
 
 	# Shooting
-	if Input.is_action_just_pressed("action"):
+	if Input.is_action_just_pressed("action") and state == "fire" and get_tree().get_nodes_in_group("Bullets").size() < 2:
 		$SFX/Shoot.play()
 		var fireball = preload("res://Scenes/Objects/Fireball.tscn").instance()
 		if ducking == true or backflip == true:
