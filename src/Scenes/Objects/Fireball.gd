@@ -4,6 +4,12 @@ var velocity = Vector2(0,0)
 var oldvelocity = velocity.x
 var hit = false
 
+func _on_bullet_body_enter( body ):
+	if body.has_method("hit_by_fireball"):
+		body.call("hit_by_fireball")
+	elif body.has_method("hit_by_bullet"):
+		body.call("hit_by_bullet")
+		
 func _physics_process(delta):
 	if $VisibilityNotifier2D.is_on_screen() == false:
 		queue_free()
@@ -19,8 +25,8 @@ func _physics_process(delta):
 		if collision:
 			velocity = velocity.bounce(collision.normal)
 			if velocity.x != oldvelocity:
-					$Extinguish.play()
-					$AnimationPlayer.play("Hit")
-					$CollisionShape2D.disabled = true
-					remove_from_group("Bullets")
-					hit = true
+				$Extinguish.play()
+				$AnimationPlayer.play("Hit")
+				$CollisionShape2D.disabled = true
+				remove_from_group("Bullets")
+				hit = true

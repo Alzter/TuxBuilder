@@ -87,7 +87,7 @@ shape = SubResource( 3 )
 position = Vector2( 0, 38 )
 enabled = true
 cast_to = Vector2( 0, -32 )
-collision_mask = 2
+collision_mask = 512
 
 [node name="SFX" type="Node" parent="."]
 
