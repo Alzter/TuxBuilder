@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tilesets/Snow.tres" type="TileSet" id=2]
 [ext_resource path="res://Scenes/Objects/Coin.tscn" type="PackedScene" id=3]
+[ext_resource path="res://UI/CoinCounter.tscn" type="PackedScene" id=4]
 
 [node name="Gameplay" type="Node2D"]
 
@@ -17,3 +18,11 @@ tile_data = PoolIntArray( 720907, 0, 0, 786437, 0, 0, 786443, 0, 0, 851973, 0, 0
 
 [node name="Coin" parent="." instance=ExtResource( 3 )]
 position = Vector2( 120, 480 )
+
+[node name="Coin2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 200, 480 )
+
+[node name="Coin3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 285, 480 )
+
+[node name="CoinCounter" parent="." instance=ExtResource( 4 )]
