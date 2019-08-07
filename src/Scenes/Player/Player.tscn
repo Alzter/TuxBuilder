@@ -2,9 +2,9 @@
 
 [ext_resource path="res://Scenes/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Creatures/Tux/Big/Stand.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/duck-0.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/skid-0.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/Creatures/Tux/Big/backflip.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/skid-0.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/duck-0.png" type="Texture" id=5]
 [ext_resource path="res://Sprites/Creatures/Tux/Big/jump-0.png" type="Texture" id=6]
 [ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk1.png" type="Texture" id=7]
 [ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk2.png" type="Texture" id=8]
@@ -29,7 +29,7 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
-"name": "duck",
+"name": "skid",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 4 ) ],
@@ -39,7 +39,7 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 5 ) ],
 "loop": true,
-"name": "skid",
+"name": "duck",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 6 ) ],
@@ -64,15 +64,15 @@ extents = Vector2( 16, 31 )
 ]]
 script = ExtResource( 1 )
 
-[node name="Animation" type="AnimatedSprite" parent="."]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0.122086, 0 )
 frames = SubResource( 1 )
 animation = "idle"
 
-[node name="ShootLocation" type="Position2D" parent="Animation"]
+[node name="ShootLocation" type="Position2D" parent="AnimatedSprite"]
 position = Vector2( 16, 0 )
 
-[node name="ShootLocationDuck" type="Position2D" parent="Animation"]
+[node name="ShootLocationDuck" type="Position2D" parent="AnimatedSprite"]
 position = Vector2( 16, 22 )
 
 [node name="SmallHitbox" type="CollisionShape2D" parent="."]
@@ -105,3 +105,9 @@ stream = ExtResource( 18 )
 
 [node name="Shoot" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 19 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+limit_left = 0
+drag_margin_h_enabled = false
+editor_draw_drag_margin = true

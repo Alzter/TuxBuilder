@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tilesets/Snow.tres" type="TileSet" id=2]
-[ext_resource path="res://Scenes/BadGuys/Snowball.tscn" type="PackedScene" id=3]
-[ext_resource path="res://UI/CoinCounter.tscn" type="PackedScene" id=4]
+[ext_resource path="res://UI/CoinCounter.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Objects/1Up.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Objects/Coin.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/BadGuys/Snowball.tscn" type="PackedScene" id=6]
 
 [node name="Gameplay" type="Node2D"]
 
@@ -17,17 +18,17 @@ cell_size = Vector2( 32, 32 )
 collision_layer = 515
 collision_mask = 3
 format = 1
-tile_data = PoolIntArray( 720907, 0, 0, 786437, 0, 0, 786443, 0, 0, 851973, 0, 0, 851974, 0, 0, 851975, 0, 0, 851979, 0, 0, 917504, 3, 0, 917515, 0, 0, 917516, 0, 0, 917517, 0, 0, 983040, 1, 0, 1048576, 0, 0, 1048577, 2, 0, 1048578, 2, 0, 1048579, 2, 0, 1048580, 2, 0, 1048581, 2, 0, 1048582, 2, 0, 1048583, 2, 0, 1048584, 2, 0, 1048585, 2, 0, 1048586, 2, 0, 1048587, 2, 0, 1048588, 2, 0, 1048589, 2, 0, 1048590, 2, 0, 1048591, 2, 0, 1048592, 2, 0, 1048593, 2, 0, 1048594, 2, 0, 1048595, 2, 0, 1048596, 2, 0, 1048597, 2, 0, 1048598, 2, 0, 1048599, 2, 0, 1048600, 2, 0, 1048601, 2, 0, 1048602, 2, 0, 1048603, 2, 0, 1048604, 2, 0 )
+tile_data = PoolIntArray( 0, 1, 0, 65536, 1, 0, 131072, 1, 0, 196608, 1, 0, 262144, 1, 0, 327680, 1, 0, 393216, 1, 0, 458752, 1, 0, 524288, 1, 0, 589824, 1, 0, 655360, 1, 0, 720896, 1, 0, 720907, 0, 0, 786432, 1, 0, 786437, 0, 0, 786443, 0, 0, 786454, 0, 0, 786465, 0, 0, 786471, 0, 0, 851968, 1, 0, 851973, 0, 0, 851974, 0, 0, 851975, 0, 0, 851979, 0, 0, 851990, 0, 0, 852001, 0, 0, 852007, 0, 0, 917504, 1, 0, 917515, 0, 0, 917516, 0, 0, 917517, 0, 0, 917526, 0, 0, 917537, 0, 0, 917543, 0, 0, 983040, 1, 0, 983062, 0, 0, 983073, 0, 0, 983079, 0, 0, 1048576, 0, 0, 1048577, 2, 0, 1048578, 2, 0, 1048579, 2, 0, 1048580, 2, 0, 1048581, 2, 0, 1048582, 2, 0, 1048583, 2, 0, 1048584, 2, 0, 1048585, 2, 0, 1048586, 2, 0, 1048587, 2, 0, 1048588, 2, 0, 1048589, 2, 0, 1048590, 2, 0, 1048591, 2, 0, 1048592, 2, 0, 1048593, 2, 0, 1048594, 2, 0, 1048595, 2, 0, 1048596, 2, 0, 1048597, 2, 0, 1048598, 2, 0, 1048599, 2, 0, 1048600, 2, 0, 1048601, 2, 0, 1048602, 2, 0, 1048603, 2, 0, 1048604, 2, 0, 1048605, 2, 0, 1048606, 2, 0, 1048607, 2, 0, 1048608, 2, 0, 1048609, 2, 0, 1048610, 2, 0, 1048611, 2, 0, 1048612, 2, 0, 1048613, 2, 0, 1048614, 2, 0, 1048615, 2, 0, 1048616, 2, 0, 1048617, 2, 0, 1048618, 2, 0, 1048619, 2, 0, 1048620, 2, 0 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Snowball" parent="." instance=ExtResource( 3 )]
-position = Vector2( 570, 490 )
-
-[node name="CoinCounter" parent="." instance=ExtResource( 4 )]
+[node name="CoinCounter" parent="." instance=ExtResource( 3 )]
 
 [node name="Coins" type="Node" parent="."]
+
+[node name="1Up" parent="Coins" instance=ExtResource( 4 )]
+position = Vector2( 309.306, 455.367 )
 
 [node name="Coin" parent="Coins" instance=ExtResource( 5 )]
 position = Vector2( 120, 480 )
@@ -37,3 +38,11 @@ position = Vector2( 230, 480 )
 
 [node name="Coin3" parent="Coins" instance=ExtResource( 5 )]
 position = Vector2( 240, 380 )
+
+[node name="BadGuys" type="Node" parent="."]
+
+[node name="Snowball" parent="BadGuys" instance=ExtResource( 6 )]
+position = Vector2( 570, 490 )
+
+[node name="Snowball2" parent="BadGuys" instance=ExtResource( 6 )]
+position = Vector2( 1187.54, 484.779 )
