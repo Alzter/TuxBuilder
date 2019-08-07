@@ -29,7 +29,7 @@ offsets = PoolRealArray( 0, 0.160494, 1 )
 colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0.196078, 1, 1, 0, 0 )
 
 [sub_resource type="Gradient" id=4]
-colors = PoolColorArray( 1, 1, 1, 0.780392, 1, 1, 1, 0 )
+colors = PoolColorArray( 1, 1, 1, 0.780392, 1, 1, 0, 0 )
 
 [sub_resource type="Animation" id=3]
 resource_name = "Pickup"
@@ -115,7 +115,7 @@ script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
-frame = 1
+frame = 4
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

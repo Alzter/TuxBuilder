@@ -47,6 +47,8 @@ var backflip_rotation = 0 # Backflip rotation
 
 var state = "fire" # Tux's power-up state
 
+var camera_offset = 0 # Moves camera horizontally for extended view
+
 #=============================================================================
 # PHYSICS
 
@@ -206,3 +208,10 @@ func _physics_process(delta):
 		fireball.velocity = Vector2((FIREBALL_SPEED * $AnimatedSprite.scale.x) + velocity.x,0)
 		fireball.add_collision_exception_with(self) # Prevent fireball colliding with player
 		get_parent().add_child(fireball) # Shoot fireball as child of player
+
+	# Camera Positioning
+	if abs(velocity.x) > 0:
+		camera_offset += 2 * (velocity.x / abs(velocity.x))
+		if abs(camera_offset) >= (get_viewport().size.x * 0.1):
+			camera_offset = (get_viewport().size.x * 0.1) * (camera_offset / abs(camera_offset))
+	$Camera2D.position.x = $Camera2D.position.x + (camera_offset - $Camera2D.position.x) / 5
