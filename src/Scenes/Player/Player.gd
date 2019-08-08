@@ -230,9 +230,19 @@ func _physics_process(delta):
 		fireball.add_collision_exception_with(self) # Prevent fireball colliding with player
 		get_parent().add_child(fireball) # Shoot fireball as child of player
 
-	# Camera Positioning
+# Camera Positioning
 	if abs(velocity.x) > 0:
 		camera_offset += 2 * (velocity.x / abs(velocity.x))
 		if abs(camera_offset) >= (get_viewport().size.x * 0.1):
 			camera_offset = (get_viewport().size.x * 0.1) * (camera_offset / abs(camera_offset))
 	$Camera2D.position.x = $Camera2D.position.x + (camera_offset - $Camera2D.position.x) / 5
+
+# Set ends of camera to ends of TileSet
+	$Camera2D.limit_left = get_tree().current_scene.get_node("TileMap").get_used_rect().position.x * get_tree().current_scene.get_node("TileMap").get_cell_size().x
+	$Camera2D.limit_right = get_tree().current_scene.get_node("TileMap").get_used_rect().end.x * get_tree().current_scene.get_node("TileMap").get_cell_size().x
+	if $Camera2D.limit_right < get_viewport().size.x: # If the tilemap is thinner than the window, align the camera to the left
+		$Camera2D.limit_right = get_viewport().size.x
+	$Camera2D.limit_top = get_tree().current_scene.get_node("TileMap").get_used_rect().position.y * get_tree().current_scene.get_node("TileMap").get_cell_size().y
+	if $Camera2D.limit_top > get_viewport().size.y * -1: # If the tilemap is shorter than the window, align the camera to the bottom
+		$Camera2D.limit_top = get_viewport().size.y * -1
+	$Camera2D.limit_bottom = get_tree().current_scene.get_node("TileMap").get_used_rect().end.y * get_tree().current_scene.get_node("TileMap").get_cell_size().y
