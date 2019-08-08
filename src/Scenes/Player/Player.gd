@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+# What angle is considered floor
+const FLOOR = Vector2(0, -1)
 # Instant speed when starting walk
 const WALK_ADD = 120.0
 # Speed Tux accelerates per second when walking
@@ -31,8 +33,9 @@ const RUNJUMP_POWER = 640
 const GRAVITY = 20.0
 # Amount of frames Tux can still jump after falling off a ledge
 const LEDGE_JUMP = 3
-# What angle is considered floor
-const FLOOR = Vector2(0, -1)
+
+# Invincible time after being hit
+const SAFE_TIME = 108
 # Fireball speed
 const FIREBALL_SPEED = 500
 
@@ -44,10 +47,21 @@ var skid = 0 # Time skidding
 var ducking = false # Ducking
 var backflip = false # Backflipping
 var backflip_rotation = 0 # Backflip rotation
-
 var state = "fire" # Tux's power-up state
-
+var invincible_time = 0 # Amount of frames Tux is invincible
 var camera_offset = 0 # Moves camera horizontally for extended view
+
+func hit():
+	if state == "small":
+		pass # Death script goes here
+	elif state == "big":
+		state = "small"
+		$SFX/Hurt.play()
+		invincible_time = SAFE_TIME
+	else:
+		state = "big"
+		$SFX/Hurt.play()
+		invincible_time = SAFE_TIME
 
 #=============================================================================
 # PHYSICS
@@ -197,6 +211,13 @@ func _physics_process(delta):
 	else:
 		$BigHitbox.disabled = false
 		$SmallHitbox.disabled = true
+
+	# Invincible flashing
+	if invincible_time > 0:
+		if $AnimatedSprite.visible == true:
+			$AnimatedSprite.visible = false
+		else: $AnimatedSprite.visible = true
+	else: $AnimatedSprite.visible = true
 
 	# Shooting
 	if Input.is_action_just_pressed("action") and state == "fire" and get_tree().get_nodes_in_group("bullets").size() < 2:

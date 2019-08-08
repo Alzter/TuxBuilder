@@ -43,7 +43,6 @@ position = Vector2( 230, 480 )
 position = Vector2( 240, 380 )
 
 [node name="BadGuys" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="Snowball" parent="BadGuys" instance=ExtResource( 6 )]
 position = Vector2( 570, 490 )

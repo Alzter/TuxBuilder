@@ -31,5 +31,9 @@ func hit_by_bullet():
 	state = "bullet"
 	remove_from_group("badguys")
 	$CollisionShape2D.disabled = true
+	$Area2D/CollisionShape2D.disabled = true
 	velocity = Vector2(300 * (velocity.x / abs(velocity.x)), -350)
 	$Fall.play()
+
+func _on_snowball_body_entered(body):
+	pass # Replace with function body.

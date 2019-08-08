@@ -44,11 +44,12 @@ shape = SubResource( 2 )
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 rect = Rect2( -25, -25, 50, 50 )
 
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 3 )
+
 [node name="Fall" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 6 )
 attenuation = 0.5
-
-[node name="Area2D" type="Area2D" parent="Fall"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Fall/Area2D"]
-shape = SubResource( 3 )
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
