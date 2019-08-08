@@ -18,6 +18,9 @@ func _physics_process(delta):
 	elif state == "burned":
 		pass
 		
+	elif state == "squished":
+		$AnimationPlayer.play("squished")
+		
 	elif state == "bullet":
 		$CollisionShape2D.disabled = true
 		velocity = move_and_slide(velocity, FLOOR)
@@ -36,4 +39,11 @@ func hit_by_bullet():
 	$Fall.play()
 
 func _on_snowball_body_entered(body):
-	pass # Replace with function body.
+	if body.has_method("hurt") && !state == "squished":
+		body.hurt()
+
+func _on_Head_area_entered(area):
+	if area.is_in_group("bottom"):
+		state = "squished"
+		var player = area.get_parent()
+		player.velocity.y = -4000
