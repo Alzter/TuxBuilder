@@ -204,11 +204,11 @@ tracks/4/keys = {
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 8, 8 )
 
-[sub_resource type="Gradient" id=7]
+[sub_resource type="Gradient" id=5]
 offsets = PoolRealArray( 0, 0.3, 0.76, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 0.984314, 0, 0.698039, 1, 0, 0, 0.290196, 1, 0, 0, 0 )
 
-[sub_resource type="SpriteFrames" id=5]
+[sub_resource type="SpriteFrames" id=6]
 animations = [ {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
@@ -216,7 +216,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="Gradient" id=6]
+[sub_resource type="Gradient" id=7]
 offsets = PoolRealArray( 0, 0.5, 1 )
 colors = PoolColorArray( 1, 1, 0, 0.372549, 1, 0, 0, 0.137255, 1, 0, 0, 0 )
 
@@ -254,11 +254,11 @@ initial_velocity = 50.0
 initial_velocity_random = 0.5
 scale_amount = 0.75
 scale_amount_random = 0.5
-color_ramp = SubResource( 7 )
+color_ramp = SubResource( 5 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 rotation = 4.18879
-frames = SubResource( 5 )
+frames = SubResource( 6 )
 
 [node name="FireballGlow" type="CPUParticles2D" parent="."]
 amount = 10
@@ -273,7 +273,7 @@ initial_velocity_random = 0.25
 damping = 100.0
 scale_amount = 2.0
 scale_amount_random = 0.5
-color_ramp = SubResource( 6 )
+color_ramp = SubResource( 7 )
 
 [node name="FireballCollisionParticles" type="CPUParticles2D" parent="."]
 emitting = false
@@ -295,7 +295,7 @@ color_ramp = ExtResource( 4 )
 
 [node name="Extinguish" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 5 )
-attenuation = 0.5
+attenuation = 0.25
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 [connection signal="body_entered" from="Area2D" to="." method="_on_fireball_body_entered"]

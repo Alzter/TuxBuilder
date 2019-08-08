@@ -50,10 +50,11 @@ var backflip_rotation = 0 # Backflip rotation
 var state = "fire" # Tux's power-up state
 var invincible_time = 0 # Amount of frames Tux is invincible
 var camera_offset = 0 # Moves camera horizontally for extended view
+var dead = false # Stop doing stuff if true
 
-func hit():
+func hurt():
 	if state == "small":
-		pass # Death script goes here
+		kill()
 	elif state == "big":
 		state = "small"
 		$SFX/Hurt.play()
@@ -63,10 +64,21 @@ func hit():
 		$SFX/Hurt.play()
 		invincible_time = SAFE_TIME
 
+func kill():
+	$BigHitbox.disabled = true
+	$SmallHitbox.disabled = true
+	dead = true
+	velocity = Vector2 (0,-1000)
+
 #=============================================================================
 # PHYSICS
 
 func _physics_process(delta):
+
+	if dead == true:
+		velocity.y += GRAVITY
+		velocity = move_and_slide(velocity, FLOOR)
+		return
 
 	# Horizontal movement
 	if Input.is_action_pressed("move_right") and (ducking == false or on_ground != 0) and backflip == false:
@@ -192,6 +204,7 @@ func _physics_process(delta):
 		$AnimatedSprite.rotation_degrees = backflip_rotation
 
 	# Animations
+	$AnimatedSprite.speed_scale = 1
 	if backflip == true:
 		$AnimatedSprite.play("backflip")
 	elif ducking == true:
@@ -201,6 +214,9 @@ func _physics_process(delta):
 			if skid > 0:
 				$AnimatedSprite.play("skid")
 			else: if abs(velocity.x) >= 20:
+				$AnimatedSprite.speed_scale = abs(velocity.x) * 0.0035
+				if $AnimatedSprite.speed_scale < 0.4:
+					$AnimatedSprite.speed_scale = 0.4
 				$AnimatedSprite.play("walk")
 			else: $AnimatedSprite.play("idle")
 		else: $AnimatedSprite.play("jump")
@@ -230,14 +246,14 @@ func _physics_process(delta):
 		fireball.add_collision_exception_with(self) # Prevent fireball colliding with player
 		get_parent().add_child(fireball) # Shoot fireball as child of player
 
-# Camera Positioning
+	# Camera Positioning
 	if abs(velocity.x) > 0:
 		camera_offset += 2 * (velocity.x / abs(velocity.x))
 		if abs(camera_offset) >= (get_viewport().size.x * 0.1):
 			camera_offset = (get_viewport().size.x * 0.1) * (camera_offset / abs(camera_offset))
 	$Camera2D.position.x = $Camera2D.position.x + (camera_offset - $Camera2D.position.x) / 5
 
-# Set ends of camera to ends of TileSet
+	# Set ends of camera to ends of TileSet
 	$Camera2D.limit_left = get_tree().current_scene.get_node("TileMap").get_used_rect().position.x * get_tree().current_scene.get_node("TileMap").get_cell_size().x
 	$Camera2D.limit_right = get_tree().current_scene.get_node("TileMap").get_used_rect().end.x * get_tree().current_scene.get_node("TileMap").get_cell_size().x
 	if $Camera2D.limit_right < get_viewport().size.x: # If the tilemap is thinner than the window, align the camera to the left
@@ -246,3 +262,11 @@ func _physics_process(delta):
 	if $Camera2D.limit_top > get_viewport().size.y * -1: # If the tilemap is shorter than the window, align the camera to the bottom
 		$Camera2D.limit_top = get_viewport().size.y * -1
 	$Camera2D.limit_bottom = get_tree().current_scene.get_node("TileMap").get_used_rect().end.y * get_tree().current_scene.get_node("TileMap").get_cell_size().y
+
+	# Block player leaving screen
+	if position.x < 16:
+		position.x = 16
+	if position.x > $Camera2D.limit_right - 16:
+		position.x = $Camera2D.limit_right - 16
+	if position.y > $Camera2D.limit_bottom:
+		kill()

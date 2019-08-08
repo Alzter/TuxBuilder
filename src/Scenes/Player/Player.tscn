@@ -2,17 +2,17 @@
 
 [ext_resource path="res://Scenes/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Creatures/Tux/Big/Stand.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/duck-0.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/backflip.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/Creatures/Tux/Big/skid-0.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/backflip.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk1.png" type="Texture" id=6]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk2.png" type="Texture" id=7]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk3.png" type="Texture" id=8]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk4.png" type="Texture" id=9]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk5.png" type="Texture" id=10]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk6.png" type="Texture" id=11]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk7.png" type="Texture" id=12]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk8.png" type="Texture" id=13]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/duck-0.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk8.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk1.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk2.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk3.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk4.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk5.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk6.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk7.png" type="Texture" id=13]
 [ext_resource path="res://Sprites/Creatures/Tux/Big/jump-0.png" type="Texture" id=14]
 [ext_resource path="res://Audio/SoundEffects/jump.wav" type="AudioStream" id=15]
 [ext_resource path="res://Audio/SoundEffects/bigjump.wav" type="AudioStream" id=16]
@@ -30,7 +30,7 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
-"name": "duck",
+"name": "backflip",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 4 ) ],
@@ -40,7 +40,7 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 5 ) ],
 "loop": true,
-"name": "backflip",
+"name": "duck",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ) ],
