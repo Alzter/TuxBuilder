@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://UI/CoinCounter.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Objects/Coin/coin-0.png" type="Texture" id=2]
+[ext_resource path="res://UI/Fonts/SuperTux-Medium.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=2]
+size = 15
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=1]
+size = 25
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = ExtResource( 3 )
+
+[node name="LevelUI" type="CanvasLayer" groups=[
+"CoinCounter",
+]]
+script = ExtResource( 1 )
+
+[node name="CoinCounter" type="HBoxContainer" parent="."]
+margin_left = 25.0
+margin_top = 25.0
+
+[node name="CoinIcon" type="TextureRect" parent="CoinCounter"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 2 )
+
+[node name="X" type="Label" parent="CoinCounter"]
+margin_left = 36.0
+margin_top = 8.0
+margin_right = 47.0
+margin_bottom = 24.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.87451, 0.898039, 0.164706, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+text = "X"
+
+[node name="CoinCount" type="Label" parent="CoinCounter"]
+margin_left = 51.0
+margin_top = 3.0
+margin_right = 103.0
+margin_bottom = 29.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.87451, 0.898039, 0.164706, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+text = "100"
