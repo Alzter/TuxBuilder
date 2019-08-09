@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/iceblock_bump.wav-e689e7f20b41b5bb0575d67e39a1512f.sample"
+
+[deps]
+
+source_file="res://Audio/SoundEffects/iceblock_bump.wav"
+dest_files=[ "res://.import/iceblock_bump.wav-e689e7f20b41b5bb0575d67e39a1512f.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
