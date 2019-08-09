@@ -8,7 +8,6 @@ func explode():
 	remove_from_group("bullets")
 	$CollisionShape2D.disabled = true
 	$Area2D/EnemyCollision.disabled = true
-	$Extinguish.play()
 	$AnimationPlayer.play("Hit")
 	hit = true
 
@@ -38,3 +37,4 @@ func _physics_process(delta):
 			velocity = velocity.bounce(collision.normal)
 			if velocity.x != oldvelocity:
 				explode()
+				$Extinguish.play()

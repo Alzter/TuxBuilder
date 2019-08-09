@@ -53,6 +53,12 @@ var invincible_time = 0 # Amount of frames Tux is invincible
 var camera_offset = 0 # Moves camera horizontally for extended view
 var dead = false # Stop doing stuff if true
 
+# Set Tux's current playing animation
+func set_animation(anim):
+	if state == "small": $AnimatedSprite.play(str(anim, "_small"))
+	else: $AnimatedSprite.play(anim)
+
+# Damage Tux
 func hurt():
 	if state == "small":
 		kill()
@@ -65,14 +71,16 @@ func hurt():
 		$SFX/Hurt.play()
 		invincible_time = SAFE_TIME
 
+# Kill Tux
 func kill():
 	state = "small"
 	$SFX/Kill.play()
 	$BigHitbox.disabled = true
 	$SmallHitbox.disabled = true
 	$SquishRadius/CollisionShape2D.disabled = true
+	set_animation("gameover")
 	dead = true
-	velocity = Vector2 (0,-JUMP_POWER)
+	velocity = Vector2 (0,-JUMP_POWER * 1.5)
 
 #=============================================================================
 # PHYSICS
@@ -80,6 +88,7 @@ func kill():
 func _physics_process(delta):
 
 	if dead == true:
+		$AnimatedSprite.z_index = 999
 		velocity.y += GRAVITY
 		$BigHitbox.disabled = true
 		$SmallHitbox.disabled = true
@@ -219,20 +228,20 @@ func _physics_process(delta):
 	# Animations
 	$AnimatedSprite.speed_scale = 1
 	if backflip == true:
-		$AnimatedSprite.play("backflip")
+		set_animation("backflip")
 	elif ducking == true:
-		$AnimatedSprite.play("duck")
+		set_animation("duck")
 	else:
 		if on_ground == 0:
 			if skid > 0:
-				$AnimatedSprite.play("skid")
+				set_animation("skid")
 			else: if abs(velocity.x) >= 20:
 				$AnimatedSprite.speed_scale = abs(velocity.x) * 0.0035
 				if $AnimatedSprite.speed_scale < 0.4:
 					$AnimatedSprite.speed_scale = 0.4
-				$AnimatedSprite.play("walk")
-			else: $AnimatedSprite.play("idle")
-		else: $AnimatedSprite.play("jump")
+				set_animation("walk")
+			else: set_animation("idle")
+		else: set_animation("jump")
 
 	if ducking == true or state == "small":
 		$BigHitbox.disabled = true

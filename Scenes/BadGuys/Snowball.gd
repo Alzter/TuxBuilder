@@ -46,6 +46,7 @@ func hit_by_bullet():
 func hit_by_fireball():
 	state = "burned"
 	disable()
+	$SFX/Melt.play()
 	$AnimationPlayer.play("melting")
 
 # If squished
@@ -68,3 +69,4 @@ func _on_Head_area_entered(area):
 func _on_snowball_body_entered(body):
 	if state == "active" and body.has_method("hurt") and body.invincible_time == 0:
 		body.hurt()
+	return
