@@ -38,8 +38,13 @@ func hit_by_bullet():
 	velocity = Vector2(300 * (velocity.x / abs(velocity.x)), -350)
 	$Fall.play()
 
+# If hit by a fireball
+func hit_by_fireball():
+	state = "burned"
+	$AnimationPlayer.play("melting")
+
 func _on_snowball_body_entered(body):
-	if body.has_method("hurt") && !state == "squished":
+	if body.has_method("hurt"):
 		body.hurt()
 
 func _on_Head_area_entered(area):

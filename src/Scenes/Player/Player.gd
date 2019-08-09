@@ -145,11 +145,13 @@ func _physics_process(delta):
 	if is_on_floor():
 		on_ground = 0
 		jumpcancel = false
+		$BottomAttack/CollisionShape2D.disabled = true
 		if backflip == true:
 			backflip = false
 			velocity.x = 0
 	else:
 		on_ground += 1
+		$BottomAttack/CollisionShape2D.disabled = false
 
 	# Running
 	if abs(velocity.x) > WALK_MAX:
