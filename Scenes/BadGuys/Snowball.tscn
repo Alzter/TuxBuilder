@@ -1,0 +1,197 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://Scenes/BadGuys/Snowball.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Creatures/Snowball/sport-left-0.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Creatures/Snowball/sport-left-1.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Creatures/Snowball/sport-left-2.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Creatures/Snowball/sport-gmelting-0.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Creatures/Snowball/sport-gmelting-1.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Creatures/Snowball/sport-gmelting-2.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Creatures/Snowball/sport-gmelting-3.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Creatures/Snowball/sport-gmelting-4.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/Creatures/Snowball/squished-left.png" type="Texture" id=10]
+[ext_resource path="res://Audio/SoundEffects/fall.wav" type="AudioStream" id=11]
+[ext_resource path="res://Audio/SoundEffects/squish.wav" type="AudioStream" id=12]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
+"loop": false,
+"name": "melting",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 10 ) ],
+"loop": true,
+"name": "squished",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 16, 15 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 16, 15 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 10, 2.5 )
+
+[sub_resource type="Animation" id=7]
+resource_name = "active"
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 0 ),
+"update": 1,
+"values": [ "default" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 0 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "melting"
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "melting" ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimatedSprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 0 ),
+"update": 0,
+"values": [ Vector2( 0, 3 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "squished" ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimatedSprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[node name="Snowball" type="KinematicBody2D" groups=[
+"badguys",
+]]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+frame = 3
+playing = true
+offset = Vector2( 0, -3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+rect = Rect2( -25, -25, 50, 50 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 3 )
+
+[node name="Head" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Head"]
+position = Vector2( 0, -17 )
+shape = SubResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "active"
+anims/active = SubResource( 7 )
+anims/melting = SubResource( 5 )
+anims/squished = SubResource( 6 )
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="Fall" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource( 11 )
+attenuation = 0.25
+
+[node name="Squish" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource( 12 )
+attenuation = 0.25
+[connection signal="body_entered" from="Area2D" to="." method="_on_snowball_body_entered"]
+[connection signal="area_entered" from="Head" to="." method="_on_Head_area_entered"]
