@@ -28,9 +28,6 @@ __meta__ = {
 [node name="1Up" parent="Coins" instance=ExtResource( 3 )]
 position = Vector2( 388.883, 381.342 )
 
-[node name="1Up2" parent="Coins" instance=ExtResource( 3 )]
-position = Vector2( 488.816, 381.342 )
-
 [node name="Coin" parent="Coins" instance=ExtResource( 4 )]
 position = Vector2( 120, 480 )
 
@@ -40,7 +37,7 @@ position = Vector2( 230, 480 )
 [node name="BadGuys" type="Node" parent="."]
 
 [node name="Snowball" parent="BadGuys" instance=ExtResource( 5 )]
-position = Vector2( 570, 490 )
+position = Vector2( 629.749, 486.058 )
 
 [node name="Snowball2" parent="BadGuys" instance=ExtResource( 5 )]
 position = Vector2( 1249.35, 487.436 )

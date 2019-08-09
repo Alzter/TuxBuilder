@@ -42,6 +42,7 @@ const FIREBALL_SPEED = 500
 var velocity = Vector2()
 var on_ground = 0 # Frames Tux has been in air (0 if grounded)
 var jumpheld = 0 # Time the jump key has been held
+var jumpcancel = false # Can let go of jump to stop vertical ascent
 var running = 0 # If horizontal speed is higher than walk max
 var skid = 0 # Time skidding
 var ducking = false # Ducking
@@ -143,6 +144,7 @@ func _physics_process(delta):
 	# Floor check
 	if is_on_floor():
 		on_ground = 0
+		jumpcancel = false
 		if backflip == true:
 			backflip = false
 			velocity.x = 0
@@ -187,10 +189,13 @@ func _physics_process(delta):
 				else: $SFX/BigJump.play()
 				on_ground = LEDGE_JUMP + 1
 			jumpheld = 16
+			jumpcancel = true
+
 	# Jump cancelling
-	if on_ground != 0 and not Input.is_action_pressed("jump") and backflip == false:
+	if on_ground != 0 and not Input.is_action_pressed("jump") and backflip == false and jumpcancel == true:
 		if velocity.y < 0:
 			velocity.y *= 0.5
+		else: jumpcancel = false
 
 	# Backflip speed and rotation
 	$AnimatedSprite.rotation_degrees = 0

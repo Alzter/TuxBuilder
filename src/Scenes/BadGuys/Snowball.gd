@@ -43,7 +43,10 @@ func _on_snowball_body_entered(body):
 		body.hurt()
 
 func _on_Head_area_entered(area):
-	if area.is_in_group("bottom"):
+	if area.is_in_group("bottom") and state != "squished":
 		state = "squished"
 		var player = area.get_parent()
-		player.velocity.y = -4000
+		if player.jumpheld > 0:
+			player.velocity.y = -player.JUMP_POWER
+		else: player.velocity.y = -300
+		player.jumpcancel = false
