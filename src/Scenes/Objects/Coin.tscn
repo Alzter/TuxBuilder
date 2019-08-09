@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Scenes/Objects/Coin.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Objects/Coin/coin-0.png" type="Texture" id=2]
@@ -9,16 +9,24 @@
 [ext_resource path="res://Sprites/Objects/Coin/coin-5.png" type="Texture" id=7]
 [ext_resource path="res://Sprites/Objects/Coin/coin-6.png" type="Texture" id=8]
 [ext_resource path="res://Sprites/Objects/Coin/coin-7.png" type="Texture" id=9]
-[ext_resource path="res://Audio/SoundEffects/coin.wav" type="AudioStream" id=10]
-[ext_resource path="res://Sprites/Objects/Coin/glow.png" type="Texture" id=11]
-[ext_resource path="res://Sprites/Objects/Coin/glimmer.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/Objects/Coin/coin-8.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/Objects/Coin/coin-9.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/Objects/Coin/coin-10.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/Objects/Coin/coin-11.png" type="Texture" id=13]
+[ext_resource path="res://Sprites/Objects/Coin/coin-12.png" type="Texture" id=14]
+[ext_resource path="res://Sprites/Objects/Coin/coin-13.png" type="Texture" id=15]
+[ext_resource path="res://Sprites/Objects/Coin/coin-14.png" type="Texture" id=16]
+[ext_resource path="res://Sprites/Objects/Coin/coin-15.png" type="Texture" id=17]
+[ext_resource path="res://Audio/SoundEffects/coin.wav" type="AudioStream" id=18]
+[ext_resource path="res://Sprites/Objects/Coin/glow.png" type="Texture" id=19]
+[ext_resource path="res://Sprites/Objects/Coin/glimmer.png" type="Texture" id=20]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ) ],
 "loop": true,
 "name": "default",
-"speed": 9.0
+"speed": 15.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
@@ -42,7 +50,7 @@ tracks/0/keys = {
 "clips": [ {
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource( 10 )
+"stream": ExtResource( 18 )
 } ],
 "times": PoolRealArray( 0 )
 }
@@ -120,7 +128,7 @@ playing = true
 shape = SubResource( 2 )
 
 [node name="PickupSFX" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 10 )
+stream = ExtResource( 18 )
 attenuation = 0.25
 bus = "SFX"
 
@@ -130,7 +138,7 @@ emitting = false
 one_shot = true
 speed_scale = 3.0
 explosiveness = 0.75
-texture = ExtResource( 11 )
+texture = ExtResource( 19 )
 spread = 180.0
 flatness = 1.0
 gravity = Vector2( 0, 0 )
@@ -146,7 +154,7 @@ amount = 5
 one_shot = true
 speed_scale = 3.0
 explosiveness = 0.75
-texture = ExtResource( 12 )
+texture = ExtResource( 20 )
 spread = 180.0
 gravity = Vector2( 0, 0 )
 initial_velocity = 40.0

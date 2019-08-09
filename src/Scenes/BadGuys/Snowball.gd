@@ -5,6 +5,12 @@ const FLOOR = Vector2(0, -1)
 var velocity = Vector2(0,0)
 var state = "active"
 
+func disable():
+	remove_from_group("badguys")
+	$CollisionShape2D.disabled = true
+	$Head/CollisionShape2D.disabled = true
+	$Area2D/CollisionShape2D.disabled = true
+
 # Physics
 func _physics_process(delta):
 	if state == "active":
@@ -32,26 +38,35 @@ func _physics_process(delta):
 # If hit by any type of bullet
 func hit_by_bullet():
 	state = "bullet"
-	remove_from_group("badguys")
-	$CollisionShape2D.disabled = true
-	$Area2D/CollisionShape2D.disabled = true
+	disable()
+	$SFX/Fall.play()
 	velocity = Vector2(300 * (velocity.x / abs(velocity.x)), -350)
-	$Fall.play()
 
 # If hit by a fireball
 func hit_by_fireball():
 	state = "burned"
+	disable()
+	$SFX/Melt.play()
 	$AnimationPlayer.play("melting")
 
-func _on_snowball_body_entered(body):
-	if body.has_method("hurt"):
-		body.hurt()
-
+# If squished
 func _on_Head_area_entered(area):
-	if area.is_in_group("bottom") and state != "squished":
+	if area.is_in_group("bottom") and state == "active":
 		state = "squished"
+		disable()
+		$SFX/Squish.play()
 		var player = area.get_parent()
 		if player.jumpheld > 0:
 			player.velocity.y = -player.JUMP_POWER
 		else: player.velocity.y = -300
 		player.jumpcancel = false
+
+# Despawn when falling out of world
+	if position.y > get_tree().current_scene.get_node("Player/Camera2D").limit_bottom:
+		queue_free()
+
+# Hit player
+func _on_snowball_body_entered(body):
+	if state == "active" and body.has_method("hurt") and body.invincible_time == 0:
+		body.hurt()
+	return
