@@ -34,8 +34,9 @@ const GRAVITY = 20.0
 # Amount of frames Tux can still jump after falling off a ledge
 const LEDGE_JUMP = 3
 
-# Invincible time after being hit
-const SAFE_TIME = 108
+# Invincible state
+var invincible = false
+var damageinvincible = false
 # Fireball speed
 const FIREBALL_SPEED = 500
 
@@ -49,7 +50,6 @@ var ducking = false # Ducking
 var backflip = false # Backflipping
 var backflip_rotation = 0 # Backflip rotation
 var state = "fire" # Tux's power-up state
-var invincible_time = 0 # Amount of frames Tux is invincible
 var camera_offset = 0 # Moves camera horizontally for extended view
 var dead = false # Stop doing stuff if true
 
@@ -65,11 +65,15 @@ func hurt():
 	elif state == "big":
 		state = "small"
 		$SFX/Hurt.play()
-		invincible_time = SAFE_TIME
+		invincible = true
+		damageinvincible = true
+		$DamageInvincibilityTimer.start()
 	else:
 		state = "big"
 		$SFX/Hurt.play()
-		invincible_time = SAFE_TIME
+		invincible = true
+		damageinvincible = true
+		$DamageInvincibilityTimer.start()
 
 # Kill Tux
 func kill():
@@ -252,15 +256,13 @@ func _physics_process(delta):
 		$BigHitbox.disabled = false
 		$SmallHitbox.disabled = true
 
-	# Invincible flashing
-	if invincible_time > 0:
+	# Damage Invincible flashing
+	if damageinvincible == true:
 		if $AnimatedSprite.visible == true:
 			$AnimatedSprite.visible = false
 		else: $AnimatedSprite.visible = true
-		invincible_time -= 1
 	else:
 		$AnimatedSprite.visible = true
-		invincible_time = 0
 
 	# Shooting
 	if Input.is_action_just_pressed("action") and state == "fire" and get_tree().get_nodes_in_group("bullets").size() < 2:
@@ -297,3 +299,7 @@ func _physics_process(delta):
 		position.x = $Camera2D.limit_right - 16
 	if position.y > $Camera2D.limit_bottom:
 		kill()
+
+func _on_DamageInvincibilityTimer_timeout():
+	invincible = false
+	damageinvincible = false

@@ -163,7 +163,7 @@ script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
-frame = 2
+frame = 7
 playing = true
 offset = Vector2( 0, -3 )
 
@@ -191,6 +191,7 @@ anims/melting = SubResource( 6 )
 anims/squished = SubResource( 7 )
 
 [node name="SFX" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="Fall" type="AudioStreamPlayer2D" parent="SFX"]
 stream = ExtResource( 16 )
@@ -203,5 +204,9 @@ attenuation = 0.25
 [node name="Melt" type="AudioStreamPlayer2D" parent="SFX"]
 stream = ExtResource( 18 )
 attenuation = 0.25
+
+[node name="ResetCollisionTimer" type="Timer" parent="."]
+wait_time = 4.1
 [connection signal="area_entered" from="Head" to="." method="_on_Head_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_snowball_body_entered"]
+[connection signal="timeout" from="ResetCollisionTimer" to="." method="_on_ResetCollisionTimer_timeout"]

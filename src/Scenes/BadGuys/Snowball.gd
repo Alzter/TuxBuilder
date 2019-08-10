@@ -67,6 +67,11 @@ func _on_Head_area_entered(area):
 
 # Hit player
 func _on_snowball_body_entered(body):
-	if state == "active" and body.has_method("hurt") and body.invincible_time == 0:
+	if state == "active" and body.has_method("hurt") and body.invincible == false:
 		body.hurt()
+		$ResetCollisionTimer.start()
 	return
+
+func _on_ResetCollisionTimer_timeout():
+	$Area2D/CollisionShape2D.disabled = true
+	$Area2D/CollisionShape2D.disabled = false
