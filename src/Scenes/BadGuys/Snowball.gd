@@ -62,8 +62,8 @@ func _on_Head_area_entered(area):
 		player.jumpcancel = false
 
 # Despawn when falling out of world
-	if position.y > get_tree().current_scene.get_node("Player/Camera2D").limit_bottom:
-		queue_free()
+#	if position.y > get_tree().current_scene.get_node("Player/Camera2D").limit_bottom:
+#		queue_free()
 
 # Hit player
 func _on_snowball_body_entered(body):
