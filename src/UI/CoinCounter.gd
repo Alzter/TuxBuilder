@@ -1,7 +1,6 @@
 extends Node
 
 var coins = 0
-var coinsmooth = 0
 
 const SMOOTH_FACTOR = 5
 

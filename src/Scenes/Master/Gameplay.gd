@@ -28,6 +28,21 @@ func load_player():
 
 func clear_player():
 	var scene = get_node("Player")
+	for i in get_children():
+    i.queue_free()
+	remove_child(scene)
+	scene.call_deferred("free")
+
+func load_ui():
+	var scene = load("res://UI/LevelUI.tscn")
+	var scene_instance = scene.instance()
+	scene_instance.set_name("LevelUI")
+	add_child(scene_instance)
+
+func clear_ui():
+	var scene = get_node("LevelUI")
+	for i in get_children():
+    i.queue_free()
 	remove_child(scene)
 	scene.call_deferred("free")
 
@@ -35,9 +50,11 @@ func _process(delta):
 	if Input.is_action_just_pressed("click_right"):
 		if editmode == false:
 			editmode = true
+			clear_ui()
 			clear_player()
 			clear_level()
 			load_level(current_level)
 			load_player()
-			$LevelUI.coins = 0
-		else: editmode = false
+		else:
+			editmode = false
+			load_ui()
