@@ -3,7 +3,13 @@ extends KinematicBody2D
 const FLOOR = Vector2(0, -1)
 
 var velocity = Vector2(0,0)
+var startpos = Vector2(0,0)
 var state = "active"
+var direction = 1
+
+func _ready():
+	startpos = position
+	direction = $AnimatedSprite.scale.x
 
 func disable():
 	remove_from_group("badguys")
@@ -13,6 +19,9 @@ func disable():
 
 # Physics
 func _physics_process(delta):
+	if get_tree().current_scene.editmode == true:
+		return
+	
 	if state == "active":
 		velocity.x = -100 * $AnimatedSprite.scale.x
 		velocity.y += 20
@@ -43,11 +52,11 @@ func hit_by_bullet():
 	velocity = Vector2(300 * (velocity.x / abs(velocity.x)), -350)
 
 # If hit by a fireball
-func hit_by_fireball():
-	state = "burned"
-	disable()
-	$SFX/Melt.play()
-	$AnimationPlayer.play("melting")
+#func hit_by_fireball():
+#	state = "burned"
+#	disable()
+#	$SFX/Melt.play()
+#	$AnimationPlayer.play("melting")
 
 # If squished
 func _on_Head_area_entered(area):
@@ -58,8 +67,10 @@ func _on_Head_area_entered(area):
 		var player = area.get_parent()
 		if player.jumpheld > 0:
 			player.velocity.y = -player.JUMP_POWER
-		else: player.velocity.y = -300
-		player.jumpcancel = false
+			player.jumpcancel = true
+		else:
+			player.velocity.y = -300
+			player.jumpcancel = false
 
 # Despawn when falling out of world
 #	if position.y > get_tree().current_scene.get_node("Player/Camera2D").limit_bottom:

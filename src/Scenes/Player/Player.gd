@@ -35,7 +35,7 @@ const GRAVITY = 20.0
 const LEDGE_JUMP = 3
 
 # Invincible time after being hit
-const SAFE_TIME = 108
+const SAFE_TIME = 60
 # Fireball speed
 const FIREBALL_SPEED = 500
 
@@ -84,10 +84,17 @@ func kill():
 	dead = true
 	velocity = Vector2 (0,-JUMP_POWER * 1.5)
 
+func _ready():
+	position = get_tree().current_scene.get_node("Level/SpawnPos").position
+
 #=============================================================================
 # PHYSICS
 
 func _physics_process(delta):
+
+	if get_tree().current_scene.editmode == true:
+		return
+	else: $Camera2D.current = true
 
 	if dead == true:
 		$AnimatedSprite.z_index = 999

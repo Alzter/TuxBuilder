@@ -6,6 +6,9 @@
 
 [node name="Node2D" type="Node2D"]
 
+[node name="SpawnPos" type="Position2D" parent="."]
+position = Vector2( 59.4483, 301.119 )
+
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 32, 32 )
