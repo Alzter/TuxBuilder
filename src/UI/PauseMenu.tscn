@@ -1,0 +1,93 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://UI/PauseMenu.gd" type="Script" id=1]
+[ext_resource path="res://UI/Fonts/SuperTux-Medium.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 23
+use_filter = true
+font_data = ExtResource( 2 )
+
+[node name="PauseMenu" type="Popup"]
+pause_mode = 2
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -80.0
+margin_top = -90.0
+margin_right = 60.0
+margin_bottom = 100.0
+script = ExtResource( 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Paused" type="Label" parent="VBoxContainer"]
+margin_right = 140.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 1 )
+text = "Paused"
+align = 1
+
+[node name="Panel" type="Panel" parent="VBoxContainer"]
+margin_top = 27.0
+margin_right = 140.0
+margin_bottom = 190.0
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 13.0
+margin_right = -10.0
+margin_bottom = -10.0
+
+[node name="Resume" type="Button" parent="VBoxContainer/Panel/VBoxContainer"]
+margin_right = 120.0
+margin_bottom = 20.0
+rect_pivot_offset = Vector2( -488.794, -160.987 )
+text = "Resume"
+
+[node name="Restart" type="Button" parent="VBoxContainer/Panel/VBoxContainer"]
+margin_top = 24.0
+margin_right = 120.0
+margin_bottom = 44.0
+rect_pivot_offset = Vector2( -488.794, -160.987 )
+text = "Restart"
+
+[node name="Options" type="Button" parent="VBoxContainer/Panel/VBoxContainer"]
+margin_top = 48.0
+margin_right = 120.0
+margin_bottom = 68.0
+rect_pivot_offset = Vector2( -488.794, -160.987 )
+text = "Options"
+
+[node name="QuitLevel" type="Button" parent="VBoxContainer/Panel/VBoxContainer"]
+margin_top = 72.0
+margin_right = 120.0
+margin_bottom = 92.0
+rect_pivot_offset = Vector2( -488.794, -160.987 )
+text = "Quit Level"
+
+[node name="MainMenu" type="Button" parent="VBoxContainer/Panel/VBoxContainer"]
+margin_top = 96.0
+margin_right = 120.0
+margin_bottom = 116.0
+rect_pivot_offset = Vector2( -488.794, -160.987 )
+text = "Main Menu"
+
+[node name="QuitGame" type="Button" parent="VBoxContainer/Panel/VBoxContainer"]
+margin_top = 120.0
+margin_right = 120.0
+margin_bottom = 140.0
+rect_pivot_offset = Vector2( -488.794, -160.987 )
+text = "Quit Game"
+[connection signal="pressed" from="VBoxContainer/Panel/VBoxContainer/Resume" to="." method="_on_Resume_pressed"]
+[connection signal="pressed" from="VBoxContainer/Panel/VBoxContainer/Restart" to="." method="_on_Restart_pressed"]
+[connection signal="pressed" from="VBoxContainer/Panel/VBoxContainer/Options" to="." method="_on_Options_pressed"]
+[connection signal="pressed" from="VBoxContainer/Panel/VBoxContainer/QuitLevel" to="." method="_on_QuitLevel_pressed"]
+[connection signal="pressed" from="VBoxContainer/Panel/VBoxContainer/MainMenu" to="." method="_on_MainMenu_pressed"]
+[connection signal="pressed" from="VBoxContainer/Panel/VBoxContainer/QuitGame" to="." method="_on_QuitGame_pressed"]
