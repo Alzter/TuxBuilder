@@ -97,6 +97,7 @@ func _physics_process(delta):
 		$BigHitbox.disabled = true
 		$SmallHitbox.disabled = true
 		$SquishRadius/CollisionShape2D.disabled = true
+		$HeadAttack/CollisionShape2D.disabled = true
 		return
 
 	if dead == true:
