@@ -9,7 +9,9 @@
 [node name="SpawnPos" type="Position2D" parent="."]
 position = Vector2( 59.4483, 301.119 )
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="TileMap" type="TileMap" parent="." groups=[
+"tilemap",
+]]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 32, 32 )
 collision_layer = 515

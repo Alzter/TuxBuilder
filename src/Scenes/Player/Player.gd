@@ -292,14 +292,14 @@ func _physics_process(delta):
 	$Camera2D.position = camera_position
 
 	# Set ends of camera to ends of TileSet
-	$Camera2D.limit_left = get_tree().current_scene.get_node("Level/TileMap").get_used_rect().position.x * get_tree().current_scene.get_node("Level/TileMap").get_cell_size().x
-	$Camera2D.limit_right = get_tree().current_scene.get_node("Level/TileMap").get_used_rect().end.x * get_tree().current_scene.get_node("Level/TileMap").get_cell_size().x
+	$Camera2D.limit_left = get_tree().current_scene.level_bound_left
+	$Camera2D.limit_right = get_tree().current_scene.level_bound_right
 	if $Camera2D.limit_right < get_viewport().size.x: # If the tilemap is thinner than the window, align the camera to the left
 		$Camera2D.limit_right = get_viewport().size.x
-	$Camera2D.limit_top = get_tree().current_scene.get_node("Level/TileMap").get_used_rect().position.y * get_tree().current_scene.get_node("Level/TileMap").get_cell_size().y
+	$Camera2D.limit_top = get_tree().current_scene.level_bound_top
 	if $Camera2D.limit_top > get_viewport().size.y * -1: # If the tilemap is shorter than the window, align the camera to the bottom
 		$Camera2D.limit_top = get_viewport().size.y * -1
-	$Camera2D.limit_bottom = get_tree().current_scene.get_node("Level/TileMap").get_used_rect().end.y * get_tree().current_scene.get_node("Level/TileMap").get_cell_size().y
+	$Camera2D.limit_bottom = get_tree().current_scene.level_bound_bottom
 
 	# Block player leaving screen
 	if position.x < $Camera2D.limit_left + 16:
