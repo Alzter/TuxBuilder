@@ -52,11 +52,11 @@ func hit_by_bullet():
 	velocity = Vector2(300 * (velocity.x / abs(velocity.x)), -350)
 
 # If hit by a fireball
-#func hit_by_fireball():
-#	state = "burned"
-#	disable()
-#	$SFX/Melt.play()
-#	$AnimationPlayer.play("melting")
+func hit_by_fireball():
+	state = "burned"
+	disable()
+	$SFX/Melt.play()
+	$AnimationPlayer.play("melting")
 
 # If squished
 func _on_Head_area_entered(area):

@@ -1,7 +1,9 @@
 extends Node2D
 
 var editmode = false
+var editsaved = false # Using an edited version of a level
 var current_level = ""
+var camera = Vector2(0,0)
 
 func _ready():
 	editmode = true
@@ -12,18 +14,36 @@ func _ready():
 func _process(delta):
 	if Input.is_action_just_pressed("click_right"):
 		if editmode == false:
+			camera = get_node("Player").position
 			clear_ui()
 			clear_player()
 			clear_level()
 			clear_editor()
-			load_level(current_level)
+			if editsaved == false:
+				load_level(current_level)
+			else: load_edited_level()
 			load_player()
 			load_editor()
+			get_node("Editor/Camera2D").position = camera
 			editmode = true
 		else:
+			save_edited_level()
+			get_node("Player/Camera2D").current = true
 			clear_editor()
 			load_ui()
 			editmode = false
+
+func save_edited_level():
+	var packed_scene = PackedScene.new()
+	editsaved = true
+	packed_scene.pack(get_tree().get_current_scene().get_node("Level"))
+	ResourceSaver.save("res://Scenes/Levels/Tmp/EditedLevel.tscn", packed_scene)
+
+func load_edited_level():
+	var packed_scene = load("res://Scenes/Levels/Tmp/EditedLevel.tscn")
+	var scene_instance = packed_scene.instance()
+	scene_instance.set_name("Level")
+	add_child(scene_instance)
 
 func load_level(level):
 	current_level = str(level)
@@ -68,7 +88,7 @@ func load_player():
 
 func clear_player():
 	var scene = get_node("Player")
-	for i in get_children():
-    i.queue_free()
+	for i in scene.get_children():
+		i.queue_free()
 	remove_child(scene)
 	scene.call_deferred("free")

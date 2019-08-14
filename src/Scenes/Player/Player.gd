@@ -39,7 +39,7 @@ const SAFE_TIME = 60
 # Fireball speed
 const FIREBALL_SPEED = 500
 
-var velocity = Vector2()
+var velocity = Vector2(0,0)
 var on_ground = 0 # Frames Tux has been in air (0 if grounded)
 var jumpheld = 0 # Time the jump key has been held
 var jumpcancel = false # Can let go of jump to stop vertical ascent
@@ -51,6 +51,7 @@ var backflip_rotation = 0 # Backflip rotation
 var state = "fire" # Tux's power-up state
 var invincible_time = 0 # Amount of frames Tux is invincible
 var camera_offset = 0 # Moves camera horizontally for extended view
+var camera_position = Vector2(0,0) # Camera Position
 var dead = false # Stop doing stuff if true
 
 # Set Tux's current playing animation
@@ -93,8 +94,10 @@ func _ready():
 func _physics_process(delta):
 
 	if get_tree().current_scene.editmode == true:
+		$BigHitbox.disabled = true
+		$SmallHitbox.disabled = true
+		$SquishRadius/CollisionShape2D.disabled = true
 		return
-	else: $Camera2D.current = true
 
 	if dead == true:
 		$AnimatedSprite.z_index = 999
@@ -285,7 +288,8 @@ func _physics_process(delta):
 		camera_offset += 2 * (velocity.x / abs(velocity.x))
 		if abs(camera_offset) >= (get_viewport().size.x * 0.1):
 			camera_offset = (get_viewport().size.x * 0.1) * (camera_offset / abs(camera_offset))
-	$Camera2D.position.x = $Camera2D.position.x + (camera_offset - $Camera2D.position.x) / 5
+	camera_position.x = camera_position.x + (camera_offset - camera_position.x) / 5
+	$Camera2D.position = camera_position
 
 	# Set ends of camera to ends of TileSet
 	$Camera2D.limit_left = get_tree().current_scene.get_node("Level/TileMap").get_used_rect().position.x * get_tree().current_scene.get_node("Level/TileMap").get_cell_size().x
@@ -298,8 +302,8 @@ func _physics_process(delta):
 	$Camera2D.limit_bottom = get_tree().current_scene.get_node("Level/TileMap").get_used_rect().end.y * get_tree().current_scene.get_node("Level/TileMap").get_cell_size().y
 
 	# Block player leaving screen
-	if position.x < 16:
-		position.x = 16
+	if position.x < $Camera2D.limit_left + 16:
+		position.x = $Camera2D.limit_left + 16
 	if position.x > $Camera2D.limit_right - 16:
 		position.x = $Camera2D.limit_right - 16
 	if position.y > $Camera2D.limit_bottom:
