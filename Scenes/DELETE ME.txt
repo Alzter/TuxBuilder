@@ -1,1 +1,1 @@
-DELETE ME
+Delete this folder
