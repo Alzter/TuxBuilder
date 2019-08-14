@@ -1,13 +1,13 @@
 extends Node2D
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	$TextureRect.rect_size = get_viewport().size
+	$Grid.rect_size = Vector2(get_viewport().size.x + 32, get_viewport().size.y + 32)
+	$Camera2D.current = true
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	$Grid.rect_size = Vector2(get_viewport().size.x + 32, get_viewport().size.y + 32)
+	$Grid.rect_position = Vector2($Camera2D.position.x - (get_viewport().size.x / 2), $Camera2D.position.y - (get_viewport().size.y / 2))
+	$Grid.rect_position = Vector2(floor($Grid.rect_position.x / 32) * 32, floor($Grid.rect_position.y / 32) * 32)
+	
+	if Input.is_action_pressed("click_left"):
+		pass

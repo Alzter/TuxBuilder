@@ -12,17 +12,18 @@ func _ready():
 func _process(delta):
 	if Input.is_action_just_pressed("click_right"):
 		if editmode == false:
-			editmode = true
 			clear_ui()
 			clear_player()
 			clear_level()
+			clear_editor()
 			load_level(current_level)
 			load_player()
 			load_editor()
+			editmode = true
 		else:
-			editmode = false
 			clear_editor()
 			load_ui()
+			editmode = false
 
 func load_level(level):
 	current_level = str(level)
