@@ -1,11 +1,13 @@
 extends Node2D
 
-var editmode = true
+var editmode = false
 var current_level = ""
 
 func _ready():
+	editmode = true
 	load_level("TEST")
 	load_player()
+	load_editor()
 	
 func _process(delta):
 	if Input.is_action_just_pressed("click_right"):
