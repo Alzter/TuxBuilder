@@ -195,7 +195,7 @@ func _physics_process(delta):
 	if on_ground == 0:
 		if not Input.is_action_pressed("duck"):
 			ducking = false
-		if Input.is_action_pressed("duck") or ($StandWindow.is_colliding() == true and state != "small") and backflip == false:
+		if (Input.is_action_pressed("duck") or $StandWindow.is_colliding() == true) and backflip == false and state != "small":
 				ducking = true
 
 	# Jump buffering
@@ -272,14 +272,6 @@ func _physics_process(delta):
 		$SmallHitbox.disabled = true
 		$HeadAttack/BigHitbox.disabled = false
 		$HeadAttack/SmallHitbox.disabled = true
-
-	# Walk over one block gaps by increasing hitbox width when walking
-	if abs(velocity.x) >= 100:
-		$BigHitbox.shape.extents.x = 16
-		$SmallHitbox.shape.extents.x = 16
-	else:
-		$BigHitbox.shape.extents.x = 15
-		$SmallHitbox.shape.extents.x = 15
 
 	# Invincible flashing
 	if invincible_time > 0:

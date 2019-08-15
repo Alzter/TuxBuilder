@@ -99,16 +99,16 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 15, 31 )
+extents = Vector2( 15.5, 31 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 15, 15 )
+extents = Vector2( 15.5, 15 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 15, 1 )
+extents = Vector2( 15.5, 1 )
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 15, 3 )
+extents = Vector2( 15.5, 3 )
 
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
@@ -153,11 +153,11 @@ shape = SubResource( 4 )
 ]]
 
 [node name="BigHitbox" type="CollisionShape2D" parent="HeadAttack"]
-position = Vector2( 0, -23 )
+position = Vector2( 0, -21 )
 shape = SubResource( 5 )
 
 [node name="SmallHitbox" type="CollisionShape2D" parent="HeadAttack"]
-position = Vector2( 0, 9 )
+position = Vector2( 0, 11 )
 shape = SubResource( 5 )
 
 [node name="SFX" type="Node" parent="."]

@@ -32,7 +32,6 @@ stretch_mode = 2
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="SideBar" type="ColorRect" parent="UI"]
-editor/display_folded = true
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -128.0

@@ -11,8 +11,12 @@ func _ready():
 func _process(delta):
 	if get_tree().current_scene.editmode == false:
 		visible = false
+		$UI.offset = Vector2 (get_viewport().size.x * 9999,get_viewport().size.y * 9999)
 		return
-	else: visible = true
+	else:
+		visible = true
+		$UI.offset = Vector2(0,0)
+	
 	$Grid.rect_size = Vector2(get_viewport().size.x + 32, get_viewport().size.y + 32)
 	$Grid.rect_position = Vector2(get_tree().current_scene.get_node("Camera2D").position.x - (get_viewport().size.x / 2), get_tree().current_scene.get_node("Camera2D").position.y - (get_viewport().size.y / 2))
 	$Grid.rect_position = Vector2(floor($Grid.rect_position.x / 32) * 32, floor($Grid.rect_position.y / 32) * 32)
