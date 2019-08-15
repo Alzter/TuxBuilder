@@ -41,7 +41,7 @@ func _process(delta):
 		if get_viewport().get_mouse_position().x < get_viewport().size.x - 128 and get_viewport().get_mouse_position().y < get_viewport().size.y - 64:
 			var tile_selected = get_tree().current_scene.get_node(str("Level/", tilemap_selected)).world_to_map(get_global_mouse_position())
 			get_tree().current_scene.get_node(str("Level/", tilemap_selected)).set_cellv(tile_selected, 0)
-			get_tree().current_scene.get_node(str("Level/", tilemap_selected)).update_bitmask_region(Vector2(1,1))
+			get_tree().current_scene.get_node(str("Level/", tilemap_selected)).update_bitmask_area(tile_selected)
 	
 	if Input.is_action_pressed("up"):
 		get_tree().current_scene.get_node("Camera2D").position.y -= CAMERA_MOVE_SPEED
