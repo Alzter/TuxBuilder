@@ -25,18 +25,15 @@ func _process(delta):
 			clear_ui()
 			clear_player()
 			clear_level()
-			clear_editor()
 			if editsaved == false:
 				load_level(current_level)
 			else: load_edited_level()
 			load_player()
 			get_node("Player").position = player_position
-			load_editor()
 			editmode = true
 		else:
 			camera_smooth_time = 20
 			save_edited_level()
-			clear_editor()
 			load_ui()
 			editmode = false
 	
@@ -119,17 +116,7 @@ func clear_player():
 	remove_child(scene)
 	scene.call_deferred("free")
 
-func level_bounds(): # NON FUNCTIONAL SCRIPT
-	
-	# This is supposed to go through every tilemap in the level,
-	# get it's used area and then make the level boundaries the
-	# biggest Tilemap area so every Tilemap fits inside it.
-	
-	# However the "get class" script to see if the node is a TileMap
-	# doesn't seem to be working, and as such the level boundaries are
-	# always set to 0,0,0,0, meaning Tux instantly dies as he's considered
-	# to be under the bottom of the level.
-	
+func level_bounds():
 	level_bound_left = 0
 	level_bound_right = 0
 	level_bound_top = 0
@@ -149,7 +136,6 @@ func level_bounds(): # NON FUNCTIONAL SCRIPT
 			
 			if get_tree().current_scene.get_node(str("Level/", child.get_name())).get_used_rect().end.y * get_tree().current_scene.get_node(str("Level/", child.get_name())).get_cell_size().y > level_bound_bottom:
 				level_bound_bottom = get_tree().current_scene.get_node(str("Level/", child_name)).get_used_rect().end.y * get_tree().current_scene.get_node(str("Level/", child_name)).get_cell_size().y
-			
 		else:
 			return
 

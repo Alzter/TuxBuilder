@@ -261,6 +261,7 @@ func _physics_process(delta):
 			else: set_animation("idle")
 		else: set_animation("jump")
 
+	# Duck Hitboxes
 	if ducking == true or state == "small":
 		$BigHitbox.disabled = true
 		$SmallHitbox.disabled = false
@@ -271,6 +272,14 @@ func _physics_process(delta):
 		$SmallHitbox.disabled = true
 		$HeadAttack/BigHitbox.disabled = false
 		$HeadAttack/SmallHitbox.disabled = true
+
+	# Walk over one block gaps by increasing hitbox width when walking
+	if abs(velocity.x) >= 100:
+		$BigHitbox.shape.extents.x = 16
+		$SmallHitbox.shape.extents.x = 16
+	else:
+		$BigHitbox.shape.extents.x = 15
+		$SmallHitbox.shape.extents.x = 15
 
 	# Invincible flashing
 	if invincible_time > 0:
