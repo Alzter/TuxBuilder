@@ -78,6 +78,8 @@ func kill():
 	$SFX/Kill.play()
 	$BigHitbox.disabled = true
 	$SmallHitbox.disabled = true
+	$HeadAttack/BigHitbox.disabled = true
+	$HeadAttack/SmallHitbox.disabled = true
 	$SquishRadius/CollisionShape2D.disabled = true
 	$AnimatedSprite.rotation_degrees = 0
 	$AnimatedSprite.scale.x = 1
@@ -96,8 +98,9 @@ func _physics_process(delta):
 	if get_tree().current_scene.editmode == true:
 		$BigHitbox.disabled = true
 		$SmallHitbox.disabled = true
+		$HeadAttack/BigHitbox.disabled = true
+		$HeadAttack/SmallHitbox.disabled = true
 		$SquishRadius/CollisionShape2D.disabled = true
-		$HeadAttack/CollisionShape2D.disabled = true
 		return
 
 	if dead == true:
@@ -105,6 +108,8 @@ func _physics_process(delta):
 		velocity.y += GRAVITY
 		$BigHitbox.disabled = true
 		$SmallHitbox.disabled = true
+		$HeadAttack/BigHitbox.disabled = true
+		$HeadAttack/SmallHitbox.disabled = true
 		$SquishRadius/CollisionShape2D.disabled = true
 		velocity = move_and_slide(velocity, Vector2(0,0))
 		return
@@ -259,9 +264,13 @@ func _physics_process(delta):
 	if ducking == true or state == "small":
 		$BigHitbox.disabled = true
 		$SmallHitbox.disabled = false
+		$HeadAttack/BigHitbox.disabled = true
+		$HeadAttack/SmallHitbox.disabled = false
 	else:
 		$BigHitbox.disabled = false
 		$SmallHitbox.disabled = true
+		$HeadAttack/BigHitbox.disabled = false
+		$HeadAttack/SmallHitbox.disabled = true
 
 	# Invincible flashing
 	if invincible_time > 0:
@@ -290,22 +299,13 @@ func _physics_process(delta):
 		if abs(camera_offset) >= (get_viewport().size.x * 0.1):
 			camera_offset = (get_viewport().size.x * 0.1) * (camera_offset / abs(camera_offset))
 	camera_position.x = camera_position.x + (camera_offset - camera_position.x) / 5
-	$Camera2D.position = camera_position
-
-	# Set ends of camera to ends of TileSet
-	$Camera2D.limit_left = get_tree().current_scene.level_bound_left
-	$Camera2D.limit_right = get_tree().current_scene.level_bound_right
-	if $Camera2D.limit_right < get_viewport().size.x: # If the tilemap is thinner than the window, align the camera to the left
-		$Camera2D.limit_right = get_viewport().size.x
-	$Camera2D.limit_top = get_tree().current_scene.level_bound_top
-	if $Camera2D.limit_top > get_viewport().size.y * -1: # If the tilemap is shorter than the window, align the camera to the bottom
-		$Camera2D.limit_top = get_viewport().size.y * -1
-	$Camera2D.limit_bottom = get_tree().current_scene.level_bound_bottom
+	get_tree().current_scene.get_node("Camera2D").position = Vector2(position.x + camera_position.x,position.y + camera_position.y)
 
 	# Block player leaving screen
-	if position.x < $Camera2D.limit_left + 16:
-		position.x = $Camera2D.limit_left + 16
-	if position.x > $Camera2D.limit_right - 16:
-		position.x = $Camera2D.limit_right - 16
-	if position.y > $Camera2D.limit_bottom:
+	if position.x <= get_tree().current_scene.get_node("Camera2D").limit_left + 16:
+		position.x = get_tree().current_scene.get_node("Camera2D").limit_left + 16
+	if position.x >= get_tree().current_scene.get_node("Camera2D").limit_right - 16:
+		position.x = get_tree().current_scene.get_node("Camera2D").limit_right - 16
+	if position.y >= get_tree().current_scene.get_node("Camera2D").limit_bottom:
+		position.y = get_tree().current_scene.get_node("Camera2D").limit_bottom
 		kill()

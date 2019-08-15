@@ -3,14 +3,16 @@ extends Node2D
 var editmode = false
 var editsaved = false # Using an edited version of a level
 var current_level = ""
-var camera = Vector2(0,0)
+var player_position = Vector2(0,0)
 var level_bound_left = 0
 var level_bound_right = 0
 var level_bound_bottom = 0
 var level_bound_top = 0
+var camera_smooth_time = 0
 
 func _ready():
 	editmode = true
+	editsaved = false
 	load_level("TEST")
 	load_player()
 	load_editor()
@@ -19,7 +21,7 @@ func _process(delta):
 	level_bounds()
 	if Input.is_action_just_pressed("click_right"):
 		if editmode == false:
-			camera = get_node("Player").position
+			player_position = get_node("Player").position
 			clear_ui()
 			clear_player()
 			clear_level()
@@ -28,17 +30,35 @@ func _process(delta):
 				load_level(current_level)
 			else: load_edited_level()
 			load_player()
+			get_node("Player").position = player_position
 			load_editor()
-			get_node("Editor/Camera2D").position = camera
 			editmode = true
 		else:
+			camera_smooth_time = 20
 			save_edited_level()
-			get_node("Player/Camera2D").current = true
 			clear_editor()
 			load_ui()
 			editmode = false
 	
-
+	if editmode == false:
+		#camera_to_level_bounds() <- Level bounds don't work atm
+		if camera_smooth_time == 0:
+			$Camera2D.drag_margin_v_enabled = true
+	else:
+		camera_bounds_remove()
+		$Camera2D.drag_margin_v_enabled = false
+	
+	if camera_smooth_time > 0:
+		$Camera2D.smoothing_enabled = true
+		camera_smooth_time -= 1
+		if camera_smooth_time < 10:
+			$Camera2D.smoothing_speed += 3
+		else: $Camera2D.smoothing_speed = 10
+	else:
+		$Camera2D.smoothing_enabled = false
+		$Camera2D.smoothing_speed = 10
+		camera_smooth_time = 0
+	
 func save_edited_level():
 	var packed_scene = PackedScene.new()
 	packed_scene.pack(get_tree().get_current_scene().get_node("Level"))
@@ -81,7 +101,7 @@ func load_ui():
 
 func clear_ui():
 	var scene = get_node("LevelUI")
-	for i in get_children():
+	for i in scene.get_children():
 		i.queue_free()
 	remove_child(scene)
 	scene.call_deferred("free")
@@ -99,7 +119,17 @@ func clear_player():
 	remove_child(scene)
 	scene.call_deferred("free")
 
-func level_bounds():
+func level_bounds(): # NON FUNCTIONAL SCRIPT
+	
+	# This is supposed to go through every tilemap in the level,
+	# get it's used area and then make the level boundaries the
+	# biggest Tilemap area so every Tilemap fits inside it.
+	
+	# However the "get class" script to see if the node is a TileMap
+	# doesn't seem to be working, and as such the level boundaries are
+	# always set to 0,0,0,0, meaning Tux instantly dies as he's considered
+	# to be under the bottom of the level.
+	
 	level_bound_left = 0
 	level_bound_right = 0
 	level_bound_top = 0
@@ -122,3 +152,19 @@ func level_bounds():
 			
 		else:
 			return
+
+func camera_bounds_remove():
+	$Camera2D.limit_left = -10000000
+	$Camera2D.limit_right = 10000000
+	$Camera2D.limit_top = -10000000
+	$Camera2D.limit_bottom = 10000000
+
+func camera_to_level_bounds():
+	$Camera2D.limit_left = level_bound_left
+	$Camera2D.limit_right = level_bound_right
+	if $Camera2D.limit_right < get_viewport().size.x: # If the tilemap is thinner than the window, align the camera to the left
+		$Camera2D.limit_right = get_viewport().size.x
+	$Camera2D.limit_top = level_bound_top
+	if $Camera2D.limit_top > get_viewport().size.y * -1: # If the tilemap is shorter than the window, align the camera to the bottom
+		$Camera2D.limit_top = get_viewport().size.y * -1
+	$Camera2D.limit_bottom = level_bound_bottom

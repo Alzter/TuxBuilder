@@ -17,8 +17,3 @@ margin_right = 16.0
 margin_bottom = 16.0
 texture = ExtResource( 2 )
 stretch_mode = 2
-
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true
-drag_margin_h_enabled = false
-drag_margin_v_enabled = false
