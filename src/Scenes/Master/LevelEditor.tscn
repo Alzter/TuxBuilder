@@ -82,19 +82,7 @@ margin_top = -64.0
 margin_right = 512.0
 color = Color( 0.196078, 0.196078, 0.196078, 0.752941 )
 
-[node name="SideBarOverlay" type="Control" parent="UI"]
-anchor_left = 1.0
-anchor_right = 1.0
-
-[node name="EraserButton" type="TextureRect" parent="UI/SideBarOverlay"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -128.0
-margin_top = 68.0
-margin_right = -96.0
-margin_bottom = 100.0
-
-[node name="TilesButton" type="TextureButton" parent="UI/SideBarOverlay"]
+[node name="TilesButton" type="TextureButton" parent="UI"]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -128.0
@@ -103,7 +91,7 @@ grow_horizontal = 0
 grow_vertical = 0
 expand = true
 
-[node name="ObjectsButton" type="TextureButton" parent="UI/SideBarOverlay"]
+[node name="ObjectsButton" type="TextureButton" parent="UI"]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -128.0
@@ -112,6 +100,18 @@ margin_bottom = 66.0
 grow_horizontal = 0
 grow_vertical = 0
 expand = true
+
+[node name="EraserButton" type="TextureRect" parent="UI"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -128.0
+margin_top = 68.0
+margin_right = -96.0
+margin_bottom = 100.0
+
+[node name="SideBarOverlay" type="Control" parent="UI"]
+anchor_left = 1.0
+anchor_right = 1.0
 
 [node name="TilesSelected" type="ColorRect" parent="UI/SideBarOverlay"]
 anchor_left = 1.0
