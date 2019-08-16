@@ -51,10 +51,10 @@ func _process(delta):
 			bottombar_offset *= 0.8
 		$UI.offset = Vector2(0,0)
 	
-	if $UI/SideBarOverlay/TilesButton.pressed == true:
+	if $UI/TilesButton.pressed == true:
 		category_selected = "Tiles"
 	
-	if $UI/SideBarOverlay/ObjectsButton.pressed == true:
+	if $UI/ObjectsButton.pressed == true:
 		category_selected = "Objects"
 	
 	if category_selected == "Tiles":
