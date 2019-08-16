@@ -31,7 +31,11 @@ stretch_mode = 2
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="SideBar" type="ColorRect" parent="UI"]
+[node name="SideBar" type="Control" parent="UI"]
+anchor_left = 1.0
+anchor_right = 1.0
+
+[node name="SideBar" type="ColorRect" parent="UI/SideBar"]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -128.0
@@ -43,6 +47,7 @@ anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -128.0
 margin_top = 32.0
+margin_bottom = 34.0
 texture = ExtResource( 3 )
 
 [node name="Line2" type="TextureRect" parent="UI/SideBar"]
@@ -53,18 +58,22 @@ margin_top = 66.0
 margin_bottom = 68.0
 texture = ExtResource( 3 )
 
-[node name="Control" type="Control" parent="UI/SideBar"]
-margin_right = 40.0
-margin_bottom = 40.0
+[node name="BottomBar" type="Control" parent="UI"]
+anchor_top = 1.0
+anchor_bottom = 1.0
 
-[node name="BottomBar" type="ColorRect" parent="UI"]
+[node name="BottomBar" type="ColorRect" parent="UI/BottomBar"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_top = -64.0
 margin_right = 512.0
 color = Color( 0.196078, 0.196078, 0.196078, 0.752941 )
 
-[node name="TilesButton" type="TextureButton" parent="UI"]
+[node name="SideBarOverlay" type="Control" parent="UI"]
+anchor_left = 1.0
+anchor_right = 1.0
+
+[node name="TilesButton" type="TextureButton" parent="UI/SideBarOverlay"]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -128.0
@@ -73,13 +82,7 @@ grow_horizontal = 0
 grow_vertical = 0
 expand = true
 
-[node name="TilesSelected" type="ColorRect" parent="UI"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -128.0
-margin_bottom = 32.0
-
-[node name="ObjectsButton" type="TextureButton" parent="UI"]
+[node name="ObjectsButton" type="TextureButton" parent="UI/SideBarOverlay"]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -128.0
@@ -89,20 +92,26 @@ grow_horizontal = 0
 grow_vertical = 0
 expand = true
 
-[node name="ObjectsSelected" type="ColorRect" parent="UI"]
+[node name="TilesSelected" type="ColorRect" parent="UI/SideBarOverlay"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -128.0
+margin_bottom = 32.0
+
+[node name="ObjectsSelected" type="ColorRect" parent="UI/SideBarOverlay"]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -128.0
 margin_top = 34.0
 margin_bottom = 66.0
 
-[node name="Label" type="Label" parent="UI"]
+[node name="Label" type="Label" parent="UI/SideBarOverlay"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -101.192
-margin_top = 7.6982
-margin_right = -9.19202
-margin_bottom = 68.6982
+margin_left = -102.0
+margin_top = 8.0
+margin_right = -10.0
+margin_bottom = 69.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
@@ -110,7 +119,7 @@ custom_constants/shadow_offset_y = 2
 text = "Tiles
 Objects"
 
-[node name="Arrow1" type="TextureRect" parent="UI"]
+[node name="Arrow1" type="TextureRect" parent="UI/SideBarOverlay"]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -118.0
@@ -119,7 +128,7 @@ margin_right = -111.0
 margin_bottom = 20.0
 texture = ExtResource( 5 )
 
-[node name="Arrow2" type="TextureRect" parent="UI"]
+[node name="Arrow2" type="TextureRect" parent="UI/SideBarOverlay"]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -118.0

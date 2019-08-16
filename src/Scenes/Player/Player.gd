@@ -40,12 +40,13 @@ const SAFE_TIME = 60
 const FIREBALL_SPEED = 500
 
 var velocity = Vector2(0,0)
-var on_ground = 0 # Frames Tux has been in air (0 if grounded)
+var on_ground = 999 # Frames Tux has been in air (0 if grounded)
 var jumpheld = 0 # Time the jump key has been held
 var jumpcancel = false # Can let go of jump to stop vertical ascent
 var running = 0 # If horizontal speed is higher than walk max
 var skid = 0 # Time skidding
 var ducking = false # Ducking
+var duck_disable = 0 # Number of frames Tux can't duck
 var backflip = false # Backflipping
 var backflip_rotation = 0 # Backflip rotation
 var state = "fire" # Tux's power-up state
@@ -101,6 +102,7 @@ func _physics_process(delta):
 		$HeadAttack/BigHitbox.disabled = true
 		$HeadAttack/SmallHitbox.disabled = true
 		$SquishRadius/CollisionShape2D.disabled = true
+		duck_disable = 3
 		return
 
 	if dead == true:
@@ -193,10 +195,11 @@ func _physics_process(delta):
 
 	# Ducking
 	if on_ground == 0:
-		if not Input.is_action_pressed("duck"):
-			ducking = false
+		ducking = false
 		if (Input.is_action_pressed("duck") or $StandWindow.is_colliding() == true) and backflip == false and state != "small":
+			if duck_disable == 0:
 				ducking = true
+			else: duck_disable -= 1
 
 	# Jump buffering
 	if Input.is_action_pressed("jump"):
