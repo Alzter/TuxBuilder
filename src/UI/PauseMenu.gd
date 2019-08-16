@@ -1,12 +1,13 @@
 extends Popup
 
 func _input(event):
-	if event.is_action_pressed("pause") && get_tree().paused == false:
-		get_tree().paused = true
-		self.show()
-	elif event.is_action_pressed("pause") && get_tree().paused == true:
-		get_tree().paused = false
-		self.hide()
+	if get_tree().current_scene.get_node("Player").dead == false and get_tree().current_scene.get_node("CanvasLayer/AnimationPlayer").is_playing() == false:
+		if event.is_action_pressed("pause") && get_tree().paused == false:
+			get_tree().paused = true
+			show()
+		elif event.is_action_pressed("pause") && get_tree().paused == true:
+			get_tree().paused = false
+			hide()
 
 func _on_Resume_pressed():
 	get_tree().paused = false
