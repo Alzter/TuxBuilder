@@ -2,6 +2,7 @@ extends Node2D
 
 var editmode = false
 var editsaved = false # Using an edited version of a level
+var can_edit = true
 var current_level = ""
 var player_position = Vector2(0,0)
 var level_bound_left = 0
@@ -18,23 +19,26 @@ func _ready():
 	load_editor()
 	load_ui()
 	level_bounds()
+
+func _process(delta):
 	if Input.is_action_just_pressed("click_right"):
-		if editmode == false:
-			player_position = get_node("Player").position
-			clear_ui()
-			clear_player()
-			clear_level()
-			if editsaved == false:
-				load_level(current_level)
-			else: load_edited_level()
-			load_player()
-			get_node("Player").position = player_position
-			editmode = true
-		else:
-			camera_smooth_time = 20
-			save_edited_level()
-			load_ui()
-			editmode = false
+		if $CanvasLayer/AnimationPlayer.is_playing() == false and can_edit == true:
+			if editmode == false:
+				player_position = get_node("Player").position
+				clear_ui()
+				clear_player()
+				clear_level()
+				if editsaved == false:
+					load_level(current_level)
+				else: load_edited_level()
+				load_player()
+				get_node("Player").position = player_position
+				editmode = true
+			else:
+				camera_smooth_time = 20
+				save_edited_level()
+				load_ui()
+				editmode = false
 	
 	if editmode == false:
 		#camera_to_level_bounds() <- Level bounds don't work atm
@@ -54,9 +58,11 @@ func _ready():
 		$Camera2D.smoothing_enabled = false
 		$Camera2D.smoothing_speed = 10
 		camera_smooth_time = 0
-	
+
 func restart_level():
 	editmode = false
+	$CanvasLayer/AnimationPlayer.play("Circle Out")
+	yield(get_node("CanvasLayer/AnimationPlayer"), "animation_finished")
 	clear_ui()
 	clear_player()
 	clear_level()
@@ -66,6 +72,7 @@ func restart_level():
 	load_ui()
 	load_player()
 	get_node("Player").position = get_node("Level/SpawnPos").position
+	$CanvasLayer/AnimationPlayer.play("Circle In")
 
 func save_edited_level():
 	var packed_scene = PackedScene.new()

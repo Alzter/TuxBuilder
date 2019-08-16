@@ -99,6 +99,7 @@ func _ready():
 func _physics_process(delta):
 
 	if get_tree().current_scene.editmode == true:
+		set_animation("idle")
 		$BigHitbox.disabled = true
 		$SmallHitbox.disabled = true
 		$HeadAttack/BigHitbox.disabled = true
@@ -109,6 +110,10 @@ func _physics_process(delta):
 		return
 
 	if dead == true:
+		if Input.is_action_pressed("pause"):
+			if restarted == false:
+					get_tree().current_scene.call("restart_level")
+					restarted = true
 		if position.y > get_viewport().size.y:
 			if restarted == false:
 				get_tree().current_scene.call("restart_level")
