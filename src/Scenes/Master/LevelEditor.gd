@@ -14,6 +14,9 @@ var mouse_down = false
 func _ready():
 	$Grid.visible = false
 	update_selected_tile()
+	if get_tree().current_scene.editmode == false:
+		sidebar_offset = 128
+		bottombar_offset = 128
 	
 func _process(delta):
 	$Grid.rect_size = Vector2(get_viewport().size.x + 32, get_viewport().size.y + 32)

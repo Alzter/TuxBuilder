@@ -11,13 +11,12 @@ var level_bound_top = 0
 var camera_smooth_time = 0
 
 func _ready():
-	editmode = true
+	editmode = false
 	editsaved = false
 	load_level("TEST")
 	load_player()
 	load_editor()
-	
-func _process(delta):
+	load_ui()
 	level_bounds()
 	if Input.is_action_just_pressed("click_right"):
 		if editmode == false:
@@ -56,6 +55,18 @@ func _process(delta):
 		$Camera2D.smoothing_speed = 10
 		camera_smooth_time = 0
 	
+func restart_level():
+	editmode = false
+	clear_ui()
+	clear_player()
+	clear_level()
+	if editsaved == false:
+		load_level(current_level)
+	else: load_edited_level()
+	load_ui()
+	load_player()
+	get_node("Player").position = get_node("Level/SpawnPos").position
+
 func save_edited_level():
 	var packed_scene = PackedScene.new()
 	packed_scene.pack(get_tree().get_current_scene().get_node("Level"))

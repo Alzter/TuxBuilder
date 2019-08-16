@@ -47,6 +47,7 @@ var running = 0 # If horizontal speed is higher than walk max
 var skid = 0 # Time skidding
 var ducking = false # Ducking
 var duck_disable = 0 # Number of frames Tux can't duck
+var duck_disable_wait = false # Wait until Tux isn't colliding
 var backflip = false # Backflipping
 var backflip_rotation = 0 # Backflip rotation
 var state = "fire" # Tux's power-up state
@@ -54,6 +55,7 @@ var invincible_time = 0 # Amount of frames Tux is invincible
 var camera_offset = 0 # Moves camera horizontally for extended view
 var camera_position = Vector2(0,0) # Camera Position
 var dead = false # Stop doing stuff if true
+var restarted = false # Should Tux call restart level
 
 # Set Tux's current playing animation
 func set_animation(anim):
@@ -103,9 +105,16 @@ func _physics_process(delta):
 		$HeadAttack/SmallHitbox.disabled = true
 		$SquishRadius/CollisionShape2D.disabled = true
 		duck_disable = 3
+		duck_disable_wait = true
 		return
 
 	if dead == true:
+		if position.y > get_viewport().size.y:
+			if restarted == false:
+				get_tree().current_scene.call("restart_level")
+				restarted = true
+		$AnimatedSprite.visible = false
+		return
 		$AnimatedSprite.z_index = 999
 		velocity.y += GRAVITY
 		$BigHitbox.disabled = true
@@ -197,9 +206,14 @@ func _physics_process(delta):
 	if on_ground == 0:
 		ducking = false
 		if (Input.is_action_pressed("duck") or $StandWindow.is_colliding() == true) and backflip == false and state != "small":
-			if duck_disable == 0:
+			if duck_disable == 0 and duck_disable_wait == false:
 				ducking = true
-			else: duck_disable -= 1
+			else:
+				if duck_disable <= 0:
+					duck_disable = 0
+					if $StandWindow.is_colliding() == false: duck_disable_wait = false
+				else:
+					duck_disable -= 1
 
 	# Jump buffering
 	if Input.is_action_pressed("jump"):
