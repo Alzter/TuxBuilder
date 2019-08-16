@@ -21,6 +21,15 @@ func _ready():
 	level_bounds()
 
 func _process(delta):
+	if get_viewport().size.x > get_viewport().size.y:
+		$CanvasLayer/CircleTransition.rect_size.x = get_viewport().size.x
+		$CanvasLayer/CircleTransition.rect_size.y = get_viewport().size.x
+		$CanvasLayer/CircleTransition.rect_position.y = 0.5 * (get_viewport().size.y - get_viewport().size.x)
+	else:
+		$CanvasLayer/CircleTransition.rect_size.x = get_viewport().size.y
+		$CanvasLayer/CircleTransition.rect_size.y = get_viewport().size.y
+		$CanvasLayer/CircleTransition.rect_position.x = 0.5 * (get_viewport().size.x - get_viewport().size.y)
+	
 	if Input.is_action_just_pressed("click_right"):
 		if $CanvasLayer/AnimationPlayer.is_playing() == false and can_edit == true:
 			if editmode == false:
