@@ -3,6 +3,7 @@ extends Node2D
 const CAMERA_MOVE_SPEED = 32
 var category_selected = "Tiles"
 var tilemap_selected = "TileMap"
+var tile_type = 0
 var tile_selected = Vector2(0,0)
 var old_tile_selected = Vector2(0,0)
 var sidebar_offset = 0
@@ -11,6 +12,7 @@ var swipe_speed = 0
 
 func _ready():
 	$Grid.visible = false
+	update_selected_tile()
 	
 func _process(delta):
 	$Grid.rect_size = Vector2(get_viewport().size.x + 32, get_viewport().size.y + 32)
@@ -19,7 +21,6 @@ func _process(delta):
 	$Grid.visible = true
 	$UI/SideBar/SideBar.margin_bottom = get_viewport().size.y
 	$UI/BottomBar/BottomBar.margin_right = get_viewport().size.x - 128 + sidebar_offset
-	
 	$UI/SideBar.rect_position.x = get_viewport().size.x + sidebar_offset
 	$UI/SideBarOverlay.rect_position.x = get_viewport().size.x + sidebar_offset
 	$UI/BottomBar.rect_position.y = get_viewport().size.y + (bottombar_offset * 0.5)
@@ -59,13 +60,18 @@ func _process(delta):
 		$UI/SideBarOverlay/TilesSelected.visible = false
 		$UI/SideBarOverlay/ObjectsSelected.visible = true
 	
+	tile_selected = get_tree().current_scene.get_node(str("Level/", tilemap_selected)).world_to_map(get_global_mouse_position())
+	
+	$SelectedTile.position = tile_selected * get_tree().current_scene.get_node(str("Level/", tilemap_selected)).cell_size
+	
+	
 	if Input.is_action_pressed("click_left"):
 		if get_viewport().get_mouse_position().x < get_viewport().size.x - 128 and get_viewport().get_mouse_position().y < get_viewport().size.y - 64:
-			tile_selected = get_tree().current_scene.get_node(str("Level/", tilemap_selected)).world_to_map(get_global_mouse_position())
 			if tile_selected != old_tile_selected:
-				get_tree().current_scene.get_node(str("Level/", tilemap_selected)).set_cellv(tile_selected, 0)
+				get_tree().current_scene.get_node(str("Level/", tilemap_selected)).set_cellv(tile_selected, tile_type)
 				get_tree().current_scene.get_node(str("Level/", tilemap_selected)).update_bitmask_area(tile_selected)
-			old_tile_selected = tile_selected
+	
+	old_tile_selected = tile_selected
 	
 	if Input.is_action_pressed("up"):
 		get_tree().current_scene.get_node("Camera2D").position.y -= CAMERA_MOVE_SPEED
@@ -78,3 +84,10 @@ func _process(delta):
 		
 	if Input.is_action_pressed("move_right"):
 		get_tree().current_scene.get_node("Camera2D").position.x += CAMERA_MOVE_SPEED
+		
+
+
+func update_selected_tile():
+	var selected_texture = get_tree().current_scene.get_node(str("Level/", tilemap_selected)).get_tileset().tile_get_texture(0)
+	$SelectedTile.texture = (selected_texture)
+	$SelectedTile.region_rect.position = get_tree().current_scene.get_node(str("Level/", tilemap_selected)).get_tileset().autotile_get_icon_coordinate(tile_type) * get_tree().current_scene.get_node(str("Level/", tilemap_selected)).cell_size

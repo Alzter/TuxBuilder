@@ -29,6 +29,10 @@ margin_bottom = 16.0
 texture = ExtResource( 2 )
 stretch_mode = 2
 
+[node name="SelectedTile" type="Sprite" parent="."]
+region_enabled = true
+region_rect = Rect2( 0, 0, 32, 32 )
+
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="SideBar" type="Control" parent="UI"]
@@ -58,6 +62,14 @@ margin_top = 66.0
 margin_bottom = 68.0
 texture = ExtResource( 3 )
 
+[node name="Line3" type="TextureRect" parent="UI/SideBar"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -128.0
+margin_top = 100.0
+margin_bottom = 102.0
+texture = ExtResource( 3 )
+
 [node name="BottomBar" type="Control" parent="UI"]
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -72,6 +84,14 @@ color = Color( 0.196078, 0.196078, 0.196078, 0.752941 )
 [node name="SideBarOverlay" type="Control" parent="UI"]
 anchor_left = 1.0
 anchor_right = 1.0
+
+[node name="EraserButton" type="TextureRect" parent="UI/SideBarOverlay"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -128.0
+margin_top = 68.0
+margin_right = -96.0
+margin_bottom = 100.0
 
 [node name="TilesButton" type="TextureButton" parent="UI/SideBarOverlay"]
 anchor_left = 1.0
