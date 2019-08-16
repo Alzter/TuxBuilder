@@ -113,8 +113,8 @@ func _physics_process(delta):
 			if restarted == false:
 				get_tree().current_scene.call("restart_level")
 				restarted = true
-		$AnimatedSprite.visible = false
-		return
+			$AnimatedSprite.visible = false
+			return
 		$AnimatedSprite.z_index = 999
 		velocity.y += GRAVITY
 		$BigHitbox.disabled = true
