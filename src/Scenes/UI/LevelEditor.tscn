@@ -11,7 +11,7 @@ size = 18
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
-extra_spacing_bottom = 11
+extra_spacing_bottom = 12
 font_data = ExtResource( 4 )
 
 [node name="Node2D" type="Node2D"]
@@ -38,6 +38,7 @@ region_rect = Rect2( 0, 0, 32, 32 )
 layer = 3
 
 [node name="SideBar" type="Control" parent="UI"]
+editor/display_folded = true
 anchor_left = 1.0
 anchor_right = 1.0
 mouse_filter = 2
@@ -74,6 +75,7 @@ margin_bottom = 102.0
 texture = ExtResource( 3 )
 
 [node name="BottomBar" type="Control" parent="UI"]
+editor/display_folded = true
 anchor_top = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -86,7 +88,6 @@ margin_right = 512.0
 color = Color( 0.196078, 0.196078, 0.196078, 0.752941 )
 
 [node name="SideBarOverlay" type="Control" parent="UI"]
-editor/display_folded = true
 anchor_left = 1.0
 anchor_right = 1.0
 mouse_filter = 2

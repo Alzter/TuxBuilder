@@ -1,3 +1,43 @@
-[gd_resource type="Theme" format=2]
+[gd_resource type="Theme" load_steps=6 format=2]
+
+[ext_resource path="res://Fonts/SuperTux-Medium.ttf" type="DynamicFontData" id=1]
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 1, 1, 1, 0.75 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 10
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 1, 1, 1, 0 )
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 1, 1, 1, 1 )
+border_blend = true
+
+[sub_resource type="DynamicFont" id=1]
+size = 18
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = ExtResource( 1 )
 
 [resource]
+default_font = SubResource( 1 )
+Panel/styles/panel = SubResource( 2 )
+Panel/styles/panelf = null
+Panel/styles/panelnc = null
+ToolButton/colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+ToolButton/colors/font_color_disabled = Color( 0.9, 0.95, 1, 0.3 )
+ToolButton/colors/font_color_hover = Color( 0.941176, 0.941176, 0.941176, 1 )
+ToolButton/colors/font_color_pressed = Color( 1, 1, 1, 1 )
+ToolButton/constants/hseparation = 3
+ToolButton/fonts/font = null
+ToolButton/styles/disabled = SubResource( 3 )
+ToolButton/styles/focus = SubResource( 3 )
+ToolButton/styles/hover = SubResource( 4 )
+ToolButton/styles/normal = SubResource( 3 )
+ToolButton/styles/pressed = SubResource( 3 )

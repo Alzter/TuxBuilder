@@ -69,6 +69,7 @@ drag_margin_v_enabled = false
 smoothing_speed = 15.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+pause_mode = 2
 layer = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
