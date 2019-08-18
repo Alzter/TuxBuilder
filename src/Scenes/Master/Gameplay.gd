@@ -108,7 +108,7 @@ func clear_level():
 	scene.call_deferred("free")
 
 func load_editor():
-	var scene = load("res://Scenes/Master/LevelEditor.tscn")
+	var scene = load("res://Scenes/UI/LevelEditor.tscn")
 	var scene_instance = scene.instance()
 	scene_instance.set_name("Editor")
 	add_child(scene_instance)
@@ -118,7 +118,7 @@ func clear_editor():
 	remove_child(scene)
 
 func load_ui():
-	var scene = load("res://UI/LevelUI.tscn")
+	var scene = load("res://Scenes/UI/LevelUI.tscn")
 	var scene_instance = scene.instance()
 	scene_instance.set_name("LevelUI")
 	add_child(scene_instance)

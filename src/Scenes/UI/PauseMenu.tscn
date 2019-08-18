@@ -1,0 +1,97 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scenes/UI/UITheme.tres" type="Theme" id=1]
+[ext_resource path="res://Scenes/UI/PauseMenu.gd" type="Script" id=2]
+[ext_resource path="res://UI/Fonts/SuperTux-Medium.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 23
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = ExtResource( 3 )
+
+[node name="PauseMenu" type="Popup"]
+pause_mode = 2
+visible = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -75.0
+margin_top = -105.0
+margin_right = 75.0
+margin_bottom = 105.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Paused" type="Label" parent="VBoxContainer"]
+margin_right = 150.0
+margin_bottom = 2.0
+custom_fonts/font = SubResource( 1 )
+text = "Paused"
+align = 1
+
+[node name="Panel" type="Panel" parent="VBoxContainer"]
+margin_top = 6.0
+margin_right = 150.0
+margin_bottom = 210.0
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -64.0
+margin_top = -80.0
+margin_right = 64.0
+margin_bottom = 80.0
+
+[node name="Continue" type="Button" parent="VBoxContainer/Panel/VBoxContainer"]
+margin_right = 128.0
+margin_bottom = 28.0
+rect_pivot_offset = Vector2( -488.794, -160.987 )
+size_flags_vertical = 3
+text = "Continue"
+
+[node name="Restart" type="Button" parent="VBoxContainer/Panel/VBoxContainer"]
+margin_top = 32.0
+margin_right = 128.0
+margin_bottom = 60.0
+rect_pivot_offset = Vector2( -488.794, -160.987 )
+size_flags_vertical = 3
+text = "Restart"
+
+[node name="Options" type="Button" parent="VBoxContainer/Panel/VBoxContainer"]
+margin_top = 64.0
+margin_right = 128.0
+margin_bottom = 92.0
+rect_pivot_offset = Vector2( -488.794, -160.987 )
+size_flags_vertical = 3
+text = "Options"
+
+[node name="ExitLevel" type="Button" parent="VBoxContainer/Panel/VBoxContainer"]
+margin_top = 96.0
+margin_right = 128.0
+margin_bottom = 124.0
+rect_pivot_offset = Vector2( -488.794, -160.987 )
+size_flags_vertical = 3
+text = "Exit Level"
+
+[node name="Quit" type="Button" parent="VBoxContainer/Panel/VBoxContainer"]
+margin_top = 128.0
+margin_right = 128.0
+margin_bottom = 160.0
+rect_pivot_offset = Vector2( -488.794, -160.987 )
+size_flags_vertical = 3
+text = "Quit"
+[connection signal="pressed" from="VBoxContainer/Panel/VBoxContainer/Continue" to="." method="_on_Resume_pressed"]
+[connection signal="pressed" from="VBoxContainer/Panel/VBoxContainer/Restart" to="." method="_on_Restart_pressed"]
+[connection signal="pressed" from="VBoxContainer/Panel/VBoxContainer/Options" to="." method="_on_Options_pressed"]
+[connection signal="pressed" from="VBoxContainer/Panel/VBoxContainer/ExitLevel" to="." method="_on_QuitLevel_pressed"]
+[connection signal="pressed" from="VBoxContainer/Panel/VBoxContainer/Quit" to="." method="_on_MainMenu_pressed"]

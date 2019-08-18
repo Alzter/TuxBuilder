@@ -3,7 +3,7 @@
 [ext_resource path="res://Scenes/Master/Gameplay.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Transitions/Circle.png" type="Texture" id=2]
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=1]
 resource_name = "Circle In"
 length = 0.6
 tracks/0/type = "value"
@@ -19,7 +19,7 @@ tracks/0/keys = {
 "values": [ 0.0, 1.0 ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=2]
 resource_name = "Circle Out"
 length = 0.6
 tracks/0/type = "value"
@@ -35,7 +35,7 @@ tracks/0/keys = {
 "values": [ 1.0, 0.0 ]
 }
 
-[sub_resource type="Shader" id=1]
+[sub_resource type="Shader" id=3]
 code = "shader_type canvas_item;
 render_mode unshaded;
 
@@ -52,8 +52,8 @@ void fragment()
 	COLOR = vec4(color.rgb, alpha);
 }"
 
-[sub_resource type="ShaderMaterial" id=2]
-shader = SubResource( 1 )
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
 shader_param/cutoff = 1.0
 shader_param/smooth_size = 0.03
 shader_param/color = null
@@ -72,11 +72,11 @@ smoothing_speed = 15.0
 layer = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
-"anims/Circle In" = SubResource( 3 )
-"anims/Circle Out" = SubResource( 4 )
+"anims/Circle In" = SubResource( 1 )
+"anims/Circle Out" = SubResource( 2 )
 
 [node name="CircleTransition" type="ColorRect" parent="CanvasLayer"]
-material = SubResource( 2 )
+material = SubResource( 4 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
