@@ -78,16 +78,16 @@ func _process(delta):
 	
 	old_tile_selected = tile_selected
 	
-	if Input.is_action_pressed("up"):
+	if Input.is_action_pressed("ui_up"):
 		get_tree().current_scene.get_node("Camera2D").position.y -= CAMERA_MOVE_SPEED
 		
-	if Input.is_action_pressed("duck"):
+	if Input.is_action_pressed("ui_down"):
 		get_tree().current_scene.get_node("Camera2D").position.y += CAMERA_MOVE_SPEED
 		
-	if Input.is_action_pressed("move_left"):
+	if Input.is_action_pressed("ui_left"):
 		get_tree().current_scene.get_node("Camera2D").position.x -= CAMERA_MOVE_SPEED
 		
-	if Input.is_action_pressed("move_right"):
+	if Input.is_action_pressed("ui_down"):
 		get_tree().current_scene.get_node("Camera2D").position.x += CAMERA_MOVE_SPEED
 		
 

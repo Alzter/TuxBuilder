@@ -3,11 +3,12 @@ extends Popup
 var background_opacity = 0
 var panel_sizemult = 1
 var panel_size = Vector2(0,0)
+var button_selected = 0
 
 func _ready():
 	hide()
 	get_tree().paused = false
-	panel_size = $Control/VBoxContainer/Panel.rect_size
+	panel_size = $Panel.rect_size
 
 func _input(event):
 	if get_tree().current_scene.get_node("Player").dead == false and get_tree().current_scene.get_node("CanvasLayer/AnimationPlayer").is_playing() == false:
@@ -16,6 +17,7 @@ func _input(event):
 			show()
 			background_opacity = 0
 			panel_sizemult = 0.1
+			$Panel/VBoxContainer/Continue.grab_focus()
 		elif event.is_action_pressed("pause") && get_tree().paused == true:
 			get_tree().paused = false
 
@@ -30,10 +32,11 @@ func _process(delta):
 		panel_sizemult -= 0.25
 		if panel_sizemult <= 0:
 				hide()
-	$Control/VBoxContainer/Panel.rect_size.x = panel_size.x * panel_sizemult
-	$Control/VBoxContainer/Panel.rect_position.x = (panel_size.x * (1 - panel_sizemult)) * 0.5
-	$Control/VBoxContainer/Panel.rect_size.y = panel_size.y * panel_sizemult
-	$Control/VBoxContainer/Panel.rect_position.y = (panel_size.y * (1 - panel_sizemult)) * 0.5
+	$Panel.rect_size.x = panel_size.x * panel_sizemult
+	$Panel.rect_position.x = round(get_viewport().size.x / 2) + ($Panel.rect_size.x * -0.5)
+	$Panel.rect_size.y = panel_size.y * panel_sizemult
+	$Panel.rect_position.y = round(get_viewport().size.y / 2) + ($Panel.rect_size.y * -0.5)
+	$Background.rect_size = get_viewport().size
 
 func _on_Resume_pressed():
 	get_tree().paused = false
