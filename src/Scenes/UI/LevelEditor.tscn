@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scenes/UI/LevelEditor.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Editor/Grid.png" type="Texture" id=2]
@@ -18,6 +18,158 @@ outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
 font_data = ExtResource( 3 )
+
+[sub_resource type="Animation" id=4]
+resource_name = "MoveIn"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("BottomBar:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 481 ), Vector2( 0, 416 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SideBar:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 648, 0 ), Vector2( 512, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SideBar:margin_left")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 8.0, -128.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SideBar:margin_right")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 136.0, 0.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("BottomBar:margin_top")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, -64 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("BottomBar:margin_bottom")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 64.9999, 0 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "MoveOut"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("BottomBar:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 416 ), Vector2( 0, 481 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SideBar:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 648, 0 ), Vector2( 512, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SideBar:margin_left")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -128, 8.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SideBar:margin_right")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 136.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("BottomBar:margin_top")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -64, 1.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("BottomBar:margin_bottom")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 64.9999 ]
+}
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
@@ -55,19 +207,19 @@ anchor_bottom = 1.0
 custom_constants/separation = 0
 
 [node name="TilesButton" type="Button" parent="UI/SideBar/VBoxContainer"]
-editor/display_folded = true
 margin_right = 128.0
 margin_bottom = 30.0
 grow_horizontal = 0
 grow_vertical = 0
 rect_min_size = Vector2( 0, 30 )
+focus_mode = 1
 size_flags_horizontal = 3
 custom_styles/hover = SubResource( 1 )
 custom_styles/pressed = SubResource( 1 )
 custom_styles/focus = SubResource( 2 )
 custom_styles/normal = SubResource( 1 )
 custom_fonts/font = SubResource( 3 )
-text = "Tiles"
+enabled_focus_mode = 1
 
 [node name="Arrow1" type="TextureRect" parent="UI/SideBar/VBoxContainer/TilesButton"]
 anchor_top = 0.5
@@ -77,6 +229,20 @@ margin_right = 7.0
 margin_bottom = 4.0
 texture = ExtResource( 4 )
 
+[node name="Label" type="Label" parent="UI/SideBar/VBoxContainer/TilesButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -54.0
+margin_top = -9.0
+margin_bottom = 9.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+text = "Tiles"
+
 [node name="Line1" type="TextureRect" parent="UI/SideBar/VBoxContainer"]
 margin_top = 30.0
 margin_right = 128.0
@@ -84,20 +250,20 @@ margin_bottom = 32.0
 texture = ExtResource( 5 )
 
 [node name="ObjectsButton" type="Button" parent="UI/SideBar/VBoxContainer"]
-editor/display_folded = true
 margin_top = 32.0
 margin_right = 128.0
 margin_bottom = 62.0
 grow_horizontal = 0
 grow_vertical = 0
 rect_min_size = Vector2( 0, 30 )
+focus_mode = 1
 size_flags_horizontal = 3
 custom_styles/hover = SubResource( 1 )
 custom_styles/pressed = SubResource( 1 )
 custom_styles/focus = SubResource( 2 )
 custom_styles/normal = SubResource( 1 )
 custom_fonts/font = SubResource( 3 )
-text = "Objects"
+enabled_focus_mode = 1
 
 [node name="Arrow2" type="TextureRect" parent="UI/SideBar/VBoxContainer/ObjectsButton"]
 anchor_top = 0.5
@@ -106,6 +272,17 @@ margin_top = -4.0
 margin_right = 7.0
 margin_bottom = 4.0
 texture = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="UI/SideBar/VBoxContainer/ObjectsButton"]
+margin_left = 10.0
+margin_top = 6.0
+margin_right = 102.0
+margin_bottom = 24.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+text = "Objects"
 
 [node name="Line2" type="TextureRect" parent="UI/SideBar/VBoxContainer"]
 margin_top = 62.0
@@ -136,5 +313,9 @@ anchor_bottom = 1.0
 margin_top = -64.0
 margin_right = -128.0
 color = Color( 0.196078, 0.196078, 0.196078, 0.752941 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI"]
+anims/MoveIn = SubResource( 4 )
+anims/MoveOut = SubResource( 5 )
 [connection signal="pressed" from="UI/SideBar/VBoxContainer/TilesButton" to="." method="_on_TilesButton_pressed"]
 [connection signal="pressed" from="UI/SideBar/VBoxContainer/ObjectsButton" to="." method="_on_ObjectsButton_pressed"]
