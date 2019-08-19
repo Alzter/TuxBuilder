@@ -100,11 +100,14 @@ func populate_lists():
 	
 	for i in range(0, tilecategories.size()):
 		$UI/SideBar/VBoxContainer/TilesButton.add_item(tilecategories[i])
+		var tilecategory = load("res://Scenes/UI/LevelEditorCategory.tscn").instance()
+		tilecategory.item = tilecategories[i]
+		$UI/SideBar/SidebarList.add_child(tilecategory)
 		for i in range (0, groundtiles.size()): # Replace groundtiles with str(tilecategories[i] + "tiles")
 			var tile = load("res://Scenes/UI/LevelEditorTile.tscn").instance()
 			tile.tile_type = groundtiles[i] # Replace groundtiles with str(tilecategories[i] + "tiles")
 			tile.tilemap_selected = tilemap_selected
-			$UI/SideBar/SidebarList.add_child(tile)
+			tilecategory.get_node("VBoxContainer/Content").add_child(tile)
 		
 	for i in range(0, objectcategories.size()):
 		$UI/SideBar/VBoxContainer/ObjectsButton.add_item(objectcategories[i])
