@@ -40,7 +40,6 @@ func _process(delta):
 
 func _on_Resume_pressed():
 	get_tree().paused = false
-	self.hide()
 
 func _on_Restart_pressed():
 	get_tree().current_scene.call("restart_level")

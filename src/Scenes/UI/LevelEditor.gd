@@ -1,48 +1,40 @@
 extends Node2D
 
 const CAMERA_MOVE_SPEED = 32
+var category_selected = "Tiles"
 var tilemap_selected = "TileMap"
 var tile_type = 0
 var tile_selected = Vector2(0,0)
 var old_tile_selected = Vector2(0,0)
-var sidebar_offset = 0
-var bottombar_offset = 0
-var swipe_speed = 0
 var mouse_down = false
+var anim_in = false
 
 func _ready():
-	$Grid.visible = false
-	update_selected_tile()
-	if get_tree().current_scene.editmode == false:
-		sidebar_offset = 128
-		bottombar_offset = 128
-	
+	anim_in = get_tree().current_scene.editmode
+	visible = false
+	$UI.offset = Vector2 (get_viewport().size.x * 9999,get_viewport().size.y * 9999)
+	$UI/SideBar/VBoxContainer/TilesButton.grab_focus()
+
 func _process(delta):
 	$Grid.rect_size = Vector2(get_viewport().size.x + 32, get_viewport().size.y + 32)
 	$Grid.rect_position = Vector2(get_tree().current_scene.get_node("Camera2D").position.x - (get_viewport().size.x / 2), get_tree().current_scene.get_node("Camera2D").position.y - (get_viewport().size.y / 2))
 	$Grid.rect_position = Vector2(floor($Grid.rect_position.x / 32) * 32, floor($Grid.rect_position.y / 32) * 32)
-	$Grid.visible = true
-	$Grid.self_modulate = Color(1, 1, 1, 1 - (sidebar_offset / 128))
 	
 	if get_tree().current_scene.editmode == false:
-		swipe_speed += 10
-		sidebar_offset += swipe_speed
-		bottombar_offset += swipe_speed
-		if sidebar_offset >= 128:
+		# Move out animation
+		if anim_in == true:
+			anim_in = false
+			$UI/AnimationPlayer.play("MoveOut")
+		if $UI/AnimationPlayer.current_animation != "MoveOut":
 			visible = false
 			$UI.offset = Vector2 (get_viewport().size.x * 9999,get_viewport().size.y * 9999)
-			sidebar_offset = 128
-			bottombar_offset = 128
-		return
+			return
 	else:
-		swipe_speed = 0
+		# Move in animation
+		if anim_in == false:
+			anim_in = true
+			$UI/AnimationPlayer.play("MoveIn")
 		visible = true
-		if sidebar_offset < 2:
-			sidebar_offset = 0
-			bottombar_offset = 0
-		else:
-			sidebar_offset *= 0.8
-			bottombar_offset *= 0.8
 		$UI.offset = Vector2(0,0)
 		
 	# Navigation
@@ -59,6 +51,8 @@ func _process(delta):
 		get_tree().current_scene.get_node("Camera2D").position.x += CAMERA_MOVE_SPEED
 
 func _input(event):
+	if get_tree().current_scene.editmode == false:
+		return
 	
 	tile_selected = get_tree().current_scene.get_node(str("Level/", tilemap_selected)).world_to_map(get_global_mouse_position())
 	update_selected_tile()
@@ -72,13 +66,6 @@ func _input(event):
 	else: mouse_down = false
 	
 	old_tile_selected = tile_selected
-	
-	# Transition animation
-	if Input.is_action_pressed("click_right") && get_tree().current_scene.editmode == false:
-		$UI/AnimationPlayer.play("MoveIn")
-	
-	if Input.is_action_pressed("click_right") && get_tree().current_scene.editmode == true:
-		$UI/AnimationPlayer.play("MoveOut")
 
 func update_selected_tile():
 	$SelectedTile.visible = false
@@ -90,9 +77,9 @@ func update_selected_tile():
 		$SelectedTile.position.x = (tile_selected.x + 0.5) * get_tree().current_scene.get_node(str("Level/", tilemap_selected)).cell_size.x
 		$SelectedTile.position.y = (tile_selected.y + 0.5) * get_tree().current_scene.get_node(str("Level/", tilemap_selected)).cell_size.y
 
-#Buttons
+# Buttons
 func _on_TilesButton_pressed():
-	print("tiles")
+	category_selected = "Tiles"
 
 func _on_ObjectsButton_pressed():
-	print("objects")
+	category_selected = "Objects"
