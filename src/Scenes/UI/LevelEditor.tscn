@@ -1,12 +1,14 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scenes/UI/LevelEditor.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Editor/Grid.png" type="Texture" id=2]
-[ext_resource path="res://Fonts/SuperTux-Medium.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://Sprites/Editor/Arrow.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Editor/Line.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Editor/Eraser.png" type="Texture" id=3]
+[ext_resource path="res://Fonts/SuperTux-Medium.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Sprites/Editor/Arrow.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Editor/Line.png" type="Texture" id=6]
+[ext_resource path="res://Scenes/UI/UITheme.tres" type="Theme" id=7]
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=1]
 resource_name = "MoveIn"
 length = 0.2
 tracks/0/type = "value"
@@ -94,7 +96,7 @@ tracks/6/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=2]
 resource_name = "MoveOut"
 length = 0.1
 tracks/0/type = "value"
@@ -182,18 +184,22 @@ tracks/6/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="StyleBoxFlat" id=1]
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 1, 1, 1, 0 )
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=5]
 size = 18
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
-font_data = ExtResource( 3 )
+font_data = ExtResource( 4 )
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
@@ -212,7 +218,15 @@ texture = ExtResource( 2 )
 stretch_mode = 2
 
 [node name="SelectedTile" type="Sprite" parent="."]
-modulate = Color( 1, 1, 1, 0.25 )
+z_index = 1
+region_enabled = true
+region_rect = Rect2( 0, 0, 32, 32 )
+
+[node name="EraserSprite" type="Sprite" parent="."]
+z_index = 1
+texture = ExtResource( 3 )
+offset = Vector2( 16, 16 )
+flip_h = true
 region_enabled = true
 region_rect = Rect2( 0, 0, 32, 32 )
 
@@ -220,8 +234,8 @@ region_rect = Rect2( 0, 0, 32, 32 )
 layer = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI"]
-anims/MoveIn = SubResource( 4 )
-anims/MoveOut = SubResource( 5 )
+anims/MoveIn = SubResource( 1 )
+anims/MoveOut = SubResource( 2 )
 
 [node name="SideBar" type="ColorRect" parent="UI"]
 anchor_left = 1.0
@@ -237,6 +251,7 @@ anchor_bottom = 1.0
 custom_constants/separation = 0
 
 [node name="TilesButton" type="Button" parent="UI/SideBar/VBoxContainer"]
+editor/display_folded = true
 margin_right = 128.0
 margin_bottom = 32.0
 grow_horizontal = 0
@@ -244,11 +259,12 @@ grow_vertical = 0
 rect_min_size = Vector2( 0, 32 )
 focus_mode = 1
 size_flags_horizontal = 3
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 1 )
-custom_styles/focus = SubResource( 2 )
-custom_styles/normal = SubResource( 1 )
-custom_fonts/font = SubResource( 3 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/disabled = SubResource( 3 )
+custom_styles/normal = SubResource( 3 )
+custom_fonts/font = SubResource( 5 )
 enabled_focus_mode = 1
 
 [node name="Arrow1" type="TextureRect" parent="UI/SideBar/VBoxContainer/TilesButton"]
@@ -258,7 +274,7 @@ margin_left = 8.0
 margin_top = -4.0
 margin_right = 7.0
 margin_bottom = 4.0
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 
 [node name="Label" type="Label" parent="UI/SideBar/VBoxContainer/TilesButton"]
 anchor_left = 0.5
@@ -268,7 +284,7 @@ anchor_bottom = 0.5
 margin_left = -42.0
 margin_top = -9.0
 margin_bottom = 9.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 5 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
@@ -278,9 +294,10 @@ text = "Tiles"
 margin_top = 32.0
 margin_right = 128.0
 margin_bottom = 34.0
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 
 [node name="ObjectsButton" type="Button" parent="UI/SideBar/VBoxContainer"]
+editor/display_folded = true
 margin_top = 34.0
 margin_right = 128.0
 margin_bottom = 66.0
@@ -289,11 +306,12 @@ grow_vertical = 0
 rect_min_size = Vector2( 0, 32 )
 focus_mode = 1
 size_flags_horizontal = 3
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 1 )
-custom_styles/focus = SubResource( 2 )
-custom_styles/normal = SubResource( 1 )
-custom_fonts/font = SubResource( 3 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/disabled = SubResource( 3 )
+custom_styles/normal = SubResource( 3 )
+custom_fonts/font = SubResource( 5 )
 enabled_focus_mode = 1
 
 [node name="Arrow2" type="TextureRect" parent="UI/SideBar/VBoxContainer/ObjectsButton"]
@@ -301,7 +319,7 @@ margin_left = 8.0
 margin_top = 12.0
 margin_right = 7.0
 margin_bottom = 20.0
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 
 [node name="Label" type="Label" parent="UI/SideBar/VBoxContainer/ObjectsButton"]
 anchor_left = 0.5
@@ -311,7 +329,7 @@ anchor_bottom = 0.5
 margin_left = -42.0
 margin_top = -9.0
 margin_bottom = 9.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 5 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
@@ -321,24 +339,40 @@ text = "Objects"
 margin_top = 66.0
 margin_right = 128.0
 margin_bottom = 68.0
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 
-[node name="EraserButton" type="Button" parent="UI/SideBar/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/SideBar/VBoxContainer"]
 margin_top = 68.0
 margin_right = 128.0
 margin_bottom = 100.0
-rect_min_size = Vector2( 0, 32 )
-focus_mode = 1
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 1 )
-custom_styles/focus = SubResource( 2 )
-custom_styles/normal = SubResource( 1 )
+custom_constants/separation = 0
+alignment = 1
+
+[node name="EraserButton" type="Button" parent="UI/SideBar/VBoxContainer/HBoxContainer"]
+margin_left = 48.0
+margin_right = 80.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+focus_mode = 0
+theme = ExtResource( 7 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 3 )
+custom_styles/normal = SubResource( 3 )
+toggle_mode = true
+enabled_focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="UI/SideBar/VBoxContainer/HBoxContainer/EraserButton"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 3 )
 
 [node name="Line3" type="TextureRect" parent="UI/SideBar/VBoxContainer"]
 margin_top = 100.0
 margin_right = 128.0
 margin_bottom = 102.0
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 
 [node name="BottomBar" type="ColorRect" parent="UI"]
 anchor_top = 1.0
