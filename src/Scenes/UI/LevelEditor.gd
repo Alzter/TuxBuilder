@@ -44,9 +44,19 @@ func _process(delta):
 			sidebar_offset *= 0.8
 			bottombar_offset *= 0.8
 		$UI.offset = Vector2(0,0)
-	
-	
-	
+		
+	# Navigation
+	if Input.is_action_pressed("ui_up"):
+		get_tree().current_scene.get_node("Camera2D").position.y -= CAMERA_MOVE_SPEED
+		
+	if Input.is_action_pressed("ui_down"):
+		get_tree().current_scene.get_node("Camera2D").position.y += CAMERA_MOVE_SPEED
+		
+	if Input.is_action_pressed("ui_left"):
+		get_tree().current_scene.get_node("Camera2D").position.x -= CAMERA_MOVE_SPEED
+		
+	if Input.is_action_pressed("ui_right"):
+		get_tree().current_scene.get_node("Camera2D").position.x += CAMERA_MOVE_SPEED
 
 func _input(event):
 	
@@ -63,17 +73,12 @@ func _input(event):
 	
 	old_tile_selected = tile_selected
 	
-	if Input.is_action_pressed("ui_up"):
-		get_tree().current_scene.get_node("Camera2D").position.y -= CAMERA_MOVE_SPEED
-		
-	if Input.is_action_pressed("ui_down"):
-		get_tree().current_scene.get_node("Camera2D").position.y += CAMERA_MOVE_SPEED
-		
-	if Input.is_action_pressed("ui_left"):
-		get_tree().current_scene.get_node("Camera2D").position.x -= CAMERA_MOVE_SPEED
-		
-	if Input.is_action_pressed("ui_right"):
-		get_tree().current_scene.get_node("Camera2D").position.x += CAMERA_MOVE_SPEED
+	# Transition animation
+	if Input.is_action_pressed("click_right") && get_tree().current_scene.editmode == false:
+		$UI/AnimationPlayer.play("MoveIn")
+	
+	if Input.is_action_pressed("click_right") && get_tree().current_scene.editmode == true:
+		$UI/AnimationPlayer.play("MoveOut")
 
 func update_selected_tile():
 	$SelectedTile.visible = false
@@ -85,8 +90,9 @@ func update_selected_tile():
 		$SelectedTile.position.x = (tile_selected.x + 0.5) * get_tree().current_scene.get_node(str("Level/", tilemap_selected)).cell_size.x
 		$SelectedTile.position.y = (tile_selected.y + 0.5) * get_tree().current_scene.get_node(str("Level/", tilemap_selected)).cell_size.y
 
+#Buttons
 func _on_TilesButton_pressed():
-	pass
+	print("tiles")
 
 func _on_ObjectsButton_pressed():
-	pass
+	print("objects")
