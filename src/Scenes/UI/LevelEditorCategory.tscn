@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scenes/UI/LevelEditorCategory.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/UI/UITheme.tres" type="Theme" id=2]
+[ext_resource path="res://Sprites/Editor/Arrow.png" type="Texture" id=3]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
@@ -17,9 +18,35 @@ margin_right = 64.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 128, 32 )
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="Button" type="Button" parent="VBoxContainer"]
+margin_right = 128.0
+margin_bottom = 23.0
+rect_min_size = Vector2( 128, 23 )
+focus_mode = 1
+theme = ExtResource( 2 )
+toggle_mode = true
+
+[node name="Arrow" type="TextureRect" parent="VBoxContainer/Button"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -12.0
+margin_top = -3.5
+margin_right = -7.0
+margin_bottom = 2.5
+rect_rotation = 180.0
+rect_scale = Vector2( 2, 2 )
+rect_pivot_offset = Vector2( 2.5, 3 )
+mouse_filter = 2
+texture = ExtResource( 3 )
+expand = true
+
+[node name="Label" type="Label" parent="VBoxContainer/Button"]
 margin_right = 128.0
 margin_bottom = 20.0
+rect_min_size = Vector2( 128, 32 )
+rect_clip_content = true
 theme = ExtResource( 2 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
@@ -27,7 +54,7 @@ custom_constants/shadow_offset_y = 2
 text = "Category1"
 
 [node name="Content" type="VBoxContainer" parent="VBoxContainer"]
-margin_top = 24.0
+margin_top = 27.0
 margin_right = 128.0
-margin_bottom = 56.0
+margin_bottom = 59.0
 rect_min_size = Vector2( 128, 32 )
