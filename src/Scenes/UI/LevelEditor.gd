@@ -12,10 +12,13 @@ var anim_in = false
 func _ready():
 	anim_in = get_tree().current_scene.editmode
 	visible = false
-	$UI.offset = Vector2 (get_viewport().size.x * 9999,get_viewport().size.y * 9999)
+	$UI.offset = Vector2(get_viewport().size.x * 9999,get_viewport().size.y * 9999)
 	$UI/SideBar/VBoxContainer/TilesButton.grab_focus()
+	populate_lists()
 
 func _process(delta):
+	$UI/SideBar/VBoxContainer/TilesButton.text = ""
+	$UI/SideBar/VBoxContainer/ObjectsButton.text = ""
 	$Grid.rect_size = Vector2(get_viewport().size.x + 32, get_viewport().size.y + 32)
 	$Grid.rect_position = Vector2(get_tree().current_scene.get_node("Camera2D").position.x - (get_viewport().size.x / 2), get_tree().current_scene.get_node("Camera2D").position.y - (get_viewport().size.y / 2))
 	$Grid.rect_position = Vector2(floor($Grid.rect_position.x / 32) * 32, floor($Grid.rect_position.y / 32) * 32)
@@ -88,3 +91,16 @@ func _on_TilesButton_pressed():
 
 func _on_ObjectsButton_pressed():
 	category_selected = "Objects"
+
+func populate_lists():
+	var tilecategories = ["Ground", "Bonus"]
+	var groundtilenames = ["Snow"]
+	var groundtileids = ["0"]
+	
+	var objectcategories = ["BadGuys"]
+	
+	for i in range(0, tilecategories.size()):
+		$UI/SideBar/VBoxContainer/TilesButton.add_item(tilecategories[i])
+	
+	for i in range(0, objectcategories.size()):
+		$UI/SideBar/VBoxContainer/ObjectsButton.add_item(objectcategories[i])
