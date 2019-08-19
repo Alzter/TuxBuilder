@@ -93,7 +93,7 @@ func _on_ObjectsButton_pressed():
 	category_selected = "Objects"
 
 func populate_lists():
-	var tilecategories = ["ground"]
+	var tilecategories = ["Ground","Blocks"]
 	var groundtiles = ["Snow"]
 	
 	var objectcategories = ["BadGuys"]
