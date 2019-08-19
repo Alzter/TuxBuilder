@@ -347,7 +347,6 @@ margin_bottom = 68.0
 texture = ExtResource( 7 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/SideBar/VBoxContainer"]
-editor/display_folded = true
 margin_top = 68.0
 margin_right = 128.0
 margin_bottom = 100.0
@@ -385,6 +384,7 @@ texture = ExtResource( 7 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 102.0
+alignment = 1
 
 [node name="BottomBar" type="ColorRect" parent="UI"]
 anchor_top = 1.0

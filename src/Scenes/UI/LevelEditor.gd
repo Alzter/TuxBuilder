@@ -76,7 +76,7 @@ func update_selected_tile():
 			$SelectedTile.modulate = Color(1,1,1,1)
 			$EraserSprite.visible = true
 		else:
-			var selected_texture = get_tree().current_scene.get_node(str("Level/", tilemap_selected)).get_tileset().tile_get_texture(0)
+			var selected_texture = get_tree().current_scene.get_node(str("Level/", tilemap_selected)).get_tileset().tile_get_texture(tile_type)
 			$SelectedTile.texture = (selected_texture)
 			$SelectedTile.region_rect.position = get_tree().current_scene.get_node(str("Level/", tilemap_selected)).get_tileset().autotile_get_icon_coordinate(tile_type) * get_tree().current_scene.get_node(str("Level/", tilemap_selected)).cell_size
 			$SelectedTile.modulate = Color(1,1,1,0.25)
@@ -93,14 +93,18 @@ func _on_ObjectsButton_pressed():
 	category_selected = "Objects"
 
 func populate_lists():
-	var tilecategories = ["Ground", "Bonus"]
-	var groundtilenames = ["Snow"]
-	var groundtileids = ["0"]
+	var tilecategories = ["ground"]
+	var groundtiles = ["Snow"]
 	
 	var objectcategories = ["BadGuys"]
 	
 	for i in range(0, tilecategories.size()):
 		$UI/SideBar/VBoxContainer/TilesButton.add_item(tilecategories[i])
-	
+		for i in range (0, groundtiles.size()): # Replace groundtiles with str(tilecategories[i] + "tiles")
+			var tile = load("res://Scenes/UI/LevelEditorTile.tscn").instance()
+			tile.tile_type = groundtiles[i] # Replace groundtiles with str(tilecategories[i] + "tiles")
+			tile.tilemap_selected = tilemap_selected
+			$UI/SideBar/SidebarList.add_child(tile)
+		
 	for i in range(0, objectcategories.size()):
 		$UI/SideBar/VBoxContainer/ObjectsButton.add_item(objectcategories[i])
