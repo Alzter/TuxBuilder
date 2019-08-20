@@ -6,6 +6,7 @@ var velocity = Vector2(0,0)
 var startpos = Vector2(0,0)
 var state = "active"
 var direction = 1
+var rotate = 0
 
 func _ready():
 	startpos = position
@@ -22,6 +23,7 @@ func _physics_process(delta):
 	if get_tree().current_scene.editmode == true:
 		return
 	
+	# Movement
 	if state == "active":
 		velocity.x = -100 * $AnimatedSprite.scale.x
 		velocity.y += 20
@@ -29,40 +31,36 @@ func _physics_process(delta):
 		if is_on_wall():
 			$AnimatedSprite.scale.x *= -1
 	
-	# Enemy killed animations
-	elif state == "burned":
-		pass
-		
-	elif state == "squished":
-		$AnimationPlayer.play("squished")
-		
-	elif state == "bullet":
-		$CollisionShape2D.disabled = true
-		velocity = move_and_slide(velocity, FLOOR)
+	# Kill states
+	if state == "kill":
+		disable()
+		velocity = move_and_slide(velocity, Vector2(0,0))
 		velocity.y += 20
-		$AnimatedSprite.rotation_degrees += 30 * (velocity.x / abs(velocity.x))
+		$AnimatedSprite.rotation_degrees += rotate
 		if $VisibilityNotifier2D.is_on_screen() == false:
 			queue_free()
 
-# If hit by any type of bullet
-func hit_by_bullet():
-	state = "bullet"
+# Custom death animation (optional, overrides normal kill)
+func custom_kill():
 	disable()
-	$SFX/Fall.play()
-	velocity = Vector2(300 * (velocity.x / abs(velocity.x)), -350)
-
-# If hit by a fireball
-func hit_by_fireball():
-	state = "burned"
-	disable()
+	state = ""
 	$SFX/Melt.play()
-	$AnimationPlayer.play("melting")
+	$AnimationPlayer.play("explode")
+	
+# If hit by bullet or invincible player
+func kill():
+	disable()
+	state = "kill"
+	velocity = Vector2(300 * (velocity.x / abs(velocity.x)), -350)
+	rotate = 30 * (velocity.x / abs(velocity.x))
+	$SFX/Fall.play()
 
 # If squished
 func _on_Head_area_entered(area):
 	if area.is_in_group("bottom") and state == "active":
-		state = "squished"
 		disable()
+		state = ""
+		$AnimationPlayer.play("squished")
 		$SFX/Squish.play()
 		var player = area.get_parent()
 		if player.jumpheld > 0:
@@ -73,8 +71,8 @@ func _on_Head_area_entered(area):
 			player.jumpcancel = false
 
 # Despawn when falling out of world
-#	if position.y > get_tree().current_scene.get_node("Player/Camera2D").limit_bottom:
-#		queue_free()
+	if position.y > get_tree().current_scene.get_node("Camera2D").limit_bottom:
+		queue_free()
 
 # Hit player
 func _on_snowball_body_entered(body):

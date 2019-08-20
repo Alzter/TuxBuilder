@@ -13,12 +13,10 @@ func explode():
 
 func _on_fireball_body_entered(body):
 	if body.is_in_group("badguys") and hit == false:
-		if body.has_method("hit_by_fireball"):
-			body.velocity.x = velocity.x
-			body.call("hit_by_fireball")
-		elif body.has_method("hit_by_bullet"):
-			body.velocity.x = velocity.x
-			body.call("hit_by_bullet")
+		body.velocity.x = velocity.x
+		if body.has_method("custom_kill"):
+			body.call("custom_kill")
+		else: body.call("kill")
 		explode()
 
 func _physics_process(delta):
