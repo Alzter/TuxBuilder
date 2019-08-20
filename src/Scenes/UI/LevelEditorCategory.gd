@@ -12,7 +12,7 @@ func _process(delta):
 	if $VBoxContainer/Button.pressed == true:
 		$VBoxContainer/Button/Arrow.rect_rotation = -90
 		$VBoxContainer/Content.visible = true
-		rect_min_size.y = 32 + ($VBoxContainer/Content.get_child_count() * 32)
+		rect_min_size.y = 32 + (floor(($VBoxContainer/Content.get_child_count() - 1) / 3) + 1) * 41
 	else:
 		$VBoxContainer/Button/Arrow.rect_rotation = 180
 		$VBoxContainer/Content.visible = false

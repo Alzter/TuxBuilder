@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 var tile_type = ""
 var tilemap_selected = ""

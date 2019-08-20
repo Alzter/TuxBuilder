@@ -26,28 +26,28 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[sub_resource type="ImageTexture" id=11]
+[sub_resource type="ImageTexture" id=5]
 
-[sub_resource type="ImageTexture" id=12]
+[sub_resource type="ImageTexture" id=6]
 
-[sub_resource type="ImageTexture" id=13]
+[sub_resource type="ImageTexture" id=7]
 
-[sub_resource type="ImageTexture" id=14]
+[sub_resource type="ImageTexture" id=8]
 
-[sub_resource type="ImageTexture" id=15]
+[sub_resource type="ImageTexture" id=9]
 
-[sub_resource type="StyleBoxFlat" id=7]
+[sub_resource type="StyleBoxFlat" id=10]
 bg_color = Color( 1, 1, 1, 0.75 )
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[sub_resource type="StyleBoxTexture" id=8]
+[sub_resource type="StyleBoxTexture" id=11]
 texture = ExtResource( 1 )
 region_rect = Rect2( 0, 0, 126, 2 )
 
-[sub_resource type="StyleBoxFlat" id=9]
+[sub_resource type="StyleBoxFlat" id=12]
 content_margin_left = 0.0
 content_margin_right = 0.0
 bg_color = Color( 0.419608, 0.521569, 0.619608, 0.8 )
@@ -61,13 +61,13 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxEmpty" id=10]
+[sub_resource type="StyleBoxEmpty" id=13]
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=14]
 bg_color = Color( 1, 1, 1, 0 )
 draw_center = false
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=15]
 size = 18
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
@@ -76,7 +76,7 @@ extra_spacing_top = 2
 font_data = ExtResource( 2 )
 
 [resource]
-default_font = SubResource( 6 )
+default_font = SubResource( 15 )
 Button/colors/font_color = Color( 1, 1, 1, 1 )
 Button/colors/font_color_disabled = Color( 0.403922, 0.403922, 0.403922, 1 )
 Button/colors/font_color_hover = Color( 0, 0.666667, 1, 1 )
@@ -98,25 +98,25 @@ PopupMenu/colors/font_color_hover = Color( 0, 0.666667, 1, 1 )
 PopupMenu/constants/hseparation = 4
 PopupMenu/constants/vseparation = 4
 PopupMenu/fonts/font = null
-PopupMenu/icons/checked = SubResource( 11 )
-PopupMenu/icons/radio_checked = SubResource( 12 )
-PopupMenu/icons/radio_unchecked = SubResource( 13 )
-PopupMenu/icons/submenu = SubResource( 14 )
-PopupMenu/icons/unchecked = SubResource( 15 )
-PopupMenu/styles/hover = SubResource( 7 )
-PopupMenu/styles/labeled_separator_left = SubResource( 8 )
-PopupMenu/styles/labeled_separator_right = SubResource( 8 )
-PopupMenu/styles/panel = SubResource( 9 )
-PopupMenu/styles/panel_disabled = SubResource( 10 )
-PopupMenu/styles/separator = SubResource( 8 )
+PopupMenu/icons/checked = SubResource( 5 )
+PopupMenu/icons/radio_checked = SubResource( 6 )
+PopupMenu/icons/radio_unchecked = SubResource( 7 )
+PopupMenu/icons/submenu = SubResource( 8 )
+PopupMenu/icons/unchecked = SubResource( 9 )
+PopupMenu/styles/hover = SubResource( 10 )
+PopupMenu/styles/labeled_separator_left = SubResource( 11 )
+PopupMenu/styles/labeled_separator_right = SubResource( 11 )
+PopupMenu/styles/panel = SubResource( 12 )
+PopupMenu/styles/panel_disabled = SubResource( 13 )
+PopupMenu/styles/separator = SubResource( 11 )
 ToolButton/colors/font_color = Color( 1, 1, 1, 1 )
 ToolButton/colors/font_color_disabled = Color( 0.403922, 0.403922, 0.403922, 1 )
 ToolButton/colors/font_color_hover = Color( 0, 0.666667, 1, 1 )
 ToolButton/colors/font_color_pressed = Color( 0, 0.666667, 1, 1 )
 ToolButton/constants/hseparation = 3
 ToolButton/fonts/font = null
-ToolButton/styles/disabled = SubResource( 5 )
-ToolButton/styles/focus = SubResource( 5 )
-ToolButton/styles/hover = SubResource( 5 )
-ToolButton/styles/normal = SubResource( 5 )
-ToolButton/styles/pressed = SubResource( 5 )
+ToolButton/styles/disabled = SubResource( 14 )
+ToolButton/styles/focus = SubResource( 14 )
+ToolButton/styles/hover = SubResource( 14 )
+ToolButton/styles/normal = SubResource( 14 )
+ToolButton/styles/pressed = SubResource( 14 )
