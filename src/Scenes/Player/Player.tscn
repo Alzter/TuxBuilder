@@ -2,13 +2,13 @@
 
 [ext_resource path="res://Scenes/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Creatures/Tux/Big/Stand.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/backflip.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/skid-0.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/gameover-0.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/gameover-1.png" type="Texture" id=6]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/skid-0.png" type="Texture" id=7]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/stand-0.png" type="Texture" id=8]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/jump-0.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/skid-0.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/backflip.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/duck-0.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/jump-0.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/jump-0.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/gameover-0.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/gameover-1.png" type="Texture" id=9]
 [ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk8.png" type="Texture" id=10]
 [ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk1.png" type="Texture" id=11]
 [ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk2.png" type="Texture" id=12]
@@ -25,8 +25,8 @@
 [ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk5.png" type="Texture" id=23]
 [ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk6.png" type="Texture" id=24]
 [ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk7.png" type="Texture" id=25]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/duck-0.png" type="Texture" id=26]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/jump-0.png" type="Texture" id=27]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/stand-0.png" type="Texture" id=26]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/skid-0.png" type="Texture" id=27]
 [ext_resource path="res://Audio/SoundEffects/jump.wav" type="AudioStream" id=28]
 [ext_resource path="res://Audio/SoundEffects/bigjump.wav" type="AudioStream" id=29]
 [ext_resource path="res://Audio/SoundEffects/flip.wav" type="AudioStream" id=30]
@@ -44,38 +44,38 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
-"name": "backflip",
+"name": "skid",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 4 ) ],
 "loop": true,
-"name": "skid",
+"name": "backflip",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 5 ), ExtResource( 6 ) ],
+"frames": [ ExtResource( 5 ) ],
 "loop": true,
-"name": "gameover",
-"speed": 10.0
+"name": "duck",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "jump_small",
+"speed": 5.0
 }, {
 "frames": [ ExtResource( 7 ) ],
 "loop": true,
-"name": "skid_small",
+"name": "jump",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 5 ), ExtResource( 6 ) ],
+"frames": [ ExtResource( 8 ), ExtResource( 9 ) ],
 "loop": true,
 "name": "gameover_small",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 8 ) ],
+"frames": [ ExtResource( 8 ), ExtResource( 9 ) ],
 "loop": true,
-"name": "idle_small",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 9 ) ],
-"loop": true,
-"name": "jump",
-"speed": 5.0
+"name": "gameover",
+"speed": 10.0
 }, {
 "frames": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ) ],
 "loop": true,
@@ -89,12 +89,12 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 26 ) ],
 "loop": true,
-"name": "duck",
+"name": "idle_small",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 27 ) ],
 "loop": true,
-"name": "jump_small",
+"name": "skid_small",
 "speed": 5.0
 } ]
 
@@ -161,7 +161,6 @@ position = Vector2( 0, 11 )
 shape = SubResource( 5 )
 
 [node name="SFX" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="Jump" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 28 )

@@ -67,7 +67,7 @@ corner_radius_bottom_left = 4
 bg_color = Color( 1, 1, 1, 0 )
 draw_center = false
 
-[sub_resource type="DynamicFont" id=15]
+[sub_resource type="DynamicFont" id=18]
 size = 18
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
@@ -76,7 +76,7 @@ extra_spacing_top = 2
 font_data = ExtResource( 2 )
 
 [resource]
-default_font = SubResource( 15 )
+default_font = SubResource( 18 )
 Button/colors/font_color = Color( 1, 1, 1, 1 )
 Button/colors/font_color_disabled = Color( 0.403922, 0.403922, 0.403922, 1 )
 Button/colors/font_color_hover = Color( 0, 0.666667, 1, 1 )

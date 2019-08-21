@@ -218,7 +218,7 @@ animations = [ {
 
 [sub_resource type="Gradient" id=7]
 offsets = PoolRealArray( 0, 0.5, 1 )
-colors = PoolColorArray( 1, 1, 0, 0.372549, 1, 0, 0, 0.137255, 1, 0, 0, 0 )
+colors = PoolColorArray( 1, 1, 0, 0.45098, 1, 0, 0, 0.203922, 1, 0, 0, 0 )
 
 [node name="Fireball" type="KinematicBody2D" groups=[
 "bullets",

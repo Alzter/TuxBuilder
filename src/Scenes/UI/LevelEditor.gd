@@ -94,7 +94,7 @@ func _on_ObjectsButton_pressed():
 
 func populate_lists():
 	var tilecategories = ["Ground","Blocks"]
-	var groundtiles = ["Snow","Snow","Snow","Snow","Snow","Snow","Snow","Snow","Snow","Snow","Snow","Snow","Snow","Snow","Snow","Snow","Snow","Snow","Snow","Snow","Snow","Snow","Snow","Snow","Snow","Snow","Snow","Snow","Snow","Snow",]
+	var groundtiles = ["Snow"]
 	
 	var objectcategories = ["BadGuys"]
 	

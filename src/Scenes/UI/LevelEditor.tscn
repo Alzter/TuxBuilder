@@ -403,6 +403,7 @@ margin_left = -120.0
 margin_top = 6.0
 margin_right = -6.0
 margin_bottom = -6.0
+theme = ExtResource( 4 )
 scroll_horizontal_enabled = false
 
 [node name="SidebarList" type="VBoxContainer" parent="UI/SideBar/Panel/ScrollContainer"]
