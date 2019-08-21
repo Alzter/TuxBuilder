@@ -395,11 +395,19 @@ margin_bottom = -65.0
 rect_clip_content = true
 custom_styles/panel = SubResource( 6 )
 
-[node name="SidebarList" type="VBoxContainer" parent="UI/SideBar/Panel"]
-margin_left = 6.0
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/SideBar/Panel"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -120.0
 margin_top = 6.0
-margin_right = 120.0
-margin_bottom = 306.0
+margin_right = -6.0
+margin_bottom = -6.0
+scroll_horizontal_enabled = false
+
+[node name="SidebarList" type="VBoxContainer" parent="UI/SideBar/Panel/ScrollContainer"]
+margin_right = 114.0
+rect_min_size = Vector2( 114, 0 )
 rect_clip_content = true
 custom_constants/separation = 0
 
