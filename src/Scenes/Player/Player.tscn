@@ -2,8 +2,8 @@
 
 [ext_resource path="res://Scenes/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Creatures/Tux/Big/Stand.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/skid-0.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/backflip.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/backflip.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/skid-0.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/Creatures/Tux/Big/duck-0.png" type="Texture" id=5]
 [ext_resource path="res://Sprites/Creatures/Tux/Small/jump-0.png" type="Texture" id=6]
 [ext_resource path="res://Sprites/Creatures/Tux/Big/jump-0.png" type="Texture" id=7]
@@ -44,12 +44,12 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
-"name": "skid",
+"name": "backflip",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 4 ) ],
 "loop": true,
-"name": "backflip",
+"name": "skid",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 5 ) ],
@@ -117,6 +117,7 @@ script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 editor/display_folded = true
+position = Vector2( 0, 1 )
 frames = SubResource( 1 )
 animation = "idle"
 
