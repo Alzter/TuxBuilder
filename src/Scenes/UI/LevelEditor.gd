@@ -93,19 +93,21 @@ func _on_ObjectsButton_pressed():
 	category_selected = "Objects"
 
 func populate_lists():
-	var tilecategories = ["Ground","Blocks"]
+	var tilecategories = ["ground"]
 	var groundtiles = ["Snow"]
+	var blockstiles = ["Snow","Snow"]
 	
 	var objectcategories = ["BadGuys"]
 	
 	for i in range(0, tilecategories.size()):
+		var activetilecategory = get(str(tilecategories[i], "tiles"))
 		$UI/SideBar/VBoxContainer/TilesButton.add_item(tilecategories[i])
 		var tilecategory = load("res://Scenes/UI/LevelEditorCategory.tscn").instance()
 		tilecategory.item = tilecategories[i]
 		$UI/SideBar/Panel/ScrollContainer/SidebarList.add_child(tilecategory)
-		for i in range (0, groundtiles.size()): # Replace groundtiles with str(tilecategories[i] + "tiles")
+		for i in range (0, activetilecategory.size()): # Replace groundtiles with str(tilecategories[i] + "tiles")
 			var tile = load("res://Scenes/UI/LevelEditorTile.tscn").instance()
-			tile.tile_type = groundtiles[i] # Replace groundtiles with str(tilecategories[i] + "tiles")
+			tile.tile_type = activetilecategory[i] # Replace groundtiles with str(tilecategories[i] + "tiles")
 			tile.tilemap_selected = tilemap_selected
 			tilecategory.get_node("VBoxContainer/Content").add_child(tile)
 		
