@@ -50,6 +50,7 @@ func _process(delta):
 				editmode = false
 	
 	if editmode == false:
+		level_bounds()
 		camera_to_level_bounds()
 		if camera_smooth_time == 0:
 			$Camera2D.drag_margin_v_enabled = true

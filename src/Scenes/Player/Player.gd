@@ -114,7 +114,7 @@ func _physics_process(delta):
 			if restarted == false:
 					get_tree().current_scene.call("restart_level")
 					restarted = true
-		if position.y > get_viewport().size.y:
+		if position.y > get_viewport().size.y and velocity.y > 0:
 			if restarted == false:
 				get_tree().current_scene.call("restart_level")
 				restarted = true
