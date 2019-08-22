@@ -100,6 +100,7 @@ func populate_lists():
 	var objectcategories = ["BadGuys"]
 	
 	for i in range(0, tilecategories.size()):
+		return # until it's fixed
 		var activetilecategory = get(str(tilecategories[i], "tiles"))
 		$UI/SideBar/VBoxContainer/TilesButton.add_item(tilecategories[i])
 		var tilecategory = load("res://Scenes/UI/LevelEditorCategory.tscn").instance()
