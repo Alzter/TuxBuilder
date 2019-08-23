@@ -59,8 +59,8 @@ var restarted = false # Should Tux call restart level
 
 # Set Tux's current playing animation
 func set_animation(anim):
-	if state == "small": $AnimatedSprite.play(str(anim, "_small"))
-	else: $AnimatedSprite.play(anim)
+	if state == "small": $Control/AnimatedSprite.play(str(anim, "_small"))
+	else: $Control/AnimatedSprite.play(anim)
 
 # Damage Tux
 func hurt():
@@ -79,13 +79,11 @@ func hurt():
 func kill():
 	state = "small"
 	$SFX/Kill.play()
-	$BigHitbox.disabled = true
-	$SmallHitbox.disabled = true
-	$HeadAttack/BigHitbox.disabled = true
-	$HeadAttack/SmallHitbox.disabled = true
+	$Hitbox.disabled = true
+	$HeadAttack/CollisionShape2D.disabled = true
 	$SquishRadius/CollisionShape2D.disabled = true
-	$AnimatedSprite.rotation_degrees = 0
-	$AnimatedSprite.scale.x = 1
+	$Control.rect_rotation = 0
+	$Control/AnimatedSprite.scale.x = 1
 	set_animation("gameover")
 	dead = true
 	velocity = Vector2 (0,-JUMP_POWER * 1.5)
@@ -100,10 +98,8 @@ func _physics_process(delta):
 
 	if get_tree().current_scene.editmode == true:
 		set_animation("idle")
-		$BigHitbox.disabled = true
-		$SmallHitbox.disabled = true
-		$HeadAttack/BigHitbox.disabled = true
-		$HeadAttack/SmallHitbox.disabled = true
+		$Hitbox.disabled = true
+		$HeadAttack/CollisionShape2D.disabled = true
 		$SquishRadius/CollisionShape2D.disabled = true
 		duck_disable = 3
 		duck_disable_wait = true
@@ -118,21 +114,19 @@ func _physics_process(delta):
 			if restarted == false:
 				get_tree().current_scene.call("restart_level")
 				restarted = true
-			$AnimatedSprite.visible = false
+			$Control.visible = false
 			return
-		$AnimatedSprite.z_index = 999
+		$Control.z_index = 999
 		velocity.y += GRAVITY
-		$BigHitbox.disabled = true
-		$SmallHitbox.disabled = true
-		$HeadAttack/BigHitbox.disabled = true
-		$HeadAttack/SmallHitbox.disabled = true
+		$Hitbox.disabled = true
+		$HeadAttack/CollisionShape2D.disabled = true
 		$SquishRadius/CollisionShape2D.disabled = true
 		velocity = move_and_slide(velocity, Vector2(0,0))
 		return
 
 	# Horizontal movement
 	if Input.is_action_pressed("move_right") and (ducking == false or on_ground != 0) and backflip == false:
-		$AnimatedSprite.scale.x = 1
+		$Control/AnimatedSprite.scale.x = 1
 		if skid <= 0 and velocity.x >= 0:
 			if velocity.x == 0:
 				velocity.x += WALK_ADD
@@ -149,7 +143,7 @@ func _physics_process(delta):
 			else: velocity.x += TURN_ACCEL / 60
 
 	else: if Input.is_action_pressed("move_left") and (ducking == false or on_ground != 0) and backflip == false:
-		$AnimatedSprite.scale.x = -1
+		$Control/AnimatedSprite.scale.x = -1
 		if skid <= 0 and velocity.x <= 0:
 			if velocity.x == 0:
 				velocity.x -= WALK_ADD
@@ -192,6 +186,9 @@ func _physics_process(delta):
 
 	# Floor check
 	if is_on_floor():
+		if on_ground != 0:
+			$AnimationPlayer.playback_speed = 1
+			$AnimationPlayer.play("Land")
 		on_ground = 0
 		jumpcancel = false
 		$SquishRadius/CollisionShape2D.disabled = true
@@ -247,26 +244,32 @@ func _physics_process(delta):
 				on_ground = LEDGE_JUMP + 1
 			jumpheld = 16
 			jumpcancel = true
+			$AnimationPlayer.playback_speed = 1
+			$AnimationPlayer.play("Jump")
 
 	# Jump cancelling
 	if on_ground != 0 and not Input.is_action_pressed("jump") and backflip == false and jumpcancel == true:
 		if velocity.y < 0:
+			$AnimationPlayer.playback_speed += 1
 			velocity.y *= 0.5
 		else: jumpcancel = false
 
+	if velocity.y > 0 and on_ground != 0:
+		$AnimationPlayer.play("Stop")
+
 	# Backflip speed and rotation
-	$AnimatedSprite.rotation_degrees = 0
+	$Control.rect_rotation = 0
 	if backflip == true:
-		if $AnimatedSprite.scale.x == 1:
+		if $Control/AnimatedSprite.scale.x == 1:
 			velocity.x = BACKFLIP_SPEED
 			backflip_rotation -= 15
 		else:
 			velocity.x = -BACKFLIP_SPEED
 			backflip_rotation += 15
-		$AnimatedSprite.rotation_degrees = backflip_rotation
+		$Control.rect_rotation = backflip_rotation
 
 	# Animations
-	$AnimatedSprite.speed_scale = 1
+	$Control/AnimatedSprite.speed_scale = 1
 	if backflip == true:
 		set_animation("backflip")
 	elif ducking == true:
@@ -276,43 +279,42 @@ func _physics_process(delta):
 			if skid > 0:
 				set_animation("skid")
 			else: if abs(velocity.x) >= 20:
-				$AnimatedSprite.speed_scale = abs(velocity.x) * 0.0035
-				if $AnimatedSprite.speed_scale < 0.4:
-					$AnimatedSprite.speed_scale = 0.4
+				$Control/AnimatedSprite.speed_scale = abs(velocity.x) * 0.0035
+				if $Control/AnimatedSprite.speed_scale < 0.4:
+					$Control/AnimatedSprite.speed_scale = 0.4
 				set_animation("walk")
 			else: set_animation("idle")
 		else: set_animation("jump")
 
 	# Duck Hitboxes
 	if ducking == true or state == "small":
-		$BigHitbox.disabled = true
-		$SmallHitbox.disabled = false
-		$HeadAttack/BigHitbox.disabled = true
-		$HeadAttack/SmallHitbox.disabled = false
+		$Hitbox.shape.extents.y = 15
+		$Hitbox.position.y = 23
+		$HeadAttack/CollisionShape2D.position.y = 11
+		$ShootLocation.position.y = 22
 	else:
-		$BigHitbox.disabled = false
-		$SmallHitbox.disabled = true
-		$HeadAttack/BigHitbox.disabled = false
-		$HeadAttack/SmallHitbox.disabled = true
+		$Hitbox.shape.extents.y = 31
+		$Hitbox.position.y = 7
+		$HeadAttack/CollisionShape2D.position.y = -21
+		$ShootLocation.position.y = 1
+	$ShootLocation.position.x = $Control/AnimatedSprite.scale.x * 16
 
 	# Invincible flashing
 	if invincible_time > 0:
-		if $AnimatedSprite.visible == true:
-			$AnimatedSprite.visible = false
-		else: $AnimatedSprite.visible = true
+		if $Control.visible == true:
+			$Control.visible = false
+		else: $Control.visible = true
 		invincible_time -= 1
 	else:
-		$AnimatedSprite.visible = true
+		$Control.visible = true
 		invincible_time = 0
 
 	# Shooting
 	if Input.is_action_just_pressed("action") and state == "fire" and get_tree().get_nodes_in_group("bullets").size() < 2:
 		$SFX/Shoot.play()
 		var fireball = preload("res://Scenes/Objects/Fireball.tscn").instance()
-		if ducking == true and backflip == false:
-			fireball.position = $AnimatedSprite/ShootLocationDuck.global_position
-		else: fireball.position = $AnimatedSprite/ShootLocation.global_position
-		fireball.velocity = Vector2((FIREBALL_SPEED * $AnimatedSprite.scale.x) + velocity.x,0)
+		fireball.position = $ShootLocation.global_position
+		fireball.velocity = Vector2((FIREBALL_SPEED * $Control/AnimatedSprite.scale.x) + velocity.x,0)
 		fireball.add_collision_exception_with(self) # Prevent fireball colliding with player
 		get_parent().add_child(fireball) # Shoot fireball as child of player
 
