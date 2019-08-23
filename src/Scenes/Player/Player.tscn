@@ -160,6 +160,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=5]
+custom_solver_bias = 1.0
 extents = Vector2( 15.5, 31 )
 
 [sub_resource type="RectangleShape2D" id=6]

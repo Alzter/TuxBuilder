@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
-# What angle is considered floor
 const FLOOR = Vector2(0, -1)
+const SLOPE = 999
 # Instant speed when starting walk
 const WALK_ADD = 120.0
 # Speed Tux accelerates per second when walking
@@ -18,12 +18,10 @@ const BACKFLIP_SPEED = -128
 
 # Acceleration when holding the opposite direction
 const TURN_ACCEL = 900.0
-# Speed which Tux slows down
-const SKID_ACCEL = 950.0
-# Speed which Tux skids
-const FRICTION = 0.93
 # Speed Tux slows down skidding
-const SKID_TIME = 12
+const SKID_ACCEL = 950.0
+# Speed which Tux slows down
+const FRICTION = 0.93
 
 # Jump velocity
 const JUMP_POWER = 580
@@ -39,12 +37,13 @@ const SAFE_TIME = 60
 # Fireball speed
 const FIREBALL_SPEED = 500
 
-var velocity = Vector2(0,0)
+var velocity = Vector2()
 var on_ground = 999 # Frames Tux has been in air (0 if grounded)
+var can_jump = false # Can Tux jump
 var jumpheld = 0 # Time the jump key has been held
 var jumpcancel = false # Can let go of jump to stop vertical ascent
 var running = 0 # If horizontal speed is higher than walk max
-var skid = 0 # Time skidding
+var skidding = false # Skidding
 var ducking = false # Ducking
 var duck_disable = 0 # Number of frames Tux can't duck
 var duck_disable_wait = false # Wait until Tux isn't colliding
@@ -116,7 +115,7 @@ func _physics_process(delta):
 				restarted = true
 			$Control.visible = false
 			return
-		$Control.z_index = 999
+		$Control/AnimatedSprite.z_index = 999
 		velocity.y += GRAVITY
 		$Hitbox.disabled = true
 		$HeadAttack/CollisionShape2D.disabled = true
@@ -127,7 +126,7 @@ func _physics_process(delta):
 	# Horizontal movement
 	if Input.is_action_pressed("move_right") and (ducking == false or on_ground != 0) and backflip == false:
 		$Control/AnimatedSprite.scale.x = 1
-		if skid <= 0 and velocity.x >= 0:
+		if skidding == false and velocity.x >= 0:
 			if velocity.x == 0:
 				velocity.x += WALK_ADD
 			if running == 1:
@@ -138,13 +137,13 @@ func _physics_process(delta):
 		if velocity.x < 0:
 			if on_ground == 0:
 				velocity.x += SKID_ACCEL / 60
-				if skid == 0 and velocity.x <= -WALK_MAX:
-					skid = SKID_TIME
+				if skidding == false and velocity.x <= -WALK_MAX:
+					skidding == true
 			else: velocity.x += TURN_ACCEL / 60
 
 	else: if Input.is_action_pressed("move_left") and (ducking == false or on_ground != 0) and backflip == false:
 		$Control/AnimatedSprite.scale.x = -1
-		if skid <= 0 and velocity.x <= 0:
+		if skidding == false and velocity.x <= 0:
 			if velocity.x == 0:
 				velocity.x -= WALK_ADD
 			if running == 1:
@@ -155,8 +154,8 @@ func _physics_process(delta):
 		if velocity.x > 0:
 			if on_ground == 0:
 				velocity.x -= SKID_ACCEL / 60
-				if skid == 0 and velocity.x >= WALK_MAX:
-					skid = SKID_TIME
+				if skidding == false and velocity.x >= WALK_MAX:
+					skidding == true
 			else: velocity.x -= TURN_ACCEL / 60
 
 	else: if backflip == false: velocity.x *= FRICTION
@@ -171,18 +170,10 @@ func _physics_process(delta):
 	if abs(velocity.x) < 50:
 		velocity.x = 0
 
-	# Skid
-	if skid > 0:
-		if skid == SKID_TIME:
-			$SFX/Skid.play()
-		skid -= 1
-	else:
-		skid = 0
-
 	# Gravity
 	velocity.y += GRAVITY
 
-	velocity = move_and_slide(velocity, FLOOR)
+	velocity = move_and_slide(velocity, FLOOR, SLOPE)
 
 	# Floor check
 	if is_on_floor():
@@ -247,17 +238,18 @@ func _physics_process(delta):
 					$SFX/Jump.play()
 				else: $SFX/BigJump.play()
 				on_ground = LEDGE_JUMP + 1
-			jumpheld = 16
-			jumpcancel = true
-			$AnimationPlayer.playback_speed = 1
-			$AnimationPlayer.play("Jump")
+				$AnimationPlayer.playback_speed = 1
+				$AnimationPlayer.play("Jump")
+				jumpheld = 16
+				jumpcancel = true
 
 	# Jump cancelling
 	if on_ground != 0 and not Input.is_action_pressed("jump") and backflip == false and jumpcancel == true:
 		if velocity.y < 0:
-			$AnimationPlayer.playback_speed += 1
+			$AnimationPlayer.playback_speed += 0.3
 			velocity.y *= 0.5
-		else: jumpcancel = false
+		else:
+			jumpcancel = false
 
 	# Backflip speed and rotation
 	$Control/AnimatedSprite.rotation_degrees = 0
@@ -278,7 +270,7 @@ func _physics_process(delta):
 		set_animation("duck")
 	else:
 		if on_ground == 0:
-			if skid > 0:
+			if skidding == true:
 				set_animation("skid")
 			else: if abs(velocity.x) >= 20:
 				$Control/AnimatedSprite.speed_scale = abs(velocity.x) * 0.0035
