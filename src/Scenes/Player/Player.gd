@@ -82,7 +82,7 @@ func kill():
 	$Hitbox.disabled = true
 	$HeadAttack/CollisionShape2D.disabled = true
 	$SquishRadius/CollisionShape2D.disabled = true
-	$Control.rect_rotation = 0
+	$Control/AnimatedSprite.rotation_degrees = 0
 	$Control/AnimatedSprite.scale.x = 1
 	set_animation("gameover")
 	dead = true
@@ -187,8 +187,13 @@ func _physics_process(delta):
 	# Floor check
 	if is_on_floor():
 		if on_ground != 0:
+			$AnimationPlayer.stop()
 			$AnimationPlayer.playback_speed = 1
-			$AnimationPlayer.play("Land")
+			if on_ground >= 40:
+				$AnimationPlayer.play("Land")
+			elif on_ground >= 20:
+				$AnimationPlayer.play("LandSmall")
+			else: $AnimationPlayer.play("Stop")
 		on_ground = 0
 		jumpcancel = false
 		$SquishRadius/CollisionShape2D.disabled = true
@@ -254,11 +259,8 @@ func _physics_process(delta):
 			velocity.y *= 0.5
 		else: jumpcancel = false
 
-	if velocity.y > 0 and on_ground != 0:
-		$AnimationPlayer.play("Stop")
-
 	# Backflip speed and rotation
-	$Control.rect_rotation = 0
+	$Control/AnimatedSprite.rotation_degrees = 0
 	if backflip == true:
 		if $Control/AnimatedSprite.scale.x == 1:
 			velocity.x = BACKFLIP_SPEED
@@ -266,7 +268,7 @@ func _physics_process(delta):
 		else:
 			velocity.x = -BACKFLIP_SPEED
 			backflip_rotation += 15
-		$Control.rect_rotation = backflip_rotation
+		$Control/AnimatedSprite.rotation_degrees = backflip_rotation
 
 	# Animations
 	$Control/AnimatedSprite.speed_scale = 1

@@ -1,32 +1,32 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://Scenes/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Creatures/Tux/Big/Stand.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/backflip.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/skid-0.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/skid-0.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/backflip.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/Creatures/Tux/Small/gameover-0.png" type="Texture" id=5]
 [ext_resource path="res://Sprites/Creatures/Tux/Small/gameover-1.png" type="Texture" id=6]
 [ext_resource path="res://Sprites/Creatures/Tux/Big/duck-0.png" type="Texture" id=7]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/skid-0.png" type="Texture" id=8]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk8.png" type="Texture" id=9]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk1.png" type="Texture" id=10]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk2.png" type="Texture" id=11]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk3.png" type="Texture" id=12]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk4.png" type="Texture" id=13]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk5.png" type="Texture" id=14]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk6.png" type="Texture" id=15]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk7.png" type="Texture" id=16]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/jump-0.png" type="Texture" id=17]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/stand-0.png" type="Texture" id=18]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/jump-0.png" type="Texture" id=19]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk8.png" type="Texture" id=20]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk1.png" type="Texture" id=21]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk2.png" type="Texture" id=22]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk3.png" type="Texture" id=23]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk4.png" type="Texture" id=24]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk5.png" type="Texture" id=25]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk6.png" type="Texture" id=26]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk7.png" type="Texture" id=27]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/jump-0.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk8.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk1.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk2.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk3.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk4.png" type="Texture" id=13]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk5.png" type="Texture" id=14]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk6.png" type="Texture" id=15]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk7.png" type="Texture" id=16]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/stand-0.png" type="Texture" id=17]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/skid-0.png" type="Texture" id=18]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk8.png" type="Texture" id=19]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk1.png" type="Texture" id=20]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk2.png" type="Texture" id=21]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk3.png" type="Texture" id=22]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk4.png" type="Texture" id=23]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk5.png" type="Texture" id=24]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk6.png" type="Texture" id=25]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk7.png" type="Texture" id=26]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/jump-0.png" type="Texture" id=27]
 [ext_resource path="res://Audio/SoundEffects/jump.wav" type="AudioStream" id=28]
 [ext_resource path="res://Audio/SoundEffects/bigjump.wav" type="AudioStream" id=29]
 [ext_resource path="res://Audio/SoundEffects/flip.wav" type="AudioStream" id=30]
@@ -35,7 +35,7 @@
 [ext_resource path="res://Audio/SoundEffects/hurt.wav" type="AudioStream" id=33]
 [ext_resource path="res://Audio/SoundEffects/kill.wav" type="AudioStream" id=34]
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=1]
 resource_name = "Jump"
 length = 0.5
 tracks/0/type = "value"
@@ -45,13 +45,13 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.4 ),
+"times": PoolRealArray( 0, 0.2, 0.4 ),
 "transitions": PoolRealArray( 0.5, 2, 1 ),
 "update": 0,
 "values": [ Vector2( 1, 1 ), Vector2( 0.8, 1.25 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=2]
 resource_name = "Land"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Control:rect_scale")
@@ -65,20 +65,23 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( 1.5, 0.75 ), Vector2( 1, 1 ) ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("Control:rect_position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
+
+[sub_resource type="Animation" id=8]
+resource_name = "LandSmall"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 0.5, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 9 ), Vector2( 0, 0 ) ]
+"values": [ Vector2( 1.3, 0.8 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=3]
 resource_name = "Stop"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Control:rect_scale")
@@ -93,7 +96,7 @@ tracks/0/keys = {
 "values": [ Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="SpriteFrames" id=4]
 animations = [ {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
@@ -102,12 +105,12 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
-"name": "backflip",
+"name": "skid",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 4 ) ],
 "loop": true,
-"name": "skid",
+"name": "backflip",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 5 ), ExtResource( 6 ) ],
@@ -120,49 +123,49 @@ animations = [ {
 "name": "duck",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 8 ) ],
+"loop": true,
+"name": "jump",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 5 ), ExtResource( 6 ) ],
 "loop": true,
 "name": "gameover",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 8 ) ],
-"loop": true,
-"name": "skid_small",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
 "loop": true,
-"name": "walk",
+"name": "walk_small",
 "speed": 20.0
 }, {
 "frames": [ ExtResource( 17 ) ],
 "loop": true,
-"name": "jump",
+"name": "idle_small",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 18 ) ],
 "loop": true,
-"name": "idle_small",
+"name": "skid_small",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 19 ) ],
+"frames": [ ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ) ],
+"loop": true,
+"name": "walk",
+"speed": 20.0
+}, {
+"frames": [ ExtResource( 27 ) ],
 "loop": true,
 "name": "jump_small",
 "speed": 5.0
-}, {
-"frames": [ ExtResource( 20 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ) ],
-"loop": true,
-"name": "walk_small",
-"speed": 20.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 15.5, 31 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 15.5, 1 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 15.5, 3 )
 
 [node name="Player" type="KinematicBody2D" groups=[
@@ -172,20 +175,22 @@ script = ExtResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Stop"
-anims/Jump = SubResource( 6 )
-anims/Land = SubResource( 8 )
-anims/Stop = SubResource( 7 )
+anims/Jump = SubResource( 1 )
+anims/Land = SubResource( 2 )
+anims/LandSmall = SubResource( 8 )
+anims/Stop = SubResource( 3 )
 
 [node name="Control" type="Control" parent="."]
+rect_pivot_offset = Vector2( 0, 40 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
 position = Vector2( 0, 2 )
-frames = SubResource( 1 )
+frames = SubResource( 4 )
 animation = "idle"
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 7 )
-shape = SubResource( 2 )
+shape = SubResource( 5 )
 
 [node name="ShootLocation" type="Position2D" parent="."]
 position = Vector2( 16, 1 )
@@ -202,7 +207,7 @@ collision_mask = 512
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SquishRadius"]
 position = Vector2( 0, 37 )
-shape = SubResource( 4 )
+shape = SubResource( 6 )
 
 [node name="HeadAttack" type="Area2D" parent="." groups=[
 "head_attack",
@@ -210,7 +215,7 @@ shape = SubResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HeadAttack"]
 position = Vector2( 0, -21 )
-shape = SubResource( 5 )
+shape = SubResource( 7 )
 
 [node name="SFX" type="Node" parent="."]
 
