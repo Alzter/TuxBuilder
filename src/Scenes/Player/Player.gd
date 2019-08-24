@@ -1,7 +1,6 @@
 extends KinematicBody2D
 
 const FLOOR = Vector2(0, -1)
-const SLOPE = 999
 # Instant speed when starting walk
 const WALK_ADD = 120.0
 # Speed Tux accelerates per second when walking
@@ -16,12 +15,10 @@ const RUN_MAX = 320.0
 # Backflip horizontal speed
 const BACKFLIP_SPEED = -128
 
-# Acceleration when holding the opposite direction
-const TURN_ACCEL = 900.0
-# Speed Tux slows down skidding
-const SKID_ACCEL = 950.0
 # Speed which Tux slows down
 const FRICTION = 0.93
+# Acceleration when holding the opposite direction
+const TURN_ACCEL = 900.0
 
 # Jump velocity
 const JUMP_POWER = 580
@@ -124,38 +121,38 @@ func _physics_process(delta):
 		return
 
 	# Horizontal movement
-	if Input.is_action_pressed("move_right") and (ducking == false or on_ground != 0) and backflip == false:
+	if Input.is_action_pressed("move_right") and (ducking == false or on_ground != 0) and backflip == false and skidding == false:
 		$Control/AnimatedSprite.scale.x = 1
-		if skidding == false and velocity.x >= 0:
+		if velocity.x >= 0:
 			if velocity.x == 0:
 				velocity.x += WALK_ADD
 			if running == 1:
 					velocity.x += RUN_ACCEL / 60
 			else: velocity.x += WALK_ACCEL / 60
-
-			# Skidding and air turning
+		
+		# Skidding and air turning
 		if velocity.x < 0:
 			if on_ground == 0:
-				velocity.x += SKID_ACCEL / 60
 				if skidding == false and velocity.x <= -WALK_MAX:
-					skidding == true
+					skidding = true
+					$SFX/Skid.play()
 			else: velocity.x += TURN_ACCEL / 60
 
-	else: if Input.is_action_pressed("move_left") and (ducking == false or on_ground != 0) and backflip == false:
+	else: if Input.is_action_pressed("move_left") and (ducking == false or on_ground != 0) and backflip == false and skidding == false:
 		$Control/AnimatedSprite.scale.x = -1
-		if skidding == false and velocity.x <= 0:
+		if velocity.x <= 0:
 			if velocity.x == 0:
 				velocity.x -= WALK_ADD
 			if running == 1:
 					velocity.x -= RUN_ACCEL / 60
 			else: velocity.x -= WALK_ACCEL / 60
-
+		
 		# Skidding and air turning
 		if velocity.x > 0:
 			if on_ground == 0:
-				velocity.x -= SKID_ACCEL / 60
 				if skidding == false and velocity.x >= WALK_MAX:
-					skidding == true
+					skidding = true
+					$SFX/Skid.play()
 			else: velocity.x -= TURN_ACCEL / 60
 
 	else: if backflip == false: velocity.x *= FRICTION
@@ -170,10 +167,15 @@ func _physics_process(delta):
 	if abs(velocity.x) < 50:
 		velocity.x = 0
 
+	# Stop skidding if low velocity
+	if abs(velocity.x) < 75 and skidding == true:
+		skidding = false
+		velocity.x = 0
+
 	# Gravity
 	velocity.y += GRAVITY
 
-	velocity = move_and_slide(velocity, FLOOR, SLOPE)
+	velocity = move_and_slide(velocity, FLOOR)
 
 	# Floor check
 	if is_on_floor():
@@ -250,6 +252,9 @@ func _physics_process(delta):
 			velocity.y *= 0.5
 		else:
 			jumpcancel = false
+
+	# Stop skidding in air
+	if on_ground != 0: skidding = false
 
 	# Backflip speed and rotation
 	$Control/AnimatedSprite.rotation_degrees = 0
