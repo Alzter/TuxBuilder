@@ -272,13 +272,18 @@ func _physics_process(delta):
 		if on_ground == 0:
 			if skidding == true:
 				set_animation("skid")
-			else: if abs(velocity.x) >= 20:
+			elif abs(velocity.x) >= 20:
 				$Control/AnimatedSprite.speed_scale = abs(velocity.x) * 0.0035
 				if $Control/AnimatedSprite.speed_scale < 0.4:
 					$Control/AnimatedSprite.speed_scale = 0.4
 				set_animation("walk")
 			else: set_animation("idle")
-		else: set_animation("jump")
+		elif velocity.y <= 0:
+			set_animation("jump")
+		else:
+			if $Control/AnimatedSprite.animation == ("jump") or $Control/AnimatedSprite.animation == ("fall_transition") or  $Control/AnimatedSprite.animation == ("jump_small") or $Control/AnimatedSprite.animation == ("fall_transition_small"):
+				set_animation("fall_transition")
+			else: set_animation("fall")
 
 	# Duck Hitboxes
 	if ducking == true or state == "small":
