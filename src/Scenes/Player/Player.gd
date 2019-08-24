@@ -333,8 +333,10 @@ func _physics_process(delta):
 	# Block player leaving screen
 	if position.x <= get_tree().current_scene.get_node("Camera2D").limit_left + 16:
 		position.x = get_tree().current_scene.get_node("Camera2D").limit_left + 16
+		velocity.x = 0
 	if position.x >= get_tree().current_scene.get_node("Camera2D").limit_right - 16:
 		position.x = get_tree().current_scene.get_node("Camera2D").limit_right - 16
+		velocity.x = 0
 	if position.y >= get_tree().current_scene.get_node("Camera2D").limit_bottom:
 		position.y = get_tree().current_scene.get_node("Camera2D").limit_bottom
 		kill()
