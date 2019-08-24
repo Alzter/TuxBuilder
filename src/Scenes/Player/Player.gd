@@ -123,34 +123,32 @@ func _physics_process(delta):
 	# Horizontal movement
 	if Input.is_action_pressed("move_right") and (ducking == false or on_ground != 0) and backflip == false and skidding == false:
 		$Control/AnimatedSprite.scale.x = 1
-		if velocity.x >= 0:
-			if velocity.x == 0:
-				velocity.x += WALK_ADD
-			if running == 1:
-					velocity.x += RUN_ACCEL / 60
-			else: velocity.x += WALK_ACCEL / 60
+		if velocity.x == 0:
+			velocity.x += WALK_ADD
+		if running == 1:
+				velocity.x += RUN_ACCEL / 60
+		else: velocity.x += WALK_ACCEL / 60
 		
 		# Skidding and air turning
 		if velocity.x < 0:
-			if on_ground == 0:
-				if skidding == false and velocity.x <= -WALK_MAX:
+			if on_ground == 0 and velocity.x <= -WALK_MAX:
+				if skidding == false:
 					skidding = true
 					$SFX/Skid.play()
 			else: velocity.x += TURN_ACCEL / 60
 
 	else: if Input.is_action_pressed("move_left") and (ducking == false or on_ground != 0) and backflip == false and skidding == false:
 		$Control/AnimatedSprite.scale.x = -1
-		if velocity.x <= 0:
-			if velocity.x == 0:
-				velocity.x -= WALK_ADD
-			if running == 1:
-					velocity.x -= RUN_ACCEL / 60
-			else: velocity.x -= WALK_ACCEL / 60
+		if velocity.x == 0:
+			velocity.x -= WALK_ADD
+		if running == 1:
+				velocity.x -= RUN_ACCEL / 60
+		else: velocity.x -= WALK_ACCEL / 60
 		
 		# Skidding and air turning
 		if velocity.x > 0:
-			if on_ground == 0:
-				if skidding == false and velocity.x >= WALK_MAX:
+			if on_ground == 0 and velocity.x >= WALK_MAX:
+				if skidding == false:
 					skidding = true
 					$SFX/Skid.play()
 			else: velocity.x -= TURN_ACCEL / 60
@@ -231,7 +229,7 @@ func _physics_process(delta):
 						backflip_rotation = 0
 						velocity.y = -RUNJUMP_POWER
 						$SFX/Flip.play()
-				elif running == 1:
+				elif abs(velocity.x) >= RUN_MAX:
 					velocity.y = -RUNJUMP_POWER
 					
 				else:
