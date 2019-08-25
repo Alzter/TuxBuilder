@@ -17,6 +17,8 @@ const BACKFLIP_SPEED = -128
 
 # Speed which Tux slows down
 const FRICTION = 0.93
+# Speed Tux slows down when sliding
+const SLIDE_FRICTION = 0.99
 # Acceleration when holding the opposite direction
 const TURN_ACCEL = 900.0
 
@@ -41,6 +43,7 @@ var jumpheld = 0 # Time the jump key has been held
 var jumpcancel = false # Can let go of jump to stop vertical ascent
 var running = 0 # If horizontal speed is higher than walk max
 var skidding = false # Skidding
+var sliding = false # Sliding
 var ducking = false # Ducking
 var duck_disable = 0 # Number of frames Tux can't duck
 var duck_disable_wait = false # Wait until Tux isn't colliding
@@ -48,6 +51,7 @@ var backflip = false # Backflipping
 var backflip_rotation = 0 # Backflip rotation
 var state = "fire" # Tux's power-up state
 var invincible_time = 0 # Amount of frames Tux is invincible
+var invincible_kill_time = 0 # Amount of frames Tux can kill enemies on touch
 var camera_offset = 0 # Moves camera horizontally for extended view
 var camera_position = Vector2(0,0) # Camera Position
 var dead = false # Stop doing stuff if true
@@ -106,7 +110,7 @@ func _physics_process(delta):
 			if restarted == false:
 					get_tree().current_scene.call("restart_level")
 					restarted = true
-		if position.y > get_viewport().size.y and velocity.y > 0:
+		if position.y >= get_tree().current_scene.get_node("Camera2D").limit_bottom and velocity.y > 0:
 			if restarted == false:
 				get_tree().current_scene.call("restart_level")
 				restarted = true
@@ -121,7 +125,7 @@ func _physics_process(delta):
 		return
 
 	# Horizontal movement
-	if Input.is_action_pressed("move_right") and (ducking == false or on_ground != 0) and backflip == false and skidding == false:
+	if Input.is_action_pressed("move_right") and (ducking == false or on_ground != 0) and backflip == false and skidding == false and sliding == false:
 		$Control/AnimatedSprite.scale.x = 1
 		if velocity.x == 0:
 			velocity.x += WALK_ADD
@@ -137,7 +141,7 @@ func _physics_process(delta):
 					$SFX/Skid.play()
 			else: velocity.x += TURN_ACCEL / 60
 
-	else: if Input.is_action_pressed("move_left") and (ducking == false or on_ground != 0) and backflip == false and skidding == false:
+	else: if Input.is_action_pressed("move_left") and (ducking == false or on_ground != 0) and backflip == false and skidding == false and sliding == false:
 		$Control/AnimatedSprite.scale.x = -1
 		if velocity.x == 0:
 			velocity.x -= WALK_ADD
@@ -153,13 +157,17 @@ func _physics_process(delta):
 					$SFX/Skid.play()
 			else: velocity.x -= TURN_ACCEL / 60
 
-	else: if backflip == false: velocity.x *= FRICTION
+	else: if backflip == false:
+		if sliding == false:
+			velocity.x *= FRICTION
+		else: velocity.x *= SLIDE_FRICTION
 
 	# Speedcap
-	if velocity.x >= RUN_MAX:
-		velocity.x = RUN_MAX
-	if velocity.x <= -RUN_MAX:
-		velocity.x = -RUN_MAX
+	if sliding == false:
+		if velocity.x >= RUN_MAX:
+			velocity.x = RUN_MAX
+		if velocity.x <= -RUN_MAX:
+			velocity.x = -RUN_MAX
 
 	# Don't slide on the ground
 	if abs(velocity.x) < 50:
@@ -200,18 +208,28 @@ func _physics_process(delta):
 		running = 1
 	else: running = 0
 
-	# Ducking
+	# Ducking / Sliding
 	if on_ground == 0:
 		ducking = false
-		if (Input.is_action_pressed("duck") or $StandWindow.is_colliding() == true) and backflip == false and state != "small":
+		if (Input.is_action_pressed("duck") or $StandWindow.is_colliding() == true) and backflip == false:
 			if duck_disable == 0 and duck_disable_wait == false:
-				ducking = true
+				if abs(velocity.x) < WALK_MAX or ducking == true:
+					if sliding == false and state != "small": ducking = true
+				elif sliding == false:
+					sliding = true
+					$SFX/Skid.play()
+					velocity.x += WALK_ADD * $Control/AnimatedSprite.scale.x
 			else:
 				if duck_disable <= 0:
 					duck_disable = 0
 					if $StandWindow.is_colliding() == false: duck_disable_wait = false
 				else:
 					duck_disable -= 1
+
+	# Invincible when sliding
+	if sliding == true:
+		if invincible_kill_time <= 0: invincible_kill_time = 1
+		invincible_kill_time += 1
 
 	# Jump buffering
 	if Input.is_action_pressed("jump"):
@@ -223,7 +241,7 @@ func _physics_process(delta):
 	if Input.is_action_pressed("jump"):
 		if jumpheld <= 15:
 			if on_ground <= LEDGE_JUMP:
-				if state != "small" and Input.is_action_pressed("duck") == true and (Input.is_action_pressed("move_left") == false and Input.is_action_pressed("move_right") == false) and $StandWindow.is_colliding() == false:
+				if state != "small" and Input.is_action_pressed("duck") == true and (Input.is_action_pressed("move_left") == false and Input.is_action_pressed("move_right") == false) and $StandWindow.is_colliding() == false and sliding == false:
 						backflip = true
 						ducking = false
 						backflip_rotation = 0
@@ -242,6 +260,7 @@ func _physics_process(delta):
 				$AnimationPlayer.play("Jump")
 				jumpheld = 16
 				jumpcancel = true
+				sliding = false
 
 	# Jump cancelling
 	if on_ground != 0 and not Input.is_action_pressed("jump") and backflip == false and jumpcancel == true:
@@ -271,6 +290,8 @@ func _physics_process(delta):
 		set_animation("backflip")
 	elif ducking == true:
 		set_animation("duck")
+	elif sliding == true:
+		set_animation("jump") # Placeholder until slide animation is added
 	else:
 		if on_ground == 0:
 			if skidding == true:
@@ -289,7 +310,7 @@ func _physics_process(delta):
 			else: set_animation("fall")
 
 	# Duck Hitboxes
-	if ducking == true or state == "small":
+	if ducking == true or sliding == true or state == "small":
 		$Hitbox.shape.extents.y = 15
 		$Hitbox.position.y = 23
 		$HeadAttack/CollisionShape2D.position.y = 11
@@ -310,6 +331,8 @@ func _physics_process(delta):
 	else:
 		$Control.visible = true
 		invincible_time = 0
+	if invincible_kill_time > 0: invincible_kill_time -= 1
+	else: invincible_kill_time = -1
 
 	# Shooting
 	if Input.is_action_just_pressed("action") and state == "fire" and get_tree().get_nodes_in_group("bullets").size() < 2:

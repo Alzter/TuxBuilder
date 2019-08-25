@@ -72,9 +72,8 @@ texture = ExtResource( 2 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
-[node name="PickupSFX" type="AudioStreamPlayer2D" parent="."]
+[node name="PickupSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
-attenuation = 0.25
 bus = "SFX"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

@@ -293,9 +293,8 @@ scale_amount = 3.0
 scale_amount_random = 1.0
 color_ramp = ExtResource( 4 )
 
-[node name="Extinguish" type="AudioStreamPlayer2D" parent="."]
+[node name="Extinguish" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
-attenuation = 0.25
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 [connection signal="body_entered" from="Area2D" to="." method="_on_fireball_body_entered"]

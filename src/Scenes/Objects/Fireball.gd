@@ -14,8 +14,8 @@ func explode():
 func _on_fireball_body_entered(body):
 	if body.is_in_group("badguys") and hit == false:
 		body.velocity.x = velocity.x
-		if body.has_method("custom_kill"):
-			body.call("custom_kill")
+		if body.has_method("fireball_kill"):
+			body.call("fireball_kill")
 		else: body.call("kill")
 		explode()
 

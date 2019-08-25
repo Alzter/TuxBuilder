@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/jump-0.png-4ff395f008cc2b858796f27f9eba9343.stex"
+path="res://.import/Jump1.png-6c7b0e300e91e5f4ea9d8c6de2f780fa.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Creatures/Tux/Big/jump-0.png"
-dest_files=[ "res://.import/jump-0.png-4ff395f008cc2b858796f27f9eba9343.stex" ]
+source_file="res://Sprites/Creatures/Tux/Small/Jump1.png"
+dest_files=[ "res://.import/Jump1.png-6c7b0e300e91e5f4ea9d8c6de2f780fa.stex" ]
 
 [params]
 

@@ -188,7 +188,7 @@ script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
-frame = 6
+frame = 1
 playing = true
 offset = Vector2( 0, -3 )
 
@@ -217,17 +217,14 @@ anims/squished = SubResource( 7 )
 
 [node name="SFX" type="Node" parent="."]
 
-[node name="Fall" type="AudioStreamPlayer2D" parent="SFX"]
+[node name="Fall" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 11 )
-attenuation = 0.25
 
-[node name="Squish" type="AudioStreamPlayer2D" parent="SFX"]
+[node name="Squish" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 12 )
-attenuation = 0.25
 
-[node name="Melt" type="AudioStreamPlayer2D" parent="SFX"]
+[node name="Melt" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 13 )
-attenuation = 0.25
 
 [node name="ExplodeSnow" type="CPUParticles2D" parent="."]
 emitting = false
