@@ -240,8 +240,8 @@ func _physics_process(delta):
 	# Jumping
 	if Input.is_action_pressed("jump"):
 		if jumpheld <= 15:
-			if on_ground <= LEDGE_JUMP:
-				if state != "small" and Input.is_action_pressed("duck") == true and (Input.is_action_pressed("move_left") == false and Input.is_action_pressed("move_right") == false) and $StandWindow.is_colliding() == false and sliding == false:
+			if on_ground <= LEDGE_JUMP and ((sliding == true and $StandWindow.is_colliding() == false) or sliding == false):
+				if state != "small" and Input.is_action_pressed("duck") == true and $StandWindow.is_colliding() == false and sliding == false:
 						backflip = true
 						ducking = false
 						backflip_rotation = 0
