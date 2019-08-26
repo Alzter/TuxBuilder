@@ -7,7 +7,7 @@ var tilemap_selected = ""
 func _ready():
 	tile_type = get_tree().current_scene.get_node(str("Level/", tilemap_selected)).get_tileset().find_tile_by_name(str(tile_type))
 	
-	var selected_texture = get_tree().current_scene.get_node(str("Level/", tilemap_selected)).get_tileset().tile_get_texture(0)
+	var selected_texture = get_tree().current_scene.get_node(str("Level/", tilemap_selected)).get_tileset().tile_get_texture(tile_type)
 	$Control/Sprite.texture = (selected_texture)
 	$Control/Sprite.region_rect.position = get_tree().current_scene.get_node(str("Level/", tilemap_selected)).get_tileset().autotile_get_icon_coordinate(tile_type) * get_tree().current_scene.get_node(str("Level/", tilemap_selected)).cell_size
 

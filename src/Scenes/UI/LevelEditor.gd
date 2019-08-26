@@ -6,6 +6,8 @@ var tilemap_selected = "TileMap"
 var tile_type = 0
 var tile_selected = Vector2(0,0)
 var old_tile_selected = Vector2(0,0)
+var object_category = "BadGuys"
+var object_type = "Snowball"
 var mouse_down = false
 var anim_in = false
 
@@ -14,7 +16,7 @@ func _ready():
 	visible = false
 	$UI.offset = Vector2(get_viewport().size.x * 9999,get_viewport().size.y * 9999)
 	$UI/SideBar/VBoxContainer/TilesButton.grab_focus()
-	populate_lists()
+	populate_tiles()
 
 func _process(delta):
 	$UI/SideBar/VBoxContainer/TilesButton.text = ""
@@ -58,59 +60,100 @@ func _process(delta):
 	update_selected_tile()
 	if Input.is_action_pressed("click_left"):
 		if get_viewport().get_mouse_position().x < get_viewport().size.x - 128 and get_viewport().get_mouse_position().y < get_viewport().size.y - 64:
+			
 			if tile_selected != old_tile_selected or mouse_down == false:
-				if $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == true:
-					get_tree().current_scene.get_node(str("Level/", tilemap_selected)).set_cellv(tile_selected, -1)
-				else: get_tree().current_scene.get_node(str("Level/", tilemap_selected)).set_cellv(tile_selected, tile_type)
-				get_tree().current_scene.get_node(str("Level/", tilemap_selected)).update_bitmask_area(tile_selected)
+				if category_selected == "Tiles":
+					if $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == true:
+						get_tree().current_scene.get_node(str("Level/", tilemap_selected)).set_cellv(tile_selected, -1)
+					else: get_tree().current_scene.get_node(str("Level/", tilemap_selected)).set_cellv(tile_selected, tile_type)
+					get_tree().current_scene.get_node(str("Level/", tilemap_selected)).update_bitmask_area(tile_selected)
+				
+				else:
+					var object = load(str("res://Scenes/", object_category, "/", object_type, ".tscn")).instance()
+					object.position = $SelectedTile.position
+					get_tree().current_scene.get_node("Level").add_child(object)
 		mouse_down = true
 	else: mouse_down = false
 	old_tile_selected = tile_selected
 
 func update_selected_tile():
-	$SelectedTile.visible = true
-	if get_viewport().get_mouse_position().x < get_viewport().size.x - 128 and get_viewport().get_mouse_position().y < get_viewport().size.y - 64:
-		if $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == true:
-			$SelectedTile.texture = load("res://Sprites/Editor/EraseSelect.png")
-			$SelectedTile.region_rect = Rect2(0,0,32,32)
-			$SelectedTile.modulate = Color(1,1,1,1)
-			$EraserSprite.visible = true
-		else:
+	if get_viewport().get_mouse_position().x >= get_viewport().size.x - 128 and get_viewport().get_mouse_position().y >= get_viewport().size.y - 64:
+		$EraserSprite.visible = false
+		$SelectedTile.visible = false
+		return
+	
+	$SelectedTile.position.x = (tile_selected.x + 0.5) * get_tree().current_scene.get_node(str("Level/", tilemap_selected)).cell_size.x
+	$SelectedTile.position.y = (tile_selected.y + 0.5) * get_tree().current_scene.get_node(str("Level/", tilemap_selected)).cell_size.y
+	
+	if $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == true:
+		$EraserSprite.visible = true
+		$SelectedTile.visible = true
+		$SelectedTile.texture = load("res://Sprites/Editor/EraseSelect.png")
+		$SelectedTile.region_rect = Rect2(0,0,32,32)
+		$SelectedTile.modulate = Color(1,1,1,1)
+		$EraserSprite.position = $SelectedTile.position
+	
+	else:
+		$EraserSprite.visible = false
+		$SelectedTile.visible = true
+		$SelectedTile.modulate = Color(1,1,1,0.25)
+		
+		if category_selected == "Tiles":
 			var selected_texture = get_tree().current_scene.get_node(str("Level/", tilemap_selected)).get_tileset().tile_get_texture(tile_type)
 			$SelectedTile.texture = (selected_texture)
 			$SelectedTile.region_rect.position = get_tree().current_scene.get_node(str("Level/", tilemap_selected)).get_tileset().autotile_get_icon_coordinate(tile_type) * get_tree().current_scene.get_node(str("Level/", tilemap_selected)).cell_size
-			$SelectedTile.modulate = Color(1,1,1,0.25)
-			$EraserSprite.visible = false
-		$SelectedTile.position.x = (tile_selected.x + 0.5) * get_tree().current_scene.get_node(str("Level/", tilemap_selected)).cell_size.x
-		$SelectedTile.position.y = (tile_selected.y + 0.5) * get_tree().current_scene.get_node(str("Level/", tilemap_selected)).cell_size.y
-		$EraserSprite.position = $SelectedTile.position
+			$SelectedTile.region_enabled = true
+
+		else:
+			var selected_texture = load(str("res://Scenes/", object_category, "/", object_type, ".tscn")).instance().get_node("AnimatedSprite").get_sprite_frames().get_frame("default",0)
+			$SelectedTile.texture = (selected_texture)
+			$SelectedTile.region_enabled = false
 
 # Buttons
 func _on_TilesButton_pressed():
-	category_selected = "Tiles"
+	if category_selected != "Tiles":
+		category_selected = "Tiles"
+		for child in $UI/SideBar/Panel/ScrollContainer/SidebarList.get_children():
+			child.queue_free()
+		populate_tiles()
 
 func _on_ObjectsButton_pressed():
-	category_selected = "Objects"
+	if category_selected != "Objects":
+		category_selected = "Objects"
+		for child in $UI/SideBar/Panel/ScrollContainer/SidebarList.get_children():
+			child.queue_free()
+		populate_objects()
 
-func populate_lists():
-	var tilecategories = ["ground"]
-	var groundtiles = ["Snow"]
+func populate_tiles():
+	var tilecategories = ["ground","filler","filler","filler","filler","filler","filler","filler","filler","filler","filler","filler","filler","filler","filler","filler","filler","filler","blocks"]
+	var groundtiles = ["Snow", "Snow Slope 1"]
 	var blockstiles = ["Snow","Snow"]
 	
-	var objectcategories = ["BadGuys"]
-	
+	$UI/SideBar/VBoxContainer/TilesButton.clear()
 	for i in range(0, tilecategories.size()):
-		return # until it's fixed
-		var activetilecategory = get(str(tilecategories[i], "tiles"))
 		$UI/SideBar/VBoxContainer/TilesButton.add_item(tilecategories[i])
 		var tilecategory = load("res://Scenes/UI/LevelEditorCategory.tscn").instance()
 		tilecategory.item = tilecategories[i]
 		$UI/SideBar/Panel/ScrollContainer/SidebarList.add_child(tilecategory)
-		for i in range (0, activetilecategory.size()): # Replace groundtiles with str(tilecategories[i] + "tiles")
+		for i in range (0, groundtiles.size()): # Replace groundtiles with str(tilecategories[i], "tiles")
 			var tile = load("res://Scenes/UI/LevelEditorTile.tscn").instance()
-			tile.tile_type = activetilecategory[i] # Replace groundtiles with str(tilecategories[i] + "tiles")
+			tile.tile_type = groundtiles[i] # Replace groundtiles with str(tilecategories[i], "tiles")
 			tile.tilemap_selected = tilemap_selected
 			tilecategory.get_node("VBoxContainer/Content").add_child(tile)
-		
+
+func populate_objects():
+	var objectcategories = ["BadGuys"]
+	
+	var badguysobjects = ["Snowball"]
+	
+	$UI/SideBar/VBoxContainer/ObjectsButton.clear()
 	for i in range(0, objectcategories.size()):
 		$UI/SideBar/VBoxContainer/ObjectsButton.add_item(objectcategories[i])
+		var objectcategory = load("res://Scenes/UI/LevelEditorCategory.tscn").instance()
+		objectcategory.item = objectcategories[i]
+		$UI/SideBar/Panel/ScrollContainer/SidebarList.add_child(objectcategory)
+		for i in range (0, badguysobjects.size()): # Replace badguys with str(objectcategories[i], "objects")
+			var object = load("res://Scenes/UI/LevelEditorObject.tscn").instance()
+			object.object_type = badguysobjects[i] # Replace badguys with str(objectcategories[i], "objects")
+			object.object_category = objectcategories[i]
+			objectcategory.get_node("VBoxContainer/Content").add_child(object)

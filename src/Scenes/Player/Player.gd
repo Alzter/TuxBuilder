@@ -194,7 +194,8 @@ func _physics_process(delta):
 				$AnimationPlayer.play("Land")
 			elif on_ground >= 20:
 				$AnimationPlayer.play("LandSmall")
-			else: $AnimationPlayer.play("Stop")
+			else:
+				$AnimationPlayer.play("Stop")
 		on_ground = 0
 		jumpcancel = false
 		$SquishRadius/CollisionShape2D.disabled = true
