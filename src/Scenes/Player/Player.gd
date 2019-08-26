@@ -213,7 +213,7 @@ func _physics_process(delta):
 	# Ducking / Sliding
 	if on_ground == 0:
 		ducking = false
-		if $StandWindow.is_colliding() == true and sliding == false: ducking = true
+		if $StandWindow.is_colliding() == true and sliding == false and state != "small": ducking = true
 		elif Input.is_action_pressed("duck") and backflip == false:
 			if duck_disable == 0 and duck_disable_wait == false:
 				if abs(velocity.x) < WALK_MAX or ducking == true:
@@ -367,11 +367,11 @@ func _physics_process(delta):
 		
 
 func bounce():
+	sliding = false
+	jumpcancel = true
 	$Control/AnimatedSprite.play("jump")
 	set_animation("jump")
 	if on_ground > 0:
 		velocity.y = -JUMP_POWER
-		jumpcancel = true
 	else:
 		velocity.y = -300
-		jumpcancel = false
