@@ -95,6 +95,7 @@ func load_edited_level():
 	var scene_instance = packed_scene.instance()
 	scene_instance.set_name("Level")
 	add_child(scene_instance)
+	level_to_grid()
 
 func load_level(level):
 	current_level = str(level)
@@ -102,6 +103,15 @@ func load_level(level):
 	var scene_instance = scene.instance()
 	scene_instance.set_name("Level")
 	add_child(scene_instance)
+	level_to_grid()
+
+func level_to_grid():
+	for child in get_tree().current_scene.get_node("Level").get_children():
+		child.position.x = floor(child.position.x / 32) * 32
+		child.position.y = floor(child.position.y / 32) * 32
+		if not child.is_in_group("tilemap"):
+			child.position.x += 16
+			child.position.y += 16
 
 func clear_level():
 	var scene = get_node("Level")

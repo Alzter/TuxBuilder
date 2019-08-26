@@ -56,6 +56,7 @@ func fireball_kill():
 func kill():
 	disable()
 	state = "kill"
+	if velocity.x == 0: velocity.x = 1
 	velocity = Vector2(300 * (velocity.x / abs(velocity.x)), -350)
 	rotate = 30 * (velocity.x / abs(velocity.x))
 	$SFX/Fall.play()
@@ -63,11 +64,14 @@ func kill():
 # If squished
 func _on_Head_area_entered(area):
 	if area.is_in_group("bottom") and state == "active":
+		var player = area.get_parent()
+		if player.sliding == true:
+			kill()
+			return
 		disable()
 		state = ""
 		$AnimationPlayer.play("squished")
 		$SFX/Squish.play()
-		var player = area.get_parent()
 		player.call("bounce")
 
 # Despawn when falling out of world

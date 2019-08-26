@@ -185,10 +185,13 @@ colors = PoolColorArray( 1, 1, 1, 0.847059, 0.625, 0.936279, 1, 0.556863, 0, 0.4
 collision_layer = 2
 collision_mask = 2
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
-frame = 4
+frame = 1
 playing = true
 offset = Vector2( 0, -3 )
 
@@ -196,7 +199,7 @@ offset = Vector2( 0, -3 )
 shape = SubResource( 2 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-rect = Rect2( -256, -256, 512, 512 )
+rect = Rect2( -25, -25, 50, 50 )
 
 [node name="Head" type="Area2D" parent="."]
 

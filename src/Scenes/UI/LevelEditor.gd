@@ -59,19 +59,29 @@ func _process(delta):
 	tile_selected = get_tree().current_scene.get_node(str("Level/", tilemap_selected)).world_to_map(get_global_mouse_position())
 	update_selected_tile()
 	if Input.is_action_pressed("click_left"):
-		if get_viewport().get_mouse_position().x < get_viewport().size.x - 128 and get_viewport().get_mouse_position().y < get_viewport().size.y - 64:
+		if get_viewport().get_mouse_position().x < get_viewport().size.x - 128 and get_viewport().get_mouse_position().y < get_viewport().size.y - 64 and (tile_selected != old_tile_selected or mouse_down == false):
 			
-			if tile_selected != old_tile_selected or mouse_down == false:
-				if category_selected == "Tiles":
-					if $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == true:
-						get_tree().current_scene.get_node(str("Level/", tilemap_selected)).set_cellv(tile_selected, -1)
-					else: get_tree().current_scene.get_node(str("Level/", tilemap_selected)).set_cellv(tile_selected, tile_type)
-					get_tree().current_scene.get_node(str("Level/", tilemap_selected)).update_bitmask_area(tile_selected)
+			# Tile placing / erasing
+			if category_selected == "Tiles":
+				if $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == true:
+					get_tree().current_scene.get_node(str("Level/", tilemap_selected)).set_cellv(tile_selected, -1)
+				else: get_tree().current_scene.get_node(str("Level/", tilemap_selected)).set_cellv(tile_selected, tile_type)
+				get_tree().current_scene.get_node(str("Level/", tilemap_selected)).update_bitmask_area(tile_selected)
+			
+			else:
+				# Delete whatever object is on that tile
+				$SelectedTile.position.x = (tile_selected.x + 0.5) * get_tree().current_scene.get_node(str("Level/", tilemap_selected)).cell_size.x
+				$SelectedTile.position.y = (tile_selected.y + 0.5) * get_tree().current_scene.get_node(str("Level/", tilemap_selected)).cell_size.y
+				for child in get_tree().current_scene.get_node("Level").get_children():
+					if child.position == $SelectedTile.position:
+						child.queue_free()
 				
-				else:
+				# Object placing
+				if $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == false:
 					var object = load(str("res://Scenes/", object_category, "/", object_type, ".tscn")).instance()
 					object.position = $SelectedTile.position
 					get_tree().current_scene.get_node("Level").add_child(object)
+		
 		mouse_down = true
 	else: mouse_down = false
 	old_tile_selected = tile_selected
@@ -108,6 +118,7 @@ func update_selected_tile():
 			var selected_texture = load(str("res://Scenes/", object_category, "/", object_type, ".tscn")).instance().get_node("AnimatedSprite").get_sprite_frames().get_frame("default",0)
 			$SelectedTile.texture = (selected_texture)
 			$SelectedTile.region_enabled = false
+			$SelectedTile.position += load(str("res://Scenes/", object_category, "/", object_type, ".tscn")).instance().get_node("AnimatedSprite").offset
 
 # Buttons
 func _on_TilesButton_pressed():
