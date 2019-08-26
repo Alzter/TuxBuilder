@@ -63,7 +63,7 @@ func _on_Head_area_entered(area):
 		$AnimationPlayer.play("squished")
 		$SFX/Squish.play()
 		var player = area.get_parent()
-		if player.jumpheld > 0:
+		if player.on_ground > 0:
 			player.velocity.y = -player.JUMP_POWER
 			player.jumpcancel = true
 		else:

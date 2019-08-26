@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 var velocity = Vector2(0,0)
-var oldvelocity = velocity.x
+var oldvelocity
 var hit = false
 
 func explode():
@@ -30,7 +30,7 @@ func _physics_process(delta):
 			$AnimationPlayer.play("ActiveLeft")
 		velocity.y += 20
 		var collision = move_and_collide(velocity * delta)
-		var oldvelocity = velocity.x
+		oldvelocity = velocity.x
 		if collision:
 			velocity = velocity.bounce(collision.normal)
 			if velocity.x != oldvelocity:

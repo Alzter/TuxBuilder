@@ -39,7 +39,6 @@ const FIREBALL_SPEED = 500
 var velocity = Vector2()
 var on_ground = 999 # Frames Tux has been in air (0 if grounded)
 var can_jump = false # Can Tux jump
-var jumpheld = 0 # Time the jump key has been held
 var jumpcancel = false # Can let go of jump to stop vertical ascent
 var running = 0 # If horizontal speed is higher than walk max
 var skidding = false # Skidding
@@ -181,7 +180,7 @@ func _physics_process(delta):
 	# Gravity
 	velocity.y += GRAVITY
 
-	velocity = move_and_slide(velocity, FLOOR)
+	velocity = move_and_slide(velocity, FLOOR, 30)
 
 	# Floor check
 	if is_on_floor():
@@ -231,37 +230,6 @@ func _physics_process(delta):
 		if invincible_kill_time <= 0: invincible_kill_time = 1
 		invincible_kill_time += 1
 
-	# Jump buffering
-	if Input.is_action_pressed("jump"):
-			jumpheld += 1
-	else:
-			jumpheld = 0
-
-	# Jumping
-	if Input.is_action_pressed("jump"):
-		if jumpheld <= 15:
-			if on_ground <= LEDGE_JUMP and ((sliding == true and $StandWindow.is_colliding() == false) or sliding == false):
-				if state != "small" and Input.is_action_pressed("duck") == true and $StandWindow.is_colliding() == false and sliding == false:
-						backflip = true
-						ducking = false
-						backflip_rotation = 0
-						velocity.y = -RUNJUMP_POWER
-						$SFX/Flip.play()
-				elif abs(velocity.x) >= RUN_MAX:
-					velocity.y = -RUNJUMP_POWER
-					
-				else:
-					velocity.y = -JUMP_POWER
-				if state == "small":
-					$SFX/Jump.play()
-				else: $SFX/BigJump.play()
-				on_ground = LEDGE_JUMP + 1
-				$AnimationPlayer.playback_speed = 1
-				$AnimationPlayer.play("Jump")
-				jumpheld = 16
-				jumpcancel = true
-				sliding = false
-
 	# Jump cancelling
 	if on_ground != 0 and not Input.is_action_pressed("jump") and backflip == false and jumpcancel == true:
 		if velocity.y < 0:
@@ -269,9 +237,6 @@ func _physics_process(delta):
 			velocity.y *= 0.5
 		else:
 			jumpcancel = false
-
-	# Stop skidding in air
-	if on_ground != 0: skidding = false
 
 	# Backflip speed and rotation
 	$Control/AnimatedSprite.rotation_degrees = 0
@@ -303,7 +268,7 @@ func _physics_process(delta):
 				set_animation("walk")
 			else: set_animation("idle")
 		elif velocity.y <= 0:
-			set_animation("jump")
+			pass
 		else:
 			if $Control/AnimatedSprite.animation == ("jump") or $Control/AnimatedSprite.animation == ("fall_transition") or  $Control/AnimatedSprite.animation == ("jump_small") or $Control/AnimatedSprite.animation == ("fall_transition_small"):
 				set_animation("fall_transition")
@@ -333,11 +298,11 @@ func _physics_process(delta):
 		invincible_time = 0
 	if invincible_kill_time > 0: invincible_kill_time -= 1
 	else: invincible_kill_time = -1
-
-	# Shooting
+	
+		# Shooting
 	if Input.is_action_just_pressed("action") and state == "fire" and get_tree().get_nodes_in_group("bullets").size() < 2:
 		$SFX/Shoot.play()
-		var fireball = preload("res://Scenes/Objects/Fireball.tscn").instance()
+		var fireball = load("res://Scenes/Objects/Fireball.tscn").instance()
 		fireball.position = $ShootLocation.global_position
 		fireball.velocity = Vector2((FIREBALL_SPEED * $Control/AnimatedSprite.scale.x) + velocity.x,0)
 		fireball.add_collision_exception_with(self) # Prevent fireball colliding with player
@@ -361,3 +326,28 @@ func _physics_process(delta):
 	if position.y >= get_tree().current_scene.get_node("Camera2D").limit_bottom:
 		position.y = get_tree().current_scene.get_node("Camera2D").limit_bottom
 		kill()
+		
+func _input(event):
+
+	# Jumping
+	if Input.is_action_pressed("jump") && dead == false:
+		if on_ground <= LEDGE_JUMP and ((sliding == true and $StandWindow.is_colliding() == false) or sliding == false):
+			if state != "small" and Input.is_action_pressed("duck") == true and $StandWindow.is_colliding() == false and sliding == false:
+					backflip = true
+					ducking = false
+					backflip_rotation = 0
+					velocity.y = -RUNJUMP_POWER
+					$SFX/Flip.play()
+			elif abs(velocity.x) >= RUN_MAX:
+				velocity.y = -RUNJUMP_POWER
+			else:
+				velocity.y = -JUMP_POWER
+			if state == "small":
+				$SFX/Jump.play()
+			else: $SFX/BigJump.play()
+			on_ground = LEDGE_JUMP + 1
+			$AnimationPlayer.playback_speed = 1
+			$AnimationPlayer.play("Jump")
+			set_animation("jump")
+			jumpcancel = true
+			sliding = false
