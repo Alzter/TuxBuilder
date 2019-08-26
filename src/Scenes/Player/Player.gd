@@ -26,6 +26,8 @@ const TURN_ACCEL = 900.0
 const JUMP_POWER = 580
 # Running Jump / Backflip velocity
 const RUNJUMP_POWER = 640
+# Amount of frames you can hold jump before landing and still jump
+const JUMP_BUFFER_TIME = 15
 # Gravity
 const GRAVITY = 20.0
 # Amount of frames Tux can still jump after falling off a ledge
@@ -39,6 +41,7 @@ const FIREBALL_SPEED = 500
 var velocity = Vector2()
 var on_ground = 999 # Frames Tux has been in air (0 if grounded)
 var can_jump = false # Can Tux jump
+var jumpheld = 0 # Amount of frames jump has been help
 var jumpcancel = false # Can let go of jump to stop vertical ascent
 var running = 0 # If horizontal speed is higher than walk max
 var skidding = false # Skidding
@@ -210,7 +213,8 @@ func _physics_process(delta):
 	# Ducking / Sliding
 	if on_ground == 0:
 		ducking = false
-		if (Input.is_action_pressed("duck") or $StandWindow.is_colliding() == true) and backflip == false:
+		if $StandWindow.is_colliding() == true and sliding == false: ducking = true
+		elif Input.is_action_pressed("duck") and backflip == false:
 			if duck_disable == 0 and duck_disable_wait == false:
 				if abs(velocity.x) < WALK_MAX or ducking == true:
 					if sliding == false and state != "small": ducking = true
@@ -225,10 +229,46 @@ func _physics_process(delta):
 				else:
 					duck_disable -= 1
 
-	# Invincible when sliding
+	# Sliding
 	if sliding == true:
+		if $StandWindow.is_colliding() == true: # Push Tux forward when stuck in a one block space to prevent getting stuck
+			velocity.x += 4 * $Control/AnimatedSprite.scale.x
 		if invincible_kill_time <= 0: invincible_kill_time = 1
 		invincible_kill_time += 1
+		if abs(velocity.x) < 20 and on_ground == 0:
+			sliding = false
+			if $StandWindow.is_colliding() == true: ducking = true
+
+	# Jump buffering
+	if Input.is_action_pressed("jump"):
+		jumpheld += 1
+	else: jumpheld = 0
+
+	# Jumping
+	if Input.is_action_pressed("jump") and jumpheld <= JUMP_BUFFER_TIME:
+		if on_ground <= LEDGE_JUMP:
+			if state != "small" and Input.is_action_pressed("duck") == true and $StandWindow.is_colliding() == false and sliding == false:
+				backflip = true
+				backflip_rotation = 0
+				velocity.y = -RUNJUMP_POWER
+				$SFX/Flip.play()
+			elif abs(velocity.x) >= RUN_MAX:
+				velocity.y = -RUNJUMP_POWER
+			else:
+				velocity.y = -JUMP_POWER
+			if state == "small":
+				$SFX/Jump.play()
+			else: $SFX/BigJump.play()
+			on_ground = LEDGE_JUMP + 1
+			$AnimationPlayer.playback_speed = 1
+			$AnimationPlayer.play("Jump")
+			set_animation("jump")
+			jumpheld = JUMP_BUFFER_TIME + 1
+			jumpcancel = true
+			sliding = false
+			skidding = false
+			ducking = false
+			if $StandWindow.is_colliding() == true and state != "small": ducking = true
 
 	# Jump cancelling
 	if on_ground != 0 and not Input.is_action_pressed("jump") and backflip == false and jumpcancel == true:
@@ -267,9 +307,7 @@ func _physics_process(delta):
 					$Control/AnimatedSprite.speed_scale = 0.4
 				set_animation("walk")
 			else: set_animation("idle")
-		elif velocity.y <= 0:
-			pass
-		else:
+		elif velocity.y > 0:
 			if $Control/AnimatedSprite.animation == ("jump") or $Control/AnimatedSprite.animation == ("fall_transition") or  $Control/AnimatedSprite.animation == ("jump_small") or $Control/AnimatedSprite.animation == ("fall_transition_small"):
 				set_animation("fall_transition")
 			else: set_animation("fall")
@@ -327,27 +365,13 @@ func _physics_process(delta):
 		position.y = get_tree().current_scene.get_node("Camera2D").limit_bottom
 		kill()
 		
-func _input(event):
 
-	# Jumping
-	if Input.is_action_pressed("jump") && dead == false:
-		if on_ground <= LEDGE_JUMP and ((sliding == true and $StandWindow.is_colliding() == false) or sliding == false):
-			if state != "small" and Input.is_action_pressed("duck") == true and $StandWindow.is_colliding() == false and sliding == false:
-					backflip = true
-					ducking = false
-					backflip_rotation = 0
-					velocity.y = -RUNJUMP_POWER
-					$SFX/Flip.play()
-			elif abs(velocity.x) >= RUN_MAX:
-				velocity.y = -RUNJUMP_POWER
-			else:
-				velocity.y = -JUMP_POWER
-			if state == "small":
-				$SFX/Jump.play()
-			else: $SFX/BigJump.play()
-			on_ground = LEDGE_JUMP + 1
-			$AnimationPlayer.playback_speed = 1
-			$AnimationPlayer.play("Jump")
-			set_animation("jump")
-			jumpcancel = true
-			sliding = false
+func bounce():
+	$Control/AnimatedSprite.play("jump")
+	set_animation("jump")
+	if on_ground > 0:
+		velocity.y = -JUMP_POWER
+		jumpcancel = true
+	else:
+		velocity.y = -300
+		jumpcancel = false

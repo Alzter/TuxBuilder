@@ -63,12 +63,7 @@ func _on_Head_area_entered(area):
 		$AnimationPlayer.play("squished")
 		$SFX/Squish.play()
 		var player = area.get_parent()
-		if player.on_ground > 0:
-			player.velocity.y = -player.JUMP_POWER
-			player.jumpcancel = true
-		else:
-			player.velocity.y = -300
-			player.jumpcancel = false
+		player.call("bounce")
 
 # Despawn when falling out of world
 	if position.y > get_tree().current_scene.get_node("Camera2D").limit_bottom:
