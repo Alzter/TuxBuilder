@@ -20,15 +20,15 @@ func disable():
 
 # Physics
 func _physics_process(delta):
-	if get_tree().current_scene.editmode == true:
-		return
-	
 	if $VisibilityNotifier2D.is_on_screen() == false:
 		if state == "kill": queue_free()
 		else:
 			$AnimatedSprite.visible == false
 			return
 	else: $AnimatedSprite.visible == true
+	
+	if get_tree().current_scene.editmode == true:
+		return
 	
 	# Movement
 	if state == "active":
