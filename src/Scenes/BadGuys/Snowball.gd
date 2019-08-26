@@ -23,6 +23,13 @@ func _physics_process(delta):
 	if get_tree().current_scene.editmode == true:
 		return
 	
+	if $VisibilityNotifier2D.is_on_screen() == false:
+		if state == "kill": queue_free()
+		else:
+			$AnimatedSprite.visible == false
+			return
+	else: $AnimatedSprite.visible == true
+	
 	# Movement
 	if state == "active":
 		velocity.x = -100 * $AnimatedSprite.scale.x
@@ -37,8 +44,6 @@ func _physics_process(delta):
 		velocity = move_and_slide(velocity, Vector2(0,0))
 		velocity.y += 20
 		$AnimatedSprite.rotation_degrees += rotate
-		if $VisibilityNotifier2D.is_on_screen() == false:
-			queue_free()
 
 # Custom fireball death animation (optional)
 func fireball_kill():

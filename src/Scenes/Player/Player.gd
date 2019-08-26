@@ -369,10 +369,11 @@ func _physics_process(delta):
 
 func bounce():
 	sliding = false
-	jumpcancel = true
 	$Control/AnimatedSprite.play("jump")
 	set_animation("jump")
-	if on_ground > 0:
+	if jumpheld > 0:
 		velocity.y = -JUMP_POWER
+		jumpcancel = true
 	else:
 		velocity.y = -300
+		jumpcancel = false
