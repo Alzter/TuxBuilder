@@ -24,11 +24,11 @@ func _physics_process(_delta):
 		return
 	
 	if $VisibilityNotifier2D.is_on_screen() == false:
-		if state == "kill": queue_free()
+		if state != "active": queue_free()
 		else:
 			$AnimatedSprite.visible = false
 			return
-	else: $AnimatedSprite.visible = true
+	elif state == "active": $AnimatedSprite.visible = true
 	
 	if get_tree().current_scene.editmode == true:
 		return

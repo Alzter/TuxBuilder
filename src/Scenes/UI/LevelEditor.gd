@@ -70,8 +70,6 @@ func _process(_delta):
 			
 			else:
 				# Delete whatever object is on that tile
-				$SelectedTile.position.x = (tile_selected.x + 0.5) * get_tree().current_scene.get_node(str("Level/", tilemap_selected)).cell_size.x
-				$SelectedTile.position.y = (tile_selected.y + 0.5) * get_tree().current_scene.get_node(str("Level/", tilemap_selected)).cell_size.y
 				for child in get_tree().current_scene.get_node("Level").get_children():
 					if child.position == $SelectedTile.position:
 						child.queue_free()
@@ -94,6 +92,7 @@ func update_selected_tile():
 	
 	$SelectedTile.position.x = (tile_selected.x + 0.5) * get_tree().current_scene.get_node(str("Level/", tilemap_selected)).cell_size.x
 	$SelectedTile.position.y = (tile_selected.y + 0.5) * get_tree().current_scene.get_node(str("Level/", tilemap_selected)).cell_size.y
+	$SelectedTile.offset = Vector2(0,0)
 	
 	if $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == true:
 		$EraserSprite.visible = true
@@ -118,7 +117,7 @@ func update_selected_tile():
 			var selected_texture = load(str("res://Scenes/", object_category, "/", object_type, ".tscn")).instance().get_node("AnimatedSprite").get_sprite_frames().get_frame("default",0)
 			$SelectedTile.texture = (selected_texture)
 			$SelectedTile.region_enabled = false
-			$SelectedTile.position += load(str("res://Scenes/", object_category, "/", object_type, ".tscn")).instance().get_node("AnimatedSprite").offset
+			$SelectedTile.offset = load(str("res://Scenes/", object_category, "/", object_type, ".tscn")).instance().get_node("AnimatedSprite").offset
 
 # Buttons
 func _on_TilesButton_pressed():

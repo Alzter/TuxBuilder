@@ -190,8 +190,9 @@ __meta__ = {
 }
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+visible = false
 frames = SubResource( 1 )
-frame = 1
+frame = 2
 playing = true
 offset = Vector2( 0, -3 )
 
