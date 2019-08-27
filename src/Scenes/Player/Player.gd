@@ -83,8 +83,9 @@ func kill():
 	$Hitbox.disabled = true
 	$HeadAttack/CollisionShape2D.disabled = true
 	$SquishRadius/CollisionShape2D.disabled = true
-	$AnimatedSprite.rotation_degrees = 0
-	$AnimatedSprite.scale.x = 1
+	$Control/AnimatedSprite.rotation_degrees = 0
+	$Control/AnimatedSprite.scale.x = 1
+	$AnimationPlayer.play("Stop")
 	set_animation("gameover")
 	dead = true
 	velocity = Vector2 (0,-JUMP_POWER * 1.5)
