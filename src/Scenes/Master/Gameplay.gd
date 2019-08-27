@@ -20,7 +20,7 @@ func _ready():
 	load_ui()
 	level_bounds()
 
-func _process(delta):
+func _process(_delta):
 	if get_viewport().size.x > get_viewport().size.y:
 		$CanvasLayer/CircleTransition.rect_size.x = get_viewport().size.x
 		$CanvasLayer/CircleTransition.rect_size.y = get_viewport().size.x

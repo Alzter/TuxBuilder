@@ -8,7 +8,7 @@ func _ready():
 	$VBoxContainer/Button/Label.text = str(item)
 	$VBoxContainer/Button.pressed = true
 
-func _process(delta):
+func _process(_delta):
 	if $VBoxContainer/Button.pressed == true:
 		$VBoxContainer/Button/Arrow.rect_rotation = 90
 		$VBoxContainer/Content.visible = true

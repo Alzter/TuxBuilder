@@ -3,7 +3,6 @@ extends Popup
 var background_opacity = 0
 var panel_sizemult = 1
 var panel_size = Vector2(0,0)
-var button_selected = 0
 
 func _ready():
 	hide()
@@ -21,7 +20,7 @@ func _input(event):
 		elif event.is_action_pressed("pause") && get_tree().paused == true:
 			get_tree().paused = false
 
-func _process(delta):
+func _process(_delta):
 	if get_tree().paused == true:
 		background_opacity += 0.25
 		if background_opacity > 1: background_opacity = 1

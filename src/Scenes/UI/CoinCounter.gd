@@ -9,7 +9,7 @@ func _ready():
 	offset = 100
 	$CoinCounter/CoinCount.text = "0"
 
-func _process(delta):
+func _process(_delta):
 	$CoinCounter.rect_position.x = get_viewport().size.x + offset
 	if offset < 2:
 		offset = 0
