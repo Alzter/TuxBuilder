@@ -252,7 +252,7 @@ anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -128.0
-color = Color( 0.2, 0.2, 0.2, 0.85 )
+color = Color( 0.2, 0.2, 0.2, 0.85098 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/SideBar"]
 anchor_right = 1.0
@@ -374,16 +374,10 @@ margin_right = 32.0
 margin_bottom = 32.0
 texture = ExtResource( 3 )
 
-[node name="Line3" type="TextureRect" parent="UI/SideBar/VBoxContainer"]
-margin_top = 100.0
-margin_right = 128.0
-margin_bottom = 102.0
-texture = ExtResource( 6 )
-
 [node name="Panel" type="Panel" parent="UI/SideBar"]
 anchor_bottom = 1.0
 margin_left = 1.0
-margin_top = 103.0
+margin_top = 101.0
 margin_right = 127.0
 margin_bottom = -65.0
 rect_clip_content = true
