@@ -58,8 +58,9 @@ margin_left = -16.0
 margin_top = -16.0
 margin_right = 16.0
 margin_bottom = 16.0
-focus_mode = 1
+focus_mode = 0
 theme = ExtResource( 2 )
 custom_styles/hover = SubResource( 2 )
 custom_styles/pressed = SubResource( 3 )
+enabled_focus_mode = 0
 [connection signal="pressed" from="Control/Button" to="." method="_on_Button_pressed"]
