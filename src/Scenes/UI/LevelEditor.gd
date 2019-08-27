@@ -18,7 +18,7 @@ func _ready():
 	$UI/SideBar/VBoxContainer/TilesButton.grab_focus()
 	populate_tiles()
 
-func _process(delta):
+func _process(_delta):
 	$UI/SideBar/VBoxContainer/TilesButton.text = ""
 	$UI/SideBar/VBoxContainer/ObjectsButton.text = ""
 	$Grid.rect_size = Vector2(get_viewport().size.x + 32, get_viewport().size.y + 32)

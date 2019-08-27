@@ -19,13 +19,16 @@ func disable():
 	$Area2D/CollisionShape2D.disabled = true
 
 # Physics
-func _physics_process(delta):
+func _physics_process(_delta):
+	if get_tree().current_scene.editmode == true:
+		return
+	
 	if $VisibilityNotifier2D.is_on_screen() == false:
 		if state == "kill": queue_free()
 		else:
-			$AnimatedSprite.visible == false
+			$AnimatedSprite.visible = false
 			return
-	else: $AnimatedSprite.visible == true
+	else: $AnimatedSprite.visible = true
 	
 	if get_tree().current_scene.editmode == true:
 		return
