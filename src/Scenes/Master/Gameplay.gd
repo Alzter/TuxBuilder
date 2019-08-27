@@ -107,9 +107,9 @@ func load_level(level):
 
 func level_to_grid():
 	for child in get_tree().current_scene.get_node("Level").get_children():
-		child.position.x = floor(child.position.x / 32) * 32
-		child.position.y = floor(child.position.y / 32) * 32
 		if not child.is_in_group("tilemap"):
+			child.position.x = floor(child.position.x / 32) * 32
+			child.position.y = floor(child.position.y / 32) * 32
 			child.position.x += 16
 			child.position.y += 16
 
