@@ -88,6 +88,7 @@ func _process(_delta):
 						object.position = $SelectedTile.position
 						get_tree().current_scene.get_node("Level").add_child(object)
 						object.set_owner(get_tree().current_scene.get_node("Level"))
+						object.set_name(object_type)
 		
 		mouse_down = true
 	else: mouse_down = false
