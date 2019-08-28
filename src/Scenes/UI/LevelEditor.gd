@@ -85,7 +85,7 @@ func _process(_delta):
 	old_tile_selected = tile_selected
 
 func update_selected_tile():
-	if get_viewport().get_mouse_position().x >= get_viewport().size.x - 128 and get_viewport().get_mouse_position().y >= get_viewport().size.y - 64:
+	if not (get_viewport().get_mouse_position().x < get_viewport().size.x - 128 and get_viewport().get_mouse_position().y < get_viewport().size.y - 64):
 		$EraserSprite.visible = false
 		$SelectedTile.visible = false
 		return
@@ -139,9 +139,9 @@ func populate_tiles():
 	var groundtiles = ["Snow", "Snow Slope 1"]
 	var blockstiles = ["Snow","Snow"]
 	
-	$UI/SideBar/VBoxContainer/TilesButton.clear()
+	#$UI/SideBar/VBoxContainer/TilesButton.clear()
 	for i in range(0, tilecategories.size()):
-		$UI/SideBar/VBoxContainer/TilesButton.add_item(tilecategories[i])
+		#$UI/SideBar/VBoxContainer/TilesButton.add_item(tilecategories[i])
 		var tilecategory = load("res://Scenes/UI/LevelEditorCategory.tscn").instance()
 		tilecategory.item = tilecategories[i]
 		$UI/SideBar/Panel/ScrollContainer/SidebarList.add_child(tilecategory)
@@ -156,9 +156,9 @@ func populate_objects():
 	
 	var badguysobjects = ["Snowball"]
 	
-	$UI/SideBar/VBoxContainer/ObjectsButton.clear()
+	#$UI/SideBar/VBoxContainer/ObjectsButton.clear()
 	for i in range(0, objectcategories.size()):
-		$UI/SideBar/VBoxContainer/ObjectsButton.add_item(objectcategories[i])
+		#$UI/SideBar/VBoxContainer/ObjectsButton.add_item(objectcategories[i])
 		var objectcategory = load("res://Scenes/UI/LevelEditorCategory.tscn").instance()
 		objectcategory.item = objectcategories[i]
 		$UI/SideBar/Panel/ScrollContainer/SidebarList.add_child(objectcategory)

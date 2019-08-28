@@ -46,8 +46,6 @@ var running = 0 # If horizontal speed is higher than walk max
 var skidding = false # Skidding
 var sliding = false # Sliding
 var ducking = false # Ducking
-var duck_disable = 0 # Number of frames Tux can't duck
-var duck_disable_wait = false # Wait until Tux isn't colliding
 var backflip = false # Backflipping
 var backflip_rotation = 0 # Backflip rotation
 var state = "fire" # Tux's power-up state
@@ -103,8 +101,6 @@ func _physics_process(_delta):
 		$Hitbox.disabled = true
 		$HeadAttack/CollisionShape2D.disabled = true
 		$SquishRadius/CollisionShape2D.disabled = true
-		duck_disable = 3
-		duck_disable_wait = true
 		return
 
 	if dead == true:
@@ -216,19 +212,12 @@ func _physics_process(_delta):
 		ducking = false
 		if $StandWindow.is_colliding() == true and sliding == false and state != "small": ducking = true
 		elif Input.is_action_pressed("duck") and backflip == false:
-			if duck_disable == 0 and duck_disable_wait == false:
-				if abs(velocity.x) < WALK_MAX or ducking == true:
-					if sliding == false and state != "small": ducking = true
-				elif sliding == false:
-					sliding = true
-					$SFX/Skid.play()
-					velocity.x += WALK_ADD * $Control/AnimatedSprite.scale.x
-			else:
-				if duck_disable <= 0:
-					duck_disable = 0
-					if $StandWindow.is_colliding() == false: duck_disable_wait = false
-				else:
-					duck_disable -= 1
+			if abs(velocity.x) < WALK_MAX or ducking == true:
+				if sliding == false and state != "small": ducking = true
+			elif sliding == false:
+				sliding = true
+				$SFX/Skid.play()
+				velocity.x += WALK_ADD * $Control/AnimatedSprite.scale.x
 
 	# Sliding
 	if sliding == true:
