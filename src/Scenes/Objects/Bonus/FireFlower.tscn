@@ -1,0 +1,39 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Scenes/Objects/Bonus/FireFlower.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Objects/FireFlower/fire_flower-0.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Objects/FireFlower/fire_flower-1.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Objects/FireFlower/fire_flower-2.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Objects/FireFlower/fire_flower-3.png" type="Texture" id=5]
+[ext_resource path="res://Audio/SoundEffects/fire-flower.wav" type="AudioStream" id=6]
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 20.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 20, 20 )
+
+[node name="FireFlower" type="RigidBody2D"]
+mass = 2.04082
+script = ExtResource( 1 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+rect = Rect2( -25, -25, 50, 50 )
+process_parent = true
+physics_process_parent = true
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 3 )
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="PickupSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+[connection signal="body_entered" from="." to="." method="_on_FireFlower_body_entered"]

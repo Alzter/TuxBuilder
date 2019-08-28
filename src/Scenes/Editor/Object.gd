@@ -5,7 +5,7 @@ var object_category = ""
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var selected_texture = load(str("res://Scenes/", object_category, "/", object_type, ".tscn")).instance().get_node("AnimatedSprite").get_sprite_frames().get_frame("default",0)
+	var selected_texture = load(str("res://Scenes/Objects/", object_category, "/", object_type, ".tscn")).instance().get_node("AnimatedSprite").get_sprite_frames().get_frame("default",0)
 	$Control/Sprite.texture = (selected_texture)
 	
 

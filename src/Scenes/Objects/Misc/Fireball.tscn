@@ -1,9 +1,9 @@
 [gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://Scenes/Objects/Fireball.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Objects/Misc/Fireball.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Objects/Fireball/fireballambient.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/Objects/Fireball/fireball.png" type="Texture" id=3]
-[ext_resource path="res://Scenes/Objects/Fireball.tres" type="Gradient" id=4]
+[ext_resource path="res://Scenes/Objects/Misc/Fireball.tres" type="Gradient" id=4]
 [ext_resource path="res://Audio/SoundEffects/extinguish.wav" type="AudioStream" id=5]
 
 [sub_resource type="Animation" id=1]

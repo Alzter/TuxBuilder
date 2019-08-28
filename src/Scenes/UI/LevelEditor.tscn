@@ -440,9 +440,8 @@ margin_bottom = 12.0
 scroll_vertical_enabled = false
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/BottomBar/ScrollContainer"]
-margin_right = 446.0
 margin_bottom = 52.0
-rect_min_size = Vector2( 446, 52 )
+rect_min_size = Vector2( 0, 52 )
 rect_clip_content = true
 alignment = 1
 
@@ -458,6 +457,7 @@ custom_styles/pressed = SubResource( 15 )
 custom_styles/focus = SubResource( 14 )
 custom_styles/disabled = SubResource( 14 )
 custom_styles/normal = SubResource( 14 )
+toggle_mode = true
 enabled_focus_mode = 0
 
 [node name="TextureRect" type="TextureRect" parent="UI/BottomBar/LayerAdd"]
@@ -474,12 +474,11 @@ texture = ExtResource( 7 )
 
 [node name="AddLayer" type="Popup" parent="UI"]
 editor/display_folded = true
-anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 2.0
-margin_top = -366.0
+margin_top = 2.0
 margin_right = 202.0
-margin_bottom = -66.0
+margin_bottom = -64.0
 theme = ExtResource( 4 )
 
 [node name="Panel" type="Panel" parent="UI/AddLayer"]
@@ -554,26 +553,35 @@ align = 1
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/AddLayer/VBoxContainer"]
 margin_top = 130.0
 margin_right = 188.0
-margin_bottom = 252.0
-rect_min_size = Vector2( 0, 122 )
+margin_bottom = 366.0
+rect_min_size = Vector2( 0, 236 )
+scroll_horizontal_enabled = false
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/AddLayer/VBoxContainer/ScrollContainer"]
+margin_bottom = 236.0
+rect_min_size = Vector2( 0, 236 )
 
 [node name="LayerConfirmation" type="Button" parent="UI/AddLayer"]
-margin_left = 6.0
-margin_top = 262.0
-margin_right = 194.0
-margin_bottom = 294.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = -36.0
+margin_right = -4.0
+margin_bottom = -4.0
 focus_mode = 0
 text = "OK"
 
 [node name="Line" type="TextureRect" parent="UI/AddLayer/LayerConfirmation"]
+anchor_right = 1.0
 margin_top = -2.0
-margin_right = 188.0
+margin_bottom = -12.0
 rect_min_size = Vector2( 0, 2 )
 texture = ExtResource( 6 )
 expand = true
 [connection signal="button_down" from="UI/SideBar/VBoxContainer/TilesButton" to="." method="_on_TilesButton_pressed"]
 [connection signal="button_down" from="UI/SideBar/VBoxContainer/ObjectsButton" to="." method="_on_ObjectsButton_pressed"]
+[connection signal="button_down" from="UI/BottomBar/LayerAdd" to="." method="_on_LayerAdd_button_down"]
 [connection signal="pressed" from="UI/BottomBar/LayerAdd" to="." method="_on_LayerAdd_pressed"]
+[connection signal="popup_hide" from="UI/AddLayer" to="." method="_on_AddLayer_popup_hide"]
 [connection signal="pressed" from="UI/AddLayer/LayerConfirmation" to="." method="_on_LayerConfirmation_pressed"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Scenes/Objects/1Up.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Objects/Bonus/1Up.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Objects/1Up/1up.png" type="Texture" id=2]
 [ext_resource path="res://Audio/SoundEffects/lifeup.wav" type="AudioStream" id=3]
 

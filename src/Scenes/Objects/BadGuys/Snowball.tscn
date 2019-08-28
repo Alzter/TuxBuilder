@@ -1,6 +1,6 @@
 [gd_scene load_steps=25 format=2]
 
-[ext_resource path="res://Scenes/BadGuys/Snowball.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Objects/BadGuys/Snowball.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Creatures/Snowball/snowball-0.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/Creatures/Snowball/snowball-1.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/Creatures/Snowball/snowball-2.png" type="Texture" id=4]
@@ -190,9 +190,8 @@ __meta__ = {
 }
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-visible = false
 frames = SubResource( 1 )
-frame = 2
+frame = 4
 playing = true
 offset = Vector2( 0, -3 )
 

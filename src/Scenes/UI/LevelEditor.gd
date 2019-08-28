@@ -77,7 +77,7 @@ func _process(_delta):
 				
 				# Object placing
 				if $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == false:
-					var object = load(str("res://Scenes/", object_category, "/", object_type, ".tscn")).instance()
+					var object = load(str("res://Scenes/Objects/", object_category, "/", object_type, ".tscn")).instance()
 					object.position = $SelectedTile.position
 					get_tree().current_scene.get_node("Level").add_child(object)
 		
@@ -115,10 +115,10 @@ func update_selected_tile():
 			$SelectedTile.region_enabled = true
 
 		else:
-			var selected_texture = load(str("res://Scenes/", object_category, "/", object_type, ".tscn")).instance().get_node("AnimatedSprite").get_sprite_frames().get_frame("default",0)
+			var selected_texture = load(str("res://Scenes/Objects/", object_category, "/", object_type, ".tscn")).instance().get_node("AnimatedSprite").get_sprite_frames().get_frame("default",0)
 			$SelectedTile.texture = (selected_texture)
 			$SelectedTile.region_enabled = false
-			$SelectedTile.offset = load(str("res://Scenes/", object_category, "/", object_type, ".tscn")).instance().get_node("AnimatedSprite").offset
+			$SelectedTile.offset = load(str("res://Scenes/Objects/", object_category, "/", object_type, ".tscn")).instance().get_node("AnimatedSprite").offset
 
 # Buttons
 func _on_TilesButton_pressed():
@@ -157,6 +157,8 @@ func populate_objects():
 	
 	var badguysobjects = ["Snowball"]
 	
+	var bonusobjects = ["Test"]
+	
 	#$UI/SideBar/VBoxContainer/ObjectsButton.clear()
 	for i in range(0, objectcategories.size()):
 		#$UI/SideBar/VBoxContainer/ObjectsButton.add_item(objectcategories[i])
@@ -169,10 +171,11 @@ func populate_objects():
 			object.object_category = objectcategories[i]
 			objectcategory.get_node("VBoxContainer/Content").add_child(object)
 
-func _on_LayerAdd_pressed():
-	if $UI/BottomBar/LayerAdd.pressed == true:
-		$UI/AddLayer.popup()
-	else: $UI/AddLayer.hide()
+func _on_LayerAdd_button_down():
+	$UI/AddLayer.popup()
+
+func _on_AddLayer_popup_hide():
+	$UI/BottomBar/LayerAdd.pressed = false
 
 func _on_LayerConfirmation_pressed():
 	$UI/AddLayer.hide()
