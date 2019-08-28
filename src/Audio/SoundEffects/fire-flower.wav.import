@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/fire-flower.wav-e3884198d4884efb6d946a716b1707eb.sample"
+
+[deps]
+
+source_file="res://Audio/SoundEffects/fire-flower.wav"
+dest_files=[ "res://.import/fire-flower.wav-e3884198d4884efb6d946a716b1707eb.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
