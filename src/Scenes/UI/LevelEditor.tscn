@@ -8,7 +8,7 @@
 [ext_resource path="res://Sprites/Editor/Line.png" type="Texture" id=6]
 [ext_resource path="res://Sprites/Editor/Plus.png" type="Texture" id=7]
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=1]
 resource_name = "MoveIn"
 length = 0.2
 tracks/0/type = "value"
@@ -96,7 +96,7 @@ tracks/6/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=2]
 resource_name = "MoveOut"
 length = 0.1
 tracks/0/type = "value"
@@ -184,24 +184,24 @@ tracks/6/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="StyleBoxFlat" id=10]
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 1, 1, 1, 0 )
 
-[sub_resource type="StyleBoxFlat" id=11]
+[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 1, 1, 1, 1 )
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="DynamicFont" id=12]
+[sub_resource type="DynamicFont" id=5]
 size = 18
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
 font_data = ExtResource( 5 )
 
-[sub_resource type="StreamTexture" id=13]
+[sub_resource type="StreamTexture" id=6]
 flags = 4
 load_path = "res://.import/Arrow.png-b67a8582a20cb371d6c96fa38cdd2ef3.stex"
 
@@ -212,14 +212,14 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[sub_resource type="StyleBoxFlat" id=14]
+[sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 0.4, 0.4, 0.4, 1 )
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxFlat" id=15]
+[sub_resource type="StyleBoxFlat" id=9]
 bg_color = Color( 0.75, 0.75, 0.75, 1 )
 corner_radius_top_left = 4
 corner_radius_top_right = 4
@@ -259,8 +259,8 @@ region_rect = Rect2( 0, 0, 32, 32 )
 layer = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI"]
-anims/MoveIn = SubResource( 8 )
-anims/MoveOut = SubResource( 9 )
+anims/MoveIn = SubResource( 1 )
+anims/MoveOut = SubResource( 2 )
 
 [node name="SideBar" type="ColorRect" parent="UI"]
 anchor_left = 1.0
@@ -283,16 +283,16 @@ rect_min_size = Vector2( 0, 32 )
 focus_mode = 1
 size_flags_horizontal = 3
 theme = ExtResource( 4 )
-custom_styles/hover = SubResource( 10 )
-custom_styles/pressed = SubResource( 11 )
-custom_styles/focus = SubResource( 11 )
-custom_styles/disabled = SubResource( 10 )
-custom_styles/normal = SubResource( 10 )
-custom_fonts/font = SubResource( 12 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/disabled = SubResource( 3 )
+custom_styles/normal = SubResource( 3 )
+custom_fonts/font = SubResource( 5 )
 enabled_focus_mode = 1
 
 [node name="Arrow1" type="Sprite" parent="UI/SideBar/VBoxContainer/TilesButton"]
-texture = SubResource( 13 )
+texture = SubResource( 6 )
 offset = Vector2( 12, 16 )
 flip_h = true
 
@@ -305,7 +305,7 @@ margin_left = -41.0
 margin_top = -9.0
 margin_right = 13.0
 margin_bottom = 9.0
-custom_fonts/font = SubResource( 12 )
+custom_fonts/font = SubResource( 5 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
@@ -327,16 +327,16 @@ rect_min_size = Vector2( 0, 32 )
 focus_mode = 1
 size_flags_horizontal = 3
 theme = ExtResource( 4 )
-custom_styles/hover = SubResource( 10 )
-custom_styles/pressed = SubResource( 11 )
-custom_styles/focus = SubResource( 11 )
-custom_styles/disabled = SubResource( 10 )
-custom_styles/normal = SubResource( 10 )
-custom_fonts/font = SubResource( 12 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/disabled = SubResource( 3 )
+custom_styles/normal = SubResource( 3 )
+custom_fonts/font = SubResource( 5 )
 enabled_focus_mode = 1
 
 [node name="Arrow2" type="Sprite" parent="UI/SideBar/VBoxContainer/ObjectsButton"]
-texture = SubResource( 13 )
+texture = SubResource( 6 )
 offset = Vector2( 12, 16 )
 flip_h = true
 
@@ -349,7 +349,7 @@ margin_left = -41.0
 margin_top = -9.0
 margin_right = 51.0
 margin_bottom = 9.0
-custom_fonts/font = SubResource( 12 )
+custom_fonts/font = SubResource( 5 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
@@ -377,11 +377,11 @@ margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 focus_mode = 0
 theme = ExtResource( 4 )
-custom_styles/hover = SubResource( 10 )
-custom_styles/pressed = SubResource( 11 )
-custom_styles/focus = SubResource( 10 )
-custom_styles/disabled = SubResource( 10 )
-custom_styles/normal = SubResource( 10 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 3 )
+custom_styles/normal = SubResource( 3 )
 toggle_mode = true
 enabled_focus_mode = 0
 
@@ -452,11 +452,11 @@ margin_right = 62.0
 margin_bottom = 62.0
 focus_mode = 0
 theme = ExtResource( 4 )
-custom_styles/hover = SubResource( 14 )
-custom_styles/pressed = SubResource( 15 )
-custom_styles/focus = SubResource( 14 )
-custom_styles/disabled = SubResource( 14 )
-custom_styles/normal = SubResource( 14 )
+custom_styles/hover = SubResource( 8 )
+custom_styles/pressed = SubResource( 9 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 8 )
 toggle_mode = true
 enabled_focus_mode = 0
 
@@ -473,7 +473,7 @@ mouse_filter = 2
 texture = ExtResource( 7 )
 
 [node name="AddLayer" type="Popup" parent="UI"]
-editor/display_folded = true
+visible = true
 anchor_bottom = 1.0
 margin_left = 2.0
 margin_top = 2.0
@@ -550,16 +550,10 @@ custom_constants/shadow_offset_y = 2
 text = "Layer type:"
 align = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="UI/AddLayer/VBoxContainer"]
+[node name="OptionButton" type="OptionButton" parent="UI/AddLayer/VBoxContainer"]
 margin_top = 130.0
 margin_right = 188.0
-margin_bottom = 366.0
-rect_min_size = Vector2( 0, 236 )
-scroll_horizontal_enabled = false
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/AddLayer/VBoxContainer/ScrollContainer"]
-margin_bottom = 236.0
-rect_min_size = Vector2( 0, 236 )
+margin_bottom = 150.0
 
 [node name="LayerConfirmation" type="Button" parent="UI/AddLayer"]
 anchor_top = 1.0

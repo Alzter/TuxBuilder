@@ -17,7 +17,6 @@ _global_script_class_icons={
 
 config/name="Tux Builder"
 run/main_scene="res://Scenes/Master/Gameplay.tscn"
-run/disable_stdout=true
 config/icon="res://icon.png"
 
 [display]

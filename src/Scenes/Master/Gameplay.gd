@@ -159,7 +159,6 @@ func level_bounds():
 	level_bound_right = 0
 	level_bound_top = 0
 	level_bound_bottom = 0
-	get_tree().current_scene.get_node("Level")
 	for child in get_tree().get_nodes_in_group("tilemap"):
 		var child_name = child.get_name()
 		if get_tree().current_scene.get_node(str("Level/", child_name)).get_used_rect().position.x * get_tree().current_scene.get_node(str("Level/", child_name)).get_cell_size().x < level_bound_left:

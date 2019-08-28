@@ -11,13 +11,15 @@ var object_type = "Snowball"
 var mouse_down = false
 var anim_in = false
 
+var layer_types = [] # All layer types (Gets from layer folder)
+
 func _ready():
 	anim_in = get_tree().current_scene.editmode
 	visible = false
 	$UI.offset = Vector2(get_viewport().size.x * 9999,get_viewport().size.y * 9999)
 	$UI/SideBar/VBoxContainer/TilesButton.grab_focus()
-	populate_tiles()
-	populate_layers()
+	update_tiles()
+	update_layers()
 
 func _process(_delta):
 	$UI/SideBar/VBoxContainer/TilesButton.text = ""
@@ -56,30 +58,35 @@ func _process(_delta):
 	if Input.is_action_pressed("ui_right"):
 		get_tree().current_scene.get_node("Camera2D").position.x += CAMERA_MOVE_SPEED
 	
-	# Placing tiles
+	# Placing tiles / objects
 	tile_selected = get_tree().current_scene.get_node(str("Level/", tilemap_selected)).world_to_map(get_global_mouse_position())
 	update_selected_tile()
 	if Input.is_action_pressed("click_left"):
 		if get_viewport().get_mouse_position().x < get_viewport().size.x - 128 and get_viewport().get_mouse_position().y < get_viewport().size.y - 64 and (tile_selected != old_tile_selected or mouse_down == false) and $UI/AddLayer.visible == false:
 			
-			# Tile placing / erasing
 			if category_selected == "Tiles":
+				
+				# Tile erasing
 				if $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == true:
 					get_tree().current_scene.get_node(str("Level/", tilemap_selected)).set_cellv(tile_selected, -1)
+				
+				# Tile placing
 				else: get_tree().current_scene.get_node(str("Level/", tilemap_selected)).set_cellv(tile_selected, tile_type)
 				get_tree().current_scene.get_node(str("Level/", tilemap_selected)).update_bitmask_area(tile_selected)
 			
 			else:
-				# Delete whatever object is on that tile
-				for child in get_tree().current_scene.get_node("Level").get_children():
-					if child.position == $SelectedTile.position:
-						child.queue_free()
+				# Object erasing
+				if $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == true:
+					for child in get_tree().current_scene.get_node("Level").get_children():
+						if child.position == $SelectedTile.position:
+							child.queue_free()
+				else:
 				
 				# Object placing
-				if $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == false:
-					var object = load(str("res://Scenes/Objects/", object_category, "/", object_type, ".tscn")).instance()
-					object.position = $SelectedTile.position
-					get_tree().current_scene.get_node("Level").add_child(object)
+					if $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == false:
+						var object = load(str("res://Scenes/Objects/", object_category, "/", object_type, ".tscn")).instance()
+						object.position = $SelectedTile.position
+						get_tree().current_scene.get_node("Level").add_child(object)
 		
 		mouse_down = true
 	else: mouse_down = false
@@ -126,52 +133,31 @@ func _on_TilesButton_pressed():
 		category_selected = "Tiles"
 		for child in $UI/SideBar/Panel/ScrollContainer/SidebarList.get_children():
 			child.queue_free()
-		populate_tiles()
+		update_tiles()
 
 func _on_ObjectsButton_pressed():
 	if category_selected != "Objects":
 		category_selected = "Objects"
 		for child in $UI/SideBar/Panel/ScrollContainer/SidebarList.get_children():
 			child.queue_free()
-		populate_objects()
+		update_objects()
 
-func populate_tiles():
-	var tilecategories = ["ground","blocks"]
-	var groundtiles = ["Snow", "Snow Slope 1"]
-	var blockstiles = ["Snow","Snow"]
-	
-	#$UI/SideBar/VBoxContainer/TilesButton.clear()
-	for i in range(0, tilecategories.size()):
-		#$UI/SideBar/VBoxContainer/TilesButton.add_item(tilecategories[i])
-		var tilecategory = load("res://Scenes/Editor/Category.tscn").instance()
-		tilecategory.item = tilecategories[i]
-		$UI/SideBar/Panel/ScrollContainer/SidebarList.add_child(tilecategory)
-		for i in range (0, groundtiles.size()): # Replace groundtiles with str(tilecategories[i], "tiles")
-			var tile = load("res://Scenes/Editor/Tile.tscn").instance()
-			tile.tile_type = groundtiles[i] # Replace groundtiles with str(tilecategories[i], "tiles")
-			tile.tilemap_selected = tilemap_selected
-			tilecategory.get_node("VBoxContainer/Content").add_child(tile)
+func update_tiles():
+	pass
+	# List all the tile categories and tiles inside them
+	# E.g. ("Ground - Snow, Cave, Grass || Blocks - Bonus Block, Brick")
 
-func populate_objects():
-	var objectcategories = ["BadGuys"]
-	
-	var badguysobjects = ["Snowball"]
-	
-	var bonusobjects = ["Test"]
-	
-	#$UI/SideBar/VBoxContainer/ObjectsButton.clear()
-	for i in range(0, objectcategories.size()):
-		#$UI/SideBar/VBoxContainer/ObjectsButton.add_item(objectcategories[i])
-		var objectcategory = load("res://Scenes/Editor/Category.tscn").instance()
-		objectcategory.item = objectcategories[i]
-		$UI/SideBar/Panel/ScrollContainer/SidebarList.add_child(objectcategory)
-		for i in range (0, badguysobjects.size()): # Replace badguys with str(objectcategories[i], "objects")
-			var object = load("res://Scenes/Editor/Object.tscn").instance()
-			object.object_type = badguysobjects[i] # Replace badguys with str(objectcategories[i], "objects")
-			object.object_category = objectcategories[i]
-			objectcategory.get_node("VBoxContainer/Content").add_child(object)
+func update_objects():
+	pass
+	# List all of the folders inside the objects folder as
+	# object categories and list all of the scenes
+	# inside each folder as objects for that category
 
 func _on_LayerAdd_button_down():
+	# Add all filenames from the layers folder into an
+	# array, then add all the array items into the
+	# OptionsButton.
+	
 	$UI/AddLayer.popup()
 
 func _on_AddLayer_popup_hide():
@@ -179,13 +165,13 @@ func _on_AddLayer_popup_hide():
 
 func _on_LayerConfirmation_pressed():
 	$UI/AddLayer.hide()
-	var layer = load("res://Scenes/Editor/Tilemap.tscn").instance()
-	layer.z_index = $UI/AddLayer/VBoxContainer/SpinBox.value
-	layer.set_name("TileMap")
-	get_tree().current_scene.get_node("Level").add_child(layer)
-	populate_layers()
+	
+	# Load a scene with the name of the selected option,
+	# then place it as a child of the Level node
+	
+	update_layers()
 
-func populate_layers():
+func update_layers(): # Updates the list of layers at the bottom
 	for child in $UI/BottomBar/ScrollContainer/HBoxContainer.get_children():
 		child.queue_free()
 	for child in get_tree().current_scene.get_node("Level").get_children():
