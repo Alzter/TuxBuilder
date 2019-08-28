@@ -178,9 +178,15 @@ func update_objects():
 	child.get_node("VBoxContainer/Content").add_child(child2)
 
 func _on_LayerAdd_button_down():
+	$UI/AddLayer/VBoxContainer/OptionButton.clear()
 	# Add all filenames from the layers folder into an
 	# array, then add all the array items into the
 	# OptionsButton.
+	
+	# TEMPORARY LAYERS LIST CODE BELOW
+	var layers = ["TileMap", "Background"]
+	for i in layers.size():
+		$UI/AddLayer/VBoxContainer/OptionButton.add_item(layers[i])
 	
 	$UI/AddLayer.popup()
 
@@ -189,9 +195,12 @@ func _on_AddLayer_popup_hide():
 
 func _on_LayerConfirmation_pressed():
 	$UI/AddLayer.hide()
-	
-	# Load a scene with the name of the selected option,
-	# then place it as a child of the Level node
+	var selected = $UI/AddLayer/VBoxContainer/OptionButton.get_item_text($UI/AddLayer/VBoxContainer/OptionButton.selected)
+	var layer = load(str("res://Scenes/Editor/Layers/", selected, ".tscn")).instance()
+	layer.z_index = $UI/AddLayer/VBoxContainer/SpinBox.value
+	get_tree().current_scene.get_node("Level").add_child(layer)
+	layer.set_owner(get_tree().current_scene.get_node("Level"))
+	layer.set_name(selected)
 	
 	update_layers()
 
@@ -201,8 +210,6 @@ func update_layers(): # Updates the list of layers at the bottom
 	for child in get_tree().current_scene.get_node("Level").get_children():
 		if child.is_in_group("layer"):
 			var layer = load("res://Scenes/Editor/Layer.tscn").instance()
-			layer.type = "Unknown"
-			if child.is_in_group("tilemap"):
-				layer.type = "Tilemap"
+			layer.type = child.get_name()
 			layer.z_axis = child.z_index
 			$UI/BottomBar/ScrollContainer/HBoxContainer.add_child(layer)
