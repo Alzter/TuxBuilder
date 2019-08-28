@@ -443,7 +443,6 @@ scroll_vertical_enabled = false
 margin_bottom = 52.0
 rect_min_size = Vector2( 0, 52 )
 rect_clip_content = true
-alignment = 1
 
 [node name="LayerAdd" type="Button" parent="UI/BottomBar"]
 margin_left = 2.0
