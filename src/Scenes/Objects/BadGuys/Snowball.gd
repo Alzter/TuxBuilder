@@ -23,16 +23,6 @@ func _physics_process(_delta):
 	if get_tree().current_scene.editmode == true:
 		return
 	
-	if $VisibilityNotifier2D.is_on_screen() == false:
-		if state != "active": queue_free()
-		else:
-			$AnimatedSprite.visible = false
-			return
-	elif state == "active": $AnimatedSprite.visible = true
-	
-	if get_tree().current_scene.editmode == true:
-		return
-	
 	# Movement
 	if state == "active":
 		velocity.x = -100 * $AnimatedSprite.scale.x
@@ -77,10 +67,6 @@ func _on_Head_area_entered(area):
 		$SFX/Squish.play()
 		player.call("bounce")
 
-# Despawn when falling out of world
-	if position.y > get_tree().current_scene.get_node("Camera2D").limit_bottom:
-		queue_free()
-
 # Hit player
 func _on_snowball_body_entered(body):
 	if body.is_in_group("player"):
@@ -88,3 +74,7 @@ func _on_snowball_body_entered(body):
 	if state == "active" and body.has_method("hurt") and body.invincible_time == 0:
 		body.hurt()
 	return
+
+#Die when knocked off stage
+func _on_VisibilityEnabler2D_screen_exited():
+	if state != "active": queue_free()
