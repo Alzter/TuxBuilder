@@ -4,7 +4,6 @@ var item = ""
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	item = item.capitalize()
 	$VBoxContainer/Button/Label.text = str(item)
 	$VBoxContainer/Button.pressed = true
 

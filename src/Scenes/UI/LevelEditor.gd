@@ -87,6 +87,7 @@ func _process(_delta):
 						var object = load(str("res://Scenes/Objects/", object_category, "/", object_type, ".tscn")).instance()
 						object.position = $SelectedTile.position
 						get_tree().current_scene.get_node("Level").add_child(object)
+						object.set_owner(get_tree().current_scene.get_node("Level"))
 		
 		mouse_down = true
 	else: mouse_down = false
@@ -143,15 +144,37 @@ func _on_ObjectsButton_pressed():
 		update_objects()
 
 func update_tiles():
-	pass
+	for child in $UI/SideBar/Panel/ScrollContainer/SidebarList.get_children():
+		child.queue_free()
 	# List all the tile categories and tiles inside them
 	# E.g. ("Ground - Snow, Cave, Grass || Blocks - Bonus Block, Brick")
+	
+	# TEMPORARY TILES LIST CODE BELOW
+	var child = load("res://Scenes/Editor/Category.tscn").instance()
+	child.item = "Ground"
+	$UI/SideBar/Panel/ScrollContainer/SidebarList.add_child(child)
+	
+	var child2 = load("res://Scenes/Editor/Tile.tscn").instance()
+	child2.tile_type = "Snow"
+	child.get_node("VBoxContainer/Content").add_child(child2)
 
 func update_objects():
-	pass
+	for child in $UI/SideBar/Panel/ScrollContainer/SidebarList.get_children():
+		child.queue_free()
+
 	# List all of the folders inside the objects folder as
 	# object categories and list all of the scenes
 	# inside each folder as objects for that category
+	
+	# TEMPORARY OBJECTS LIST CODE BELOW
+	var child = load("res://Scenes/Editor/Category.tscn").instance()
+	child.item = "BadGuys"
+	$UI/SideBar/Panel/ScrollContainer/SidebarList.add_child(child)
+	
+	var child2 = load("res://Scenes/Editor/Object.tscn").instance()
+	child2.object_category = "BadGuys"
+	child2.object_type = "Snowball"
+	child.get_node("VBoxContainer/Content").add_child(child2)
 
 func _on_LayerAdd_button_down():
 	# Add all filenames from the layers folder into an
