@@ -436,6 +436,7 @@ anchor_bottom = 1.0
 margin_left = 64.0
 margin_top = -64.0
 margin_right = -130.0
+margin_bottom = 12.0
 scroll_vertical_enabled = false
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/BottomBar/ScrollContainer"]
