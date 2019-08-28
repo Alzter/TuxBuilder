@@ -436,12 +436,16 @@ anchor_bottom = 1.0
 margin_left = 64.0
 margin_top = -64.0
 margin_right = -130.0
+scroll_vertical_enabled = false
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/BottomBar/ScrollContainer"]
+margin_right = 446.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 446, 52 )
 rect_clip_content = true
 alignment = 1
 
-[node name="Button" type="Button" parent="UI/BottomBar"]
+[node name="LayerAdd" type="Button" parent="UI/BottomBar"]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 62.0
@@ -455,7 +459,7 @@ custom_styles/disabled = SubResource( 14 )
 custom_styles/normal = SubResource( 14 )
 enabled_focus_mode = 0
 
-[node name="TextureRect" type="TextureRect" parent="UI/BottomBar/Button"]
+[node name="TextureRect" type="TextureRect" parent="UI/BottomBar/LayerAdd"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -466,5 +470,109 @@ margin_right = 32.0
 margin_bottom = 32.0
 mouse_filter = 2
 texture = ExtResource( 7 )
+
+[node name="AddLayer" type="Popup" parent="UI"]
+editor/display_folded = true
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = -366.0
+margin_right = 202.0
+margin_bottom = -66.0
+theme = ExtResource( 4 )
+
+[node name="Panel" type="Panel" parent="UI/AddLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/AddLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 6.0
+margin_top = 6.0
+margin_right = -6.0
+margin_bottom = -42.0
+rect_clip_content = true
+custom_constants/separation = 6
+
+[node name="Label" type="Label" parent="UI/AddLayer/VBoxContainer"]
+margin_right = 188.0
+margin_bottom = 20.0
+custom_colors/font_color = Color( 0, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+text = "Add layer"
+align = 1
+
+[node name="Line" type="TextureRect" parent="UI/AddLayer/VBoxContainer"]
+margin_top = 26.0
+margin_right = 188.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 0, 2 )
+texture = ExtResource( 6 )
+expand = true
+
+[node name="Label2" type="Label" parent="UI/AddLayer/VBoxContainer"]
+margin_top = 34.0
+margin_right = 188.0
+margin_bottom = 54.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+text = "Z axis:"
+align = 1
+
+[node name="SpinBox" type="SpinBox" parent="UI/AddLayer/VBoxContainer"]
+margin_top = 60.0
+margin_right = 188.0
+margin_bottom = 90.0
+max_value = 0.0
+rounded = true
+allow_greater = true
+allow_lesser = true
+
+[node name="Line2" type="TextureRect" parent="UI/AddLayer/VBoxContainer"]
+margin_top = 96.0
+margin_right = 188.0
+margin_bottom = 98.0
+rect_min_size = Vector2( 0, 2 )
+texture = ExtResource( 6 )
+expand = true
+
+[node name="Label3" type="Label" parent="UI/AddLayer/VBoxContainer"]
+margin_top = 104.0
+margin_right = 188.0
+margin_bottom = 124.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+text = "Layer type:"
+align = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/AddLayer/VBoxContainer"]
+margin_top = 130.0
+margin_right = 188.0
+margin_bottom = 252.0
+rect_min_size = Vector2( 0, 122 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/AddLayer/VBoxContainer/ScrollContainer"]
+
+[node name="LayerConfirmation" type="Button" parent="UI/AddLayer"]
+margin_left = 6.0
+margin_top = 262.0
+margin_right = 194.0
+margin_bottom = 294.0
+focus_mode = 0
+text = "OK"
+
+[node name="Line" type="TextureRect" parent="UI/AddLayer/LayerConfirmation"]
+margin_top = -2.0
+margin_right = 188.0
+rect_min_size = Vector2( 0, 2 )
+texture = ExtResource( 6 )
+expand = true
 [connection signal="button_down" from="UI/SideBar/VBoxContainer/TilesButton" to="." method="_on_TilesButton_pressed"]
 [connection signal="button_down" from="UI/SideBar/VBoxContainer/ObjectsButton" to="." method="_on_ObjectsButton_pressed"]
+[connection signal="pressed" from="UI/BottomBar/LayerAdd" to="." method="_on_LayerAdd_pressed"]
+[connection signal="pressed" from="UI/AddLayer/LayerConfirmation" to="." method="_on_LayerConfirmation_pressed"]

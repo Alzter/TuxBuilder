@@ -17,6 +17,7 @@ func _ready():
 	$UI.offset = Vector2(get_viewport().size.x * 9999,get_viewport().size.y * 9999)
 	$UI/SideBar/VBoxContainer/TilesButton.grab_focus()
 	populate_tiles()
+	populate_layers()
 
 func _process(_delta):
 	$UI/SideBar/VBoxContainer/TilesButton.text = ""
@@ -59,7 +60,7 @@ func _process(_delta):
 	tile_selected = get_tree().current_scene.get_node(str("Level/", tilemap_selected)).world_to_map(get_global_mouse_position())
 	update_selected_tile()
 	if Input.is_action_pressed("click_left"):
-		if get_viewport().get_mouse_position().x < get_viewport().size.x - 128 and get_viewport().get_mouse_position().y < get_viewport().size.y - 64 and (tile_selected != old_tile_selected or mouse_down == false):
+		if get_viewport().get_mouse_position().x < get_viewport().size.x - 128 and get_viewport().get_mouse_position().y < get_viewport().size.y - 64 and (tile_selected != old_tile_selected or mouse_down == false) and $UI/AddLayer.visible == false:
 			
 			# Tile placing / erasing
 			if category_selected == "Tiles":
@@ -85,7 +86,7 @@ func _process(_delta):
 	old_tile_selected = tile_selected
 
 func update_selected_tile():
-	if not (get_viewport().get_mouse_position().x < get_viewport().size.x - 128 and get_viewport().get_mouse_position().y < get_viewport().size.y - 64):
+	if not (get_viewport().get_mouse_position().x < get_viewport().size.x - 128 and get_viewport().get_mouse_position().y < get_viewport().size.y - 64) or $UI/AddLayer.visible == true:
 		$EraserSprite.visible = false
 		$SelectedTile.visible = false
 		return
@@ -142,11 +143,11 @@ func populate_tiles():
 	#$UI/SideBar/VBoxContainer/TilesButton.clear()
 	for i in range(0, tilecategories.size()):
 		#$UI/SideBar/VBoxContainer/TilesButton.add_item(tilecategories[i])
-		var tilecategory = load("res://Scenes/UI/LevelEditorCategory.tscn").instance()
+		var tilecategory = load("res://Scenes/Editor/Category.tscn").instance()
 		tilecategory.item = tilecategories[i]
 		$UI/SideBar/Panel/ScrollContainer/SidebarList.add_child(tilecategory)
 		for i in range (0, groundtiles.size()): # Replace groundtiles with str(tilecategories[i], "tiles")
-			var tile = load("res://Scenes/UI/LevelEditorTile.tscn").instance()
+			var tile = load("res://Scenes/Editor/Tile.tscn").instance()
 			tile.tile_type = groundtiles[i] # Replace groundtiles with str(tilecategories[i], "tiles")
 			tile.tilemap_selected = tilemap_selected
 			tilecategory.get_node("VBoxContainer/Content").add_child(tile)
@@ -159,11 +160,36 @@ func populate_objects():
 	#$UI/SideBar/VBoxContainer/ObjectsButton.clear()
 	for i in range(0, objectcategories.size()):
 		#$UI/SideBar/VBoxContainer/ObjectsButton.add_item(objectcategories[i])
-		var objectcategory = load("res://Scenes/UI/LevelEditorCategory.tscn").instance()
+		var objectcategory = load("res://Scenes/Editor/Category.tscn").instance()
 		objectcategory.item = objectcategories[i]
 		$UI/SideBar/Panel/ScrollContainer/SidebarList.add_child(objectcategory)
 		for i in range (0, badguysobjects.size()): # Replace badguys with str(objectcategories[i], "objects")
-			var object = load("res://Scenes/UI/LevelEditorObject.tscn").instance()
+			var object = load("res://Scenes/Editor/Object.tscn").instance()
 			object.object_type = badguysobjects[i] # Replace badguys with str(objectcategories[i], "objects")
 			object.object_category = objectcategories[i]
 			objectcategory.get_node("VBoxContainer/Content").add_child(object)
+
+func _on_LayerAdd_pressed():
+	if $UI/BottomBar/LayerAdd.pressed == true:
+		$UI/AddLayer.popup()
+	else: $UI/AddLayer.hide()
+
+func _on_LayerConfirmation_pressed():
+	$UI/AddLayer.hide()
+	var layer = load("res://Scenes/Editor/Tilemap.tscn").instance()
+	layer.z_index = $UI/AddLayer/VBoxContainer/SpinBox.value
+	layer.set_name("TileMap")
+	get_tree().current_scene.get_node("Level").add_child(layer)
+	populate_layers()
+
+func populate_layers():
+	for child in $UI/BottomBar/ScrollContainer/HBoxContainer.get_children():
+		child.queue_free()
+	for child in get_tree().current_scene.get_node("Level").get_children():
+		if child.is_in_group("layer"):
+			var layer = load("res://Scenes/Editor/Layer.tscn").instance()
+			layer.type = "Unknown"
+			if child.is_in_group("tilemap"):
+				layer.type = "Tilemap"
+			layer.z_axis = child.z_index
+			$UI/BottomBar/ScrollContainer/HBoxContainer.add_child(layer)

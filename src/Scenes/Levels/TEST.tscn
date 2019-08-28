@@ -11,6 +11,7 @@
 position = Vector2( 0, -100 )
 
 [node name="TileMap" type="TileMap" parent="." groups=[
+"layer",
 "tilemap",
 ]]
 position = Vector2( -1, 0 )
