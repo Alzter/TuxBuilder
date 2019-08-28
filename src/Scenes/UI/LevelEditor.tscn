@@ -205,7 +205,7 @@ flags = 4
 load_path = "res://.import/Arrow.png-b67a8582a20cb371d6c96fa38cdd2ef3.stex"
 
 [sub_resource type="StyleBoxFlat" id=7]
-bg_color = Color( 0.5, 0.5, 0.5, 0.5 )
+bg_color = Color( 0.501961, 0.501961, 0.501961, 0.501961 )
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
@@ -406,5 +406,19 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -64.0
 color = Color( 0.196078, 0.196078, 0.196078, 0.752941 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/BottomBar"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -64.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/BottomBar/ScrollContainer"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -64.0
+rect_clip_content = true
+alignment = 1
 [connection signal="pressed" from="UI/SideBar/VBoxContainer/TilesButton" to="." method="_on_TilesButton_pressed"]
 [connection signal="pressed" from="UI/SideBar/VBoxContainer/ObjectsButton" to="." method="_on_ObjectsButton_pressed"]
