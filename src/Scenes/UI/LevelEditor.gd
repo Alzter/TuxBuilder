@@ -58,6 +58,13 @@ func _process(_delta):
 	if Input.is_action_pressed("ui_right"):
 		get_tree().current_scene.get_node("Camera2D").position.x += CAMERA_MOVE_SPEED
 	
+	# Scaling Bottom Bar
+	$UI/BottomBar/ScrollContainer/HBoxContainer.rect_min_size.y = 64
+	$UI/BottomBar/ScrollContainer.rect_size.y = 64
+	if $UI/BottomBar/ScrollContainer.rect_size.y != 64:
+		$UI/BottomBar/ScrollContainer/HBoxContainer.rect_min_size.y = 52
+		$UI/BottomBar/ScrollContainer.rect_size.y = 64
+	
 	# Placing tiles / objects
 	tile_selected = get_tree().current_scene.get_node(str("Level/", tilemap_selected)).world_to_map(get_global_mouse_position())
 	update_selected_tile()
@@ -210,6 +217,7 @@ func update_layers(): # Updates the list of layers at the bottom
 	for child in get_tree().current_scene.get_node("Level").get_children():
 		if child.is_in_group("layer"):
 			var layer = load("res://Scenes/Editor/Layer.tscn").instance()
-			layer.type = child.get_name()
+			layer.type = child.get_class()
+			layer.layername = child.get_name()
 			layer.z_axis = child.z_index
 			$UI/BottomBar/ScrollContainer/HBoxContainer.add_child(layer)
