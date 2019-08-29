@@ -23,12 +23,19 @@ func _ready():
 	update_layers()
 
 func _process(_delta):
+	# General positioning stuff
 	$UI/SideBar/VBoxContainer/TilesButton.text = ""
 	$UI/SideBar/VBoxContainer/ObjectsButton.text = ""
 	$Grid.rect_size = Vector2(get_viewport().size.x + 32, get_viewport().size.y + 32)
 	$Grid.rect_position = Vector2(get_tree().current_scene.get_node("Camera2D").position.x - (get_viewport().size.x / 2), get_tree().current_scene.get_node("Camera2D").position.y - (get_viewport().size.y / 2))
 	$Grid.rect_position = Vector2(floor($Grid.rect_position.x / 32) * 32, floor($Grid.rect_position.y / 32) * 32)
+	$UI/BottomBar/ScrollContainer/HBoxContainer.rect_min_size.y = 64
+	$UI/BottomBar/ScrollContainer.rect_size.y = 64
+	if $UI/BottomBar/ScrollContainer.rect_size.y != 64:
+		$UI/BottomBar/ScrollContainer/HBoxContainer.rect_min_size.y = 52
+		$UI/BottomBar/ScrollContainer.rect_size.y = 64
 	
+	# Show and hide
 	if get_tree().current_scene.editmode == false:
 		# Move out animation
 		if anim_in == true:
@@ -45,7 +52,7 @@ func _process(_delta):
 			$UI/AnimationPlayer.play("MoveIn")
 		visible = true
 		$UI.offset = Vector2(0,0)
-		
+	
 	# Navigation
 	if Input.is_action_pressed("ui_up"):
 		get_tree().current_scene.get_node("Camera2D").position.y -= CAMERA_MOVE_SPEED
@@ -59,12 +66,14 @@ func _process(_delta):
 	if Input.is_action_pressed("ui_right"):
 		get_tree().current_scene.get_node("Camera2D").position.x += CAMERA_MOVE_SPEED
 	
-	# Scaling Bottom Bar
-	$UI/BottomBar/ScrollContainer/HBoxContainer.rect_min_size.y = 64
-	$UI/BottomBar/ScrollContainer.rect_size.y = 64
-	if $UI/BottomBar/ScrollContainer.rect_size.y != 64:
-		$UI/BottomBar/ScrollContainer/HBoxContainer.rect_min_size.y = 52
-		$UI/BottomBar/ScrollContainer.rect_size.y = 64
+	# Disable rectangle select for objects
+	if category_selected == "Objects":
+		$UI/SideBar/VBoxContainer/HBoxContainer/SelectButton.disabled = true
+		$UI/SideBar/VBoxContainer/HBoxContainer/SelectButton.pressed = false
+		$UI/SideBar/VBoxContainer/HBoxContainer/SelectButton/TextureRect.self_modulate = Color(1,1,1,0.5)
+	else:
+		$UI/SideBar/VBoxContainer/HBoxContainer/SelectButton.disabled = false
+		$UI/SideBar/VBoxContainer/HBoxContainer/SelectButton/TextureRect.self_modulate = Color(1,1,1,1)
 	
 	# Placing tiles / objects
 	tile_selected = get_tree().current_scene.get_node(str("Level/", tilemap_selected)).world_to_map(get_global_mouse_position())
