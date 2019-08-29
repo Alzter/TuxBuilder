@@ -1,13 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/Editor/Layers/TileMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tilesets/LevelTiles.tres" type="TileSet" id=2]
-[ext_resource path="res://Scenes/Objects/Bonus/1Up.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/Objects/Bonus/1Up.gd" type="Script" id=4]
-[ext_resource path="res://Scenes/Objects/Bonus/FireFlower.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Objects/Bonus/FireFlower.gd" type="Script" id=6]
-[ext_resource path="res://Scenes/Objects/Bonus/Coin.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/Objects/Bonus/Coin.gd" type="Script" id=8]
+[ext_resource path="res://Scenes/Objects/BadGuys/Snowball.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Objects/BadGuys/Snowball.gd" type="Script" id=4]
 
 [node name="Level" type="Node2D"]
 
@@ -25,112 +21,35 @@ collision_mask = 515
 format = 1
 tile_data = PoolIntArray( 131072, 0, 0, 131073, 0, 1, 131074, 0, 1, 131075, 0, 1, 131076, 0, 1, 131077, 0, 1, 131078, 0, 1, 131079, 0, 1, 131080, 0, 1, 131081, 0, 1, 131082, 0, 1, 131083, 0, 1, 131084, 0, 1, 131085, 0, 2, 196608, 0, 65536, 196609, 0, 65537, 196610, 0, 65537, 196611, 0, 65537, 196612, 0, 65537, 196613, 0, 65537, 196614, 0, 65537, 196615, 0, 65537, 196616, 0, 65537, 196617, 0, 65537, 196618, 0, 65537, 196619, 0, 65537, 196620, 0, 65537, 196621, 0, 65538, 262144, 0, 65536, 262145, 0, 65537, 262146, 0, 65537, 262147, 0, 65537, 262148, 0, 65537, 262149, 0, 65537, 262150, 0, 65537, 262151, 0, 65537, 262152, 0, 65537, 262153, 0, 65537, 262154, 0, 65537, 262155, 0, 65537, 262156, 0, 65537, 262157, 0, 65538, 327680, 0, 65536, 327681, 0, 65537, 327682, 0, 65537, 327683, 0, 65537, 327684, 0, 65537, 327685, 0, 65537, 327686, 0, 65537, 327687, 0, 65537, 327688, 0, 65537, 327689, 0, 65537, 327690, 0, 65537, 327691, 0, 65537, 327692, 0, 65537, 327693, 0, 65538, 393216, 0, 65536, 393217, 0, 65537, 393218, 0, 65537, 393219, 0, 65537, 393220, 0, 65537, 393221, 0, 65537, 393222, 0, 65537, 393223, 0, 65537, 393224, 0, 65537, 393225, 0, 65537, 393226, 0, 65537, 393227, 0, 65537, 393228, 0, 65537, 393229, 0, 65538, 458752, 0, 65536, 458753, 0, 65537, 458754, 0, 65537, 458755, 0, 65537, 458756, 0, 65537, 458757, 0, 65537, 458758, 0, 65537, 458759, 0, 15, 458760, 0, 65537, 458761, 0, 65537, 458762, 0, 65537, 458763, 0, 15, 458764, 0, 65537, 458765, 0, 65538, 524288, 0, 65536, 524289, 0, 65537, 524290, 0, 65537, 524291, 0, 65537, 524292, 0, 65537, 524293, 0, 65537, 524294, 0, 65537, 524295, 0, 65537, 524296, 0, 65537, 524297, 0, 65537, 524298, 0, 65537, 524299, 0, 65537, 524300, 0, 65537, 524301, 0, 65538, 589824, 0, 65536, 589825, 0, 65537, 589826, 0, 65537, 589827, 0, 65537, 589828, 0, 65537, 589829, 0, 65537, 589830, 0, 65537, 589831, 0, 65537, 589832, 0, 65537, 589833, 0, 65537, 589834, 0, 65537, 589835, 0, 65537, 589836, 0, 65537, 589837, 0, 65538, 655360, 0, 65536, 655361, 0, 65537, 655362, 0, 65537, 655363, 0, 65537, 655364, 0, 65537, 655365, 0, 65537, 655366, 0, 65537, 655367, 0, 65537, 655368, 0, 65537, 655369, 0, 65537, 655370, 0, 65537, 655371, 0, 65537, 655372, 0, 65537, 655373, 0, 65538, 720896, 0, 65536, 720897, 0, 65537, 720898, 0, 65537, 720899, 0, 65537, 720900, 0, 65537, 720901, 0, 65537, 720902, 0, 65537, 720903, 0, 65537, 720904, 0, 65537, 720905, 0, 65537, 720906, 0, 65537, 720907, 0, 65537, 720908, 0, 65537, 720909, 0, 65538, 786432, 0, 131072, 786433, 0, 131073, 786434, 0, 131073, 786435, 0, 131073, 786436, 0, 131073, 786437, 0, 131073, 786438, 0, 131073, 786439, 0, 131073, 786440, 0, 131073, 786441, 0, 131073, 786442, 0, 131073, 786443, 0, 131073, 786444, 0, 131073, 786445, 0, 131074 )
 
-[node name="1Uptscn" type="Area2D" parent="." instance=ExtResource( 3 )]
-position = Vector2( 208, -176 )
+[node name="@Snowballtscn@78" type="KinematicBody2D" parent="." groups=[
+"badguys",
+] instance=ExtResource( 3 )]
+position = Vector2( 432, 48 )
+collision_layer = 2
+collision_mask = 2
 script = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
 
-[node name="FireFlowertscn" type="RigidBody2D" parent="." instance=ExtResource( 5 )]
-position = Vector2( 243.616, 44.2164 )
-rotation = -0.0042525
-scale = Vector2( 1, 1 )
-mass = 2.04082
-linear_velocity = Vector2( -1.16201e-008, 7.34179e-009 )
-angular_velocity = -5.71046e-010
-script = ExtResource( 6 )
+[node name="Snowballtscn" type="KinematicBody2D" parent="." groups=[
+"badguys",
+] instance=ExtResource( 3 )]
+position = Vector2( 368, 48 )
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
 
-[node name="Cointscn" type="Area2D" parent="." instance=ExtResource( 7 )]
-position = Vector2( 304, -144 )
-script = ExtResource( 8 )
-
-[node name="@Cointscn@23" type="Area2D" parent="." instance=ExtResource( 7 )]
-position = Vector2( 272, -144 )
-script = ExtResource( 8 )
-
-[node name="@Cointscn@24" type="Area2D" parent="." instance=ExtResource( 7 )]
-position = Vector2( 240, -144 )
-script = ExtResource( 8 )
-
-[node name="@Cointscn@25" type="Area2D" parent="." instance=ExtResource( 7 )]
-position = Vector2( 208, -144 )
-script = ExtResource( 8 )
-
-[node name="@Cointscn@26" type="Area2D" parent="." instance=ExtResource( 7 )]
-position = Vector2( 176, -144 )
-script = ExtResource( 8 )
-
-[node name="@Cointscn@27" type="Area2D" parent="." instance=ExtResource( 7 )]
-position = Vector2( 144, -144 )
-script = ExtResource( 8 )
-
-[node name="@Cointscn@28" type="Area2D" parent="." instance=ExtResource( 7 )]
-position = Vector2( 112, -144 )
-script = ExtResource( 8 )
-
-[node name="@Cointscn@29" type="Area2D" parent="." instance=ExtResource( 7 )]
-position = Vector2( 16, 16 )
-script = ExtResource( 8 )
-
-[node name="@Cointscn@30" type="Area2D" parent="." instance=ExtResource( 7 )]
-position = Vector2( 48, 16 )
-script = ExtResource( 8 )
-
-[node name="@Cointscn@31" type="Area2D" parent="." instance=ExtResource( 7 )]
-position = Vector2( 80, 16 )
-script = ExtResource( 8 )
-
-[node name="@Cointscn@32" type="Area2D" parent="." instance=ExtResource( 7 )]
-position = Vector2( 112, 16 )
-script = ExtResource( 8 )
-
-[node name="@Cointscn@33" type="Area2D" parent="." instance=ExtResource( 7 )]
-position = Vector2( 144, 16 )
-script = ExtResource( 8 )
-
-[node name="@Cointscn@34" type="Area2D" parent="." instance=ExtResource( 7 )]
-position = Vector2( 176, 16 )
-script = ExtResource( 8 )
-
-[node name="@Cointscn@35" type="Area2D" parent="." instance=ExtResource( 7 )]
-position = Vector2( 208, 16 )
-script = ExtResource( 8 )
-
-[node name="@Cointscn@36" type="Area2D" parent="." instance=ExtResource( 7 )]
-position = Vector2( 240, 16 )
-script = ExtResource( 8 )
-
-[node name="@Cointscn@37" type="Area2D" parent="." instance=ExtResource( 7 )]
-position = Vector2( 272, 16 )
-script = ExtResource( 8 )
-
-[node name="@Cointscn@38" type="Area2D" parent="." instance=ExtResource( 7 )]
-position = Vector2( 304, 16 )
-script = ExtResource( 8 )
-
-[node name="@Cointscn@39" type="Area2D" parent="." instance=ExtResource( 7 )]
-position = Vector2( 336, 16 )
-script = ExtResource( 8 )
-
-[node name="@Cointscn@40" type="Area2D" parent="." instance=ExtResource( 7 )]
-position = Vector2( 368, 16 )
-script = ExtResource( 8 )
-[connection signal="body_entered" from="1Uptscn" to="1Uptscn" method="_on_1Up_body_entered"]
-[connection signal="body_entered" from="FireFlowertscn" to="FireFlowertscn" method="_on_FireFlower_body_entered"]
-[connection signal="body_entered" from="Cointscn" to="Cointscn" method="_on_Coin_body_entered"]
-[connection signal="body_entered" from="@Cointscn@23" to="@Cointscn@23" method="_on_Coin_body_entered"]
-[connection signal="body_entered" from="@Cointscn@24" to="@Cointscn@24" method="_on_Coin_body_entered"]
-[connection signal="body_entered" from="@Cointscn@25" to="@Cointscn@25" method="_on_Coin_body_entered"]
-[connection signal="body_entered" from="@Cointscn@26" to="@Cointscn@26" method="_on_Coin_body_entered"]
-[connection signal="body_entered" from="@Cointscn@27" to="@Cointscn@27" method="_on_Coin_body_entered"]
-[connection signal="body_entered" from="@Cointscn@28" to="@Cointscn@28" method="_on_Coin_body_entered"]
-[connection signal="body_entered" from="@Cointscn@29" to="@Cointscn@29" method="_on_Coin_body_entered"]
-[connection signal="body_entered" from="@Cointscn@30" to="@Cointscn@30" method="_on_Coin_body_entered"]
-[connection signal="body_entered" from="@Cointscn@31" to="@Cointscn@31" method="_on_Coin_body_entered"]
-[connection signal="body_entered" from="@Cointscn@32" to="@Cointscn@32" method="_on_Coin_body_entered"]
-[connection signal="body_entered" from="@Cointscn@33" to="@Cointscn@33" method="_on_Coin_body_entered"]
-[connection signal="body_entered" from="@Cointscn@34" to="@Cointscn@34" method="_on_Coin_body_entered"]
-[connection signal="body_entered" from="@Cointscn@35" to="@Cointscn@35" method="_on_Coin_body_entered"]
-[connection signal="body_entered" from="@Cointscn@36" to="@Cointscn@36" method="_on_Coin_body_entered"]
-[connection signal="body_entered" from="@Cointscn@37" to="@Cointscn@37" method="_on_Coin_body_entered"]
-[connection signal="body_entered" from="@Cointscn@38" to="@Cointscn@38" method="_on_Coin_body_entered"]
-[connection signal="body_entered" from="@Cointscn@39" to="@Cointscn@39" method="_on_Coin_body_entered"]
-[connection signal="body_entered" from="@Cointscn@40" to="@Cointscn@40" method="_on_Coin_body_entered"]
+[node name="@Snowballtscn@79" type="KinematicBody2D" parent="." groups=[
+"badguys",
+] instance=ExtResource( 3 )]
+position = Vector2( 336, 48 )
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}

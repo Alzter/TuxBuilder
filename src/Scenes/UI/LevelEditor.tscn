@@ -511,7 +511,6 @@ mouse_filter = 2
 texture = ExtResource( 8 )
 
 [node name="AddLayer" type="Popup" parent="UI"]
-editor/display_folded = true
 visible = true
 anchor_bottom = 1.0
 margin_left = 2.0

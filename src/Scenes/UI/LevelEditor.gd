@@ -277,7 +277,7 @@ func _on_AddLayer_popup_hide():
 func _on_LayerConfirmation_pressed():
 	$UI/AddLayer.hide()
 	var selected = $UI/AddLayer/VBoxContainer/OptionButton.get_item_text($UI/AddLayer/VBoxContainer/OptionButton.selected)
-	var layer = load(str("res://Scenes/Editor/Layers/", selected)).instance()
+	var layer = load(str("res://Scenes/Editor/Layers/", selected, ".tscn")).instance()
 	layer.z_index = $UI/AddLayer/VBoxContainer/SpinBox.value
 	get_tree().current_scene.get_node("Level").add_child(layer)
 	layer.set_owner(get_tree().current_scene.get_node("Level"))
