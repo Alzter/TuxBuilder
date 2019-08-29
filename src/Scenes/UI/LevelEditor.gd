@@ -135,6 +135,8 @@ func update_selected_tile():
 		$SelectedArea.rect_position.y = (rect_start_pos.y) * cellsize.y
 		$SelectedArea.rect_scale.x = (-1 * ($SelectedArea.rect_position.x - ($SelectedTile.position.x))) / 32
 		$SelectedArea.rect_scale.y = (-1 * ($SelectedArea.rect_position.y - ($SelectedTile.position.y))) / 32
+		$SelectedArea.rect_scale.x += 0.5 * ($SelectedArea.rect_scale.x / abs($SelectedArea.rect_scale.x))
+		$SelectedArea.rect_scale.y += 0.5 * ($SelectedArea.rect_scale.y / abs($SelectedArea.rect_scale.y))
 		$SelectedArea.visible == true
 		$EraserSprite.visible = false
 		$SelectedTile.visible = false
