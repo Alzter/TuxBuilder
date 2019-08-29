@@ -256,6 +256,17 @@ flip_h = true
 region_enabled = true
 region_rect = Rect2( 0, 0, 32, 32 )
 
+[node name="SelectedArea" type="ColorRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -16.0
+margin_top = -16.0
+margin_right = 16.0
+margin_bottom = 16.0
+color = Color( 0, 1, 0, 0.501961 )
+
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 3
 
