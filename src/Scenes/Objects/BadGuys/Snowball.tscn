@@ -191,15 +191,17 @@ __meta__ = {
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
-frame = 4
+frame = 6
 playing = true
 offset = Vector2( 0, -3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
 
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-rect = Rect2( -25, -25, 50, 50 )
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+position = Vector2( -0.0874104, -0.174824 )
+scale = Vector2( 2.51224, 2.53846 )
+physics_process_parent = true
 
 [node name="Head" type="Area2D" parent="."]
 
@@ -271,5 +273,6 @@ angle_random = 1.0
 scale_amount = 0.1
 scale_amount_random = 0.3
 color_ramp = SubResource( 9 )
+[connection signal="screen_exited" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_exited"]
 [connection signal="area_entered" from="Head" to="." method="_on_Head_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_snowball_body_entered"]
