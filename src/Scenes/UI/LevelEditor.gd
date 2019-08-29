@@ -125,7 +125,7 @@ func update_selected_tile():
 	$SelectedTile.offset = Vector2(0,0)
 	
 	# Rectangle selection
-	$SelectedArea.visible == false
+	$SelectedArea.visible = false
 	if $UI/SideBar/VBoxContainer/HBoxContainer/SelectButton.pressed == true and Input.is_action_pressed("click_left"):
 		# Start rectangle selection
 		if Input.is_action_just_pressed("click_left"):
@@ -133,11 +133,11 @@ func update_selected_tile():
 		
 		$SelectedArea.rect_position.x = (rect_start_pos.x) * cellsize.x
 		$SelectedArea.rect_position.y = (rect_start_pos.y) * cellsize.y
-		$SelectedArea.rect_scale.x = (-1 * ($SelectedArea.rect_position.x - ($SelectedTile.position.x))) / 32
-		$SelectedArea.rect_scale.y = (-1 * ($SelectedArea.rect_position.y - ($SelectedTile.position.y))) / 32
+		$SelectedArea.rect_scale.x = (-1 * ($SelectedArea.rect_position.x - ($SelectedTile.position.x))) / cellsize.x
+		$SelectedArea.rect_scale.y = (-1 * ($SelectedArea.rect_position.y - ($SelectedTile.position.y))) / cellsize.y
 		$SelectedArea.rect_scale.x += 0.5 * ($SelectedArea.rect_scale.x / abs($SelectedArea.rect_scale.x))
 		$SelectedArea.rect_scale.y += 0.5 * ($SelectedArea.rect_scale.y / abs($SelectedArea.rect_scale.y))
-		$SelectedArea.visible == true
+		$SelectedArea.visible = true
 		$EraserSprite.visible = false
 		$SelectedTile.visible = false
 	
