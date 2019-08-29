@@ -5,7 +5,7 @@ var tilemap_selected = ""
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	tilemap_selected = get_tree().current_scene.get_node("Editor").tilemap_selected
+	tilemap_selected = get_tree().current_scene.get_node("Editor").layer_selected
 	tile_type = get_tree().current_scene.get_node(str("Level/", tilemap_selected)).get_tileset().find_tile_by_name(str(tile_type))
 	
 	var selected_texture = get_tree().current_scene.get_node(str("Level/", tilemap_selected)).get_tileset().tile_get_texture(tile_type)

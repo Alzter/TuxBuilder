@@ -2,7 +2,8 @@ extends Node2D
 
 const CAMERA_MOVE_SPEED = 32
 var category_selected = "Tiles"
-var tilemap_selected = "TileMap"
+var layer_selected = "TileMap"
+var layer_selected_type = "TileMap"
 var tile_type = 0
 var tile_selected = Vector2(0,0)
 var old_tile_selected = Vector2(0,0)
@@ -77,7 +78,7 @@ func _process(_delta):
 		$UI/SideBar/VBoxContainer/HBoxContainer/SelectButton/TextureRect.self_modulate = Color(1,1,1,1)
 	
 	# Placing tiles / objects
-	tile_selected = get_tree().current_scene.get_node(str("Level/", tilemap_selected)).world_to_map(get_global_mouse_position())
+	tile_selected = get_tree().current_scene.get_node(str("Level/", layer_selected)).world_to_map(get_global_mouse_position())
 	update_selected_tile()
 	
 	if Input.is_action_pressed("click_left"):
@@ -91,8 +92,8 @@ func _process(_delta):
 					pass
 					
 				elif $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == true:
-					get_tree().current_scene.get_node(str("Level/", tilemap_selected)).set_cellv(tile_selected, -1)
-					get_tree().current_scene.get_node(str("Level/", tilemap_selected)).update_bitmask_area(tile_selected)
+					get_tree().current_scene.get_node(str("Level/", layer_selected)).set_cellv(tile_selected, -1)
+					get_tree().current_scene.get_node(str("Level/", layer_selected)).update_bitmask_area(tile_selected)
 				
 				
 				# Tile placing
@@ -101,8 +102,8 @@ func _process(_delta):
 					pass
 					
 				else:
-					get_tree().current_scene.get_node(str("Level/", tilemap_selected)).set_cellv(tile_selected, tile_type)
-					get_tree().current_scene.get_node(str("Level/", tilemap_selected)).update_bitmask_area(tile_selected)
+					get_tree().current_scene.get_node(str("Level/", layer_selected)).set_cellv(tile_selected, tile_type)
+					get_tree().current_scene.get_node(str("Level/", layer_selected)).update_bitmask_area(tile_selected)
 			
 			else:
 				# Object erasing
@@ -130,7 +131,7 @@ func update_selected_tile():
 		$SelectedTile.visible = false
 		return
 	
-	var cellsize = get_tree().current_scene.get_node(str("Level/", tilemap_selected)).cell_size
+	var cellsize = get_tree().current_scene.get_node(str("Level/", layer_selected)).cell_size
 	
 	$SelectedTile.position.x = (tile_selected.x + 0.5) * cellsize.x
 	$SelectedTile.position.y = (tile_selected.y + 0.5) * cellsize.y
@@ -175,9 +176,9 @@ func update_selected_tile():
 		$SelectedTile.modulate = Color(1,1,1,0.25)
 		
 		if category_selected == "Tiles":
-			var selected_texture = get_tree().current_scene.get_node(str("Level/", tilemap_selected)).get_tileset().tile_get_texture(tile_type)
+			var selected_texture = get_tree().current_scene.get_node(str("Level/", layer_selected)).get_tileset().tile_get_texture(tile_type)
 			$SelectedTile.texture = (selected_texture)
-			$SelectedTile.region_rect.position = get_tree().current_scene.get_node(str("Level/", tilemap_selected)).get_tileset().autotile_get_icon_coordinate(tile_type) * cellsize
+			$SelectedTile.region_rect.position = get_tree().current_scene.get_node(str("Level/", layer_selected)).get_tileset().autotile_get_icon_coordinate(tile_type) * cellsize
 			$SelectedTile.region_enabled = true
 
 		else:
@@ -237,7 +238,6 @@ func update_objects():
 func _on_LayerAdd_button_down():
 	$UI/AddLayer/VBoxContainer/OptionButton.clear()
 	list_files_in_directory("res://Scenes/Editor/Layers/")
-	print(files)
 	for i in files.size():
 		var item = files[i]
 		item.erase(item.length() - 5,5)
