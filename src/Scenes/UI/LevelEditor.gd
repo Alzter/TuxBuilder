@@ -12,7 +12,8 @@ var mouse_down = false
 var anim_in = false
 var rect_start_pos = Vector2() # Where you started clicking for the rectangle select
 
-var layer_types = [] # All layer types (Gets from layer folder)
+var files = []
+var dir = Directory.new()
 
 func _ready():
 	anim_in = get_tree().current_scene.editmode
@@ -235,14 +236,12 @@ func update_objects():
 
 func _on_LayerAdd_button_down():
 	$UI/AddLayer/VBoxContainer/OptionButton.clear()
-	# Add all filenames from the layers folder into an
-	# array, then add all the array items into the
-	# OptionsButton.
-	
-	# TEMPORARY LAYERS LIST CODE BELOW
-	var layers = ["TileMap", "Background"]
-	for i in layers.size():
-		$UI/AddLayer/VBoxContainer/OptionButton.add_item(layers[i])
+	list_files_in_directory("res://Scenes/Editor/Layers/")
+	print(files)
+	for i in files.size():
+		var item = files[i]
+		item.erase(item.length() - 5,5)
+		$UI/AddLayer/VBoxContainer/OptionButton.add_item(item)
 	
 	$UI/AddLayer.popup()
 
@@ -270,3 +269,20 @@ func update_layers(): # Updates the list of layers at the bottom
 			layer.layername = child.get_name()
 			layer.z_axis = child.z_index
 			$UI/BottomBar/ScrollContainer/HBoxContainer.add_child(layer)
+
+func list_files_in_directory(path):
+    files = []
+    dir = Directory.new()
+    dir.open(path)
+    dir.list_dir_begin()
+
+    while true:
+        var file = dir.get_next()
+        if file == "":
+            break
+        elif not file.begins_with("."):
+            files.append(file)
+
+    dir.list_dir_end()
+
+    return files

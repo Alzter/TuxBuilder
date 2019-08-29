@@ -206,28 +206,28 @@ font_data = ExtResource( 5 )
 flags = 4
 load_path = "res://.import/Arrow.png-b67a8582a20cb371d6c96fa38cdd2ef3.stex"
 
-[sub_resource type="StyleBoxFlat" id=10]
+[sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 0, 0, 0, 0.5 )
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxFlat" id=7]
+[sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 0.5, 0.5, 0.5, 0.5 )
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[sub_resource type="StyleBoxFlat" id=8]
+[sub_resource type="StyleBoxFlat" id=9]
 bg_color = Color( 0.4, 0.4, 0.4, 1 )
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxFlat" id=9]
+[sub_resource type="StyleBoxFlat" id=10]
 bg_color = Color( 0.75, 0.75, 0.75, 1 )
 corner_radius_top_left = 4
 corner_radius_top_right = 4
@@ -400,7 +400,7 @@ theme = ExtResource( 4 )
 custom_styles/hover = SubResource( 3 )
 custom_styles/pressed = SubResource( 4 )
 custom_styles/focus = SubResource( 3 )
-custom_styles/disabled = SubResource( 10 )
+custom_styles/disabled = SubResource( 7 )
 custom_styles/normal = SubResource( 3 )
 toggle_mode = true
 enabled_focus_mode = 0
@@ -420,7 +420,7 @@ theme = ExtResource( 4 )
 custom_styles/hover = SubResource( 3 )
 custom_styles/pressed = SubResource( 4 )
 custom_styles/focus = SubResource( 3 )
-custom_styles/disabled = SubResource( 10 )
+custom_styles/disabled = SubResource( 7 )
 custom_styles/normal = SubResource( 3 )
 toggle_mode = true
 enabled_focus_mode = 0
@@ -443,7 +443,7 @@ margin_top = 104.0
 margin_right = 126.0
 margin_bottom = -66.0
 rect_clip_content = true
-custom_styles/panel = SubResource( 7 )
+custom_styles/panel = SubResource( 8 )
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/SideBar/Panel"]
 anchor_left = 1.0
@@ -490,11 +490,11 @@ margin_right = 62.0
 margin_bottom = 62.0
 focus_mode = 0
 theme = ExtResource( 4 )
-custom_styles/hover = SubResource( 8 )
-custom_styles/pressed = SubResource( 9 )
-custom_styles/focus = SubResource( 8 )
-custom_styles/disabled = SubResource( 8 )
-custom_styles/normal = SubResource( 8 )
+custom_styles/hover = SubResource( 9 )
+custom_styles/pressed = SubResource( 10 )
+custom_styles/focus = SubResource( 9 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 9 )
 toggle_mode = true
 enabled_focus_mode = 0
 
