@@ -85,12 +85,23 @@ func _process(_delta):
 			if category_selected == "Tiles":
 				
 				# Tile erasing
-				if $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == true:
+				if $UI/SideBar/VBoxContainer/HBoxContainer/SelectButton.pressed == true:
+					# Rectangle Tile Erasing
+					pass
+					
+				elif $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == true:
 					get_tree().current_scene.get_node(str("Level/", tilemap_selected)).set_cellv(tile_selected, -1)
+					get_tree().current_scene.get_node(str("Level/", tilemap_selected)).update_bitmask_area(tile_selected)
+				
 				
 				# Tile placing
-				else: get_tree().current_scene.get_node(str("Level/", tilemap_selected)).set_cellv(tile_selected, tile_type)
-				get_tree().current_scene.get_node(str("Level/", tilemap_selected)).update_bitmask_area(tile_selected)
+				elif $UI/SideBar/VBoxContainer/HBoxContainer/SelectButton.pressed == true:
+					# Rectangle Tile Placing
+					pass
+					
+				else:
+					get_tree().current_scene.get_node(str("Level/", tilemap_selected)).set_cellv(tile_selected, tile_type)
+					get_tree().current_scene.get_node(str("Level/", tilemap_selected)).update_bitmask_area(tile_selected)
 			
 			else:
 				# Object erasing
@@ -137,6 +148,12 @@ func update_selected_tile():
 		$SelectedArea.rect_scale.y = (-1 * ($SelectedArea.rect_position.y - ($SelectedTile.position.y))) / cellsize.y
 		$SelectedArea.rect_scale.x += 0.5 * ($SelectedArea.rect_scale.x / abs($SelectedArea.rect_scale.x))
 		$SelectedArea.rect_scale.y += 0.5 * ($SelectedArea.rect_scale.y / abs($SelectedArea.rect_scale.y))
+		if $SelectedArea.rect_scale.x < 0:
+			$SelectedArea.rect_position.x += cellsize.x
+			$SelectedArea.rect_scale.x -= 1
+		if $SelectedArea.rect_scale.y < 0:
+			$SelectedArea.rect_position.y += cellsize.y
+			$SelectedArea.rect_scale.y -= 1
 		$SelectedArea.visible = true
 		$EraserSprite.visible = false
 		$SelectedTile.visible = false
