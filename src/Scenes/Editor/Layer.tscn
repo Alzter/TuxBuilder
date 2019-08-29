@@ -64,11 +64,9 @@ context_menu_enabled = false
 placeholder_text = "Layer"
 
 [node name="SpinBox" type="SpinBox" parent="Panel"]
-anchor_right = 1.0
-anchor_bottom = 1.0
 margin_left = 52.0
-margin_right = 30.0
-margin_bottom = -30.0
+margin_right = 186.0
+margin_bottom = 30.0
 rect_scale = Vector2( 0.75, 0.75 )
 rect_clip_content = true
 min_value = -4096.0

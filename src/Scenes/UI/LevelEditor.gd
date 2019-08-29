@@ -8,12 +8,13 @@ var tile_type = 0
 var tile_selected = Vector2(0,0)
 var old_tile_selected = Vector2(0,0)
 var object_category = "BadGuys"
-var object_type = "Snowball"
+var object_type = "Snowball.tscn"
 var mouse_down = false
 var anim_in = false
 var rect_start_pos = Vector2() # Where you started clicking for the rectangle select
 
 var files = []
+var files2 = []
 var dir = Directory.new()
 
 func _ready():
@@ -115,7 +116,7 @@ func _process(_delta):
 				
 				# Object placing
 					if $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == false:
-						var object = load(str("res://Scenes/Objects/", object_category, "/", object_type, ".tscn")).instance()
+						var object = load(str("res://Scenes/Objects/", object_category, "/", object_type)).instance()
 						object.position = $SelectedTile.position
 						get_tree().current_scene.get_node("Level").add_child(object)
 						object.set_owner(get_tree().current_scene.get_node("Level"))
@@ -160,6 +161,7 @@ func update_selected_tile():
 		$EraserSprite.visible = false
 		$SelectedTile.visible = false
 	
+	# Eraser selection
 	elif $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == true:
 		$SelectedArea.color = Color(1,0,0,0.5)
 		$EraserSprite.visible = true
@@ -175,6 +177,7 @@ func update_selected_tile():
 		$SelectedTile.visible = true
 		$SelectedTile.modulate = Color(1,1,1,0.25)
 		
+		# Tile selection
 		if category_selected == "Tiles":
 			var selected_texture = get_tree().current_scene.get_node(str("Level/", layer_selected)).get_tileset().tile_get_texture(tile_type)
 			$SelectedTile.texture = (selected_texture)
@@ -182,10 +185,8 @@ func update_selected_tile():
 			$SelectedTile.region_enabled = true
 
 		else:
-			var selected_texture = load(str("res://Scenes/Objects/", object_category, "/", object_type, ".tscn")).instance().get_node("AnimatedSprite").get_sprite_frames().get_frame("default",0)
-			$SelectedTile.texture = (selected_texture)
-			$SelectedTile.region_enabled = false
-			$SelectedTile.offset = load(str("res://Scenes/Objects/", object_category, "/", object_type, ".tscn")).instance().get_node("AnimatedSprite").offset
+			# Object Selection
+			get_object_texture(str("res://Scenes/Objects/", object_category, "/", object_type))
 
 # Buttons
 func _on_TilesButton_pressed():
@@ -203,8 +204,10 @@ func _on_ObjectsButton_pressed():
 		update_objects()
 
 func update_tiles():
+	# Delete existing children of the objects/tiles list
 	for child in $UI/SideBar/Panel/ScrollContainer/SidebarList.get_children():
 		child.queue_free()
+	
 	# List all the tile categories and tiles inside them
 	# E.g. ("Ground - Snow, Cave, Grass || Blocks - Bonus Block, Brick")
 	
@@ -218,22 +221,45 @@ func update_tiles():
 	child.get_node("VBoxContainer/Content").add_child(child2)
 
 func update_objects():
+	# Delete existing children of the objects/tiles list
 	for child in $UI/SideBar/Panel/ScrollContainer/SidebarList.get_children():
 		child.queue_free()
+	
+	# Find all the folders in Scenes/Objects
+	list_files_in_directory("res://Scenes/Objects/")
+	
+	# For every folder in Scenes/Objects
+	for i in files.size():
+		
+		# Create a category
+		var child = load("res://Scenes/Editor/Category.tscn").instance()
+		var category = files[i]
+		child.item = category
+		$UI/SideBar/Panel/ScrollContainer/SidebarList.add_child(child)
+		
+		# Then for every file inside each folder
+		list_files_in_directory_2(str("res://Scenes/Objects/", category, "/"))
+		for i in files2.size():
+			
+			# If it's a scene, create an object button inside that category
+			if ".tscn" in files2[i]:
+				var child2 = load("res://Scenes/Editor/Object.tscn").instance()
+				child2.object_category = category
+				child2.object_type = files2[i]
+				child.get_node("VBoxContainer/Content").add_child(child2)
 
-	# List all of the folders inside the objects folder as
-	# object categories and list all of the scenes
-	# inside each folder as objects for that category
+func get_object_texture(object_location):
+	$SelectedTile.region_enabled = false
 	
-	# TEMPORARY OBJECTS LIST CODE BELOW
-	var child = load("res://Scenes/Editor/Category.tscn").instance()
-	child.item = "BadGuys"
-	$UI/SideBar/Panel/ScrollContainer/SidebarList.add_child(child)
+	# If the object has an animated sprite, set the thumbnail to that
+	if load(object_location).instance().has_node("AnimatedSprite"):
+		var selected_texture = load(object_location).instance().get_node("AnimatedSprite").get_sprite_frames().get_frame("default",0)
+		$SelectedTile.texture = (selected_texture)
 	
-	var child2 = load("res://Scenes/Editor/Object.tscn").instance()
-	child2.object_category = "BadGuys"
-	child2.object_type = "Snowball"
-	child.get_node("VBoxContainer/Content").add_child(child2)
+	# Otherwise if it has a sprite, set the thumbnail to that
+	elif load(object_location).instance().has_node("Sprite"):
+		var selected_texture = load(object_location).instance().get_node("Sprite").texture
+		$SelectedTile.texture = (selected_texture)
 
 func _on_LayerAdd_button_down():
 	$UI/AddLayer/VBoxContainer/OptionButton.clear()
@@ -251,7 +277,7 @@ func _on_AddLayer_popup_hide():
 func _on_LayerConfirmation_pressed():
 	$UI/AddLayer.hide()
 	var selected = $UI/AddLayer/VBoxContainer/OptionButton.get_item_text($UI/AddLayer/VBoxContainer/OptionButton.selected)
-	var layer = load(str("res://Scenes/Editor/Layers/", selected, ".tscn")).instance()
+	var layer = load(str("res://Scenes/Editor/Layers/", selected)).instance()
 	layer.z_index = $UI/AddLayer/VBoxContainer/SpinBox.value
 	get_tree().current_scene.get_node("Level").add_child(layer)
 	layer.set_owner(get_tree().current_scene.get_node("Level"))
@@ -286,3 +312,20 @@ func list_files_in_directory(path):
     dir.list_dir_end()
 
     return files
+
+func list_files_in_directory_2(path):
+    files2 = []
+    dir = Directory.new()
+    dir.open(path)
+    dir.list_dir_begin()
+
+    while true:
+        var file = dir.get_next()
+        if file == "":
+            break
+        elif not file.begins_with("."):
+            files2.append(file)
+
+    dir.list_dir_end()
+
+    return files2
