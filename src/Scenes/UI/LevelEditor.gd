@@ -28,7 +28,6 @@ func _ready():
 	update_layers()
 
 func _process(_delta):
-	
 	if stop == true:
 		$SelectedArea.visible = false
 		$EraserSprite.visible = false

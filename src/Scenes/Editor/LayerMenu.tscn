@@ -13,7 +13,7 @@ theme = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="Popup" type="Popup" parent="."]
-visible = true
+editor/display_folded = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -28,7 +28,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="Title" type="VBoxContainer" parent="Popup/Panel"]
-editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -55,7 +54,6 @@ texture = ExtResource( 3 )
 expand = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Popup/Panel"]
-editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -65,9 +63,9 @@ margin_bottom = -34.0
 alignment = 1
 
 [node name="Name" type="HBoxContainer" parent="Popup/Panel/VBoxContainer"]
-margin_top = 35.0
+margin_top = 23.0
 margin_right = 234.0
-margin_bottom = 65.0
+margin_bottom = 53.0
 alignment = 1
 
 [node name="Label2" type="Label" parent="Popup/Panel/VBoxContainer/Name"]
@@ -91,9 +89,9 @@ focus_mode = 1
 
 [node name="Zaxis" type="HBoxContainer" parent="Popup/Panel/VBoxContainer"]
 editor/display_folded = true
-margin_top = 69.0
+margin_top = 57.0
 margin_right = 234.0
-margin_bottom = 99.0
+margin_bottom = 87.0
 alignment = 1
 
 [node name="Label2" type="Label" parent="Popup/Panel/VBoxContainer/Zaxis"]
@@ -116,9 +114,9 @@ max_value = 4096.0
 rounded = true
 
 [node name="Solid" type="HBoxContainer" parent="Popup/Panel/VBoxContainer"]
-margin_top = 103.0
+margin_top = 91.0
 margin_right = 234.0
-margin_bottom = 123.0
+margin_bottom = 111.0
 alignment = 1
 
 [node name="Label2" type="Label" parent="Popup/Panel/VBoxContainer/Solid"]
@@ -137,9 +135,9 @@ margin_right = 158.0
 margin_bottom = 20.0
 
 [node name="Tint" type="HBoxContainer" parent="Popup/Panel/VBoxContainer"]
-margin_top = 127.0
+margin_top = 115.0
 margin_right = 234.0
-margin_bottom = 147.0
+margin_bottom = 135.0
 alignment = 1
 
 [node name="Label2" type="Label" parent="Popup/Panel/VBoxContainer/Tint"]
@@ -157,6 +155,20 @@ margin_left = 114.0
 margin_right = 178.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 64, 0 )
+
+[node name="Delete" type="HBoxContainer" parent="Popup/Panel/VBoxContainer"]
+margin_top = 139.0
+margin_right = 234.0
+margin_bottom = 159.0
+alignment = 1
+
+[node name="DeleteButton" type="Button" parent="Popup/Panel/VBoxContainer/Delete"]
+margin_left = 42.0
+margin_right = 191.0
+margin_bottom = 20.0
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 1, 0, 0, 1 )
+text = "Delete Layer"
 
 [node name="OK" type="VBoxContainer" parent="Popup/Panel"]
 editor/display_folded = true
@@ -180,5 +192,76 @@ margin_right = 250.0
 margin_bottom = 26.0
 focus_mode = 1
 text = "OK"
+
+[node name="DeleteConfirmation" type="Popup" parent="."]
+visible = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -125.0
+margin_top = -125.0
+margin_right = 125.0
+margin_bottom = 125.0
+
+[node name="Panel" type="Panel" parent="DeleteConfirmation"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -125.0
+margin_top = -50.0
+margin_right = 125.0
+margin_bottom = 50.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DeleteConfirmation/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -8.0
+alignment = 1
+
+[node name="Label" type="Label" parent="DeleteConfirmation/Panel/VBoxContainer"]
+margin_top = 17.0
+margin_right = 234.0
+margin_bottom = 37.0
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+text = "Delete this layer?"
+align = 1
+
+[node name="Line2" type="TextureRect" parent="DeleteConfirmation/Panel/VBoxContainer"]
+margin_top = 41.0
+margin_right = 234.0
+margin_bottom = 43.0
+rect_min_size = Vector2( 0, 2 )
+texture = ExtResource( 3 )
+expand = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="DeleteConfirmation/Panel/VBoxContainer"]
+margin_top = 47.0
+margin_right = 234.0
+margin_bottom = 67.0
+custom_constants/separation = 32
+alignment = 1
+
+[node name="DeleteYes" type="Button" parent="DeleteConfirmation/Panel/VBoxContainer/HBoxContainer"]
+margin_left = 68.0
+margin_right = 106.0
+margin_bottom = 20.0
+text = "Yes"
+
+[node name="DeleteNo" type="Button" parent="DeleteConfirmation/Panel/VBoxContainer/HBoxContainer"]
+margin_left = 138.0
+margin_right = 166.0
+margin_bottom = 20.0
+text = "No"
 [connection signal="popup_hide" from="Popup" to="." method="_on_Popup_popup_hide"]
+[connection signal="pressed" from="Popup/Panel/VBoxContainer/Delete/DeleteButton" to="." method="_on_DeleteButton_pressed"]
 [connection signal="pressed" from="Popup/Panel/OK/OK" to="." method="_on_OK_pressed"]
+[connection signal="pressed" from="DeleteConfirmation/Panel/VBoxContainer/HBoxContainer/DeleteYes" to="." method="_on_DeleteYes_pressed"]
+[connection signal="pressed" from="DeleteConfirmation/Panel/VBoxContainer/HBoxContainer/DeleteNo" to="." method="_on_DeleteNo_pressed"]

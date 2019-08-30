@@ -4,6 +4,7 @@ var type = ""
 var layername = ""
 var layername2 = ""
 var z_axis = 0
+var hide = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -68,5 +69,25 @@ func _on_OK_pressed():
 	queue_free()
 
 func _on_Popup_popup_hide():
+	if hide == false:
+		get_tree().current_scene.get_node("Editor").stop = false
+		queue_free()
+
+func _on_DeleteButton_pressed():
+	hide = true
+	$Popup.hide()
+	$DeleteConfirmation.show()
+
+func _on_DeleteYes_pressed():
+	if get_tree().current_scene.get_node("Editor").layer_selected == layername:
+		get_tree().current_scene.get_node("Editor").layer_selected = ""
+		get_tree().current_scene.get_node("Editor").layer_selected_type = ""
+	get_tree().current_scene.get_node(str("Editor/UI/BottomBar/ScrollContainer/HBoxContainer/", layername)).queue_free()
+	get_tree().current_scene.get_node(str("Level/", layername)).queue_free()
 	get_tree().current_scene.get_node("Editor").stop = false
 	queue_free()
+
+func _on_DeleteNo_pressed():
+	$Popup.popup()
+	$DeleteConfirmation.hide()
+	hide = false

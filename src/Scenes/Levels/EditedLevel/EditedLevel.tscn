@@ -12,6 +12,7 @@ position = Vector2( 16, -112 )
 "layers",
 "tilemap",
 ] instance=ExtResource( 1 )]
+self_modulate = Color( 1, 1, 1, 0.1 )
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 32, 32 )
 collision_layer = 515
@@ -28,83 +29,4 @@ cell_size = Vector2( 32, 32 )
 collision_layer = 515
 collision_mask = 515
 format = 1
-
-[node name="TileMap14" type="TileMap" parent="." groups=[
-"layers",
-"tilemap",
-] instance=ExtResource( 1 )]
-tile_set = ExtResource( 2 )
-cell_size = Vector2( 32, 32 )
-collision_layer = 515
-collision_mask = 515
-format = 1
-
-[node name="TileMap18" type="TileMap" parent="." groups=[
-"layers",
-"tilemap",
-] instance=ExtResource( 1 )]
-tile_set = ExtResource( 2 )
-cell_size = Vector2( 32, 32 )
-collision_layer = 515
-collision_mask = 515
-format = 1
-
-[node name="TileMap23" type="TileMap" parent="." groups=[
-"layers",
-"tilemap",
-] instance=ExtResource( 1 )]
-tile_set = ExtResource( 2 )
-cell_size = Vector2( 32, 32 )
-collision_layer = 515
-collision_mask = 515
-format = 1
-
-[node name="TileMap29" type="TileMap" parent="." groups=[
-"layers",
-"tilemap",
-] instance=ExtResource( 1 )]
-tile_set = ExtResource( 2 )
-cell_size = Vector2( 32, 32 )
-collision_layer = 515
-collision_mask = 515
-format = 1
-
-[node name="TileMap36" type="TileMap" parent="." groups=[
-"layers",
-"tilemap",
-] instance=ExtResource( 1 )]
-tile_set = ExtResource( 2 )
-cell_size = Vector2( 32, 32 )
-collision_layer = 515
-collision_mask = 515
-format = 1
-
-[node name="TileMap44" type="TileMap" parent="." groups=[
-"layers",
-"tilemap",
-] instance=ExtResource( 1 )]
-tile_set = ExtResource( 2 )
-cell_size = Vector2( 32, 32 )
-collision_layer = 515
-collision_mask = 515
-format = 1
-
-[node name="TileMap53" type="TileMap" parent="." groups=[
-"layers",
-"tilemap",
-] instance=ExtResource( 1 )]
-tile_set = ExtResource( 2 )
-cell_size = Vector2( 32, 32 )
-collision_layer = 515
-collision_mask = 515
-format = 1
-
-[node name="TileMap63" type="TileMap" parent="." groups=[
-"layers",
-"tilemap",
-] instance=ExtResource( 1 )]
-tile_set = ExtResource( 2 )
-cell_size = Vector2( 32, 32 )
-collision_layer = 515
-collision_mask = 515
-format = 1
+tile_data = PoolIntArray( 327673, 0, 3, 393209, 0, 65539, 458745, 0, 65539, 524281, 0, 131075 )
