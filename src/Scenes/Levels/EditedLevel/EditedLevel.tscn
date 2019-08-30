@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/Editor/Layers/TileMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tilesets/LevelTiles.tres" type="TileSet" id=2]
+[ext_resource path="res://Scenes/Objects/Misc/SpawnPoint.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Objects/Misc/SpawnPoint.gd" type="Script" id=4]
 
 [node name="Level" type="Node2D"]
 
@@ -37,3 +39,7 @@ cell_size = Vector2( 32, 32 )
 collision_layer = 0
 collision_mask = 0
 format = 1
+
+[node name="SpawnPoint" type="Position2D" parent="." instance=ExtResource( 3 )]
+position = Vector2( 496, 48 )
+script = ExtResource( 4 )
