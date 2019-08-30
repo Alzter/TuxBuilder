@@ -11,13 +11,13 @@ func _ready():
 
 func _input(event):
 	if get_tree().current_scene.get_node("Player").dead == false and get_tree().current_scene.get_node("CanvasLayer/AnimationPlayer").is_playing() == false:
-		if event.is_action_pressed("pause") && get_tree().paused == false:
+		if Input.is_action_just_pressed("pause") && get_tree().paused == false:
 			get_tree().paused = true
 			show()
 			background_opacity = 0
 			panel_sizemult = 0.1
 			$Panel/VBoxContainer/Continue.grab_focus()
-		elif event.is_action_pressed("pause") && get_tree().paused == true:
+		elif Input.is_action_just_pressed("pause") && get_tree().paused == true:
 			get_tree().paused = false
 
 func _process(_delta):

@@ -63,6 +63,7 @@ shader_param/mask = ExtResource( 2 )
 script = ExtResource( 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
+pause_mode = 2
 current = true
 drag_margin_h_enabled = false
 drag_margin_v_enabled = false

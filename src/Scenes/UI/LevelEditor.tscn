@@ -236,6 +236,7 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
 [node name="Node2D" type="Node2D"]
+pause_mode = 2
 script = ExtResource( 1 )
 
 [node name="Grid" type="TextureRect" parent="."]

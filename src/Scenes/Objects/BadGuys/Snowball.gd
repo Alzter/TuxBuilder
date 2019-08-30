@@ -20,6 +20,7 @@ func disable():
 
 # Physics
 func _physics_process(_delta):
+	
 	if get_tree().current_scene.editmode == true:
 		return
 	
@@ -75,6 +76,6 @@ func _on_snowball_body_entered(body):
 		body.hurt()
 	return
 
-#Die when knocked off stage
+# Die when knocked off stage
 func _on_VisibilityEnabler2D_screen_exited():
 	if state != "active": queue_free()

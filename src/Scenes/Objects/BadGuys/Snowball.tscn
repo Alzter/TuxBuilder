@@ -201,6 +201,7 @@ shape = SubResource( 2 )
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 position = Vector2( -0.0874104, -0.174824 )
 scale = Vector2( 2.51224, 2.53846 )
+rect = Rect2( -32, -256, 64, 512 )
 physics_process_parent = true
 
 [node name="Head" type="Area2D" parent="."]

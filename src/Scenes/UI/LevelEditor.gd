@@ -137,6 +137,7 @@ func update_selected_tile():
 	$SelectedArea.visible = false
 	$EraserSprite.visible = false
 	$SelectedTile.visible = false
+	$SelectedTile.offset = Vector2(0,0)
 	
 	if not (get_viewport().get_mouse_position().x < get_viewport().size.x - 128 and get_viewport().get_mouse_position().y < get_viewport().size.y - 64) or $UI/AddLayer.visible == true:
 		return
@@ -257,11 +258,13 @@ func get_object_texture(object_location): # Get the texture for an object
 	# If the object has an animated sprite, set the thumbnail to that
 	if load(object_location).instance().has_node("AnimatedSprite"):
 		var selected_texture = load(object_location).instance().get_node("AnimatedSprite").get_sprite_frames().get_frame("default",0)
+		$SelectedTile.offset += load(object_location).instance().get_node("AnimatedSprite").offset
 		$SelectedTile.texture = (selected_texture)
 	
 	# Otherwise if it has a sprite, set the thumbnail to that
 	elif load(object_location).instance().has_node("Sprite"):
 		var selected_texture = load(object_location).instance().get_node("Sprite").texture
+		$SelectedTile.offset += load(object_location).instance().get_node("Sprite").offset
 		$SelectedTile.texture = (selected_texture)
 
 # Add all the layers from Scenes/Editor/Layers
