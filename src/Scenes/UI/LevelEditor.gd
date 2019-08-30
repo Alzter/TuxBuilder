@@ -2,13 +2,13 @@ extends Node2D
 
 const CAMERA_MOVE_SPEED = 32
 var category_selected = "Tiles"
-var layer_selected = "TileMap"
-var layer_selected_type = "TileMap"
+var layer_selected = ""
+var layer_selected_type = ""
 var tile_type = 0
 var tile_selected = Vector2(0,0)
 var old_tile_selected = Vector2(0,0)
-var object_category = "BadGuys"
-var object_type = "Snowball.tscn"
+var object_category = ""
+var object_type = ""
 var mouse_down = false
 var anim_in = false
 var rect_start_pos = Vector2() # Where you started clicking for the rectangle select
@@ -131,7 +131,7 @@ func _process(_delta):
 				else:
 				
 				# Object placing
-					if $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == false:
+					if $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == false and object_type != "":
 						var object = load(str("res://Scenes/Objects/", object_category, "/", object_type)).instance()
 						object.position = $SelectedTile.position
 						get_tree().current_scene.get_node("Level").add_child(object)
@@ -262,6 +262,9 @@ func update_objects(): # Update the objects list from the editor using the scene
 				child.get_node("VBoxContainer/Content").add_child(child2)
 
 func get_object_texture(object_location): # Get the texture for an object
+	if object_type == "":
+		return
+	
 	$SelectedTile.region_enabled = false
 	
 	# If the object has an animated sprite, set the thumbnail to that

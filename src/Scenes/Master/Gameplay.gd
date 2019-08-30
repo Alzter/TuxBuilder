@@ -81,7 +81,6 @@ func restart_level():
 	else: load_edited_level()
 	load_ui()
 	load_player()
-	get_node("Player").position = get_node("Level/SpawnPos").position
 	$CanvasLayer/AnimationPlayer.play("Circle In")
 
 func save_edited_level():
