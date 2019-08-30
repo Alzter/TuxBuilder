@@ -319,6 +319,7 @@ func update_layers(): # Updates the list of layers at the bottom
 			layer.type = child.get_class()
 			layer.layername = child.get_name()
 			layer.z_axis = child.z_index
+			layer.set_name(child.get_name())
 			$UI/BottomBar/ScrollContainer/HBoxContainer.add_child(layer)
 
 func list_files_in_directory(path):

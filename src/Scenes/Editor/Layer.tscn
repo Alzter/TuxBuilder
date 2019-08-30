@@ -1,29 +1,69 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scenes/UI/UITheme.tres" type="Theme" id=1]
 [ext_resource path="res://Scenes/Editor/Layer.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/Editor/Wrench.png" type="Texture" id=3]
+[ext_resource path="res://Fonts/SuperTux-Medium.ttf" type="DynamicFontData" id=4]
 
 [sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 1, 0, 0, 1 )
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
+bg_color = Color( 0.870588, 0.870588, 0.870588, 1 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 1, 1, 1, 0.25 )
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
+bg_color = Color( 0.454902, 0.454902, 0.454902, 1 )
+corner_radius_bottom_left = 4
+anti_aliasing = false
 
-[sub_resource type="StyleBoxEmpty" id=3]
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.243137, 0.243137, 0.243137, 1 )
+corner_radius_top_right = 4
+anti_aliasing = false
+
+[sub_resource type="DynamicFont" id=4]
+size = 13
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
+extra_spacing_top = 2
+font_data = ExtResource( 4 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 1, 0, 0, 1 )
+corner_radius_bottom_right = 4
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 1, 1, 1, 0.25 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxEmpty" id=7]
+
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 1, 1, 1, 0.509804 )
+corner_radius_top_right = 4
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 1, 1, 1, 0.862745 )
+corner_radius_top_right = 4
+anti_aliasing = false
+
+[sub_resource type="StyleBoxEmpty" id=10]
 
 [node name="Layer" type="Control"]
-margin_right = 160.0
-margin_bottom = 64.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -480.0
+margin_bottom = -416.0
 rect_min_size = Vector2( 160, 0 )
-rect_clip_content = true
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
 
@@ -35,14 +75,45 @@ margin_top = 2.0
 margin_right = -2.0
 margin_bottom = -2.0
 mouse_filter = 2
+custom_styles/panel = SubResource( 1 )
+
+[node name="Panel3" type="Panel" parent="Panel"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -16.0
+margin_right = -50.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 2 )
+
+[node name="Panel2" type="Panel" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 106.0
+margin_bottom = -16.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 3 )
+
+[node name="TextureRect" type="TextureRect" parent="Panel/Panel2"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -17.5
+margin_top = -18.0
+margin_right = 17.5
+margin_bottom = 18.0
+mouse_filter = 2
+texture = ExtResource( 3 )
 
 [node name="Label" type="Label" parent="Panel"]
 anchor_top = 1.0
+anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = -24.0
-margin_right = 94.0
-margin_bottom = -4.0
+margin_top = -16.0
+margin_right = -50.0
+rect_clip_content = true
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
@@ -55,13 +126,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -62.0
-margin_top = -20.0
-margin_right = 13.0
-margin_bottom = 1.0
-rect_scale = Vector2( 0.8, 0.8 )
+margin_left = -50.0
+margin_top = -16.0
 mouse_filter = 2
-custom_styles/panel = SubResource( 1 )
+custom_styles/panel = SubResource( 5 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -69,10 +137,11 @@ __meta__ = {
 [node name="Zaxis" type="Label" parent="Panel/Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
-text = "-4096"
+text = "0"
 align = 1
 clip_text = true
 
@@ -80,9 +149,24 @@ clip_text = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 focus_mode = 1
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/focus = SubResource( 3 )
-custom_styles/disabled = SubResource( 3 )
-custom_styles/normal = SubResource( 3 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 7 )
+custom_styles/disabled = SubResource( 7 )
+custom_styles/normal = SubResource( 7 )
+
+[node name="LayerSettings" type="Button" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 108.0
+margin_top = 2.0
+margin_right = -2.0
+margin_bottom = -18.0
+focus_mode = 0
+custom_styles/hover = SubResource( 9 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/focus = SubResource( 10 )
+custom_styles/disabled = SubResource( 10 )
+custom_styles/normal = SubResource( 10 )
 [connection signal="pressed" from="Panel/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="LayerSettings" to="." method="_on_LayerSettings_pressed"]
