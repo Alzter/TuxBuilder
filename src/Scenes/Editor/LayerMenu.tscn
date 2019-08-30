@@ -13,7 +13,7 @@ theme = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="Popup" type="Popup" parent="."]
-editor/display_folded = true
+visible = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -63,6 +63,7 @@ margin_bottom = -34.0
 alignment = 1
 
 [node name="Name" type="HBoxContainer" parent="Popup/Panel/VBoxContainer"]
+editor/display_folded = true
 margin_top = 23.0
 margin_right = 234.0
 margin_bottom = 53.0
@@ -194,7 +195,7 @@ focus_mode = 1
 text = "OK"
 
 [node name="DeleteConfirmation" type="Popup" parent="."]
-visible = true
+editor/display_folded = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5

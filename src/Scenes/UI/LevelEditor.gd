@@ -301,12 +301,12 @@ func _on_LayerConfirmation_pressed():
 	
 	# Then find the scene with the same name in Scenes/Editors/Layers
 	var layer = load(str("res://Scenes/Editor/Layers/", selected, ".tscn")).instance()
-	layer.z_index = $UI/AddLayer/VBoxContainer/SpinBox.value
+	layer.z_index = $UI/AddLayer/VBoxContainer/Zaxis/SpinBox.value
 	
 	# Then add the layer
 	get_tree().current_scene.get_node("Level").add_child(layer)
 	layer.set_owner(get_tree().current_scene.get_node("Level"))
-	layer.set_name(selected)
+	layer.set_name($UI/AddLayer/VBoxContainer/Name/LineEdit.text)
 	if "@" in layer.get_name():
 		var newname = layer.get_name()
 		newname.replace("@","")
