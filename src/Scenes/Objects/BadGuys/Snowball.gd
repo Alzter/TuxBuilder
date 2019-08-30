@@ -14,9 +14,9 @@ func _ready():
 
 func disable():
 	remove_from_group("badguys")
-	$CollisionShape2D.disabled = true
-	$Head/CollisionShape2D.disabled = true
-	$Area2D/CollisionShape2D.disabled = true
+	$CollisionShape2D.call_deferred("set_disabled", true)
+	$Head/CollisionShape2D.call_deferred("set_disabled", true)
+	$Area2D/CollisionShape2D.call_deferred("set_disabled", true)
 
 # Physics
 func _physics_process(_delta):
@@ -34,7 +34,6 @@ func _physics_process(_delta):
 	
 	# Kill states
 	if state == "kill":
-		disable()
 		velocity = move_and_slide(velocity, Vector2(0,0))
 		velocity.y += 20
 		$AnimatedSprite.rotation_degrees += rotate
