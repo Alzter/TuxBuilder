@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Scenes/UI/LevelEditor.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Editor/Grid.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Sprites/Editor/Line.png" type="Texture" id=6]
 [ext_resource path="res://Sprites/Editor/Rectangle.png" type="Texture" id=7]
 [ext_resource path="res://Sprites/Editor/Plus.png" type="Texture" id=8]
+[ext_resource path="res://Tilesets/LevelTiles.tres" type="TileSet" id=9]
 
 [sub_resource type="Animation" id=1]
 resource_name = "MoveIn"
@@ -275,6 +276,7 @@ margin_bottom = 16.0
 color = Color( 0, 1, 0, 0.501961 )
 
 [node name="UI" type="CanvasLayer" parent="."]
+editor/display_folded = true
 layer = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI"]
@@ -610,6 +612,13 @@ margin_bottom = -12.0
 rect_min_size = Vector2( 0, 2 )
 texture = ExtResource( 6 )
 expand = true
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 9 )
+cell_size = Vector2( 32, 32 )
+collision_layer = 0
+collision_mask = 0
+format = 1
 [connection signal="button_down" from="UI/SideBar/VBoxContainer/TilesButton" to="." method="_on_TilesButton_pressed"]
 [connection signal="button_down" from="UI/SideBar/VBoxContainer/ObjectsButton" to="." method="_on_ObjectsButton_pressed"]
 [connection signal="button_down" from="UI/BottomBar/LayerAdd" to="." method="_on_LayerAdd_button_down"]

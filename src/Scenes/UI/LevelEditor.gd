@@ -79,33 +79,40 @@ func _process(_delta):
 		$UI/SideBar/VBoxContainer/HBoxContainer/SelectButton/TextureRect.self_modulate = Color(1,1,1,1)
 	
 	# Placing tiles / objects
-	tile_selected = get_tree().current_scene.get_node(str("Level/", layer_selected)).world_to_map(get_global_mouse_position())
+	tile_selected = $TileMap.world_to_map(get_global_mouse_position())
 	update_selected_tile()
 	
 	if Input.is_action_pressed("click_left"):
+		# If the mouse isn't on the level editor UI
 		if get_viewport().get_mouse_position().x < get_viewport().size.x - 128 and get_viewport().get_mouse_position().y < get_viewport().size.y - 64 and (tile_selected != old_tile_selected or mouse_down == false) and $UI/AddLayer.visible == false:
 			
+			# Tile placing / erasing
 			if category_selected == "Tiles":
 				
-				# Tile erasing
-				if $UI/SideBar/VBoxContainer/HBoxContainer/SelectButton.pressed == true:
-					# Rectangle Tile Erasing
-					pass
+				# Only works if the layer selected is a TileMap
+				if layer_selected_type == "TileMap":
+					# Tile erasing
+					if $UI/SideBar/VBoxContainer/HBoxContainer/SelectButton.pressed == true:
+						
+						# Rectangle Tile Erasing
+						pass
+						
+					elif $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == true:
+						get_tree().current_scene.get_node(str("Level/", layer_selected)).set_cellv(tile_selected, -1)
+						get_tree().current_scene.get_node(str("Level/", layer_selected)).update_bitmask_area(tile_selected)
 					
-				elif $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == true:
-					get_tree().current_scene.get_node(str("Level/", layer_selected)).set_cellv(tile_selected, -1)
-					get_tree().current_scene.get_node(str("Level/", layer_selected)).update_bitmask_area(tile_selected)
-				
-				
-				# Tile placing
-				elif $UI/SideBar/VBoxContainer/HBoxContainer/SelectButton.pressed == true:
-					# Rectangle Tile Placing
-					pass
 					
-				else:
-					get_tree().current_scene.get_node(str("Level/", layer_selected)).set_cellv(tile_selected, tile_type)
-					get_tree().current_scene.get_node(str("Level/", layer_selected)).update_bitmask_area(tile_selected)
+					# Tile placing
+					elif $UI/SideBar/VBoxContainer/HBoxContainer/SelectButton.pressed == true:
+						
+						# Rectangle Tile Placing
+						pass
+						
+					else:
+						get_tree().current_scene.get_node(str("Level/", layer_selected)).set_cellv(tile_selected, tile_type)
+						get_tree().current_scene.get_node(str("Level/", layer_selected)).update_bitmask_area(tile_selected)
 			
+			# Object placing / erasing
 			else:
 				# Object erasing
 				if $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == true:
@@ -127,15 +134,18 @@ func _process(_delta):
 	old_tile_selected = tile_selected
 
 func update_selected_tile():
+	$SelectedArea.visible = false
+	$EraserSprite.visible = false
+	$SelectedTile.visible = false
+	
 	if not (get_viewport().get_mouse_position().x < get_viewport().size.x - 128 and get_viewport().get_mouse_position().y < get_viewport().size.y - 64) or $UI/AddLayer.visible == true:
-		$EraserSprite.visible = false
-		$SelectedTile.visible = false
 		return
 	
-	var cellsize = get_tree().current_scene.get_node(str("Level/", layer_selected)).cell_size
+	if layer_selected_type != "TileMap" and category_selected == "Tiles":
+		return
 	
-	$SelectedTile.position.x = (tile_selected.x + 0.5) * cellsize.x
-	$SelectedTile.position.y = (tile_selected.y + 0.5) * cellsize.y
+	$SelectedTile.position.x = (tile_selected.x + 0.5) * 32
+	$SelectedTile.position.y = (tile_selected.y + 0.5) * 32
 	$SelectedTile.offset = Vector2(0,0)
 	
 	# Rectangle selection
@@ -145,21 +155,19 @@ func update_selected_tile():
 		if Input.is_action_just_pressed("click_left"):
 			rect_start_pos = tile_selected
 		
-		$SelectedArea.rect_position.x = (rect_start_pos.x) * cellsize.x
-		$SelectedArea.rect_position.y = (rect_start_pos.y) * cellsize.y
-		$SelectedArea.rect_scale.x = (-1 * ($SelectedArea.rect_position.x - ($SelectedTile.position.x))) / cellsize.x
-		$SelectedArea.rect_scale.y = (-1 * ($SelectedArea.rect_position.y - ($SelectedTile.position.y))) / cellsize.y
+		$SelectedArea.rect_position.x = (rect_start_pos.x) * 32
+		$SelectedArea.rect_position.y = (rect_start_pos.y) * 32
+		$SelectedArea.rect_scale.x = (-1 * ($SelectedArea.rect_position.x - ($SelectedTile.position.x))) / 32
+		$SelectedArea.rect_scale.y = (-1 * ($SelectedArea.rect_position.y - ($SelectedTile.position.y))) / 32
 		$SelectedArea.rect_scale.x += 0.5 * ($SelectedArea.rect_scale.x / abs($SelectedArea.rect_scale.x))
 		$SelectedArea.rect_scale.y += 0.5 * ($SelectedArea.rect_scale.y / abs($SelectedArea.rect_scale.y))
 		if $SelectedArea.rect_scale.x < 0:
-			$SelectedArea.rect_position.x += cellsize.x
+			$SelectedArea.rect_position.x += 32
 			$SelectedArea.rect_scale.x -= 1
 		if $SelectedArea.rect_scale.y < 0:
-			$SelectedArea.rect_position.y += cellsize.y
+			$SelectedArea.rect_position.y += 32
 			$SelectedArea.rect_scale.y -= 1
 		$SelectedArea.visible = true
-		$EraserSprite.visible = false
-		$SelectedTile.visible = false
 	
 	# Eraser selection
 	elif $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == true:
@@ -179,9 +187,9 @@ func update_selected_tile():
 		
 		# Tile selection
 		if category_selected == "Tiles":
-			var selected_texture = get_tree().current_scene.get_node(str("Level/", layer_selected)).get_tileset().tile_get_texture(tile_type)
+			var selected_texture = $TileMap.get_tileset().tile_get_texture(tile_type)
 			$SelectedTile.texture = (selected_texture)
-			$SelectedTile.region_rect.position = get_tree().current_scene.get_node(str("Level/", layer_selected)).get_tileset().autotile_get_icon_coordinate(tile_type) * cellsize
+			$SelectedTile.region_rect.position = $TileMap.get_tileset().autotile_get_icon_coordinate(tile_type) * 32
 			$SelectedTile.region_enabled = true
 
 		else:
@@ -204,23 +212,18 @@ func _on_ObjectsButton_pressed():
 		update_objects()
 
 func update_tiles():
-	# Delete existing children of the objects/tiles list
-	for child in $UI/SideBar/Panel/ScrollContainer/SidebarList.get_children():
-		child.queue_free()
-	
-	# List all the tile categories and tiles inside them
-	# E.g. ("Ground - Snow, Cave, Grass || Blocks - Bonus Block, Brick")
-	
-	# TEMPORARY TILES LIST CODE BELOW
 	var child = load("res://Scenes/Editor/Category.tscn").instance()
-	child.item = "Ground"
+	child.item = "Tiles"
 	$UI/SideBar/Panel/ScrollContainer/SidebarList.add_child(child)
 	
-	var child2 = load("res://Scenes/Editor/Tile.tscn").instance()
-	child2.tile_type = "Snow"
-	child.get_node("VBoxContainer/Content").add_child(child2)
+	var tiles = $TileMap.get_tileset().get_tiles_ids()
+	for i in tiles.size():
+		var child2 = load("res://Scenes/Editor/Tile.tscn").instance()
+		child2.tile_type = $TileMap.get_tileset().tile_get_name(tiles[i])
+		child.get_node("VBoxContainer/Content").add_child(child2)
+	
 
-func update_objects():
+func update_objects(): # Update the objects list from the editor using the scenes from Scenes/Objects
 	# Delete existing children of the objects/tiles list
 	for child in $UI/SideBar/Panel/ScrollContainer/SidebarList.get_children():
 		child.queue_free()
@@ -248,7 +251,7 @@ func update_objects():
 				child2.object_type = files2[i]
 				child.get_node("VBoxContainer/Content").add_child(child2)
 
-func get_object_texture(object_location):
+func get_object_texture(object_location): # Get the texture for an object
 	$SelectedTile.region_enabled = false
 	
 	# If the object has an animated sprite, set the thumbnail to that
@@ -261,13 +264,18 @@ func get_object_texture(object_location):
 		var selected_texture = load(object_location).instance().get_node("Sprite").texture
 		$SelectedTile.texture = (selected_texture)
 
+# Add all the layers from Scenes/Editor/Layers
 func _on_LayerAdd_button_down():
 	$UI/AddLayer/VBoxContainer/OptionButton.clear()
+	
+	# Get all the files from Scenes/Editor/Layers
 	list_files_in_directory("res://Scenes/Editor/Layers/")
 	for i in files.size():
-		var item = files[i]
-		item.erase(item.length() - 5,5)
-		$UI/AddLayer/VBoxContainer/OptionButton.add_item(item)
+		# If the file is a scene, add it to the OptionButton
+		if ".tscn" in files[i]:
+			var item = files[i]
+			item.erase(item.length() - 5,5)
+			$UI/AddLayer/VBoxContainer/OptionButton.add_item(item)
 	
 	$UI/AddLayer.popup()
 
@@ -276,20 +284,34 @@ func _on_AddLayer_popup_hide():
 
 func _on_LayerConfirmation_pressed():
 	$UI/AddLayer.hide()
+	# Set the selected var to the selected item of the OptionButton
 	var selected = $UI/AddLayer/VBoxContainer/OptionButton.get_item_text($UI/AddLayer/VBoxContainer/OptionButton.selected)
+	
+	# Then find the scene with the same name in Scenes/Editors/Layers
 	var layer = load(str("res://Scenes/Editor/Layers/", selected, ".tscn")).instance()
 	layer.z_index = $UI/AddLayer/VBoxContainer/SpinBox.value
+	
+	# Then add the layer
 	get_tree().current_scene.get_node("Level").add_child(layer)
 	layer.set_owner(get_tree().current_scene.get_node("Level"))
 	layer.set_name(selected)
 	
+	# If the layer isn't in the group "layers", add it to the group so it shows in the layer menu
+	if not layer.is_in_group("layers"): layer.add_to_group("layers")
+	
+	# And update the layers list to reflect this
 	update_layers()
 
 func update_layers(): # Updates the list of layers at the bottom
+	# Clear the existing layer list
 	for child in $UI/BottomBar/ScrollContainer/HBoxContainer.get_children():
 		child.queue_free()
+	
+	# For every child in the Level node
 	for child in get_tree().current_scene.get_node("Level").get_children():
-		if child.is_in_group("layer"):
+		# If it counts as a layer (needs to be in "layers" group)
+		if child.is_in_group("layers"):
+			# Make a layer node to represent it and add it as a child
 			var layer = load("res://Scenes/Editor/Layer.tscn").instance()
 			layer.type = child.get_class()
 			layer.layername = child.get_name()
@@ -313,7 +335,7 @@ func list_files_in_directory(path):
 
     return files
 
-func list_files_in_directory_2(path):
+func list_files_in_directory_2(path): # Dupe of list files in directory used to list sub-files
     files2 = []
     dir = Directory.new()
     dir.open(path)
