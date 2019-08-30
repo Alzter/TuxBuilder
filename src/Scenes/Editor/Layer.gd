@@ -5,20 +5,10 @@ var layername = ""
 var z_axis = 0
 
 func _ready():
-	$Panel/LineEdit.text = str(layername)
-	$Panel/SpinBox.value = z_axis
+	$Panel/Label.text = str(layername)
+	$Panel/Panel/Zaxis.text = str(z_axis)
 
 func _process(_delta):
-	# Layer name editing
-	if $Panel/LineEdit.text != layername:
-		get_tree().current_scene.get_node(str("Level/", layername)).set_name($Panel/LineEdit.text)
-		layername = $Panel/LineEdit.text
-		get_tree().current_scene.get_node("Editor").layer_selected = layername
-	
-	# Layer Z-axis editing - needs fixing
-		z_axis = $Panel/SpinBox.value
-		get_tree().current_scene.get_node(str("Level/", layername)).z_index = z_axis
-	
 	# Highlight if selected
 	$Panel.modulate = Color(0.5,0.5,0.5,1)
 	if layername == get_tree().current_scene.get_node("Editor").layer_selected:
