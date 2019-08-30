@@ -277,7 +277,6 @@ margin_bottom = 16.0
 color = Color( 0, 1, 0, 0.501961 )
 
 [node name="UI" type="CanvasLayer" parent="."]
-editor/display_folded = true
 layer = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI"]
@@ -518,7 +517,7 @@ visible = true
 anchor_bottom = 1.0
 margin_left = 2.0
 margin_top = 2.0
-margin_right = 202.0
+margin_right = 222.0
 margin_bottom = -64.0
 theme = ExtResource( 4 )
 
@@ -537,7 +536,7 @@ rect_clip_content = true
 custom_constants/separation = 6
 
 [node name="Label" type="Label" parent="UI/AddLayer/VBoxContainer"]
-margin_right = 188.0
+margin_right = 208.0
 margin_bottom = 20.0
 custom_colors/font_color = Color( 0, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -548,7 +547,7 @@ align = 1
 
 [node name="Line" type="TextureRect" parent="UI/AddLayer/VBoxContainer"]
 margin_top = 26.0
-margin_right = 188.0
+margin_right = 208.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 0, 2 )
 texture = ExtResource( 6 )
@@ -556,7 +555,7 @@ expand = true
 
 [node name="Label2" type="Label" parent="UI/AddLayer/VBoxContainer"]
 margin_top = 34.0
-margin_right = 188.0
+margin_right = 208.0
 margin_bottom = 54.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
@@ -566,7 +565,7 @@ align = 1
 
 [node name="SpinBox" type="SpinBox" parent="UI/AddLayer/VBoxContainer"]
 margin_top = 60.0
-margin_right = 188.0
+margin_right = 208.0
 margin_bottom = 90.0
 min_value = -4096.0
 max_value = 4096.0
@@ -574,7 +573,7 @@ rounded = true
 
 [node name="Line2" type="TextureRect" parent="UI/AddLayer/VBoxContainer"]
 margin_top = 96.0
-margin_right = 188.0
+margin_right = 208.0
 margin_bottom = 98.0
 rect_min_size = Vector2( 0, 2 )
 texture = ExtResource( 6 )
@@ -582,7 +581,7 @@ expand = true
 
 [node name="Label3" type="Label" parent="UI/AddLayer/VBoxContainer"]
 margin_top = 104.0
-margin_right = 188.0
+margin_right = 208.0
 margin_bottom = 124.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
@@ -592,7 +591,7 @@ align = 1
 
 [node name="OptionButton" type="OptionButton" parent="UI/AddLayer/VBoxContainer"]
 margin_top = 130.0
-margin_right = 188.0
+margin_right = 208.0
 margin_bottom = 150.0
 
 [node name="LayerConfirmation" type="Button" parent="UI/AddLayer"]

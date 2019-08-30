@@ -14,18 +14,21 @@ script = ExtResource( 2 )
 
 [node name="Popup" type="Popup" parent="."]
 visible = true
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -125.0
+margin_top = -125.0
+margin_right = 125.0
+margin_bottom = 125.0
 
 [node name="Panel" type="Panel" parent="Popup"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 72.0
-margin_top = 32.0
-margin_right = -72.0
-margin_bottom = -32.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Popup/Panel"]
+[node name="Title" type="VBoxContainer" parent="Popup/Panel"]
+editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -33,8 +36,8 @@ margin_top = 8.0
 margin_right = -8.0
 margin_bottom = -30.0
 
-[node name="Label" type="Label" parent="Popup/Panel/VBoxContainer"]
-margin_right = 480.0
+[node name="Label" type="Label" parent="Popup/Panel/Title"]
+margin_right = 234.0
 margin_bottom = 20.0
 custom_colors/font_color = Color( 0, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -43,24 +46,34 @@ custom_constants/shadow_offset_y = 2
 text = "Layer Settings"
 align = 1
 
-[node name="Line" type="TextureRect" parent="Popup/Panel/VBoxContainer"]
+[node name="Line" type="TextureRect" parent="Popup/Panel/Title"]
 margin_top = 24.0
-margin_right = 480.0
+margin_right = 234.0
 margin_bottom = 26.0
 rect_min_size = Vector2( 0, 2 )
 texture = ExtResource( 3 )
 expand = true
 
+[node name="VBoxContainer" type="VBoxContainer" parent="Popup/Panel"]
+editor/display_folded = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 34.0
+margin_right = -8.0
+margin_bottom = -34.0
+alignment = 1
+
 [node name="Name" type="HBoxContainer" parent="Popup/Panel/VBoxContainer"]
-margin_top = 30.0
-margin_right = 480.0
-margin_bottom = 60.0
+margin_top = 35.0
+margin_right = 234.0
+margin_bottom = 65.0
 alignment = 1
 
 [node name="Label2" type="Label" parent="Popup/Panel/VBoxContainer/Name"]
-margin_left = 146.0
+margin_left = 23.0
 margin_top = 5.0
-margin_right = 211.0
+margin_right = 88.0
 margin_bottom = 25.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
@@ -69,36 +82,103 @@ text = "Name:"
 align = 1
 
 [node name="LineEdit" type="LineEdit" parent="Popup/Panel/VBoxContainer/Name"]
-margin_left = 215.0
-margin_right = 333.0
+margin_left = 92.0
+margin_right = 210.0
 margin_bottom = 30.0
 focus_mode = 1
 expand_to_text_length = true
 focus_mode = 1
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Popup/Panel"]
+[node name="Zaxis" type="HBoxContainer" parent="Popup/Panel/VBoxContainer"]
 editor/display_folded = true
-anchor_left = 0.5
+margin_top = 69.0
+margin_right = 234.0
+margin_bottom = 99.0
+alignment = 1
+
+[node name="Label2" type="Label" parent="Popup/Panel/VBoxContainer/Zaxis"]
+margin_left = 9.0
+margin_top = 5.0
+margin_right = 87.0
+margin_bottom = 25.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+text = "Z axis:"
+align = 1
+
+[node name="SpinBox" type="SpinBox" parent="Popup/Panel/VBoxContainer/Zaxis"]
+margin_left = 91.0
+margin_right = 225.0
+margin_bottom = 30.0
+min_value = -4096.0
+max_value = 4096.0
+rounded = true
+
+[node name="Solid" type="HBoxContainer" parent="Popup/Panel/VBoxContainer"]
+margin_top = 103.0
+margin_right = 234.0
+margin_bottom = 123.0
+alignment = 1
+
+[node name="Label2" type="Label" parent="Popup/Panel/VBoxContainer/Solid"]
+margin_left = 76.0
+margin_right = 138.0
+margin_bottom = 20.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+text = "Solid:"
+align = 1
+
+[node name="CheckBox" type="CheckBox" parent="Popup/Panel/VBoxContainer/Solid"]
+margin_left = 142.0
+margin_right = 158.0
+margin_bottom = 20.0
+
+[node name="Tint" type="HBoxContainer" parent="Popup/Panel/VBoxContainer"]
+margin_top = 127.0
+margin_right = 234.0
+margin_bottom = 147.0
+alignment = 1
+
+[node name="Label2" type="Label" parent="Popup/Panel/VBoxContainer/Tint"]
+margin_left = 56.0
+margin_right = 110.0
+margin_bottom = 20.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+text = "Tint:"
+align = 1
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="Popup/Panel/VBoxContainer/Tint"]
+margin_left = 114.0
+margin_right = 178.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 64, 0 )
+
+[node name="OK" type="VBoxContainer" parent="Popup/Panel"]
+editor/display_folded = true
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -240.0
 margin_top = -34.0
-margin_right = 240.0
 margin_bottom = -8.0
 alignment = 2
 
-[node name="Line" type="TextureRect" parent="Popup/Panel/VBoxContainer2"]
-margin_right = 480.0
+[node name="Line" type="TextureRect" parent="Popup/Panel/OK"]
+margin_right = 250.0
 margin_bottom = 2.0
 rect_min_size = Vector2( 0, 2 )
 texture = ExtResource( 3 )
 expand = true
 
-[node name="OK" type="Button" parent="Popup/Panel/VBoxContainer2"]
+[node name="OK" type="Button" parent="Popup/Panel/OK"]
 margin_top = 6.0
-margin_right = 480.0
+margin_right = 250.0
 margin_bottom = 26.0
 focus_mode = 1
 text = "OK"
-[connection signal="pressed" from="Popup/Panel/VBoxContainer2/OK" to="." method="_on_OK_pressed"]
+[connection signal="popup_hide" from="Popup" to="." method="_on_Popup_popup_hide"]
+[connection signal="pressed" from="Popup/Panel/OK/OK" to="." method="_on_OK_pressed"]

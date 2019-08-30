@@ -7,6 +7,7 @@ var z_axis = 0
 func _ready():
 	$Panel/Label.text = str(layername)
 	$Panel/Panel/Zaxis.text = str(z_axis)
+	$Panel/Icon.texture = load(str("res://Sprites/Editor/LayerIcons/", type, ".png"))
 
 func _process(_delta):
 	# Update text

@@ -46,12 +46,12 @@ corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxEmpty" id=7]
 
-[sub_resource type="StyleBoxFlat" id=9]
+[sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 1, 1, 1, 0.509804 )
 corner_radius_top_right = 4
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id=8]
+[sub_resource type="StyleBoxFlat" id=9]
 bg_color = Color( 1, 1, 1, 0.862745 )
 corner_radius_top_right = 4
 anti_aliasing = false
@@ -74,6 +74,7 @@ margin_left = 2.0
 margin_top = 2.0
 margin_right = -2.0
 margin_bottom = -2.0
+rect_clip_content = true
 mouse_filter = 2
 custom_styles/panel = SubResource( 1 )
 
@@ -95,16 +96,16 @@ mouse_filter = 2
 custom_styles/panel = SubResource( 3 )
 
 [node name="TextureRect" type="TextureRect" parent="Panel/Panel2"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -17.5
-margin_top = -18.0
-margin_right = 17.5
-margin_bottom = 18.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 3.0
+margin_top = 3.0
+margin_right = -3.0
+margin_bottom = -3.0
 mouse_filter = 2
 texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
 
 [node name="Label" type="Label" parent="Panel"]
 anchor_top = 1.0
@@ -155,6 +156,16 @@ custom_styles/focus = SubResource( 7 )
 custom_styles/disabled = SubResource( 7 )
 custom_styles/normal = SubResource( 7 )
 
+[node name="Icon" type="TextureRect" parent="Panel"]
+self_modulate = Color( 1, 1, 1, 0.75 )
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -60.0
+margin_right = 106.0
+margin_bottom = -16.0
+rect_clip_content = true
+mouse_filter = 2
+
 [node name="LayerSettings" type="Button" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -163,8 +174,8 @@ margin_top = 2.0
 margin_right = -2.0
 margin_bottom = -18.0
 focus_mode = 0
-custom_styles/hover = SubResource( 9 )
-custom_styles/pressed = SubResource( 8 )
+custom_styles/hover = SubResource( 8 )
+custom_styles/pressed = SubResource( 9 )
 custom_styles/focus = SubResource( 10 )
 custom_styles/disabled = SubResource( 10 )
 custom_styles/normal = SubResource( 10 )

@@ -17,6 +17,8 @@ var files = []
 var files2 = []
 var dir = Directory.new()
 
+var stop = false
+
 func _ready():
 	anim_in = get_tree().current_scene.editmode
 	visible = false
@@ -26,6 +28,14 @@ func _ready():
 	update_layers()
 
 func _process(_delta):
+	
+	if stop == true:
+		$SelectedArea.visible = false
+		$EraserSprite.visible = false
+		$SelectedTile.visible = false
+		$SelectedTile.offset = Vector2(0,0)
+		return
+	
 	# General positioning stuff
 	$UI/SideBar/VBoxContainer/TilesButton.text = ""
 	$UI/SideBar/VBoxContainer/ObjectsButton.text = ""
@@ -278,7 +288,7 @@ func _on_LayerAdd_button_down():
 		if ".tscn" in files[i]:
 			var item = files[i]
 			item.erase(item.length() - 5,5)
-			$UI/AddLayer/VBoxContainer/OptionButton.add_item(item)
+			$UI/AddLayer/VBoxContainer/OptionButton.add_icon_item(load(str("res://Sprites/Editor/LayerIcons/", item, ".png")),item)
 	
 	$UI/AddLayer.popup()
 
@@ -298,6 +308,10 @@ func _on_LayerConfirmation_pressed():
 	get_tree().current_scene.get_node("Level").add_child(layer)
 	layer.set_owner(get_tree().current_scene.get_node("Level"))
 	layer.set_name(selected)
+	if "@" in layer.get_name():
+		var newname = layer.get_name()
+		newname.replace("@","")
+		layer.set_name(newname)
 	
 	# If the layer isn't in the group "layers", add it to the group so it shows in the layer menu
 	if not layer.is_in_group("layers"): layer.add_to_group("layers")
