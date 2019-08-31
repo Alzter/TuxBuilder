@@ -46,10 +46,10 @@ collision_layer = 0
 collision_mask = 0
 format = 1
 
-[node name="Snowballtscn" type="KinematicBody2D" parent="." groups=[
+[node name="@Snowballtscn@19" type="KinematicBody2D" parent="." groups=[
 "badguys",
 ] instance=ExtResource( 5 )]
-position = Vector2( 592, 112 )
+position = Vector2( 208, 80 )
 collision_layer = 2
 collision_mask = 2
 script = ExtResource( 6 )
@@ -57,11 +57,10 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="@Snowballtscn@19" type="KinematicBody2D" parent="." groups=[
+[node name="@Snowballtscn@20" type="KinematicBody2D" parent="." groups=[
 "badguys",
 ] instance=ExtResource( 5 )]
-position = Vector2( 496, -272 )
-scale = Vector2( 1.25, 1.25 )
+position = Vector2( 176, 80 )
 collision_layer = 2
 collision_mask = 2
 script = ExtResource( 6 )

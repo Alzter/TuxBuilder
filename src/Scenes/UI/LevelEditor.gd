@@ -110,12 +110,15 @@ func _process(_delta):
 	# Let go of dragged objects
 	if not Input.is_action_pressed("click_left") and dragging_object == true:
 		dragging_object = false
+		$GrabSprite.visible = false
 		get_tree().current_scene.get_node(str("Level/", object_dragged)).scale -= Vector2(0.25,0.25)
 	
 	# Drag the object
 	if Input.is_action_pressed("click_left") and dragging_object == true:
-		get_tree().current_scene.get_node(str("Level/", object_dragged)).position = $SelectedTile.position
 		$SelectedTile.visible = false
+		$GrabSprite.visible = true
+		$GrabSprite.position = $SelectedTile.position
+		get_tree().current_scene.get_node(str("Level/", object_dragged)).position = $SelectedTile.position
 	
 	if Input.is_action_pressed("click_left") and dragging_object == false:
 		# If the mouse isn't on the level editor UI
