@@ -17,9 +17,10 @@
 [ext_resource path="res://Sprites/Objects/Coin/coin-13.png" type="Texture" id=15]
 [ext_resource path="res://Sprites/Objects/Coin/coin-14.png" type="Texture" id=16]
 [ext_resource path="res://Sprites/Objects/Coin/coin-15.png" type="Texture" id=17]
-[ext_resource path="res://Audio/SoundEffects/coin.wav" type="AudioStream" id=18]
+[ext_resource path="res://Audio/SoundEffects/Bonus/coin.wav" type="AudioStream" id=18]
 [ext_resource path="res://Sprites/Objects/Coin/glow.png" type="Texture" id=19]
 [ext_resource path="res://Sprites/Objects/Coin/glimmer.png" type="Texture" id=20]
+
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {

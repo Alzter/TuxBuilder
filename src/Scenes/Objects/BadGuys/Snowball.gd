@@ -78,8 +78,8 @@ func _on_Head_area_entered(area):
 # Hit player
 func _on_snowball_body_entered(body):
 	if body.is_in_group("player"):
-		if body.invincible_kill_time > 0: kill()
-	if state == "active" and body.has_method("hurt") and body.invincible_time == 0:
+		if body.invincible == true: kill()
+	if state == "active" and body.has_method("hurt") and body.invincible_damage == false:
 		body.hurt()
 	return
 

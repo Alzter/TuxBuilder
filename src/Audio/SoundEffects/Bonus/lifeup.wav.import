@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/lifeup.wav-5fa780db583607e9d9542d3cd1f6ac46.sample"
+path="res://.import/lifeup.wav-e027107df5afe75305b7f216b288711d.sample"
 
 [deps]
 
-source_file="res://Audio/SoundEffects/lifeup.wav"
-dest_files=[ "res://.import/lifeup.wav-5fa780db583607e9d9542d3cd1f6ac46.sample" ]
+source_file="res://Audio/SoundEffects/Bonus/lifeup.wav"
+dest_files=[ "res://.import/lifeup.wav-e027107df5afe75305b7f216b288711d.sample" ]
 
 [params]
 
