@@ -168,6 +168,10 @@ func _process(_delta):
 					get_tree().current_scene.get_node("Level").add_child(object)
 					object.set_owner(get_tree().current_scene.get_node("Level"))
 					object.set_name(object_type)
+					if not Input.is_action_pressed("action"):
+						dragging_object = true
+						object_dragged = object.get_name()
+						object.scale += Vector2(0.25,0.25)
 		
 		mouse_down = true
 	else: mouse_down = false

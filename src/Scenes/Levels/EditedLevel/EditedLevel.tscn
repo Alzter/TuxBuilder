@@ -51,13 +51,13 @@ format = 1
 [node name="BonusBlocktscn" type="StaticBody2D" parent="." groups=[
 "stackable",
 ] instance=ExtResource( 5 )]
-position = Vector2( 240, 176 )
+position = Vector2( 16, 176 )
 collision_layer = 519
 collision_mask = 519
 script = ExtResource( 6 )
 
 [node name="_1Downtscn" type="Area2D" parent="." instance=ExtResource( 7 )]
-position = Vector2( 240, 176 )
+position = Vector2( 16, 176 )
 collision_layer = 0
 script = ExtResource( 8 )
 [connection signal="body_entered" from="_1Downtscn" to="_1Downtscn" method="_on_1Up_body_entered"]

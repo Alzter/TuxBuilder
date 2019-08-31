@@ -18,7 +18,7 @@ func _ready():
 func _on_BottomHitbox_area_entered(area):
 	if hit == false:
 		if area.get_name() == "HeadAttack":
-			if area.get_parent().position.x >= self.position.x:
+			if area.get_parent().position.x > self.position.x:
 				hitdirection = -1
 			else: hitdirection = 1
 			$AnimatedSprite.play("empty")

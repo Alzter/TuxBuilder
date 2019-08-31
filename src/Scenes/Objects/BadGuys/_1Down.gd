@@ -8,7 +8,7 @@ var volume = -40
 func _physics_process(delta):
 	if active == true:
 		position += velocity * delta
-		velocity.y += 20
+		velocity.y += 40
 
 func _process(delta):
 	if collected == false and get_tree().current_scene.editmode == false:
@@ -28,4 +28,4 @@ func _on_1Up_body_entered(body):
 
 func appear(dir):
 	active = true
-	velocity = Vector2(200 * dir, -500)
+	velocity = Vector2(0, -750)
