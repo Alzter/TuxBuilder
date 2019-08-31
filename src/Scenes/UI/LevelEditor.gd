@@ -213,6 +213,7 @@ func update_selected_tile():
 		$SelectedTile.region_rect = Rect2(0,0,32,32)
 		$SelectedTile.modulate = Color(1,1,1,1)
 		$EraserSprite.position = $SelectedTile.position
+		old_object_type = ""
 	
 	else:
 		$SelectedArea.color = Color(0,1,0,0.5)
@@ -226,6 +227,7 @@ func update_selected_tile():
 			$SelectedTile.texture = (selected_texture)
 			$SelectedTile.region_rect.position = $TileMap.get_tileset().autotile_get_icon_coordinate(tile_type) * 32
 			$SelectedTile.region_enabled = true
+			old_object_type = ""
 
 		else:
 			# Object Selection
