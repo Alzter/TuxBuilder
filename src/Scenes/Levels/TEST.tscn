@@ -6,6 +6,7 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="SpawnPoint" parent="." instance=ExtResource( 1 )]
+position = Vector2( 16, 16 )
 
 [node name="Background" parent="." instance=ExtResource( 2 )]
 z_index = -100

@@ -19,7 +19,7 @@ func _ready():
 	if not (type == "TileMap"):
 		$Popup/Panel/VBoxContainer/Solid/CheckBox.disabled = true
 		$Popup/Panel/VBoxContainer/Solid/CheckBox.pressed = false
-	elif get_tree().current_scene.get_node(str("Level/", layername)).get_collision_layer() == 515:
+	elif get_tree().current_scene.get_node(str("Level/", layername)).get_collision_layer() != 0:
 		$Popup/Panel/VBoxContainer/Solid/CheckBox.pressed = true
 	else: $Popup/Panel/VBoxContainer/Solid/CheckBox.pressed = false
 	
@@ -50,8 +50,8 @@ func _process(_delta):
 		$Popup/Panel/VBoxContainer/Solid/CheckBox.disabled = true
 		$Popup/Panel/VBoxContainer/Solid/CheckBox.pressed = false
 	elif $Popup/Panel/VBoxContainer/Solid/CheckBox.pressed == true:
-		get_tree().current_scene.get_node(str("Level/", layername)).set_collision_layer(515)
-		get_tree().current_scene.get_node(str("Level/", layername)).set_collision_mask(515)
+		get_tree().current_scene.get_node(str("Level/", layername)).set_collision_layer(519)
+		get_tree().current_scene.get_node(str("Level/", layername)).set_collision_mask(519)
 	else:
 		get_tree().current_scene.get_node(str("Level/", layername)).set_collision_layer(0)
 		get_tree().current_scene.get_node(str("Level/", layername)).set_collision_mask(0)
