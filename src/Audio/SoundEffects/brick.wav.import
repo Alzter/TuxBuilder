@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/brick.wav-b54644fbd90bc00c8127c268613da3a6.sample"
+
+[deps]
+
+source_file="res://Audio/SoundEffects/brick.wav"
+dest_files=[ "res://.import/brick.wav-b54644fbd90bc00c8127c268613da3a6.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,52 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Scenes/Objects/Bonus/BonusBlock.gd" type="Script" id=1]
+[ext_resource path="res://Audio/SoundEffects/brick.wav" type="AudioStream" id=2]
+[ext_resource path="res://Sprites/Objects/BonusBlock/empty.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Objects/BonusBlock/full-0.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Objects/BonusBlock/full-1.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Objects/BonusBlock/full-2.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Objects/BonusBlock/full-3.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Objects/BonusBlock/full-4.png" type="Texture" id=8]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "empty",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 15.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 16, 16 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 16, 4 )
+
+[node name="BonusBlock" type="StaticBody2D"]
+collision_layer = 519
+collision_mask = 519
+script = ExtResource( 1 )
+
+[node name="Brick" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+frame = 4
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="BottomHitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomHitbox"]
+position = Vector2( 0, 13 )
+shape = SubResource( 3 )
+[connection signal="area_entered" from="BottomHitbox" to="." method="_on_BottomHitbox_area_entered"]

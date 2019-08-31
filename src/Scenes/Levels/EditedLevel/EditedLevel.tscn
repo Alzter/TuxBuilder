@@ -4,8 +4,8 @@
 [ext_resource path="res://Scenes/Objects/Misc/SpawnPoint.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Editor/Layers/TileMap.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Tilesets/LevelTiles.tres" type="TileSet" id=4]
-[ext_resource path="res://Scenes/Objects/BadGuys/_1Down.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Objects/BadGuys/_1Down.gd" type="Script" id=6]
+[ext_resource path="res://Scenes/Objects/Bonus/BonusBlock.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Objects/Bonus/BonusBlock.gd" type="Script" id=6]
 
 [node name="Level" type="Node2D"]
 
@@ -46,7 +46,20 @@ collision_layer = 0
 collision_mask = 0
 format = 1
 
-[node name="_1Downtscn" type="Area2D" parent="." instance=ExtResource( 5 )]
-position = Vector2( 272, 144 )
+[node name="BonusBlocktscn" type="StaticBody2D" parent="." instance=ExtResource( 5 )]
+position = Vector2( 144, 176 )
+collision_layer = 519
+collision_mask = 519
 script = ExtResource( 6 )
-[connection signal="body_entered" from="_1Downtscn" to="_1Downtscn" method="_on_1Up_body_entered"]
+
+[node name="@BonusBlocktscn@21" type="StaticBody2D" parent="." instance=ExtResource( 5 )]
+position = Vector2( 80, 112 )
+collision_layer = 519
+collision_mask = 519
+script = ExtResource( 6 )
+
+[node name="@BonusBlocktscn@22" type="StaticBody2D" parent="." instance=ExtResource( 5 )]
+position = Vector2( 16, 48 )
+collision_layer = 519
+collision_mask = 519
+script = ExtResource( 6 )
