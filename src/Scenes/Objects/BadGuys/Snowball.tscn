@@ -238,9 +238,20 @@ __meta__ = {
 "_edit_group_": true
 }
 
+[node name="ReferenceRect" type="ReferenceRect" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -20.0
+margin_top = -23.0
+margin_right = 20.0
+margin_bottom = 15.0
+border_color = Color( 1, 0, 0, 0 )
+
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
-frame = 2
+frame = 4
 playing = true
 offset = Vector2( 0, -3 )
 
