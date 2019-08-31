@@ -250,7 +250,6 @@ shape = SubResource( 7 )
 [node name="HeadAttack" type="Area2D" parent="." groups=[
 "head_attack",
 ]]
-collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HeadAttack"]
 position = Vector2( 0, -21 )

@@ -251,7 +251,7 @@ border_color = Color( 1, 0, 0, 0 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
-frame = 6
+frame = 2
 playing = true
 offset = Vector2( 0, -3 )
 
@@ -259,9 +259,7 @@ offset = Vector2( 0, -3 )
 shape = SubResource( 2 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
-position = Vector2( -0.0874104, -0.174824 )
-scale = Vector2( 2.51224, 2.53846 )
-rect = Rect2( -32, -256, 64, 512 )
+rect = Rect2( -64, -512, 128, 1024 )
 physics_process_parent = true
 
 [node name="Head" type="Area2D" parent="."]
