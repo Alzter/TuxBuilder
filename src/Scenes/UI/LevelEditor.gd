@@ -12,6 +12,8 @@ var object_type = ""
 var mouse_down = false
 var anim_in = false
 var rect_start_pos = Vector2() # Where you started clicking for the rectangle select
+var dragging_object = false
+var object_dragged = ""
 
 var files = []
 var files2 = []
@@ -92,7 +94,18 @@ func _process(_delta):
 	tile_selected = $TileMap.world_to_map(get_global_mouse_position())
 	update_selected_tile()
 	
-	if Input.is_action_pressed("click_left"):
+	if Input.is_action_just_pressed("click_left") and category_selected == "Objects":
+		for child in get_tree().current_scene.get_node("Level").get_children():
+			if not child.is_in_group("layers"):
+				if child.position == $SelectedTile.position:
+						dragging_object = true
+						object_dragged = child.get_name()
+						return
+	
+	if Input.is_action_pressed("click_left") and dragging_object == true:
+		get_tree().current_scene.get_node(str("Level/", object_dragged)).position = $SelectedTile.position
+	
+	elif Input.is_action_pressed("click_left") and dragging_object == false:
 		# If the mouse isn't on the level editor UI
 		if get_viewport().get_mouse_position().x < get_viewport().size.x - 128 and get_viewport().get_mouse_position().y < get_viewport().size.y - 64 and (tile_selected != old_tile_selected or mouse_down == false) and $UI/AddLayer.visible == false:
 			
@@ -124,6 +137,7 @@ func _process(_delta):
 			
 			# Object placing / erasing
 			else:
+				
 				# Object erasing
 				if $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == true:
 					for child in get_tree().current_scene.get_node("Level").get_children():
@@ -232,7 +246,6 @@ func update_tiles():
 		var child2 = load("res://Scenes/Editor/Tile.tscn").instance()
 		child2.tile_type = $TileMap.get_tileset().tile_get_name(tiles[i])
 		child.get_node("VBoxContainer/Content").add_child(child2)
-	
 
 func update_objects(): # Update the objects list from the editor using the scenes from Scenes/Objects
 	# Delete existing children of the objects/tiles list
@@ -261,6 +274,11 @@ func update_objects(): # Update the objects list from the editor using the scene
 				child2.object_category = category
 				child2.object_type = files2[i]
 				child.get_node("VBoxContainer/Content").add_child(child2)
+				
+				# Set the object selected to this object if none are selected
+				if object_type == "":
+					object_type = child2.object_type
+					object_category = child2.object_category
 
 func get_object_texture(object_location): # Get the texture for an object
 	if object_type == "":
