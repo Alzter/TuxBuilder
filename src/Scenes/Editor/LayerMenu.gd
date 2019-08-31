@@ -4,7 +4,7 @@ var type = ""
 var layername = ""
 var layername2 = ""
 var z_axis = 0
-var hide = true
+var hide = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

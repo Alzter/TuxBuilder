@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scenes/UI/UITheme.tres" type="Theme" id=1]
 [ext_resource path="res://Scenes/Editor/Layer.gd" type="Script" id=2]
@@ -36,15 +36,6 @@ font_data = ExtResource( 4 )
 bg_color = Color( 1, 0, 0, 1 )
 corner_radius_bottom_right = 4
 anti_aliasing = false
-
-[sub_resource type="StyleBoxFlat" id=6]
-bg_color = Color( 1, 1, 1, 0.25 )
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-
-[sub_resource type="StyleBoxEmpty" id=7]
 
 [sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 1, 1, 1, 0.509804 )
@@ -150,11 +141,9 @@ clip_text = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 focus_mode = 1
-custom_styles/hover = SubResource( 6 )
-custom_styles/pressed = SubResource( 7 )
-custom_styles/focus = SubResource( 7 )
-custom_styles/disabled = SubResource( 7 )
-custom_styles/normal = SubResource( 7 )
+action_mode = 0
+button_mask = 3
+flat = true
 
 [node name="Icon" type="TextureRect" parent="Panel"]
 self_modulate = Color( 1, 1, 1, 0.75 )

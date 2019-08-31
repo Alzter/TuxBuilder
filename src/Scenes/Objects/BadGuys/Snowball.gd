@@ -37,6 +37,14 @@ func _physics_process(_delta):
 		velocity = move_and_slide(velocity, Vector2(0,0))
 		velocity.y += 20
 		$AnimatedSprite.rotation_degrees += rotate
+	
+	if state == "squished":
+		velocity.x = 0
+		velocity.y += 20
+		velocity = move_and_slide(velocity, Vector2(0,0))
+		collision_layer = 4
+		collision_mask = 0
+		$CollisionShape2D.disabled = false
 
 # Custom fireball death animation (optional)
 func fireball_kill():
@@ -62,7 +70,7 @@ func _on_Head_area_entered(area):
 			kill()
 			return
 		disable()
-		state = ""
+		state = "squished"
 		$AnimationPlayer.play("squished")
 		$SFX/Squish.play()
 		player.call("bounce")

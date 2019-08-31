@@ -105,6 +105,10 @@ func _physics_process(_delta):
 		$SquishRadius/CollisionShape2D.disabled = true
 		return
 
+	$Hitbox.disabled = false
+	$HeadAttack/CollisionShape2D.disabled = false
+	$SquishRadius/CollisionShape2D.disabled = false
+
 	if dead == true:
 		if Input.is_action_pressed("pause"):
 			if restarted == false:
