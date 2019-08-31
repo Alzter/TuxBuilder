@@ -9,6 +9,7 @@ var tile_selected = Vector2(0,0)
 var old_tile_selected = Vector2(0,0)
 var object_category = ""
 var object_type = ""
+var old_object_type = ""
 var mouse_down = false
 var anim_in = false
 var rect_start_pos = Vector2() # Where you started clicking for the rectangle select
@@ -94,18 +95,29 @@ func _process(_delta):
 	tile_selected = $TileMap.world_to_map(get_global_mouse_position())
 	update_selected_tile()
 	
-	if Input.is_action_just_pressed("click_left") and category_selected == "Objects":
+	# If clicking on a tile occupied by an object, pick up the object
+	if category_selected == "Objects" and $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == false:
 		for child in get_tree().current_scene.get_node("Level").get_children():
 			if not child.is_in_group("layers"):
 				if child.position == $SelectedTile.position:
-						dragging_object = true
-						object_dragged = child.get_name()
-						return
+						$SelectedTile.visible = false
+						if Input.is_action_just_pressed("click_left"):
+							dragging_object = true
+							object_dragged = child.get_name()
+							child.scale += Vector2(0.25,0.25)
+							return
 	
+	# Let go of dragged objects
+	if not Input.is_action_pressed("click_left") and dragging_object == true:
+		dragging_object = false
+		get_tree().current_scene.get_node(str("Level/", object_dragged)).scale -= Vector2(0.25,0.25)
+	
+	# Drag the object
 	if Input.is_action_pressed("click_left") and dragging_object == true:
 		get_tree().current_scene.get_node(str("Level/", object_dragged)).position = $SelectedTile.position
+		$SelectedTile.visible = false
 	
-	elif Input.is_action_pressed("click_left") and dragging_object == false:
+	if Input.is_action_pressed("click_left") and dragging_object == false:
 		# If the mouse isn't on the level editor UI
 		if get_viewport().get_mouse_position().x < get_viewport().size.x - 128 and get_viewport().get_mouse_position().y < get_viewport().size.y - 64 and (tile_selected != old_tile_selected or mouse_down == false) and $UI/AddLayer.visible == false:
 			
@@ -138,20 +150,18 @@ func _process(_delta):
 			# Object placing / erasing
 			else:
 				
-				# Object erasing
-				if $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == true:
-					for child in get_tree().current_scene.get_node("Level").get_children():
-						if child.position == $SelectedTile.position:
-							child.queue_free()
-				else:
+				# Object erasing (also happens when placing objects so they don't stack)
+				for child in get_tree().current_scene.get_node("Level").get_children():
+					if child.position == $SelectedTile.position:
+						child.queue_free()
 				
 				# Object placing
-					if $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == false and object_type != "":
-						var object = load(str("res://Scenes/Objects/", object_category, "/", object_type)).instance()
-						object.position = $SelectedTile.position
-						get_tree().current_scene.get_node("Level").add_child(object)
-						object.set_owner(get_tree().current_scene.get_node("Level"))
-						object.set_name(object_type)
+				if $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == false and object_type != "":
+					var object = load(str("res://Scenes/Objects/", object_category, "/", object_type)).instance()
+					object.position = $SelectedTile.position
+					get_tree().current_scene.get_node("Level").add_child(object)
+					object.set_owner(get_tree().current_scene.get_node("Level"))
+					object.set_name(object_type)
 		
 		mouse_down = true
 	else: mouse_down = false
@@ -219,7 +229,9 @@ func update_selected_tile():
 
 		else:
 			# Object Selection
-			get_object_texture(str("res://Scenes/Objects/", object_category, "/", object_type))
+			if object_type != old_object_type:
+				get_object_texture(str("res://Scenes/Objects/", object_category, "/", object_type))
+			old_object_type = object_type
 
 # Buttons
 func _on_TilesButton_pressed():
