@@ -187,3 +187,4 @@ func camera_to_level_bounds():
 	if $Camera2D.limit_top > get_viewport().size.y * -1: # If the tilemap is shorter than the window, align the camera to the bottom
 		$Camera2D.limit_top = get_viewport().size.y * -1
 	$Camera2D.limit_bottom = level_bound_bottom
+

@@ -26,6 +26,7 @@ func _ready():
 	$UI/SideBar/VBoxContainer/TilesButton.grab_focus()
 	update_tiles()
 	update_layers()
+	select_first_solid_tilemap()
 
 func _process(_delta):
 	if stop == true:
@@ -318,6 +319,10 @@ func _on_LayerConfirmation_pressed():
 	# If the layer isn't in the group "layers", add it to the group so it shows in the layer menu
 	if not layer.is_in_group("layers"): layer.add_to_group("layers")
 	
+	# Select the layer
+	layer_selected = layer.get_name()
+	layer_selected_type = layer.get_class()
+	
 	# And update the layers list to reflect this
 	update_layers()
 
@@ -337,6 +342,14 @@ func update_layers(): # Updates the list of layers at the bottom
 			layer.z_axis = child.z_index
 			layer.set_name(child.get_name())
 			$UI/BottomBar/ScrollContainer/HBoxContainer.add_child(layer)
+
+func select_first_solid_tilemap():
+	for i in get_tree().get_nodes_in_group("tilemap"):
+		if i.get_class() == "TileMap":
+			if i.get_collision_layer() == 515:
+				layer_selected = i.get_name()
+				layer_selected_type = "TileMap"
+				return
 
 func list_files_in_directory(path):
     files = []
