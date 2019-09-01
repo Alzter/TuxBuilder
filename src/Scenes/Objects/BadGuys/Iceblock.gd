@@ -7,10 +7,13 @@ var startpos = Vector2(0,0)
 var state = "active"
 var direction = 1
 var rotate = 0
+var invincible_time = 0
+
+const KICK_SPEED = 500
 
 func _ready():
 	startpos = position
-	direction = $AnimatedSprite.scale.x
+	direction = $Control/AnimatedSprite.scale.x
 
 func disable():
 	remove_from_group("badguys")
@@ -21,22 +24,34 @@ func disable():
 # Physics
 func _physics_process(delta):
 	
+	if invincible_time > 0: invincible_time -= 1
+	
 	if get_tree().current_scene.editmode == true:
 		return
 	
 	# Movement
-	if state != "kill" and state != "":
-		if state == "active": velocity.x = -100 * $AnimatedSprite.scale.x
+	if state == "active":
+		velocity.x = -100 * $Control/AnimatedSprite.scale.x
 		velocity.y += 20
 		velocity = move_and_slide(velocity, FLOOR)
-		if is_on_wall() and state == "active":
-			$AnimatedSprite.scale.x *= -1
+		if is_on_wall():
+			$Control/AnimatedSprite.scale.x *= -1
+			velocity.x *= -1
+	
+	if state == "kicked":
+		velocity.x = KICK_SPEED * -$Control/AnimatedSprite.scale.x
+		velocity.y += 20
+		velocity = move_and_slide(velocity, FLOOR)
+		if is_on_wall():
+			$Control/AnimatedSprite.scale.x *= -1
+			velocity.x *= -1
+			$SFX/Bump.play()
 	
 	# Kill states
 	if state == "kill":
 		position += velocity * delta
 		velocity.y += 20
-		$AnimatedSprite.rotation_degrees += rotate
+		$Control/AnimatedSprite.rotation_degrees += rotate
 
 # Custom fireball death animation (optional)
 func fireball_kill():
@@ -56,16 +71,36 @@ func kill():
 
 # If squished
 func _on_Head_area_entered(area):
-	if area.is_in_group("bottom") and state == "active":
+	if area.is_in_group("bottom"):
 		var player = area.get_parent()
 		if player.sliding == true:
 			kill()
 			return
-		state = "squished"
-		velocity = Vector2(0,0)
-		$AnimationPlayer.play("squished")
-		$SFX/Squish.play()
-		player.call("bounce")
+		
+		if invincible_time == 0:
+			invincible_time = 5
+			
+			if state == "active" or state == "kicked":
+				state = "squished"
+				velocity = Vector2(0,0)
+				$AnimationPlayer.play("squished")
+				$SFX/Squish.play()
+				player.call("bounce")
+				
+			elif state == "squished":
+				$AnimationPlayer.play("squished")
+				$Control/AnimatedSprite.play("squished")
+				$SFX/Kick.play()
+				
+				if player.position.x > position.x:
+					velocity.x = -KICK_SPEED
+					$Control/AnimatedSprite.scale.x = 1
+					
+				else:
+					velocity.x = KICK_SPEED
+					$Control/AnimatedSprite.scale.x = -1
+				state = "kicked"
+				player.call("bounce")
 
 # Hit player
 func _on_snowball_body_entered(body):
@@ -73,6 +108,21 @@ func _on_snowball_body_entered(body):
 		if body.invincible == true: kill()
 	if state == "active" and body.has_method("hurt"):
 		body.hurt()
+		
+	elif state == "squished":
+		if invincible_time == 0:
+			invincible_time = 5
+			$Control/AnimatedSprite.play("squished")
+			$SFX/Kick.play()
+			
+			if body.position.x > position.x:
+				velocity.x = -KICK_SPEED
+				$Control/AnimatedSprite.scale.x = 1
+				
+			else:
+				velocity.x = KICK_SPEED
+				$Control/AnimatedSprite.scale.x = -1
+			state = "kicked"
 	return
 
 # Die when knocked off stage

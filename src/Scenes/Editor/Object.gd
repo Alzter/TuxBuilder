@@ -16,7 +16,12 @@ func _on_Button_pressed():
 
 func get_object_texture(object_location):
 	# If the object has an animated sprite, set the thumbnail to that
-	if load(object_location).instance().has_node("AnimatedSprite"):
+	if load(object_location).instance().has_node("Control/AnimatedSprite"):
+		var selected_texture = load(object_location).instance().get_node("Control/AnimatedSprite").get_sprite_frames().get_frame("default",0)
+		$Control/Sprite.texture = (selected_texture)
+	
+	# If the object has an animated sprite, set the thumbnail to that
+	elif load(object_location).instance().has_node("AnimatedSprite"):
 		var selected_texture = load(object_location).instance().get_node("AnimatedSprite").get_sprite_frames().get_frame("default",0)
 		$Control/Sprite.texture = (selected_texture)
 	

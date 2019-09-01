@@ -3,42 +3,42 @@
 [ext_resource path="res://Scenes/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Creatures/Tux/Big/Stand.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/Creatures/Tux/Big/backflip.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/gameover-0.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/gameover-1.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Fall4.png" type="Texture" id=6]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Fall1.png" type="Texture" id=7]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Fall2.png" type="Texture" id=8]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Fall3.png" type="Texture" id=9]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk8.png" type="Texture" id=10]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk1.png" type="Texture" id=11]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk2.png" type="Texture" id=12]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk3.png" type="Texture" id=13]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk4.png" type="Texture" id=14]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk5.png" type="Texture" id=15]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk6.png" type="Texture" id=16]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk7.png" type="Texture" id=17]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/duck-0.png" type="Texture" id=18]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/skid-0.png" type="Texture" id=19]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/stand-0.png" type="Texture" id=20]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Jump1.png" type="Texture" id=21]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Jump2.png" type="Texture" id=22]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Jump3.png" type="Texture" id=23]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/skid-0.png" type="Texture" id=24]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Jump1.png" type="Texture" id=25]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Jump2.png" type="Texture" id=26]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Jump3.png" type="Texture" id=27]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Fall1.png" type="Texture" id=28]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Fall2.png" type="Texture" id=29]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Fall3.png" type="Texture" id=30]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Fall4.png" type="Texture" id=31]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk8.png" type="Texture" id=32]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk1.png" type="Texture" id=33]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk2.png" type="Texture" id=34]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk3.png" type="Texture" id=35]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk4.png" type="Texture" id=36]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk5.png" type="Texture" id=37]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk6.png" type="Texture" id=38]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk7.png" type="Texture" id=39]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Fall4.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Fall1.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Fall2.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Fall3.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Fall4.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/duck-0.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Jump1.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Jump2.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Jump3.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk8.png" type="Texture" id=13]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk1.png" type="Texture" id=14]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk2.png" type="Texture" id=15]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk3.png" type="Texture" id=16]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk4.png" type="Texture" id=17]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk5.png" type="Texture" id=18]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk6.png" type="Texture" id=19]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk7.png" type="Texture" id=20]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Fall1.png" type="Texture" id=21]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Fall2.png" type="Texture" id=22]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Fall3.png" type="Texture" id=23]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/gameover-0.png" type="Texture" id=24]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/gameover-1.png" type="Texture" id=25]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk8.png" type="Texture" id=26]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk1.png" type="Texture" id=27]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk2.png" type="Texture" id=28]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk3.png" type="Texture" id=29]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk4.png" type="Texture" id=30]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk5.png" type="Texture" id=31]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk6.png" type="Texture" id=32]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk7.png" type="Texture" id=33]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/skid-0.png" type="Texture" id=34]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Jump1.png" type="Texture" id=35]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Jump2.png" type="Texture" id=36]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Jump3.png" type="Texture" id=37]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/skid-0.png" type="Texture" id=38]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/stand-0.png" type="Texture" id=39]
 [ext_resource path="res://Audio/SoundEffects/Player/jump.wav" type="AudioStream" id=40]
 [ext_resource path="res://Audio/SoundEffects/Player/bigjump.wav" type="AudioStream" id=41]
 [ext_resource path="res://Audio/SoundEffects/Player/flip.wav" type="AudioStream" id=42]
@@ -127,7 +127,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=6]
 resource_name = "InvincibleStar"
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=7]
 resource_name = "Stop"
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:visible")
@@ -142,7 +142,7 @@ tracks/0/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="SpriteFrames" id=7]
+[sub_resource type="SpriteFrames" id=8]
 animations = [ {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
@@ -154,84 +154,84 @@ animations = [ {
 "name": "backflip",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
-"loop": true,
-"name": "gameover",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
-"loop": true,
-"name": "gameover_small",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 6 ) ],
+"frames": [ ExtResource( 4 ) ],
 "loop": false,
 "name": "fall_small",
 "speed": 16.0
 }, {
-"frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 6 ) ],
-"loop": false,
-"name": "fall_transition_small",
-"speed": 16.0
-}, {
-"frames": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ) ],
-"loop": true,
-"name": "walk",
-"speed": 20.0
-}, {
-"frames": [ ExtResource( 18 ) ],
-"loop": true,
-"name": "duck",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 19 ) ],
-"loop": true,
-"name": "skid",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 20 ) ],
-"loop": true,
-"name": "idle_small",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ) ],
-"loop": false,
-"name": "jump",
-"speed": 16.0
-}, {
-"frames": [ ExtResource( 24 ) ],
-"loop": true,
-"name": "skid_small",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ) ],
-"loop": false,
-"name": "jump_small",
-"speed": 16.0
-}, {
-"frames": [ ExtResource( 28 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 31 ) ],
+"frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ],
 "loop": false,
 "name": "fall_transition",
 "speed": 16.0
 }, {
-"frames": [ ExtResource( 32 ), ExtResource( 33 ), ExtResource( 34 ), ExtResource( 35 ), ExtResource( 36 ), ExtResource( 37 ), ExtResource( 38 ), ExtResource( 39 ) ],
+"frames": [ ExtResource( 9 ) ],
+"loop": true,
+"name": "duck",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ) ],
+"loop": false,
+"name": "jump_small",
+"speed": 16.0
+}, {
+"frames": [ ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ) ],
 "loop": true,
 "name": "walk_small",
 "speed": 20.0
 }, {
-"frames": [ ExtResource( 31 ) ],
+"frames": [ ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 4 ) ],
+"loop": false,
+"name": "fall_transition_small",
+"speed": 16.0
+}, {
+"frames": [ ExtResource( 24 ), ExtResource( 25 ) ],
+"loop": true,
+"name": "gameover_small",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 33 ) ],
+"loop": true,
+"name": "walk",
+"speed": 20.0
+}, {
+"frames": [ ExtResource( 34 ) ],
+"loop": true,
+"name": "skid",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 35 ), ExtResource( 36 ), ExtResource( 37 ) ],
+"loop": false,
+"name": "jump",
+"speed": 16.0
+}, {
+"frames": [ ExtResource( 38 ) ],
+"loop": true,
+"name": "skid_small",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ) ],
 "loop": false,
 "name": "fall",
 "speed": 16.0
+}, {
+"frames": [ ExtResource( 39 ) ],
+"loop": true,
+"name": "idle_small",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 24 ), ExtResource( 25 ) ],
+"loop": true,
+"name": "gameover",
+"speed": 10.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 15.5, 31 )
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 15.5, 1 )
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 15.5, 3 )
 
 [node name="Player" type="KinematicBody2D" groups=[
@@ -250,7 +250,7 @@ anims/Stop = SubResource( 4 )
 autoplay = "Stop"
 anims/HurtInvincibility = SubResource( 5 )
 anims/InvincibleStar = SubResource( 6 )
-anims/Stop = SubResource( 11 )
+anims/Stop = SubResource( 7 )
 
 [node name="Control" type="Control" parent="."]
 anchor_left = 0.5
@@ -260,7 +260,7 @@ anchor_bottom = 0.5
 rect_pivot_offset = Vector2( 0, 38 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
-frames = SubResource( 7 )
+frames = SubResource( 8 )
 animation = "idle"
 offset = Vector2( 0, -6 )
 
@@ -268,7 +268,7 @@ offset = Vector2( 0, -6 )
 "player",
 ]]
 position = Vector2( 0, 1 )
-shape = SubResource( 8 )
+shape = SubResource( 9 )
 
 [node name="ShootLocation" type="Position2D" parent="."]
 position = Vector2( 16, 1 )
@@ -287,7 +287,7 @@ collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SquishRadius"]
 position = Vector2( 0, 37 )
-shape = SubResource( 9 )
+shape = SubResource( 10 )
 
 [node name="HeadAttack" type="Area2D" parent="." groups=[
 "head_attack",
@@ -296,7 +296,7 @@ position = Vector2( 0, -6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HeadAttack"]
 position = Vector2( 0, -21 )
-shape = SubResource( 10 )
+shape = SubResource( 11 )
 
 [node name="SFX" type="Node" parent="."]
 

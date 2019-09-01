@@ -10,7 +10,7 @@ var rotate = 0
 
 func _ready():
 	startpos = position
-	direction = $AnimatedSprite.scale.x
+	direction = $Control/AnimatedSprite.scale.x
 
 func disable():
 	remove_from_group("badguys")
@@ -26,17 +26,17 @@ func _physics_process(delta):
 	
 	# Movement
 	if state == "active":
-		velocity.x = -100 * $AnimatedSprite.scale.x
+		velocity.x = -100 * $Control/AnimatedSprite.scale.x
 		velocity.y += 20
 		velocity = move_and_slide(velocity, FLOOR)
 		if is_on_wall():
-			$AnimatedSprite.scale.x *= -1
+			$Control/AnimatedSprite.scale.x *= -1
 	
 	# Kill states
 	if state == "kill":
 		position += velocity * delta
 		velocity.y += 20
-		$AnimatedSprite.rotation_degrees += rotate
+		$Control/AnimatedSprite.rotation_degrees += rotate
 	
 	if state == "squished":
 		velocity.x = 0

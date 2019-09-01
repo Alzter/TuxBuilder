@@ -363,6 +363,12 @@ func get_object_texture(object_location): # Get the texture for an object
 	$SelectedTile.region_enabled = false
 	
 	# If the object has an animated sprite, set the thumbnail to that
+	if load(object_location).instance().has_node("Control/AnimatedSprite"):
+		var selected_texture = load(object_location).instance().get_node("Control/AnimatedSprite").get_sprite_frames().get_frame("default",0)
+		$SelectedTile.offset += load(object_location).instance().get_node("Control/AnimatedSprite").offset
+		$SelectedTile.texture = (selected_texture)
+	
+	# If the object has an animated sprite, set the thumbnail to that
 	if load(object_location).instance().has_node("AnimatedSprite"):
 		var selected_texture = load(object_location).instance().get_node("AnimatedSprite").get_sprite_frames().get_frame("default",0)
 		$SelectedTile.offset += load(object_location).instance().get_node("AnimatedSprite").offset
