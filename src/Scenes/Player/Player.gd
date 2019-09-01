@@ -33,8 +33,6 @@ const GRAVITY = 20.0
 # Amount of frames Tux can still jump after falling off a ledge
 const LEDGE_JUMP = 3
 
-# Invincible time after being hit
-const SAFE_TIME = 60
 # Fireball speed
 const FIREBALL_SPEED = 500
 
@@ -50,12 +48,13 @@ var ducking = false # Ducking
 var backflip = false # Backflipping
 var backflip_rotation = 0 # Backflip rotation
 var state = "fire" # Tux's power-up state
-var invincible_time = 0 # Amount of frames Tux is invincible
-var invincible_kill_time = 0 # Amount of frames Tux can kill enemies on touch
 var camera_offset = 0 # Moves camera horizontally for extended view
 var camera_position = Vector2(0,0) # Camera Position
 var dead = false # Stop doing stuff if true
 var restarted = false # Should Tux call restart level
+var invincible_damage = false
+var invincible = false
+var using_star = false
 
 # Set Tux's current playing animation
 func set_animation(anim):
@@ -69,19 +68,19 @@ func hurt():
 	elif state == "big":
 		state = "small"
 		$SFX/Hurt.play()
-		invincible_time = SAFE_TIME
+		damage_invincibility()
 	else:
 		state = "big"
 		$SFX/Hurt.play()
-		invincible_time = SAFE_TIME
+		damage_invincibility()
 
 # Kill Tux
 func kill():
 	state = "small"
 	$SFX/Kill.play()
-	$Hitbox.disabled = true
-	$HeadAttack/CollisionShape2D.disabled = true
-	$SquishRadius/CollisionShape2D.disabled = true
+	#$Hitbox.disabled = true
+	#$HeadAttack/CollisionShape2D.disabled = true
+	#$SquishRadius/CollisionShape2D.disabled = true
 	$Control/AnimatedSprite.rotation_degrees = 0
 	$Control/AnimatedSprite.scale.x = 1
 	$AnimationPlayer.play("Stop")
@@ -228,13 +227,13 @@ func _physics_process(_delta):
 
 	# Sliding
 	if sliding == true:
+		invincible = true
 		if $StandWindow.is_colliding() == true: # Push Tux forward when stuck in a one block space to prevent getting stuck
 			velocity.x += 4 * $Control/AnimatedSprite.scale.x
-		if invincible_kill_time <= 0: invincible_kill_time = 1
-		invincible_kill_time += 1
 		if abs(velocity.x) < 20 and on_ground == 0:
 			sliding = false
 			if $StandWindow.is_colliding() == true: ducking = true
+	elif using_star == false: invincible = false
 
 	# Jump buffering
 	if Input.is_action_pressed("jump"):
@@ -322,18 +321,6 @@ func _physics_process(_delta):
 		$ShootLocation.position.y = 1
 	$ShootLocation.position.x = $Control/AnimatedSprite.scale.x * 16
 
-	# Invincible flashing
-	if invincible_time > 0:
-		if self.visible == true:
-			self.visible = false
-		else: self.visible = true
-		invincible_time -= 1
-	else:
-		self.visible = true
-		invincible_time = 0
-	if invincible_kill_time > 0: invincible_kill_time -= 1
-	else: invincible_kill_time = -1
-	
 		# Shooting
 	if Input.is_action_just_pressed("action") and state == "fire" and get_tree().get_nodes_in_group("bullets").size() < 2:
 		$SFX/Shoot.play()
@@ -361,7 +348,28 @@ func _physics_process(_delta):
 	if position.y >= get_tree().current_scene.get_node("Camera2D").limit_bottom:
 		position.y = get_tree().current_scene.get_node("Camera2D").limit_bottom
 		kill()
-		
+
+# Star invincibility
+func star_invincibility():
+	using_star = true
+	invincible = true
+	$InvincibilityTimer.wait_time = 10.86
+	$InvincibilityTimer.start()
+	$AnimationPlayerInvincibility.play("InvincibleStar")
+	
+# Damage invincibility
+func damage_invincibility():
+	invincible_damage = true
+	$InvincibilityTimer.wait_time = 5
+	$InvincibilityTimer.start()
+	$AnimationPlayerInvincibility.play("HurtInvincibility")
+	
+func _on_InvincibilityTimer_timeout():
+	invincible = false
+	invincible_damage = false
+	using_star = false
+	self.show()
+	$AnimationPlayerInvincibility.stop()
 
 func bounce():
 	sliding = false

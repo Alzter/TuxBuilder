@@ -10,7 +10,7 @@ func _physics_process(delta):
 		position += velocity * delta
 		velocity.y += 40
 
-func _process(delta):
+func _process(_delta):
 	if collected == false and get_tree().current_scene.editmode == false:
 		$Humming.volume_db = volume
 		if $Humming.playing == false: $Humming.play()
