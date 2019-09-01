@@ -106,7 +106,7 @@ func _on_Head_area_entered(area):
 func _on_snowball_body_entered(body):
 	if body.is_in_group("player"):
 		if body.invincible == true: kill()
-	if state == "active" and body.has_method("hurt"):
+	if (state == "active" or state == "kicked") and body.has_method("hurt"):
 		body.hurt()
 		
 	elif state == "squished":

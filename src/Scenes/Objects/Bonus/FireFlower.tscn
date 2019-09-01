@@ -13,7 +13,7 @@ resource_name = "appear"
 [sub_resource type="Animation" id=2]
 resource_name = "collect"
 tracks/0/type = "value"
-tracks/0/path = NodePath("AnimatedSprite:visible")
+tracks/0/path = NodePath("Control/AnimatedSprite:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -54,7 +54,7 @@ tracks/2/keys = {
 [sub_resource type="Animation" id=3]
 resource_name = "default"
 tracks/0/type = "value"
-tracks/0/path = NodePath("AnimatedSprite:visible")
+tracks/0/path = NodePath("Control/AnimatedSprite:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -96,9 +96,15 @@ rect = Rect2( -64, -512, 128, 1024 )
 process_parent = true
 physics_process_parent = true
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="Control" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
 frames = SubResource( 4 )
-frame = 2
+frame = 5
 playing = true
 
 [node name="PickupSFX" type="AudioStreamPlayer" parent="."]

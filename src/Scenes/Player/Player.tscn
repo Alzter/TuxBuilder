@@ -262,7 +262,7 @@ rect_pivot_offset = Vector2( 0, 38 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
 frames = SubResource( 8 )
 animation = "idle"
-offset = Vector2( 0, -6 )
+offset = Vector2( 0, -4 )
 
 [node name="Hitbox" type="CollisionShape2D" parent="." groups=[
 "player",

@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scenes/Objects/Bonus/Egg.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/Objects/Egg/egg.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Objects/Egg/egg-merged.png" type="Texture" id=2]
 [ext_resource path="res://Audio/SoundEffects/Bonus/grow.ogg" type="AudioStream" id=3]
 
 [sub_resource type="Animation" id=1]
@@ -23,7 +23,7 @@ tracks/0/keys = {
 "values": [ true ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("AnimatedSprite:visible")
+tracks/1/path = NodePath("Control/AnimatedSprite:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -51,8 +51,10 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id=3]
 resource_name = "default"
+length = 0.8
+loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("AnimatedSprite:visible")
+tracks/0/path = NodePath("Control/AnimatedSprite:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -62,6 +64,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Control:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8 ),
+"transitions": PoolRealArray( 0.5, 2, 0.5, 2, 0.5 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.9, 1.1 ), Vector2( 1, 1 ), Vector2( 1.1, 0.9 ), Vector2( 1, 1 ) ]
 }
 
 [sub_resource type="SpriteFrames" id=4]
@@ -94,7 +108,14 @@ rect = Rect2( -64, -512, 128, 1024 )
 process_parent = true
 physics_process_parent = true
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="Control" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+rect_pivot_offset = Vector2( 0, 16 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
 frames = SubResource( 4 )
 
 [node name="PickupSFX" type="AudioStreamPlayer" parent="."]
