@@ -251,7 +251,7 @@ border_color = Color( 1, 0, 0, 0 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
-frame = 5
+frame = 1
 playing = true
 offset = Vector2( 0, -3 )
 

@@ -207,6 +207,10 @@ func _physics_process(_delta):
 		on_ground += 1
 		$SquishRadius/CollisionShape2D.disabled = false
 
+	# Ceiling bump sound
+	if is_on_ceiling():
+		$SFX/Brick.play()
+
 	# Running
 	if abs(velocity.x) > WALK_MAX:
 		running = 1
@@ -354,7 +358,6 @@ func star_invincibility():
 	invincible = true
 	$InvincibilityTimer.wait_time = 14
 	$InvincibilityTimer.start()
-	$SFX/InvincibleStart.play()
 	get_tree().current_scene.play_music("invincible.ogg")
 	$AnimationPlayerInvincibility.play("InvincibleStar")
 	

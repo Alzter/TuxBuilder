@@ -1,37 +1,31 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Scenes/Objects/Bonus/Star.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/Objects/Star/star-0.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/Objects/Star/star-1.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/Objects/Star/star-2.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Objects/Star/star-3.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/Objects/Star/star-4.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Objects/1Up/glow.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Objects/Star/star-0.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Objects/Star/star-1.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Objects/Star/star-2.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Objects/Star/star-3.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Objects/Star/star-4.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Objects/1Up/glimmer.png" type="Texture" id=8]
+[ext_resource path="res://Audio/SoundEffects/Bonus/invincible_start.ogg" type="AudioStream" id=9]
 
-[sub_resource type="PhysicsMaterial" id=5]
-bounce = 1.0
-
-[sub_resource type="SpriteFrames" id=1]
-animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
-"loop": true,
-"name": "default",
-"speed": 5.0
-} ]
-
-[sub_resource type="Animation" id=2]
-resource_name = "pickup"
-tracks/0/type = "audio"
-tracks/0/path = NodePath("PickupSFX")
+[sub_resource type="Animation" id=10]
+resource_name = "default"
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"clips": [  ],
-"times": PoolRealArray(  )
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("AnimatedSprite:visible")
+tracks/1/path = NodePath("Sparkle:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -40,54 +34,169 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ false ]
+"values": [ true ]
 }
-tracks/2/type = "method"
-tracks/2/path = NodePath(".")
+tracks/2/type = "value"
+tracks/2/path = NodePath("Glow:emitting")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 3.2 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
 "method": "queue_free"
 } ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("PickupSFX:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Glow:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sparkle:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 17, 17 )
+[sub_resource type="Gradient" id=9]
+offsets = PoolRealArray( 0, 0.510345, 1 )
+colors = PoolColorArray( 1, 1, 1, 0.32549, 1, 1, 1, 0.14902, 0, 0.859375, 1, 0 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="Curve" id=7]
+min_value = -360.0
+max_value = 360.0
+_data = [ Vector2( 0, 0 ), 0.0, -745.939, 0, 0, Vector2( 1, -360 ), 4.80714, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=6]
+_data = [ Vector2( 0.00295858, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.245562, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=8]
+offsets = PoolRealArray( 0, 0.475862, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0.784314, 0, 1, 0.927778, 0 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 16, 16 )
 
-[node name="Star" type="RigidBody2D"]
-physics_material_override = SubResource( 5 )
-gravity_scale = 3.0
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 16, 15 )
+
+[node name="Star" type="KinematicBody2D"]
+collision_layer = 4
+collision_mask = 0
 script = ExtResource( 1 )
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "default"
+anims/default = SubResource( 10 )
+anims/pickup = SubResource( 3 )
+
+[node name="Glow" type="CPUParticles2D" parent="."]
+amount = 4
+speed_scale = 5.0
+local_coords = false
+texture = ExtResource( 2 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 10.0
+scale_amount = 3.0
+color_ramp = SubResource( 9 )
+
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-frames = SubResource( 1 )
+frames = SubResource( 2 )
+
+[node name="Sparkle" type="CPUParticles2D" parent="."]
+amount = 6
+lifetime = 0.5
+local_coords = false
+texture = ExtResource( 8 )
+emission_shape = 2
+emission_rect_extents = Vector2( 16, 16 )
+gravity = Vector2( 0, 0 )
+angle_curve = SubResource( 7 )
+scale_amount = 0.75
+scale_amount_curve = SubResource( 6 )
+color_ramp = SubResource( 8 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
-rect = Rect2( -17, -17, 34, 34 )
+rect = Rect2( -64, -512, 128, 1024 )
 process_parent = true
 physics_process_parent = true
 
 [node name="PickupSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
 bus = "SFX"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/pickup = SubResource( 2 )
-
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-shape = SubResource( 4 )
+position = Vector2( 0, 1 )
+shape = SubResource( 5 )
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

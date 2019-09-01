@@ -1,14 +1,13 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scenes/Objects/Bonus/BonusBlock.gd" type="Script" id=1]
-[ext_resource path="res://Audio/SoundEffects/Player/brick.wav" type="AudioStream" id=2]
-[ext_resource path="res://Audio/SoundEffects/Bonus/upgrade.wav" type="AudioStream" id=3]
-[ext_resource path="res://Sprites/Objects/BonusBlock/empty.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Objects/BonusBlock/full-0.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/Objects/BonusBlock/full-1.png" type="Texture" id=6]
-[ext_resource path="res://Sprites/Objects/BonusBlock/full-2.png" type="Texture" id=7]
-[ext_resource path="res://Sprites/Objects/BonusBlock/full-3.png" type="Texture" id=8]
-[ext_resource path="res://Sprites/Objects/BonusBlock/full-4.png" type="Texture" id=9]
+[ext_resource path="res://Audio/SoundEffects/Bonus/upgrade.wav" type="AudioStream" id=2]
+[ext_resource path="res://Sprites/Objects/BonusBlock/empty.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Objects/BonusBlock/full-0.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Objects/BonusBlock/full-1.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Objects/BonusBlock/full-2.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Objects/BonusBlock/full-3.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Objects/BonusBlock/full-4.png" type="Texture" id=8]
 
 [sub_resource type="Animation" id=1]
 resource_name = "default"
@@ -66,12 +65,12 @@ tracks/1/keys = {
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ ExtResource( 4 ) ],
+"frames": [ ExtResource( 3 ) ],
 "loop": true,
 "name": "empty",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 5 ), ExtResource( 5 ) ],
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ) ],
 "loop": true,
 "name": "default",
 "speed": 15.0
@@ -90,11 +89,11 @@ collision_layer = 519
 collision_mask = 519
 script = ExtResource( 1 )
 
-[node name="Brick" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 2 )
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+rect = Rect2( -32, -32, 64, 64 )
 
 [node name="Upgrade" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 3 )
+stream = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "default"
@@ -103,7 +102,7 @@ anims/hit = SubResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 3 )
-frame = 7
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
