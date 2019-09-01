@@ -1,29 +1,24 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=21 format=2]
 
-[ext_resource path="res://Scenes/Objects/BadGuys/Snowball.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/Creatures/Snowball/snowball-0.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/Creatures/Snowball/snowball-1.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/Creatures/Snowball/snowball-2.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Creatures/Snowball/snowball-3.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/Creatures/Snowball/snowball-4.png" type="Texture" id=6]
-[ext_resource path="res://Sprites/Creatures/Snowball/snowball-5.png" type="Texture" id=7]
-[ext_resource path="res://Sprites/Creatures/Snowball/snowball-6.png" type="Texture" id=8]
-[ext_resource path="res://Sprites/Creatures/Snowball/snowball-7.png" type="Texture" id=9]
-[ext_resource path="res://Sprites/Creatures/Snowball/squished-left.png" type="Texture" id=10]
-[ext_resource path="res://Audio/SoundEffects/Enemy/fall.wav" type="AudioStream" id=11]
-[ext_resource path="res://Audio/SoundEffects/Enemy/squish.wav" type="AudioStream" id=12]
-[ext_resource path="res://Audio/SoundEffects/Enemy/splash.ogg" type="AudioStream" id=13]
-[ext_resource path="res://Sprites/Creatures/Snowball/particle.png" type="Texture" id=14]
-[ext_resource path="res://Sprites/Creatures/Snowball/droplet.png" type="Texture" id=15]
+[ext_resource path="res://Scenes/Objects/BadGuys/Iceblock.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Creatures/Iceblock/left-0.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Creatures/Iceblock/left-1.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Creatures/Iceblock/left-2.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Creatures/Iceblock/flat-left.png" type="Texture" id=5]
+[ext_resource path="res://Audio/SoundEffects/Enemy/fall.wav" type="AudioStream" id=6]
+[ext_resource path="res://Audio/SoundEffects/Enemy/stomp.wav" type="AudioStream" id=7]
+[ext_resource path="res://Audio/SoundEffects/Enemy/splash.ogg" type="AudioStream" id=8]
+[ext_resource path="res://Sprites/Creatures/Snowball/particle.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/Creatures/Snowball/droplet.png" type="Texture" id=10]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 3 ) ],
 "loop": true,
 "name": "default",
-"speed": 15.0
+"speed": 8.0
 }, {
-"frames": [ ExtResource( 10 ) ],
+"frames": [ ExtResource( 5 ) ],
 "loop": true,
 "name": "squished",
 "speed": 5.0
@@ -100,6 +95,18 @@ tracks/4/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("AnimatedSprite:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
 
 [sub_resource type="Animation" id=6]
 resource_name = "explode"
@@ -155,8 +162,26 @@ tracks/3/keys = {
 "values": [ false ]
 }
 
+[sub_resource type="Animation" id=10]
+resource_name = "shake"
+length = 0.1
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ -10.0, 10.0, -10.0 ]
+}
+
 [sub_resource type="Animation" id=7]
-length = 2.0
+length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
 tracks/0/interp = 1
@@ -169,55 +194,29 @@ tracks/0/keys = {
 "update": 1,
 "values": [ "squished" ]
 }
-tracks/1/type = "method"
-tracks/1/path = NodePath(".")
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 2 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "queue_free"
-} ]
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 7 ), Vector2( 0, 0 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("AnimatedSprite:position")
+tracks/2/path = NodePath("AnimatedSprite:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.2, 1.3, 1.9 ),
-"transitions": PoolRealArray( 0.5, 1, 2, 1 ),
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 0.5, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 7 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 16 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("AnimatedSprite:scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 0.2, 1.3, 1.9 ),
-"transitions": PoolRealArray( 0.5, 1, 2, 1 ),
-"update": 0,
-"values": [ Vector2( 1.6, 0.5 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 2, 0 ) ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("AnimatedSprite:self_modulate")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0, 1.3, 1.9 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 0.662745, 0.905882, 1, 0.580392 ) ]
+"values": [ Vector2( 1.6, 0.5 ), Vector2( 1, 1 ) ]
 }
 
 [sub_resource type="Gradient" id=8]
@@ -228,7 +227,7 @@ colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0.443137, 1, 1, 1, 0 )
 offsets = PoolRealArray( 0, 0.467949, 1 )
 colors = PoolColorArray( 1, 1, 1, 0.847059, 0.625, 0.936279, 1, 0.556863, 0, 0.478516, 1, 0 )
 
-[node name="Snowball" type="KinematicBody2D" groups=[
+[node name="Iceblock" type="KinematicBody2D" groups=[
 "badguys",
 ]]
 collision_layer = 2
@@ -240,7 +239,7 @@ __meta__ = {
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
-frame = 5
+frame = 1
 playing = true
 offset = Vector2( 0, -3 )
 
@@ -266,18 +265,19 @@ shape = SubResource( 4 )
 autoplay = "active"
 anims/active = SubResource( 5 )
 anims/explode = SubResource( 6 )
+anims/shake = SubResource( 10 )
 anims/squished = SubResource( 7 )
 
 [node name="SFX" type="Node" parent="."]
 
 [node name="Fall" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource( 11 )
+stream = ExtResource( 6 )
 
 [node name="Squish" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource( 12 )
+stream = ExtResource( 7 )
 
 [node name="Melt" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource( 13 )
+stream = ExtResource( 8 )
 
 [node name="ExplodeSnow" type="CPUParticles2D" parent="."]
 emitting = false
@@ -285,7 +285,7 @@ amount = 4
 one_shot = true
 explosiveness = 1.0
 local_coords = false
-texture = ExtResource( 14 )
+texture = ExtResource( 9 )
 spread = 180.0
 flatness = 1.0
 gravity = Vector2( 0, 1200 )
@@ -306,7 +306,7 @@ amount = 16
 one_shot = true
 explosiveness = 1.0
 local_coords = false
-texture = ExtResource( 15 )
+texture = ExtResource( 10 )
 spread = 180.0
 flatness = 1.0
 gravity = Vector2( 0, 500 )

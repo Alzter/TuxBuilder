@@ -134,9 +134,9 @@ _data = [ Vector2( 0, 0 ), 0.0, -745.939, 0, 0, Vector2( 1, -360 ), 4.80714, 0.0
 [sub_resource type="Curve" id=6]
 _data = [ Vector2( 0.00295858, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.245562, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="Gradient" id=8]
+[sub_resource type="Gradient" id=11]
 offsets = PoolRealArray( 0, 0.475862, 1 )
-colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0.784314, 0, 1, 0.927778, 0 )
+colors = PoolColorArray( 1, 1, 1, 1, 0.835938, 1, 0.996155, 0.784314, 0, 0.765625, 1, 0 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 16, 16 )
@@ -179,7 +179,7 @@ gravity = Vector2( 0, 0 )
 angle_curve = SubResource( 7 )
 scale_amount = 0.75
 scale_amount_curve = SubResource( 6 )
-color_ramp = SubResource( 8 )
+color_ramp = SubResource( 11 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 rect = Rect2( -64, -512, 128, 1024 )

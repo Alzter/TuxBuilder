@@ -21,10 +21,11 @@ func _process(_delta):
 
 func _on_1Up_body_entered(body):
 	if body.is_in_group("player") and collected == false:
-		active = false
-		collected = true
-		$AnimationPlayer.play("collect")
-		body.call("kill")
+		if body.invincible_damage == false:
+			active = false
+			collected = true
+			$AnimationPlayer.play("collect")
+			body.call("kill")
 
 func appear(dir):
 	active = true

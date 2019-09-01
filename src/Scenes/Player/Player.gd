@@ -62,30 +62,30 @@ func set_animation(anim):
 
 # Damage Tux
 func hurt():
-	if state == "small":
-		kill()
-	elif state == "big":
-		state = "small"
-		$SFX/Hurt.play()
-		damage_invincibility()
-	else:
-		state = "big"
-		$SFX/Hurt.play()
-		damage_invincibility()
+	if invincible_damage == false and invincible == false:
+		if state == "small":
+			kill()
+		elif state == "big":
+			state = "small"
+			$SFX/Hurt.play()
+			damage_invincibility()
+		else:
+			state = "big"
+			$SFX/Hurt.play()
+			damage_invincibility()
 
 # Kill Tux
 func kill():
-	state = "small"
-	$SFX/Kill.play()
-	#$Hitbox.disabled = true
-	#$HeadAttack/CollisionShape2D.disabled = true
-	#$SquishRadius/CollisionShape2D.disabled = true
-	$Control/AnimatedSprite.rotation_degrees = 0
-	$Control/AnimatedSprite.scale.x = 1
-	$AnimationPlayer.play("Stop")
-	set_animation("gameover")
-	dead = true
-	velocity = Vector2 (0,-JUMP_POWER * 1.5)
+	if invincible_damage == false and invincible == false:
+		state = "small"
+		$SFX/Kill.play()
+		$AnimationPlayerInvincibility.play("Stop")
+		$Control/AnimatedSprite.rotation_degrees = 0
+		$Control/AnimatedSprite.scale.x = 1
+		$AnimationPlayer.play("Stop")
+		set_animation("gameover")
+		dead = true
+		velocity = Vector2 (0,-JUMP_POWER * 1.5)
 
 func _ready():
 	if get_tree().current_scene.get_node("Level").has_node("SpawnPoint"):
@@ -95,7 +95,7 @@ func _ready():
 #=============================================================================
 # PHYSICS
 
-func _physics_process(_delta):
+func _physics_process(delta):
 
 	if get_tree().current_scene.editmode == true:
 		set_animation("idle")
@@ -120,11 +120,11 @@ func _physics_process(_delta):
 			self.visible = false
 			return
 		$Control/AnimatedSprite.z_index = 999
-		velocity.y += GRAVITY
 		$Hitbox.disabled = true
 		$HeadAttack/CollisionShape2D.disabled = true
 		$SquishRadius/CollisionShape2D.disabled = true
-		velocity = move_and_slide(velocity, Vector2(0,0))
+		position += velocity * delta
+		velocity.y += GRAVITY
 		return
 
 	# Horizontal movement
@@ -314,12 +314,12 @@ func _physics_process(_delta):
 	# Duck Hitboxes
 	if ducking == true or sliding == true or state == "small":
 		$Hitbox.shape.extents.y = 15
-		$Hitbox.position.y = 23
+		$Hitbox.position.y = 17
 		$HeadAttack/CollisionShape2D.position.y = 11
-		$ShootLocation.position.y = 22
+		$ShootLocation.position.y = 17
 	else:
 		$Hitbox.shape.extents.y = 31
-		$Hitbox.position.y = 7
+		$Hitbox.position.y = 1
 		$HeadAttack/CollisionShape2D.position.y = -21
 		$ShootLocation.position.y = 1
 	$ShootLocation.position.x = $Control/AnimatedSprite.scale.x * 16

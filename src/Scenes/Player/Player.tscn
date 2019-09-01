@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=2]
+[gd_scene load_steps=59 format=2]
 
 [ext_resource path="res://Scenes/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Creatures/Tux/Big/Stand.png" type="Texture" id=2]
@@ -127,6 +127,21 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=6]
 resource_name = "InvincibleStar"
 
+[sub_resource type="Animation" id=11]
+resource_name = "Stop"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
 [sub_resource type="SpriteFrames" id=7]
 animations = [ {
 "frames": [ ExtResource( 2 ) ],
@@ -232,8 +247,10 @@ anims/LandSmall = SubResource( 3 )
 anims/Stop = SubResource( 4 )
 
 [node name="AnimationPlayerInvincibility" type="AnimationPlayer" parent="."]
+autoplay = "Stop"
 anims/HurtInvincibility = SubResource( 5 )
 anims/InvincibleStar = SubResource( 6 )
+anims/Stop = SubResource( 11 )
 
 [node name="Control" type="Control" parent="."]
 anchor_left = 0.5
@@ -245,19 +262,19 @@ rect_pivot_offset = Vector2( 0, 38 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
 frames = SubResource( 7 )
 animation = "idle"
-offset = Vector2( 0, 1 )
+offset = Vector2( 0, -6 )
 
 [node name="Hitbox" type="CollisionShape2D" parent="." groups=[
 "player",
 ]]
-position = Vector2( 0, 7 )
+position = Vector2( 0, 1 )
 shape = SubResource( 8 )
 
 [node name="ShootLocation" type="Position2D" parent="."]
 position = Vector2( 16, 1 )
 
 [node name="StandWindow" type="RayCast2D" parent="."]
-position = Vector2( 0, 38 )
+position = Vector2( 0, 31 )
 enabled = true
 cast_to = Vector2( 0, -32 )
 collision_mask = 512
@@ -265,6 +282,7 @@ collision_mask = 512
 [node name="SquishRadius" type="Area2D" parent="." groups=[
 "bottom",
 ]]
+position = Vector2( 0, -6 )
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SquishRadius"]
@@ -274,6 +292,7 @@ shape = SubResource( 9 )
 [node name="HeadAttack" type="Area2D" parent="." groups=[
 "head_attack",
 ]]
+position = Vector2( 0, -6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HeadAttack"]
 position = Vector2( 0, -21 )

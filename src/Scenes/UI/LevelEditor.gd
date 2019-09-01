@@ -15,12 +15,16 @@ var anim_in = false
 var rect_start_pos = Vector2() # Where you started clicking for the rectangle select
 var dragging_object = false
 var object_dragged = ""
-
+var movetime_up = 0
+var movetime_down = 0
+var movetime_left = 0
+var movetime_right = 0
+var player_drag_half = "bottom"
+var player_hovered = false
+var stop = false
 var files = []
 var files2 = []
 var dir = Directory.new()
-
-var stop = false
 
 func _ready():
 	anim_in = get_tree().current_scene.editmode
@@ -72,15 +76,41 @@ func _process(_delta):
 	# Navigation
 	if Input.is_action_pressed("ui_up"):
 		get_tree().current_scene.get_node("Camera2D").position.y -= CAMERA_MOVE_SPEED
-		
+		movetime_up += 1
+	elif Input.is_action_just_released("ui_up"): movetime_up = -1
+	else: movetime_up = 0
+	
 	if Input.is_action_pressed("ui_down"):
 		get_tree().current_scene.get_node("Camera2D").position.y += CAMERA_MOVE_SPEED
-		
+		movetime_down += 1
+	elif Input.is_action_just_released("ui_down"): movetime_down = -1
+	else: movetime_down = 0
+	
 	if Input.is_action_pressed("ui_left"):
 		get_tree().current_scene.get_node("Camera2D").position.x -= CAMERA_MOVE_SPEED
-		
+		movetime_left += 1
+	elif Input.is_action_just_released("ui_left"): movetime_left = -1
+	else: movetime_left = 0
+	
 	if Input.is_action_pressed("ui_right"):
 		get_tree().current_scene.get_node("Camera2D").position.x += CAMERA_MOVE_SPEED
+		movetime_right += 1
+	elif Input.is_action_just_released("ui_right"): movetime_right = -1
+	else: movetime_right = 0
+	
+	# Round player position
+	get_tree().current_scene.get_node("Player").position.x = (floor(get_tree().current_scene.get_node("Player").position.x / 32) * 32) + 16
+	get_tree().current_scene.get_node("Player").position.y = round(get_tree().current_scene.get_node("Player").position.y / 32) * 32
+	
+	# Delay the player movement by one frame to sync with the camera
+	if movetime_up != 1 and movetime_up != 0:
+		get_tree().current_scene.get_node("Player").position.y -= CAMERA_MOVE_SPEED
+	if movetime_down != 1 and movetime_down != 0:
+		get_tree().current_scene.get_node("Player").position.y += CAMERA_MOVE_SPEED
+	if movetime_left != 1 and movetime_left != 0:
+		get_tree().current_scene.get_node("Player").position.x -= CAMERA_MOVE_SPEED
+	if movetime_right != 1 and movetime_right != 0:
+		get_tree().current_scene.get_node("Player").position.x += CAMERA_MOVE_SPEED
 	
 	# Disable rectangle select for objects
 	if category_selected == "Objects":
@@ -95,8 +125,17 @@ func _process(_delta):
 	tile_selected = $TileMap.world_to_map(get_global_mouse_position())
 	update_selected_tile()
 	
+	# Drag the player
+	if player_hovered == true and Input.is_action_just_pressed("click_left") and dragging_object == false:
+		dragging_object = true
+		object_dragged = "Player"
+		get_tree().current_scene.get_node("Player/Control/AnimatedSprite").scale += Vector2(0.25,0.25)
+		if $SelectedTile.position == Vector2(get_tree().current_scene.get_node("Player").position.x,get_tree().current_scene.get_node("Player").position.y - 16):
+			player_drag_half = "top"
+		else: player_drag_half = "bottom"
+	
 	# If clicking on a tile occupied by an object, pick up the object
-	if category_selected == "Objects" and $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == false:
+	if category_selected == "Objects" and $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == false and dragging_object == false:
 		for child in get_tree().current_scene.get_node("Level").get_children():
 			if not child.is_in_group("layers"):
 				if child.position == $SelectedTile.position:
@@ -111,17 +150,25 @@ func _process(_delta):
 	if not Input.is_action_pressed("click_left") and dragging_object == true:
 		dragging_object = false
 		$GrabSprite.visible = false
-		get_tree().current_scene.get_node(str("Level/", object_dragged)).scale -= Vector2(0.25,0.25)
-		for child in get_tree().current_scene.get_node("Level").get_children():
-			if child.position == $SelectedTile.position and child.get_name() != object_dragged and not child.is_in_group("stackable"):
-				child.queue_free()
+		if object_dragged != "Player":
+			get_tree().current_scene.get_node(str("Level/", object_dragged)).scale -= Vector2(0.25,0.25)
+			for child in get_tree().current_scene.get_node("Level").get_children():
+				if child.position == $SelectedTile.position and child.get_name() != object_dragged and not child.is_in_group("stackable"):
+					child.queue_free()
+		else: get_tree().current_scene.get_node("Player/Control/AnimatedSprite").scale -= Vector2(0.25,0.25)
 	
 	# Drag the object
 	if Input.is_action_pressed("click_left") and dragging_object == true:
 		$SelectedTile.visible = false
 		$GrabSprite.visible = true
 		$GrabSprite.position = $SelectedTile.position
-		get_tree().current_scene.get_node(str("Level/", object_dragged)).position = $SelectedTile.position
+		if object_dragged != "Player":
+			get_tree().current_scene.get_node(str("Level/", object_dragged)).position = $SelectedTile.position
+		else:
+			get_tree().current_scene.get_node("Player").position = $SelectedTile.position
+			if player_drag_half == "top":
+				get_tree().current_scene.get_node("Player").position.y += 16
+			else: get_tree().current_scene.get_node("Player").position.y -= 16
 	
 	if Input.is_action_pressed("click_left") and dragging_object == false:
 		# If the mouse isn't on the level editor UI
@@ -182,6 +229,7 @@ func update_selected_tile():
 	$EraserSprite.visible = false
 	$SelectedTile.visible = false
 	$SelectedTile.offset = Vector2(0,0)
+	player_hovered = false
 	
 	if not (get_viewport().get_mouse_position().x < get_viewport().size.x - 128 and get_viewport().get_mouse_position().y < get_viewport().size.y - 64) or $UI/AddLayer.visible == true:
 		return
@@ -192,6 +240,10 @@ func update_selected_tile():
 	$SelectedTile.position.x = (tile_selected.x + 0.5) * 32
 	$SelectedTile.position.y = (tile_selected.y + 0.5) * 32
 	$SelectedTile.offset = Vector2(0,0)
+	
+	if ($SelectedTile.position == Vector2(get_tree().current_scene.get_node("Player").position.x,get_tree().current_scene.get_node("Player").position.y - 16) and get_tree().current_scene.get_node("Player").state != "small") or $SelectedTile.position == Vector2(get_tree().current_scene.get_node("Player").position.x,get_tree().current_scene.get_node("Player").position.y + 16) and dragging_object == false:
+		player_hovered = true
+		return
 	
 	# Rectangle selection
 	$SelectedArea.visible = false

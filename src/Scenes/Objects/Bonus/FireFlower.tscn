@@ -98,7 +98,7 @@ physics_process_parent = true
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 4 )
-frame = 4
+frame = 2
 playing = true
 
 [node name="PickupSFX" type="AudioStreamPlayer" parent="."]

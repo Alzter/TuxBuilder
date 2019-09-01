@@ -43,7 +43,7 @@ func _process(_delta):
 				else: load_edited_level()
 				load_player()
 				get_node("Player").position = player_position
-			else:
+			elif get_node("Editor").dragging_object == false:
 				editmode = false
 				camera_smooth_time = 20
 				save_edited_level()

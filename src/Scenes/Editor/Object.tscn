@@ -62,5 +62,6 @@ focus_mode = 0
 theme = ExtResource( 2 )
 custom_styles/hover = SubResource( 2 )
 custom_styles/pressed = SubResource( 3 )
+action_mode = 0
 enabled_focus_mode = 0
 [connection signal="pressed" from="Control/Button" to="." method="_on_Button_pressed"]

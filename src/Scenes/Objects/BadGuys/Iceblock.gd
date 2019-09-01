@@ -25,11 +25,11 @@ func _physics_process(delta):
 		return
 	
 	# Movement
-	if state == "active":
-		velocity.x = -100 * $AnimatedSprite.scale.x
+	if state != "kill" and state != "":
+		if state == "active": velocity.x = -100 * $AnimatedSprite.scale.x
 		velocity.y += 20
 		velocity = move_and_slide(velocity, FLOOR)
-		if is_on_wall():
+		if is_on_wall() and state == "active":
 			$AnimatedSprite.scale.x *= -1
 	
 	# Kill states
@@ -37,14 +37,6 @@ func _physics_process(delta):
 		position += velocity * delta
 		velocity.y += 20
 		$AnimatedSprite.rotation_degrees += rotate
-	
-	if state == "squished":
-		velocity.x = 0
-		velocity.y += 20
-		velocity = move_and_slide(velocity, FLOOR)
-		collision_layer = 4
-		collision_mask = 0
-		$CollisionShape2D.disabled = false
 
 # Custom fireball death animation (optional)
 func fireball_kill():
@@ -69,8 +61,8 @@ func _on_Head_area_entered(area):
 		if player.sliding == true:
 			kill()
 			return
-		disable()
 		state = "squished"
+		velocity = Vector2(0,0)
 		$AnimationPlayer.play("squished")
 		$SFX/Squish.play()
 		player.call("bounce")
@@ -85,4 +77,4 @@ func _on_snowball_body_entered(body):
 
 # Die when knocked off stage
 func _on_VisibilityEnabler2D_screen_exited():
-	if state != "active": queue_free()
+	if state == "kill" or state == "": queue_free()
