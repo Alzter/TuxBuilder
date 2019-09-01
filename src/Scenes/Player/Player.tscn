@@ -1,64 +1,65 @@
-[gd_scene load_steps=55 format=2]
+[gd_scene load_steps=58 format=2]
 
 [ext_resource path="res://Scenes/Player/Player.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Stand.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/gameover-0.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/gameover-1.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/skid-0.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Fall4.png" type="Texture" id=6]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Fall1.png" type="Texture" id=7]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Fall2.png" type="Texture" id=8]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Fall3.png" type="Texture" id=9]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/stand-0.png" type="Texture" id=10]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Fall4.png" type="Texture" id=11]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk8.png" type="Texture" id=12]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk1.png" type="Texture" id=13]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk2.png" type="Texture" id=14]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk3.png" type="Texture" id=15]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk4.png" type="Texture" id=16]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk5.png" type="Texture" id=17]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk6.png" type="Texture" id=18]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk7.png" type="Texture" id=19]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Fall1.png" type="Texture" id=20]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Fall2.png" type="Texture" id=21]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Fall3.png" type="Texture" id=22]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk8.png" type="Texture" id=23]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk1.png" type="Texture" id=24]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk2.png" type="Texture" id=25]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk3.png" type="Texture" id=26]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk4.png" type="Texture" id=27]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk5.png" type="Texture" id=28]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk6.png" type="Texture" id=29]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk7.png" type="Texture" id=30]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/skid-0.png" type="Texture" id=31]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Jump1.png" type="Texture" id=32]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Jump2.png" type="Texture" id=33]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Jump3.png" type="Texture" id=34]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/duck-0.png" type="Texture" id=35]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Jump1.png" type="Texture" id=36]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Jump2.png" type="Texture" id=37]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Jump3.png" type="Texture" id=38]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/backflip.png" type="Texture" id=39]
-[ext_resource path="res://Audio/SoundEffects/jump.wav" type="AudioStream" id=40]
-[ext_resource path="res://Audio/SoundEffects/bigjump.wav" type="AudioStream" id=41]
-[ext_resource path="res://Audio/SoundEffects/flip.wav" type="AudioStream" id=42]
-[ext_resource path="res://Audio/SoundEffects/skid.wav" type="AudioStream" id=43]
-[ext_resource path="res://Audio/SoundEffects/shoot.wav" type="AudioStream" id=44]
-[ext_resource path="res://Audio/SoundEffects/hurt.wav" type="AudioStream" id=45]
-[ext_resource path="res://Audio/SoundEffects/kill.wav" type="AudioStream" id=46]
+[ext_resource path="res://Audio/SoundEffects/Bonus/invincible.wav" type="AudioStream" id=2]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Stand.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/backflip.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/gameover-0.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/gameover-1.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Fall4.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/duck-0.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Jump1.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Jump2.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Jump3.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/skid-0.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Fall1.png" type="Texture" id=13]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Fall2.png" type="Texture" id=14]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Fall3.png" type="Texture" id=15]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Fall4.png" type="Texture" id=16]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Fall1.png" type="Texture" id=17]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Fall2.png" type="Texture" id=18]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Fall3.png" type="Texture" id=19]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/stand-0.png" type="Texture" id=20]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Jump1.png" type="Texture" id=21]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Jump2.png" type="Texture" id=22]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Jump3.png" type="Texture" id=23]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk8.png" type="Texture" id=24]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk1.png" type="Texture" id=25]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk2.png" type="Texture" id=26]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk3.png" type="Texture" id=27]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk4.png" type="Texture" id=28]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk5.png" type="Texture" id=29]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk6.png" type="Texture" id=30]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Smalltuxwalk7.png" type="Texture" id=31]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/skid-0.png" type="Texture" id=32]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk8.png" type="Texture" id=33]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk1.png" type="Texture" id=34]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk2.png" type="Texture" id=35]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk3.png" type="Texture" id=36]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk4.png" type="Texture" id=37]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk5.png" type="Texture" id=38]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk6.png" type="Texture" id=39]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Bigtuxwalk7.png" type="Texture" id=40]
+[ext_resource path="res://Audio/SoundEffects/jump.wav" type="AudioStream" id=41]
+[ext_resource path="res://Audio/SoundEffects/bigjump.wav" type="AudioStream" id=42]
+[ext_resource path="res://Audio/SoundEffects/flip.wav" type="AudioStream" id=43]
+[ext_resource path="res://Audio/SoundEffects/skid.wav" type="AudioStream" id=44]
+[ext_resource path="res://Audio/SoundEffects/shoot.wav" type="AudioStream" id=45]
+[ext_resource path="res://Audio/SoundEffects/hurt.wav" type="AudioStream" id=46]
+[ext_resource path="res://Audio/SoundEffects/kill.wav" type="AudioStream" id=47]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Jump"
 length = 0.5
 tracks/0/type = "value"
-tracks/0/path = NodePath("Control:rect_scale")
+tracks/0/path = NodePath(".:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.3 ),
-"transitions": PoolRealArray( 0.5, 2, 1 ),
+"transitions": PoolRealArray( 1, 2, 1 ),
 "update": 0,
 "values": [ Vector2( 1, 1 ), Vector2( 0.95, 1.1 ), Vector2( 1, 1 ) ]
 }
@@ -107,96 +108,130 @@ tracks/0/keys = {
 "values": [ Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="SpriteFrames" id=5]
+[sub_resource type="Animation" id=5]
+resource_name = "HurtInvincibility"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true, false, true, false, true, false, true, false, true ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "InvincibleStar"
+length = 10.86
+tracks/0/type = "audio"
+tracks/0/path = NodePath("SFX/Invincible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 2 )
+} ],
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="SpriteFrames" id=7]
 animations = [ {
-"frames": [ ExtResource( 2 ) ],
+"frames": [ ExtResource( 3 ) ],
 "loop": true,
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 3 ), ExtResource( 4 ) ],
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "backflip",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 6 ) ],
 "loop": true,
 "name": "gameover",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 5 ) ],
-"loop": true,
-"name": "skid_small",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 6 ) ],
-"loop": false,
-"name": "fall",
-"speed": 16.0
-}, {
-"frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 6 ) ],
-"loop": false,
-"name": "fall_transition",
-"speed": 16.0
-}, {
-"frames": [ ExtResource( 10 ) ],
-"loop": true,
-"name": "idle_small",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 11 ) ],
+"frames": [ ExtResource( 7 ) ],
 "loop": false,
 "name": "fall_small",
 "speed": 16.0
 }, {
-"frames": [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ) ],
-"loop": true,
-"name": "walk",
-"speed": 20.0
-}, {
-"frames": [ ExtResource( 3 ), ExtResource( 4 ) ],
-"loop": true,
-"name": "gameover_small",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 20 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 11 ) ],
-"loop": false,
-"name": "fall_transition_small",
-"speed": 16.0
-}, {
-"frames": [ ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 30 ) ],
-"loop": true,
-"name": "walk_small",
-"speed": 20.0
-}, {
-"frames": [ ExtResource( 31 ) ],
-"loop": true,
-"name": "skid",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 32 ), ExtResource( 33 ), ExtResource( 34 ) ],
-"loop": false,
-"name": "jump",
-"speed": 16.0
-}, {
-"frames": [ ExtResource( 35 ) ],
+"frames": [ ExtResource( 8 ) ],
 "loop": true,
 "name": "duck",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 36 ), ExtResource( 37 ), ExtResource( 38 ) ],
+"frames": [ ExtResource( 5 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "gameover_small",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ],
 "loop": false,
 "name": "jump_small",
 "speed": 16.0
 }, {
-"frames": [ ExtResource( 39 ) ],
+"frames": [ ExtResource( 12 ) ],
 "loop": true,
-"name": "backflip",
+"name": "skid",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
+"loop": false,
+"name": "fall_transition",
+"speed": 16.0
+}, {
+"frames": [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 7 ) ],
+"loop": false,
+"name": "fall_transition_small",
+"speed": 16.0
+}, {
+"frames": [ ExtResource( 20 ) ],
+"loop": true,
+"name": "idle_small",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ) ],
+"loop": false,
+"name": "jump",
+"speed": 16.0
+}, {
+"frames": [ ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 31 ) ],
+"loop": true,
+"name": "walk_small",
+"speed": 20.0
+}, {
+"frames": [ ExtResource( 16 ) ],
+"loop": false,
+"name": "fall",
+"speed": 16.0
+}, {
+"frames": [ ExtResource( 32 ) ],
+"loop": true,
+"name": "skid_small",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 33 ), ExtResource( 34 ), ExtResource( 35 ), ExtResource( 36 ), ExtResource( 37 ), ExtResource( 38 ), ExtResource( 39 ), ExtResource( 40 ) ],
+"loop": true,
+"name": "walk",
+"speed": 20.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 15.5, 31 )
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 15.5, 1 )
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 15.5, 3 )
 
 [node name="Player" type="KinematicBody2D" groups=[
@@ -211,6 +246,10 @@ anims/Land = SubResource( 2 )
 anims/LandSmall = SubResource( 3 )
 anims/Stop = SubResource( 4 )
 
+[node name="AnimationPlayerInvincibility" type="AnimationPlayer" parent="."]
+anims/HurtInvincibility = SubResource( 5 )
+anims/InvincibleStar = SubResource( 6 )
+
 [node name="Control" type="Control" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
@@ -219,7 +258,7 @@ anchor_bottom = 0.5
 rect_pivot_offset = Vector2( 0, 38 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
-frames = SubResource( 5 )
+frames = SubResource( 7 )
 animation = "idle"
 offset = Vector2( 0, 1 )
 
@@ -227,7 +266,7 @@ offset = Vector2( 0, 1 )
 "player",
 ]]
 position = Vector2( 0, 7 )
-shape = SubResource( 6 )
+shape = SubResource( 8 )
 
 [node name="ShootLocation" type="Position2D" parent="."]
 position = Vector2( 16, 1 )
@@ -245,7 +284,7 @@ collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SquishRadius"]
 position = Vector2( 0, 37 )
-shape = SubResource( 7 )
+shape = SubResource( 9 )
 
 [node name="HeadAttack" type="Area2D" parent="." groups=[
 "head_attack",
@@ -253,28 +292,34 @@ shape = SubResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HeadAttack"]
 position = Vector2( 0, -21 )
-shape = SubResource( 8 )
+shape = SubResource( 10 )
 
 [node name="SFX" type="Node" parent="."]
 editor/display_folded = true
 
 [node name="Jump" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource( 40 )
-
-[node name="BigJump" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 41 )
 
-[node name="Flip" type="AudioStreamPlayer" parent="SFX"]
+[node name="BigJump" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 42 )
 
-[node name="Skid" type="AudioStreamPlayer" parent="SFX"]
+[node name="Flip" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 43 )
 
-[node name="Shoot" type="AudioStreamPlayer" parent="SFX"]
+[node name="Skid" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 44 )
 
-[node name="Hurt" type="AudioStreamPlayer" parent="SFX"]
+[node name="Shoot" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 45 )
 
-[node name="Kill" type="AudioStreamPlayer" parent="SFX"]
+[node name="Hurt" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 46 )
+
+[node name="Kill" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 47 )
+
+[node name="Invincible" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 2 )
+
+[node name="InvincibilityTimer" type="Timer" parent="."]
+[connection signal="timeout" from="InvincibilityTimer" to="." method="_on_InvincibilityTimer_timeout"]
