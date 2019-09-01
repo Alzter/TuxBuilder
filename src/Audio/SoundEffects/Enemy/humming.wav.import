@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/humming.wav-a06bada847c680f30e11eb84cb32a1e3.sample"
+path="res://.import/humming.wav-c00ee340c1044d423a55b5f6a132002a.sample"
 
 [deps]
 
-source_file="res://Audio/SoundEffects/humming.wav"
-dest_files=[ "res://.import/humming.wav-a06bada847c680f30e11eb84cb32a1e3.sample" ]
+source_file="res://Audio/SoundEffects/Enemy/humming.wav"
+dest_files=[ "res://.import/humming.wav-c00ee340c1044d423a55b5f6a132002a.sample" ]
 
 [params]
 

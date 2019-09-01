@@ -25,10 +25,12 @@ func _on_BottomHitbox_area_entered(area):
 			$AnimationPlayer.play("hit")
 			hit = true
 			if stored != "":
-				$Upgrade.play()
 				var child = load(str(stored)).instance()
 				child.position = position
-				child.position.y -= 32
+				if child.name != "Coin":
+					$Upgrade.play()
+					child.position.y -= 32
+				else: $Brick.play()
 				get_tree().current_scene.get_node("Level").add_child(child)
 				if child.has_method("appear"):
 					child.call("appear", hitdirection)

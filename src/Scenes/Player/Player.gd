@@ -352,14 +352,16 @@ func _physics_process(_delta):
 func star_invincibility():
 	using_star = true
 	invincible = true
-	$InvincibilityTimer.wait_time = 10.86
+	$InvincibilityTimer.wait_time = 14
 	$InvincibilityTimer.start()
+	$SFX/InvincibleStart.play()
+	get_tree().current_scene.play_music("invincible.ogg")
 	$AnimationPlayerInvincibility.play("InvincibleStar")
 	
 # Damage invincibility
 func damage_invincibility():
 	invincible_damage = true
-	$InvincibilityTimer.wait_time = 5
+	$InvincibilityTimer.wait_time = 1.8
 	$InvincibilityTimer.start()
 	$AnimationPlayerInvincibility.play("HurtInvincibility")
 	

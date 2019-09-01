@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/shoot.wav-4f362b18feb862fdb55608cc5173c228.sample"
+path="res://.import/kick.wav-2e098a7f4fc11745f5ffa0d5464bafe4.sample"
 
 [deps]
 
-source_file="res://Audio/SoundEffects/shoot.wav"
-dest_files=[ "res://.import/shoot.wav-4f362b18feb862fdb55608cc5173c228.sample" ]
+source_file="res://Audio/SoundEffects/Player/kick.wav"
+dest_files=[ "res://.import/kick.wav-2e098a7f4fc11745f5ffa0d5464bafe4.sample" ]
 
 [params]
 

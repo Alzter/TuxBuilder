@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/kick.wav-6f1169dad78477eebd5ed4ba7ff32f1f.sample"
+path="res://.import/upgrade.wav-1080a24083cf63936a1aeeedd3decf5e.sample"
 
 [deps]
 
-source_file="res://Audio/SoundEffects/kick.wav"
-dest_files=[ "res://.import/kick.wav-6f1169dad78477eebd5ed4ba7ff32f1f.sample" ]
+source_file="res://Audio/SoundEffects/Bonus/upgrade.wav"
+dest_files=[ "res://.import/upgrade.wav-1080a24083cf63936a1aeeedd3decf5e.sample" ]
 
 [params]
 

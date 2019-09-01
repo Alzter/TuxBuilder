@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/kill.wav-9dd4d60d09965ea43be15feb5f3cb92c.sample"
+path="res://.import/flip.wav-7f2cd2042e13ff26bab74ea42710a9a2.sample"
 
 [deps]
 
-source_file="res://Audio/SoundEffects/kill.wav"
-dest_files=[ "res://.import/kill.wav-9dd4d60d09965ea43be15feb5f3cb92c.sample" ]
+source_file="res://Audio/SoundEffects/Player/flip.wav"
+dest_files=[ "res://.import/flip.wav-7f2cd2042e13ff26bab74ea42710a9a2.sample" ]
 
 [params]
 

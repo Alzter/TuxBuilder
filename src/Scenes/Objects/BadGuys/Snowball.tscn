@@ -10,9 +10,9 @@
 [ext_resource path="res://Sprites/Creatures/Snowball/snowball-6.png" type="Texture" id=8]
 [ext_resource path="res://Sprites/Creatures/Snowball/snowball-7.png" type="Texture" id=9]
 [ext_resource path="res://Sprites/Creatures/Snowball/squished-left.png" type="Texture" id=10]
-[ext_resource path="res://Audio/SoundEffects/fall.wav" type="AudioStream" id=11]
-[ext_resource path="res://Audio/SoundEffects/squish.wav" type="AudioStream" id=12]
-[ext_resource path="res://Audio/SoundEffects/splash.ogg" type="AudioStream" id=13]
+[ext_resource path="res://Audio/SoundEffects/Enemy/fall.wav" type="AudioStream" id=11]
+[ext_resource path="res://Audio/SoundEffects/Enemy/squish.wav" type="AudioStream" id=12]
+[ext_resource path="res://Audio/SoundEffects/Enemy/splash.ogg" type="AudioStream" id=13]
 [ext_resource path="res://Sprites/Creatures/Snowball/particle.png" type="Texture" id=14]
 [ext_resource path="res://Sprites/Creatures/Snowball/droplet.png" type="Texture" id=15]
 
@@ -251,7 +251,7 @@ border_color = Color( 1, 0, 0, 0 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
-frame = 2
+frame = 5
 playing = true
 offset = Vector2( 0, -3 )
 

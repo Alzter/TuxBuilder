@@ -1,8 +1,8 @@
 [gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scenes/Objects/Bonus/BonusBlock.gd" type="Script" id=1]
-[ext_resource path="res://Audio/SoundEffects/brick.wav" type="AudioStream" id=2]
-[ext_resource path="res://Audio/SoundEffects/upgrade.wav" type="AudioStream" id=3]
+[ext_resource path="res://Audio/SoundEffects/Player/brick.wav" type="AudioStream" id=2]
+[ext_resource path="res://Audio/SoundEffects/Bonus/upgrade.wav" type="AudioStream" id=3]
 [ext_resource path="res://Sprites/Objects/BonusBlock/empty.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/Objects/BonusBlock/full-0.png" type="Texture" id=5]
 [ext_resource path="res://Sprites/Objects/BonusBlock/full-1.png" type="Texture" id=6]
@@ -103,7 +103,7 @@ anims/hit = SubResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 3 )
-frame = 6
+frame = 7
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

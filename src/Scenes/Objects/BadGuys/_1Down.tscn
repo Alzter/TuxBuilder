@@ -1,8 +1,8 @@
 [gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scenes/Objects/BadGuys/_1Down.gd" type="Script" id=1]
-[ext_resource path="res://Audio/SoundEffects/humming.wav" type="AudioStream" id=2]
-[ext_resource path="res://Audio/SoundEffects/explode.wav" type="AudioStream" id=3]
+[ext_resource path="res://Audio/SoundEffects/Enemy/humming.wav" type="AudioStream" id=2]
+[ext_resource path="res://Audio/SoundEffects/Enemy/explode.wav" type="AudioStream" id=3]
 [ext_resource path="res://Sprites/Objects/1Up/glow.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/Objects/1Down/1down.png" type="Texture" id=5]
 [ext_resource path="res://Sprites/Objects/1Up/glimmer.png" type="Texture" id=6]
@@ -276,16 +276,16 @@ tracks/11/keys = {
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 17, 17 )
 
-[sub_resource type="Curve" id=8]
+[sub_resource type="Curve" id=5]
 _data = [ Vector2( 0.00295858, 1 ), 0.0, 0.642983, 0, 0, Vector2( 1, 0 ), -3.22841, 0.0, 0, 0 ]
 
 [sub_resource type="Gradient" id=6]
 colors = PoolColorArray( 0.662745, 0, 0, 1, 0, 0, 0, 0 )
 
-[sub_resource type="Curve" id=5]
+[sub_resource type="Curve" id=7]
 _data = [ Vector2( 0.00295858, 1 ), 0.0, 0.642983, 0, 0, Vector2( 1, 0.00679398 ), -3.98978, 0.0, 0, 0 ]
 
-[sub_resource type="Gradient" id=7]
+[sub_resource type="Gradient" id=8]
 offsets = PoolRealArray( 0.0206897, 0.558621, 1 )
 colors = PoolColorArray( 1, 0, 0, 0.792157, 1, 0, 0.207843, 0.670588, 0.414063, 0, 0.35907, 0 )
 
@@ -322,7 +322,7 @@ gravity = Vector2( 0, -200 )
 initial_velocity = 50.0
 damping = 100.0
 scale_amount = 2.75
-scale_amount_curve = SubResource( 8 )
+scale_amount_curve = SubResource( 5 )
 color_ramp = SubResource( 6 )
 
 [node name="CPUParticles2D3" type="CPUParticles2D" parent="."]
@@ -336,8 +336,8 @@ gravity = Vector2( 0, -175 )
 initial_velocity = 50.0
 damping = 100.0
 scale_amount = 1.25
-scale_amount_curve = SubResource( 5 )
-color_ramp = SubResource( 7 )
+scale_amount_curve = SubResource( 7 )
+color_ramp = SubResource( 8 )
 
 [node name="Sprite" type="Sprite" parent="."]
 editor/display_folded = true
@@ -366,6 +366,6 @@ gravity = Vector2( 0, -175 )
 initial_velocity = 50.0
 damping = 100.0
 scale_amount = 1.25
-scale_amount_curve = SubResource( 5 )
-color_ramp = SubResource( 7 )
+scale_amount_curve = SubResource( 7 )
+color_ramp = SubResource( 8 )
 [connection signal="body_entered" from="." to="." method="_on_1Up_body_entered"]

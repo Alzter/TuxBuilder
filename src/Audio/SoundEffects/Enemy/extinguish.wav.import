@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/extinguish.wav-1530e513f400f4b5127fb20a513d66dc.sample"
+
+[deps]
+
+source_file="res://Audio/SoundEffects/Enemy/extinguish.wav"
+dest_files=[ "res://.import/extinguish.wav-1530e513f400f4b5127fb20a513d66dc.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

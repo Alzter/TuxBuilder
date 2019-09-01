@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/flip.wav-0a74ee27fb0a7f184bf57541ea2f2e89.sample"
+path="res://.import/bigjump.wav-aef86937f6d2cf081a01e20652be09ec.sample"
 
 [deps]
 
-source_file="res://Audio/SoundEffects/flip.wav"
-dest_files=[ "res://.import/flip.wav-0a74ee27fb0a7f184bf57541ea2f2e89.sample" ]
+source_file="res://Audio/SoundEffects/Player/bigjump.wav"
+dest_files=[ "res://.import/bigjump.wav-aef86937f6d2cf081a01e20652be09ec.sample" ]
 
 [params]
 

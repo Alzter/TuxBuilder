@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/stomp.wav-8e3c0a06531ccb83248277eebc5ea45d.sample"
+path="res://.import/shoot.wav-f5a3f5182edff725c24da6c38bf1c007.sample"
 
 [deps]
 
-source_file="res://Audio/SoundEffects/stomp.wav"
-dest_files=[ "res://.import/stomp.wav-8e3c0a06531ccb83248277eebc5ea45d.sample" ]
+source_file="res://Audio/SoundEffects/Player/shoot.wav"
+dest_files=[ "res://.import/shoot.wav-f5a3f5182edff725c24da6c38bf1c007.sample" ]
 
 [params]
 

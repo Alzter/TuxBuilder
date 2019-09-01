@@ -7,7 +7,6 @@
 [ext_resource path="res://Sprites/Objects/FireFlower/fire_flower-3.png" type="Texture" id=5]
 [ext_resource path="res://Audio/SoundEffects/Bonus/fire-flower.wav" type="AudioStream" id=6]
 
-
 [sub_resource type="Animation" id=1]
 resource_name = "appear"
 
@@ -95,7 +94,7 @@ physics_process_parent = true
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 visible = false
 frames = SubResource( 4 )
-frame = 4
+frame = 5
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

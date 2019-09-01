@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/fall.wav-3af97dbfeaab4fe8a07043f94445de48.sample"
+path="res://.import/skid.wav-35a696278c4961d97ef70be662260789.sample"
 
 [deps]
 
-source_file="res://Audio/SoundEffects/fall.wav"
-dest_files=[ "res://.import/fall.wav-3af97dbfeaab4fe8a07043f94445de48.sample" ]
+source_file="res://Audio/SoundEffects/Player/skid.wav"
+dest_files=[ "res://.import/skid.wav-35a696278c4961d97ef70be662260789.sample" ]
 
 [params]
 

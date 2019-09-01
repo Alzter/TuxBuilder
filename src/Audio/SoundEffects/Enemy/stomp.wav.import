@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/brick.wav-b54644fbd90bc00c8127c268613da3a6.sample"
+path="res://.import/stomp.wav-b1022596026d18791e57b523abf0fadd.sample"
 
 [deps]
 
-source_file="res://Audio/SoundEffects/brick.wav"
-dest_files=[ "res://.import/brick.wav-b54644fbd90bc00c8127c268613da3a6.sample" ]
+source_file="res://Audio/SoundEffects/Enemy/stomp.wav"
+dest_files=[ "res://.import/stomp.wav-b1022596026d18791e57b523abf0fadd.sample" ]
 
 [params]
 

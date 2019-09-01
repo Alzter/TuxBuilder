@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/upgrade.wav-0fa73b5cb7d005c104ed2adc90628fc3.sample"
+path="res://.import/kill.wav-4e09583a4cb5e83a9959b4d5465c5cdf.sample"
 
 [deps]
 
-source_file="res://Audio/SoundEffects/upgrade.wav"
-dest_files=[ "res://.import/upgrade.wav-0fa73b5cb7d005c104ed2adc90628fc3.sample" ]
+source_file="res://Audio/SoundEffects/Player/kill.wav"
+dest_files=[ "res://.import/kill.wav-4e09583a4cb5e83a9959b4d5465c5cdf.sample" ]
 
 [params]
 

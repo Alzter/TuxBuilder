@@ -192,3 +192,7 @@ func camera_to_level_bounds():
 		$Camera2D.limit_top = get_viewport().size.y * -1
 	$Camera2D.limit_bottom = level_bound_bottom
 
+func play_music(music):
+	$Music.stop()
+	$Music.play()
+

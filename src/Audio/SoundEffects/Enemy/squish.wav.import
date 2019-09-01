@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/jump.wav-93e82ea02e74114613fccb1a7088b64a.sample"
+path="res://.import/squish.wav-99db692a08a95eb7fc2f94653c22b225.sample"
 
 [deps]
 
-source_file="res://Audio/SoundEffects/jump.wav"
-dest_files=[ "res://.import/jump.wav-93e82ea02e74114613fccb1a7088b64a.sample" ]
+source_file="res://Audio/SoundEffects/Enemy/squish.wav"
+dest_files=[ "res://.import/squish.wav-99db692a08a95eb7fc2f94653c22b225.sample" ]
 
 [params]
 

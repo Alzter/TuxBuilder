@@ -4,8 +4,8 @@
 [ext_resource path="res://Scenes/Objects/Misc/SpawnPoint.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Editor/Layers/TileMap.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Tilesets/LevelTiles.tres" type="TileSet" id=4]
-[ext_resource path="res://Scenes/Objects/Bonus/BonusBlock.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Objects/Bonus/BonusBlock.gd" type="Script" id=6]
+[ext_resource path="res://Scenes/Objects/Bonus/Star.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Objects/Bonus/Star.gd" type="Script" id=6]
 
 [node name="Level" type="Node2D"]
 
@@ -46,82 +46,8 @@ collision_layer = 0
 collision_mask = 0
 format = 1
 
-[node name="BonusBlocktscn" type="StaticBody2D" parent="." groups=[
-"stackable",
-] instance=ExtResource( 5 )]
+[node name="Startscn" type="Area2D" parent="." instance=ExtResource( 5 )]
 position = Vector2( 16, 176 )
-collision_layer = 519
-collision_mask = 519
+scale = Vector2( 1.25, 1.25 )
 script = ExtResource( 6 )
-
-[node name="@BonusBlocktscn@22" type="StaticBody2D" parent="." groups=[
-"stackable",
-] instance=ExtResource( 5 )]
-position = Vector2( 48, 176 )
-collision_layer = 519
-collision_mask = 519
-script = ExtResource( 6 )
-
-[node name="@BonusBlocktscn@23" type="StaticBody2D" parent="." groups=[
-"stackable",
-] instance=ExtResource( 5 )]
-position = Vector2( 80, 176 )
-collision_layer = 519
-collision_mask = 519
-script = ExtResource( 6 )
-
-[node name="@BonusBlocktscn@24" type="StaticBody2D" parent="." groups=[
-"stackable",
-] instance=ExtResource( 5 )]
-position = Vector2( 112, 176 )
-collision_layer = 519
-collision_mask = 519
-script = ExtResource( 6 )
-
-[node name="@BonusBlocktscn@25" type="StaticBody2D" parent="." groups=[
-"stackable",
-] instance=ExtResource( 5 )]
-position = Vector2( 144, 176 )
-collision_layer = 519
-collision_mask = 519
-script = ExtResource( 6 )
-
-[node name="@BonusBlocktscn@26" type="StaticBody2D" parent="." groups=[
-"stackable",
-] instance=ExtResource( 5 )]
-position = Vector2( 176, 176 )
-collision_layer = 519
-collision_mask = 519
-script = ExtResource( 6 )
-
-[node name="@BonusBlocktscn@27" type="StaticBody2D" parent="." groups=[
-"stackable",
-] instance=ExtResource( 5 )]
-position = Vector2( 208, 176 )
-collision_layer = 519
-collision_mask = 519
-script = ExtResource( 6 )
-
-[node name="@BonusBlocktscn@28" type="StaticBody2D" parent="." groups=[
-"stackable",
-] instance=ExtResource( 5 )]
-position = Vector2( 240, 176 )
-collision_layer = 519
-collision_mask = 519
-script = ExtResource( 6 )
-
-[node name="@BonusBlocktscn@29" type="StaticBody2D" parent="." groups=[
-"stackable",
-] instance=ExtResource( 5 )]
-position = Vector2( 272, 176 )
-collision_layer = 519
-collision_mask = 519
-script = ExtResource( 6 )
-
-[node name="@BonusBlocktscn@30" type="StaticBody2D" parent="." groups=[
-"stackable",
-] instance=ExtResource( 5 )]
-position = Vector2( 304, 176 )
-collision_layer = 519
-collision_mask = 519
-script = ExtResource( 6 )
+[connection signal="body_entered" from="Startscn" to="Startscn" method="_on_Star_body_entered"]
