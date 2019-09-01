@@ -37,7 +37,6 @@ const LEDGE_JUMP = 3
 const FIREBALL_SPEED = 500
 
 var velocity = Vector2()
-var old_velocity = Vector2(0,0) # To detect when Tux hits a ceiling
 var on_ground = 999 # Frames Tux has been in air (0 if grounded)
 var jumpheld = 0 # Amount of frames jump has been help
 var jumpcancel = false # Can let go of jump to stop vertical ascent

@@ -10,7 +10,7 @@
 [ext_resource path="res://Sprites/Objects/BonusBlock/full-3.png" type="Texture" id=8]
 [ext_resource path="res://Sprites/Objects/BonusBlock/full-4.png" type="Texture" id=9]
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=1]
 resource_name = "default"
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:position")
@@ -37,7 +37,7 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=2]
 resource_name = "hit"
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:position")
@@ -64,7 +64,7 @@ tracks/1/keys = {
 "values": [ Vector2( 1.25, 1.25 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="SpriteFrames" id=3]
 animations = [ {
 "frames": [ ExtResource( 4 ) ],
 "loop": true,
@@ -77,10 +77,10 @@ animations = [ {
 "speed": 15.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 16, 16 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 16, 4 )
 
 [node name="BonusBlock" type="StaticBody2D" groups=[
@@ -98,20 +98,20 @@ stream = ExtResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "default"
-anims/default = SubResource( 4 )
-anims/hit = SubResource( 5 )
+anims/default = SubResource( 1 )
+anims/hit = SubResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-frames = SubResource( 1 )
-frame = 5
+frames = SubResource( 3 )
+frame = 6
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 2 )
+shape = SubResource( 4 )
 
 [node name="BottomHitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BottomHitbox"]
 position = Vector2( 0, 13 )
-shape = SubResource( 3 )
+shape = SubResource( 5 )
 [connection signal="area_entered" from="BottomHitbox" to="." method="_on_BottomHitbox_area_entered"]
