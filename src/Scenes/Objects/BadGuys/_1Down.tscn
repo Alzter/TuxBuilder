@@ -315,6 +315,7 @@ shape = SubResource( 4 )
 [node name="CPUParticles2D2" type="CPUParticles2D" parent="."]
 position = Vector2( 0, 5 )
 amount = 16
+preprocess = 16.0
 local_coords = false
 texture = ExtResource( 4 )
 spread = 180.0
@@ -328,8 +329,8 @@ color_ramp = SubResource( 6 )
 [node name="CPUParticles2D3" type="CPUParticles2D" parent="."]
 position = Vector2( 0, 10 )
 amount = 32
+preprocess = 16.0
 speed_scale = 3.0
-local_coords = false
 texture = ExtResource( 4 )
 spread = 180.0
 gravity = Vector2( 0, -175 )
@@ -346,12 +347,14 @@ texture = ExtResource( 5 )
 [node name="Sprite2" type="Sprite" parent="Sprite"]
 self_modulate = Color( 1, 0, 0, 1 )
 position = Vector2( -3, -9.5 )
+rotation = 6.28319
 scale = Vector2( 1e-005, 1e-005 )
 texture = ExtResource( 6 )
 
 [node name="Sprite3" type="Sprite" parent="Sprite"]
 self_modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 3, -9.5 )
+rotation = -6.28319
 scale = Vector2( 1e-005, 1e-005 )
 texture = ExtResource( 6 )
 

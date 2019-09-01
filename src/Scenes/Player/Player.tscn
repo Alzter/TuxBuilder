@@ -142,6 +142,15 @@ tracks/0/keys = {
 "values": [ true ]
 }
 
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 15.5, 31 )
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 15.5, 1 )
+
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 15.5, 3 )
+
 [sub_resource type="SpriteFrames" id=8]
 animations = [ {
 "frames": [ ExtResource( 2 ) ],
@@ -225,15 +234,6 @@ animations = [ {
 "speed": 10.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 15.5, 31 )
-
-[sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 15.5, 1 )
-
-[sub_resource type="RectangleShape2D" id=11]
-extents = Vector2( 15.5, 3 )
-
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
 ]]
@@ -252,7 +252,44 @@ anims/HurtInvincibility = SubResource( 5 )
 anims/InvincibleStar = SubResource( 6 )
 anims/Stop = SubResource( 7 )
 
+[node name="Hitbox" type="CollisionShape2D" parent="." groups=[
+"player",
+]]
+position = Vector2( 0, 1 )
+shape = SubResource( 9 )
+
+[node name="SquishRadius" type="Area2D" parent="." groups=[
+"bottom",
+]]
+editor/display_folded = true
+position = Vector2( 0, -6 )
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SquishRadius"]
+position = Vector2( 0, 37 )
+shape = SubResource( 10 )
+
+[node name="HeadAttack" type="Area2D" parent="." groups=[
+"head_attack",
+]]
+editor/display_folded = true
+position = Vector2( 0, -6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HeadAttack"]
+position = Vector2( 0, -21 )
+shape = SubResource( 11 )
+
+[node name="ShootLocation" type="Position2D" parent="."]
+position = Vector2( 16, 1 )
+
+[node name="StandWindow" type="RayCast2D" parent="."]
+position = Vector2( 0, 31 )
+enabled = true
+cast_to = Vector2( 0, -32 )
+collision_mask = 512
+
 [node name="Control" type="Control" parent="."]
+editor/display_folded = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -264,41 +301,8 @@ frames = SubResource( 8 )
 animation = "idle"
 offset = Vector2( 0, -4 )
 
-[node name="Hitbox" type="CollisionShape2D" parent="." groups=[
-"player",
-]]
-position = Vector2( 0, 1 )
-shape = SubResource( 9 )
-
-[node name="ShootLocation" type="Position2D" parent="."]
-position = Vector2( 16, 1 )
-
-[node name="StandWindow" type="RayCast2D" parent="."]
-position = Vector2( 0, 31 )
-enabled = true
-cast_to = Vector2( 0, -32 )
-collision_mask = 512
-
-[node name="SquishRadius" type="Area2D" parent="." groups=[
-"bottom",
-]]
-position = Vector2( 0, -6 )
-collision_layer = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SquishRadius"]
-position = Vector2( 0, 37 )
-shape = SubResource( 10 )
-
-[node name="HeadAttack" type="Area2D" parent="." groups=[
-"head_attack",
-]]
-position = Vector2( 0, -6 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HeadAttack"]
-position = Vector2( 0, -21 )
-shape = SubResource( 11 )
-
 [node name="SFX" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="Jump" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 40 )

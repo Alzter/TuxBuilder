@@ -128,3 +128,6 @@ func _on_snowball_body_entered(body):
 # Die when knocked off stage
 func _on_VisibilityEnabler2D_screen_exited():
 	if state == "kill" or state == "": queue_free()
+
+func appear(dir):
+	$Control/AnimatedSprite.scale.x = -dir

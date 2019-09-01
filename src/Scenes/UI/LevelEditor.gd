@@ -152,9 +152,10 @@ func _process(_delta):
 		$GrabSprite.visible = false
 		if object_dragged != "Player":
 			get_tree().current_scene.get_node(str("Level/", object_dragged)).scale -= Vector2(0.25,0.25)
-			for child in get_tree().current_scene.get_node("Level").get_children():
-				if child.position == $SelectedTile.position and child.get_name() != object_dragged and not child.is_in_group("stackable"):
-					child.queue_free()
+			if not get_tree().current_scene.get_node(str("Level/", object_dragged)).is_in_group("stackable"):
+				for child in get_tree().current_scene.get_node("Level").get_children():
+					if child.position == $SelectedTile.position and child.get_name() != object_dragged and not child.is_in_group("stackable"):
+						child.queue_free()
 		else: get_tree().current_scene.get_node("Player/Control/AnimatedSprite").scale -= Vector2(0.25,0.25)
 	
 	# Drag the object

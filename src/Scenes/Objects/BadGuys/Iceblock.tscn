@@ -10,8 +10,17 @@
 [ext_resource path="res://Audio/SoundEffects/Enemy/kick.wav" type="AudioStream" id=8]
 [ext_resource path="res://Audio/SoundEffects/Enemy/iceblock_bump.wav" type="AudioStream" id=9]
 [ext_resource path="res://Audio/SoundEffects/Enemy/splash.ogg" type="AudioStream" id=10]
-[ext_resource path="res://Sprites/Creatures/Snowball/particle.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/Creatures/Iceblock/shard.png" type="Texture" id=11]
 [ext_resource path="res://Sprites/Creatures/Snowball/droplet.png" type="Texture" id=12]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 16, 15 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 12, 6 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 16, 15 )
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -25,15 +34,6 @@ animations = [ {
 "name": "squished",
 "speed": 5.0
 } ]
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 16, 15 )
-
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 12, 6 )
-
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 16, 15 )
 
 [sub_resource type="Animation" id=5]
 resource_name = "active"
@@ -89,25 +89,13 @@ tracks/3/keys = {
 [sub_resource type="Animation" id=6]
 resource_name = "explode"
 length = 2.0
-tracks/0/type = "value"
-tracks/0/path = NodePath("ExplodeSnow:emitting")
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/1/type = "method"
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
 "times": PoolRealArray( 2 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
@@ -115,8 +103,20 @@ tracks/1/keys = {
 "method": "queue_free"
 } ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("ExplodeDroplets:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 tracks/2/type = "value"
-tracks/2/path = NodePath("ExplodeDroplets:emitting")
+tracks/2/path = NodePath("Control/AnimatedSprite:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -125,10 +125,10 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ true ]
+"values": [ false ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Control/AnimatedSprite:visible")
+tracks/3/path = NodePath("IceShards:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -137,7 +137,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ false ]
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=10]
@@ -184,10 +184,22 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Vector2( 1.6, 0.5 ), Vector2( 1, 1 ) ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("IceShards:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
-[sub_resource type="Gradient" id=8]
-offsets = PoolRealArray( 0, 0.762821, 1 )
-colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0.443137, 1, 1, 1, 0 )
+[sub_resource type="Gradient" id=12]
+offsets = PoolRealArray( 0, 0.646552, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0.941176, 0.339844, 0.922334, 1, 0 )
 
 [sub_resource type="Gradient" id=9]
 offsets = PoolRealArray( 0, 0.467949, 1 )
@@ -203,19 +215,6 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Control" type="Control" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-rect_pivot_offset = Vector2( 0, 14 )
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
-frames = SubResource( 1 )
-animation = "squished"
-playing = true
-offset = Vector2( 0, -2 )
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
 
@@ -224,15 +223,31 @@ rect = Rect2( -64, -512, 128, 1024 )
 physics_process_parent = true
 
 [node name="Head" type="Area2D" parent="."]
+editor/display_folded = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Head"]
 position = Vector2( 0, -14 )
 shape = SubResource( 3 )
 
 [node name="Area2D" type="Area2D" parent="."]
+editor/display_folded = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 4 )
+
+[node name="Control" type="Control" parent="."]
+editor/display_folded = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+rect_pivot_offset = Vector2( 0, 14 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
+frames = SubResource( 1 )
+frame = 1
+playing = true
+offset = Vector2( 0, -2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "active"
@@ -258,26 +273,27 @@ stream = ExtResource( 9 )
 [node name="Melt" type="AudioStreamPlayer2D" parent="SFX"]
 stream = ExtResource( 10 )
 
-[node name="ExplodeSnow" type="CPUParticles2D" parent="."]
+[node name="IceShards" type="CPUParticles2D" parent="."]
+rotation = -1.5708
 emitting = false
 amount = 4
+lifetime = 0.6
 one_shot = true
 explosiveness = 1.0
 local_coords = false
 texture = ExtResource( 11 )
-spread = 180.0
+spread = 60.0
 flatness = 1.0
-gravity = Vector2( 0, 1200 )
-initial_velocity = 600.0
-initial_velocity_random = 0.5
-angular_velocity = 720.0
-angular_velocity_random = 1.0
-damping = 100.0
-damping_random = 0.25
-angle = 360.0
+gravity = Vector2( 0, 500 )
+initial_velocity = 250.0
+angular_velocity = 1000.0
+angular_velocity_random = 0.75
+damping = 50.0
+angle = 720.0
 angle_random = 1.0
-scale_amount_random = 0.25
-color_ramp = SubResource( 8 )
+scale_amount = 0.1
+scale_amount_random = 0.5
+color_ramp = SubResource( 12 )
 
 [node name="ExplodeDroplets" type="CPUParticles2D" parent="."]
 emitting = false

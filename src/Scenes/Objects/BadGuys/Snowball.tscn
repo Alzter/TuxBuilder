@@ -16,6 +16,15 @@
 [ext_resource path="res://Sprites/Creatures/Snowball/particle.png" type="Texture" id=14]
 [ext_resource path="res://Sprites/Creatures/Snowball/droplet.png" type="Texture" id=15]
 
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 16, 15 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 12, 6 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 16, 15 )
+
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
@@ -28,15 +37,6 @@ animations = [ {
 "name": "squished",
 "speed": 5.0
 } ]
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 16, 15 )
-
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 12, 6 )
-
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 16, 15 )
 
 [sub_resource type="Animation" id=5]
 resource_name = "active"
@@ -207,10 +207,22 @@ tracks/3/keys = {
 "update": 0,
 "values": [ Vector2( 1.6, 0.5 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 2, 0 ) ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("ExplodeSnow:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Gradient" id=8]
 offsets = PoolRealArray( 0, 0.762821, 1 )
-colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0.443137, 1, 1, 1, 0 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0.443137, 0, 1, 0.882813, 0 )
 
 [sub_resource type="Gradient" id=9]
 offsets = PoolRealArray( 0, 0.467949, 1 )
@@ -226,7 +238,28 @@ __meta__ = {
 "_edit_group_": true
 }
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+rect = Rect2( -64, -512, 128, 1024 )
+physics_process_parent = true
+
+[node name="Head" type="Area2D" parent="."]
+editor/display_folded = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Head"]
+position = Vector2( 0, -14 )
+shape = SubResource( 3 )
+
+[node name="Area2D" type="Area2D" parent="."]
+editor/display_folded = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 4 )
+
 [node name="Control" type="Control" parent="."]
+editor/display_folded = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -236,27 +269,9 @@ rect_pivot_offset = Vector2( 0, 14 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
 position = Vector2( 0, 6.31594e-013 )
 frames = SubResource( 1 )
-frame = 4
+animation = "squished"
 playing = true
 offset = Vector2( 0, -2 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 2 )
-
-[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
-rect = Rect2( -64, -512, 128, 1024 )
-physics_process_parent = true
-
-[node name="Head" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Head"]
-position = Vector2( 0, -14 )
-shape = SubResource( 3 )
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "active"
@@ -265,6 +280,7 @@ anims/explode = SubResource( 6 )
 anims/squished = SubResource( 7 )
 
 [node name="SFX" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="Fall" type="AudioStreamPlayer2D" parent="SFX"]
 stream = ExtResource( 11 )
@@ -276,24 +292,26 @@ stream = ExtResource( 12 )
 stream = ExtResource( 13 )
 
 [node name="ExplodeSnow" type="CPUParticles2D" parent="."]
+rotation = -1.5708
 emitting = false
 amount = 4
 one_shot = true
+speed_scale = 1.5
 explosiveness = 1.0
 local_coords = false
 texture = ExtResource( 14 )
-spread = 180.0
+spread = 60.0
 flatness = 1.0
-gravity = Vector2( 0, 1200 )
-initial_velocity = 600.0
-initial_velocity_random = 0.5
+gravity = Vector2( 0, 500 )
+initial_velocity = 250.0
 angular_velocity = 720.0
 angular_velocity_random = 1.0
-damping = 100.0
+damping = 80.0
 damping_random = 0.25
 angle = 360.0
 angle_random = 1.0
-scale_amount_random = 0.25
+scale_amount = 0.2
+scale_amount_random = 0.75
 color_ramp = SubResource( 8 )
 
 [node name="ExplodeDroplets" type="CPUParticles2D" parent="."]
