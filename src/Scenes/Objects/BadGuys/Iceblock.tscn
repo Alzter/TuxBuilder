@@ -291,10 +291,10 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray(  ),
-"transitions": PoolRealArray(  ),
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
 "update": 2,
-"values": [  ]
+"values": [ "active" ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Control/AnimatedSprite:animation")

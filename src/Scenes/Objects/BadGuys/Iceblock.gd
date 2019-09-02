@@ -143,12 +143,15 @@ func appear(dir):
 	$Control/AnimatedSprite.scale.x = -dir
 
 func _on_WakeupTimer_timeout():
+	$WakeupTimer.stop()
 	if state == "squished":
 		$AnimationPlayer.stop()
 		$AnimationPlayer.play("shake")
 		$ShakeTimer.start(1)
 
-
 func _on_ShakeTimer_timeout():
-	$AnimationPlayer.play("wakeup")
-	state = "active"
+	$ShakeTimer.stop()
+	$WakeupTimer.stop()
+	if state == "squished":
+		$AnimationPlayer.play("wakeup")
+		state = "active"
