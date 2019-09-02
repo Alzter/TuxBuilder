@@ -92,6 +92,8 @@ func _on_Head_area_entered(area):
 				$AnimationPlayer.play("squished")
 				$SFX/Squish.play()
 				player.call("bounce")
+				$ShakeTimer.stop()
+				$WakeupTimer.start(5)
 				
 			elif state == "squished":
 				$AnimationPlayer.play("squished")
@@ -139,3 +141,14 @@ func _on_VisibilityEnabler2D_screen_exited():
 
 func appear(dir):
 	$Control/AnimatedSprite.scale.x = -dir
+
+func _on_WakeupTimer_timeout():
+	if state == "squished":
+		$AnimationPlayer.stop()
+		$AnimationPlayer.play("shake")
+		$ShakeTimer.start(1)
+
+
+func _on_ShakeTimer_timeout():
+	$AnimationPlayer.play("wakeup")
+	state = "active"
