@@ -229,7 +229,7 @@ func _process(_delta):
 						object.set_name(objectname)
 					
 					# Drag object by default
-					if not Input.is_action_pressed("action"):
+					if not Input.is_action_pressed("action") or object.is_in_group("oneonly"):
 						dragging_object = true
 						object_dragged = object.get_name()
 						object.scale += Vector2(0.25,0.25)
