@@ -3,7 +3,9 @@
 [ext_resource path="res://Scenes/Objects/Misc/SpawnPoint.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Objects/Misc/spawnpoint.png" type="Texture" id=2]
 
-[node name="SpawnPoint" type="Position2D"]
+[node name="SpawnPoint" type="Position2D" groups=[
+"oneonly",
+]]
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]

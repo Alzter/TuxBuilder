@@ -216,6 +216,14 @@ func _process(_delta):
 					get_tree().current_scene.get_node("Level").add_child(object)
 					object.set_owner(get_tree().current_scene.get_node("Level"))
 					object.set_name(object_type)
+					
+					# If the object is in the group "oneonly", delete all other instances of it
+					if object.is_in_group("oneonly"):
+						for child in get_tree().current_scene.get_node("Level").get_children():
+							if child.filename == object.filename and not child.is_in_group("layers"):
+								if child.name != object.name: child.queue_free()
+					
+					# Drag object by default
 					if not Input.is_action_pressed("action"):
 						dragging_object = true
 						object_dragged = object.get_name()
