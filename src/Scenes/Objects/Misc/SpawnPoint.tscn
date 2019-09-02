@@ -5,6 +5,7 @@
 
 [node name="SpawnPoint" type="Position2D" groups=[
 "oneonly",
+"spawnpoint",
 ]]
 script = ExtResource( 1 )
 

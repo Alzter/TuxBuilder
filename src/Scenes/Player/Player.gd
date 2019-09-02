@@ -88,9 +88,10 @@ func kill():
 		velocity = Vector2 (0,-JUMP_POWER * 1.5)
 
 func _ready():
-	if get_tree().current_scene.get_node("Level").has_node("SpawnPoint"):
-		position = get_tree().current_scene.get_node("Level/SpawnPoint").position
-	else: position = Vector2(0,0)
+	position = Vector2(0,0)
+	for child in get_tree().current_scene.get_node("Level").get_children():
+		if child.is_in_group("spawnpoint"):
+			position = child.position
 
 #=============================================================================
 # PHYSICS
