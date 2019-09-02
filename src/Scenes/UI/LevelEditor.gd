@@ -222,6 +222,7 @@ func _process(_delta):
 						for child in get_tree().current_scene.get_node("Level").get_children():
 							if child.filename == object.filename and not child.is_in_group("layers"):
 								if child.name != object.name: child.queue_free()
+						object.set_name(object_type)
 					
 					# Drag object by default
 					if not Input.is_action_pressed("action"):
