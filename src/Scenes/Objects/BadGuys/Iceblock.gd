@@ -14,6 +14,7 @@ const KICK_SPEED = 500
 func _ready():
 	startpos = position
 	direction = $Control/AnimatedSprite.scale.x
+	collision_mask = 2
 
 func disable():
 	remove_from_group("badguys")
@@ -29,6 +30,10 @@ func _physics_process(delta):
 	if get_tree().current_scene.editmode == true:
 		return
 	
+	
+	if state != "kicked": collision_layer = 2
+	else: collision_layer = 8
+	
 	# Movement
 	if state == "active":
 		velocity.x = -100 * $Control/AnimatedSprite.scale.x
@@ -42,6 +47,7 @@ func _physics_process(delta):
 		velocity.x = KICK_SPEED * -$Control/AnimatedSprite.scale.x
 		velocity.y += 20
 		velocity = move_and_slide(velocity, FLOOR)
+		collision_mask = 0
 		if is_on_wall():
 			$Control/AnimatedSprite.scale.x *= -1
 			velocity.x *= -1
@@ -104,26 +110,28 @@ func _on_Head_area_entered(area):
 
 # Hit player
 func _on_snowball_body_entered(body):
+	if body.is_in_group("badguys") and body.name != name and state == "kicked":
+		body.kill()
 	if body.is_in_group("player"):
 		if body.invincible == true: kill()
-	if (state == "active" or state == "kicked") and body.has_method("hurt"):
-		body.hurt()
-		
-	elif state == "squished":
-		if invincible_time == 0:
-			invincible_time = 5
-			$Control/AnimatedSprite.play("squished")
-			$SFX/Kick.play()
+		if (state == "active" or state == "kicked") and body.has_method("hurt"):
+			body.hurt()
 			
-			if body.position.x > position.x:
-				velocity.x = -KICK_SPEED
-				$Control/AnimatedSprite.scale.x = 1
+		elif state == "squished":
+			if invincible_time == 0:
+				invincible_time = 5
+				$Control/AnimatedSprite.play("squished")
+				$SFX/Kick.play()
 				
-			else:
-				velocity.x = KICK_SPEED
-				$Control/AnimatedSprite.scale.x = -1
-			state = "kicked"
-	return
+				if body.position.x > position.x:
+					velocity.x = -KICK_SPEED
+					$Control/AnimatedSprite.scale.x = 1
+					
+				else:
+					velocity.x = KICK_SPEED
+					$Control/AnimatedSprite.scale.x = -1
+				state = "kicked"
+		return
 
 # Die when knocked off stage
 func _on_VisibilityEnabler2D_screen_exited():

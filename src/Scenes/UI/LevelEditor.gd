@@ -460,7 +460,7 @@ func update_layers(): # Updates the list of layers at the bottom
 func select_first_solid_tilemap():
 	for i in get_tree().get_nodes_in_group("tilemap"):
 		if i.get_class() == "TileMap":
-			if i.get_collision_layer() == 519:
+			if i.get_collision_layer() == 31:
 				layer_selected = i.get_name()
 				layer_selected_type = "TileMap"
 				return

@@ -50,8 +50,8 @@ func _process(_delta):
 		$Popup/Panel/VBoxContainer/Solid/CheckBox.disabled = true
 		$Popup/Panel/VBoxContainer/Solid/CheckBox.pressed = false
 	elif $Popup/Panel/VBoxContainer/Solid/CheckBox.pressed == true:
-		get_tree().current_scene.get_node(str("Level/", layername)).set_collision_layer(519)
-		get_tree().current_scene.get_node(str("Level/", layername)).set_collision_mask(519)
+		get_tree().current_scene.get_node(str("Level/", layername)).set_collision_layer(31)
+		get_tree().current_scene.get_node(str("Level/", layername)).set_collision_mask(31)
 	else:
 		get_tree().current_scene.get_node(str("Level/", layername)).set_collision_layer(0)
 		get_tree().current_scene.get_node(str("Level/", layername)).set_collision_mask(0)

@@ -223,6 +223,7 @@ colors = PoolColorArray( 1, 1, 0, 0.45098, 1, 0, 0, 0.203922, 1, 0, 0, 0 )
 [node name="Fireball" type="KinematicBody2D" groups=[
 "bullets",
 ]]
+collision_layer = 3
 collision_mask = 0
 script = ExtResource( 1 )
 

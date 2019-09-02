@@ -76,16 +76,17 @@ func hurt():
 
 # Kill Tux
 func kill():
-	if invincible_damage == false and invincible == false:
-		state = "small"
-		$SFX/Kill.play()
-		$AnimationPlayerInvincibility.play("Stop")
-		$Control/AnimatedSprite.rotation_degrees = 0
-		$Control/AnimatedSprite.scale.x = 1
-		$AnimationPlayer.play("Stop")
-		set_animation("gameover")
-		dead = true
-		velocity = Vector2 (0,-JUMP_POWER * 1.5)
+	invincible = false
+	invincible_damage = false
+	state = "small"
+	$SFX/Kill.play()
+	$AnimationPlayerInvincibility.play("Stop")
+	$Control/AnimatedSprite.rotation_degrees = 0
+	$Control/AnimatedSprite.scale.x = 1
+	$AnimationPlayer.play("Stop")
+	set_animation("gameover")
+	dead = true
+	velocity = Vector2 (0,-JUMP_POWER * 1.5)
 
 func _ready():
 	position = Vector2(0,0)

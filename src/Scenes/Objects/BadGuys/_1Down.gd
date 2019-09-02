@@ -25,7 +25,7 @@ func _on_1Up_body_entered(body):
 			active = false
 			collected = true
 			$AnimationPlayer.play("collect")
-			body.call("kill")
+			if body.invincible == false: body.call("kill")
 
 func appear(dir):
 	active = true
