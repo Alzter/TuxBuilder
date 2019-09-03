@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/flat-left.png-ab08afe58c9f949a9220f5ef92f6d190.stex"
+path="res://.import/iceblock-2.png-901d73bb138ed3db9eb18ba92ca9484b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Creatures/Iceblock/flat-left.png"
-dest_files=[ "res://.import/flat-left.png-ab08afe58c9f949a9220f5ef92f6d190.stex" ]
+source_file="res://Sprites/Creatures/Iceblock/iceblock-2.png"
+dest_files=[ "res://.import/iceblock-2.png-901d73bb138ed3db9eb18ba92ca9484b.stex" ]
 
 [params]
 

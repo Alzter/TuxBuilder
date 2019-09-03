@@ -261,7 +261,6 @@ position = Vector2( 0, 6 )
 shape = SubResource( 3 )
 
 [node name="Control" type="Control" parent="."]
-editor/display_folded = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -271,7 +270,7 @@ rect_pivot_offset = Vector2( 0, 14 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
 position = Vector2( 0, 6.31594e-013 )
 frames = SubResource( 4 )
-frame = 7
+frame = 5
 playing = true
 offset = Vector2( 0, -2 )
 

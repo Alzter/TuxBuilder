@@ -100,7 +100,7 @@ script = ExtResource( 1 )
 visible = false
 rect = Rect2( -32, -32, 64, 64 )
 
-[node name="Upgrade" type="AudioStreamPlayer2D" parent="."]
+[node name="Upgrade" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

@@ -1,17 +1,22 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Scenes/Objects/BadGuys/Iceblock.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/Creatures/Iceblock/left-0.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/Creatures/Iceblock/left-1.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/Creatures/Iceblock/left-2.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Creatures/Iceblock/flat-left.png" type="Texture" id=5]
-[ext_resource path="res://Audio/SoundEffects/Enemy/fall.wav" type="AudioStream" id=6]
-[ext_resource path="res://Audio/SoundEffects/Enemy/stomp.wav" type="AudioStream" id=7]
-[ext_resource path="res://Audio/SoundEffects/Enemy/kick.wav" type="AudioStream" id=8]
-[ext_resource path="res://Audio/SoundEffects/Enemy/iceblock_bump.wav" type="AudioStream" id=9]
-[ext_resource path="res://Audio/SoundEffects/Enemy/splash.ogg" type="AudioStream" id=10]
-[ext_resource path="res://Sprites/Creatures/Iceblock/shard.png" type="Texture" id=11]
-[ext_resource path="res://Sprites/Creatures/Snowball/droplet.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/Creatures/Iceblock/iceblock-0.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Creatures/Iceblock/iceblock-1.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Creatures/Iceblock/iceblock-2.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Creatures/Iceblock/iceblock-3.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Creatures/Iceblock/iceblock-4.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Creatures/Iceblock/iceblock-5.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Creatures/Iceblock/iceblock-6.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Creatures/Iceblock/iceblock-7.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/Creatures/Iceblock/stomped-0.png" type="Texture" id=10]
+[ext_resource path="res://Audio/SoundEffects/Enemy/fall.wav" type="AudioStream" id=11]
+[ext_resource path="res://Audio/SoundEffects/Enemy/stomp.wav" type="AudioStream" id=12]
+[ext_resource path="res://Audio/SoundEffects/Enemy/kick.wav" type="AudioStream" id=13]
+[ext_resource path="res://Audio/SoundEffects/Enemy/iceblock_bump.wav" type="AudioStream" id=14]
+[ext_resource path="res://Audio/SoundEffects/Enemy/splash.ogg" type="AudioStream" id=15]
+[ext_resource path="res://Sprites/Creatures/Iceblock/shard.png" type="Texture" id=16]
+[ext_resource path="res://Sprites/Creatures/Snowball/droplet.png" type="Texture" id=17]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 15 )
@@ -24,12 +29,12 @@ extents = Vector2( 16, 10 )
 
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 3 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
 "loop": true,
 "name": "default",
-"speed": 8.0
+"speed": 15.0
 }, {
-"frames": [ ExtResource( 5 ) ],
+"frames": [ ExtResource( 10 ) ],
 "loop": true,
 "name": "squished",
 "speed": 5.0
@@ -245,7 +250,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=9]
 resource_name = "wakeup"
 step = 0.05
 tracks/0/type = "value"
@@ -309,11 +314,11 @@ tracks/4/keys = {
 "values": [ "default" ]
 }
 
-[sub_resource type="Gradient" id=9]
+[sub_resource type="Gradient" id=10]
 offsets = PoolRealArray( 0, 0.646552, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0.941176, 0.339844, 0.922334, 1, 0 )
 
-[sub_resource type="Gradient" id=10]
+[sub_resource type="Gradient" id=11]
 offsets = PoolRealArray( 0, 0.467949, 1 )
 colors = PoolColorArray( 1, 1, 1, 0.847059, 0.625, 0.936279, 1, 0.556863, 0, 0.478516, 1, 0 )
 
@@ -350,7 +355,6 @@ position = Vector2( 0, 5 )
 shape = SubResource( 3 )
 
 [node name="Control" type="Control" parent="."]
-editor/display_folded = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -359,7 +363,7 @@ rect_pivot_offset = Vector2( 0, 14 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
 frames = SubResource( 4 )
-frame = 2
+frame = 6
 playing = true
 offset = Vector2( 0, -2 )
 
@@ -369,24 +373,24 @@ anims/active = SubResource( 5 )
 anims/explode = SubResource( 6 )
 anims/shake = SubResource( 7 )
 anims/squished = SubResource( 8 )
-anims/wakeup = SubResource( 11 )
+anims/wakeup = SubResource( 9 )
 
 [node name="SFX" type="Node" parent="."]
 
 [node name="Fall" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource( 6 )
+stream = ExtResource( 11 )
 
 [node name="Squish" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource( 7 )
+stream = ExtResource( 12 )
 
 [node name="Kick" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource( 8 )
+stream = ExtResource( 13 )
 
 [node name="Bump" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource( 9 )
+stream = ExtResource( 14 )
 
 [node name="Melt" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource( 10 )
+stream = ExtResource( 15 )
 
 [node name="IceShards" type="CPUParticles2D" parent="."]
 rotation = -1.5708
@@ -396,7 +400,7 @@ lifetime = 0.6
 one_shot = true
 explosiveness = 1.0
 local_coords = false
-texture = ExtResource( 11 )
+texture = ExtResource( 16 )
 spread = 60.0
 flatness = 1.0
 gravity = Vector2( 0, 500 )
@@ -408,7 +412,7 @@ angle = 720.0
 angle_random = 1.0
 scale_amount = 0.1
 scale_amount_random = 0.5
-color_ramp = SubResource( 9 )
+color_ramp = SubResource( 10 )
 
 [node name="ExplodeDroplets" type="CPUParticles2D" parent="."]
 emitting = false
@@ -416,7 +420,7 @@ amount = 16
 one_shot = true
 explosiveness = 1.0
 local_coords = false
-texture = ExtResource( 12 )
+texture = ExtResource( 17 )
 spread = 180.0
 flatness = 1.0
 gravity = Vector2( 0, 500 )
@@ -430,7 +434,7 @@ angle = 360.0
 angle_random = 1.0
 scale_amount = 0.1
 scale_amount_random = 0.3
-color_ramp = SubResource( 10 )
+color_ramp = SubResource( 11 )
 
 [node name="WakeupTimer" type="Timer" parent="."]
 
