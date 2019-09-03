@@ -44,10 +44,11 @@ func _on_Restart_pressed():
 	get_tree().current_scene.call("restart_level")
 
 func _on_Options_pressed():
-	pass # Replace with function body.
+	$Options.show()
 
 func _on_QuitLevel_pressed():
 	pass # Replace with function body.
 
 func _on_MainMenu_pressed():
-	pass # Replace with function body.
+	get_tree().paused = false
+	get_tree().change_scene("res://Scenes/UI/MainMenu.tscn")

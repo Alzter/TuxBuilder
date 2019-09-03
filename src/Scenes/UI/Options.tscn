@@ -1,0 +1,76 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/UI/UITheme.tres" type="Theme" id=1]
+[ext_resource path="res://Scenes/UI/Options.gd" type="Script" id=2]
+
+[node name="Options" type="PopupPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -94.5
+margin_top = -46.5
+margin_right = 94.5
+margin_bottom = 112.5
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -77.0
+margin_top = -73.0
+margin_right = 77.0
+margin_bottom = 73.0
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+margin_right = 154.0
+margin_bottom = 20.0
+custom_colors/font_color = Color( 0.109804, 0.980392, 1, 1 )
+text = "Options"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 24.0
+margin_right = 154.0
+margin_bottom = 44.0
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+margin_left = 7.0
+margin_right = 127.0
+margin_bottom = 20.0
+text = "Fullscreen"
+
+[node name="FullscreenCheck" type="CheckBox" parent="VBoxContainer/HBoxContainer"]
+margin_left = 131.0
+margin_right = 147.0
+margin_bottom = 20.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 48.0
+margin_right = 154.0
+margin_bottom = 68.0
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2"]
+margin_left = 26.0
+margin_right = 107.0
+margin_bottom = 20.0
+text = "V-sync"
+
+[node name="VSyncCheck" type="CheckBox" parent="VBoxContainer/HBoxContainer2"]
+margin_left = 111.0
+margin_right = 127.0
+margin_bottom = 20.0
+
+[node name="Back" type="Button" parent="VBoxContainer"]
+margin_top = 72.0
+margin_right = 154.0
+margin_bottom = 92.0
+text = "Back"
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/FullscreenCheck" to="." method="_on_FullscreenCheck_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/VSyncCheck" to="." method="_on_VSyncCheck_pressed"]
+[connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_Back_pressed"]
