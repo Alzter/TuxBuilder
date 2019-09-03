@@ -1,76 +1,124 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scenes/UI/UITheme.tres" type="Theme" id=1]
 [ext_resource path="res://Scenes/UI/Options.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/Editor/Line.png" type="Texture" id=3]
 
-[node name="Options" type="PopupPanel"]
+[node name="Options" type="Popup"]
+visible = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -94.5
-margin_top = -46.5
-margin_right = 94.5
-margin_bottom = 112.5
+margin_left = -90.0
+margin_top = -100.0
+margin_right = 90.0
+margin_bottom = 100.0
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
 
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -77.0
-margin_top = -73.0
-margin_right = 77.0
-margin_bottom = 73.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -38.0
+rect_clip_content = true
+custom_constants/separation = 5
 
 [node name="Label" type="Label" parent="VBoxContainer"]
-margin_right = 154.0
-margin_bottom = 20.0
+margin_right = 164.0
+margin_bottom = 29.0
+rect_min_size = Vector2( 0, 29 )
 custom_colors/font_color = Color( 0.109804, 0.980392, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
 text = "Options"
 align = 1
+valign = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+margin_top = 34.0
+margin_right = 164.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 0, 2 )
+texture = ExtResource( 3 )
+expand = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 24.0
-margin_right = 154.0
-margin_bottom = 44.0
+editor/display_folded = true
+margin_top = 41.0
+margin_right = 164.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 0, 23 )
 alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
-margin_left = 7.0
-margin_right = 127.0
-margin_bottom = 20.0
+margin_left = 12.0
+margin_top = 1.0
+margin_right = 132.0
+margin_bottom = 21.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 0
 text = "Fullscreen"
 
 [node name="FullscreenCheck" type="CheckBox" parent="VBoxContainer/HBoxContainer"]
-margin_left = 131.0
-margin_right = 147.0
-margin_bottom = 20.0
+margin_left = 136.0
+margin_right = 152.0
+margin_bottom = 23.0
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 48.0
-margin_right = 154.0
-margin_bottom = 68.0
+editor/display_folded = true
+margin_top = 69.0
+margin_right = 164.0
+margin_bottom = 92.0
+rect_min_size = Vector2( 0, 23 )
 alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2"]
-margin_left = 26.0
-margin_right = 107.0
-margin_bottom = 20.0
+margin_left = 31.0
+margin_top = 1.0
+margin_right = 112.0
+margin_bottom = 21.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 0
 text = "V-sync"
 
 [node name="VSyncCheck" type="CheckBox" parent="VBoxContainer/HBoxContainer2"]
-margin_left = 111.0
-margin_right = 127.0
-margin_bottom = 20.0
+margin_left = 116.0
+margin_right = 132.0
+margin_bottom = 23.0
 
-[node name="Back" type="Button" parent="VBoxContainer"]
-margin_top = 72.0
-margin_right = 154.0
-margin_bottom = 92.0
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = -38.0
+margin_right = -8.0
+margin_bottom = -8.0
+
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer2"]
+margin_right = 164.0
+margin_bottom = 2.0
+rect_min_size = Vector2( 0, 2 )
+texture = ExtResource( 3 )
+expand = true
+
+[node name="Back" type="Button" parent="VBoxContainer2"]
+margin_top = 6.0
+margin_right = 164.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 0, 25 )
 text = "Back"
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/FullscreenCheck" to="." method="_on_FullscreenCheck_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer2/VSyncCheck" to="." method="_on_VSyncCheck_pressed"]
-[connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_Back_pressed"]
+[connection signal="pressed" from="VBoxContainer2/Back" to="." method="_on_Back_pressed"]

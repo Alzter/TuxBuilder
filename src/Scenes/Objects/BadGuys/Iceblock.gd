@@ -119,8 +119,13 @@ func _on_snowball_body_entered(body):
 		if (state == "active" or state == "kicked") and body.has_method("hurt"):
 			body.hurt()
 			
+		# Kick / Grab Iceblock
 		elif state == "squished":
-			if invincible_time == 0:
+			if Input.is_action_pressed("action"):
+				body.holding_object = true
+				body.object_held = name
+				state = ""
+			elif invincible_time == 0:
 				invincible_time = 5
 				$Control/AnimatedSprite.play("squished")
 				$SFX/Kick.play()
@@ -134,6 +139,12 @@ func _on_snowball_body_entered(body):
 					$Control/AnimatedSprite.scale.x = -1
 				state = "kicked"
 		return
+
+# When thrown by player
+func throw():
+	state = "kicked"
+	$Control/AnimatedSprite.play("squished")
+	$SFX/Kick.play()
 
 # Die when knocked off stage
 func _on_VisibilityEnabler2D_screen_exited():

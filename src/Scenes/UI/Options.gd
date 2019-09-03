@@ -1,4 +1,4 @@
-extends PopupPanel
+extends Popup
 
 func _ready():
 	if OS.window_fullscreen == true:
@@ -19,5 +19,5 @@ func _on_VSyncCheck_pressed():
 		OS.vsync_enabled = true
 
 func _on_Back_pressed():
-	self.hide()
-	
+	get_parent().get_node("Panel").show()
+	hide()

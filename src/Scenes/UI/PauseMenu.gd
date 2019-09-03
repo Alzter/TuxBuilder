@@ -45,10 +45,16 @@ func _on_Restart_pressed():
 
 func _on_Options_pressed():
 	$Options.show()
+	$Panel.hide()
 
 func _on_QuitLevel_pressed():
 	pass # Replace with function body.
 
 func _on_MainMenu_pressed():
+	get_tree().current_scene.get_node("CanvasLayer/AnimationPlayer").play("Circle Out")
+	yield(get_tree().current_scene.get_node("CanvasLayer/AnimationPlayer"), "animation_finished")
 	get_tree().paused = false
 	get_tree().change_scene("res://Scenes/UI/MainMenu.tscn")
+
+func _on_Options_popup_hide():
+	$Panel.show()

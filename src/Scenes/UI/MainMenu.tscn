@@ -1,95 +1,119 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/UI/MainMenu.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/UI/Images/SuperTuxLogo.png" type="Texture" id=2]
-[ext_resource path="res://Scenes/UI/UITheme.tres" type="Theme" id=3]
-[ext_resource path="res://Scenes/UI/Options.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Fonts/SuperTux-Medium.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://Fonts/SuperTux-Medium.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Scenes/UI/Images/SuperTuxLogo.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/UI/UITheme.tres" type="Theme" id=4]
+[ext_resource path="res://Scenes/UI/Options.tscn" type="PackedScene" id=5]
 
-[sub_resource type="DynamicFont" id=2]
-size = 20
+[sub_resource type="DynamicFont" id=1]
+size = 12
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
-font_data = ExtResource( 5 )
+font_data = ExtResource( 2 )
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
 
+[node name="BottomText" type="Label" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = -65.0
+margin_right = -368.0
+margin_bottom = -4.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+text = "Godot SuperTux v0.1
+
+This is a work-in-progress port of
+SuperTux to the Godot Engine."
+valign = 2
+
 [node name="Title" type="TextureRect" parent="."]
 anchor_left = 0.5
+anchor_top = 0.3
 anchor_right = 0.5
-margin_left = -120.5
-margin_top = 9.0
-margin_right = 120.5
-margin_bottom = 162.0
-texture = ExtResource( 2 )
-expand = true
+anchor_bottom = 0.3
+margin_left = -163.5
+margin_top = -128.0
+margin_right = 163.5
+margin_bottom = 79.0
+texture = ExtResource( 3 )
 stretch_mode = 5
 
-[node name="Buttons" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -90.5
-margin_top = -36.0
-margin_right = 90.5
-margin_bottom = 96.0
-theme = ExtResource( 3 )
+margin_left = -90.0
+margin_top = -10.0
+margin_right = 90.0
+margin_bottom = 150.0
+theme = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Buttons"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 8.0
-margin_top = 6.0
-margin_right = -6.0
-margin_bottom = -7.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+alignment = 1
 
-[node name="StartGame" type="Button" parent="Buttons/VBoxContainer"]
-margin_right = 167.0
-margin_bottom = 20.0
+[node name="StartGame" type="Button" parent="Panel/VBoxContainer"]
+margin_right = 160.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 0, 25 )
+focus_neighbour_top = NodePath("../Quit")
 text = "Start Game"
 
-[node name="Options" type="Button" parent="Buttons/VBoxContainer"]
-margin_top = 24.0
-margin_right = 167.0
-margin_bottom = 44.0
+[node name="Options" type="Button" parent="Panel/VBoxContainer"]
+margin_top = 29.0
+margin_right = 160.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 0, 25 )
 text = "Options"
 
-[node name="LevelEditor" type="Button" parent="Buttons/VBoxContainer"]
-margin_top = 48.0
-margin_right = 167.0
-margin_bottom = 68.0
+[node name="LevelEditor" type="Button" parent="Panel/VBoxContainer"]
+margin_top = 58.0
+margin_right = 160.0
+margin_bottom = 83.0
+rect_min_size = Vector2( 0, 25 )
 text = "Level Editor"
 
-[node name="Credits" type="Button" parent="Buttons/VBoxContainer"]
-margin_top = 72.0
-margin_right = 167.0
-margin_bottom = 92.0
+[node name="Credits" type="Button" parent="Panel/VBoxContainer"]
+margin_top = 87.0
+margin_right = 160.0
+margin_bottom = 112.0
+rect_min_size = Vector2( 0, 25 )
 text = "Credits"
 
-[node name="Quit" type="Button" parent="Buttons/VBoxContainer"]
-margin_top = 96.0
-margin_right = 167.0
-margin_bottom = 116.0
+[node name="Quit" type="Button" parent="Panel/VBoxContainer"]
+margin_top = 116.0
+margin_right = 160.0
+margin_bottom = 141.0
+rect_min_size = Vector2( 0, 25 )
+focus_neighbour_bottom = NodePath("../StartGame")
 text = "Quit"
 
-[node name="Options" parent="." instance=ExtResource( 4 )]
-
-[node name="VersionNumber" type="Label" parent="."]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -95.0
-margin_top = -46.0
-custom_fonts/font = SubResource( 2 )
-text = "V0.1"
-align = 1
-valign = 1
-[connection signal="pressed" from="Buttons/VBoxContainer/StartGame" to="." method="_on_StartGame_pressed"]
-[connection signal="pressed" from="Buttons/VBoxContainer/Options" to="." method="_on_Options_pressed"]
-[connection signal="pressed" from="Buttons/VBoxContainer/LevelEditor" to="." method="_on_LevelEditor_pressed"]
-[connection signal="pressed" from="Buttons/VBoxContainer/Credits" to="." method="_on_Credits_pressed"]
-[connection signal="pressed" from="Buttons/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
+[node name="Options" parent="." instance=ExtResource( 5 )]
+visible = false
+margin_top = -10.0
+margin_bottom = 150.0
+[connection signal="pressed" from="Panel/VBoxContainer/StartGame" to="." method="_on_StartGame_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Options" to="." method="_on_Options_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/LevelEditor" to="." method="_on_LevelEditor_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Credits" to="." method="_on_Credits_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
+[connection signal="popup_hide" from="Options" to="." method="_on_Options_popup_hide"]

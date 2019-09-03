@@ -9,6 +9,11 @@
 
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 1, 1, 1, 0.74902 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.8, 0.8, 0.8, 0.501961 )
 corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
@@ -17,16 +22,17 @@ corner_radius_bottom_left = 12
 [sub_resource type="ImageTexture" id=4]
 
 [sub_resource type="StyleBoxFlat" id=5]
-bg_color = Color( 0.419608, 0.521569, 0.619608, 0.8 )
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color( 0.243137, 0.333333, 0.447059, 1 )
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
+bg_color = Color( 0.443137, 0.521569, 0.603922, 0.8 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0.207843, 0.282353, 0.380392, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 16
 
 [sub_resource type="ImageTexture" id=6]
 

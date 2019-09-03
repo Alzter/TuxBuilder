@@ -54,6 +54,8 @@ var restarted = false # Should Tux call restart level
 var invincible_damage = false
 var invincible = false
 var using_star = false
+var holding_object = false
+var object_held = ""
 
 # Set Tux's current playing animation
 func set_animation(anim):
@@ -354,6 +356,23 @@ func _physics_process(delta):
 		position.y = get_tree().current_scene.get_node("Camera2D").limit_bottom
 		kill()
 
+	# Carry objects
+	if holding_object == true:
+		# Set the object's position
+		get_tree().current_scene.get_node(str("Level/", object_held)).position = position
+		get_tree().current_scene.get_node(str("Level/", object_held)).position.x += 16 * $Control/AnimatedSprite.scale.x
+		
+		# Set the object's direction
+		if get_tree().current_scene.get_node(str("Level/", object_held)).has_node("Sprite"): get_tree().current_scene.get_node(str("Level/", object_held, "/Sprite")).scale.x = $Control/AnimatedSprite.scale.x * -1
+		if get_tree().current_scene.get_node(str("Level/", object_held)).has_node("AnimatedSprite"): get_tree().current_scene.get_node(str("Level/", object_held, "/AnimatedSprite")).scale.x = $Control/AnimatedSprite.scale.x * -1
+		if get_tree().current_scene.get_node(str("Level/", object_held)).has_node("Control/AnimatedSprite"): get_tree().current_scene.get_node(str("Level/", object_held, "/Control/AnimatedSprite")).scale.x = $Control/AnimatedSprite.scale.x * -1
+		
+		# Throw objects
+		if not Input.is_action_pressed("action"):
+			holding_object = false
+			if get_tree().current_scene.get_node(str("Level/", object_held)).has_method("throw"):
+				get_tree().current_scene.get_node(str("Level/", object_held)).throw()
+
 # Star invincibility
 func star_invincibility():
 	using_star = true
@@ -375,6 +394,7 @@ func _on_InvincibilityTimer_timeout():
 	self.show()
 	$AnimationPlayerInvincibility.stop()
 
+# Bounce off squished enemies
 func bounce():
 	sliding = false
 	$AnimationPlayer.play("Jump")
