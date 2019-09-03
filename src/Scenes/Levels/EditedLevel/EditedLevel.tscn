@@ -1,15 +1,19 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/Objects/Misc/SpawnPoint.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Objects/Misc/SpawnPoint.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Editor/Layers/TileMap.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Tilesets/LevelTiles.tres" type="TileSet" id=4]
+[ext_resource path="res://Scenes/Objects/Bonus/BonusBlock.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Objects/Bonus/BonusBlock.gd" type="Script" id=6]
+[ext_resource path="res://Scenes/Objects/Bonus/Coin.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Objects/Bonus/Coin.gd" type="Script" id=8]
 
 [node name="Level" type="Node2D"]
 
 [node name="SpawnPoint" type="Position2D" parent="." groups=[
-"spawnpoint",
 "oneonly",
+"spawnpoint",
 ] instance=ExtResource( 1 )]
 position = Vector2( 16, 16 )
 script = ExtResource( 2 )
@@ -46,3 +50,3743 @@ cell_size = Vector2( 32, 32 )
 collision_layer = 0
 collision_mask = 0
 format = 1
+
+[node name="BonusBlock" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 336, 16 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@Coin@27" type="Area2D" parent="." instance=ExtResource( 7 )]
+position = Vector2( 720, 432 )
+script = ExtResource( 8 )
+
+[node name="@BonusBlock@29" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 304, 16 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@31" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 272, 16 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@33" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 240, 16 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@35" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 208, 16 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@37" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 176, 16 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@39" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 144, 16 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@41" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 112, 16 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@43" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 112, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@45" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 144, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@47" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 176, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@49" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 208, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@51" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 240, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@53" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 272, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@55" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 304, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@57" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 336, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@59" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 336, 80 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@61" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 304, 80 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@63" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 272, 80 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@65" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 240, 80 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@67" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 208, 80 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@69" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 176, 80 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@71" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 144, 80 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@73" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 112, 80 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@75" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 112, 112 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@77" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 144, 112 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@79" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 176, 112 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@81" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 208, 112 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@83" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 240, 112 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@85" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 272, 112 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@87" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 304, 112 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@89" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 336, 112 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@91" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 336, 144 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@93" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 304, 144 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@95" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 272, 144 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@97" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 240, 144 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@99" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 208, 144 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@101" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 176, 144 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@103" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 144, 144 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@105" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 112, 144 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@107" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 208, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@109" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 240, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@111" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 272, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@113" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 304, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@115" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 336, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@117" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 368, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@119" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 400, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@121" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 432, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@123" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 464, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@125" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 496, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@127" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 528, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@129" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 560, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@131" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 592, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@133" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 624, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@135" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 656, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@137" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 688, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@139" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 720, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@141" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 752, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@143" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 784, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@145" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 816, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@147" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 848, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@149" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 880, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@151" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 912, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@153" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 944, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@155" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 976, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@157" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 1008, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@159" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 1040, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@161" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 1072, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@163" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 1104, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@165" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 1136, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@167" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 1168, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@169" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 1200, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@171" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 1232, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@173" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 1264, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@175" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 1296, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@177" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 1328, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@179" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 1360, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@181" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 1392, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@183" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 1424, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@185" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 1456, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@187" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 1488, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@189" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 1520, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@191" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 1552, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@193" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 1584, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@195" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 1616, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@197" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 1648, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@199" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 1680, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@201" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 1712, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@203" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 1744, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@205" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 1776, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@207" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 1808, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@209" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 1840, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@211" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 1872, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@213" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 1904, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@215" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 1936, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@217" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 1968, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@219" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2000, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@221" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2032, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@223" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2064, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@225" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2096, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@227" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2128, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@229" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2160, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@231" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2192, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@233" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2224, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@235" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2256, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@237" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2288, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@239" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2320, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@241" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2352, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@243" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2384, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@245" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2416, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@247" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2448, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@249" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2480, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@251" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2512, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@253" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2544, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@255" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2576, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@257" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2608, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@259" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2640, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@261" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2672, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@263" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2704, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@265" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2736, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@267" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2768, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@269" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2800, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@271" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2832, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@273" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2864, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@275" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2896, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@277" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2928, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@279" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2960, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@281" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2992, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@283" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3024, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@285" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3056, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@287" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3088, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@289" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3120, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@291" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3152, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@293" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3184, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@295" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3216, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@297" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3248, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@299" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3280, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@301" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3312, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@303" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3344, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@305" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3376, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@307" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3408, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@309" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3440, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@311" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3472, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@313" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2160, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@315" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2192, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@317" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2224, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@319" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2256, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@321" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2288, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@323" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2320, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@325" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2352, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@327" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2384, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@329" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2416, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@331" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2448, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@333" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2480, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@335" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2512, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@337" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2544, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@339" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2576, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@341" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2608, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@343" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2640, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@345" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2672, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@347" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2704, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@349" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2736, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@351" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2768, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@353" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2800, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@355" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2832, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@357" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2864, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@359" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2896, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@361" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2928, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@363" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2960, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@365" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2992, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@367" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3024, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@369" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3056, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@371" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3088, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@373" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3120, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@375" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3152, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@377" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2608, -240 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@379" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2640, -240 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@381" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2672, -240 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@383" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2704, -240 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@385" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2736, -240 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@387" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2768, -240 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@389" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2800, -240 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@391" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2832, -240 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@393" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2864, -240 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@395" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2896, -240 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@397" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2928, -240 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@399" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2960, -240 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@401" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2992, -240 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@403" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3024, -240 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@405" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3056, -240 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@407" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3088, -240 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@409" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3120, -240 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@411" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3152, -240 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@413" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3184, -240 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@415" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3216, -240 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@417" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3248, -240 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@419" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3280, -240 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@421" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3280, -208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@423" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3248, -208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@425" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3216, -208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@427" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3184, -208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@429" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3152, -208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@431" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3120, -208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@433" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3088, -208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@435" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3056, -208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@437" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3024, -208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@439" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2992, -208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@441" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2960, -208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@443" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2928, -208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@445" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2896, -208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@447" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2864, -208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@449" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2832, -208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@451" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2800, -208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@453" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2768, -208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@455" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2736, -208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@457" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2704, -208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@459" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2672, -208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@461" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2640, -208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@465" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2544, -208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@467" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2576, -208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@469" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2608, -208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@471" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2608, -176 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@473" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2640, -176 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@475" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2672, -176 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@477" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2704, -176 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@479" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2736, -176 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@481" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2768, -176 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@483" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2800, -176 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@485" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2832, -176 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@487" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2864, -176 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@489" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2896, -176 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@491" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2928, -176 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@493" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2960, -176 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@495" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2992, -176 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@497" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3024, -176 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@499" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3056, -176 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@501" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3088, -176 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@503" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3120, -176 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@505" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3152, -176 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@507" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3184, -176 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@509" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3216, -176 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@511" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3248, -176 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@513" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3280, -176 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@515" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3280, -144 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@517" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3248, -144 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@519" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3216, -144 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@521" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3216, -112 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@523" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3184, -112 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@525" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3152, -112 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@527" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3120, -112 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@529" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3120, -144 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@531" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3088, -144 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@533" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3056, -144 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@535" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3024, -144 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@537" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3024, -112 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@539" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2992, -112 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@541" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2960, -112 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@543" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2960, -144 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@545" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2928, -144 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@547" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2896, -144 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@549" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2864, -144 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@551" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2832, -144 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@553" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2800, -144 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@555" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2800, -112 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@557" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2768, -112 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@559" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2736, -112 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@561" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2704, -112 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@563" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2672, -144 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@565" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2640, -144 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@567" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2608, -144 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@569" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2576, -144 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@571" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2544, -112 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@573" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2512, -112 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@575" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2512, -80 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@577" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2512, -48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@579" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2544, -48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@581" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2544, -16 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@583" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2576, -16 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@585" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2608, -16 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@587" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2640, -16 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@589" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2640, -48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@591" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2672, -48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@593" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2704, -48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@595" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2704, -80 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@597" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2736, -80 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@599" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2768, -80 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@601" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2800, -80 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@603" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2800, -48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@605" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2832, -48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@607" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2832, -16 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@609" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2864, -16 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@611" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2896, -16 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@613" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2928, -16 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@615" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2928, -48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@617" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2960, -48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@619" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2992, -48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@621" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 2992, -80 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@623" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3024, -80 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@625" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3024, -48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@627" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3056, -48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@629" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3088, -16 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@633" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3120, 16 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@635" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3120, -16 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@637" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3152, -16 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@639" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3184, -16 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@641" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3184, -48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@643" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3216, -48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@645" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3248, -48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@647" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3280, -48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@649" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3280, -16 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@651" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3312, -16 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@653" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3312, 16 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@655" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 3312, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@657" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4464, -304 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@659" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4464, -272 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@661" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4464, -240 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@663" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4464, -208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@665" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4464, -176 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@667" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4464, -144 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@669" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4464, -112 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@671" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4464, -80 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@673" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4464, -48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@675" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4464, -16 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@677" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4464, 16 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@679" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4464, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@681" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4464, 80 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@683" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4464, 112 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@685" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4464, 144 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@687" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4464, 176 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@689" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4464, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@695" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4496, -304 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@697" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4496, -272 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@699" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4496, -240 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@701" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4496, -208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@703" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4496, -176 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@705" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4496, -144 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@707" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4496, -112 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@709" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4496, -80 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@711" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4496, -48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@713" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4496, -16 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@715" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4496, 16 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@717" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4496, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@719" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4496, 80 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@721" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4496, 112 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@723" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4496, 144 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@725" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4496, 176 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@727" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4496, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@729" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4528, -304 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@731" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4528, -272 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@733" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4528, -240 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@735" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4528, -208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@737" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4528, -176 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@739" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4528, -144 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@741" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4528, -112 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@743" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4528, -80 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@745" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4528, -48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@747" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4528, -16 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@749" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4528, 16 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@751" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4528, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@753" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4528, 80 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@755" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4528, 112 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@757" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4528, 144 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@759" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4528, 176 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@761" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4528, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@763" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4560, -304 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@765" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4560, -272 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@767" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4560, -240 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@769" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4560, -208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@771" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4560, -176 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@773" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4560, -144 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@775" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4560, -112 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@777" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4560, -80 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@779" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4560, -48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@781" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4560, -16 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@783" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4560, 16 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@785" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4560, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@787" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4560, 80 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@789" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4560, 112 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@791" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4560, 144 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@793" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4560, 176 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@795" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4560, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@797" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4592, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@799" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4592, 176 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@801" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4592, 144 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@803" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4592, 112 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@805" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4592, 80 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@807" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4592, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@809" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4592, 16 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@811" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4592, -16 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@813" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4592, -48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@815" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4592, -80 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@817" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4592, -112 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@819" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4592, -144 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@821" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4592, -176 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@823" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4592, -208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@825" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4592, -240 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@827" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4592, -272 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@829" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4592, -304 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@831" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4432, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@833" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4432, 176 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@835" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4432, 144 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@837" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4432, 112 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@839" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4432, 80 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@841" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4432, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@843" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4432, 16 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@845" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4432, -16 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@847" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4432, -48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@849" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4432, -80 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@851" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4432, -112 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@853" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4432, -144 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@855" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4432, -176 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@857" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4432, -208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@859" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4432, -240 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@861" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4432, -272 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+
+[node name="@BonusBlock@863" type="StaticBody2D" parent="." groups=[
+"stackable",
+] instance=ExtResource( 5 )]
+position = Vector2( 4432, -304 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 6 )
+[connection signal="body_entered" from="@Coin@27" to="@Coin@27" method="_on_Coin_body_entered"]
