@@ -20,9 +20,10 @@ script = ExtResource( 2 )
 "layers",
 "tilemap",
 ] instance=ExtResource( 3 )]
+scale = Vector2( 0.25, 0.25 )
 z_index = -100
 tile_set = ExtResource( 4 )
-cell_size = Vector2( 32, 32 )
+cell_size = Vector2( 128, 128 )
 collision_layer = 0
 collision_mask = 0
 format = 1
@@ -31,8 +32,9 @@ format = 1
 "layers",
 "tilemap",
 ] instance=ExtResource( 3 )]
+scale = Vector2( 0.25, 0.25 )
 tile_set = ExtResource( 4 )
-cell_size = Vector2( 32, 32 )
+cell_size = Vector2( 128, 128 )
 collision_layer = 31
 collision_mask = 31
 format = 1
@@ -42,9 +44,10 @@ tile_data = PoolIntArray( 524288, 0, 0, 524289, 0, 1, 524290, 0, 1, 524291, 0, 1
 "layers",
 "tilemap",
 ] instance=ExtResource( 3 )]
+scale = Vector2( 0.25, 0.25 )
 z_index = 100
 tile_set = ExtResource( 4 )
-cell_size = Vector2( 32, 32 )
+cell_size = Vector2( 128, 128 )
 collision_layer = 0
 collision_mask = 0
 format = 1
@@ -52,70 +55,7 @@ format = 1
 [node name="BonusBlock" type="StaticBody2D" parent="." groups=[
 "stackable",
 ] instance=ExtResource( 5 )]
-position = Vector2( 16, 176 )
-z_index = -1
-collision_layer = 31
-collision_mask = 31
-script = ExtResource( 6 )
-
-[node name="@BonusBlock@24" type="StaticBody2D" parent="." groups=[
-"stackable",
-] instance=ExtResource( 5 )]
-position = Vector2( 48, 176 )
-z_index = -1
-collision_layer = 31
-collision_mask = 31
-script = ExtResource( 6 )
-
-[node name="@BonusBlock@26" type="StaticBody2D" parent="." groups=[
-"stackable",
-] instance=ExtResource( 5 )]
 position = Vector2( 80, 176 )
-z_index = -1
-collision_layer = 31
-collision_mask = 31
-script = ExtResource( 6 )
-
-[node name="@BonusBlock@28" type="StaticBody2D" parent="." groups=[
-"stackable",
-] instance=ExtResource( 5 )]
-position = Vector2( 112, 176 )
-z_index = -1
-collision_layer = 31
-collision_mask = 31
-script = ExtResource( 6 )
-
-[node name="@BonusBlock@30" type="StaticBody2D" parent="." groups=[
-"stackable",
-] instance=ExtResource( 5 )]
-position = Vector2( 144, 176 )
-z_index = -1
-collision_layer = 31
-collision_mask = 31
-script = ExtResource( 6 )
-
-[node name="@BonusBlock@32" type="StaticBody2D" parent="." groups=[
-"stackable",
-] instance=ExtResource( 5 )]
-position = Vector2( 176, 176 )
-z_index = -1
-collision_layer = 31
-collision_mask = 31
-script = ExtResource( 6 )
-
-[node name="@BonusBlock@34" type="StaticBody2D" parent="." groups=[
-"stackable",
-] instance=ExtResource( 5 )]
-position = Vector2( 208, 176 )
-z_index = -1
-collision_layer = 31
-collision_mask = 31
-script = ExtResource( 6 )
-
-[node name="@BonusBlock@36" type="StaticBody2D" parent="." groups=[
-"stackable",
-] instance=ExtResource( 5 )]
-position = Vector2( 240, 176 )
 z_index = -1
 collision_layer = 31
 collision_mask = 31

@@ -46,7 +46,7 @@ func _process(_delta):
 	# General positioning stuff
 	$UI/SideBar/VBoxContainer/TilesButton.text = ""
 	$UI/SideBar/VBoxContainer/ObjectsButton.text = ""
-	$Grid.rect_size = Vector2(get_viewport().size.x + 32, get_viewport().size.y + 32)
+	$Grid.rect_size = Vector2((get_viewport().size.x + 32) * 4, (get_viewport().size.y + 32) * 4)
 	$Grid.rect_position = Vector2(get_tree().current_scene.get_node("Camera2D").position.x - (get_viewport().size.x / 2), get_tree().current_scene.get_node("Camera2D").position.y - (get_viewport().size.y / 2))
 	$Grid.rect_position = Vector2(floor($Grid.rect_position.x / 32) * 32, floor($Grid.rect_position.y / 32) * 32)
 	$UI/BottomBar/ScrollContainer/HBoxContainer.rect_min_size.y = 64
@@ -259,6 +259,9 @@ func update_selected_tile():
 		player_hovered = true
 		return
 	
+	if dragging_object == true:
+		return
+	
 	# Rectangle selection
 	$SelectedArea.visible = false
 	if $UI/SideBar/VBoxContainer/HBoxContainer/SelectButton.pressed == true and Input.is_action_pressed("click_left"):
@@ -286,7 +289,7 @@ func update_selected_tile():
 		$EraserSprite.visible = true
 		$SelectedTile.visible = true
 		$SelectedTile.texture = load("res://Sprites/Editor/EraseSelect.png")
-		$SelectedTile.region_rect = Rect2(0,0,32,32)
+		$SelectedTile.region_rect = Rect2(0,0,128,128)
 		$SelectedTile.modulate = Color(1,1,1,1)
 		$EraserSprite.position = $SelectedTile.position
 		old_object_type = ""
@@ -301,7 +304,7 @@ func update_selected_tile():
 		if category_selected == "Tiles":
 			var selected_texture = $TileMap.get_tileset().tile_get_texture(tile_type)
 			$SelectedTile.texture = (selected_texture)
-			$SelectedTile.region_rect.position = $TileMap.get_tileset().autotile_get_icon_coordinate(tile_type) * 32
+			$SelectedTile.region_rect.position = $TileMap.get_tileset().autotile_get_icon_coordinate(tile_type) * 128
 			$SelectedTile.region_enabled = true
 			old_object_type = ""
 

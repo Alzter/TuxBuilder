@@ -19,13 +19,17 @@ config/name="Tux Builder"
 run/main_scene="res://Scenes/Master/Gameplay.tscn"
 config/icon="res://icon.png"
 
+[debug]
+
+settings/crash_handler/message="Please report this bug at https://github.com/Alzter/TuxBuilder/issues"
+
 [display]
 
 window/size/width=640
 window/size/height=480
 window/size/test_width=1366
 window/size/test_height=750
-window/stretch/aspect="keep"
+window/stretch/aspect="expand"
 
 [input]
 

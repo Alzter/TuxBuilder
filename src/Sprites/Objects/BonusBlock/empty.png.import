@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/empty.png-6ba7c84c6e33cbda71acf41e37b968be.stex"
+path="res://.import/Empty.png-a3dac182e67244e7c8175a8cab043ae2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Objects/BonusBlock/empty.png"
-dest_files=[ "res://.import/empty.png-6ba7c84c6e33cbda71acf41e37b968be.stex" ]
+source_file="res://Sprites/Objects/BonusBlock/Empty.png"
+dest_files=[ "res://.import/Empty.png-a3dac182e67244e7c8175a8cab043ae2.stex" ]
 
 [params]
 
@@ -21,7 +21,7 @@ compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
 flags/filter=true
-flags/mipmaps=false
+flags/mipmaps=true
 flags/anisotropic=false
 flags/srgb=2
 process/fix_alpha_border=true

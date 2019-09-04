@@ -46,8 +46,9 @@ custom_styles/panel = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="Control"]
 position = Vector2( 16, 16 )
+scale = Vector2( 0.25, 0.25 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 32, 32 )
+region_rect = Rect2( 0, 0, 128, 128 )
 
 [node name="Button" type="Button" parent="Control"]
 anchor_left = 0.5

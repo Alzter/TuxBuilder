@@ -247,30 +247,35 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -16.0
 margin_top = -16.0
-margin_right = 16.0
-margin_bottom = 16.0
+margin_right = 112.0
+margin_bottom = 112.0
+rect_scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
+expand = true
 stretch_mode = 2
 
 [node name="SelectedTile" type="Sprite" parent="."]
+visible = false
+scale = Vector2( 0.25, 0.25 )
 z_index = 4096
 region_enabled = true
-region_rect = Rect2( 0, 0, 32, 32 )
+region_rect = Rect2( 0, 0, 128, 128 )
 
 [node name="GrabSprite" type="Sprite" parent="."]
 visible = false
+scale = Vector2( 0.25, 0.25 )
 z_index = 4096
 texture = ExtResource( 3 )
-offset = Vector2( 16, 8 )
+offset = Vector2( 64, 32 )
 
 [node name="EraserSprite" type="Sprite" parent="."]
-visible = false
+scale = Vector2( 0.25, 0.25 )
 z_index = 4096
 texture = ExtResource( 4 )
-offset = Vector2( 16, 16 )
+offset = Vector2( 64, 64 )
 flip_h = true
 region_enabled = true
-region_rect = Rect2( 0, 0, 32, 32 )
+region_rect = Rect2( 0, 0, 128, 128 )
 
 [node name="SelectedArea" type="ColorRect" parent="."]
 anchor_left = 0.5
@@ -399,7 +404,6 @@ custom_constants/separation = 16
 alignment = 1
 
 [node name="EraserButton" type="Button" parent="UI/SideBar/VBoxContainer/HBoxContainer"]
-editor/display_folded = true
 margin_left = 24.0
 margin_right = 56.0
 margin_bottom = 32.0
@@ -417,6 +421,7 @@ enabled_focus_mode = 0
 [node name="TextureRect" type="TextureRect" parent="UI/SideBar/VBoxContainer/HBoxContainer/EraserButton"]
 margin_right = 32.0
 margin_bottom = 32.0
+rect_scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 4 )
 
 [node name="SelectButton" type="Button" parent="UI/SideBar/VBoxContainer/HBoxContainer"]

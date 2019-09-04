@@ -6,8 +6,9 @@
 "layers",
 "tilemap",
 ]]
+scale = Vector2( 0.25, 0.25 )
 tile_set = ExtResource( 1 )
-cell_size = Vector2( 32, 32 )
+cell_size = Vector2( 128, 128 )
 collision_layer = 31
 collision_mask = 31
 format = 1

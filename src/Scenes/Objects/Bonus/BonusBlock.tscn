@@ -1,19 +1,9 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scenes/Objects/Bonus/BonusBlock.gd" type="Script" id=1]
 [ext_resource path="res://Audio/SoundEffects/Bonus/upgrade.wav" type="AudioStream" id=2]
 [ext_resource path="res://Sprites/Objects/BonusBlock/empty.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/Objects/BonusBlock/full-0.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Objects/BonusBlock/full-1.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/Objects/BonusBlock/full-2.png" type="Texture" id=6]
-[ext_resource path="res://Sprites/Objects/BonusBlock/full-3.png" type="Texture" id=7]
-[ext_resource path="res://Sprites/Objects/BonusBlock/full-4.png" type="Texture" id=8]
-[ext_resource path="res://Sprites/Objects/BonusBlock/full-5.png" type="Texture" id=9]
-[ext_resource path="res://Sprites/Objects/BonusBlock/full-6.png" type="Texture" id=10]
-[ext_resource path="res://Sprites/Objects/BonusBlock/full-7.png" type="Texture" id=11]
-[ext_resource path="res://Sprites/Objects/BonusBlock/full-8.png" type="Texture" id=12]
-[ext_resource path="res://Sprites/Objects/BonusBlock/full-9.png" type="Texture" id=13]
-[ext_resource path="res://Sprites/Objects/BonusBlock/full-10.png" type="Texture" id=14]
+[ext_resource path="res://Sprites/Objects/BonusBlock/Block.png" type="Texture" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "default"
@@ -39,7 +29,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ) ]
+"values": [ Vector2( 0.25, 0.25 ) ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -66,7 +56,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 0.5, 1 ),
 "update": 0,
-"values": [ Vector2( 1.25, 1.25 ), Vector2( 1, 1 ) ]
+"values": [ Vector2( 0.3, 0.3 ), Vector2( 0.25, 0.25 ) ]
 }
 
 [sub_resource type="SpriteFrames" id=3]
@@ -76,7 +66,7 @@ animations = [ {
 "name": "empty",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ) ],
+"frames": [ ExtResource( 4 ) ],
 "loop": true,
 "name": "default",
 "speed": 15.0
@@ -109,16 +99,15 @@ anims/default = SubResource( 1 )
 anims/hit = SubResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 0.25, 0.25 )
 frames = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource( 4 )
 
 [node name="BottomHitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BottomHitbox"]
-visible = false
 position = Vector2( 0, 13 )
 shape = SubResource( 5 )
 [connection signal="area_entered" from="BottomHitbox" to="." method="_on_BottomHitbox_area_entered"]
