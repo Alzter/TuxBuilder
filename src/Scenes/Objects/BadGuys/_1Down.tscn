@@ -186,7 +186,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0, 0.3, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0.5, 0.5 ), Vector2( 0, 0 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 2, 2 ), Vector2( 0, 0 ) ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("Sprite/Sprite3:scale")
@@ -198,7 +198,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0, 0.3, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0.5, 0.5 ), Vector2( 0, 0 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 2, 2 ), Vector2( 0, 0 ) ]
 }
 tracks/6/type = "value"
 tracks/6/path = NodePath("Sprite/Sprite2:visible")
@@ -341,21 +341,18 @@ scale_amount_curve = SubResource( 7 )
 color_ramp = SubResource( 8 )
 
 [node name="Sprite" type="Sprite" parent="."]
-editor/display_folded = true
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 5 )
 
 [node name="Sprite2" type="Sprite" parent="Sprite"]
 self_modulate = Color( 1, 0, 0, 1 )
-position = Vector2( -3, -9.5 )
-rotation = 6.28319
+position = Vector2( -11, -37 )
 scale = Vector2( 1e-005, 1e-005 )
 texture = ExtResource( 6 )
 
 [node name="Sprite3" type="Sprite" parent="Sprite"]
 self_modulate = Color( 1, 0, 0, 1 )
-position = Vector2( 3, -9.5 )
-rotation = -6.28319
+position = Vector2( 11, -37 )
 scale = Vector2( 1e-005, 1e-005 )
 texture = ExtResource( 6 )
 
