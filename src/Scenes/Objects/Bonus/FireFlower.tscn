@@ -66,13 +66,13 @@ tracks/0/keys = {
 "values": [ true ]
 }
 
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 16, 16 )
+
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 16, 16 )
 
-[sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 16, 16 )
-
-[sub_resource type="SpriteFrames" id=4]
+[sub_resource type="SpriteFrames" id=6]
 animations = [ {
 "frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 4 ) ],
 "loop": true,
@@ -100,13 +100,14 @@ physics_process_parent = true
 stream = ExtResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="."]
+editor/display_folded = true
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 6 )
+shape = SubResource( 5 )
 
 [node name="Control" type="Control" parent="."]
 editor/display_folded = true
@@ -116,7 +117,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
-frames = SubResource( 4 )
-frame = 1
+frames = SubResource( 6 )
+frame = 2
 playing = true
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

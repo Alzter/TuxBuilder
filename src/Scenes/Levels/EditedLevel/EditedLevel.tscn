@@ -4,10 +4,10 @@
 [ext_resource path="res://Scenes/Objects/Misc/SpawnPoint.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Editor/Layers/TileMap.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Tilesets/LevelTiles.tres" type="TileSet" id=4]
-[ext_resource path="res://Scenes/Objects/Bonus/BonusBlock.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Objects/Bonus/BonusBlock.gd" type="Script" id=6]
-[ext_resource path="res://Scenes/Objects/BadGuys/Iceblock.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/Objects/BadGuys/Iceblock.gd" type="Script" id=8]
+[ext_resource path="res://Scenes/Objects/BadGuys/_1Down.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Objects/BadGuys/_1Down.gd" type="Script" id=6]
+[ext_resource path="res://Scenes/Objects/Bonus/1Up.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Objects/Bonus/1Up.gd" type="Script" id=8]
 
 [node name="Level" type="Node2D"]
 
@@ -54,49 +54,14 @@ collision_layer = 0
 collision_mask = 0
 format = 1
 
-[node name="BonusBlock" type="StaticBody2D" parent="." groups=[
-"stackable",
-] instance=ExtResource( 5 )]
-position = Vector2( 16, 176 )
-z_index = -1
-collision_layer = 31
-collision_mask = 31
-script = ExtResource( 6 )
-
-[node name="@BonusBlock@24" type="StaticBody2D" parent="." groups=[
-"stackable",
-] instance=ExtResource( 5 )]
-position = Vector2( 48, 176 )
-z_index = -1
-collision_layer = 31
-collision_mask = 31
-script = ExtResource( 6 )
-
-[node name="@BonusBlock@26" type="StaticBody2D" parent="." groups=[
-"stackable",
-] instance=ExtResource( 5 )]
+[node name="_1Down" type="Area2D" parent="." instance=ExtResource( 5 )]
 position = Vector2( 80, 176 )
-z_index = -1
-collision_layer = 31
-collision_mask = 31
+collision_layer = 0
 script = ExtResource( 6 )
 
-[node name="@BonusBlock@28" type="StaticBody2D" parent="." groups=[
-"stackable",
-] instance=ExtResource( 5 )]
-position = Vector2( 112, 176 )
-z_index = -1
-collision_layer = 31
-collision_mask = 31
-script = ExtResource( 6 )
-
-[node name="Iceblock" type="KinematicBody2D" parent="." groups=[
-"badguys",
-] instance=ExtResource( 7 )]
-position = Vector2( 272, 240 )
-collision_layer = 2
-collision_mask = 2
+[node name="1Up" type="Area2D" parent="." instance=ExtResource( 7 )]
+position = Vector2( 144, 176 )
+collision_layer = 0
 script = ExtResource( 8 )
-__meta__ = {
-"_edit_group_": true
-}
+[connection signal="body_entered" from="_1Down" to="_1Down" method="_on_1Up_body_entered"]
+[connection signal="body_entered" from="1Up" to="1Up" method="_on_1Up_body_entered"]

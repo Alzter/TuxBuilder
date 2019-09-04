@@ -342,6 +342,7 @@ color_ramp = SubResource( 8 )
 
 [node name="Sprite" type="Sprite" parent="."]
 editor/display_folded = true
+scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 5 )
 
 [node name="Sprite2" type="Sprite" parent="Sprite"]

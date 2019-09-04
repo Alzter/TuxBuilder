@@ -10,7 +10,7 @@
 [ext_resource path="res://Sprites/Objects/Star/star-3.png" type="Texture" id=8]
 [ext_resource path="res://Sprites/Objects/Star/star-4.png" type="Texture" id=9]
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=1]
 resource_name = "bounce"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Control:rect_scale")
@@ -22,11 +22,10 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.4, 0.6 ),
 "transitions": PoolRealArray( 0.5, 2, 0.5, 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 0.6, 1.4 ), Vector2( 1.3, 0.7 ), Vector2( 1, 1 ) ]
+"values": [ Vector2( 0.25, 0.25 ), Vector2( 0.15, 0.35 ), Vector2( 0.325, 0.175 ), Vector2( 0.25, 0.25 ) ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "default"
+[sub_resource type="Animation" id=2]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Control/AnimatedSprite:visible")
 tracks/0/interp = 1
@@ -73,10 +72,10 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ) ]
+"values": [ Vector2( 0.25, 0.25 ) ]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=3]
 length = 4.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Control/AnimatedSprite:visible")
@@ -141,7 +140,7 @@ tracks/4/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Gradient" id=3]
+[sub_resource type="Gradient" id=4]
 offsets = PoolRealArray( 0, 0.510345, 1 )
 colors = PoolColorArray( 1, 1, 1, 0.32549, 1, 1, 1, 0.14902, 0, 0.859375, 1, 0 )
 
@@ -163,9 +162,9 @@ extents = Vector2( 16, 16 )
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 16, 15 )
 
-[sub_resource type="SpriteFrames" id=4]
+[sub_resource type="SpriteFrames" id=10]
 animations = [ {
-"frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 5 ), ExtResource( 6 ) ],
+"frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 5 ) ],
 "loop": true,
 "name": "default",
 "speed": 20.0
@@ -178,9 +177,9 @@ script = ExtResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "default"
-anims/bounce = SubResource( 10 )
-anims/default = SubResource( 1 )
-anims/pickup = SubResource( 2 )
+anims/bounce = SubResource( 1 )
+anims/default = SubResource( 2 )
+anims/pickup = SubResource( 3 )
 
 [node name="Glow" type="CPUParticles2D" parent="."]
 amount = 4
@@ -191,7 +190,7 @@ spread = 180.0
 gravity = Vector2( 0, 0 )
 initial_velocity = 10.0
 scale_amount = 3.0
-color_ramp = SubResource( 3 )
+color_ramp = SubResource( 4 )
 
 [node name="Sparkle" type="CPUParticles2D" parent="."]
 amount = 6
@@ -226,12 +225,14 @@ position = Vector2( 0, 1 )
 shape = SubResource( 9 )
 
 [node name="Control" type="Control" parent="."]
-editor/display_folded = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+rect_scale = Vector2( 0.25, 0.25 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
-frames = SubResource( 4 )
+frames = SubResource( 10 )
+frame = 8
+playing = true
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

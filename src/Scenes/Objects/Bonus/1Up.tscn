@@ -228,6 +228,7 @@ anims/collect = SubResource( 2 )
 anims/default = SubResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
