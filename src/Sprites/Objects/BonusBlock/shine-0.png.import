@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Button.png-eb17f05360305897a4dd5a532dcc23ab.stex"
+path="res://.import/shine-0.png-4fcd2d56acfe0fa7520cd84e94fbcbd6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Editor/Button.png"
-dest_files=[ "res://.import/Button.png-eb17f05360305897a4dd5a532dcc23ab.stex" ]
+source_file="res://Sprites/Objects/BonusBlock/shine-0.png"
+dest_files=[ "res://.import/shine-0.png-4fcd2d56acfe0fa7520cd84e94fbcbd6.stex" ]
 
 [params]
 

@@ -37,17 +37,17 @@ bg_color = Color( 1, 0, 0, 1 )
 corner_radius_bottom_right = 4
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id=8]
+[sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 1, 1, 1, 0.509804 )
 corner_radius_top_right = 4
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id=9]
+[sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 1, 1, 1, 0.862745 )
 corner_radius_top_right = 4
 anti_aliasing = false
 
-[sub_resource type="StyleBoxEmpty" id=10]
+[sub_resource type="StyleBoxEmpty" id=8]
 
 [node name="Layer" type="Control"]
 anchor_right = 1.0
@@ -163,10 +163,10 @@ margin_top = 2.0
 margin_right = -2.0
 margin_bottom = -18.0
 focus_mode = 0
-custom_styles/hover = SubResource( 8 )
-custom_styles/pressed = SubResource( 9 )
-custom_styles/focus = SubResource( 10 )
-custom_styles/disabled = SubResource( 10 )
-custom_styles/normal = SubResource( 10 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 8 )
 [connection signal="pressed" from="Panel/Button" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="LayerSettings" to="." method="_on_LayerSettings_pressed"]
