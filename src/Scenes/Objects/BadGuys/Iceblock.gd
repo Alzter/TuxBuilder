@@ -45,6 +45,7 @@ func _physics_process(delta):
 			velocity.x *= -1
 	
 	if state == "squished":
+		velocity.y += 20
 		velocity = move_and_slide(velocity, FLOOR)
 	
 	if state == "kicked":
@@ -125,6 +126,8 @@ func _on_snowball_body_entered(body):
 			
 		# Kick / Grab Iceblock
 		elif state == "squished":
+			$AnimationPlayer.stop()
+			$AnimationPlayer.play("stop")
 			if Input.is_action_pressed("action"):
 				body.holding_object = true
 				body.object_held = name

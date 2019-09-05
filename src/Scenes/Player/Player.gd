@@ -321,12 +321,15 @@ func _physics_process(delta):
 		$Hitbox.position.y = 17
 		$HeadAttack/CollisionShape2D.position.y = 11
 		$ShootLocation.position.y = 17
+		$GrabLocation.position.y = 17
 	else:
 		$Hitbox.shape.extents.y = 31
 		$Hitbox.position.y = 1
 		$HeadAttack/CollisionShape2D.position.y = -21
 		$ShootLocation.position.y = 1
+		$GrabLocation.position.y = 1
 	$ShootLocation.position.x = $Control/AnimatedSprite.scale.x * 16
+	$GrabLocation.position.x = $Control/AnimatedSprite.scale.x * 16
 
 		# Shooting
 	if Input.is_action_just_pressed("action") and state == "fire" and get_tree().get_nodes_in_group("bullets").size() < 2:
@@ -359,8 +362,7 @@ func _physics_process(delta):
 	# Carry objects
 	if holding_object == true:
 		# Set the object's position
-		get_tree().current_scene.get_node(str("Level/", object_held)).position = position
-		get_tree().current_scene.get_node(str("Level/", object_held)).position.x += 16 * $Control/AnimatedSprite.scale.x
+		get_tree().current_scene.get_node(str("Level/", object_held)).position = Vector2(position.x + $GrabLocation.position.x, position.y + $GrabLocation.position.y)
 		
 		# Set the object's direction
 		if get_tree().current_scene.get_node(str("Level/", object_held)).has_node("Sprite"): get_tree().current_scene.get_node(str("Level/", object_held, "/Sprite")).scale.x = $Control/AnimatedSprite.scale.x * -1

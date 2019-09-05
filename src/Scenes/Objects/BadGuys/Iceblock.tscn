@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Scenes/Objects/BadGuys/Iceblock.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Creatures/Iceblock/iceblock-0.png" type="Texture" id=2]
@@ -250,6 +250,69 @@ tracks/4/keys = {
 "values": [ Vector2( 0, -42 ) ]
 }
 
+[sub_resource type="Animation" id=12]
+resource_name = "stop"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control/AnimatedSprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Control/AnimatedSprite:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Control:rect_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.25, 0.25 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Control:rect_rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Control:rect_position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -42 ) ]
+}
+
 [sub_resource type="Animation" id=9]
 resource_name = "wakeup"
 step = 0.05
@@ -373,6 +436,7 @@ anims/active = SubResource( 5 )
 anims/explode = SubResource( 6 )
 anims/shake = SubResource( 7 )
 anims/squished = SubResource( 8 )
+anims/stop = SubResource( 12 )
 anims/wakeup = SubResource( 9 )
 
 [node name="SFX" type="Node" parent="."]
