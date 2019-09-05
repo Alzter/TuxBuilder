@@ -46,8 +46,8 @@ func _process(_delta):
 	# General positioning stuff
 	$UI/SideBar/VBoxContainer/TilesButton.text = ""
 	$UI/SideBar/VBoxContainer/ObjectsButton.text = ""
-	$Grid.rect_size = Vector2((get_viewport().size.x + 32) * 4, (get_viewport().size.y + 32) * 4)
-	$Grid.rect_position = Vector2(get_tree().current_scene.get_node("Camera2D").position.x - (get_viewport().size.x / 2), get_tree().current_scene.get_node("Camera2D").position.y - (get_viewport().size.y / 2))
+	$Grid.rect_size = Vector2((get_viewport().size.x + 32) * 4 * get_tree().current_scene.get_node("Camera2D").zoom.x, (get_viewport().size.y + 32) * 4 * get_tree().current_scene.get_node("Camera2D").zoom.y)
+	$Grid.rect_position = Vector2(get_tree().current_scene.get_node("Camera2D").position.x - (get_viewport().size.x / 2) * get_tree().current_scene.get_node("Camera2D").zoom.x, get_tree().current_scene.get_node("Camera2D").position.y - (get_viewport().size.y / 2) * get_tree().current_scene.get_node("Camera2D").zoom.y)
 	$Grid.rect_position = Vector2(floor($Grid.rect_position.x / 32) * 32, floor($Grid.rect_position.y / 32) * 32)
 	$UI/BottomBar/ScrollContainer/HBoxContainer.rect_min_size.y = 64
 	$UI/BottomBar/ScrollContainer.rect_size.y = 64
@@ -172,8 +172,8 @@ func _process(_delta):
 			else: get_tree().current_scene.get_node("Player").position.y -= 16
 	
 	if Input.is_action_pressed("click_left") and dragging_object == false:
-		# If the mouse isn't on the level editor UI
-		if get_viewport().get_mouse_position().x < get_viewport().size.x - 128 and get_viewport().get_mouse_position().y < get_viewport().size.y - 64 and (tile_selected != old_tile_selected or mouse_down == false) and $UI/AddLayer.visible == false:
+		# If the mouse isn't on the level editor UI or zoom buttons
+		if get_viewport().get_mouse_position().x < get_viewport().size.x - 128 and get_viewport().get_mouse_position().y < get_viewport().size.y - 64 and (tile_selected != old_tile_selected or mouse_down == false) and $UI/AddLayer.visible == false and $UI/BottomBar/Zoom/ZoomIn.is_hovered() == false and $UI/BottomBar/Zoom/ZoomDefault.is_hovered() == false and $UI/BottomBar/Zoom/ZoomOut.is_hovered() == false:
 			
 			# Tile placing / erasing
 			if category_selected == "Tiles":
@@ -249,6 +249,9 @@ func update_selected_tile():
 		return
 	
 	if layer_selected_type != "TileMap" and category_selected == "Tiles":
+		return
+	
+	if not ($UI/BottomBar/Zoom/ZoomIn.is_hovered() == false and $UI/BottomBar/Zoom/ZoomDefault.is_hovered() == false and $UI/BottomBar/Zoom/ZoomOut.is_hovered() == false):
 		return
 	
 	$SelectedTile.position.x = (tile_selected.x + 0.5) * 32
@@ -501,3 +504,15 @@ func list_files_in_directory_2(path): # Dupe of list files in directory used to 
     dir.list_dir_end()
 
     return files2
+
+func _on_ZoomIn_pressed():
+	get_tree().current_scene.camera_zoom -= 0.25
+	get_tree().current_scene.camera_zoom_speed = 5
+
+func _on_ZoomDefault_pressed():
+	get_tree().current_scene.camera_zoom = 1
+	get_tree().current_scene.camera_zoom_speed = 5
+
+func _on_ZoomOut_pressed():
+	get_tree().current_scene.camera_zoom += 0.25
+	get_tree().current_scene.camera_zoom_speed = 5

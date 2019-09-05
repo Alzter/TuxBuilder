@@ -340,8 +340,8 @@ func _physics_process(delta):
 	# Camera Positioning
 	if abs(velocity.x) > 0:
 		camera_offset += 2 * (velocity.x / abs(velocity.x))
-		if abs(camera_offset) >= (get_viewport().size.x * 0.1):
-			camera_offset = (get_viewport().size.x * 0.1) * (camera_offset / abs(camera_offset))
+		if abs(camera_offset) >= (get_viewport().size.x * 0.1) * get_tree().current_scene.get_node("Camera2D").zoom.x:
+			camera_offset = (get_viewport().size.x * 0.1) * get_tree().current_scene.get_node("Camera2D").zoom.x * (camera_offset / abs(camera_offset))
 	camera_position.x = camera_position.x + (camera_offset - camera_position.x) / 5
 	get_tree().current_scene.get_node("Camera2D").position = Vector2(position.x + camera_position.x,position.y + camera_position.y)
 

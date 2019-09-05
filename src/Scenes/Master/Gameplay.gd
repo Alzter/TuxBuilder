@@ -10,6 +10,8 @@ var level_bound_right = 0
 var level_bound_bottom = 0
 var level_bound_top = 0
 var camera_smooth_time = 0
+var camera_zoom = 1
+var camera_zoom_speed = 20
 
 func _ready():
 	editmode = false
@@ -21,6 +23,11 @@ func _ready():
 	level_bounds()
 
 func _process(_delta):
+	if camera_zoom_speed < 1: camera_zoom_speed = 1
+	if camera_zoom < 0.25: camera_zoom = 0.25
+	$Camera2D.zoom.x = $Camera2D.zoom.x + (camera_zoom - $Camera2D.zoom.x) / camera_zoom_speed
+	$Camera2D.zoom.y = $Camera2D.zoom.x
+	
 	if get_viewport().size.x > get_viewport().size.y:
 		$CanvasLayer/CircleTransition.rect_size.x = get_viewport().size.x
 		$CanvasLayer/CircleTransition.rect_size.y = get_viewport().size.x
