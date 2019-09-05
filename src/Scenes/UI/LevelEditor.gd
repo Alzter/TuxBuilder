@@ -516,3 +516,6 @@ func _on_ZoomDefault_pressed():
 func _on_ZoomOut_pressed():
 	get_tree().current_scene.camera_zoom += 0.25
 	get_tree().current_scene.camera_zoom_speed = 5
+
+func _on_Play_pressed():
+	get_tree().current_scene.editmode_toggle()

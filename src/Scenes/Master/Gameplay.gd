@@ -37,29 +37,6 @@ func _process(_delta):
 		$CanvasLayer/CircleTransition.rect_size.y = get_viewport().size.y
 		$CanvasLayer/CircleTransition.rect_position.x = 0.5 * (get_viewport().size.x - get_viewport().size.y)
 	
-	if Input.is_action_just_pressed("click_right"):
-		if $CanvasLayer/AnimationPlayer.is_playing() == false and can_edit == true:
-			if editmode == false:
-				editmode = true
-				player_position = get_node("Player").position
-				clear_ui()
-				clear_player()
-				clear_level()
-				if editsaved == false:
-					load_level(current_level)
-				else: load_edited_level()
-				load_player()
-				get_node("Player").position = player_position
-			elif get_node("Editor").dragging_object == false:
-				editmode = false
-				camera_smooth_time = 20
-				save_edited_level()
-				clear_level()
-				if editsaved == false:
-					load_level(current_level)
-				else: load_edited_level()
-				load_ui()
-	
 	if editmode == false:
 		level_bounds()
 		camera_to_level_bounds()
@@ -203,3 +180,25 @@ func play_music(music):
 	$Music.stop()
 	$Music.play()
 
+func editmode_toggle():
+	if $CanvasLayer/AnimationPlayer.is_playing() == false and can_edit == true:
+		if editmode == false:
+			editmode = true
+			player_position = get_node("Player").position
+			clear_ui()
+			clear_player()
+			clear_level()
+			if editsaved == false:
+				load_level(current_level)
+			else: load_edited_level()
+			load_player()
+			get_node("Player").position = player_position
+		elif get_node("Editor").dragging_object == false:
+			editmode = false
+			camera_smooth_time = 20
+			save_edited_level()
+			clear_level()
+			if editsaved == false:
+				load_level(current_level)
+			else: load_edited_level()
+			load_ui()

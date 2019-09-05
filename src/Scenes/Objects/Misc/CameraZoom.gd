@@ -1,7 +1,7 @@
 extends Area2D
 
-var camera_zoom = 2
-var camera_zoom_speed = 20
+export var camera_zoom = 2
+export var camera_zoom_speed = 20
 
 func _process(delta):
 	visible = get_tree().current_scene.editmode

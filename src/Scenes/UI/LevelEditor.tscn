@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Scenes/UI/LevelEditor.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Editor/Grid.png" type="Texture" id=2]
@@ -11,7 +11,10 @@
 [ext_resource path="res://Sprites/Editor/Plus.png" type="Texture" id=9]
 [ext_resource path="res://Sprites/Editor/Equals.png" type="Texture" id=10]
 [ext_resource path="res://Sprites/Editor/Minus.png" type="Texture" id=11]
-[ext_resource path="res://Tilesets/LevelTiles.tres" type="TileSet" id=12]
+[ext_resource path="res://Sprites/Editor/Save.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/Editor/Wrench.png" type="Texture" id=13]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Jump3.png" type="Texture" id=14]
+[ext_resource path="res://Tilesets/LevelTiles.tres" type="TileSet" id=15]
 
 [sub_resource type="Animation" id=1]
 resource_name = "MoveIn"
@@ -99,6 +102,30 @@ tracks/6/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("../Play/Play/Edit:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("../Play/Play/Play:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -188,6 +215,30 @@ tracks/6/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
+tracks/7/type = "value"
+tracks/7/path = NodePath("../Play/Play/Play:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("../Play/Play/Edit:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 1, 1, 1, 0 )
@@ -244,6 +295,22 @@ corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id=12]
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 0.5 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id=14]
+bg_color = Color( 0.3, 0.3, 0.3, 1 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [node name="Node2D" type="Node2D"]
 pause_mode = 2
@@ -307,7 +374,6 @@ anims/MoveIn = SubResource( 1 )
 anims/MoveOut = SubResource( 2 )
 
 [node name="SideBar" type="ColorRect" parent="UI"]
-editor/display_folded = true
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -321,7 +387,6 @@ anchor_bottom = 1.0
 custom_constants/separation = 0
 
 [node name="TilesButton" type="Button" parent="UI/SideBar/VBoxContainer"]
-editor/display_folded = true
 margin_right = 128.0
 margin_bottom = 32.0
 grow_horizontal = 0
@@ -474,10 +539,11 @@ texture = ExtResource( 7 )
 
 [node name="Panel" type="Panel" parent="UI/SideBar"]
 editor/display_folded = true
+anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = 2.0
 margin_top = 104.0
-margin_right = 126.0
+margin_right = 62.0
 margin_bottom = -66.0
 rect_clip_content = true
 custom_styles/panel = SubResource( 8 )
@@ -655,6 +721,35 @@ mouse_filter = 2
 texture = ExtResource( 11 )
 expand = true
 
+[node name="Save" type="Button" parent="UI/BottomBar"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -126.0
+margin_top = -62.0
+margin_right = -66.0
+margin_bottom = -2.0
+focus_mode = 0
+custom_styles/hover = SubResource( 12 )
+custom_styles/pressed = SubResource( 12 )
+custom_styles/focus = SubResource( 12 )
+custom_styles/disabled = SubResource( 14 )
+custom_styles/normal = SubResource( 12 )
+action_mode = 0
+enabled_focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="UI/BottomBar/Save"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = 2.0
+margin_right = -4.0
+margin_bottom = -4.0
+texture = ExtResource( 12 )
+expand = true
+stretch_mode = 6
+
 [node name="AddLayer" type="Popup" parent="UI"]
 editor/display_folded = true
 visible = true
@@ -798,8 +893,50 @@ rect_min_size = Vector2( 0, 2 )
 texture = ExtResource( 7 )
 expand = true
 
+[node name="Play" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="Play" type="Button" parent="Play"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -62.0
+margin_top = -62.0
+margin_right = -2.0
+margin_bottom = -2.0
+rect_pivot_offset = Vector2( 64, 64 )
+focus_mode = 0
+custom_styles/hover = SubResource( 12 )
+custom_styles/pressed = SubResource( 12 )
+custom_styles/focus = SubResource( 12 )
+custom_styles/disabled = SubResource( 14 )
+custom_styles/normal = SubResource( 12 )
+action_mode = 0
+enabled_focus_mode = 0
+
+[node name="Edit" type="TextureRect" parent="Play/Play"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -6.0
+margin_bottom = -6.0
+texture = ExtResource( 13 )
+expand = true
+stretch_mode = 6
+
+[node name="Play" type="TextureRect" parent="Play/Play"]
+visible = false
+anchor_right = 0.5
+margin_left = -4.0
+margin_top = -24.0
+margin_right = 30.0
+margin_bottom = 56.0
+texture = ExtResource( 14 )
+
 [node name="TileMap" type="TileMap" parent="."]
-tile_set = ExtResource( 12 )
+tile_set = ExtResource( 15 )
 cell_size = Vector2( 32, 32 )
 collision_layer = 0
 collision_mask = 0
@@ -813,3 +950,4 @@ format = 1
 [connection signal="pressed" from="UI/BottomBar/Zoom/ZoomOut" to="." method="_on_ZoomOut_pressed"]
 [connection signal="popup_hide" from="UI/AddLayer" to="." method="_on_AddLayer_popup_hide"]
 [connection signal="pressed" from="UI/AddLayer/LayerConfirmation" to="." method="_on_LayerConfirmation_pressed"]
+[connection signal="pressed" from="Play/Play" to="." method="_on_Play_pressed"]
