@@ -340,11 +340,10 @@ rect = Rect2( -64, -512, 128, 1024 )
 physics_process_parent = true
 
 [node name="Head" type="Area2D" parent="."]
-editor/display_folded = true
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Head"]
-position = Vector2( 0, -14 )
+position = Vector2( 0, -9 )
 shape = SubResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -366,7 +365,6 @@ rect_pivot_offset = Vector2( 0, 56 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
 frames = SubResource( 4 )
-animation = "squished"
 offset = Vector2( 0, -2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

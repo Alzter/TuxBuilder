@@ -44,6 +44,9 @@ func _physics_process(delta):
 			$Control/AnimatedSprite.scale.x *= -1
 			velocity.x *= -1
 	
+	if state == "squished":
+		velocity = move_and_slide(velocity, FLOOR)
+	
 	if state == "kicked":
 		velocity.x = KICK_SPEED * -$Control/AnimatedSprite.scale.x
 		velocity.y += 20
