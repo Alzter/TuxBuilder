@@ -9,6 +9,7 @@ var direction = 1
 var rotate = 0
 var invincible_time = 0
 
+const INVINCIBLE_TIME = 10
 const KICK_SPEED = 500
 
 func _ready():
@@ -84,7 +85,7 @@ func _on_Head_area_entered(area):
 			return
 		
 		if invincible_time == 0:
-			invincible_time = 5
+			invincible_time = INVINCIBLE_TIME
 			
 			if state == "active" or state == "kicked":
 				state = "squished"
@@ -126,7 +127,7 @@ func _on_snowball_body_entered(body):
 				body.object_held = name
 				state = ""
 			elif invincible_time == 0:
-				invincible_time = 5
+				invincible_time = INVINCIBLE_TIME
 				$Control/AnimatedSprite.play("squished")
 				$SFX/Kick.play()
 				
