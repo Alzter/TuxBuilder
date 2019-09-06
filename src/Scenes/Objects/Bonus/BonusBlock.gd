@@ -21,6 +21,8 @@ func _ready():
 func _on_BottomHitbox_area_entered(area):
 	if hit == false:
 		if area.get_name() == "HeadAttack":
+			
+			# Detect if block is hit from 
 			if area.get_parent().position.x > self.position.x:
 				hitdirection = -1
 			else: hitdirection = 1
@@ -28,7 +30,7 @@ func _on_BottomHitbox_area_entered(area):
 			$AnimationPlayer.play("hit")
 			hit = true
 			if stored != "":
-				if childstored.name != "Coin":
+				if childstored.is_in_group("Coin"):
 					$Upgrade.play()
 					childstored.position.y -= 32
 				get_tree().current_scene.get_node("Level").add_child(childstored)
