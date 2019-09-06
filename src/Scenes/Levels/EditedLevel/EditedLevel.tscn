@@ -55,7 +55,7 @@ format = 1
 [node name="Bomb" type="KinematicBody2D" parent="." groups=[
 "badguys",
 ] instance=ExtResource( 5 )]
-position = Vector2( 240, 240 )
+position = Vector2( 304, 240 )
 collision_layer = 2
 collision_mask = 2
 script = ExtResource( 6 )

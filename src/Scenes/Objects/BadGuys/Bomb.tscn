@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Scenes/Objects/BadGuys/Bomb.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Creatures/Bomb/bomb-0.png" type="Texture" id=2]
@@ -13,9 +13,10 @@
 [ext_resource path="res://Audio/SoundEffects/Enemy/splash.ogg" type="AudioStream" id=11]
 [ext_resource path="res://Audio/SoundEffects/Enemy/hiss.wav" type="AudioStream" id=12]
 [ext_resource path="res://Audio/SoundEffects/Enemy/beep.wav" type="AudioStream" id=13]
-[ext_resource path="res://Audio/SoundEffects/Enemy/explode.wav" type="AudioStream" id=14]
-[ext_resource path="res://Sprites/Creatures/Snowball/particle.png" type="Texture" id=15]
-[ext_resource path="res://Sprites/Creatures/Snowball/droplet.png" type="Texture" id=16]
+[ext_resource path="res://Audio/SoundEffects/Enemy/beepfast.wav" type="AudioStream" id=14]
+[ext_resource path="res://Audio/SoundEffects/Enemy/explode.wav" type="AudioStream" id=15]
+[ext_resource path="res://Sprites/Creatures/Snowball/particle.png" type="Texture" id=16]
+[ext_resource path="res://Sprites/Creatures/Snowball/droplet.png" type="Texture" id=17]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 15 )
@@ -352,10 +353,22 @@ tracks/10/loop_wrap = true
 tracks/10/imported = false
 tracks/10/enabled = true
 tracks/10/keys = {
-"times": PoolRealArray( 1.4, 1.7, 2, 2.3, 2.4, 2.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 1.4, 1.7, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ true, true, true, true, true, true ]
+"values": [ true, true, true ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("SFX/Beepfast:playing")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 2.3 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Gradient" id=11]
@@ -408,17 +421,18 @@ rect_pivot_offset = Vector2( 0, 14 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
 position = Vector2( 0, 6.31594e-013 )
 frames = SubResource( 4 )
-frame = 1
 playing = true
 offset = Vector2( 0, -2 )
 
 [node name="RedGlow" type="AnimatedSprite" parent="Control/AnimatedSprite"]
 visible = false
+self_modulate = Color( 1, 1, 1, 0.157895 )
 frames = SubResource( 5 )
 offset = Vector2( 0, -2 )
 
 [node name="WhiteFlash" type="AnimatedSprite" parent="Control/AnimatedSprite"]
 visible = false
+self_modulate = Color( 1, 1, 1, 0 )
 frames = SubResource( 6 )
 offset = Vector2( 0, -2 )
 
@@ -460,13 +474,16 @@ stream = ExtResource( 11 )
 
 [node name="Hiss" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 12 )
-volume_db = -20.0
+volume_db = -23.75
 
 [node name="Beep" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 13 )
 
-[node name="Explode" type="AudioStreamPlayer" parent="SFX"]
+[node name="Beepfast" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 14 )
+
+[node name="Explode" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 15 )
 
 [node name="ExplodeSnow" type="CPUParticles2D" parent="."]
 rotation = -1.5708
@@ -476,7 +493,7 @@ one_shot = true
 speed_scale = 1.5
 explosiveness = 1.0
 local_coords = false
-texture = ExtResource( 15 )
+texture = ExtResource( 16 )
 spread = 60.0
 flatness = 1.0
 gravity = Vector2( 0, 500 )
@@ -497,7 +514,7 @@ amount = 16
 one_shot = true
 explosiveness = 1.0
 local_coords = false
-texture = ExtResource( 16 )
+texture = ExtResource( 17 )
 spread = 180.0
 flatness = 1.0
 gravity = Vector2( 0, 500 )
