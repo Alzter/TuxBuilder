@@ -381,12 +381,14 @@ func star_invincibility():
 	invincible = true
 	$InvincibilityTimer.start(14)
 	get_tree().current_scene.play_music("invincible.ogg")
+	$AnimationPlayerInvincibility.stop()
 	$AnimationPlayerInvincibility.play("InvincibleStar")
 	
 # Damage invincibility
 func damage_invincibility():
 	invincible_damage = true
 	$InvincibilityTimer.start(1.8)
+	$AnimationPlayerInvincibility.stop()
 	$AnimationPlayerInvincibility.play("HurtInvincibility")
 	
 func _on_InvincibilityTimer_timeout():
@@ -395,6 +397,7 @@ func _on_InvincibilityTimer_timeout():
 	using_star = false
 	self.show()
 	$AnimationPlayerInvincibility.stop()
+	$AnimationPlayerInvincibility.play("Stop")
 
 # Bounce off squished enemies
 func bounce():
