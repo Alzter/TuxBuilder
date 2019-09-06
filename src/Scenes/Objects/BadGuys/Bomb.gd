@@ -52,11 +52,8 @@ func fireball_kill():
 
 # If hit by bullet or invincible player
 func kill():
-	explode()
-
-# If hit by sliding player
-func normal_kill():
 	disable()
+	$AnimationPlayer.stop()
 	state = "kill"
 	if velocity.x == 0: velocity.x = 1
 	velocity = Vector2(300 * (velocity.x / abs(velocity.x)), -350)
@@ -68,7 +65,7 @@ func _on_Head_area_entered(area):
 	if area.is_in_group("bottom") and state == "active":
 		var player = area.get_parent()
 		if player.sliding == true:
-			normal_kill()
+			kill()
 			return
 		disable()
 		state = "squished"

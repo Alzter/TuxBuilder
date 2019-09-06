@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/beep.wav-f86d4f11b3ab6ff0dcd768406ffbcd69.sample"
+
+[deps]
+
+source_file="res://Audio/SoundEffects/Enemy/beep.wav"
+dest_files=[ "res://.import/beep.wav-f86d4f11b3ab6ff0dcd768406ffbcd69.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
