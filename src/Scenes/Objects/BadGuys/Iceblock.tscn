@@ -250,7 +250,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, -42 ) ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=9]
 resource_name = "stop"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Control/AnimatedSprite:visible")
@@ -313,8 +313,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, -42 ) ]
 }
 
-[sub_resource type="Animation" id=9]
-resource_name = "wakeup"
+[sub_resource type="Animation" id=10]
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Control:rect_scale")
@@ -377,11 +376,11 @@ tracks/4/keys = {
 "values": [ "default" ]
 }
 
-[sub_resource type="Gradient" id=10]
+[sub_resource type="Gradient" id=11]
 offsets = PoolRealArray( 0, 0.646552, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0.941176, 0.339844, 0.922334, 1, 0 )
 
-[sub_resource type="Gradient" id=11]
+[sub_resource type="Gradient" id=12]
 offsets = PoolRealArray( 0, 0.467949, 1 )
 colors = PoolColorArray( 1, 1, 1, 0.847059, 0.625, 0.936279, 1, 0.556863, 0, 0.478516, 1, 0 )
 
@@ -436,8 +435,8 @@ anims/active = SubResource( 5 )
 anims/explode = SubResource( 6 )
 anims/shake = SubResource( 7 )
 anims/squished = SubResource( 8 )
-anims/stop = SubResource( 12 )
-anims/wakeup = SubResource( 9 )
+anims/stop = SubResource( 9 )
+anims/wakeup = SubResource( 10 )
 
 [node name="SFX" type="Node" parent="."]
 
@@ -476,7 +475,7 @@ angle = 720.0
 angle_random = 1.0
 scale_amount = 0.1
 scale_amount_random = 0.5
-color_ramp = SubResource( 10 )
+color_ramp = SubResource( 11 )
 
 [node name="ExplodeDroplets" type="CPUParticles2D" parent="."]
 emitting = false
@@ -498,7 +497,7 @@ angle = 360.0
 angle_random = 1.0
 scale_amount = 0.1
 scale_amount_random = 0.3
-color_ramp = SubResource( 11 )
+color_ramp = SubResource( 12 )
 
 [node name="WakeupTimer" type="Timer" parent="."]
 

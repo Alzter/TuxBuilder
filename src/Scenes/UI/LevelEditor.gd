@@ -245,6 +245,8 @@ func update_selected_tile():
 	$SelectedTile.offset = Vector2(0,0)
 	player_hovered = false
 	
+	if category_selected != "Objects" or $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == true: $SelectedTile.scale = Vector2(0.25,0.25)
+	
 	if not (get_viewport().get_mouse_position().x < get_viewport().size.x - 128 and get_viewport().get_mouse_position().y < get_viewport().size.y - 64) or $UI/AddLayer.visible == true:
 		return
 	
@@ -380,23 +382,27 @@ func get_object_texture(object_location): # Get the texture for an object
 	if object_type == "":
 		return
 	
+	$SelectedTile.scale = Vector2(0.25,0.25)
 	$SelectedTile.region_enabled = false
 	
 	# If the object has an animated sprite, set the thumbnail to that
 	if load(object_location).instance().has_node("Control/AnimatedSprite"):
 		var selected_texture = load(object_location).instance().get_node("Control/AnimatedSprite").get_sprite_frames().get_frame("default",0)
+		$SelectedTile.scale = load(object_location).instance().get_node("Control").rect_scale
 		$SelectedTile.offset += load(object_location).instance().get_node("Control/AnimatedSprite").offset
 		$SelectedTile.texture = (selected_texture)
 	
 	# If the object has an animated sprite, set the thumbnail to that
 	if load(object_location).instance().has_node("AnimatedSprite"):
 		var selected_texture = load(object_location).instance().get_node("AnimatedSprite").get_sprite_frames().get_frame("default",0)
+		$SelectedTile.scale = load(object_location).instance().get_node("AnimatedSprite").scale
 		$SelectedTile.offset += load(object_location).instance().get_node("AnimatedSprite").offset
 		$SelectedTile.texture = (selected_texture)
 	
 	# Otherwise if it has a sprite, set the thumbnail to that
 	elif load(object_location).instance().has_node("Sprite"):
 		var selected_texture = load(object_location).instance().get_node("Sprite").texture
+		$SelectedTile.scale = load(object_location).instance().get_node("Sprite").scale
 		$SelectedTile.offset += load(object_location).instance().get_node("Sprite").offset
 		$SelectedTile.texture = (selected_texture)
 
