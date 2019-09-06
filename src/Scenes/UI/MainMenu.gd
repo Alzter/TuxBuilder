@@ -2,6 +2,8 @@ extends Control
 
 func _ready():
 	$Panel/VBoxContainer/StartGame.grab_focus()
+	$FadeIn.show()
+	$AnimationPlayer.play("Appear")
 
 func _on_StartGame_pressed():
 	pass # Replace with function body.
