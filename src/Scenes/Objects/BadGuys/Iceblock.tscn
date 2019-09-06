@@ -427,6 +427,7 @@ rect_pivot_offset = Vector2( 0, 56 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
 frames = SubResource( 4 )
+animation = "squished"
 offset = Vector2( 0, -2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
