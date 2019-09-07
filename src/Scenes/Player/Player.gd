@@ -379,6 +379,7 @@ func _physics_process(delta):
 func star_invincibility():
 	using_star = true
 	invincible = true
+	self.show()
 	$InvincibilityTimer.start(14)
 	get_tree().current_scene.play_music("invincible.ogg")
 	$AnimationPlayerInvincibility.stop()
