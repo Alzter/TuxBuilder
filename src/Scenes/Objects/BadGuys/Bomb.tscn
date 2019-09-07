@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Scenes/Objects/BadGuys/Bomb.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Creatures/Bomb/bomb-0.png" type="Texture" id=2]
@@ -15,14 +15,12 @@
 [ext_resource path="res://Audio/SoundEffects/Enemy/beep.wav" type="AudioStream" id=13]
 [ext_resource path="res://Audio/SoundEffects/Enemy/beepfast.wav" type="AudioStream" id=14]
 [ext_resource path="res://Audio/SoundEffects/Enemy/explode.wav" type="AudioStream" id=15]
-[ext_resource path="res://Sprites/Creatures/Snowball/particle.png" type="Texture" id=16]
-[ext_resource path="res://Sprites/Creatures/Snowball/droplet.png" type="Texture" id=17]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 15 )
 
-[sub_resource type="CircleShape2D" id=9]
-radius = 0.01
+[sub_resource type="CircleShape2D" id=22]
+radius = 80.0
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 12, 6 )
@@ -63,7 +61,10 @@ animations = [ {
 offsets = PoolRealArray( 0, 0.470588, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="RectangleShape2D" id=23]
+extents = Vector2( 0, 0 )
+
+[sub_resource type="Animation" id=9]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Control/AnimatedSprite:animation")
 tracks/0/interp = 1
@@ -179,13 +180,25 @@ tracks/9/loop_wrap = true
 tracks/9/imported = false
 tracks/9/enabled = true
 tracks/9/keys = {
-"times": PoolRealArray( -0.1 ),
+"times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
 }
+tracks/10/type = "value"
+tracks/10/path = NodePath("ExplosionRadius/CollisionShape2D:shape")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ SubResource( 23 ) ]
+}
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=10]
 length = 1.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Control/AnimatedSprite:visible")
@@ -248,19 +261,19 @@ tracks/4/keys = {
 "values": [ false, true ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("ExplosionRadius/CollisionShape2D:shape:radius")
+tracks/5/path = NodePath("ExplosionRadius/CollisionShape2D:shape")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0.01, 130.0 ]
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ SubResource( 22 ) ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=11]
 length = 2.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("Control/AnimatedSprite:animation")
@@ -409,14 +422,6 @@ tracks/11/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Gradient" id=13]
-offsets = PoolRealArray( 0, 0.762821, 1 )
-colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0.443137, 0, 1, 0.882813, 0 )
-
-[sub_resource type="Gradient" id=14]
-offsets = PoolRealArray( 0, 0.467949, 1 )
-colors = PoolColorArray( 1, 1, 1, 0.847059, 0.625, 0.936279, 1, 0.556863, 0, 0.478516, 1, 0 )
-
 [node name="Bomb" type="KinematicBody2D" groups=[
 "badguys",
 ]]
@@ -431,9 +436,10 @@ __meta__ = {
 shape = SubResource( 1 )
 
 [node name="ExplosionRadius" type="Area2D" parent="."]
+editor/display_folded = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionRadius"]
-shape = SubResource( 9 )
+shape = SubResource( 22 )
 disabled = true
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
@@ -449,6 +455,7 @@ position = Vector2( 0, -14 )
 shape = SubResource( 3 )
 
 [node name="Area2D" type="Area2D" parent="."]
+editor/display_folded = true
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
@@ -456,6 +463,7 @@ position = Vector2( 0, 6 )
 shape = SubResource( 4 )
 
 [node name="Control" type="Control" parent="."]
+editor/display_folded = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -463,8 +471,10 @@ anchor_bottom = 0.5
 rect_pivot_offset = Vector2( 0, 14 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
+visible = false
 position = Vector2( 0, 6.31594e-013 )
 frames = SubResource( 5 )
+frame = 3
 playing = true
 offset = Vector2( 0, -2 )
 
@@ -499,11 +509,12 @@ color_ramp = SubResource( 8 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "active"
-anims/active = SubResource( 10 )
-anims/explode = SubResource( 11 )
-anims/triggered = SubResource( 12 )
+anims/active = SubResource( 9 )
+anims/explode = SubResource( 10 )
+anims/triggered = SubResource( 11 )
 
 [node name="SFX" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="Fall" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 9 )
@@ -526,51 +537,6 @@ stream = ExtResource( 14 )
 
 [node name="Explode" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 15 )
-
-[node name="ExplodeSnow" type="CPUParticles2D" parent="."]
-rotation = -1.5708
-emitting = false
-amount = 4
-one_shot = true
-speed_scale = 1.5
-explosiveness = 1.0
-local_coords = false
-texture = ExtResource( 16 )
-spread = 60.0
-flatness = 1.0
-gravity = Vector2( 0, 500 )
-initial_velocity = 250.0
-angular_velocity = 720.0
-angular_velocity_random = 1.0
-damping = 80.0
-damping_random = 0.25
-angle = 360.0
-angle_random = 1.0
-scale_amount = 0.2
-scale_amount_random = 0.75
-color_ramp = SubResource( 13 )
-
-[node name="ExplodeDroplets" type="CPUParticles2D" parent="."]
-emitting = false
-amount = 16
-one_shot = true
-explosiveness = 1.0
-local_coords = false
-texture = ExtResource( 17 )
-spread = 180.0
-flatness = 1.0
-gravity = Vector2( 0, 500 )
-initial_velocity = 300.0
-initial_velocity_random = 0.75
-angular_velocity = 720.0
-angular_velocity_random = 1.0
-damping = 25.0
-damping_random = 0.75
-angle = 360.0
-angle_random = 1.0
-scale_amount = 0.1
-scale_amount_random = 0.3
-color_ramp = SubResource( 14 )
 [connection signal="area_entered" from="ExplosionRadius" to="." method="_on_ExplosionRadius_area_entered"]
 [connection signal="screen_exited" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_exited"]
 [connection signal="area_entered" from="Head" to="." method="_on_Head_area_entered"]

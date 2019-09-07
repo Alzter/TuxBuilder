@@ -97,7 +97,5 @@ func _on_ExplosionRadius_area_entered(area):
 	if area.get_parent().get_name() != name:
 		if area.get_parent().is_in_group("badguys"):
 			area.get_parent().kill()
-		if area.is_in_group("bonusblock"):
-			if position.x > area.get_parent().position.x:
-				area.get_parent().hit(1)
-			else: area.get_parent().hit(-1)
+		if area.get_parent().is_in_group("player"):
+			area.get_parent().hurt()
