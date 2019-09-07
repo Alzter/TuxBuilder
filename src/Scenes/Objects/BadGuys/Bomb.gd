@@ -92,3 +92,12 @@ func explode():
 
 func appear(dir):
 	$Control/AnimatedSprite.scale.x = -dir
+
+func _on_ExplosionRadius_area_entered(area):
+	if area.get_parent().get_name() != name:
+		if area.is_in_group("badguys"):
+			kill()
+		if area.is_in_group("bonusblock"):
+			if position.x > area.get_parent().position.x:
+				area.hit(1)
+			else: area.hit(-1)

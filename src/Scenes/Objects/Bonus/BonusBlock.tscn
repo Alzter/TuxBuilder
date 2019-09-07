@@ -84,6 +84,7 @@ extents = Vector2( 16, 4 )
 
 [node name="BonusBlock" type="StaticBody2D" groups=[
 "stackable",
+"bonusblock",
 ]]
 z_index = -1
 collision_layer = 31

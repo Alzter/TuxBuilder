@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Scenes/Objects/BadGuys/Bomb.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Creatures/Bomb/bomb-0.png" type="Texture" id=2]
@@ -21,13 +21,16 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 15 )
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 12, 6 )
+[sub_resource type="CircleShape2D" id=2]
+radius = 60.0
 
 [sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 12, 6 )
+
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 16, 10 )
 
-[sub_resource type="SpriteFrames" id=4]
+[sub_resource type="SpriteFrames" id=5]
 animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 3 ) ],
 "loop": true,
@@ -40,7 +43,7 @@ animations = [ {
 "speed": 2.0
 } ]
 
-[sub_resource type="SpriteFrames" id=5]
+[sub_resource type="SpriteFrames" id=6]
 animations = [ {
 "frames": [ ExtResource( 6 ) ],
 "loop": true,
@@ -48,7 +51,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="SpriteFrames" id=6]
+[sub_resource type="SpriteFrames" id=7]
 animations = [ {
 "frames": [ ExtResource( 7 ) ],
 "loop": true,
@@ -56,11 +59,11 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="Gradient" id=7]
+[sub_resource type="Gradient" id=8]
 offsets = PoolRealArray( 0, 0.470588, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=9]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Control/AnimatedSprite:animation")
 tracks/0/interp = 1
@@ -169,9 +172,20 @@ tracks/8/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/9/type = "value"
+tracks/9/path = NodePath("ExplosionRadius/CollisionShape2D:disabled")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
-[sub_resource type="Animation" id=9]
-resource_name = "explode"
+[sub_resource type="Animation" id=10]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Control/AnimatedSprite:visible")
 tracks/0/interp = 1
@@ -220,9 +234,20 @@ tracks/3/keys = {
 "update": 1,
 "values": [ true ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("ExplosionRadius/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
 
-[sub_resource type="Animation" id=10]
-resource_name = "triggered"
+[sub_resource type="Animation" id=11]
 length = 2.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("Control/AnimatedSprite:animation")
@@ -371,11 +396,11 @@ tracks/11/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Gradient" id=11]
+[sub_resource type="Gradient" id=12]
 offsets = PoolRealArray( 0, 0.762821, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0.443137, 0, 1, 0.882813, 0 )
 
-[sub_resource type="Gradient" id=12]
+[sub_resource type="Gradient" id=13]
 offsets = PoolRealArray( 0, 0.467949, 1 )
 colors = PoolColorArray( 1, 1, 1, 0.847059, 0.625, 0.936279, 1, 0.556863, 0, 0.478516, 1, 0 )
 
@@ -392,6 +417,12 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
+[node name="ExplosionRadius" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionRadius"]
+shape = SubResource( 2 )
+disabled = true
+
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 rect = Rect2( -64, -512, 128, 1024 )
 physics_process_parent = true
@@ -402,14 +433,14 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Head"]
 position = Vector2( 0, -14 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 0, 6 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="Control" type="Control" parent="."]
 anchor_left = 0.5
@@ -420,21 +451,21 @@ rect_pivot_offset = Vector2( 0, 14 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
 position = Vector2( 0, 6.31594e-013 )
-frames = SubResource( 4 )
-frame = 2
+frames = SubResource( 5 )
+frame = 1
 playing = true
 offset = Vector2( 0, -2 )
 
 [node name="RedGlow" type="AnimatedSprite" parent="Control/AnimatedSprite"]
 visible = false
-self_modulate = Color( 1, 1, 1, 0.157895 )
-frames = SubResource( 5 )
+self_modulate = Color( 1, 1, 1, 0.466512 )
+frames = SubResource( 6 )
 offset = Vector2( 0, -2 )
 
 [node name="WhiteFlash" type="AnimatedSprite" parent="Control/AnimatedSprite"]
 visible = false
 self_modulate = Color( 1, 1, 1, 0 )
-frames = SubResource( 6 )
+frames = SubResource( 7 )
 offset = Vector2( 0, -2 )
 
 [node name="Sparks" type="CPUParticles2D" parent="Control/AnimatedSprite"]
@@ -454,13 +485,13 @@ angle = 360.0
 angle_random = 1.0
 scale_amount = 0.25
 scale_amount_random = 1.0
-color_ramp = SubResource( 7 )
+color_ramp = SubResource( 8 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "active"
-anims/active = SubResource( 8 )
-anims/explode = SubResource( 9 )
-anims/triggered = SubResource( 10 )
+anims/active = SubResource( 9 )
+anims/explode = SubResource( 10 )
+anims/triggered = SubResource( 11 )
 
 [node name="SFX" type="Node" parent="."]
 
@@ -475,7 +506,7 @@ stream = ExtResource( 11 )
 
 [node name="Hiss" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 12 )
-volume_db = -23.75
+volume_db = -20.0
 
 [node name="Beep" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 13 )
@@ -507,7 +538,7 @@ angle = 360.0
 angle_random = 1.0
 scale_amount = 0.2
 scale_amount_random = 0.75
-color_ramp = SubResource( 11 )
+color_ramp = SubResource( 12 )
 
 [node name="ExplodeDroplets" type="CPUParticles2D" parent="."]
 emitting = false
@@ -529,7 +560,8 @@ angle = 360.0
 angle_random = 1.0
 scale_amount = 0.1
 scale_amount_random = 0.3
-color_ramp = SubResource( 12 )
+color_ramp = SubResource( 13 )
+[connection signal="area_entered" from="ExplosionRadius" to="." method="_on_ExplosionRadius_area_entered"]
 [connection signal="screen_exited" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_exited"]
 [connection signal="area_entered" from="Head" to="." method="_on_Head_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_snowball_body_entered"]

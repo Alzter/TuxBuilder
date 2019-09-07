@@ -15,24 +15,22 @@ func _ready():
 				childstored.position = position
 				child.queue_free()
 
-#func _process(_delta):
-#	pass
-
 func _on_BottomHitbox_area_entered(area):
 	if hit == false:
 		if area.get_name() == "HeadAttack":
-			
-			# Detect if block is hit from 
 			if area.get_parent().position.x > self.position.x:
-				hitdirection = -1
-			else: hitdirection = 1
-			$AnimatedSprite.play("empty")
-			$AnimationPlayer.play("hit")
-			hit = true
-			if stored != "":
-				if childstored.is_in_group("Coin"):
-					$Upgrade.play()
-					childstored.position.y -= 32
-				get_tree().current_scene.get_node("Level").add_child(childstored)
-				if childstored.has_method("appear"):
-					childstored.call("appear", hitdirection)
+				hit(-1)
+			else: hit(1)
+
+# Detect if block is hit from 
+func hit(hitdirection):
+	$AnimatedSprite.play("empty")
+	$AnimationPlayer.play("hit")
+	hit = true
+	if stored != "":
+		if childstored.is_in_group("Coin"):
+			$Upgrade.play()
+			childstored.position.y -= 32
+		get_tree().current_scene.get_node("Level").add_child(childstored)
+		if childstored.has_method("appear"):
+			childstored.call("appear", hitdirection)
