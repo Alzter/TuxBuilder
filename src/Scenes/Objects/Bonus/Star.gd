@@ -4,7 +4,7 @@ var collected = false
 var direction = 1
 var velocity = Vector2(200,0)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if get_tree().current_scene.editmode == false and collected == false:
 		velocity.x = 200 * direction
 		velocity.y += 20

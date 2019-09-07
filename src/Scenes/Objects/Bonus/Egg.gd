@@ -4,7 +4,7 @@ var collected = false
 var direction = 1
 var velocity = Vector2()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if get_tree().current_scene.editmode == false and collected == false:
 		velocity.x = 100 * direction
 		if not is_on_floor():
