@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Scenes/Objects/BadGuys/Bomb.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Creatures/Bomb/bomb-0.png" type="Texture" id=2]
@@ -21,8 +21,8 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 15 )
 
-[sub_resource type="CircleShape2D" id=2]
-radius = 60.0
+[sub_resource type="CircleShape2D" id=14]
+radius = 0.01
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 12, 6 )
@@ -184,6 +184,21 @@ tracks/9/keys = {
 "update": 1,
 "values": [ true ]
 }
+tracks/10/type = "value"
+tracks/10/path = NodePath("ExplosionRadius/CollisionShape2D:shape")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ SubResource( 14 ) ]
+}
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 60.0
 
 [sub_resource type="Animation" id=10]
 tracks/0/type = "value"
@@ -245,6 +260,18 @@ tracks/4/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ false, true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("ExplosionRadius/CollisionShape2D:shape")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ SubResource( 2 ) ]
 }
 
 [sub_resource type="Animation" id=11]
@@ -420,7 +447,7 @@ shape = SubResource( 1 )
 [node name="ExplosionRadius" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionRadius"]
-shape = SubResource( 2 )
+shape = SubResource( 14 )
 disabled = true
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
