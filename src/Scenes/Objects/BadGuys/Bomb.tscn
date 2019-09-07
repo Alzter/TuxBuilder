@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Scenes/Objects/BadGuys/Bomb.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Creatures/Bomb/bomb-0.png" type="Texture" id=2]
@@ -21,7 +21,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 15 )
 
-[sub_resource type="CircleShape2D" id=14]
+[sub_resource type="CircleShape2D" id=9]
 radius = 0.01
 
 [sub_resource type="RectangleShape2D" id=3]
@@ -63,7 +63,7 @@ animations = [ {
 offsets = PoolRealArray( 0, 0.470588, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=10]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Control/AnimatedSprite:animation")
 tracks/0/interp = 1
@@ -179,28 +179,14 @@ tracks/9/loop_wrap = true
 tracks/9/imported = false
 tracks/9/enabled = true
 tracks/9/keys = {
-"times": PoolRealArray( 0 ),
+"times": PoolRealArray( -0.1 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
 }
-tracks/10/type = "value"
-tracks/10/path = NodePath("ExplosionRadius/CollisionShape2D:shape")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ SubResource( 14 ) ]
-}
 
-[sub_resource type="CircleShape2D" id=2]
-radius = 60.0
-
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=11]
+length = 1.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Control/AnimatedSprite:visible")
 tracks/0/interp = 1
@@ -262,19 +248,19 @@ tracks/4/keys = {
 "values": [ false, true ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("ExplosionRadius/CollisionShape2D:shape")
+tracks/5/path = NodePath("ExplosionRadius/CollisionShape2D:shape:radius")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ SubResource( 2 ) ]
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.01, 130.0 ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=12]
 length = 2.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("Control/AnimatedSprite:animation")
@@ -423,11 +409,11 @@ tracks/11/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Gradient" id=12]
+[sub_resource type="Gradient" id=13]
 offsets = PoolRealArray( 0, 0.762821, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0.443137, 0, 1, 0.882813, 0 )
 
-[sub_resource type="Gradient" id=13]
+[sub_resource type="Gradient" id=14]
 offsets = PoolRealArray( 0, 0.467949, 1 )
 colors = PoolColorArray( 1, 1, 1, 0.847059, 0.625, 0.936279, 1, 0.556863, 0, 0.478516, 1, 0 )
 
@@ -447,7 +433,7 @@ shape = SubResource( 1 )
 [node name="ExplosionRadius" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionRadius"]
-shape = SubResource( 14 )
+shape = SubResource( 9 )
 disabled = true
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
@@ -479,19 +465,16 @@ rect_pivot_offset = Vector2( 0, 14 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
 position = Vector2( 0, 6.31594e-013 )
 frames = SubResource( 5 )
-frame = 1
 playing = true
 offset = Vector2( 0, -2 )
 
 [node name="RedGlow" type="AnimatedSprite" parent="Control/AnimatedSprite"]
 visible = false
-self_modulate = Color( 1, 1, 1, 0.466512 )
 frames = SubResource( 6 )
 offset = Vector2( 0, -2 )
 
 [node name="WhiteFlash" type="AnimatedSprite" parent="Control/AnimatedSprite"]
 visible = false
-self_modulate = Color( 1, 1, 1, 0 )
 frames = SubResource( 7 )
 offset = Vector2( 0, -2 )
 
@@ -516,9 +499,9 @@ color_ramp = SubResource( 8 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "active"
-anims/active = SubResource( 9 )
-anims/explode = SubResource( 10 )
-anims/triggered = SubResource( 11 )
+anims/active = SubResource( 10 )
+anims/explode = SubResource( 11 )
+anims/triggered = SubResource( 12 )
 
 [node name="SFX" type="Node" parent="."]
 
@@ -565,7 +548,7 @@ angle = 360.0
 angle_random = 1.0
 scale_amount = 0.2
 scale_amount_random = 0.75
-color_ramp = SubResource( 12 )
+color_ramp = SubResource( 13 )
 
 [node name="ExplodeDroplets" type="CPUParticles2D" parent="."]
 emitting = false
@@ -587,7 +570,7 @@ angle = 360.0
 angle_random = 1.0
 scale_amount = 0.1
 scale_amount_random = 0.3
-color_ramp = SubResource( 13 )
+color_ramp = SubResource( 14 )
 [connection signal="area_entered" from="ExplosionRadius" to="." method="_on_ExplosionRadius_area_entered"]
 [connection signal="screen_exited" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_exited"]
 [connection signal="area_entered" from="Head" to="." method="_on_Head_area_entered"]
