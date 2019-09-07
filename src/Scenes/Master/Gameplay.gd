@@ -106,40 +106,36 @@ func clear_level():
 	scene.call_deferred("free")
 
 func load_editor():
-	var scene = load("res://Scenes/UI/LevelEditor.tscn")
-	var scene_instance = scene.instance()
-	scene_instance.set_name("Editor")
-	add_child(scene_instance)
+	_load_node("res://Scenes/UI/LevelEditor.tscn", "Editor")
 
 func clear_editor():
 	var scene = get_node("Editor")
 	remove_child(scene)
 
 func load_ui():
-	var scene = load("res://Scenes/UI/LevelUI.tscn")
+	_load_node("res://Scenes/UI/LevelUI.tscn", "LevelUI")
+
+func _load_node(scene_path, node_name):
+	var scene = load(scene_path)
 	var scene_instance = scene.instance()
-	scene_instance.set_name("LevelUI")
+	scene_instance.set_name(node_name)
 	add_child(scene_instance)
+
+func _clear_node(node_name):
+	var node = get_node(node_name)
+	for i in node.get_children():
+		i.queue_free()
+	remove_child(node)
+	node.call_deferred("free")
 
 func clear_ui():
-	var scene = get_node("LevelUI")
-	for i in scene.get_children():
-		i.queue_free()
-	remove_child(scene)
-	scene.call_deferred("free")
+	_clear_node("LevelUI")
 
 func load_player():
-	var scene = load("res://Scenes/Player/Player.tscn")
-	var scene_instance = scene.instance()
-	scene_instance.set_name("Player")
-	add_child(scene_instance)
+	_load_node("res://Scenes/Player/Player.tscn", "Player")
 
 func clear_player():
-	var scene = get_node("Player")
-	for i in scene.get_children():
-		i.queue_free()
-	remove_child(scene)
-	scene.call_deferred("free")
+	_clear_node("Player")
 
 func level_bounds():
 	level_bound_left = 0
