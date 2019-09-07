@@ -14,10 +14,10 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 15 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 16, 10 )
 
-[sub_resource type="SpriteFrames" id=4]
+[sub_resource type="SpriteFrames" id=3]
 animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 3 ) ],
 "loop": true,
@@ -30,7 +30,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 resource_name = "active"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Control/AnimatedSprite:animation")
@@ -93,7 +93,7 @@ tracks/4/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 resource_name = "explode"
 length = 2.0
 tracks/0/type = "value"
@@ -147,11 +147,11 @@ tracks/3/keys = {
 "values": [ "melted" ]
 }
 
-[sub_resource type="Gradient" id=8]
+[sub_resource type="Gradient" id=6]
 offsets = PoolRealArray( 0, 0.762821, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0.443137, 0, 1, 0.882813, 0 )
 
-[sub_resource type="Gradient" id=9]
+[sub_resource type="Gradient" id=7]
 offsets = PoolRealArray( 0, 0.467949, 1 )
 colors = PoolColorArray( 1, 1, 1, 0.847059, 0.625, 0.936279, 1, 0.556863, 0, 0.478516, 1, 0 )
 
@@ -177,7 +177,7 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 0, 6 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="Control" type="Control" parent="."]
 anchor_left = 0.5
@@ -187,15 +187,16 @@ anchor_bottom = 0.5
 rect_pivot_offset = Vector2( 0, 14 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
-position = Vector2( 0, 6.31594e-013 )
-frames = SubResource( 4 )
+position = Vector2( 0, 6.31594e-13 )
+frames = SubResource( 3 )
+frame = 1
 playing = true
 offset = Vector2( 0, -2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "active"
-anims/active = SubResource( 5 )
-anims/explode = SubResource( 6 )
+anims/active = SubResource( 4 )
+anims/explode = SubResource( 5 )
 
 [node name="SFX" type="Node" parent="."]
 
@@ -229,7 +230,7 @@ angle = 360.0
 angle_random = 1.0
 scale_amount = 0.2
 scale_amount_random = 0.75
-color_ramp = SubResource( 8 )
+color_ramp = SubResource( 6 )
 
 [node name="ExplodeDroplets" type="CPUParticles2D" parent="."]
 emitting = false
@@ -251,6 +252,6 @@ angle = 360.0
 angle_random = 1.0
 scale_amount = 0.1
 scale_amount_random = 0.3
-color_ramp = SubResource( 9 )
+color_ramp = SubResource( 7 )
 [connection signal="screen_exited" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_exited"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_snowball_body_entered"]
