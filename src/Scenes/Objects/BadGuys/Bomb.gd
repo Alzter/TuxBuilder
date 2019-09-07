@@ -1,7 +1,7 @@
 extends "BadGuy.gd"
 
 func on_squish(delta):
-	print('I squished a bomb and I liked it')
+	pass
 
 # Custom fireball death animation (optional)
 func fireball_kill():
