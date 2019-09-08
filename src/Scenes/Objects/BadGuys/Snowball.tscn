@@ -246,7 +246,6 @@ rect = Rect2( -64, -512, 128, 1024 )
 physics_process_parent = true
 
 [node name="Head" type="Area2D" parent="."]
-editor/display_folded = true
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Head"]
@@ -270,7 +269,6 @@ rect_pivot_offset = Vector2( 0, 14 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
 position = Vector2( 0, 6.31594e-013 )
 frames = SubResource( 4 )
-frame = 3
 playing = true
 offset = Vector2( 0, -2 )
 

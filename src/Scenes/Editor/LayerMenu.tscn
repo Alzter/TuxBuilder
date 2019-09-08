@@ -19,9 +19,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -125.0
-margin_top = -125.0
+margin_top = -194.0
 margin_right = 125.0
-margin_bottom = 125.0
+margin_bottom = 194.0
 
 [node name="Panel" type="Panel" parent="Popup"]
 anchor_right = 1.0
@@ -60,19 +60,20 @@ margin_left = 8.0
 margin_top = 34.0
 margin_right = -8.0
 margin_bottom = -34.0
+rect_clip_content = true
 alignment = 1
 
 [node name="Name" type="HBoxContainer" parent="Popup/Panel/VBoxContainer"]
 editor/display_folded = true
-margin_top = 23.0
-margin_right = 234.0
-margin_bottom = 53.0
+margin_top = 12.0
+margin_right = 237.0
+margin_bottom = 42.0
 alignment = 1
 
 [node name="Label2" type="Label" parent="Popup/Panel/VBoxContainer/Name"]
-margin_left = 23.0
+margin_left = 25.0
 margin_top = 5.0
-margin_right = 88.0
+margin_right = 90.0
 margin_bottom = 25.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
@@ -81,8 +82,8 @@ text = "Name:"
 align = 1
 
 [node name="LineEdit" type="LineEdit" parent="Popup/Panel/VBoxContainer/Name"]
-margin_left = 92.0
-margin_right = 210.0
+margin_left = 94.0
+margin_right = 212.0
 margin_bottom = 30.0
 focus_mode = 1
 expand_to_text_length = true
@@ -90,15 +91,15 @@ focus_mode = 1
 
 [node name="Zaxis" type="HBoxContainer" parent="Popup/Panel/VBoxContainer"]
 editor/display_folded = true
-margin_top = 57.0
-margin_right = 234.0
-margin_bottom = 87.0
+margin_top = 46.0
+margin_right = 237.0
+margin_bottom = 76.0
 alignment = 1
 
 [node name="Label2" type="Label" parent="Popup/Panel/VBoxContainer/Zaxis"]
-margin_left = 9.0
+margin_left = 10.0
 margin_top = 5.0
-margin_right = 87.0
+margin_right = 88.0
 margin_bottom = 25.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
@@ -107,22 +108,23 @@ text = "Z axis:"
 align = 1
 
 [node name="SpinBox" type="SpinBox" parent="Popup/Panel/VBoxContainer/Zaxis"]
-margin_left = 91.0
-margin_right = 225.0
+margin_left = 92.0
+margin_right = 226.0
 margin_bottom = 30.0
 min_value = -4096.0
 max_value = 4096.0
 rounded = true
 
 [node name="Solid" type="HBoxContainer" parent="Popup/Panel/VBoxContainer"]
-margin_top = 91.0
-margin_right = 234.0
-margin_bottom = 111.0
+editor/display_folded = true
+margin_top = 80.0
+margin_right = 237.0
+margin_bottom = 100.0
 alignment = 1
 
 [node name="Label2" type="Label" parent="Popup/Panel/VBoxContainer/Solid"]
-margin_left = 76.0
-margin_right = 138.0
+margin_left = 77.0
+margin_right = 139.0
 margin_bottom = 20.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
@@ -131,19 +133,137 @@ text = "Solid:"
 align = 1
 
 [node name="CheckBox" type="CheckBox" parent="Popup/Panel/VBoxContainer/Solid"]
-margin_left = 142.0
-margin_right = 158.0
+margin_left = 143.0
+margin_right = 159.0
+margin_bottom = 20.0
+
+[node name="ScrollX" type="HBoxContainer" parent="Popup/Panel/VBoxContainer"]
+margin_top = 104.0
+margin_right = 237.0
+margin_bottom = 134.0
+alignment = 1
+
+[node name="Label2" type="Label" parent="Popup/Panel/VBoxContainer/ScrollX"]
+margin_top = 5.0
+margin_right = 99.0
+margin_bottom = 25.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+text = "Scroll X:"
+align = 1
+
+[node name="SpinBox" type="SpinBox" parent="Popup/Panel/VBoxContainer/ScrollX"]
+margin_left = 103.0
+margin_right = 237.0
+margin_bottom = 30.0
+step = 0.0
+allow_greater = true
+
+[node name="ScrollY" type="HBoxContainer" parent="Popup/Panel/VBoxContainer"]
+margin_top = 138.0
+margin_right = 237.0
+margin_bottom = 168.0
+alignment = 1
+
+[node name="Label2" type="Label" parent="Popup/Panel/VBoxContainer/ScrollY"]
+margin_top = 5.0
+margin_right = 98.0
+margin_bottom = 25.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+text = "Scroll Y:"
+align = 1
+
+[node name="SpinBox" type="SpinBox" parent="Popup/Panel/VBoxContainer/ScrollY"]
+margin_left = 102.0
+margin_right = 236.0
+margin_bottom = 30.0
+step = 0.0
+allow_greater = true
+
+[node name="MoveX" type="HBoxContainer" parent="Popup/Panel/VBoxContainer"]
+margin_top = 172.0
+margin_right = 237.0
+margin_bottom = 202.0
+alignment = 1
+
+[node name="Label2" type="Label" parent="Popup/Panel/VBoxContainer/MoveX"]
+margin_left = 7.0
+margin_top = 5.0
+margin_right = 92.0
+margin_bottom = 25.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+text = "Move X:"
+align = 1
+
+[node name="SpinBox" type="SpinBox" parent="Popup/Panel/VBoxContainer/MoveX"]
+margin_left = 96.0
+margin_right = 230.0
+margin_bottom = 30.0
+step = 0.0
+allow_greater = true
+allow_lesser = true
+
+[node name="MoveY" type="HBoxContainer" parent="Popup/Panel/VBoxContainer"]
+margin_top = 206.0
+margin_right = 237.0
+margin_bottom = 236.0
+alignment = 1
+
+[node name="Label2" type="Label" parent="Popup/Panel/VBoxContainer/MoveY"]
+margin_left = 7.0
+margin_top = 5.0
+margin_right = 91.0
+margin_bottom = 25.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+text = "Move Y:"
+align = 1
+
+[node name="SpinBox" type="SpinBox" parent="Popup/Panel/VBoxContainer/MoveY"]
+margin_left = 95.0
+margin_right = 229.0
+margin_bottom = 30.0
+step = 0.0
+allow_greater = true
+allow_lesser = true
+
+[node name="Moving" type="HBoxContainer" parent="Popup/Panel/VBoxContainer"]
+margin_top = 240.0
+margin_right = 237.0
+margin_bottom = 260.0
+alignment = 1
+
+[node name="Label2" type="Label" parent="Popup/Panel/VBoxContainer/Moving"]
+margin_left = 68.0
+margin_right = 149.0
+margin_bottom = 20.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+text = "Moving:"
+align = 1
+
+[node name="CheckBox" type="CheckBox" parent="Popup/Panel/VBoxContainer/Moving"]
+margin_left = 153.0
+margin_right = 169.0
 margin_bottom = 20.0
 
 [node name="Tint" type="HBoxContainer" parent="Popup/Panel/VBoxContainer"]
-margin_top = 115.0
-margin_right = 234.0
-margin_bottom = 135.0
+editor/display_folded = true
+margin_top = 264.0
+margin_right = 237.0
+margin_bottom = 284.0
 alignment = 1
 
 [node name="Label2" type="Label" parent="Popup/Panel/VBoxContainer/Tint"]
-margin_left = 56.0
-margin_right = 110.0
+margin_left = 57.0
+margin_right = 111.0
 margin_bottom = 20.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
@@ -152,20 +272,21 @@ text = "Tint:"
 align = 1
 
 [node name="ColorPickerButton" type="ColorPickerButton" parent="Popup/Panel/VBoxContainer/Tint"]
-margin_left = 114.0
-margin_right = 178.0
+margin_left = 115.0
+margin_right = 179.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 64, 0 )
 
 [node name="Delete" type="HBoxContainer" parent="Popup/Panel/VBoxContainer"]
-margin_top = 139.0
-margin_right = 234.0
-margin_bottom = 159.0
+editor/display_folded = true
+margin_top = 288.0
+margin_right = 237.0
+margin_bottom = 308.0
 alignment = 1
 
 [node name="DeleteButton" type="Button" parent="Popup/Panel/VBoxContainer/Delete"]
-margin_left = 42.0
-margin_right = 191.0
+margin_left = 44.0
+margin_right = 193.0
 margin_bottom = 20.0
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 1, 0, 0, 1 )

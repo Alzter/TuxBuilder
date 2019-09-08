@@ -1,17 +1,20 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scenes/Objects/Misc/SpawnPoint.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Objects/Misc/SpawnPoint.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Editor/Layers/TileMap.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Tilesets/LevelTiles.tres" type="TileSet" id=4]
-[ext_resource path="res://Scenes/Objects/BadGuys/Bomb.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Objects/BadGuys/Bomb.gd" type="Script" id=6]
+[ext_resource path="res://Scenes/Editor/Layers/TileMap.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/Objects/BadGuys/Iceblock.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Objects/BadGuys/Iceblock.gd" type="Script" id=7]
+[ext_resource path="res://Scenes/Objects/BadGuys/Spiky.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Objects/BadGuys/Spiky.gd" type="Script" id=9]
 
 [node name="Level" type="Node2D"]
 
 [node name="SpawnPoint" type="Position2D" parent="." groups=[
-"oneonly",
 "spawnpoint",
+"oneonly",
 ] instance=ExtResource( 1 )]
 position = Vector2( 16, 16 )
 script = ExtResource( 2 )
@@ -27,6 +30,10 @@ cell_size = Vector2( 128, 128 )
 collision_layer = 0
 collision_mask = 0
 format = 1
+script = ExtResource( 5 )
+scroll_speed = Vector2( 1, 1 )
+move_speed = Vector2( 0, 0 )
+moving = false
 
 [node name="Interactive" type="TileMap" parent="." groups=[
 "layers",
@@ -39,6 +46,10 @@ collision_layer = 31
 collision_mask = 31
 format = 1
 tile_data = PoolIntArray( 524288, 0, 0, 524289, 0, 1, 524290, 0, 1, 524291, 0, 1, 524292, 0, 1, 524293, 0, 1, 524294, 0, 1, 524295, 0, 1, 524296, 0, 1, 524297, 0, 1, 524298, 0, 1, 524299, 0, 1, 524300, 0, 1, 524301, 0, 1, 524302, 0, 1, 524303, 0, 1, 524304, 0, 1, 524305, 0, 1, 524306, 0, 1, 524307, 0, 2, 589824, 0, 65536, 589825, 0, 15, 589826, 0, 65537, 589827, 0, 65537, 589828, 0, 65537, 589829, 0, 65537, 589830, 0, 65537, 589831, 0, 65537, 589832, 0, 15, 589833, 0, 65537, 589834, 0, 65537, 589835, 0, 65537, 589836, 0, 65537, 589837, 0, 65537, 589838, 0, 15, 589839, 0, 65537, 589840, 0, 65537, 589841, 0, 65537, 589842, 0, 65537, 589843, 0, 65538, 655360, 0, 65536, 655361, 0, 65537, 655362, 0, 65537, 655363, 0, 65537, 655364, 0, 65537, 655365, 0, 65537, 655366, 0, 65537, 655367, 0, 65537, 655368, 0, 65537, 655369, 0, 65537, 655370, 0, 65537, 655371, 0, 65537, 655372, 0, 65537, 655373, 0, 65537, 655374, 0, 65537, 655375, 0, 65537, 655376, 0, 65537, 655377, 0, 65537, 655378, 0, 65537, 655379, 0, 65538, 720896, 0, 65536, 720897, 0, 65537, 720898, 0, 65537, 720899, 0, 65537, 720900, 0, 65537, 720901, 0, 65537, 720902, 0, 65537, 720903, 0, 65537, 720904, 0, 65537, 720905, 0, 65537, 720906, 0, 65537, 720907, 0, 65537, 720908, 0, 65537, 720909, 0, 65537, 720910, 0, 65537, 720911, 0, 65537, 720912, 0, 65537, 720913, 0, 65537, 720914, 0, 65537, 720915, 0, 65538, 786432, 0, 65536, 786433, 0, 65537, 786434, 0, 65537, 786435, 0, 65537, 786436, 0, 65537, 786437, 0, 65537, 786438, 0, 65537, 786439, 0, 65537, 786440, 0, 65537, 786441, 0, 65537, 786442, 0, 65537, 786443, 0, 65537, 786444, 0, 65537, 786445, 0, 65537, 786446, 0, 65537, 786447, 0, 65537, 786448, 0, 65537, 786449, 0, 65537, 786450, 0, 65537, 786451, 0, 65538, 851968, 0, 65536, 851969, 0, 65537, 851970, 0, 65537, 851971, 0, 65537, 851972, 0, 65537, 851973, 0, 65537, 851974, 0, 65537, 851975, 0, 65537, 851976, 0, 65537, 851977, 0, 65537, 851978, 0, 65537, 851979, 0, 65537, 851980, 0, 65537, 851981, 0, 65537, 851982, 0, 15, 851983, 0, 65537, 851984, 0, 65537, 851985, 0, 65537, 851986, 0, 65537, 851987, 0, 65538, 917504, 0, 131072, 917505, 0, 131073, 917506, 0, 131073, 917507, 0, 131073, 917508, 0, 131073, 917509, 0, 131073, 917510, 0, 131073, 917511, 0, 131073, 917512, 0, 131073, 917513, 0, 131073, 917514, 0, 131073, 917515, 0, 131073, 917516, 0, 131073, 917517, 0, 131073, 917518, 0, 131073, 917519, 0, 131073, 917520, 0, 131073, 917521, 0, 131073, 917522, 0, 131073, 917523, 0, 131074 )
+script = ExtResource( 5 )
+scroll_speed = Vector2( 1, 1 )
+move_speed = Vector2( 0, 0 )
+moving = false
 
 [node name="Foreground" type="TileMap" parent="." groups=[
 "layers",
@@ -51,14 +62,29 @@ cell_size = Vector2( 128, 128 )
 collision_layer = 0
 collision_mask = 0
 format = 1
+script = ExtResource( 5 )
+scroll_speed = Vector2( 1, 1 )
+move_speed = Vector2( 0, 0 )
+moving = false
 
-[node name="Bomb" type="KinematicBody2D" parent="." groups=[
+[node name="Iceblock" type="KinematicBody2D" parent="." groups=[
 "badguys",
-] instance=ExtResource( 5 )]
-position = Vector2( 240, 240 )
+] instance=ExtResource( 6 )]
+position = Vector2( 208, 240 )
 collision_layer = 2
 collision_mask = 2
-script = ExtResource( 6 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Spiky" type="KinematicBody2D" parent="." groups=[
+"badguys",
+] instance=ExtResource( 8 )]
+position = Vector2( 464, 240 )
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 9 )
 __meta__ = {
 "_edit_group_": true
 }
