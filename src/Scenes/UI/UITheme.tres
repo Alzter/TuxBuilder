@@ -150,7 +150,6 @@ PopupMenu/styles/panel = SubResource( 13 )
 PopupMenu/styles/panel_disabled = SubResource( 14 )
 PopupMenu/styles/separator = SubResource( 12 )
 PopupPanel/styles/panel = SubResource( 15 )
-SpinBox/icons/updown = null
 ToolButton/colors/font_color = Color( 1, 1, 1, 1 )
 ToolButton/colors/font_color_disabled = Color( 0.403922, 0.403922, 0.403922, 1 )
 ToolButton/colors/font_color_hover = Color( 0, 0.666667, 1, 1 )

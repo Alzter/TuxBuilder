@@ -6,6 +6,8 @@ var layername2 = ""
 var z_axis = 0
 var hide = false
 var layer = null # Where to get the layer from
+var files = []
+var dir = Directory.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -36,6 +38,19 @@ func _ready():
 	$Popup/Panel/VBoxContainer/MoveX/SpinBox.value = layer.move_speed.x
 	$Popup/Panel/VBoxContainer/MoveY/SpinBox.value = layer.move_speed.y
 	$Popup/Panel/VBoxContainer/Moving/CheckBox.pressed = layer.moving
+	
+	$Popup/Panel/VBoxContainer/CustomProperties.hide()
+	
+	# File selecting for things like backgrounds or particles
+	if layer.filepath != "":
+		$Popup/Panel/VBoxContainer/CustomProperties.show()
+		$Popup/Panel/VBoxContainer/CustomProperties/Filelist/OptionButton.clear()
+		list_files_in_directory(layer.filepath)
+		for i in files.size():
+			if ".tscn" in files[i]:
+				var item = files[i]
+				item.erase(item.length() - 5,5)
+				$Popup/Panel/VBoxContainer/CustomProperties/Filelist/OptionButton.add_item(item)
 	
 	$Popup.popup()
 
@@ -110,3 +125,20 @@ func _on_DeleteNo_pressed():
 	$Popup.popup()
 	$DeleteConfirmation.hide()
 	hide = false
+
+func list_files_in_directory(path):
+    files = []
+    dir = Directory.new()
+    dir.open(path)
+    dir.list_dir_begin()
+
+    while true:
+        var file = dir.get_next()
+        if file == "":
+            break
+        elif not file.begins_with("."):
+            files.append(file)
+
+    dir.list_dir_end()
+
+    return files
