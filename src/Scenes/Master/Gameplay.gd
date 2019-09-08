@@ -142,19 +142,24 @@ func level_bounds():
 	level_bound_right = 0
 	level_bound_top = 0
 	level_bound_bottom = 0
+
 	for child in get_tree().get_nodes_in_group("tilemap"):
 		var child_name = child.get_name()
-		if get_tree().current_scene.get_node(str("Level/", child_name)).get_used_rect().position.x * get_tree().current_scene.get_node(str("Level/", child_name)).get_cell_size().x < level_bound_left:
-			level_bound_left = get_tree().current_scene.get_node(str("Level/", child_name)).get_used_rect().position.x * get_tree().current_scene.get_node(str("Level/", child_name)).get_cell_size().x
+		var level = get_tree().current_scene.get_node(str("Level/", child_name))
+		var rect = level.get_used_rect()
+		var cell_size = level.get_cell_size()
 		
-		if get_tree().current_scene.get_node(str("Level/", child.get_name())).get_used_rect().end.x * get_tree().current_scene.get_node(str("Level/", child_name)).get_cell_size().x > level_bound_right:
-			level_bound_right = get_tree().current_scene.get_node(str("Level/", child_name)).get_used_rect().end.x * get_tree().current_scene.get_node(str("Level/", child_name)).get_cell_size().x
+		if rect.position.x * cell_size.x < level_bound_left:
+			level_bound_left = rect.position.x * cell_size.x
 		
-		if get_tree().current_scene.get_node(str("Level/", child.get_name())).get_used_rect().position.y * get_tree().current_scene.get_node(str("Level/", child_name)).get_cell_size().y < level_bound_top:
-			level_bound_top = get_tree().current_scene.get_node(str("Level/", child_name)).get_used_rect().position.y * get_tree().current_scene.get_node(str("Level/", child_name)).get_cell_size().y
+		if rect.end.x * cell_size.x > level_bound_right:
+			level_bound_right = rect.end.x * cell_size.x
 		
-		if get_tree().current_scene.get_node(str("Level/", child.get_name())).get_used_rect().end.y * get_tree().current_scene.get_node(str("Level/", child.get_name())).get_cell_size().y > level_bound_bottom:
-			level_bound_bottom = get_tree().current_scene.get_node(str("Level/", child_name)).get_used_rect().end.y * get_tree().current_scene.get_node(str("Level/", child_name)).get_cell_size().y
+		if rect.position.y * cell_size.y < level_bound_top:
+			level_bound_top = rect.position.y * cell_size.y
+		
+		if rect.end.y * cell_size.y > level_bound_bottom:
+			level_bound_bottom = rect.end.y * cell_size.y
 
 func camera_bounds_remove():
 	$Camera2D.limit_left = -10000000
