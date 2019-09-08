@@ -149,8 +149,6 @@ func level_bounds():
 		var rect = level.get_used_rect()
 		var cell_size = level.get_cell_size()
 		
-		print(level.scale)
-		
 		if rect.position.x * (cell_size.x * level.scale.x) < level_bound_left:
 			level_bound_left = rect.position.x * (cell_size.x * level.scale.x)
 		

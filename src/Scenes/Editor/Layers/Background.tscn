@@ -2,6 +2,6 @@
 
 [ext_resource path="res://Scenes/Editor/Layers/Background.gd" type="Script" id=1]
 
-[node name="Node2D" type="Node2D"]
+[node name="Background" type="Node2D"]
 script = ExtResource( 1 )
 filepath = "res://Scenes/Editor/Layers/Backgrounds"

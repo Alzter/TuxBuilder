@@ -751,7 +751,6 @@ expand = true
 stretch_mode = 6
 
 [node name="AddLayer" type="Popup" parent="UI"]
-editor/display_folded = true
 visible = true
 anchor_bottom = 1.0
 margin_left = 2.0
@@ -793,17 +792,13 @@ texture = ExtResource( 7 )
 expand = true
 
 [node name="Name" type="HBoxContainer" parent="UI/AddLayer/VBoxContainer"]
-editor/display_folded = true
 margin_top = 34.0
 margin_right = 218.0
-margin_bottom = 64.0
-alignment = 1
+margin_bottom = 54.0
 
 [node name="Label2" type="Label" parent="UI/AddLayer/VBoxContainer/Name"]
-margin_left = 4.0
-margin_top = 5.0
-margin_right = 69.0
-margin_bottom = 25.0
+margin_right = 65.0
+margin_bottom = 20.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
@@ -811,32 +806,30 @@ text = "Name:"
 align = 1
 
 [node name="LineEdit" type="LineEdit" parent="UI/AddLayer/VBoxContainer/Name"]
-margin_left = 73.0
-margin_right = 213.0
-margin_bottom = 30.0
+margin_left = 69.0
+margin_right = 209.0
+margin_bottom = 20.0
 rect_min_size = Vector2( 140, 0 )
 text = "Layer"
 
 [node name="Line3" type="TextureRect" parent="UI/AddLayer/VBoxContainer"]
-margin_top = 70.0
+margin_top = 60.0
 margin_right = 218.0
-margin_bottom = 72.0
+margin_bottom = 62.0
 rect_min_size = Vector2( 0, 2 )
 texture = ExtResource( 7 )
 expand = true
 
 [node name="Zaxis" type="HBoxContainer" parent="UI/AddLayer/VBoxContainer"]
-editor/display_folded = true
-margin_top = 78.0
+margin_top = 68.0
 margin_right = 218.0
-margin_bottom = 108.0
+margin_bottom = 88.0
 alignment = 1
 
 [node name="Label2" type="Label" parent="UI/AddLayer/VBoxContainer/Zaxis"]
-margin_left = 1.0
-margin_top = 5.0
-margin_right = 79.0
-margin_bottom = 25.0
+margin_left = 14.0
+margin_right = 92.0
+margin_bottom = 20.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
@@ -844,25 +837,26 @@ text = "Z axis:"
 align = 1
 
 [node name="SpinBox" type="SpinBox" parent="UI/AddLayer/VBoxContainer/Zaxis"]
-margin_left = 83.0
-margin_right = 217.0
-margin_bottom = 30.0
+margin_left = 96.0
+margin_right = 204.0
+margin_bottom = 20.0
 min_value = -4096.0
 max_value = 4096.0
 rounded = true
+align = 2
 
 [node name="Line2" type="TextureRect" parent="UI/AddLayer/VBoxContainer"]
-margin_top = 114.0
+margin_top = 94.0
 margin_right = 218.0
-margin_bottom = 116.0
+margin_bottom = 96.0
 rect_min_size = Vector2( 0, 2 )
 texture = ExtResource( 7 )
 expand = true
 
 [node name="Label3" type="Label" parent="UI/AddLayer/VBoxContainer"]
-margin_top = 122.0
+margin_top = 102.0
 margin_right = 218.0
-margin_bottom = 142.0
+margin_bottom = 122.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
@@ -870,9 +864,9 @@ text = "Layer type:"
 align = 1
 
 [node name="OptionButton" type="OptionButton" parent="UI/AddLayer/VBoxContainer"]
-margin_top = 148.0
+margin_top = 128.0
 margin_right = 218.0
-margin_bottom = 168.0
+margin_bottom = 148.0
 
 [node name="LayerConfirmation" type="Button" parent="UI/AddLayer"]
 anchor_top = 1.0

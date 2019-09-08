@@ -1,13 +1,11 @@
 extends Control
 
-var type = ""
-var layername = ""
 var layername2 = ""
-var z_axis = 0
 var hide = false
 var layer = null # Where to get the layer from
 var files = []
 var dir = Directory.new()
+var filepathold = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,22 +13,34 @@ func _ready():
 	get_tree().current_scene.get_node("Editor").stop = true
 	
 	# Get the layer
-	layer = get_tree().current_scene.get_node(str("Level/", layername))
+	layer = get_tree().current_scene.get_node(str("Level/", get_parent().layername))
 	
-	# Set name and Z axis
-	$Popup/Panel/VBoxContainer/Name/LineEdit.text = layername
-	$Popup/Panel/VBoxContainer/Zaxis/SpinBox.value = z_axis
+	# Set name
+	$Popup/Panel/VBoxContainer/Name/LineEdit.text = get_parent().layername
+	
+	if get_parent().original_name == "Background":
+		$Popup/Panel/VBoxContainer/Zaxis.hide()
+	else:
+		$Popup/Panel/VBoxContainer/Zaxis/SpinBox.value = get_parent().z_axis
+		$Popup/Panel/VBoxContainer/Zaxis.show()
 	
 	# Set solid checkbox
-	if not (type == "TileMap"):
+	if get_parent().original_name == "TileMap":
+		if layer.get_collision_layer() != 0:
+			$Popup/Panel/VBoxContainer/Solid/CheckBox.pressed = true
+		else: $Popup/Panel/VBoxContainer/Solid/CheckBox.pressed = false
+		$Popup/Panel/VBoxContainer/Solid.show()
+	else:
 		$Popup/Panel/VBoxContainer/Solid/CheckBox.disabled = true
 		$Popup/Panel/VBoxContainer/Solid/CheckBox.pressed = false
-	elif layer.get_collision_layer() != 0:
-		$Popup/Panel/VBoxContainer/Solid/CheckBox.pressed = true
-	else: $Popup/Panel/VBoxContainer/Solid/CheckBox.pressed = false
+		$Popup/Panel/VBoxContainer/Solid.hide()
 	
 	# Set tint box
-	$Popup/Panel/VBoxContainer/Tint/ColorPickerButton.color = layer.modulate
+	if get_parent().original_name == "Background":
+		$Popup/Panel/VBoxContainer/Tint.hide()
+	else:
+		$Popup/Panel/VBoxContainer/Tint/ColorPickerButton.color = layer.modulate
+		$Popup/Panel/VBoxContainer/Tint.show()
 	
 	# Set scroll and move speed
 	$Popup/Panel/VBoxContainer/ScrollX/SpinBox.value = layer.scroll_speed.x
@@ -57,23 +67,19 @@ func _ready():
 func _process(_delta):
 	
 	# Change layer name
-	layername2 = $Popup/Panel/VBoxContainer/Name/LineEdit.text
-	if layer.get_name() != layername2:
-		get_tree().current_scene.get_node(str("Editor/UI/BottomBar/ScrollContainer/HBoxContainer/", layername)).layername = layername2
-		layer.set_name(layername2)
-		if get_tree().current_scene.get_node("Editor").layer_selected == layername:
-			get_tree().current_scene.get_node("Editor").layer_selected = layername2
-		layername = layername2
-		layer = get_tree().current_scene.get_node(str("Level/", layername))
+	if get_parent().layername != $Popup/Panel/VBoxContainer/Name/LineEdit.text:
+		if get_tree().current_scene.get_node("Editor").layer_selected == get_parent().layername:
+			get_tree().current_scene.get_node("Editor").layer_selected = $Popup/Panel/VBoxContainer/Name/LineEdit.text
+		get_tree().current_scene.get_node(str("Level/", get_parent().layername)).name = $Popup/Panel/VBoxContainer/Name/LineEdit.text
+		get_parent().layername = $Popup/Panel/VBoxContainer/Name/LineEdit.text
+		layer = get_tree().current_scene.get_node(str("Level/", get_parent().layername))
 	
 	# Change layer z axis
-	z_axis = $Popup/Panel/VBoxContainer/Zaxis/SpinBox.value
-	if layer.z_index != z_axis:
-		layer.z_index = z_axis
-		get_tree().current_scene.get_node(str("Editor/UI/BottomBar/ScrollContainer/HBoxContainer/", layername)).z_axis = z_axis
+	get_parent().z_axis = $Popup/Panel/VBoxContainer/Zaxis/SpinBox.value
+	layer.z_index = get_parent().z_axis
 	
 	# Change layer solidity
-	if not (type == "TileMap"):
+	if not (get_parent().type == "TileMap"):
 		$Popup/Panel/VBoxContainer/Solid/CheckBox.disabled = true
 		$Popup/Panel/VBoxContainer/Solid/CheckBox.pressed = false
 	elif $Popup/Panel/VBoxContainer/Solid/CheckBox.pressed == true:
@@ -92,6 +98,17 @@ func _process(_delta):
 	layer.move_speed.x = $Popup/Panel/VBoxContainer/MoveX/SpinBox.value
 	layer.move_speed.y = $Popup/Panel/VBoxContainer/MoveY/SpinBox.value
 	layer.moving = $Popup/Panel/VBoxContainer/Moving/CheckBox.pressed
+	
+	# Change background/particle
+	if layer.filepath != "":
+		for child in layer.get_children():
+			child.queue_free()
+		var selected = $Popup/Panel/VBoxContainer/CustomProperties/Filelist/OptionButton.get_item_text($Popup/Panel/VBoxContainer/CustomProperties/Filelist/OptionButton.selected)
+		var child = load(str(layer.filepath, "/", selected, ".tscn")).instance()
+		layer.add_child(child)
+		child.set_name("Sublayer")
+		child.set_owner(get_tree().current_scene.get_node("Level"))
+	filepathold = $Popup/Panel/VBoxContainer/CustomProperties/Filelist/OptionButton.selected
 	
 	# Delete if not in edit mode
 	if get_tree().current_scene.editmode == false:
@@ -113,10 +130,10 @@ func _on_DeleteButton_pressed():
 	$DeleteConfirmation.show()
 
 func _on_DeleteYes_pressed():
-	if get_tree().current_scene.get_node("Editor").layer_selected == layername:
+	if get_tree().current_scene.get_node("Editor").layer_selected == get_parent().layername:
 		get_tree().current_scene.get_node("Editor").layer_selected = ""
 		get_tree().current_scene.get_node("Editor").layer_selected_type = ""
-	get_tree().current_scene.get_node(str("Editor/UI/BottomBar/ScrollContainer/HBoxContainer/", layername)).queue_free()
+	get_parent().queue_free()
 	layer.queue_free()
 	get_tree().current_scene.get_node("Editor").stop = false
 	queue_free()

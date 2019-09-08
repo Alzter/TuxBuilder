@@ -434,6 +434,7 @@ func _on_LayerConfirmation_pressed():
 	# Then find the scene with the same name in Scenes/Editors/Layers
 	var layer = load(str("res://Scenes/Editor/Layers/", selected, ".tscn")).instance()
 	layer.z_index = $UI/AddLayer/VBoxContainer/Zaxis/SpinBox.value
+	layer.original_name = selected
 	
 	# Then add the layer
 	get_tree().current_scene.get_node("Level").add_child(layer)
@@ -467,6 +468,7 @@ func update_layers(): # Updates the list of layers at the bottom
 			var layer = load("res://Scenes/Editor/Layer.tscn").instance()
 			layer.type = child.get_class()
 			layer.layername = child.get_name()
+			layer.original_name = child.original_name
 			layer.z_axis = child.z_index
 			layer.set_name(child.get_name())
 			$UI/BottomBar/ScrollContainer/HBoxContainer.add_child(layer)

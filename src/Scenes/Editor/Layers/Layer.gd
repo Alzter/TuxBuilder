@@ -5,6 +5,7 @@ export var move_speed = Vector2()
 export var moving = false
 export var filepath = ""
 var move_pos = Vector2()
+export var original_name = ""
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
