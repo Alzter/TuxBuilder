@@ -19,15 +19,15 @@ corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
-[sub_resource type="StyleBoxEmpty" id=19]
+[sub_resource type="StyleBoxEmpty" id=4]
 
-[sub_resource type="StyleBoxEmpty" id=20]
+[sub_resource type="StyleBoxEmpty" id=5]
 
-[sub_resource type="StyleBoxEmpty" id=21]
+[sub_resource type="StyleBoxEmpty" id=6]
 
-[sub_resource type="ImageTexture" id=4]
+[sub_resource type="ImageTexture" id=7]
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 0.443137, 0.521569, 0.603922, 0.8 )
 border_width_left = 4
 border_width_top = 4
@@ -40,28 +40,28 @@ corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 corner_detail = 16
 
-[sub_resource type="ImageTexture" id=6]
-
-[sub_resource type="ImageTexture" id=7]
-
-[sub_resource type="ImageTexture" id=8]
-
 [sub_resource type="ImageTexture" id=9]
 
 [sub_resource type="ImageTexture" id=10]
 
-[sub_resource type="StyleBoxFlat" id=11]
+[sub_resource type="ImageTexture" id=11]
+
+[sub_resource type="ImageTexture" id=12]
+
+[sub_resource type="ImageTexture" id=13]
+
+[sub_resource type="StyleBoxFlat" id=14]
 bg_color = Color( 1, 1, 1, 0.75 )
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[sub_resource type="StyleBoxTexture" id=12]
+[sub_resource type="StyleBoxTexture" id=15]
 texture = ExtResource( 1 )
 region_rect = Rect2( 0, 0, 126, 2 )
 
-[sub_resource type="StyleBoxFlat" id=13]
+[sub_resource type="StyleBoxFlat" id=16]
 content_margin_left = 0.0
 content_margin_right = 0.0
 bg_color = Color( 0.419608, 0.521569, 0.619608, 0.8 )
@@ -75,9 +75,9 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxEmpty" id=14]
+[sub_resource type="StyleBoxEmpty" id=17]
 
-[sub_resource type="StyleBoxFlat" id=15]
+[sub_resource type="StyleBoxFlat" id=18]
 content_margin_left = 0.0
 content_margin_right = 0.0
 bg_color = Color( 0.419608, 0.521569, 0.619608, 1 )
@@ -91,13 +91,13 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="ImageTexture" id=18]
+[sub_resource type="ImageTexture" id=19]
 
-[sub_resource type="StyleBoxFlat" id=16]
+[sub_resource type="StyleBoxFlat" id=20]
 bg_color = Color( 1, 1, 1, 0 )
 draw_center = false
 
-[sub_resource type="DynamicFont" id=17]
+[sub_resource type="DynamicFont" id=21]
 size = 18
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
@@ -107,7 +107,7 @@ extra_spacing_top = 2
 font_data = ExtResource( 2 )
 
 [resource]
-default_font = SubResource( 17 )
+default_font = SubResource( 21 )
 Button/colors/font_color = Color( 1, 1, 1, 1 )
 Button/colors/font_color_disabled = Color( 0.403922, 0.403922, 0.403922, 1 )
 Button/colors/font_color_hover = Color( 0, 0.666667, 1, 1 )
@@ -132,9 +132,9 @@ LineEdit/colors/selection_color = Color( 1, 1, 0.6, 0.5 )
 LineEdit/constants/minimum_spaces = 12
 LineEdit/fonts/font = null
 LineEdit/icons/clear = null
-LineEdit/styles/focus = SubResource( 19 )
-LineEdit/styles/normal = SubResource( 20 )
-LineEdit/styles/read_only = SubResource( 21 )
+LineEdit/styles/focus = SubResource( 4 )
+LineEdit/styles/normal = SubResource( 5 )
+LineEdit/styles/read_only = SubResource( 6 )
 OptionButton/colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
 OptionButton/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
 OptionButton/colors/font_color_hover = Color( 0.941176, 0.941176, 0.941176, 1 )
@@ -142,13 +142,13 @@ OptionButton/colors/font_color_pressed = Color( 1, 1, 1, 1 )
 OptionButton/constants/arrow_margin = 2
 OptionButton/constants/hseparation = 2
 OptionButton/fonts/font = null
-OptionButton/icons/arrow = SubResource( 4 )
+OptionButton/icons/arrow = SubResource( 7 )
 OptionButton/styles/disabled = null
 OptionButton/styles/focus = null
 OptionButton/styles/hover = null
 OptionButton/styles/normal = null
 OptionButton/styles/pressed = null
-Panel/styles/panel = SubResource( 5 )
+Panel/styles/panel = SubResource( 8 )
 Panel/styles/panelf = null
 Panel/styles/panelnc = null
 PopupMenu/colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
@@ -158,27 +158,27 @@ PopupMenu/colors/font_color_hover = Color( 0, 0.666667, 1, 1 )
 PopupMenu/constants/hseparation = 4
 PopupMenu/constants/vseparation = 4
 PopupMenu/fonts/font = null
-PopupMenu/icons/checked = SubResource( 6 )
-PopupMenu/icons/radio_checked = SubResource( 7 )
-PopupMenu/icons/radio_unchecked = SubResource( 8 )
-PopupMenu/icons/submenu = SubResource( 9 )
-PopupMenu/icons/unchecked = SubResource( 10 )
-PopupMenu/styles/hover = SubResource( 11 )
-PopupMenu/styles/labeled_separator_left = SubResource( 12 )
-PopupMenu/styles/labeled_separator_right = SubResource( 12 )
-PopupMenu/styles/panel = SubResource( 13 )
-PopupMenu/styles/panel_disabled = SubResource( 14 )
-PopupMenu/styles/separator = SubResource( 12 )
-PopupPanel/styles/panel = SubResource( 15 )
-SpinBox/icons/updown = SubResource( 18 )
+PopupMenu/icons/checked = SubResource( 9 )
+PopupMenu/icons/radio_checked = SubResource( 10 )
+PopupMenu/icons/radio_unchecked = SubResource( 11 )
+PopupMenu/icons/submenu = SubResource( 12 )
+PopupMenu/icons/unchecked = SubResource( 13 )
+PopupMenu/styles/hover = SubResource( 14 )
+PopupMenu/styles/labeled_separator_left = SubResource( 15 )
+PopupMenu/styles/labeled_separator_right = SubResource( 15 )
+PopupMenu/styles/panel = SubResource( 16 )
+PopupMenu/styles/panel_disabled = SubResource( 17 )
+PopupMenu/styles/separator = SubResource( 15 )
+PopupPanel/styles/panel = SubResource( 18 )
+SpinBox/icons/updown = SubResource( 19 )
 ToolButton/colors/font_color = Color( 1, 1, 1, 1 )
 ToolButton/colors/font_color_disabled = Color( 0.403922, 0.403922, 0.403922, 1 )
 ToolButton/colors/font_color_hover = Color( 0, 0.666667, 1, 1 )
 ToolButton/colors/font_color_pressed = Color( 0, 0.666667, 1, 1 )
 ToolButton/constants/hseparation = 3
 ToolButton/fonts/font = null
-ToolButton/styles/disabled = SubResource( 16 )
-ToolButton/styles/focus = SubResource( 16 )
-ToolButton/styles/hover = SubResource( 16 )
-ToolButton/styles/normal = SubResource( 16 )
-ToolButton/styles/pressed = SubResource( 16 )
+ToolButton/styles/disabled = SubResource( 20 )
+ToolButton/styles/focus = SubResource( 20 )
+ToolButton/styles/hover = SubResource( 20 )
+ToolButton/styles/normal = SubResource( 20 )
+ToolButton/styles/pressed = SubResource( 20 )

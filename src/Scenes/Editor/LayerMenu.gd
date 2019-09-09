@@ -24,16 +24,18 @@ func _ready():
 		$Popup/Panel/VBoxContainer/Zaxis/SpinBox.value = get_parent().z_axis
 		$Popup/Panel/VBoxContainer/Zaxis.show()
 	
+	print(get_parent().original_name)
+	
 	# Set solid checkbox
-	if get_parent().original_name == "TileMap":
+	if get_parent().original_name == "Background":
+		$Popup/Panel/VBoxContainer/Solid/CheckBox.disabled = true
+		$Popup/Panel/VBoxContainer/Solid/CheckBox.pressed = false
+		$Popup/Panel/VBoxContainer/Solid.hide()
+	else:
 		if layer.get_collision_layer() != 0:
 			$Popup/Panel/VBoxContainer/Solid/CheckBox.pressed = true
 		else: $Popup/Panel/VBoxContainer/Solid/CheckBox.pressed = false
 		$Popup/Panel/VBoxContainer/Solid.show()
-	else:
-		$Popup/Panel/VBoxContainer/Solid/CheckBox.disabled = true
-		$Popup/Panel/VBoxContainer/Solid/CheckBox.pressed = false
-		$Popup/Panel/VBoxContainer/Solid.hide()
 	
 	# Set tint box
 	if get_parent().original_name == "Background":
