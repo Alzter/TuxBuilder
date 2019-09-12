@@ -27,6 +27,11 @@ func hit(hitdirection):
 	$AnimatedSprite.play("empty")
 	$AnimationPlayer.play("hit")
 	hit = true
+	
+	# Kill enemies on top of block
+	
+	
+	# Spawn contents
 	if stored != "":
 		if childstored.is_in_group("Coin"):
 			$Upgrade.play()

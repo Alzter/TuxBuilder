@@ -88,7 +88,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0.25, 0.25 ) ]
+"values": [ Vector2( 1, 1 ) ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Control:rect_rotation")
@@ -112,7 +112,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, -42 ) ]
+"values": [ Vector2( 0, 0 ) ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -211,7 +211,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0.4, 0.125 ), Vector2( 0.25, 0.25 ) ]
+"values": [ Vector2( 1.6, 0.5 ), Vector2( 1, 1 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("IceShards:emitting")
@@ -247,7 +247,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, -42 ) ]
+"values": [ Vector2( 0, 0 ) ]
 }
 
 [sub_resource type="Animation" id=9]
@@ -286,7 +286,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0.25, 0.25 ) ]
+"values": [ Vector2( 1, 1 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Control:rect_rotation")
@@ -310,7 +310,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, -42 ) ]
+"values": [ Vector2( 0, 0 ) ]
 }
 
 [sub_resource type="Animation" id=10]
@@ -325,7 +325,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.05, 0.15, 0.25, 0.45, 0.5, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 0.5, 2, 1 ),
 "update": 0,
-"values": [ Vector2( 0.25, 0.25 ), Vector2( 0.15, 0.375 ), Vector2( 0.225, 0.275 ), Vector2( 0.25, 0.25 ), Vector2( 0.25, 0.25 ), Vector2( 0.313, 0.188 ), Vector2( 0.25, 0.25 ) ]
+"values": [ Vector2( 1, 1 ), Vector2( 0.6, 1.5 ), Vector2( 0.9, 1.1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1.252, 0.752 ), Vector2( 1, 1 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Control:rect_rotation")
@@ -349,7 +349,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.05, 0.15, 0.25, 0.35, 0.45 ),
 "transitions": PoolRealArray( 2, 1, 2, 2, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, -42 ), Vector2( 0, -50 ), Vector2( 0, -62 ), Vector2( 0, -61 ), Vector2( 0, -54 ), Vector2( 0, -42 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 0, -8 ), Vector2( 0, -20 ), Vector2( 0, -19 ), Vector2( 0, -12 ), Vector2( 0, 0 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("AnimationPlayer:current_animation")
@@ -420,14 +420,12 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_top = -42.0
-margin_bottom = -42.0
-rect_scale = Vector2( 0.25, 0.25 )
-rect_pivot_offset = Vector2( 0, 56 )
+rect_pivot_offset = Vector2( 0, 14 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
 frames = SubResource( 4 )
-animation = "squished"
+frame = 6
+playing = true
 offset = Vector2( 0, -2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

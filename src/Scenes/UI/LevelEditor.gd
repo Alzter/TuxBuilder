@@ -137,7 +137,7 @@ func _process(_delta):
 		else: player_drag_half = "bottom"
 	
 	# If clicking on a tile occupied by an object, pick up the object
-	if category_selected == "Objects" and $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == false and dragging_object == false:
+	if $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == false and dragging_object == false:
 		for child in get_tree().current_scene.get_node("Level").get_children():
 			if not child.is_in_group("layers"):
 				if child.position == $SelectedTile.position:
@@ -245,9 +245,9 @@ func update_selected_tile():
 	$EraserSprite.visible = false
 	$SelectedTile.visible = false
 	$SelectedTile.offset = Vector2(0,0)
+	$SelectedTile.scale = Vector2(1,1)
+	$SelectedTile.region_enabled = false
 	player_hovered = false
-	
-	if category_selected != "Objects" or $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == true: $SelectedTile.scale = Vector2(0.25,0.25)
 	
 	if not (get_viewport().get_mouse_position().x < get_viewport().size.x - 128 and get_viewport().get_mouse_position().y < get_viewport().size.y - 64) or $UI/AddLayer.visible == true:
 		return
@@ -296,7 +296,8 @@ func update_selected_tile():
 		$EraserSprite.visible = true
 		$SelectedTile.visible = true
 		$SelectedTile.texture = load("res://Sprites/Editor/EraseSelect.png")
-		$SelectedTile.region_rect = Rect2(0,0,128,128)
+		$SelectedTile.scale = Vector2(0.25,0.25)
+		$SelectedTile.region_enabled = false
 		$SelectedTile.modulate = Color(1,1,1,1)
 		$EraserSprite.position = $SelectedTile.position
 		old_object_type = ""
@@ -311,7 +312,7 @@ func update_selected_tile():
 		if category_selected == "Tiles":
 			var selected_texture = $TileMap.get_tileset().tile_get_texture(tile_type)
 			$SelectedTile.texture = (selected_texture)
-			$SelectedTile.region_rect.position = $TileMap.get_tileset().autotile_get_icon_coordinate(tile_type) * 128
+			$SelectedTile.region_rect.position = $TileMap.get_tileset().autotile_get_icon_coordinate(tile_type) * 32
 			$SelectedTile.region_enabled = true
 			old_object_type = ""
 
@@ -320,26 +321,27 @@ func update_selected_tile():
 			if object_type != old_object_type:
 				get_object_texture(str("res://Scenes/Objects/", object_category, "/", object_type))
 			old_object_type = object_type
+			$SelectedTile.region_enabled = false
 
 # Buttons
 func _on_TilesButton_pressed():
 	if category_selected != "Tiles":
 		category_selected = "Tiles"
-		for child in $UI/SideBar/Panel/ScrollContainer/SidebarList.get_children():
+		for child in $UI/SideBar/ScrollContainer/SidebarList.get_children():
 			child.queue_free()
 		update_tiles()
 
 func _on_ObjectsButton_pressed():
 	if category_selected != "Objects":
 		category_selected = "Objects"
-		for child in $UI/SideBar/Panel/ScrollContainer/SidebarList.get_children():
+		for child in $UI/SideBar/ScrollContainer/SidebarList.get_children():
 			child.queue_free()
 		update_objects()
 
 func update_tiles():
 	var child = load("res://Scenes/Editor/Category.tscn").instance()
 	child.item = "Tiles"
-	$UI/SideBar/Panel/ScrollContainer/SidebarList.add_child(child)
+	$UI/SideBar/ScrollContainer/SidebarList.add_child(child)
 	
 	var tiles = $TileMap.get_tileset().get_tiles_ids()
 	for i in tiles.size():
@@ -349,7 +351,7 @@ func update_tiles():
 
 func update_objects(): # Update the objects list from the editor using the scenes from Scenes/Objects
 	# Delete existing children of the objects/tiles list
-	for child in $UI/SideBar/Panel/ScrollContainer/SidebarList.get_children():
+	for child in $UI/SideBar/ScrollContainer/SidebarList.get_children():
 		child.queue_free()
 	
 	# Find all the folders in Scenes/Objects
@@ -362,7 +364,7 @@ func update_objects(): # Update the objects list from the editor using the scene
 		var child = load("res://Scenes/Editor/Category.tscn").instance()
 		var category = files[i]
 		child.item = category
-		$UI/SideBar/Panel/ScrollContainer/SidebarList.add_child(child)
+		$UI/SideBar/ScrollContainer/SidebarList.add_child(child)
 		
 		# Then for every file inside each folder
 		list_files_in_directory_2(str("res://Scenes/Objects/", category, "/"))
@@ -384,7 +386,7 @@ func get_object_texture(object_location): # Get the texture for an object
 	if object_type == "":
 		return
 	
-	$SelectedTile.scale = Vector2(0.25,0.25)
+	$SelectedTile.scale = Vector2(1,1)
 	$SelectedTile.region_enabled = false
 	
 	# If the object has an animated sprite, set the thumbnail to that

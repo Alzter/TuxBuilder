@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Scenes/UI/LevelEditor.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Editor/Grid.png" type="Texture" id=2]
@@ -268,13 +268,6 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxFlat" id=8]
-bg_color = Color( 0.5, 0.5, 0.5, 0.5 )
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
 [sub_resource type="StyleBoxFlat" id=9]
 bg_color = Color( 0.4, 0.4, 0.4, 1 )
 corner_radius_top_left = 4
@@ -290,7 +283,7 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxFlat" id=11]
-bg_color = Color( 0.75, 0.75, 0.75, 1 )
+bg_color = Color( 0.25098, 0.25098, 0.25098, 0.74902 )
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
@@ -332,11 +325,10 @@ expand = true
 stretch_mode = 2
 
 [node name="SelectedTile" type="Sprite" parent="."]
-visible = false
-scale = Vector2( 0.25, 0.25 )
 z_index = 4096
 region_enabled = true
-region_rect = Rect2( 0, 0, 128, 128 )
+region_rect = Rect2( 0, 0, 32, 32 )
+region_filter_clip = true
 
 [node name="GrabSprite" type="Sprite" parent="."]
 visible = false
@@ -378,15 +370,15 @@ anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -128.0
-color = Color( 0.2, 0.2, 0.2, 0.85098 )
+color = Color( 0.25098, 0.25098, 0.25098, 0.74902 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/SideBar"]
-editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/separation = 0
 
 [node name="TilesButton" type="Button" parent="UI/SideBar/VBoxContainer"]
+editor/display_folded = true
 margin_right = 128.0
 margin_bottom = 32.0
 grow_horizontal = 0
@@ -402,6 +394,7 @@ custom_styles/disabled = SubResource( 3 )
 custom_styles/normal = SubResource( 3 )
 custom_fonts/font = SubResource( 5 )
 enabled_focus_mode = 1
+flat = true
 
 [node name="Arrow1" type="TextureRect" parent="UI/SideBar/VBoxContainer/TilesButton"]
 margin_left = 18.0
@@ -451,6 +444,7 @@ custom_styles/disabled = SubResource( 3 )
 custom_styles/normal = SubResource( 3 )
 custom_fonts/font = SubResource( 5 )
 enabled_focus_mode = 1
+flat = true
 
 [node name="Arrow2" type="TextureRect" parent="UI/SideBar/VBoxContainer/ObjectsButton"]
 margin_left = 18.0
@@ -483,6 +477,7 @@ margin_bottom = 68.0
 texture = ExtResource( 7 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/SideBar/VBoxContainer"]
+editor/display_folded = true
 margin_top = 68.0
 margin_right = 128.0
 margin_bottom = 100.0
@@ -537,29 +532,18 @@ margin_right = 128.0
 margin_bottom = 102.0
 texture = ExtResource( 7 )
 
-[node name="Panel" type="Panel" parent="UI/SideBar"]
-editor/display_folded = true
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = 2.0
-margin_top = 104.0
-margin_right = 62.0
-margin_bottom = -66.0
-rect_clip_content = true
-custom_styles/panel = SubResource( 8 )
-
-[node name="ScrollContainer" type="ScrollContainer" parent="UI/SideBar/Panel"]
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/SideBar"]
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -120.0
-margin_top = 6.0
-margin_right = -6.0
-margin_bottom = -6.0
+margin_left = -122.0
+margin_top = 110.0
+margin_right = -8.0
+margin_bottom = 98.0
 theme = ExtResource( 5 )
 scroll_horizontal_enabled = false
 
-[node name="SidebarList" type="VBoxContainer" parent="UI/SideBar/Panel/ScrollContainer"]
+[node name="SidebarList" type="VBoxContainer" parent="UI/SideBar/ScrollContainer"]
 margin_right = 114.0
 rect_min_size = Vector2( 114, 0 )
 rect_clip_content = true
@@ -570,7 +554,7 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -64.0
-color = Color( 0.2, 0.2, 0.2, 0.85098 )
+color = Color( 0.25098, 0.25098, 0.25098, 0.74902 )
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/BottomBar"]
 editor/display_folded = true
@@ -588,7 +572,6 @@ rect_min_size = Vector2( 0, 52 )
 rect_clip_content = true
 
 [node name="LayerAdd" type="Button" parent="UI/BottomBar"]
-editor/display_folded = true
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 62.0
@@ -599,7 +582,6 @@ custom_styles/hover = SubResource( 9 )
 custom_styles/pressed = SubResource( 10 )
 custom_styles/focus = SubResource( 9 )
 custom_styles/disabled = SubResource( 9 )
-custom_styles/normal = SubResource( 9 )
 toggle_mode = true
 enabled_focus_mode = 0
 
@@ -616,14 +598,7 @@ mouse_filter = 2
 texture = ExtResource( 9 )
 expand = true
 
-[node name="Button" type="Button" parent="UI/BottomBar/LayerAdd"]
-margin_left = 398.0
-margin_top = -42.0
-margin_right = 410.0
-margin_bottom = -10.0
-
 [node name="Zoom" type="HBoxContainer" parent="UI/BottomBar"]
-editor/display_folded = true
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -891,6 +866,7 @@ expand = true
 layer = 3
 
 [node name="Play" type="Button" parent="Play"]
+editor/display_folded = true
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
