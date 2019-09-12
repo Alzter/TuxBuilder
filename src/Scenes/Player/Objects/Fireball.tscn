@@ -204,24 +204,24 @@ tracks/4/keys = {
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 6, 6 )
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 8, 8 )
 
-[sub_resource type="Curve" id=10]
+[sub_resource type="Curve" id=6]
 _data = [ Vector2( 0, 0.639509 ), 5.75234, 0.629246, 0, 0, Vector2( 1, 0.146709 ), -0.92688, 0.0, 0, 0 ]
 
 [sub_resource type="Gradient" id=7]
 offsets = PoolRealArray( 0, 0.311321, 0.688679, 1 )
 colors = PoolColorArray( 1, 0.941176, 0, 0.156863, 1, 0.5625, 0, 0.117647, 1, 0, 0, 0.0784314, 1, 0.5625, 0, 0 )
 
-[sub_resource type="Curve" id=9]
+[sub_resource type="Curve" id=8]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.164721, 1 ), 4.92789, 4.92789, 0, 0, Vector2( 0.591828, 0.0281 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="Gradient" id=5]
+[sub_resource type="Gradient" id=9]
 offsets = PoolRealArray( 0, 0.3, 0.76, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 0.984314, 0, 0.698039, 1, 0, 0, 0.490196, 1, 0, 0, 0 )
 
-[sub_resource type="SpriteFrames" id=6]
+[sub_resource type="SpriteFrames" id=10]
 animations = [ {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
@@ -250,7 +250,7 @@ collision_layer = 2
 collision_mask = 10
 
 [node name="EnemyCollision" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 8 )
+shape = SubResource( 5 )
 
 [node name="FireballGlow" type="CPUParticles2D" parent="."]
 amount = 15
@@ -264,7 +264,7 @@ initial_velocity = 40.0
 initial_velocity_random = 0.25
 damping = 100.0
 scale_amount = 4.0
-scale_amount_curve = SubResource( 10 )
+scale_amount_curve = SubResource( 6 )
 color_ramp = SubResource( 7 )
 
 [node name="FireballAmbientParticles" type="CPUParticles2D" parent="."]
@@ -278,12 +278,12 @@ initial_velocity = 60.0
 initial_velocity_random = 0.5
 scale_amount = 0.8
 scale_amount_random = 0.5
-scale_amount_curve = SubResource( 9 )
-color_ramp = SubResource( 5 )
+scale_amount_curve = SubResource( 8 )
+color_ramp = SubResource( 9 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-scale = Vector2( 0.25, 0.25 )
-frames = SubResource( 6 )
+rotation = -6.28319
+frames = SubResource( 10 )
 
 [node name="FireballCollisionParticles" type="CPUParticles2D" parent="."]
 emitting = false

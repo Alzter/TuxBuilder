@@ -1,4 +1,4 @@
-extends StaticBody2D
+extends KinematicBody2D
 
 var hit = false
 var hitdirection = 0
@@ -28,9 +28,6 @@ func hit(hitdirection):
 	$AnimationPlayer.play("hit")
 	hit = true
 	
-	# Kill enemies on top of block
-	
-	
 	# Spawn contents
 	if stored != "":
 		if childstored.is_in_group("Coin"):
@@ -39,3 +36,12 @@ func hit(hitdirection):
 		get_tree().current_scene.get_node("Level").add_child(childstored)
 		if childstored.has_method("appear"):
 			childstored.call("appear", hitdirection)
+
+# Kill enemies on top of block
+func _on_TopHitbox_area_entered(area):
+	if area.get_parent().is_in_group("badguys"):
+		area.get_parent().kill()
+	if area.is_in_group("coin"):
+		area.appear()
+	if area.is_in_group("bonusblock"):
+		area.hit(0)

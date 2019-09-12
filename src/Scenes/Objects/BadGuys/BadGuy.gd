@@ -7,6 +7,7 @@ var startpos = Vector2(0,0)
 var state = "active"
 var direction = 1
 var rotate = 0
+var invincible_time = 0
 
 var SQUISHED_ANIMATION = "triggered"
 
@@ -36,10 +37,6 @@ func _ready():
 	direction = $Control/AnimatedSprite.scale.x
 	on_ready()
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
 func disable():
 	remove_from_group("badguys")
 	$CollisionShape2D.call_deferred("set_disabled", true)
@@ -49,6 +46,10 @@ func disable():
 func _physics_process(delta):
 	if get_tree().current_scene.editmode == true:
 		return
+
+	if invincible_time > 0: 
+		invincible_time -= 1
+	else: invincible_time = 0
 
 	# Movement
 	if state == "active":
@@ -65,6 +66,8 @@ func _physics_process(delta):
 
 # If hit by bullet or invincible player
 func kill():
+	if invincible_time > 0:
+		return
 	disable()
 	$AnimationPlayer.stop()
 	state = "kill"
@@ -127,6 +130,7 @@ func _on_VisibilityEnabler2D_screen_exited():
 		queue_free()
 		
 func appear(dir):
+	invincible_time = 5
 	$Control/AnimatedSprite.scale.x = -dir
 	
 # Custom fireball death animation (optional)

@@ -1,7 +1,5 @@
 extends "BadGuy.gd"
 
-var invincible_time = 0
-
 const INVINCIBLE_TIME = 10
 const KICK_SPEED = 500
 
@@ -14,10 +12,6 @@ func _squish(delta):
 
 # Physics
 func on_physics_process(delta):
-
-	if invincible_time > 0: 
-		invincible_time -= 1
-	
 	if state != "kicked": 
 		collision_layer = 2
 	else: 

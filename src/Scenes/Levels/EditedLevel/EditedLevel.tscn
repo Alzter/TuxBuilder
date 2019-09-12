@@ -1,24 +1,18 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/Objects/Misc/SpawnPoint.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Objects/Misc/SpawnPoint.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Editor/Layers/TileMap.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Tilesets/LevelTiles.tres" type="TileSet" id=4]
 [ext_resource path="res://Scenes/Editor/Layers/TileMap.gd" type="Script" id=5]
-[ext_resource path="res://Scenes/Objects/BadGuys/Bomb.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/Objects/BadGuys/Bomb.gd" type="Script" id=7]
-[ext_resource path="res://Scenes/Objects/BadGuys/Spiky.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/Objects/BadGuys/Spiky.gd" type="Script" id=9]
-[ext_resource path="res://Scenes/Objects/BadGuys/Snowball.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Scenes/Objects/BadGuys/Snowball.gd" type="Script" id=11]
-[ext_resource path="res://Scenes/Objects/BadGuys/Iceblock.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Scenes/Objects/BadGuys/Iceblock.gd" type="Script" id=13]
+[ext_resource path="res://Scenes/Objects/Bonus/BonusBlock.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Objects/Bonus/BonusBlock.gd" type="Script" id=7]
 
 [node name="Level" type="Node2D"]
 
 [node name="SpawnPoint" type="Position2D" parent="." groups=[
-"spawnpoint",
 "oneonly",
+"spawnpoint",
 ] instance=ExtResource( 1 )]
 position = Vector2( 16, 16 )
 script = ExtResource( 2 )
@@ -74,57 +68,52 @@ moving = false
 filepath = ""
 original_name = ""
 
-[node name="Bomb" type="KinematicBody2D" parent="." groups=[
-"badguys",
+[node name="BonusBlock" type="KinematicBody2D" parent="." groups=[
+"stackable",
+"bonusblock",
 ] instance=ExtResource( 6 )]
-position = Vector2( 304, 240 )
-collision_layer = 2
-collision_mask = 2
+position = Vector2( 16, 176 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
 script = ExtResource( 7 )
-__meta__ = {
-"_edit_group_": true
-}
 
-[node name="@Bomb@27" type="KinematicBody2D" parent="." groups=[
-"badguys",
+[node name="@BonusBlock@27" type="KinematicBody2D" parent="." groups=[
+"stackable",
+"bonusblock",
 ] instance=ExtResource( 6 )]
-position = Vector2( 432, 240 )
-collision_layer = 2
-collision_mask = 2
+position = Vector2( 16, 144 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
 script = ExtResource( 7 )
-__meta__ = {
-"_edit_group_": true
-}
 
-[node name="Spiky" type="KinematicBody2D" parent="." groups=[
-"badguys",
-] instance=ExtResource( 8 )]
-position = Vector2( 528, 240 )
-collision_layer = 2
-collision_mask = 2
-script = ExtResource( 9 )
-__meta__ = {
-"_edit_group_": true
-}
+[node name="@BonusBlock@29" type="KinematicBody2D" parent="." groups=[
+"stackable",
+"bonusblock",
+] instance=ExtResource( 6 )]
+position = Vector2( 16, 112 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 7 )
 
-[node name="Snowball" type="KinematicBody2D" parent="." groups=[
-"badguys",
-] instance=ExtResource( 10 )]
-position = Vector2( 592, 240 )
-collision_layer = 2
-collision_mask = 2
-script = ExtResource( 11 )
-__meta__ = {
-"_edit_group_": true
-}
+[node name="@BonusBlock@31" type="KinematicBody2D" parent="." groups=[
+"stackable",
+"bonusblock",
+] instance=ExtResource( 6 )]
+position = Vector2( 16, 80 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 7 )
 
-[node name="Iceblock" type="KinematicBody2D" parent="." groups=[
-"badguys",
-] instance=ExtResource( 12 )]
-position = Vector2( 368, 240 )
-collision_layer = 2
-collision_mask = 2
-script = ExtResource( 13 )
-__meta__ = {
-"_edit_group_": true
-}
+[node name="@BonusBlock@33" type="KinematicBody2D" parent="." groups=[
+"stackable",
+"bonusblock",
+] instance=ExtResource( 6 )]
+position = Vector2( 16, 48 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 7 )
