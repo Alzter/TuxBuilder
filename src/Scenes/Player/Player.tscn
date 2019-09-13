@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=2]
+[gd_scene load_steps=67 format=2]
 
 [ext_resource path="res://Scenes/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Creatures/Tux/Big/Stand.png" type="Texture" id=2]
@@ -233,23 +233,24 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=8]
+length = 0.2
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:visible")
+tracks/0/path = NodePath("Control/AnimatedSprite:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ true, false, true, false, true, false, true, false, true, false, true ]
+"values": [ true, false ]
 }
 
 [sub_resource type="Animation" id=9]
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:visible")
+tracks/0/path = NodePath("Control/AnimatedSprite:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -263,7 +264,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=10]
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:visible")
+tracks/0/path = NodePath("Control/AnimatedSprite:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -277,6 +278,9 @@ tracks/0/keys = {
 
 [sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 15.5, 31 )
+
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 0, 0 )
 
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
@@ -322,6 +326,13 @@ position = Vector2( 16, 1 )
 
 [node name="GrabLocation" type="Position2D" parent="."]
 position = Vector2( 16, 1 )
+
+[node name="ButtjumpHitbox" type="Area2D" parent="."]
+position = Vector2( 0, 31 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ButtjumpHitbox"]
+shape = SubResource( 12 )
+disabled = true
 
 [node name="StandWindow" type="RayCast2D" parent="."]
 position = Vector2( 0, 31 )

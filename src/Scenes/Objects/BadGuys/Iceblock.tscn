@@ -402,7 +402,7 @@ rect_pivot_offset = Vector2( 0, 14 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
 frames = SubResource( 4 )
-frame = 1
+frame = 3
 playing = true
 offset = Vector2( 0, -2 )
 
@@ -497,6 +497,7 @@ color_ramp = SubResource( 12 )
 
 [node name="ShakeTimer" type="Timer" parent="."]
 [connection signal="screen_exited" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_exited"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_snowball_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_snowball_body_entered"]
 [connection signal="timeout" from="WakeupTimer" to="." method="_on_WakeupTimer_timeout"]
 [connection signal="timeout" from="ShakeTimer" to="." method="_on_ShakeTimer_timeout"]

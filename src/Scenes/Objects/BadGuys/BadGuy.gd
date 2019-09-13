@@ -104,10 +104,20 @@ func _kill(delta):
 	$Control/AnimatedSprite.rotation_degrees += rotate
 	on_kill(delta)
 
+# Buttjump detection
+func _on_snowball_area_entered(area):
+	if area.get_parent().is_in_group("player"):
+		if area.get_parent().buttjump == true:
+			disable()
+			state = ""
+			area.get_parent().velocity.y *= 0.9
+			on_buttjump_kill()
+			return
+
 # Hit player / Squished
 func _on_snowball_body_entered(body):
 	if not body.is_in_group("player"): return
-	if body.position.y + 20 < position.y and squishable == true:
+	if body.position.y + 20 < position.y and squishable == true or body.buttjump == true:
 		if state == "active" and invincible_time == 0:
 			
 			# Squished
@@ -117,7 +127,7 @@ func _on_snowball_body_entered(body):
 			if body.buttjump == true:
 				disable()
 				state = ""
-				body.velocity.y *= 0.7
+				body.velocity.y *= 0.9
 				on_buttjump_kill()
 				return
 			disable()
@@ -133,6 +143,7 @@ func _on_snowball_body_entered(body):
 		if state == "active" and body.has_method("hurt"):
 			body.hurt()
 		return
+
 
 # Die when knocked off stage
 func _on_VisibilityEnabler2D_screen_exited():

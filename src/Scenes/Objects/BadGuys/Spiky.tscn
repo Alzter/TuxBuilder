@@ -254,4 +254,5 @@ scale_amount = 0.1
 scale_amount_random = 0.3
 color_ramp = SubResource( 7 )
 [connection signal="screen_exited" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_exited"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_snowball_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_snowball_body_entered"]

@@ -43,7 +43,7 @@ func _on_snowball_body_entered(body):
 		body.kill()
 		return
 	elif not body.is_in_group("player"): return
-	if body.position.y + 20 < position.y and squishable == true:
+	if body.position.y + 20 < position.y and squishable == true or body.buttjump == true:
 		if (state == "active" or state == "kicked"):
 			
 			# Squished
@@ -53,7 +53,7 @@ func _on_snowball_body_entered(body):
 			if body.buttjump == true:
 				disable()
 				state = ""
-				body.velocity.y *= 0.7
+				body.velocity.y *= 0.9
 				on_buttjump_kill()
 				return
 			state = "squished"
@@ -70,7 +70,7 @@ func _on_snowball_body_entered(body):
 			if body.buttjump == true:
 				disable()
 				state = ""
-				body.velocity.y *= 0.7
+				body.velocity.y *= 0.9
 				on_buttjump_kill()
 				return
 			state = "kicked"

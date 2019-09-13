@@ -31,7 +31,7 @@ const JUMP_BUFFER_TIME = 15
 # Gravity
 const GRAVITY = 20.0
 # Gravity when buttjumping
-const BUTTJUMP_GRAVITY = 80.0
+const BUTTJUMP_GRAVITY = 120.0
 # Amount of frames Tux can still jump after falling off a ledge
 const LEDGE_JUMP = 3
 # Falling speedcap
@@ -313,12 +313,19 @@ func _physics_process(delta):
 			backflip_rotation += 15
 		$Control/AnimatedSprite.rotation_degrees = backflip_rotation
 
-	# Buttjump
+	# Buttjump Hitbox
 	if on_ground != 0 and Input.is_action_just_pressed("duck") and state != "small" and backflip == false and buttjump == false:
 		buttjump = true
 		$AnimationPlayer.stop()
 		$AnimationPlayer.play("Buttjump")
 		$ButtjumpTimer.start(0.15)
+
+	# Stop buttjump if small
+	if buttjump == true and state == "small":
+		buttjump = false
+		$AnimationPlayer.stop()
+		$AnimationPlayer.play("Stop")
+		set_animation("fall")
 
 	# Animations
 	$Control/AnimatedSprite.speed_scale = 1
@@ -360,6 +367,14 @@ func _physics_process(delta):
 		$GrabLocation.position.y = 1
 	$ShootLocation.position.x = $Control/AnimatedSprite.scale.x * 16
 	$GrabLocation.position.x = $Control/AnimatedSprite.scale.x * 16
+
+	# Buttjump hitboxes
+	if buttjump == true:
+		$ButtjumpHitbox/CollisionShape2D.shape.extents = Vector2(25,16)
+		$ButtjumpHitbox/CollisionShape2D.disabled = false
+	else:
+		$ButtjumpHitbox/CollisionShape2D.shape.extents = Vector2(0,0)
+		$ButtjumpHitbox/CollisionShape2D.disabled = true
 
 	# Shooting
 	if Input.is_action_just_pressed("action") and state == "fire" and get_tree().get_nodes_in_group("bullets").size() < 2:
@@ -414,14 +429,14 @@ func star_invincibility():
 	get_tree().current_scene.play_music("invincible.ogg")
 	$AnimationPlayerInvincibility.stop()
 	$AnimationPlayerInvincibility.play("InvincibleStar")
-	
+
 # Damage invincibility
 func damage_invincibility():
 	invincible_damage = true
 	$InvincibilityTimer.start(1.8)
 	$AnimationPlayerInvincibility.stop()
 	$AnimationPlayerInvincibility.play("HurtInvincibility")
-	
+
 func _on_InvincibilityTimer_timeout():
 	invincible = false
 	invincible_damage = false

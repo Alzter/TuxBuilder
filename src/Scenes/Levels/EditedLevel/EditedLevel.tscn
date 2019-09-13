@@ -5,10 +5,10 @@
 [ext_resource path="res://Scenes/Editor/Layers/TileMap.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Tilesets/LevelTiles.tres" type="TileSet" id=4]
 [ext_resource path="res://Scenes/Editor/Layers/TileMap.gd" type="Script" id=5]
-[ext_resource path="res://Scenes/Objects/BadGuys/Iceblock.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/Objects/BadGuys/Iceblock.gd" type="Script" id=7]
-[ext_resource path="res://Scenes/Objects/BadGuys/Snowball.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/Objects/BadGuys/Snowball.gd" type="Script" id=9]
+[ext_resource path="res://Scenes/Objects/BadGuys/Bomb.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Objects/BadGuys/Bomb.gd" type="Script" id=7]
+[ext_resource path="res://Scenes/Objects/BadGuys/Iceblock.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Objects/BadGuys/Iceblock.gd" type="Script" id=9]
 [ext_resource path="res://Scenes/Objects/Bonus/BonusBlock.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Objects/Bonus/BonusBlock.gd" type="Script" id=11]
 
@@ -72,76 +72,21 @@ moving = false
 filepath = ""
 original_name = ""
 
+[node name="Bomb" type="KinematicBody2D" parent="." groups=[
+"badguys",
+] instance=ExtResource( 6 )]
+position = Vector2( 240, 240 )
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_group_": true
+}
+
 [node name="Iceblock" type="KinematicBody2D" parent="." groups=[
-"badguys",
-] instance=ExtResource( 6 )]
-position = Vector2( 144, 240 )
-collision_layer = 2
-collision_mask = 2
-script = ExtResource( 7 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="@Iceblock@27" type="KinematicBody2D" parent="." groups=[
-"badguys",
-] instance=ExtResource( 6 )]
-position = Vector2( 432, 240 )
-collision_layer = 2
-collision_mask = 2
-script = ExtResource( 7 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Snowball" type="KinematicBody2D" parent="." groups=[
 "badguys",
 ] instance=ExtResource( 8 )]
 position = Vector2( 272, 240 )
-collision_layer = 2
-collision_mask = 2
-script = ExtResource( 9 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="@Snowball@29" type="KinematicBody2D" parent="." groups=[
-"badguys",
-] instance=ExtResource( 8 )]
-position = Vector2( 304, 240 )
-collision_layer = 2
-collision_mask = 2
-script = ExtResource( 9 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="@Snowball@31" type="KinematicBody2D" parent="." groups=[
-"badguys",
-] instance=ExtResource( 8 )]
-position = Vector2( 336, 240 )
-collision_layer = 2
-collision_mask = 2
-script = ExtResource( 9 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="@Snowball@33" type="KinematicBody2D" parent="." groups=[
-"badguys",
-] instance=ExtResource( 8 )]
-position = Vector2( 368, 240 )
-collision_layer = 2
-collision_mask = 2
-script = ExtResource( 9 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="@Snowball@35" type="KinematicBody2D" parent="." groups=[
-"badguys",
-] instance=ExtResource( 8 )]
-position = Vector2( 400, 240 )
 collision_layer = 2
 collision_mask = 2
 script = ExtResource( 9 )
@@ -153,7 +98,238 @@ __meta__ = {
 "bonusblock",
 "stackable",
 ] instance=ExtResource( 10 )]
+position = Vector2( 304, 240 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 11 )
+
+[node name="@BonusBlock@27" type="KinematicBody2D" parent="." groups=[
+"bonusblock",
+"stackable",
+] instance=ExtResource( 10 )]
+position = Vector2( 208, 240 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 11 )
+
+[node name="@Iceblock@29" type="KinematicBody2D" parent="." groups=[
+"badguys",
+] instance=ExtResource( 8 )]
+position = Vector2( 304, 144 )
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="@BonusBlock@31" type="KinematicBody2D" parent="." groups=[
+"bonusblock",
+"stackable",
+] instance=ExtResource( 10 )]
+position = Vector2( 496, 240 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 11 )
+
+[node name="@BonusBlock@33" type="KinematicBody2D" parent="." groups=[
+"bonusblock",
+"stackable",
+] instance=ExtResource( 10 )]
 position = Vector2( 464, 240 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 11 )
+
+[node name="@BonusBlock@35" type="KinematicBody2D" parent="." groups=[
+"bonusblock",
+"stackable",
+] instance=ExtResource( 10 )]
+position = Vector2( 432, 240 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 11 )
+
+[node name="@BonusBlock@37" type="KinematicBody2D" parent="." groups=[
+"bonusblock",
+"stackable",
+] instance=ExtResource( 10 )]
+position = Vector2( 400, 240 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 11 )
+
+[node name="@BonusBlock@39" type="KinematicBody2D" parent="." groups=[
+"bonusblock",
+"stackable",
+] instance=ExtResource( 10 )]
+position = Vector2( 368, 240 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 11 )
+
+[node name="@BonusBlock@41" type="KinematicBody2D" parent="." groups=[
+"bonusblock",
+"stackable",
+] instance=ExtResource( 10 )]
+position = Vector2( 336, 240 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 11 )
+
+[node name="@BonusBlock@43" type="KinematicBody2D" parent="." groups=[
+"bonusblock",
+"stackable",
+] instance=ExtResource( 10 )]
+position = Vector2( 528, 240 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 11 )
+
+[node name="@BonusBlock@45" type="KinematicBody2D" parent="." groups=[
+"bonusblock",
+"stackable",
+] instance=ExtResource( 10 )]
+position = Vector2( 560, 240 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 11 )
+
+[node name="@BonusBlock@47" type="KinematicBody2D" parent="." groups=[
+"bonusblock",
+"stackable",
+] instance=ExtResource( 10 )]
+position = Vector2( 592, 240 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 11 )
+
+[node name="@BonusBlock@49" type="KinematicBody2D" parent="." groups=[
+"bonusblock",
+"stackable",
+] instance=ExtResource( 10 )]
+position = Vector2( 624, 240 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 11 )
+
+[node name="@BonusBlock@51" type="KinematicBody2D" parent="." groups=[
+"bonusblock",
+"stackable",
+] instance=ExtResource( 10 )]
+position = Vector2( 272, 144 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 11 )
+
+[node name="@BonusBlock@53" type="KinematicBody2D" parent="." groups=[
+"bonusblock",
+"stackable",
+] instance=ExtResource( 10 )]
+position = Vector2( 272, 176 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 11 )
+
+[node name="@BonusBlock@55" type="KinematicBody2D" parent="." groups=[
+"bonusblock",
+"stackable",
+] instance=ExtResource( 10 )]
+position = Vector2( 304, 176 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 11 )
+
+[node name="@BonusBlock@57" type="KinematicBody2D" parent="." groups=[
+"bonusblock",
+"stackable",
+] instance=ExtResource( 10 )]
+position = Vector2( 336, 176 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 11 )
+
+[node name="@BonusBlock@59" type="KinematicBody2D" parent="." groups=[
+"bonusblock",
+"stackable",
+] instance=ExtResource( 10 )]
+position = Vector2( 368, 176 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 11 )
+
+[node name="@BonusBlock@61" type="KinematicBody2D" parent="." groups=[
+"bonusblock",
+"stackable",
+] instance=ExtResource( 10 )]
+position = Vector2( 400, 176 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 11 )
+
+[node name="@BonusBlock@67" type="KinematicBody2D" parent="." groups=[
+"bonusblock",
+"stackable",
+] instance=ExtResource( 10 )]
+position = Vector2( 528, 144 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 11 )
+
+[node name="@BonusBlock@69" type="KinematicBody2D" parent="." groups=[
+"bonusblock",
+"stackable",
+] instance=ExtResource( 10 )]
+position = Vector2( 528, 176 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 11 )
+
+[node name="@BonusBlock@71" type="KinematicBody2D" parent="." groups=[
+"bonusblock",
+"stackable",
+] instance=ExtResource( 10 )]
+position = Vector2( 528, 208 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 11 )
+
+[node name="@BonusBlock@79" type="KinematicBody2D" parent="." groups=[
+"bonusblock",
+"stackable",
+] instance=ExtResource( 10 )]
+position = Vector2( 432, 176 )
+z_index = -1
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 11 )
+
+[node name="@BonusBlock@81" type="KinematicBody2D" parent="." groups=[
+"bonusblock",
+"stackable",
+] instance=ExtResource( 10 )]
+position = Vector2( 464, 176 )
 z_index = -1
 collision_layer = 31
 collision_mask = 31
