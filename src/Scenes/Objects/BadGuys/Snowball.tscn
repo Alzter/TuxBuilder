@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Scenes/Objects/BadGuys/Snowball.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Creatures/Snowball/snowball-0.png" type="Texture" id=2]
@@ -18,9 +18,6 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 15 )
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 12, 6 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 16, 10 )
@@ -245,13 +242,6 @@ shape = SubResource( 1 )
 rect = Rect2( -64, -512, 128, 1024 )
 physics_process_parent = true
 
-[node name="Head" type="Area2D" parent="."]
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Head"]
-position = Vector2( 0, -14 )
-shape = SubResource( 2 )
-
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 0
 
@@ -269,6 +259,7 @@ rect_pivot_offset = Vector2( 0, 14 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
 position = Vector2( 0, 6.31594e-013 )
 frames = SubResource( 4 )
+frame = 6
 playing = true
 offset = Vector2( 0, -2 )
 
@@ -334,5 +325,4 @@ scale_amount = 0.1
 scale_amount_random = 0.3
 color_ramp = SubResource( 9 )
 [connection signal="screen_exited" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_exited"]
-[connection signal="area_entered" from="Head" to="." method="_on_Head_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_snowball_body_entered"]

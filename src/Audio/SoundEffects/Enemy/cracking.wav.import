@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/cracking.wav-b172e4889806970f47d26cb763ac1b8c.sample"
+
+[deps]
+
+source_file="res://Audio/SoundEffects/Enemy/cracking.wav"
+dest_files=[ "res://.import/cracking.wav-b172e4889806970f47d26cb763ac1b8c.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

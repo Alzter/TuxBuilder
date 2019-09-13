@@ -172,10 +172,6 @@ shape = SubResource( 1 )
 rect = Rect2( -64, -512, 128, 1024 )
 physics_process_parent = true
 
-[node name="Head" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Head"]
-
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 0
 
@@ -193,6 +189,7 @@ rect_pivot_offset = Vector2( 0, 14 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
 position = Vector2( 0, 6.31594e-013 )
 frames = SubResource( 3 )
+frame = 1
 playing = true
 offset = Vector2( 0, -2 )
 

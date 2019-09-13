@@ -15,14 +15,12 @@
 [ext_resource path="res://Audio/SoundEffects/Enemy/kick.wav" type="AudioStream" id=13]
 [ext_resource path="res://Audio/SoundEffects/Enemy/iceblock_bump.wav" type="AudioStream" id=14]
 [ext_resource path="res://Audio/SoundEffects/Enemy/splash.ogg" type="AudioStream" id=15]
-[ext_resource path="res://Sprites/Creatures/Iceblock/shard.png" type="Texture" id=16]
-[ext_resource path="res://Sprites/Creatures/Snowball/droplet.png" type="Texture" id=17]
+[ext_resource path="res://Audio/SoundEffects/Enemy/icecrash.ogg" type="AudioStream" id=16]
+[ext_resource path="res://Sprites/Creatures/Iceblock/shard.png" type="Texture" id=17]
+[ext_resource path="res://Sprites/Creatures/Snowball/droplet.png" type="Texture" id=18]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 15 )
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 12, 6 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 16, 10 )
@@ -401,13 +399,6 @@ shape = SubResource( 1 )
 rect = Rect2( -64, -512, 128, 1024 )
 physics_process_parent = true
 
-[node name="Head" type="Area2D" parent="."]
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Head"]
-position = Vector2( 0, -9 )
-shape = SubResource( 2 )
-
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 2
 
@@ -424,7 +415,7 @@ rect_pivot_offset = Vector2( 0, 14 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
 frames = SubResource( 4 )
-frame = 6
+frame = 4
 playing = true
 offset = Vector2( 0, -2 )
 
@@ -454,6 +445,9 @@ stream = ExtResource( 14 )
 [node name="Melt" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 15 )
 
+[node name="Shatter" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 16 )
+
 [node name="IceShards" type="CPUParticles2D" parent="."]
 rotation = -1.5708
 emitting = false
@@ -462,7 +456,7 @@ lifetime = 0.6
 one_shot = true
 explosiveness = 1.0
 local_coords = false
-texture = ExtResource( 16 )
+texture = ExtResource( 17 )
 spread = 60.0
 flatness = 1.0
 gravity = Vector2( 0, 500 )
@@ -482,7 +476,7 @@ amount = 16
 one_shot = true
 explosiveness = 1.0
 local_coords = false
-texture = ExtResource( 17 )
+texture = ExtResource( 18 )
 spread = 180.0
 flatness = 1.0
 gravity = Vector2( 0, 500 )
@@ -502,7 +496,6 @@ color_ramp = SubResource( 12 )
 
 [node name="ShakeTimer" type="Timer" parent="."]
 [connection signal="screen_exited" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_exited"]
-[connection signal="area_entered" from="Head" to="." method="_on_Head_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_snowball_body_entered"]
 [connection signal="timeout" from="WakeupTimer" to="." method="_on_WakeupTimer_timeout"]
 [connection signal="timeout" from="ShakeTimer" to="." method="_on_ShakeTimer_timeout"]

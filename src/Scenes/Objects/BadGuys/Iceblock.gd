@@ -27,9 +27,14 @@ func on_physics_process(delta):
 			velocity.x *= -1
 			$SFX/Bump.play()
 
-# Custom fireball death animation (optional)
+# Fireball death animation
 func on_fireball_kill():
 	$SFX/Melt.play()
+	$AnimationPlayer.play("explode")
+
+# Buttjump death animation
+func on_buttjump_kill():
+	$SFX/Shatter.play()
 	$AnimationPlayer.play("explode")
 
 # If squished
@@ -38,6 +43,12 @@ func _on_Head_area_entered(area):
 		var player = area.get_parent()
 		if player.sliding == true:
 			kill()
+			return
+		if player.buttjump == true:
+			disable()
+			player.velocity.y *= 0.7
+			state = ""
+			on_buttjump_kill()
 			return
 		
 		if invincible_time == 0:

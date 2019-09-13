@@ -189,6 +189,7 @@ shape = SubResource( 8 )
 shape = SubResource( 6 )
 
 [node name="TopHitbox" type="Area2D" parent="."]
+collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TopHitbox"]
 position = Vector2( 0, -26 )

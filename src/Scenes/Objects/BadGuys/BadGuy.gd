@@ -7,6 +7,7 @@ var startpos = Vector2(0,0)
 var state = "active"
 var direction = 1
 var rotate = 0
+var squishable = true
 var invincible_time = 0
 
 var SQUISHED_ANIMATION = "triggered"
@@ -29,6 +30,9 @@ func on_squish(delta):
 func on_fireball_kill():
 	pass
 	
+func on_buttjump_kill():
+	pass
+	
 func on_physics_process(delta):
 	pass
 
@@ -40,7 +44,6 @@ func _ready():
 func disable():
 	remove_from_group("badguys")
 	$CollisionShape2D.call_deferred("set_disabled", true)
-	$Head/CollisionShape2D.call_deferred("set_disabled", true)
 	$Area2D/CollisionShape2D.call_deferred("set_disabled", true)
 
 func _physics_process(delta):
@@ -102,27 +105,31 @@ func _kill(delta):
 	$Control/AnimatedSprite.rotation_degrees += rotate
 	on_kill(delta)
 
-# If squished
-func _on_Head_area_entered(area):
-	if area.is_in_group("bottom") and state == "active":
-		var player = area.get_parent()
-		if player.sliding == true:
-			kill()
-			return
-		disable()
-		state = "squished"
-		$AnimationPlayer.play(SQUISHED_ANIMATION)
-		$SFX/Squish.play()
-		player.call("bounce")
-
 # Hit player
 func _on_snowball_body_entered(body):
-	if body.is_in_group("player"):
+	if not body.is_in_group("player"): return
+	if body.position.y + 20 < position.y:
+		if state == "active":
+			if body.sliding == true:
+				kill()
+				return
+			if body.buttjump == true:
+				disable()
+				state = ""
+				body.velocity.y *= 0.7
+				on_buttjump_kill()
+				return
+			disable()
+			state = "squished"
+			$AnimationPlayer.play(SQUISHED_ANIMATION)
+			$SFX/Squish.play()
+			body.call("bounce")
+	else:
 		if body.invincible == true:
 			kill()
-	if state == "active" and body.has_method("hurt"):
-		body.hurt()
-	return
+		if state == "active" and body.has_method("hurt"):
+			body.hurt()
+		return
 	
 # Die when knocked off stage
 func _on_VisibilityEnabler2D_screen_exited():
@@ -133,7 +140,7 @@ func appear(dir):
 	invincible_time = 5
 	$Control/AnimatedSprite.scale.x = -dir
 	
-# Custom fireball death animation (optional)
+# Fireball death animation
 func fireball_kill():
 	disable()
 	state = ""

@@ -1,10 +1,17 @@
 extends "BadGuy.gd"
 
+var hurt_player = true
+
 func on_squish(delta):
 	pass
 
-# Custom fireball death animation (optional)
+# Fireball death animation
 func fireball_kill():
+	explode()
+
+# Buttjump death animation
+func on_buttjump_kill():
+	hurt_player = false
 	explode()
 
 func explode():
@@ -18,4 +25,5 @@ func _on_ExplosionRadius_area_entered(area):
 		if parent.is_in_group("badguys"):
 			parent.kill()
 		if parent.is_in_group("player"):
-			parent.hurt()
+			if hurt_player == true: parent.hurt()
+			else: parent.velocity.y = -1000
