@@ -81,7 +81,7 @@ func kill():
 	velocity = Vector2(300 * (velocity.x / abs(velocity.x)), -350)
 	rotate = 30 * (velocity.x / abs(velocity.x))
 	$SFX/Fall.play()
-		
+
 func _move(delta):
 	velocity.x = -100 * $Control/AnimatedSprite.scale.x
 	velocity.y += 20
@@ -126,6 +126,7 @@ func _on_snowball_body_entered(body):
 			$AnimationPlayer.play(SQUISHED_ANIMATION)
 			$SFX/Squish.play()
 			body.call("bounce")
+			velocity = Vector2(0,0)
 	else:
 		# Hit player
 		if body.invincible == true:

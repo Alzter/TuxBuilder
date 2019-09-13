@@ -57,6 +57,7 @@ func _on_snowball_body_entered(body):
 			$AnimationPlayer.play(SQUISHED_ANIMATION)
 			$SFX/Squish.play()
 			body.call("bounce")
+			velocity = Vector2(0,0)
 		
 		# Kicked
 		elif state == "squished":
@@ -69,11 +70,11 @@ func _on_snowball_body_entered(body):
 				body.velocity.y *= 0.7
 				on_buttjump_kill()
 				return
-			state = "squished"
+			state = "kicked"
 			$AnimationPlayer.play(SQUISHED_ANIMATION)
 			$SFX/Kick.play()
 			body.call("bounce")
-			
+			velocity = Vector2(0,0)
 			if body.position.x > position.x:
 				velocity.x = -KICK_SPEED
 				$Control/AnimatedSprite.scale.x = 1
