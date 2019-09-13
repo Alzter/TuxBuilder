@@ -4,6 +4,8 @@ var hit = false
 var hitdirection = 0
 var stored = "" # Whatever is inside the bonus block
 var childstored = null
+var hitdirectionstored = 0
+var hitdownstored = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -29,6 +31,8 @@ func _on_Area2D_body_entered(body):
 
 # Hit the block
 func hit(hitdirection, hitdown):
+	hitdirectionstored = hitdirection
+	hitdownstored = hitdown
 	$AnimatedSprite.play("empty")
 	
 	if hitdown == true:
@@ -48,14 +52,15 @@ func hit(hitdirection, hitdown):
 			
 		get_tree().current_scene.get_node("Level").add_child(childstored)
 		if childstored.has_method("appear"):
-			childstored.call("appear", hitdirection, hitdown)
+			childstored.appear(hitdirection,hitdown)
 
 # Kill enemies on top of block
 func _on_TopHitbox_area_entered(area):
 	if area.get_parent().is_in_group("badguys"):
 		area.get_parent().kill()
 	if area.is_in_group("coin"):
-		area.appear()
-	if area.get_parent().position.x > self.position.x:
-		area.get_parent().hit(-1,false)
-	else: area.get_parent().hit(1,false)
+		area.appear(0,false)
+
+func _on_TopHitbox_body_entered(body):
+	if body.is_in_group("bonusblock") and body.name != name:
+		body.hit(hitdirectionstored,hitdownstored)

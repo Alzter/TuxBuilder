@@ -21,5 +21,5 @@ func _on_Area2D_body_entered(body):
 		if body.state == "small": body.state = "big"
 		$AnimationPlayer.play("collect")
 
-func appear(dir):
+func appear(dir, hitdown):
 	direction = dir

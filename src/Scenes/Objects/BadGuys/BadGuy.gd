@@ -142,6 +142,7 @@ func _on_VisibilityEnabler2D_screen_exited():
 func appear(dir, hitdown):
 	invincible_time = 5
 	$Control/AnimatedSprite.scale.x = -dir
+	if abs($Control/AnimatedSprite.scale.x) != 1: $Control/AnimatedSprite.scale.x = -1
 
 # Fireball death animation
 func fireball_kill():

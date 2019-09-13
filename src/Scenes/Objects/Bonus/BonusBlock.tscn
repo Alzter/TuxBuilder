@@ -71,7 +71,7 @@ tracks/4/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 16, 10 )
+extents = Vector2( 15, 10 )
 
 [sub_resource type="Animation" id=4]
 tracks/0/type = "value"
@@ -282,3 +282,4 @@ shape = SubResource( 1 )
 disabled = true
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="area_entered" from="TopHitbox" to="." method="_on_TopHitbox_area_entered"]
+[connection signal="body_entered" from="TopHitbox" to="." method="_on_TopHitbox_body_entered"]
