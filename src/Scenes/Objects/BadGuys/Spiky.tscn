@@ -11,12 +11,6 @@
 [ext_resource path="res://Sprites/Creatures/Snowball/particle.png" type="Texture" id=9]
 [ext_resource path="res://Sprites/Creatures/Snowball/droplet.png" type="Texture" id=10]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 16, 15 )
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 16, 10 )
-
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 3 ) ],
@@ -29,6 +23,12 @@ animations = [ {
 "name": "melted",
 "speed": 5.0
 } ]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16, 15 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 16, 10 )
 
 [sub_resource type="Animation" id=4]
 resource_name = "active"
@@ -165,21 +165,8 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
-
-[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
-rect = Rect2( -64, -512, 128, 1024 )
-physics_process_parent = true
-
-[node name="Area2D" type="Area2D" parent="."]
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 0, 6 )
-shape = SubResource( 2 )
-
 [node name="Control" type="Control" parent="."]
+editor/display_folded = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -189,9 +176,23 @@ rect_pivot_offset = Vector2( 0, 14 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
 position = Vector2( 0, 6.31594e-013 )
 frames = SubResource( 3 )
-frame = 2
 playing = true
 offset = Vector2( 0, -2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+rect = Rect2( -64, -512, 128, 1024 )
+physics_process_parent = true
+
+[node name="Area2D" type="Area2D" parent="."]
+editor/display_folded = true
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 0, 6 )
+shape = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "active"
@@ -199,6 +200,7 @@ anims/active = SubResource( 4 )
 anims/explode = SubResource( 5 )
 
 [node name="SFX" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="Fall" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 6 )

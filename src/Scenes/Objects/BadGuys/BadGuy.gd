@@ -69,8 +69,7 @@ func _physics_process(delta):
 
 # If hit by bullet or invincible player
 func kill():
-	if invincible_time > 0:
-		return
+	if invincible_time > 0: return
 	disable()
 	$AnimationPlayer.stop()
 	state = "kill"
@@ -109,7 +108,7 @@ func _kill(delta):
 func _on_snowball_body_entered(body):
 	if not body.is_in_group("player"): return
 	if body.position.y + 20 < position.y and squishable == true:
-		if state == "active":
+		if state == "active" and invincible_time == 0:
 			
 			# Squished
 			if body.sliding == true:
@@ -140,7 +139,7 @@ func _on_VisibilityEnabler2D_screen_exited():
 	if state == "kill" or state == "":
 		queue_free()
 
-func appear(dir):
+func appear(dir, hitdown):
 	invincible_time = 5
 	$Control/AnimatedSprite.scale.x = -dir
 

@@ -16,12 +16,6 @@
 [ext_resource path="res://Sprites/Creatures/Snowball/particle.png" type="Texture" id=14]
 [ext_resource path="res://Sprites/Creatures/Snowball/droplet.png" type="Texture" id=15]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 16, 15 )
-
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 16, 10 )
-
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
@@ -34,6 +28,12 @@ animations = [ {
 "name": "squished",
 "speed": 5.0
 } ]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16, 15 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 16, 10 )
 
 [sub_resource type="Animation" id=5]
 resource_name = "active"
@@ -235,6 +235,20 @@ __meta__ = {
 "_edit_group_": true
 }
 
+[node name="Control" type="Control" parent="."]
+editor/display_folded = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+rect_pivot_offset = Vector2( 0, 14 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
+position = Vector2( 0, 6.31594e-013 )
+frames = SubResource( 4 )
+playing = true
+offset = Vector2( 0, -2 )
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
@@ -246,22 +260,8 @@ physics_process_parent = true
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 0, 6 )
+position = Vector2( 0, 5 )
 shape = SubResource( 3 )
-
-[node name="Control" type="Control" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-rect_pivot_offset = Vector2( 0, 14 )
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
-position = Vector2( 0, 6.31594e-013 )
-frames = SubResource( 4 )
-frame = 7
-playing = true
-offset = Vector2( 0, -2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "active"
@@ -270,6 +270,7 @@ anims/explode = SubResource( 6 )
 anims/squished = SubResource( 7 )
 
 [node name="SFX" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="Fall" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 11 )

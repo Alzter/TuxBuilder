@@ -9,7 +9,7 @@ func _on_Coin_body_entered(body):
 		counter.coins = counter.coins + 1
 		touched = 1
 
-func appear(dir):
+func appear(dir, hitdown):
 	$AnimationPlayer.play("Pickup")
 	var counter = get_tree().get_nodes_in_group("CoinCounter")[0]
 	counter.coins = counter.coins + 1

@@ -27,6 +27,7 @@ func _on_Area2D_body_entered(body):
 		body.star_invincibility()
 		$AnimationPlayer.play("pickup")
 
-func appear(dir):
+func appear(dir, hitdown):
 	direction = dir
-	velocity = Vector2(200 * dir, 500)
+	velocity = Vector2(200 * dir, -500)
+	if hitdown == true: velocity.y *= -1

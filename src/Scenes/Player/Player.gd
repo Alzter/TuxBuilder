@@ -115,11 +115,9 @@ func _physics_process(delta):
 	if get_tree().current_scene.editmode == true:
 		set_animation("idle")
 		$Hitbox.disabled = true
-		$HeadAttack/CollisionShape2D.disabled = true
 		return
 
 	$Hitbox.disabled = false
-	$HeadAttack/CollisionShape2D.disabled = false
 
 	if dead == true:
 		if Input.is_action_pressed("pause"):
@@ -134,7 +132,6 @@ func _physics_process(delta):
 			return
 		$Control/AnimatedSprite.z_index = 999
 		$Hitbox.disabled = true
-		$HeadAttack/CollisionShape2D.disabled = true
 		position += velocity * delta
 		velocity.y += GRAVITY
 		return
@@ -273,7 +270,7 @@ func _physics_process(delta):
 
 	# Jumping
 	if Input.is_action_pressed("jump") and jumpheld <= JUMP_BUFFER_TIME:
-		if on_ground <= LEDGE_JUMP:
+		if on_ground <= LEDGE_JUMP and $ButtjumpLandTimer.time_left <= BUTTJUMP_LAND_TIME - 0.02:
 			if state != "small" and Input.is_action_pressed("duck") == true and $StandWindow.is_colliding() == false and sliding == false and $ButtjumpLandTimer.time_left == 0:
 				backflip = true
 				backflip_rotation = 0
@@ -354,13 +351,11 @@ func _physics_process(delta):
 	if ducking == true or sliding == true or state == "small":
 		$Hitbox.shape.extents.y = 15
 		$Hitbox.position.y = 17
-		$HeadAttack/CollisionShape2D.position.y = 11
 		$ShootLocation.position.y = 17
 		$GrabLocation.position.y = 17
 	else:
 		$Hitbox.shape.extents.y = 31
 		$Hitbox.position.y = 1
-		$HeadAttack/CollisionShape2D.position.y = -21
 		$ShootLocation.position.y = 1
 		$GrabLocation.position.y = 1
 	$ShootLocation.position.x = $Control/AnimatedSprite.scale.x * 16

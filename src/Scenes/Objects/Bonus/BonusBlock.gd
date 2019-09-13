@@ -15,27 +15,40 @@ func _ready():
 				childstored.position = position
 				child.queue_free()
 
-func _on_BottomHitbox_area_entered(area):
-	if hit == false:
-		if area.get_name() == "HeadAttack":
-			if area.get_parent().position.x > self.position.x:
-				hit(-1)
-			else: hit(1)
+func _on_Area2D_body_entered(body):
+	if body.is_in_group("player"):
+		if body.position.y > position.y:
+			if body.position.x > self.position.x:
+				hit(-1,false)
+			else: hit(1,false)
+		
+		elif body.buttjump == true or body.get_node("ButtjumpLandTimer").time_left > 0:
+			if body.position.x > self.position.x:
+				hit(-1,true)
+			else: hit(1,true)
 
-# Detect if block is hit from 
-func hit(hitdirection):
+# Hit the block
+func hit(hitdirection, hitdown):
 	$AnimatedSprite.play("empty")
-	$AnimationPlayer.play("hit")
+	
+	if hitdown == true:
+		$AnimationPlayer.play("hitdown")
+	else: $AnimationPlayer.play("hit")
+	
 	hit = true
 	
 	# Spawn contents
 	if stored != "":
-		if childstored.is_in_group("Coin"):
+		if not childstored.is_in_group("coin"):
 			$Upgrade.play()
-			childstored.position.y -= 32
+			
+			if hitdown == true:
+				childstored.position.y += 32
+			else: childstored.position.y -= 32
+			
 		get_tree().current_scene.get_node("Level").add_child(childstored)
 		if childstored.has_method("appear"):
-			childstored.call("appear", hitdirection)
+			childstored.call("appear", hitdirection, hitdown)
 
 # Kill enemies on top of block
 func _on_TopHitbox_area_entered(area):
@@ -43,5 +56,6 @@ func _on_TopHitbox_area_entered(area):
 		area.get_parent().kill()
 	if area.is_in_group("coin"):
 		area.appear()
-	if area.is_in_group("bonusblock"):
-		area.hit(0)
+	if area.get_parent().position.x > self.position.x:
+		area.get_parent().hit(-1,false)
+	else: area.get_parent().hit(1,false)

@@ -27,6 +27,7 @@ func _on_1Up_body_entered(body):
 			$AnimationPlayer.play("collect")
 			if body.invincible == false: body.call("kill")
 
-func appear(dir):
+func appear(dir, hitdown):
 	active = true
 	velocity = Vector2(0, -750)
+	if hitdown == true: velocity.y *= -1

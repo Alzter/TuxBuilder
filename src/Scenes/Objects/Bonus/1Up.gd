@@ -17,6 +17,7 @@ func _on_1Up_body_entered(body):
 		counter.coins = counter.coins + 100
 		$AnimationPlayer.play("collect")
 
-func appear(dir):
+func appear(dir, hitdown):
 	active = true
 	velocity = Vector2(200 * dir, -500)
+	if hitdown == true: velocity = Vector2(0, 500)
