@@ -10,7 +10,7 @@ var rotate = 0
 var squishable = true
 var invincible_time = 0
 
-var SQUISHED_ANIMATION = "triggered"
+var SQUISHED_ANIMATION = "squished"
 
 
 # These methods are here to be overridden in the badguy sub-classes
@@ -105,11 +105,13 @@ func _kill(delta):
 	$Control/AnimatedSprite.rotation_degrees += rotate
 	on_kill(delta)
 
-# Hit player
+# Hit player / Squished
 func _on_snowball_body_entered(body):
 	if not body.is_in_group("player"): return
-	if body.position.y + 20 < position.y:
+	if body.position.y + 20 < position.y and squishable == true:
 		if state == "active":
+			
+			# Squished
 			if body.sliding == true:
 				kill()
 				return
@@ -125,21 +127,22 @@ func _on_snowball_body_entered(body):
 			$SFX/Squish.play()
 			body.call("bounce")
 	else:
+		# Hit player
 		if body.invincible == true:
 			kill()
 		if state == "active" and body.has_method("hurt"):
 			body.hurt()
 		return
-	
+
 # Die when knocked off stage
 func _on_VisibilityEnabler2D_screen_exited():
 	if state == "kill" or state == "":
 		queue_free()
-		
+
 func appear(dir):
 	invincible_time = 5
 	$Control/AnimatedSprite.scale.x = -dir
-	
+
 # Fireball death animation
 func fireball_kill():
 	disable()

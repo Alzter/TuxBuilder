@@ -37,56 +37,57 @@ func on_buttjump_kill():
 	$SFX/Shatter.play()
 	$AnimationPlayer.play("explode")
 
-# If squished
-func _on_Head_area_entered(area):
-	if area.is_in_group("bottom"):
-		var player = area.get_parent()
-		if player.sliding == true:
-			kill()
-			return
-		if player.buttjump == true:
-			disable()
-			player.velocity.y *= 0.7
-			state = ""
-			on_buttjump_kill()
-			return
-		
-		if invincible_time == 0:
-			invincible_time = INVINCIBLE_TIME
-			
-			if state == "active" or state == "kicked":
-				state = "squished"
-				velocity = Vector2(0,0)
-				$AnimationPlayer.play("squished")
-				$SFX/Squish.play()
-				player.call("bounce")
-				$ShakeTimer.stop()
-				$WakeupTimer.start(5)
-				
-			elif state == "squished":
-				$AnimationPlayer.play("squished")
-				$Control/AnimatedSprite.play("squished")
-				$SFX/Kick.play()
-				
-				if player.position.x > position.x:
-					velocity.x = -KICK_SPEED
-					$Control/AnimatedSprite.scale.x = 1
-					
-				else:
-					velocity.x = KICK_SPEED
-					$Control/AnimatedSprite.scale.x = -1
-				state = "kicked"
-				player.call("bounce")
-
-# Hit player
+# Hit player / Squished
 func _on_snowball_body_entered(body):
-	if body.is_in_group("badguys") and body.name != name and state == "kicked":
-		body.kill()
-	if body.is_in_group("player"):
-		if body.invincible == true: kill()
+	if not body.is_in_group("player"): return
+	if body.position.y + 20 < position.y and squishable == true:
+		if (state == "active" or state == "kicked"):
+			
+			# Squished
+			if body.sliding == true:
+				kill()
+				return
+			if body.buttjump == true:
+				disable()
+				state = ""
+				body.velocity.y *= 0.7
+				on_buttjump_kill()
+				return
+			state = "squished"
+			$AnimationPlayer.play(SQUISHED_ANIMATION)
+			$SFX/Squish.play()
+			body.call("bounce")
+		
+		# Kicked
+		elif state == "squished":
+			if body.sliding == true:
+				kill()
+				return
+			if body.buttjump == true:
+				disable()
+				state = ""
+				body.velocity.y *= 0.7
+				on_buttjump_kill()
+				return
+			state = "squished"
+			$AnimationPlayer.play(SQUISHED_ANIMATION)
+			$SFX/Kick.play()
+			body.call("bounce")
+			
+			if body.position.x > position.x:
+				velocity.x = -KICK_SPEED
+				$Control/AnimatedSprite.scale.x = 1
+				
+			else:
+				velocity.x = KICK_SPEED
+				$Control/AnimatedSprite.scale.x = -1
+	else:
+		# Hit player
+		if body.invincible == true:
+			kill()
 		if (state == "active" or state == "kicked") and body.has_method("hurt"):
 			body.hurt()
-			
+		
 		# Kick / Grab Iceblock
 		elif state == "squished":
 			$AnimationPlayer.stop()

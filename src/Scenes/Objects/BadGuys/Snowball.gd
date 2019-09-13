@@ -1,8 +1,5 @@
 extends "BadGuy.gd"
 
-func on_ready():
-	SQUISHED_ANIMATION = "squished"
-
 # Fireball death animation
 func on_fireball_kill():
 	$SFX/Melt.play()

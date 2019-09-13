@@ -1,6 +1,8 @@
 extends "BadGuy.gd"
-
 var hurt_player = true
+
+func on_ready():
+	SQUISHED_ANIMATION = "triggered"
 
 func on_squish(delta):
 	pass

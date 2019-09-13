@@ -116,12 +116,10 @@ func _physics_process(delta):
 		set_animation("idle")
 		$Hitbox.disabled = true
 		$HeadAttack/CollisionShape2D.disabled = true
-		$SquishRadius/CollisionShape2D.disabled = true
 		return
 
 	$Hitbox.disabled = false
 	$HeadAttack/CollisionShape2D.disabled = false
-	$SquishRadius/CollisionShape2D.disabled = false
 
 	if dead == true:
 		if Input.is_action_pressed("pause"):
@@ -137,7 +135,6 @@ func _physics_process(delta):
 		$Control/AnimatedSprite.z_index = 999
 		$Hitbox.disabled = true
 		$HeadAttack/CollisionShape2D.disabled = true
-		$SquishRadius/CollisionShape2D.disabled = true
 		position += velocity * delta
 		velocity.y += GRAVITY
 		return
@@ -225,14 +222,12 @@ func _physics_process(delta):
 				$AnimationPlayer.play("Stop")
 		on_ground = 0
 		jumpcancel = false
-		$SquishRadius/CollisionShape2D.disabled = true
 		if backflip == true:
 			backflip = false
 			velocity.x = 0
 	else:
 		on_ground += 1
 		$ButtjumpLandTimer.stop()
-		$SquishRadius/CollisionShape2D.disabled = false
 
 	# Ceiling bump sound
 	if is_on_ceiling():
@@ -370,11 +365,6 @@ func _physics_process(delta):
 		$GrabLocation.position.y = 1
 	$ShootLocation.position.x = $Control/AnimatedSprite.scale.x * 16
 	$GrabLocation.position.x = $Control/AnimatedSprite.scale.x * 16
-
-	# Buttjump squish hitbox
-	if buttjump == true:
-		$SquishRadius/CollisionShape2D.shape.extents = Vector2(25,1)
-	else: $SquishRadius/CollisionShape2D.shape.extents = Vector2(15.5,1)
 
 	# Shooting
 	if Input.is_action_just_pressed("action") and state == "fire" and get_tree().get_nodes_in_group("bullets").size() < 2:
