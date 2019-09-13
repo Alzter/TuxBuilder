@@ -39,7 +39,10 @@ func on_buttjump_kill():
 
 # Hit player / Squished
 func _on_snowball_body_entered(body):
-	if not body.is_in_group("player"): return
+	if body.is_in_group("badguys") and state == "kicked" and body.name != name:
+		body.kill()
+		return
+	elif not body.is_in_group("player"): return
 	if body.position.y + 20 < position.y and squishable == true:
 		if (state == "active" or state == "kicked"):
 			

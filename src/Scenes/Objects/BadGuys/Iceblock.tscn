@@ -33,10 +33,10 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 16, 15 )
+extents = Vector2( 15, 15 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 16, 10 )
+extents = Vector2( 15, 15 )
 
 [sub_resource type="Animation" id=5]
 resource_name = "active"
@@ -402,7 +402,7 @@ rect_pivot_offset = Vector2( 0, 14 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
 frames = SubResource( 4 )
-frame = 3
+frame = 1
 playing = true
 offset = Vector2( 0, -2 )
 
@@ -417,7 +417,6 @@ physics_process_parent = true
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 0, 5 )
 shape = SubResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
