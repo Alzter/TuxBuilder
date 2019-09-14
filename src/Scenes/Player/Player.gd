@@ -46,7 +46,7 @@ const FIREBALL_SPEED = 500
 
 var velocity = Vector2()
 var on_ground = 999 # Frames Tux has been in air (0 if grounded)
-var jumpheld = 0 # Amount of frames jump has been help
+var jumpheld = 0 # Amount of frames jump has been held
 var jumpcancel = false # Can let go of jump to stop vertical ascent
 var running = 0 # If horizontal speed is higher than walk max
 var skidding = false # Skidding
@@ -453,14 +453,18 @@ func _on_InvincibilityTimer_timeout():
 	$AnimationPlayerInvincibility.play("Stop")
 
 # Bounce off squished enemies
-func bounce():
+func bounce(low, high, cancellable):
+	on_ground = LEDGE_JUMP + 1
 	sliding = false
+	buttjump = false
+	$ButtjumpTimer.stop()
+	$ButtjumpLandTimer.stop()
 	$AnimationPlayer.play("Jump")
 	$Control/AnimatedSprite.play("jump")
 	set_animation("jump")
 	if jumpheld > 0:
-		velocity.y = -JUMP_POWER
-		jumpcancel = true
+		velocity.y = -high
+		jumpcancel = cancellable
 	else:
-		velocity.y = -300
+		velocity.y = -low
 		jumpcancel = false

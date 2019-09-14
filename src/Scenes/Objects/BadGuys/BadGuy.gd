@@ -10,6 +10,7 @@ var rotate = 0
 var squishable = true
 var invincible_time = 0
 
+const WALK_SPEED = 80
 var SQUISHED_ANIMATION = "squished"
 
 
@@ -81,7 +82,7 @@ func kill():
 	$SFX/Fall.play()
 
 func _move(delta):
-	velocity.x = -100 * $Control/AnimatedSprite.scale.x
+	velocity.x = -WALK_SPEED * $Control/AnimatedSprite.scale.x
 	velocity.y += 20
 	velocity = move_and_slide(velocity, FLOOR)
 	if is_on_wall():
@@ -133,7 +134,7 @@ func _on_snowball_body_entered(body):
 			state = "squished"
 			$AnimationPlayer.play(SQUISHED_ANIMATION)
 			$SFX/Squish.play()
-			body.call("bounce")
+			body.bounce(300, body.JUMP_POWER, true)
 			velocity = Vector2(0,0)
 	else:
 		# Hit player
