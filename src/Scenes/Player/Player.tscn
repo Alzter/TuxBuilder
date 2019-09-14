@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=2]
+[gd_scene load_steps=68 format=2]
 
 [ext_resource path="res://Scenes/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Creatures/Tux/Big/Stand.png" type="Texture" id=2]
@@ -49,11 +49,12 @@
 [ext_resource path="res://Audio/SoundEffects/Player/jump.wav" type="AudioStream" id=47]
 [ext_resource path="res://Audio/SoundEffects/Player/bigjump.wav" type="AudioStream" id=48]
 [ext_resource path="res://Audio/SoundEffects/Player/flip.wav" type="AudioStream" id=49]
-[ext_resource path="res://Audio/SoundEffects/Player/brick.wav" type="AudioStream" id=50]
-[ext_resource path="res://Audio/SoundEffects/Player/skid.wav" type="AudioStream" id=51]
-[ext_resource path="res://Audio/SoundEffects/Player/shoot.wav" type="AudioStream" id=52]
-[ext_resource path="res://Audio/SoundEffects/Player/hurt.wav" type="AudioStream" id=53]
-[ext_resource path="res://Audio/SoundEffects/Player/kill.wav" type="AudioStream" id=54]
+[ext_resource path="res://Audio/SoundEffects/Player/thud.ogg" type="AudioStream" id=50]
+[ext_resource path="res://Audio/SoundEffects/Bonus/brick.wav" type="AudioStream" id=51]
+[ext_resource path="res://Audio/SoundEffects/Player/skid.wav" type="AudioStream" id=52]
+[ext_resource path="res://Audio/SoundEffects/Player/shoot.wav" type="AudioStream" id=53]
+[ext_resource path="res://Audio/SoundEffects/Player/hurt.wav" type="AudioStream" id=54]
+[ext_resource path="res://Audio/SoundEffects/Player/kill.wav" type="AudioStream" id=55]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -341,7 +342,6 @@ cast_to = Vector2( 0, -32 )
 collision_mask = 16
 
 [node name="SFX" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="Jump" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 47 )
@@ -352,20 +352,23 @@ stream = ExtResource( 48 )
 [node name="Flip" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 49 )
 
-[node name="Brick" type="AudioStreamPlayer" parent="SFX"]
+[node name="Thud" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 50 )
 
-[node name="Skid" type="AudioStreamPlayer" parent="SFX"]
+[node name="Brick" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 51 )
 
-[node name="Shoot" type="AudioStreamPlayer" parent="SFX"]
+[node name="Skid" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 52 )
 
-[node name="Hurt" type="AudioStreamPlayer" parent="SFX"]
+[node name="Shoot" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 53 )
 
-[node name="Kill" type="AudioStreamPlayer" parent="SFX"]
+[node name="Hurt" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 54 )
+
+[node name="Kill" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 55 )
 
 [node name="InvincibilityTimer" type="Timer" parent="."]
 

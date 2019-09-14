@@ -228,7 +228,7 @@ func _physics_process(delta):
 
 	# Ceiling bump sound
 	if is_on_ceiling():
-		$SFX/Brick.play()
+		$SFX/Thud.play()
 
 	# Running
 	if abs(velocity.x) > WALK_MAX:

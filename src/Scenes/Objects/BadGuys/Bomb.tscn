@@ -16,7 +16,7 @@
 [ext_resource path="res://Audio/SoundEffects/Enemy/beepfast.wav" type="AudioStream" id=14]
 [ext_resource path="res://Audio/SoundEffects/Enemy/explode.wav" type="AudioStream" id=15]
 
-[sub_resource type="SpriteFrames" id=4]
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 3 ) ],
 "loop": true,
@@ -29,7 +29,7 @@ animations = [ {
 "speed": 2.0
 } ]
 
-[sub_resource type="SpriteFrames" id=5]
+[sub_resource type="SpriteFrames" id=2]
 animations = [ {
 "frames": [ ExtResource( 6 ) ],
 "loop": true,
@@ -37,7 +37,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="SpriteFrames" id=6]
+[sub_resource type="SpriteFrames" id=3]
 animations = [ {
 "frames": [ ExtResource( 7 ) ],
 "loop": true,
@@ -45,17 +45,17 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="Gradient" id=7]
+[sub_resource type="Gradient" id=4]
 offsets = PoolRealArray( 0, 0.470588, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 15, 15 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 0, 0 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 15, 15 )
 
 [sub_resource type="Animation" id=8]
@@ -189,7 +189,7 @@ tracks/10/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ SubResource( 2 ) ]
+"values": [ SubResource( 6 ) ]
 }
 
 [sub_resource type="CircleShape2D" id=9]
@@ -453,18 +453,19 @@ rect_pivot_offset = Vector2( 0, 14 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
 position = Vector2( 0, 6.31594e-013 )
-frames = SubResource( 4 )
+frames = SubResource( 1 )
+frame = 1
 playing = true
 offset = Vector2( 0, -2 )
 
 [node name="RedGlow" type="AnimatedSprite" parent="Control/AnimatedSprite"]
 visible = false
-frames = SubResource( 5 )
+frames = SubResource( 2 )
 offset = Vector2( 0, -2 )
 
 [node name="WhiteFlash" type="AnimatedSprite" parent="Control/AnimatedSprite"]
 visible = false
-frames = SubResource( 6 )
+frames = SubResource( 3 )
 offset = Vector2( 0, -2 )
 
 [node name="Sparks" type="CPUParticles2D" parent="Control/AnimatedSprite"]
@@ -484,15 +485,15 @@ angle = 360.0
 angle_random = 1.0
 scale_amount = 0.25
 scale_amount_random = 1.0
-color_ramp = SubResource( 7 )
+color_ramp = SubResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( 5 )
 
 [node name="ExplosionRadius" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionRadius"]
-shape = SubResource( 2 )
+shape = SubResource( 6 )
 disabled = true
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
@@ -503,7 +504,7 @@ physics_process_parent = true
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 3 )
+shape = SubResource( 7 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "active"
@@ -528,9 +529,11 @@ volume_db = -20.0
 
 [node name="Beep" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 13 )
+volume_db = -5.0
 
 [node name="Beepfast" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 14 )
+volume_db = -5.0
 
 [node name="Explode" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 15 )

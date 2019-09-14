@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/brick.wav-03f9a793f063655afaf53a5da8b86912.sample"
+path="res://.import/brick.wav-473d4e693c9956d26914b7ad98289275.sample"
 
 [deps]
 
-source_file="res://Audio/SoundEffects/Player/brick.wav"
-dest_files=[ "res://.import/brick.wav-03f9a793f063655afaf53a5da8b86912.sample" ]
+source_file="res://Audio/SoundEffects/Bonus/brick.wav"
+dest_files=[ "res://.import/brick.wav-473d4e693c9956d26914b7ad98289275.sample" ]
 
 [params]
 

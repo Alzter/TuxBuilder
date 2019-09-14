@@ -57,10 +57,13 @@ func hit(hitdirection, hitdown):
 				childstored.position.y += 32
 			else: childstored.position.y -= 32
 			
+		else: $Brick.play()
 		get_tree().current_scene.get_node("Level").add_child(childstored)
 		if childstored.has_method("appear"):
 			childstored.appear(hitdirection,hitdown)
-	else: on_empty_hit()
+	else:
+		$Brick.play()
+		on_empty_hit()
 
 # Kill enemies on top of block
 func _on_TopHitbox_area_entered(area):

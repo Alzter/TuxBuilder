@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Scenes/Objects/Bonus/Brick.gd" type="Script" id=1]
-[ext_resource path="res://Audio/SoundEffects/Player/brick.wav" type="AudioStream" id=2]
+[ext_resource path="res://Audio/SoundEffects/Bonus/brick.wav" type="AudioStream" id=2]
 [ext_resource path="res://Audio/SoundEffects/Bonus/upgrade.wav" type="AudioStream" id=3]
 [ext_resource path="res://Sprites/Objects/BonusBlock/empty.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/Objects/Brick/brick.png" type="Texture" id=5]
