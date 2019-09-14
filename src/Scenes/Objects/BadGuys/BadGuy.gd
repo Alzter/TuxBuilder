@@ -14,7 +14,6 @@ var SQUISHED_ANIMATION = "squished"
 
 
 # These methods are here to be overridden in the badguy sub-classes
-
 func on_ready():
 	pass
 
