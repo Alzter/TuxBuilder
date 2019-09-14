@@ -36,9 +36,10 @@ func _on_Area2D_body_entered(body):
 
 # Hit the block
 func hit(hitdirection, hitdown):
+	if hit == true: return
+	
 	hitdirectionstored = hitdirection
 	hitdownstored = hitdown
-	
 	hit = true
 	
 	# Spawn contents

@@ -374,7 +374,7 @@ func _physics_process(delta):
 		
 		# Change the buttjump hitbox's size so it always collides before Tux hits the ground
 		if velocity.y > 0:
-			$ButtjumpHitbox/CollisionShape2D.shape.extents = Vector2(25,(velocity.y * delta))
+			$ButtjumpHitbox/CollisionShape2D.shape.extents = Vector2(25,16 + (velocity.y * delta))
 			$ButtjumpHitbox/CollisionShape2D.position.y = (velocity.y * delta)
 		else:
 			$ButtjumpHitbox/CollisionShape2D.shape.extents = Vector2(25,16)

@@ -525,7 +525,7 @@ animations = [ {
 
 [node name="Brick" type="KinematicBody2D" groups=[
 "stackable",
-"bonusblock",
+"brick",
 ]]
 z_index = -1
 collision_layer = 31
