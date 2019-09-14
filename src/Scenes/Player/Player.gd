@@ -251,7 +251,8 @@ func _physics_process(delta):
 				sliding = true
 				$SFX/Skid.play()
 				velocity.x += WALK_ADD * $Control/AnimatedSprite.scale.x
-	else: ducking = false
+	elif $StandWindow.is_colliding() == true and sliding == false and state != "small": ducking = true
+	else: ducking == false
 
 	# Sliding
 	if sliding == true:
