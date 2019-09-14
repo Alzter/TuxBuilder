@@ -172,9 +172,7 @@ func camera_to_level_bounds():
 	$Camera2D.limit_right = level_bound_right
 	if $Camera2D.limit_right < get_viewport().size.x: # If the tilemap is thinner than the window, align the camera to the left
 		$Camera2D.limit_right = get_viewport().size.x
-	$Camera2D.limit_top = level_bound_top
-	if $Camera2D.limit_top > get_viewport().size.y * -1: # If the tilemap is shorter than the window, align the camera to the bottom
-		$Camera2D.limit_top = get_viewport().size.y * -1
+	$Camera2D.limit_top = level_bound_top - get_viewport().size.y * 0.5
 	$Camera2D.limit_bottom = level_bound_bottom
 
 func play_music(music):
