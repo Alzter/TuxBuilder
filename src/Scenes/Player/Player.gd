@@ -276,7 +276,7 @@ func _physics_process(delta):
 				backflip_rotation = 0
 				velocity.y = -RUNJUMP_POWER
 				$SFX/Flip.play()
-			elif abs(velocity.x) >= RUN_MAX:
+			elif abs(velocity.x) >= RUN_MAX or $ButtjumpLandTimer.time_left > 0:
 				velocity.y = -RUNJUMP_POWER
 			else:
 				velocity.y = -JUMP_POWER
@@ -313,7 +313,7 @@ func _physics_process(delta):
 			backflip_rotation += 15
 		$Control/AnimatedSprite.rotation_degrees = backflip_rotation
 
-	# Buttjump Hitbox
+	# Buttjump
 	if on_ground != 0 and Input.is_action_just_pressed("duck") and state != "small" and backflip == false and buttjump == false:
 		buttjump = true
 		$AnimationPlayer.stop()
@@ -355,7 +355,7 @@ func _physics_process(delta):
 			else: set_animation("fall")
 
 	# Duck Hitboxes
-	if ducking == true or sliding == true or state == "small":
+	if ducking == true or sliding == true or state == "small" or buttjump == true:
 		$Hitbox.shape.extents.y = 15
 		$Hitbox.position.y = 17
 		$ShootLocation.position.y = 17
@@ -369,9 +369,16 @@ func _physics_process(delta):
 	$GrabLocation.position.x = $Control/AnimatedSprite.scale.x * 16
 
 	# Buttjump hitboxes
-	if buttjump == true:
-		$ButtjumpHitbox/CollisionShape2D.shape.extents = Vector2(25,16)
+	if buttjump == true and $ButtjumpTimer.time_left == 0:
 		$ButtjumpHitbox/CollisionShape2D.disabled = false
+		
+		# Change the buttjump hitbox's size so it always collides before Tux hits the ground
+		if velocity.y > 0:
+			$ButtjumpHitbox/CollisionShape2D.shape.extents = Vector2(25,(velocity.y * delta))
+			$ButtjumpHitbox/CollisionShape2D.position.y = (velocity.y * delta)
+		else:
+			$ButtjumpHitbox/CollisionShape2D.shape.extents = Vector2(25,16)
+			$ButtjumpHitbox/CollisionShape2D.position.y = 0
 	else:
 		$ButtjumpHitbox/CollisionShape2D.shape.extents = Vector2(0,0)
 		$ButtjumpHitbox/CollisionShape2D.disabled = true

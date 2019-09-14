@@ -6,6 +6,7 @@ var stored = "" # Whatever is inside the bonus block
 var childstored = null
 var hitdirectionstored = 0
 var hitdownstored = false
+var player = null
 
 # To be overridden by sub-classes
 func on_empty_hit():
@@ -22,6 +23,7 @@ func _ready():
 
 func _on_Area2D_body_entered(body):
 	if body.is_in_group("player"):
+		player = body
 		if body.position.y > position.y:
 			if body.position.x > self.position.x:
 				hit(-1,false)

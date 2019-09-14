@@ -7,8 +7,8 @@
 [ext_resource path="res://Scenes/Editor/Layers/TileMap.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/Objects/Bonus/Brick.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Objects/Bonus/Brick.gd" type="Script" id=7]
-[ext_resource path="res://Scenes/Objects/BadGuys/Snowball.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/Objects/BadGuys/Snowball.gd" type="Script" id=9]
+[ext_resource path="res://Scenes/Objects/Bonus/1Up.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Objects/Bonus/1Up.gd" type="Script" id=9]
 
 [node name="Level" type="Node2D"]
 
@@ -70,83 +70,18 @@ moving = false
 filepath = ""
 original_name = ""
 
-[node name="Brick" type="KinematicBody2D" parent="." groups=[
-"bonusblock",
+[node name="@Brick@50" type="KinematicBody2D" parent="." groups=[
 "stackable",
+"bonusblock",
 ] instance=ExtResource( 6 )]
-position = Vector2( 176, 176 )
+position = Vector2( 176, -144 )
 z_index = -1
 collision_layer = 31
 collision_mask = 31
 script = ExtResource( 7 )
 
-[node name="@Brick@28" type="KinematicBody2D" parent="." groups=[
-"bonusblock",
-"stackable",
-] instance=ExtResource( 6 )]
-position = Vector2( 208, 176 )
-z_index = -1
-collision_layer = 31
-collision_mask = 31
-script = ExtResource( 7 )
-
-[node name="@Brick@30" type="KinematicBody2D" parent="." groups=[
-"bonusblock",
-"stackable",
-] instance=ExtResource( 6 )]
-position = Vector2( 240, 176 )
-z_index = -1
-collision_layer = 31
-collision_mask = 31
-script = ExtResource( 7 )
-
-[node name="@Brick@32" type="KinematicBody2D" parent="." groups=[
-"bonusblock",
-"stackable",
-] instance=ExtResource( 6 )]
-position = Vector2( 272, 176 )
-z_index = -1
-collision_layer = 31
-collision_mask = 31
-script = ExtResource( 7 )
-
-[node name="@Brick@34" type="KinematicBody2D" parent="." groups=[
-"bonusblock",
-"stackable",
-] instance=ExtResource( 6 )]
-position = Vector2( 304, 176 )
-z_index = -1
-collision_layer = 31
-collision_mask = 31
-script = ExtResource( 7 )
-
-[node name="@Brick@36" type="KinematicBody2D" parent="." groups=[
-"bonusblock",
-"stackable",
-] instance=ExtResource( 6 )]
-position = Vector2( 336, 176 )
-z_index = -1
-collision_layer = 31
-collision_mask = 31
-script = ExtResource( 7 )
-
-[node name="@Brick@38" type="KinematicBody2D" parent="." groups=[
-"bonusblock",
-"stackable",
-] instance=ExtResource( 6 )]
-position = Vector2( 368, 176 )
-z_index = -1
-collision_layer = 31
-collision_mask = 31
-script = ExtResource( 7 )
-
-[node name="Snowball" type="KinematicBody2D" parent="." groups=[
-"badguys",
-] instance=ExtResource( 8 )]
-position = Vector2( 368, 144 )
-collision_layer = 2
-collision_mask = 2
+[node name="1Up" type="Area2D" parent="." instance=ExtResource( 8 )]
+position = Vector2( 176, -144 )
+collision_layer = 0
 script = ExtResource( 9 )
-__meta__ = {
-"_edit_group_": true
-}
+[connection signal="body_entered" from="1Up" to="1Up" method="_on_1Up_body_entered"]
