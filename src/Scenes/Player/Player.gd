@@ -285,7 +285,8 @@ func _physics_process(delta):
 			else: $SFX/BigJump.play()
 			on_ground = LEDGE_JUMP + 1
 			$AnimationPlayer.playback_speed = 1
-			$AnimationPlayer.play("Jump")
+			$AnimationPlayer.stop()
+			$AnimationPlayer.play("Stop")
 			set_animation("jump")
 			jumpheld = JUMP_BUFFER_TIME + 1
 			jumpcancel = true
@@ -456,10 +457,11 @@ func _on_InvincibilityTimer_timeout():
 func bounce(low, high, cancellable):
 	on_ground = LEDGE_JUMP + 1
 	sliding = false
+	backflip = false
 	buttjump = false
 	$ButtjumpTimer.stop()
 	$ButtjumpLandTimer.stop()
-	$AnimationPlayer.play("Jump")
+	$AnimationPlayer.play("Stop")
 	$Control/AnimatedSprite.play("jump")
 	set_animation("jump")
 	if jumpheld > 0:

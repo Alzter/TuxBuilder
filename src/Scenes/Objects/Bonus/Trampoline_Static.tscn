@@ -1,44 +1,65 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scenes/Objects/Bonus/Trampoline_Static.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/Objects/Trampoline/trampoline_static-0.png" type="Texture" id=2]
-[ext_resource path="res://Audio/SoundEffects/Objects/trampoline.wav" type="AudioStream" id=3]
+[ext_resource path="res://Sprites/Objects/Trampoline/trampoline_static-1.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Objects/Trampoline/trampoline_static-2.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Objects/Trampoline/trampoline_static-3.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Objects/Trampoline/trampoline_static-4.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Objects/Trampoline/trampoline_static-5.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Objects/Trampoline/trampoline_static-0.png" type="Texture" id=7]
+[ext_resource path="res://Audio/SoundEffects/Objects/trampoline.wav" type="AudioStream" id=8]
+[ext_resource path="res://Audio/SoundEffects/Player/thud.ogg" type="AudioStream" id=9]
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 2 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
+"loop": false,
+"name": "bounce",
+"speed": 25.0
+}, {
+"frames": [ ExtResource( 7 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 6 ), ExtResource( 7 ) ],
+"loop": false,
+"name": "land",
+"speed": 25.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 16, 14 )
+extents = Vector2( 15.5, 14 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 16, 20 )
+extents = Vector2( 15.5, 22 )
 
-[node name="KinematicBody2D" type="KinematicBody2D"]
+[node name="KinematicBody2D" type="KinematicBody2D" groups=[
+"trampoline",
+]]
 collision_layer = 31
 collision_mask = 31
 script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
+offset = Vector2( 0, -6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 2 )
 shape = SubResource( 1 )
 
 [node name="Area2D" type="Area2D" parent="."]
-editor/display_folded = true
 collision_layer = 31
 collision_mask = 31
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 0, -4 )
+position = Vector2( 0, -2 )
 shape = SubResource( 3 )
 
 [node name="Trampoline" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 3 )
+stream = ExtResource( 8 )
+
+[node name="Thud" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

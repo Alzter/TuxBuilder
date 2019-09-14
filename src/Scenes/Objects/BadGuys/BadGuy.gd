@@ -9,10 +9,10 @@ var direction = 1
 var rotate = 0
 var squishable = true
 var invincible_time = 0
+var areastored = null
 
 const WALK_SPEED = 80
 var SQUISHED_ANIMATION = "squished"
-
 
 # These methods are here to be overridden in the badguy sub-classes
 func on_ready():
@@ -108,11 +108,8 @@ func _kill(delta):
 func _on_snowball_area_entered(area):
 	if area.get_parent().is_in_group("player"):
 		if area.get_parent().buttjump == true:
-			disable()
-			state = ""
 			area.get_parent().velocity.y *= 0.9
-			on_buttjump_kill()
-			return
+			buttjump_kill()
 
 # Hit player / Squished
 func _on_snowball_body_entered(body):
@@ -125,11 +122,8 @@ func _on_snowball_body_entered(body):
 				kill()
 				return
 			if body.buttjump == true:
-				disable()
-				state = ""
 				body.velocity.y *= 0.9
-				on_buttjump_kill()
-				return
+				buttjump_kill()
 			disable()
 			state = "squished"
 			$AnimationPlayer.play(SQUISHED_ANIMATION)
@@ -160,3 +154,10 @@ func fireball_kill():
 	disable()
 	state = ""
 	on_fireball_kill()
+
+# Buttjump death animation
+func buttjump_kill():
+	disable()
+	state = ""
+	on_buttjump_kill()
+	return

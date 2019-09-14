@@ -29,7 +29,6 @@ margin_bottom = 32.0
 [node name="Sprite" type="Sprite" parent="Control"]
 position = Vector2( 16, 16 )
 scale = Vector2( 0.25, 0.25 )
-region_enabled = true
 region_rect = Rect2( 0, 0, 128, 128 )
 
 [node name="Button" type="Button" parent="Control"]

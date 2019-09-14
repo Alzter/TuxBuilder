@@ -444,7 +444,6 @@ __meta__ = {
 }
 
 [node name="Control" type="Control" parent="."]
-editor/display_folded = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -454,7 +453,7 @@ rect_pivot_offset = Vector2( 0, 14 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
 position = Vector2( 0, 6.31594e-013 )
 frames = SubResource( 1 )
-frame = 1
+frame = 2
 playing = true
 offset = Vector2( 0, -2 )
 

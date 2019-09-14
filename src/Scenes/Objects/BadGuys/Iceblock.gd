@@ -51,11 +51,8 @@ func _on_snowball_body_entered(body):
 				kill()
 				return
 			if body.buttjump == true:
-				disable()
-				state = ""
 				body.velocity.y *= 0.9
-				on_buttjump_kill()
-				return
+				buttjump_kill()
 			state = "squished"
 			$AnimationPlayer.play(SQUISHED_ANIMATION)
 			$SFX/Squish.play()
@@ -68,11 +65,8 @@ func _on_snowball_body_entered(body):
 				kill()
 				return
 			if body.buttjump == true:
-				disable()
-				state = ""
 				body.velocity.y *= 0.9
-				on_buttjump_kill()
-				return
+				buttjump_kill()
 			state = "kicked"
 			$AnimationPlayer.play(SQUISHED_ANIMATION)
 			$SFX/Kick.play()

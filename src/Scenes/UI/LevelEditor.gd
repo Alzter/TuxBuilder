@@ -40,7 +40,6 @@ func _process(_delta):
 		$SelectedArea.visible = false
 		$EraserSprite.visible = false
 		$SelectedTile.visible = false
-		$SelectedTile.offset = Vector2(0,0)
 		return
 	
 	# General positioning stuff
@@ -244,7 +243,6 @@ func update_selected_tile():
 	$SelectedArea.visible = false
 	$EraserSprite.visible = false
 	$SelectedTile.visible = false
-	$SelectedTile.offset = Vector2(0,0)
 	$SelectedTile.scale = Vector2(1,1)
 	$SelectedTile.region_enabled = false
 	player_hovered = false
@@ -260,7 +258,6 @@ func update_selected_tile():
 	
 	$SelectedTile.position.x = (tile_selected.x + 0.5) * 32
 	$SelectedTile.position.y = (tile_selected.y + 0.5) * 32
-	$SelectedTile.offset = Vector2(0,0)
 	
 	if ($SelectedTile.position == Vector2(get_tree().current_scene.get_node("Player").position.x,get_tree().current_scene.get_node("Player").position.y - 16) and get_tree().current_scene.get_node("Player").state != "small") or $SelectedTile.position == Vector2(get_tree().current_scene.get_node("Player").position.x,get_tree().current_scene.get_node("Player").position.y + 16) and dragging_object == false:
 		player_hovered = true
@@ -299,6 +296,7 @@ func update_selected_tile():
 		$SelectedTile.scale = Vector2(0.25,0.25)
 		$SelectedTile.region_enabled = false
 		$SelectedTile.modulate = Color(1,1,1,1)
+		$SelectedTile.offset = Vector2(0,0)
 		$EraserSprite.position = $SelectedTile.position
 		old_object_type = ""
 	
@@ -315,6 +313,7 @@ func update_selected_tile():
 			$SelectedTile.region_rect.position = $TileMap.get_tileset().autotile_get_icon_coordinate(tile_type) * 32
 			$SelectedTile.region_enabled = true
 			old_object_type = ""
+			$SelectedTile.offset = Vector2(0,0)
 
 		else:
 			# Object Selection
@@ -388,12 +387,14 @@ func get_object_texture(object_location): # Get the texture for an object
 	
 	$SelectedTile.scale = Vector2(1,1)
 	$SelectedTile.region_enabled = false
+	$SelectedTile.offset = Vector2(0,0)
 	
 	# If the object has an animated sprite, set the thumbnail to that
 	if load(object_location).instance().has_node("Control/AnimatedSprite"):
 		var selected_texture = load(object_location).instance().get_node("Control/AnimatedSprite").get_sprite_frames().get_frame("default",0)
 		$SelectedTile.scale = load(object_location).instance().get_node("Control").rect_scale
 		$SelectedTile.offset += load(object_location).instance().get_node("Control/AnimatedSprite").offset
+		$SelectedTile.offset += load(object_location).instance().get_node("Control/AnimatedSprite").position
 		$SelectedTile.texture = (selected_texture)
 	
 	# If the object has an animated sprite, set the thumbnail to that
@@ -401,6 +402,7 @@ func get_object_texture(object_location): # Get the texture for an object
 		var selected_texture = load(object_location).instance().get_node("AnimatedSprite").get_sprite_frames().get_frame("default",0)
 		$SelectedTile.scale = load(object_location).instance().get_node("AnimatedSprite").scale
 		$SelectedTile.offset += load(object_location).instance().get_node("AnimatedSprite").offset
+		$SelectedTile.offset += load(object_location).instance().get_node("AnimatedSprite").position
 		$SelectedTile.texture = (selected_texture)
 	
 	# Otherwise if it has a sprite, set the thumbnail to that
@@ -408,6 +410,7 @@ func get_object_texture(object_location): # Get the texture for an object
 		var selected_texture = load(object_location).instance().get_node("Sprite").texture
 		$SelectedTile.scale = load(object_location).instance().get_node("Sprite").scale
 		$SelectedTile.offset += load(object_location).instance().get_node("Sprite").offset
+		$SelectedTile.offset += load(object_location).instance().get_node("Sprite").position
 		$SelectedTile.texture = (selected_texture)
 
 # Add all the layers from Scenes/Editor/Layers

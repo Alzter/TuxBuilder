@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/Objects/Misc/SpawnPoint.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Objects/Misc/SpawnPoint.gd" type="Script" id=2]
@@ -7,14 +7,12 @@
 [ext_resource path="res://Scenes/Editor/Layers/TileMap.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/Objects/Bonus/Trampoline_Static.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Objects/Bonus/Trampoline_Static.gd" type="Script" id=7]
-[ext_resource path="res://Scenes/Objects/Bonus/Brick.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/Objects/Bonus/Brick.gd" type="Script" id=9]
 
 [node name="Level" type="Node2D"]
 
 [node name="SpawnPoint" type="Position2D" parent="." groups=[
-"oneonly",
 "spawnpoint",
+"oneonly",
 ] instance=ExtResource( 1 )]
 position = Vector2( 16, 16 )
 script = ExtResource( 2 )
@@ -70,164 +68,106 @@ moving = false
 filepath = ""
 original_name = ""
 
-[node name="Trampoline_Static" type="KinematicBody2D" parent="." instance=ExtResource( 6 )]
-position = Vector2( 16, 240 )
+[node name="Trampoline_Static" type="KinematicBody2D" parent="." groups=[
+"trampoline",
+] instance=ExtResource( 6 )]
+position = Vector2( 208, -16 )
 collision_layer = 31
 collision_mask = 31
 script = ExtResource( 7 )
 
-[node name="Brick" type="KinematicBody2D" parent="." groups=[
-"stackable",
-"brick",
-] instance=ExtResource( 8 )]
-position = Vector2( 48, 208 )
-z_index = -1
-collision_layer = 31
-collision_mask = 31
-script = ExtResource( 9 )
-
-[node name="@Brick@29" type="KinematicBody2D" parent="." groups=[
-"stackable",
-"brick",
-] instance=ExtResource( 8 )]
-position = Vector2( 48, 176 )
-z_index = -1
-collision_layer = 31
-collision_mask = 31
-script = ExtResource( 9 )
-
-[node name="@Brick@31" type="KinematicBody2D" parent="." groups=[
-"stackable",
-"brick",
-] instance=ExtResource( 8 )]
-position = Vector2( 48, 144 )
-z_index = -1
-collision_layer = 31
-collision_mask = 31
-script = ExtResource( 9 )
-
-[node name="@Brick@33" type="KinematicBody2D" parent="." groups=[
-"stackable",
-"brick",
-] instance=ExtResource( 8 )]
-position = Vector2( 48, 112 )
-z_index = -1
-collision_layer = 31
-collision_mask = 31
-script = ExtResource( 9 )
-
-[node name="@Brick@35" type="KinematicBody2D" parent="." groups=[
-"stackable",
-"brick",
-] instance=ExtResource( 8 )]
-position = Vector2( 48, 80 )
-z_index = -1
-collision_layer = 31
-collision_mask = 31
-script = ExtResource( 9 )
-
-[node name="@Brick@37" type="KinematicBody2D" parent="." groups=[
-"stackable",
-"brick",
-] instance=ExtResource( 8 )]
-position = Vector2( 48, 48 )
-z_index = -1
-collision_layer = 31
-collision_mask = 31
-script = ExtResource( 9 )
-
-[node name="@Brick@39" type="KinematicBody2D" parent="." groups=[
-"stackable",
-"brick",
-] instance=ExtResource( 8 )]
-position = Vector2( 48, 16 )
-z_index = -1
-collision_layer = 31
-collision_mask = 31
-script = ExtResource( 9 )
-
-[node name="@Brick@41" type="KinematicBody2D" parent="." groups=[
-"stackable",
-"brick",
-] instance=ExtResource( 8 )]
-position = Vector2( 48, -16 )
-z_index = -1
-collision_layer = 31
-collision_mask = 31
-script = ExtResource( 9 )
-
-[node name="@Brick@43" type="KinematicBody2D" parent="." groups=[
-"stackable",
-"brick",
-] instance=ExtResource( 8 )]
-position = Vector2( 48, -48 )
-z_index = -1
-collision_layer = 31
-collision_mask = 31
-script = ExtResource( 9 )
-
-[node name="@Brick@45" type="KinematicBody2D" parent="." groups=[
-"stackable",
-"brick",
-] instance=ExtResource( 8 )]
-position = Vector2( 48, -80 )
-z_index = -1
-collision_layer = 31
-collision_mask = 31
-script = ExtResource( 9 )
-
-[node name="@Brick@47" type="KinematicBody2D" parent="." groups=[
-"stackable",
-"brick",
-] instance=ExtResource( 8 )]
-position = Vector2( 48, -112 )
-z_index = -1
-collision_layer = 31
-collision_mask = 31
-script = ExtResource( 9 )
-
-[node name="@Brick@49" type="KinematicBody2D" parent="." groups=[
-"stackable",
-"brick",
-] instance=ExtResource( 8 )]
-position = Vector2( 48, -144 )
-z_index = -1
-collision_layer = 31
-collision_mask = 31
-script = ExtResource( 9 )
-
-[node name="@Trampoline_Static@50" type="KinematicBody2D" parent="." instance=ExtResource( 6 )]
-position = Vector2( 176, 240 )
+[node name="@Trampoline_Static@121" type="KinematicBody2D" parent="." groups=[
+"trampoline",
+] instance=ExtResource( 6 )]
+position = Vector2( 240, -16 )
 collision_layer = 31
 collision_mask = 31
 script = ExtResource( 7 )
 
-[node name="@Brick@52" type="KinematicBody2D" parent="." groups=[
-"stackable",
-"brick",
-] instance=ExtResource( 8 )]
-position = Vector2( 208, 208 )
-z_index = -1
+[node name="@Trampoline_Static@122" type="KinematicBody2D" parent="." groups=[
+"trampoline",
+] instance=ExtResource( 6 )]
+position = Vector2( 272, -16 )
 collision_layer = 31
 collision_mask = 31
-script = ExtResource( 9 )
+script = ExtResource( 7 )
 
-[node name="@Brick@54" type="KinematicBody2D" parent="." groups=[
-"stackable",
-"brick",
-] instance=ExtResource( 8 )]
-position = Vector2( 208, 176 )
-z_index = -1
+[node name="@Trampoline_Static@123" type="KinematicBody2D" parent="." groups=[
+"trampoline",
+] instance=ExtResource( 6 )]
+position = Vector2( 304, -16 )
 collision_layer = 31
 collision_mask = 31
-script = ExtResource( 9 )
+script = ExtResource( 7 )
 
-[node name="@Brick@56" type="KinematicBody2D" parent="." groups=[
-"stackable",
-"brick",
-] instance=ExtResource( 8 )]
-position = Vector2( 208, 144 )
-z_index = -1
+[node name="@Trampoline_Static@124" type="KinematicBody2D" parent="." groups=[
+"trampoline",
+] instance=ExtResource( 6 )]
+position = Vector2( 336, -16 )
 collision_layer = 31
 collision_mask = 31
-script = ExtResource( 9 )
+script = ExtResource( 7 )
+
+[node name="@Trampoline_Static@125" type="KinematicBody2D" parent="." groups=[
+"trampoline",
+] instance=ExtResource( 6 )]
+position = Vector2( 368, -16 )
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 7 )
+
+[node name="@Trampoline_Static@126" type="KinematicBody2D" parent="." groups=[
+"trampoline",
+] instance=ExtResource( 6 )]
+position = Vector2( 400, -16 )
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 7 )
+
+[node name="@Trampoline_Static@127" type="KinematicBody2D" parent="." groups=[
+"trampoline",
+] instance=ExtResource( 6 )]
+position = Vector2( 432, -16 )
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 7 )
+
+[node name="@Trampoline_Static@128" type="KinematicBody2D" parent="." groups=[
+"trampoline",
+] instance=ExtResource( 6 )]
+position = Vector2( 464, -16 )
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 7 )
+
+[node name="@Trampoline_Static@129" type="KinematicBody2D" parent="." groups=[
+"trampoline",
+] instance=ExtResource( 6 )]
+position = Vector2( 496, -16 )
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 7 )
+
+[node name="@Trampoline_Static@130" type="KinematicBody2D" parent="." groups=[
+"trampoline",
+] instance=ExtResource( 6 )]
+position = Vector2( 528, -16 )
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 7 )
+
+[node name="@Trampoline_Static@131" type="KinematicBody2D" parent="." groups=[
+"trampoline",
+] instance=ExtResource( 6 )]
+position = Vector2( 560, -16 )
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 7 )
+
+[node name="@Trampoline_Static@132" type="KinematicBody2D" parent="." groups=[
+"trampoline",
+] instance=ExtResource( 6 )]
+position = Vector2( 592, -16 )
+collision_layer = 31
+collision_mask = 31
+script = ExtResource( 7 )
