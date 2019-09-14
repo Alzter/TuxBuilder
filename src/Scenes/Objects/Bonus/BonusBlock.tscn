@@ -71,7 +71,7 @@ tracks/4/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 15, 10 )
+extents = Vector2( 8, 10 )
 
 [sub_resource type="Animation" id=4]
 tracks/0/type = "value"
@@ -147,7 +147,7 @@ tracks/5/keys = {
 "values": [ Vector2( 0, -26 ) ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=5]
 resource_name = "hitdown"
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:position")
@@ -222,7 +222,7 @@ tracks/5/keys = {
 "values": [ Vector2( 0, 26 ) ]
 }
 
-[sub_resource type="SpriteFrames" id=5]
+[sub_resource type="SpriteFrames" id=6]
 animations = [ {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
@@ -238,7 +238,7 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 16, 16 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 12, 17 )
 
 [node name="BonusBlock" type="KinematicBody2D" groups=[
@@ -260,10 +260,10 @@ stream = ExtResource( 2 )
 autoplay = "default"
 anims/default = SubResource( 2 )
 anims/hit = SubResource( 4 )
-anims/hitdown = SubResource( 8 )
+anims/hitdown = SubResource( 5 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-frames = SubResource( 5 )
+frames = SubResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 7 )
@@ -271,7 +271,7 @@ shape = SubResource( 7 )
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 6 )
+shape = SubResource( 8 )
 
 [node name="TopHitbox" type="Area2D" parent="."]
 collision_layer = 0
