@@ -82,7 +82,11 @@ func kill():
 	$SFX/Fall.play()
 
 func _move(delta):
-	velocity.x = -WALK_SPEED * $Control/AnimatedSprite.scale.x
+	if velocity.x != 0:
+		if (velocity.x / abs(velocity.x)) == $Control/AnimatedSprite.scale.x:
+			$Control/AnimatedSprite.scale.x *= -1
+	if abs(velocity.x) <= WALK_SPEED: velocity.x = -WALK_SPEED * $Control/AnimatedSprite.scale.x
+	elif is_on_floor(): velocity.x *= 0.95
 	velocity.y += 20
 	velocity = move_and_slide(velocity, FLOOR)
 	if is_on_wall():
