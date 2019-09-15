@@ -191,13 +191,14 @@ func _physics_process(delta):
 		velocity.x = 0
 
 	# Gravity
-	if buttjump == false or velocity.y <= 0:
+	if $ButtjumpTimer.time_left > 0:
+		velocity *= 0.5
+	elif buttjump == false or velocity.y <= 0:
 		velocity.y += GRAVITY
 		if velocity.y > FALL_SPEED: velocity.y = FALL_SPEED
-	elif $ButtjumpTimer.time_left == 0:
+	else:
 		velocity.y += BUTTJUMP_GRAVITY
 		if velocity.y > BUTTJUMP_FALL_SPEED: velocity.y = BUTTJUMP_FALL_SPEED
-	else: velocity *= 0.4
 
 	velocity = move_and_slide(velocity, FLOOR, 30)
 
@@ -367,7 +368,7 @@ func _physics_process(delta):
 		$Hitbox.position.y = 1
 		$ShootLocation.position.y = 1
 		$GrabLocation.position.y = 1
-	$ShootLocation.position.x = $Control/AnimatedSprite.scale.x * 16
+	$ShootLocation.position.x = $Control/AnimatedSprite.scale.x * 8
 	$GrabLocation.position.x = $Control/AnimatedSprite.scale.x * 16
 
 	# Buttjump hitboxes

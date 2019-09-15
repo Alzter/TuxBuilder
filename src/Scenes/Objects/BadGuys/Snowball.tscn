@@ -16,7 +16,7 @@
 [ext_resource path="res://Sprites/Creatures/Snowball/particle.png" type="Texture" id=14]
 [ext_resource path="res://Sprites/Creatures/Snowball/droplet.png" type="Texture" id=15]
 
-[sub_resource type="SpriteFrames" id=4]
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
 "loop": true,
@@ -29,13 +29,13 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 15, 15 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 15, 15 )
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 resource_name = "active"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Control/AnimatedSprite:animation")
@@ -98,7 +98,7 @@ tracks/4/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 resource_name = "explode"
 length = 2.0
 tracks/0/type = "value"
@@ -152,7 +152,7 @@ tracks/3/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=6]
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Control/AnimatedSprite:animation")
@@ -217,11 +217,11 @@ tracks/4/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Gradient" id=8]
+[sub_resource type="Gradient" id=7]
 offsets = PoolRealArray( 0, 0.762821, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0.443137, 0, 1, 0.882813, 0 )
 
-[sub_resource type="Gradient" id=9]
+[sub_resource type="Gradient" id=8]
 offsets = PoolRealArray( 0, 0.467949, 1 )
 colors = PoolColorArray( 1, 1, 1, 0.847059, 0.625, 0.936279, 1, 0.556863, 0, 0.478516, 1, 0 )
 
@@ -245,13 +245,13 @@ rect_pivot_offset = Vector2( 0, 14 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
 position = Vector2( 0, 6.31594e-013 )
-frames = SubResource( 4 )
+frames = SubResource( 1 )
 frame = 6
 playing = true
 offset = Vector2( 0, -2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 rect = Rect2( -64, -512, 128, 1024 )
@@ -265,9 +265,9 @@ shape = SubResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "active"
-anims/active = SubResource( 5 )
-anims/explode = SubResource( 6 )
-anims/squished = SubResource( 7 )
+anims/active = SubResource( 4 )
+anims/explode = SubResource( 5 )
+anims/squished = SubResource( 6 )
 
 [node name="SFX" type="Node" parent="."]
 editor/display_folded = true
@@ -302,7 +302,7 @@ angle = 360.0
 angle_random = 1.0
 scale_amount = 0.2
 scale_amount_random = 0.75
-color_ramp = SubResource( 8 )
+color_ramp = SubResource( 7 )
 
 [node name="ExplodeDroplets" type="CPUParticles2D" parent="."]
 emitting = false
@@ -324,7 +324,7 @@ angle = 360.0
 angle_random = 1.0
 scale_amount = 0.1
 scale_amount_random = 0.3
-color_ramp = SubResource( 9 )
+color_ramp = SubResource( 8 )
 [connection signal="screen_exited" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_exited"]
-[connection signal="area_entered" from="Area2D" to="." method="_on_snowball_area_entered"]
-[connection signal="body_entered" from="Area2D" to="." method="_on_snowball_body_entered"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

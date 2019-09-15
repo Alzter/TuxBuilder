@@ -12,16 +12,20 @@ func _squish(delta):
 
 # Physics
 func on_physics_process(delta):
-	if state != "kicked": 
-		collision_layer = 2
-	else: 
+	if state == "grabbed":
+		collision_mask = 0
+		collision_layer = 0
+	elif state == "kicked":
+		collision_mask = 0
 		collision_layer = 8
+	else: 
+		collision_mask = 2
+		collision_layer = 2
 	
 	if state == "kicked":
 		velocity.x = KICK_SPEED * -$Control/AnimatedSprite.scale.x
 		velocity.y += 20
 		velocity = move_and_slide(velocity, FLOOR)
-		collision_mask = 0
 		if is_on_wall():
 			$Control/AnimatedSprite.scale.x *= -1
 			velocity.x *= -1
@@ -38,7 +42,7 @@ func on_buttjump_kill():
 	$AnimationPlayer.play("explode")
 
 # Hit player / Squished
-func _on_snowball_body_entered(body):
+func _on_Area2D_body_entered(body):
 	if body.is_in_group("badguys") and state == "kicked" and body.name != name:
 		body.kill()
 		return
@@ -93,7 +97,7 @@ func _on_snowball_body_entered(body):
 			if Input.is_action_pressed("action"):
 				body.holding_object = true
 				body.object_held = name
-				state = ""
+				state = "grabbed"
 			elif invincible_time == 0:
 				invincible_time = INVINCIBLE_TIME
 				$Control/AnimatedSprite.play("squished")

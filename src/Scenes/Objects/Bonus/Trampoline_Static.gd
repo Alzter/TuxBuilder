@@ -67,12 +67,6 @@ func _on_Area2D_body_entered(body):
 		else:
 			body.buttjump_kill()
 			$Control/AnimatedSprite.play("default")
-	if body.is_in_group("trampoline") and body.name != name:
-		if (body.position.y - 20 < position.y and wallcling == ""):
-			$Trampoline.play()
-			$Control/AnimatedSprite.frame = 0
-			$Control/AnimatedSprite.play("bounce")
-			body.velocity.y = -BOUNCE_LOW
 
 func align():
 	$Control.rect_rotation = 0

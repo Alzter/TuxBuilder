@@ -10,7 +10,7 @@
 [ext_resource path="res://Audio/SoundEffects/Objects/trampoline.wav" type="AudioStream" id=8]
 [ext_resource path="res://Audio/SoundEffects/Player/thud.ogg" type="AudioStream" id=9]
 
-[sub_resource type="SpriteFrames" id=2]
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
 "loop": false,
@@ -28,7 +28,7 @@ animations = [ {
 "speed": 25.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 15.5, 14 )
 
 [sub_resource type="RectangleShape2D" id=3]
@@ -38,7 +38,7 @@ extents = Vector2( 15.5, 22 )
 "trampoline",
 ]]
 z_index = -2
-collision_layer = 31
+collision_layer = 0
 collision_mask = 31
 script = ExtResource( 1 )
 
@@ -47,7 +47,7 @@ editor/display_folded = true
 rect_pivot_offset = Vector2( 0, -2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
-frames = SubResource( 2 )
+frames = SubResource( 1 )
 offset = Vector2( 0, -6 )
 
 [node name="CeilingDetector" type="RayCast2D" parent="."]
@@ -59,21 +59,21 @@ collision_mask = 16
 [node name="LeftWallDetector" type="RayCast2D" parent="."]
 position = Vector2( 0, 2 )
 enabled = true
-cast_to = Vector2( -32, 0 )
+cast_to = Vector2( -16, 0 )
 collision_mask = 16
 
 [node name="RightWallDetector" type="RayCast2D" parent="."]
 position = Vector2( 0, 2 )
 enabled = true
-cast_to = Vector2( 32, 0 )
+cast_to = Vector2( 16, 0 )
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 2 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_layer = 31
+collision_layer = 0
 collision_mask = 31
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]

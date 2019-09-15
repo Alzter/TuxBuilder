@@ -109,14 +109,14 @@ func _kill(delta):
 	on_kill(delta)
 
 # Buttjump detection
-func _on_snowball_area_entered(area):
+func _on_Area2D_area_entered(area):
 	if area.get_parent().is_in_group("player"):
 		if area.get_parent().buttjump == true:
 			area.get_parent().velocity.y *= 0.9
 			buttjump_kill()
 
 # Hit player / Squished
-func _on_snowball_body_entered(body):
+func _on_Area2D_body_entered(body):
 	if not body.is_in_group("player"): return
 	if body.position.y + 20 < position.y and squishable == true or body.buttjump == true:
 		if state == "active" and invincible_time == 0:
