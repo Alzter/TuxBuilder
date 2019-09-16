@@ -1,9 +1,17 @@
 extends "BlockContainer.gd"
 
 func on_empty_hit():
-	if hitdownstored == true:
-		$AnimationPlayer.play("breakdown")
-	else: $AnimationPlayer.play("break")
+	if player.state == "small":
+		$AnimationPlayer.stop()
+		if hitdownstored == true:
+			$AnimationPlayer.play("hitdown_small")
+		else: $AnimationPlayer.play("hit_small")
+		hit = false
+	else:
+		$AnimationPlayer.stop()
+		if hitdownstored == true:
+			$AnimationPlayer.play("breakdown")
+		else: $AnimationPlayer.play("break")
 
 # Break on buttjump
 func _on_Area2D_area_entered(area):

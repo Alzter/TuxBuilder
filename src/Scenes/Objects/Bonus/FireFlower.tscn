@@ -1,17 +1,23 @@
 [gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scenes/Objects/Bonus/FireFlower.gd" type="Script" id=1]
-[ext_resource path="res://Audio/SoundEffects/Bonus/fire-flower.wav" type="AudioStream" id=2]
-[ext_resource path="res://Sprites/Objects/FireFlower/fire_flower-0.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/Objects/FireFlower/fire_flower-1.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Objects/FireFlower/fire_flower-2.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/Objects/FireFlower/fire_flower-3.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Objects/FireFlower/fire_flower-0.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Objects/FireFlower/fire_flower-1.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Objects/FireFlower/fire_flower-2.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Objects/FireFlower/fire_flower-3.png" type="Texture" id=5]
+[ext_resource path="res://Audio/SoundEffects/Bonus/fire-flower.wav" type="AudioStream" id=6]
 
-[sub_resource type="Animation" id=1]
-resource_name = "appear"
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 20.0
+} ]
 
 [sub_resource type="Animation" id=2]
-resource_name = "collect"
+
+[sub_resource type="Animation" id=3]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Control/AnimatedSprite:visible")
 tracks/0/interp = 1
@@ -51,8 +57,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "default"
+[sub_resource type="Animation" id=4]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Control/AnimatedSprite:visible")
 tracks/0/interp = 1
@@ -66,48 +71,16 @@ tracks/0/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 16, 16 )
-
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 16, 16 )
+extents = Vector2( 15, 16 )
 
-[sub_resource type="SpriteFrames" id=6]
-animations = [ {
-"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 4 ) ],
-"loop": true,
-"name": "default",
-"speed": 20.0
-} ]
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 15, 16 )
 
 [node name="FireFlower" type="KinematicBody2D"]
 collision_layer = 4
 collision_mask = 0
 script = ExtResource( 1 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "default"
-anims/appear = SubResource( 1 )
-anims/collect = SubResource( 2 )
-anims/default = SubResource( 3 )
-
-[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
-rect = Rect2( -64, -512, 128, 1024 )
-process_parent = true
-physics_process_parent = true
-
-[node name="PickupSFX" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 2 )
-
-[node name="Area2D" type="Area2D" parent="."]
-editor/display_folded = true
-collision_layer = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 4 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 5 )
 
 [node name="Control" type="Control" parent="."]
 editor/display_folded = true
@@ -117,7 +90,30 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
-frames = SubResource( 6 )
+frames = SubResource( 1 )
 frame = 2
 playing = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "default"
+anims/appear = SubResource( 2 )
+anims/collect = SubResource( 3 )
+anims/default = SubResource( 4 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+rect = Rect2( -64, -512, 128, 1024 )
+process_parent = true
+physics_process_parent = true
+
+[node name="PickupSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 6 )
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

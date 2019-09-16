@@ -87,10 +87,10 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 16, 16 )
+extents = Vector2( 15, 16 )
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 16, 15 )
+extents = Vector2( 15, 15 )
 
 [node name="Egg" type="KinematicBody2D"]
 collision_layer = 4

@@ -83,6 +83,9 @@ func hurt():
 			ducking = false
 			$SFX/Hurt.play()
 			damage_invincibility()
+			var frame = $Control/AnimatedSprite.frame
+			set_animation($Control/AnimatedSprite.animation)
+			$Control/AnimatedSprite.frame = frame
 		else:
 			state = "big"
 			$SFX/Hurt.play()

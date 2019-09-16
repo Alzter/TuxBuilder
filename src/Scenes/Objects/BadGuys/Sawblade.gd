@@ -1,6 +1,6 @@
 extends Node2D
 
-var clockwise = false
+var clockwise = true
 var direction = 90
 var start = false
 var moving = true
@@ -54,6 +54,8 @@ func _physics_process(delta):
 	$Wall.rotation_degrees = direction - 90
 	$Sparks.emitting = true
 	$Sparks.rotation_degrees = (direction - 90) + 110
+	if clockwise == true: $Sparks.rotation_degrees = (direction - 90) - 110
+	else: $Sparks.rotation_degrees = (direction - 90) + 110
 	
 	if $Left.is_colliding():
 		$Sparks.position = Vector2(-12,0)
@@ -68,6 +70,10 @@ func _physics_process(delta):
 		$Sparks.position = Vector2(0,12)
 	
 	move(MOVE_SPEED)
+	
+	if clockwise == true:
+		$AnimatedSprite.scale.x = 1
+	else: $AnimatedSprite.scale.x = -1
 	
 func move(speed):
 	if direction < 0: direction = abs(direction) + 180
