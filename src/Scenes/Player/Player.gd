@@ -78,12 +78,13 @@ func hurt():
 			kill()
 		elif state == "big":
 			state = "small"
+			backflip = false
+			buttjump = false
+			ducking = false
 			$SFX/Hurt.play()
 			damage_invincibility()
 		else:
 			state = "big"
-			backflip = false
-			ducking = false
 			$SFX/Hurt.play()
 			damage_invincibility()
 
