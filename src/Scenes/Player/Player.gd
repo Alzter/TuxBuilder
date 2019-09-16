@@ -132,6 +132,7 @@ func _physics_process(delta):
 			return
 		$Control/AnimatedSprite.z_index = 999
 		$Hitbox.disabled = true
+		$ButtjumpHitbox/CollisionShape2D.disabled = true
 		position += velocity * delta
 		velocity.y += GRAVITY
 		return
