@@ -47,7 +47,7 @@ func _on_Area2D_body_entered(body):
 		body.kill()
 		return
 	elif not body.is_in_group("player"): return
-	if body.position.y + 20 < position.y and squishable == true or body.buttjump == true:
+	if body.position.y + 20 < position.y and squishable == true:
 		if (state == "active" or state == "kicked"):
 			
 			# Squished

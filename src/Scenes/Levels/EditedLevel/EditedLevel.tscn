@@ -5,10 +5,10 @@
 [ext_resource path="res://Scenes/Editor/Layers/TileMap.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Tilesets/LevelTiles.tres" type="TileSet" id=4]
 [ext_resource path="res://Scenes/Editor/Layers/TileMap.gd" type="Script" id=5]
-[ext_resource path="res://Scenes/Objects/Bonus/Trampoline_Portable.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/Objects/Bonus/Trampoline_Portable.gd" type="Script" id=7]
-[ext_resource path="res://Scenes/Objects/Bonus/BonusBlock.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/Objects/Bonus/BonusBlock.gd" type="Script" id=9]
+[ext_resource path="res://Scenes/Objects/BadGuys/Bomb.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Objects/BadGuys/Bomb.gd" type="Script" id=7]
+[ext_resource path="res://Scenes/Objects/BadGuys/Spiky.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Objects/BadGuys/Spiky.gd" type="Script" id=9]
 
 [node name="Level" type="Node2D"]
 
@@ -70,19 +70,24 @@ moving = false
 filepath = ""
 original_name = ""
 
-[node name="Trampoline_Portable" type="KinematicBody2D" parent="." groups=[
-"trampoline",
+[node name="Bomb" type="KinematicBody2D" parent="." groups=[
+"badguys",
 ] instance=ExtResource( 6 )]
-position = Vector2( 272, 112 )
-collision_mask = 31
+position = Vector2( 464, 240 )
+collision_layer = 2
+collision_mask = 2
 script = ExtResource( 7 )
+__meta__ = {
+"_edit_group_": true
+}
 
-[node name="BonusBlock" type="KinematicBody2D" parent="." groups=[
-"stackable",
-"bonusblock",
+[node name="Spiky" type="KinematicBody2D" parent="." groups=[
+"badguys",
 ] instance=ExtResource( 8 )]
-position = Vector2( 272, 112 )
-z_index = -1
-collision_layer = 31
-collision_mask = 31
+position = Vector2( 368, 240 )
+collision_layer = 2
+collision_mask = 2
 script = ExtResource( 9 )
+__meta__ = {
+"_edit_group_": true
+}
