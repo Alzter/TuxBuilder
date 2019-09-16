@@ -94,7 +94,7 @@ func _on_Area2D_body_entered(body):
 		elif state == "squished":
 			$AnimationPlayer.stop()
 			$AnimationPlayer.play("stop")
-			if Input.is_action_pressed("action"):
+			if Input.is_action_pressed("action") and body.holding_object == false:
 				body.holding_object = true
 				body.object_held = name
 				state = "grabbed"

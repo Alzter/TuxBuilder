@@ -429,6 +429,7 @@ func _physics_process(delta):
 			holding_object = false
 			if get_tree().current_scene.get_node(str("Level/", object_held)).has_method("throw"):
 				get_tree().current_scene.get_node(str("Level/", object_held)).throw()
+				if not Input.is_action_pressed("duck"): get_tree().current_scene.get_node(str("Level/", object_held)).velocity.x = velocity.x + (200 * $Control/AnimatedSprite.scale.x)
 
 # Star invincibility
 func star_invincibility():
