@@ -73,8 +73,9 @@ alignment = 1
 [node name="CustomProperties" type="VBoxContainer" parent="Popup/Panel/VBoxContainer"]
 editor/display_folded = true
 visible = false
+margin_top = 24.0
 margin_right = 243.0
-margin_bottom = 26.0
+margin_bottom = 50.0
 
 [node name="Filelist" type="HBoxContainer" parent="Popup/Panel/VBoxContainer/CustomProperties"]
 editor/display_folded = true

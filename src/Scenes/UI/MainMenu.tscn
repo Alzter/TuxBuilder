@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scenes/UI/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/SuperTux-Medium.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://Scenes/UI/Images/SuperTuxLogo.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/UI/SuperTuxLogo.png" type="Texture" id=3]
 [ext_resource path="res://Scenes/UI/UITheme.tres" type="Theme" id=4]
 [ext_resource path="res://Scenes/UI/Options.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Audio/Music/theme.ogg" type="AudioStream" id=6]

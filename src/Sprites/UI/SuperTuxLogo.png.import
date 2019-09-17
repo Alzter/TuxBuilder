@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/SuperTuxLogo.png-4acad60b7487de1c5158abd3c112de01.stex"
+path="res://.import/SuperTuxLogo.png-0652a9e0b1f015afcb381e0f9adf4707.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/UI/Images/SuperTuxLogo.png"
-dest_files=[ "res://.import/SuperTuxLogo.png-4acad60b7487de1c5158abd3c112de01.stex" ]
+source_file="res://Sprites/UI/SuperTuxLogo.png"
+dest_files=[ "res://.import/SuperTuxLogo.png-0652a9e0b1f015afcb381e0f9adf4707.stex" ]
 
 [params]
 

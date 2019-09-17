@@ -27,15 +27,15 @@ func _ready():
 	print(get_parent().original_name)
 	
 	# Set solid checkbox
-	if get_parent().original_name == "Background":
-		$Popup/Panel/VBoxContainer/Solid/CheckBox.disabled = true
-		$Popup/Panel/VBoxContainer/Solid/CheckBox.pressed = false
-		$Popup/Panel/VBoxContainer/Solid.hide()
-	else:
+	if get_parent().original_name == "TileMap":
 		if layer.get_collision_layer() != 0:
 			$Popup/Panel/VBoxContainer/Solid/CheckBox.pressed = true
 		else: $Popup/Panel/VBoxContainer/Solid/CheckBox.pressed = false
 		$Popup/Panel/VBoxContainer/Solid.show()
+	else:
+		$Popup/Panel/VBoxContainer/Solid/CheckBox.disabled = true
+		$Popup/Panel/VBoxContainer/Solid/CheckBox.pressed = false
+		$Popup/Panel/VBoxContainer/Solid.hide()
 	
 	# Set tint box
 	if get_parent().original_name == "Background":
@@ -52,6 +52,9 @@ func _ready():
 	$Popup/Panel/VBoxContainer/Moving/CheckBox.pressed = layer.moving
 	
 	$Popup/Panel/VBoxContainer/CustomProperties.hide()
+	for child in $Popup/Panel/VBoxContainer/CustomProperties.get_children():
+		hide()
+	$Popup/Panel/VBoxContainer/CustomProperties/TextureRect.show()
 	
 	# File selecting for things like backgrounds or particles
 	if layer.filepath != "":
@@ -108,7 +111,6 @@ func _process(_delta):
 		var selected = $Popup/Panel/VBoxContainer/CustomProperties/Filelist/OptionButton.get_item_text($Popup/Panel/VBoxContainer/CustomProperties/Filelist/OptionButton.selected)
 		var child = load(str(layer.filepath, "/", selected, ".tscn")).instance()
 		layer.add_child(child)
-		child.set_name("Sublayer")
 		child.set_owner(get_tree().current_scene.get_node("Level"))
 	filepathold = $Popup/Panel/VBoxContainer/CustomProperties/Filelist/OptionButton.selected
 	

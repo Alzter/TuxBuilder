@@ -314,7 +314,7 @@ func update_selected_tile():
 		$SelectedArea.color = Color(0,1,0,0.5)
 		$EraserSprite.visible = false
 		$SelectedTile.visible = true
-		$SelectedTile.modulate = Color(1,1,1,0.25)
+		$SelectedTile.modulate = Color(1,1,1,0.5)
 		
 		# Tile selection
 		if category_selected == "Tiles":
