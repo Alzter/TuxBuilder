@@ -3,6 +3,7 @@ extends Node2D
 export var scroll_speed = Vector2(1,1)
 export var move_speed = Vector2()
 export var moving = false
+export var tint = Color(1,1,1,1)
 export var filepath = ""
 var move_pos = Vector2()
 export var original_name = ""
@@ -13,6 +14,14 @@ func _ready():
 
 func _process(delta):
 	position = Vector2(0,0)
+	
+	modulate = tint
+	
+	# Make transparent if not selected TileMap
+	if get_tree().current_scene.editmode == true and get_class() == "TileMap":
+		if get_tree().current_scene.get_node("Editor").layer_selected_type == "TileMap":
+			if get_tree().current_scene.get_node("Editor").layer_selected != name:
+				modulate -= Color(0,0,0,0.75)
 	
 	# Scrolling
 	if scroll_speed.x != 1:

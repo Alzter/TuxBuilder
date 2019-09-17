@@ -41,7 +41,7 @@ func _ready():
 	if get_parent().original_name == "Background":
 		$Popup/Panel/VBoxContainer/Tint.hide()
 	else:
-		$Popup/Panel/VBoxContainer/Tint/ColorPickerButton.color = layer.modulate
+		$Popup/Panel/VBoxContainer/Tint/ColorPickerButton.color = layer.tint
 		$Popup/Panel/VBoxContainer/Tint.show()
 	
 	# Set scroll and move speed
@@ -92,7 +92,7 @@ func _process(_delta):
 		layer.set_collision_mask(0)
 	
 	# Change layer tint
-	layer.modulate = $Popup/Panel/VBoxContainer/Tint/ColorPickerButton.color
+	layer.tint = $Popup/Panel/VBoxContainer/Tint/ColorPickerButton.color
 	
 	# Change layer scroll and move speed
 	layer.scroll_speed.x = $Popup/Panel/VBoxContainer/ScrollX/SpinBox.value

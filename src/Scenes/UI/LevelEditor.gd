@@ -51,6 +51,8 @@ func _process(_delta):
 	$Grid.rect_size = Vector2((get_viewport().size.x + 32) * 4 * get_tree().current_scene.get_node("Camera2D").zoom.x, (get_viewport().size.y + 32) * 4 * get_tree().current_scene.get_node("Camera2D").zoom.y)
 	$Grid.rect_position = Vector2(get_tree().current_scene.get_node("Camera2D").position.x - (get_viewport().size.x / 2) * get_tree().current_scene.get_node("Camera2D").zoom.x, get_tree().current_scene.get_node("Camera2D").position.y - (get_viewport().size.y / 2) * get_tree().current_scene.get_node("Camera2D").zoom.y)
 	$Grid.rect_position = Vector2(floor($Grid.rect_position.x / 32) * 32, floor($Grid.rect_position.y / 32) * 32)
+	if layer_selected_type == "TileMap" and category_selected == "Tiles":
+		$Grid.rect_position += Vector2(fmod(layerfile.position.x, 32),fmod(layerfile.position.y, 32))
 	
 	$UI/BottomBar/ScrollContainer/HBoxContainer.rect_min_size.y = 64
 	$UI/BottomBar/ScrollContainer.rect_size.y = 64
