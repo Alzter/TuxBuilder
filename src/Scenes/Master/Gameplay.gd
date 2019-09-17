@@ -149,17 +149,22 @@ func level_bounds():
 		var rect = level.get_used_rect()
 		var cell_size = level.get_cell_size()
 		
-		if rect.position.x * (cell_size.x * level.scale.x) < level_bound_left:
-			level_bound_left = rect.position.x * (cell_size.x * level.scale.x)
+		var bound_left = rect.position.x * ((cell_size.x * level.scale.x) / level.scroll_speed.x)
+		var bound_right = rect.end.x * ((cell_size.x * level.scale.x) / level.scroll_speed.x)
+		var bound_top = rect.position.y * ((cell_size.y * level.scale.y) / level.scroll_speed.y)
+		var bound_bottom = rect.end.y * ((cell_size.y * level.scale.y) / level.scroll_speed.y)
 		
-		if rect.end.x * (cell_size.x * level.scale.x) > level_bound_right:
-			level_bound_right = rect.end.x * (cell_size.x * level.scale.x)
+		if bound_left < level_bound_left:
+			level_bound_left = bound_left
 		
-		if rect.position.y * (cell_size.y * level.scale.y) < level_bound_top:
-			level_bound_top = rect.position.y * (cell_size.y * level.scale.y)
+		if bound_right > level_bound_right:
+			level_bound_right = bound_right
 		
-		if rect.end.y * (cell_size.y * level.scale.y) > level_bound_bottom:
-			level_bound_bottom = rect.end.y * (cell_size.y * level.scale.y)
+		if bound_top < level_bound_top:
+			level_bound_top = bound_top
+		
+		if  bound_bottom > level_bound_bottom:
+			level_bound_bottom = bound_bottom
 
 func camera_bounds_remove():
 	$Camera2D.limit_left = -10000000

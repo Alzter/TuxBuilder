@@ -61,7 +61,6 @@ texture = ExtResource( 3 )
 expand = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Popup/Panel"]
-editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -224,7 +223,7 @@ align = 1
 margin_left = 117.0
 margin_right = 225.0
 margin_bottom = 20.0
-step = 0.0
+step = 0.01
 allow_greater = true
 align = 2
 
@@ -248,7 +247,7 @@ align = 1
 margin_left = 112.0
 margin_right = 220.0
 margin_bottom = 20.0
-step = 0.0
+step = 0.01
 allow_greater = true
 allow_lesser = true
 align = 2
@@ -273,7 +272,7 @@ align = 1
 margin_left = 111.0
 margin_right = 219.0
 margin_bottom = 20.0
-step = 0.0
+step = 0.01
 allow_greater = true
 allow_lesser = true
 align = 2
