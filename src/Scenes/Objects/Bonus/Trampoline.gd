@@ -40,8 +40,7 @@ func _physics_process(delta):
 	else: on_ground = false
 	
 	if portable == true and state == "active" and $SolidTimer.time_left == 0:
-		var bodies = null
-		bodies = $GrabRadius.get_overlapping_bodies()
+		var bodies = $GrabRadius.get_overlapping_bodies()
 		for body in bodies:
 			if body.is_in_group("player"):
 				if Input.is_action_pressed("action") and body.holding_object == false and body.sliding == false:

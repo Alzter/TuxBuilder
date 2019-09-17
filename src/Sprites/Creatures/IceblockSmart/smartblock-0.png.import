@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sport-gmelting-0.png-81a8c8623e876e3644709c172c68300d.stex"
+path="res://.import/smartblock-0.png-0ea610c04ce7dd3783e97dca1ce6b371.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Creatures/Snowball/sport-gmelting-0.png"
-dest_files=[ "res://.import/sport-gmelting-0.png-81a8c8623e876e3644709c172c68300d.stex" ]
+source_file="res://Sprites/Creatures/IceblockSmart/smartblock-0.png"
+dest_files=[ "res://.import/smartblock-0.png-0ea610c04ce7dd3783e97dca1ce6b371.stex" ]
 
 [params]
 

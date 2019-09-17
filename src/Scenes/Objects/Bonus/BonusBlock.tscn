@@ -243,8 +243,8 @@ extents = Vector2( 16, 16 )
 extents = Vector2( 12, 17 )
 
 [node name="BonusBlock" type="KinematicBody2D" groups=[
-"stackable",
 "bonusblock",
+"stackable",
 ]]
 z_index = -1
 collision_layer = 31

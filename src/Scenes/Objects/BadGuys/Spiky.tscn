@@ -5,11 +5,11 @@
 [ext_resource path="res://Sprites/Creatures/Spiky/spiky-1.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/Creatures/Spiky/spiky-2.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/Creatures/Spiky/gear-cracked.png" type="Texture" id=5]
-[ext_resource path="res://Audio/SoundEffects/Enemy/fall.wav" type="AudioStream" id=6]
-[ext_resource path="res://Audio/SoundEffects/Enemy/squish.wav" type="AudioStream" id=7]
-[ext_resource path="res://Audio/SoundEffects/Enemy/splash.ogg" type="AudioStream" id=8]
-[ext_resource path="res://Sprites/Creatures/Snowball/particle.png" type="Texture" id=9]
-[ext_resource path="res://Sprites/Creatures/Snowball/droplet.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/Creatures/Snowball/particle.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Creatures/Snowball/droplet.png" type="Texture" id=7]
+[ext_resource path="res://Audio/SoundEffects/Enemy/fall.wav" type="AudioStream" id=8]
+[ext_resource path="res://Audio/SoundEffects/Enemy/squish.wav" type="AudioStream" id=9]
+[ext_resource path="res://Audio/SoundEffects/Enemy/splash.ogg" type="AudioStream" id=10]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -164,6 +164,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
+smart = true
 
 [node name="Control" type="Control" parent="."]
 editor/display_folded = true
@@ -197,18 +198,6 @@ autoplay = "active"
 anims/active = SubResource( 4 )
 anims/explode = SubResource( 5 )
 
-[node name="SFX" type="Node" parent="."]
-editor/display_folded = true
-
-[node name="Fall" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource( 6 )
-
-[node name="Squish" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource( 7 )
-
-[node name="Melt" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource( 8 )
-
 [node name="ExplodeSnow" type="CPUParticles2D" parent="."]
 rotation = -1.5708
 emitting = false
@@ -217,7 +206,7 @@ one_shot = true
 speed_scale = 1.5
 explosiveness = 1.0
 local_coords = false
-texture = ExtResource( 9 )
+texture = ExtResource( 6 )
 spread = 60.0
 flatness = 1.0
 gravity = Vector2( 0, 500 )
@@ -238,7 +227,7 @@ amount = 16
 one_shot = true
 explosiveness = 1.0
 local_coords = false
-texture = ExtResource( 10 )
+texture = ExtResource( 7 )
 spread = 180.0
 flatness = 1.0
 gravity = Vector2( 0, 500 )
@@ -253,6 +242,18 @@ angle_random = 1.0
 scale_amount = 0.1
 scale_amount_random = 0.3
 color_ramp = SubResource( 7 )
+
+[node name="SFX" type="Node" parent="."]
+editor/display_folded = true
+
+[node name="Fall" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 8 )
+
+[node name="Squish" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 9 )
+
+[node name="Melt" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 10 )
 [connection signal="screen_exited" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_exited"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

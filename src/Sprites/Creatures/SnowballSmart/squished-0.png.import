@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sport-gmelting-4.png-9b6043c7c9b40a566ff5586455040b5d.stex"
+path="res://.import/squished-0.png-054b8cf25096eab31ce3d5a31d1cc34f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Creatures/Snowball/sport-gmelting-4.png"
-dest_files=[ "res://.import/sport-gmelting-4.png-9b6043c7c9b40a566ff5586455040b5d.stex" ]
+source_file="res://Sprites/Creatures/SnowballSmart/squished-0.png"
+dest_files=[ "res://.import/squished-0.png-054b8cf25096eab31ce3d5a31d1cc34f.stex" ]
 
 [params]
 

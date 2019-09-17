@@ -4,6 +4,7 @@ const CAMERA_MOVE_SPEED = 32
 var category_selected = "Tiles"
 var layer_selected = ""
 var layer_selected_type = ""
+var layerfile = null
 var tile_type = 0
 var tile_selected = Vector2(0,0)
 var old_tile_selected = Vector2(0,0)
@@ -36,6 +37,7 @@ func _ready():
 	select_first_solid_tilemap()
 
 func _process(_delta):
+	layerfile = get_tree().current_scene.get_node(str("Level/", layer_selected))
 	if stop == true:
 		$SelectedArea.visible = false
 		$EraserSprite.visible = false
@@ -123,7 +125,9 @@ func _process(_delta):
 		$UI/SideBar/VBoxContainer/HBoxContainer/SelectButton/TextureRect.self_modulate = Color(1,1,1,1)
 	
 	# Placing tiles / objects
-	tile_selected = $TileMap.world_to_map(get_global_mouse_position())
+	if layer_selected_type == "TileMap" and category_selected == "Tiles":
+		tile_selected = layerfile.world_to_map(Vector2(get_global_mouse_position().x - ((1 - layerfile.scroll_speed.x) * get_tree().current_scene.get_node("Camera2D").position.x), get_global_mouse_position().y - ((1 - layerfile.scroll_speed.y) * get_tree().current_scene.get_node("Camera2D").position.y)))
+	else: tile_selected = $TileMap.world_to_map(get_global_mouse_position())
 	update_selected_tile()
 	
 	# Drag the player
@@ -188,8 +192,8 @@ func _process(_delta):
 						pass
 						
 					elif $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == true:
-						get_tree().current_scene.get_node(str("Level/", layer_selected)).set_cellv(tile_selected, -1)
-						get_tree().current_scene.get_node(str("Level/", layer_selected)).update_bitmask_area(tile_selected)
+						layerfile.set_cellv(tile_selected, -1)
+						layerfile.update_bitmask_area(tile_selected)
 					
 					
 					# Tile placing
@@ -199,8 +203,8 @@ func _process(_delta):
 						pass
 						
 					else:
-						get_tree().current_scene.get_node(str("Level/", layer_selected)).set_cellv(tile_selected, tile_type)
-						get_tree().current_scene.get_node(str("Level/", layer_selected)).update_bitmask_area(tile_selected)
+						layerfile.set_cellv(tile_selected, tile_type)
+						layerfile.update_bitmask_area(tile_selected)
 			
 			# Object placing / erasing
 			else:
@@ -256,8 +260,12 @@ func update_selected_tile():
 	if not ($UI/BottomBar/Zoom/ZoomIn.is_hovered() == false and $UI/BottomBar/Zoom/ZoomDefault.is_hovered() == false and $UI/BottomBar/Zoom/ZoomOut.is_hovered() == false):
 		return
 	
-	$SelectedTile.position.x = (tile_selected.x + 0.5) * 32
-	$SelectedTile.position.y = (tile_selected.y + 0.5) * 32
+	if layer_selected_type == "TileMap" and category_selected == "Tiles":
+		$SelectedTile.position.x = ((tile_selected.x + 0.5) * 32) + (get_tree().current_scene.get_node("Camera2D").position.x * (1 - layerfile.scroll_speed.x))
+		$SelectedTile.position.y = ((tile_selected.y + 0.5) * 32) + (get_tree().current_scene.get_node("Camera2D").position.y * (1 - layerfile.scroll_speed.y))
+	else:
+		$SelectedTile.position.x = (tile_selected.x + 0.5) * 32
+		$SelectedTile.position.y = (tile_selected.y + 0.5) * 32
 	
 	if ($SelectedTile.position == Vector2(get_tree().current_scene.get_node("Player").position.x,get_tree().current_scene.get_node("Player").position.y - 16) and get_tree().current_scene.get_node("Player").state != "small") or $SelectedTile.position == Vector2(get_tree().current_scene.get_node("Player").position.x,get_tree().current_scene.get_node("Player").position.y + 16) and dragging_object == false:
 		player_hovered = true
@@ -456,6 +464,7 @@ func _on_LayerConfirmation_pressed():
 	# Select the layer
 	layer_selected = layer.get_name()
 	layer_selected_type = layer.get_class()
+	layerfile = get_tree().current_scene.get_node(str("Level/", layer_selected))
 	
 	# And update the layers list to reflect this
 	update_layers()
@@ -484,6 +493,7 @@ func select_first_solid_tilemap():
 			if i.get_collision_layer() == 31:
 				layer_selected = i.get_name()
 				layer_selected_type = "TileMap"
+				layerfile = get_tree().current_scene.get_node(str("Level/", layer_selected))
 				return
 
 func list_files_in_directory(path):

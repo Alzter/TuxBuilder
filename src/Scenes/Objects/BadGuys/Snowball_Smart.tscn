@@ -1,29 +1,24 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Scenes/Objects/BadGuys/Snowball.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/Creatures/Snowball/snowball-0.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/Creatures/Snowball/snowball-1.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/Creatures/Snowball/snowball-2.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Creatures/Snowball/snowball-3.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/Creatures/Snowball/snowball-4.png" type="Texture" id=6]
-[ext_resource path="res://Sprites/Creatures/Snowball/snowball-5.png" type="Texture" id=7]
-[ext_resource path="res://Sprites/Creatures/Snowball/snowball-6.png" type="Texture" id=8]
-[ext_resource path="res://Sprites/Creatures/Snowball/snowball-7.png" type="Texture" id=9]
-[ext_resource path="res://Sprites/Creatures/Snowball/squished-0.png" type="Texture" id=10]
-[ext_resource path="res://Audio/SoundEffects/Enemy/fall.wav" type="AudioStream" id=11]
-[ext_resource path="res://Audio/SoundEffects/Enemy/squish.wav" type="AudioStream" id=12]
-[ext_resource path="res://Audio/SoundEffects/Enemy/splash.ogg" type="AudioStream" id=13]
-[ext_resource path="res://Sprites/Creatures/Snowball/particle.png" type="Texture" id=14]
-[ext_resource path="res://Sprites/Creatures/Snowball/droplet.png" type="Texture" id=15]
+[ext_resource path="res://Sprites/Creatures/SnowballSmart/smartball-0.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Creatures/SnowballSmart/smartball-1.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Creatures/SnowballSmart/smartball-2.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Creatures/SnowballSmart/squished-0.png" type="Texture" id=5]
+[ext_resource path="res://Audio/SoundEffects/Enemy/fall.wav" type="AudioStream" id=6]
+[ext_resource path="res://Audio/SoundEffects/Enemy/squish.wav" type="AudioStream" id=7]
+[ext_resource path="res://Audio/SoundEffects/Enemy/splash.ogg" type="AudioStream" id=8]
+[ext_resource path="res://Sprites/Creatures/Snowball/particle.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/Creatures/Snowball/droplet.png" type="Texture" id=10]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 3 ) ],
 "loop": true,
 "name": "default",
-"speed": 15.0
+"speed": 8.0
 }, {
-"frames": [ ExtResource( 10 ) ],
+"frames": [ ExtResource( 5 ) ],
 "loop": true,
 "name": "squished",
 "speed": 5.0
@@ -225,7 +220,7 @@ colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0.443137, 0, 1, 0.882813, 0 )
 offsets = PoolRealArray( 0, 0.467949, 1 )
 colors = PoolColorArray( 1, 1, 1, 0.847059, 0.625, 0.936279, 1, 0.556863, 0, 0.478516, 1, 0 )
 
-[node name="Snowball" type="KinematicBody2D" groups=[
+[node name="Smartball" type="KinematicBody2D" groups=[
 "badguys",
 ]]
 collision_layer = 2
@@ -234,6 +229,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
+smart = true
 
 [node name="Control" type="Control" parent="."]
 anchor_left = 0.5
@@ -245,7 +241,7 @@ rect_pivot_offset = Vector2( 0, 14 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
 position = Vector2( 0, 6.31594e-013 )
 frames = SubResource( 1 )
-frame = 5
+frame = 2
 playing = true
 offset = Vector2( 0, -2 )
 
@@ -272,13 +268,13 @@ anims/squished = SubResource( 6 )
 editor/display_folded = true
 
 [node name="Fall" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource( 11 )
+stream = ExtResource( 6 )
 
 [node name="Squish" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource( 12 )
+stream = ExtResource( 7 )
 
 [node name="Melt" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource( 13 )
+stream = ExtResource( 8 )
 
 [node name="ExplodeSnow" type="CPUParticles2D" parent="."]
 rotation = -1.5708
@@ -288,7 +284,7 @@ one_shot = true
 speed_scale = 1.5
 explosiveness = 1.0
 local_coords = false
-texture = ExtResource( 14 )
+texture = ExtResource( 9 )
 spread = 60.0
 flatness = 1.0
 gravity = Vector2( 0, 500 )
@@ -309,7 +305,7 @@ amount = 16
 one_shot = true
 explosiveness = 1.0
 local_coords = false
-texture = ExtResource( 15 )
+texture = ExtResource( 10 )
 spread = 180.0
 flatness = 1.0
 gravity = Vector2( 0, 500 )

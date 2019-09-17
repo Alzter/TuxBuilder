@@ -10,6 +10,7 @@ var rotate = 0
 var squishable = true
 var invincible_time = 0
 var areastored = null
+export var smart = false
 
 const WALK_SPEED = 80
 var SQUISHED_ANIMATION = "squished"
@@ -39,6 +40,14 @@ func on_physics_process(delta):
 func _ready():
 	startpos = position
 	direction = $Control/AnimatedSprite.scale.x
+	if smart == true:
+		var child = RayCast2D.new()
+		child.enabled = true
+		child.cast_to = Vector2(0,32)
+		child.collision_mask = 4
+		add_child(child)
+		child.set_name("Smart")
+		child.set_owner(self)
 	on_ready()
 
 func disable():
@@ -83,8 +92,14 @@ func kill():
 
 func _move(delta):
 	if velocity.x != 0:
+		if smart == true and is_on_floor():
+			if not $Smart.is_colliding():
+				$Control/AnimatedSprite.scale.x *= -1
+				velocity.x *= -1
+	
 		if (velocity.x / abs(velocity.x)) == $Control/AnimatedSprite.scale.x:
 			$Control/AnimatedSprite.scale.x *= -1
+	
 	if abs(velocity.x) <= WALK_SPEED: velocity.x = -WALK_SPEED * $Control/AnimatedSprite.scale.x
 	elif is_on_floor(): velocity.x *= 0.95
 	velocity.y += 20

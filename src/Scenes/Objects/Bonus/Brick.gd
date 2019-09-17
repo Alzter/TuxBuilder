@@ -1,12 +1,18 @@
 extends "BlockContainer.gd"
 
 func on_empty_hit():
-	if player.state == "small":
-		$AnimationPlayer.stop()
-		if hitdownstored == true:
-			$AnimationPlayer.play("hitdown_small")
-		else: $AnimationPlayer.play("hit_small")
-		hit = false
+	if hitbyplayer == true:
+			if player.state == "small":
+				$AnimationPlayer.stop()
+				if hitdownstored == true:
+					$AnimationPlayer.play("hitdown_small")
+				else: $AnimationPlayer.play("hit_small")
+				hit = false
+			else:
+				$AnimationPlayer.stop()
+				if hitdownstored == true:
+					$AnimationPlayer.play("breakdown")
+				else: $AnimationPlayer.play("break")
 	else:
 		$AnimationPlayer.stop()
 		if hitdownstored == true:

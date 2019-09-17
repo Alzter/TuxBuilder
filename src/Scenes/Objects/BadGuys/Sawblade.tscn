@@ -14,17 +14,17 @@ animations = [ {
 "speed": 25.0
 } ]
 
-[sub_resource type="Curve" id=4]
+[sub_resource type="Curve" id=2]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.552409, 0.6232 ), -1.32867, -1.32867, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="Gradient" id=5]
+[sub_resource type="Gradient" id=3]
 offsets = PoolRealArray( 0, 0.0816327, 0.122449, 1 )
 colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 4, 4 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 16, 16 )
 
 [node name="Sawblade" type="Node2D"]
@@ -64,7 +64,7 @@ collision_mask = 4
 [node name="Sparks" type="CPUParticles2D" parent="."]
 emitting = false
 amount = 12
-lifetime = 0.6
+lifetime = 0.75
 preprocess = 4.0
 speed_scale = 3.0
 local_coords = false
@@ -74,10 +74,10 @@ gravity = Vector2( 0, 150 )
 initial_velocity = 80.0
 angle = 360.0
 angle_random = 1.0
-scale_amount = 0.25
+scale_amount = 0.5
 scale_amount_random = 0.75
-scale_amount_curve = SubResource( 4 )
-color_ramp = SubResource( 5 )
+scale_amount_curve = SubResource( 2 )
+color_ramp = SubResource( 3 )
 
 [node name="Area2D" type="Area2D" parent="."]
 editor/display_folded = true
@@ -85,12 +85,12 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="HitDetection" type="Area2D" parent="."]
 editor/display_folded = true
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitDetection"]
-shape = SubResource( 2 )
+shape = SubResource( 5 )
 [connection signal="body_entered" from="HitDetection" to="." method="_on_HitDetection_body_entered"]

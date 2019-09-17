@@ -16,6 +16,12 @@ func on_buttjump_kill():
 
 func explode():
 	exploding = true
+	var bodies = $Area2D.get_overlapping_bodies()
+	for body in bodies:
+		if body.is_in_group("player"):
+			if body.holding_object == true:
+				if body.object_held == name:
+					body.holding_object = false
 	disable()
 	state = ""
 	$AnimationPlayer.play("explode")
@@ -41,3 +47,34 @@ func _on_ExplosionRadius_area_entered(area):
 	if area.get_parent().get_name() != name and exploding == true:
 		if area.get_parent().is_in_group("badguys"):
 			area.get_parent().kill()
+
+# Hit player / Squished
+func _on_Area2D_body_entered(body):
+	if not body.is_in_group("player"): return
+	if body.position.y + 20 < position.y and squishable == true:
+		if state == "active" and invincible_time == 0:
+			
+			# Squished
+			if body.sliding == true:
+				kill()
+				return
+			if body.buttjump == true:
+				body.velocity.y *= 0.9
+				buttjump_kill()
+			disable()
+			state = "squished"
+			$AnimationPlayer.play(SQUISHED_ANIMATION)
+			$SFX/Squish.play()
+			body.bounce(300, body.JUMP_POWER, true)
+			velocity = Vector2(0,0)
+		elif state == "triggered":
+			if Input.is_action_pressed("action") and body.holding_object == false:
+				body.holding_object = true
+				body.object_held = name
+	else:
+		# Hit player
+		if body.invincible == true:
+			kill()
+		if state == "active" and body.has_method("hurt"):
+			body.hurt()
+		return
