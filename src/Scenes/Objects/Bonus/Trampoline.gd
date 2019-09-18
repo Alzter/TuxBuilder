@@ -78,7 +78,7 @@ func _on_Area2D_body_entered(body):
 			$Control/AnimatedSprite.play("default")
 			$Thud.play()
 			velocity.y = -600
-			if body.position.x < position.x:
+			if body.position.x > position.x:
 				velocity.x = -175
 			else: velocity.x = 175
 	
