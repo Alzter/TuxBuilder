@@ -20,7 +20,7 @@ const FRICTION = 0.93
 # Speed Tux slows down when sliding
 const SLIDE_FRICTION = 0.99
 # Acceleration when holding the opposite direction
-const TURN_ACCEL = 900.0
+const TURN_ACCEL = 1800.0
 
 # Jump velocity
 const JUMP_POWER = 580
@@ -142,42 +142,45 @@ func _physics_process(delta):
 		return
 
 	# Horizontal movement
-	if Input.is_action_pressed("move_right") and (ducking == false or on_ground != 0) and backflip == false and skidding == false and sliding == false and $ButtjumpLandTimer.time_left == 0:
-		$Control/AnimatedSprite.scale.x = 1
-		if velocity.x == 0:
-			velocity.x += WALK_ADD
-		if running == 1:
-				velocity.x += RUN_ACCEL / 60
-		else: velocity.x += WALK_ACCEL / 60
-		
-		# Skidding and air turning
-		if velocity.x < 0:
-			if on_ground == 0 and velocity.x <= -WALK_MAX:
+	if (ducking == false or on_ground != 0) and backflip == false and skidding == false and sliding == false and $ButtjumpLandTimer.time_left == 0:
+		if Input.is_action_pressed("move_right"):
+			$Control/AnimatedSprite.scale.x = 1
+			
+			# Moving
+			if velocity.x >= 0:
+				if velocity.x < WALK_ADD:
+					velocity.x = WALK_ADD
+				if running == 1:
+						velocity.x += RUN_ACCEL * delta
+				else: velocity.x += WALK_ACCEL * delta
+			
+			# Skidding
+			elif on_ground == 0 and abs(velocity.x) >= WALK_MAX:
 				if skidding == false:
 					skidding = true
 					$SFX/Skid.play()
-			else: velocity.x += TURN_ACCEL / 60
-
-	else: if Input.is_action_pressed("move_left") and (ducking == false or on_ground != 0) and backflip == false and skidding == false and sliding == false and $ButtjumpLandTimer.time_left == 0:
-		$Control/AnimatedSprite.scale.x = -1
-		if velocity.x == 0:
-			velocity.x -= WALK_ADD
-		if running == 1:
-				velocity.x -= RUN_ACCEL / 60
-		else: velocity.x -= WALK_ACCEL / 60
+			
+			# Air turning
+			else: velocity.x += TURN_ACCEL * delta
 		
-		# Skidding and air turning
-		if velocity.x > 0:
-			if on_ground == 0 and velocity.x >= WALK_MAX:
+		if Input.is_action_pressed("move_left"):
+			$Control/AnimatedSprite.scale.x = -1
+			if velocity.x <= 0:
+				$Control/AnimatedSprite.scale.x = -1
+				if velocity.x > -WALK_ADD:
+					velocity.x = -WALK_ADD
+				if running == 1:
+						velocity.x -= RUN_ACCEL * delta
+				else: velocity.x -= WALK_ACCEL * delta
+			
+			# Skidding
+			elif on_ground == 0 and abs(velocity.x) >= WALK_MAX:
 				if skidding == false:
 					skidding = true
 					$SFX/Skid.play()
-			else: velocity.x -= TURN_ACCEL / 60
-
-	else: if backflip == false:
-		if sliding == false:
-			velocity.x *= FRICTION
-		else: velocity.x *= SLIDE_FRICTION
+			
+			# Air turning
+			else: velocity.x -= TURN_ACCEL * delta
 
 	# Speedcap
 	if sliding == false:
@@ -186,9 +189,22 @@ func _physics_process(delta):
 		if velocity.x <= -RUN_MAX:
 			velocity.x = -RUN_MAX
 
-	# Don't slide on the ground
-	if abs(velocity.x) < 50:
-		velocity.x = 0
+	# Friction
+	if backflip == false and (skidding == true or (ducking == true and on_ground == 0) or (not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"))):
+		
+		# Turn when skidding
+		if skidding == true:
+			if velocity.x > 0:
+				$Control/AnimatedSprite.scale.x = -1
+			if velocity.x < 0:
+				$Control/AnimatedSprite.scale.x = 1
+		
+		# Friction
+		if sliding == false:
+			velocity.x *= FRICTION
+		elif on_ground == 0: velocity.x *= SLIDE_FRICTION
+		if abs(velocity.x) < 80:
+			velocity.x = 0
 
 	# Stop skidding if low velocity
 	if abs(velocity.x) < 75 and skidding == true:
@@ -205,7 +221,15 @@ func _physics_process(delta):
 		velocity.y += BUTTJUMP_GRAVITY
 		if velocity.y > BUTTJUMP_FALL_SPEED: velocity.y = BUTTJUMP_FALL_SPEED
 
-	velocity = move_and_slide(velocity, FLOOR, 30)
+	# Move
+	var velocityold = velocity
+	if on_ground == 0 and sliding == false:
+		velocity = move_and_slide_with_snap(velocity, Vector2(40,80), FLOOR)
+	else: velocity = move_and_slide(velocity, FLOOR)
+	if (sliding == false or abs(velocityold.x) > abs(velocity.x)) and abs(velocity.x) > 50 and on_ground == 0:
+		velocity.x = velocityold.x
+		if sliding == true and velocity.x != 0:
+			velocity.x *= SLIDE_FRICTION
 
 	# Floor check
 	if is_on_floor():
@@ -361,6 +385,7 @@ func _physics_process(delta):
 			if $Control/AnimatedSprite.animation == ("jump") or $Control/AnimatedSprite.animation == ("fall_transition") or  $Control/AnimatedSprite.animation == ("jump_small") or $Control/AnimatedSprite.animation == ("fall_transition_small"):
 				set_animation("fall_transition")
 			else: set_animation("fall")
+		else: set_animation("jump")
 
 	# Duck Hitboxes
 	if ducking == true or sliding == true or state == "small" or buttjump == true:

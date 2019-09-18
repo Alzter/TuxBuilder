@@ -24,8 +24,6 @@ func _ready():
 		$Popup/Panel/VBoxContainer/Zaxis/SpinBox.value = get_parent().z_axis
 		$Popup/Panel/VBoxContainer/Zaxis.show()
 	
-	print(get_parent().original_name)
-	
 	# Set solid checkbox
 	if get_parent().original_name == "TileMap":
 		if layer.get_collision_layer() != 0:

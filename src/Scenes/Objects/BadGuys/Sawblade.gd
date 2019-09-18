@@ -4,7 +4,6 @@ var clockwise = true
 var direction = 90
 var start = false
 var moving = true
-var inactive = 0
 
 const MOVE_SPEED = 4
 
@@ -41,26 +40,16 @@ func _physics_process(delta):
 	
 	if moving == false: return
 	
-	inactive -= 1
-	if inactive <= 0: inactive = 0
-	
 	if $Area2D.get_overlapping_bodies().size() == 0:
-		inactive += 2
 		move(-MOVE_SPEED)
 		if clockwise == true:
 			direction += 90
 		else: direction -= 90
 	
 	if $Wall.is_colliding():
-		inactive += 2
 		if clockwise == true:
 			direction -= 90
 		else: direction += 90
-	
-	if inactive == 8:
-		moving = false
-		$Sparks.emitting = false
-		return
 	
 	$Wall.rotation_degrees = direction - 90
 	$Sparks.emitting = true
