@@ -1,41 +1,41 @@
 [gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scenes/Objects/Bonus/Trampoline_Portable.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/Objects/Trampoline/trampoline_static-1.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/Objects/Trampoline/trampoline_static-2.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/Objects/Trampoline/trampoline_static-3.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Objects/Trampoline/trampoline_static-4.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/Objects/Trampoline/trampoline_static-5.png" type="Texture" id=6]
-[ext_resource path="res://Sprites/Objects/Trampoline/trampoline_portable-0.png" type="Texture" id=7]
-[ext_resource path="res://Sprites/Objects/Trampoline/trampoline_static-0.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Objects/Trampoline/trampoline_portable-1.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Objects/Trampoline/trampoline_portable-2.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Objects/Trampoline/trampoline_portable-3.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Objects/Trampoline/trampoline_portable-4.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Objects/Trampoline/trampoline_portable-5.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Objects/Trampoline/trampoline_portable-6.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Objects/Trampoline/trampoline_portable-0.png" type="Texture" id=8]
 [ext_resource path="res://Audio/SoundEffects/Objects/trampoline.wav" type="AudioStream" id=9]
 [ext_resource path="res://Audio/SoundEffects/Player/thud.ogg" type="AudioStream" id=10]
 
-[sub_resource type="SpriteFrames" id=4]
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ],
 "loop": false,
 "name": "bounce",
 "speed": 25.0
 }, {
-"frames": [ ExtResource( 7 ) ],
+"frames": [ ExtResource( 8 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 8 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 6 ), ExtResource( 7 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 7 ), ExtResource( 8 ) ],
 "loop": false,
 "name": "land",
 "speed": 25.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 32, 8 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 15.5, 14 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 15.5, 22 )
 
 [node name="KinematicBody2D" type="KinematicBody2D" groups=[
@@ -48,8 +48,8 @@ script = ExtResource( 1 )
 rect_pivot_offset = Vector2( 0, -2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
-frames = SubResource( 4 )
-offset = Vector2( 0, -6 )
+frames = SubResource( 1 )
+offset = Vector2( 0, -14 )
 
 [node name="SolidTimer" type="Timer" parent="."]
 one_shot = true
@@ -59,11 +59,11 @@ position = Vector2( 0, 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GrabRadius"]
 position = Vector2( 0, 6 )
-shape = SubResource( 5 )
+shape = SubResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 2 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
@@ -71,7 +71,7 @@ collision_mask = 31
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 0, -2 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="Trampoline" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
