@@ -211,18 +211,6 @@ func _physics_process(delta):
 		skidding = false
 		velocity.x = 0
 
-	# Gravity
-	if $ButtjumpTimer.time_left > 0:
-		velocity *= 0.5
-	elif buttjump == false or velocity.y <= 0:
-		if on_ground:
-			velocity.y += GRAVITY
-			if velocity.y > FALL_SPEED: velocity.y = FALL_SPEED
-	else:
-		if on_ground:
-			velocity.y += BUTTJUMP_GRAVITY
-			if velocity.y > BUTTJUMP_FALL_SPEED: velocity.y = BUTTJUMP_FALL_SPEED
-
 	# Move
 	var oldvelocity = velocity
 	if on_ground == 0:
@@ -230,6 +218,18 @@ func _physics_process(delta):
 	else: velocity = move_and_slide(velocity, FLOOR)
 	if abs(velocity.x) > abs(oldvelocity.x) and $ButtjumpLandTimer.time_left > 0:
 		start_sliding()
+
+	# Gravity
+	if $ButtjumpTimer.time_left > 0:
+		velocity *= 0.5
+	elif buttjump == false or velocity.y <= 0:
+		if on_ground or (sliding and abs(oldvelocity.x) < abs(velocity.x)):
+			velocity.y += GRAVITY
+			if velocity.y > FALL_SPEED: velocity.y = FALL_SPEED
+	else:
+		if on_ground:
+			velocity.y += BUTTJUMP_GRAVITY
+			if velocity.y > BUTTJUMP_FALL_SPEED: velocity.y = BUTTJUMP_FALL_SPEED
 
 	# Floor check
 	if is_on_floor():
