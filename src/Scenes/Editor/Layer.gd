@@ -9,8 +9,6 @@ func _ready():
 	$Panel/Label.text = str(layername)
 	$Panel/Panel/Zaxis.text = str(z_axis)
 	$Panel/Icon.texture = load(str("res://Sprites/Editor/LayerIcons/", type, ".png"))
-	if not is_in_group("layer"):
-		add_to_group("layer")
 	if layername == get_tree().current_scene.get_node("Editor").layer_selected and get_tree().current_scene.get_node(str("Level/",layername)).filepath != "":
 		settings()
 

@@ -4,6 +4,7 @@
 [ext_resource path="res://Scenes/Editor/Layers/TileMap.gd" type="Script" id=2]
 
 [node name="TileMap" type="TileMap" groups=[
+"layers",
 "tilemap",
 ]]
 tile_set = ExtResource( 1 )
