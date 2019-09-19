@@ -215,26 +215,21 @@ func _physics_process(delta):
 	if $ButtjumpTimer.time_left > 0:
 		velocity *= 0.5
 	elif buttjump == false or velocity.y <= 0:
-		velocity.y += GRAVITY
-		if velocity.y > FALL_SPEED: velocity.y = FALL_SPEED
+		if on_ground:
+			velocity.y += GRAVITY
+			if velocity.y > FALL_SPEED: velocity.y = FALL_SPEED
 	else:
-		velocity.y += BUTTJUMP_GRAVITY
-		if velocity.y > BUTTJUMP_FALL_SPEED: velocity.y = BUTTJUMP_FALL_SPEED
+		if on_ground:
+			velocity.y += BUTTJUMP_GRAVITY
+			if velocity.y > BUTTJUMP_FALL_SPEED: velocity.y = BUTTJUMP_FALL_SPEED
 
 	# Move
-	var velocityold = velocity
-	if on_ground == 0 and sliding == false:
-		velocity = move_and_slide_with_snap(velocity, Vector2(40,80), FLOOR)
+	var oldvelocity = velocity
+	if on_ground == 0:
+		velocity = move_and_slide_with_snap(velocity, Vector2(10, 20), FLOOR)
 	else: velocity = move_and_slide(velocity, FLOOR)
-	
-	# Walk up slopes
-	if (sliding == false or abs(velocityold.x) > abs(velocity.x)) and abs(velocity.x) > 50 and on_ground == 0:
-		if $ButtjumpLandTimer.time_left > 0 and abs(velocityold.x) < abs(velocity.x):
-			start_sliding()
-		else:
-			velocity.x = velocityold.x
-			if sliding == true and velocity.x != 0:
-				velocity.x *= SLIDE_FRICTION
+	if abs(velocity.x) > abs(oldvelocity.x) and $ButtjumpLandTimer.time_left > 0:
+		start_sliding()
 
 	# Floor check
 	if is_on_floor():
@@ -322,6 +317,7 @@ func _physics_process(delta):
 			$AnimationPlayer.play("Stop")
 			set_animation("jump")
 			jumpheld = JUMP_BUFFER_TIME + 1
+			on_ground = LEDGE_JUMP + 1
 			jumpcancel = true
 			sliding = false
 			skidding = false
@@ -372,7 +368,7 @@ func _physics_process(delta):
 	elif sliding == true:
 		set_animation("jump") # Placeholder until slide animation is added
 	else:
-		if on_ground == 0:
+		if on_ground <= LEDGE_JUMP:
 			if $ButtjumpLandTimer.time_left > 0:
 				set_animation("buttjumpland")
 			elif skidding == true:
@@ -494,6 +490,7 @@ func bounce(low, high, cancellable):
 	sliding = false
 	backflip = false
 	buttjump = false
+	on_ground = LEDGE_JUMP + 1
 	$ButtjumpTimer.stop()
 	$ButtjumpLandTimer.stop()
 	$AnimationPlayer.play("Stop")
