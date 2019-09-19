@@ -31,5 +31,5 @@ modulate = Color( 0, 0, 0, 1 )
 tint = Color( 0, 0, 0, 1 )
 original_name = "Background"
 
-[node name="@ParallaxBackground@99" parent="Layer" instance=ExtResource( 4 )]
-scroll_offset = Vector2( 667, 128.58 )
+[node name="ParallaxBackground" parent="Layer" instance=ExtResource( 4 )]
+scroll_offset = Vector2( 443, 128.502 )

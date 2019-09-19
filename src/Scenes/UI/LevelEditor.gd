@@ -38,6 +38,11 @@ func _ready():
 
 func _process(_delta):
 	layerfile = get_tree().current_scene.get_node(str("Level/", layer_selected))
+	if layerfile == null:
+		layer_selected == ""
+		layer_selected_type = ""
+		print("ERROR! The level unloaded because I don't know. Try restarting Godot.")
+	
 	if stop == true:
 		$SelectedArea.visible = false
 		$EraserSprite.visible = false

@@ -1,16 +1,39 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/Editor/Layers/Backgrounds/Background.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/Backgrounds/Snow/mountainsplaceholder.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Backgrounds/Snow/arcticmountains-sky.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Backgrounds/Snow/arcticmountains-bg.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Backgrounds/Snow/arcticmountains-fg.png" type="Texture" id=4]
 
 [node name="ParallaxBackground" type="ParallaxBackground"]
 script = ExtResource( 1 )
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
-motion_scale = Vector2( 0.2, 0.2 )
+[node name="Sky" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0, 0 )
 motion_offset = Vector2( 0, -600 )
-motion_mirroring = Vector2( 1664, 0 )
+motion_mirroring = Vector2( 1700, 0 )
 
-[node name="Sprite" type="Sprite" parent="ParallaxLayer"]
+[node name="Sprite" type="Sprite" parent="Sky"]
 texture = ExtResource( 2 )
+centered = false
+
+[node name="BG" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.18, 0.2 )
+motion_offset = Vector2( 0, -350 )
+motion_mirroring = Vector2( 1530, 0 )
+
+[node name="Sprite" type="Sprite" parent="BG"]
+scale = Vector2( 1, 0.5 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="FG" type="ParallaxLayer" parent="."]
+editor/display_folded = true
+motion_scale = Vector2( 0.2, 0.2 )
+motion_offset = Vector2( 0, -400 )
+motion_mirroring = Vector2( 1700, 0 )
+
+[node name="Sprite" type="Sprite" parent="FG"]
+scale = Vector2( 1, 0.5 )
+texture = ExtResource( 4 )
 centered = false

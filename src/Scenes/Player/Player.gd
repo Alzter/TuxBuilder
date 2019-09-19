@@ -166,6 +166,8 @@ func _physics_process(delta):
 		if Input.is_action_pressed("move_left"):
 			$Control/AnimatedSprite.scale.x = -1
 			if velocity.x <= 0:
+				
+				# Moving
 				$Control/AnimatedSprite.scale.x = -1
 				if velocity.x > -WALK_ADD:
 					velocity.x = -WALK_ADD
@@ -214,7 +216,7 @@ func _physics_process(delta):
 	# Move
 	var oldvelocity = velocity
 	if on_ground == 0:
-		velocity = move_and_slide_with_snap(velocity, Vector2(10, 20), FLOOR)
+		velocity = move_and_slide_with_snap(velocity, Vector2(0, 20), FLOOR)
 	else: velocity = move_and_slide(velocity, FLOOR)
 	if abs(velocity.x) > abs(oldvelocity.x) and $ButtjumpLandTimer.time_left > 0:
 		start_sliding()
@@ -223,7 +225,7 @@ func _physics_process(delta):
 	if $ButtjumpTimer.time_left > 0:
 		velocity *= 0.5
 	elif buttjump == false or velocity.y <= 0:
-		if on_ground or (sliding and abs(oldvelocity.x) < abs(velocity.x)):
+		if on_ground:
 			velocity.y += GRAVITY
 			if velocity.y > FALL_SPEED: velocity.y = FALL_SPEED
 	else:
@@ -424,7 +426,7 @@ func _physics_process(delta):
 		get_parent().add_child(fireball) # Shoot fireball as child of player
 
 	# Camera Positioning
-	if abs(velocity.x) > 0:
+	if abs(velocity.x) > WALK_ADD:
 		camera_offset += 2 * (velocity.x / abs(velocity.x))
 		if abs(camera_offset) >= (get_viewport().size.x * 0.1) * get_tree().current_scene.get_node("Camera2D").zoom.x:
 			camera_offset = (get_viewport().size.x * 0.1) * get_tree().current_scene.get_node("Camera2D").zoom.x * (camera_offset / abs(camera_offset))

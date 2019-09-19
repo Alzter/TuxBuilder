@@ -25,6 +25,7 @@ func _ready():
 func _process(_delta):
 	if camera_zoom_speed < 1: camera_zoom_speed = 1
 	if camera_zoom < 0.25: camera_zoom = 0.25
+	if camera_zoom > 1.5: camera_zoom = 1.5
 	$Camera2D.zoom.x = $Camera2D.zoom.x + (camera_zoom - $Camera2D.zoom.x) / camera_zoom_speed
 	$Camera2D.zoom.y = $Camera2D.zoom.x
 	
