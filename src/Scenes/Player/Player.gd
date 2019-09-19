@@ -226,10 +226,15 @@ func _physics_process(delta):
 	if on_ground == 0 and sliding == false:
 		velocity = move_and_slide_with_snap(velocity, Vector2(40,80), FLOOR)
 	else: velocity = move_and_slide(velocity, FLOOR)
+	
+	# Walk up slopes
 	if (sliding == false or abs(velocityold.x) > abs(velocity.x)) and abs(velocity.x) > 50 and on_ground == 0:
-		velocity.x = velocityold.x
-		if sliding == true and velocity.x != 0:
-			velocity.x *= SLIDE_FRICTION
+		if $ButtjumpLandTimer.time_left > 0 and abs(velocityold.x) < abs(velocity.x):
+			start_sliding()
+		else:
+			velocity.x = velocityold.x
+			if sliding == true and velocity.x != 0:
+				velocity.x *= SLIDE_FRICTION
 
 	# Floor check
 	if is_on_floor():
@@ -277,10 +282,7 @@ func _physics_process(delta):
 		elif Input.is_action_pressed("duck") and sliding == false and $ButtjumpLandTimer.time_left == 0:
 			if abs(velocity.x) < WALK_MAX:
 				if state != "small": ducking = true
-			else:
-				sliding = true
-				$SFX/Skid.play()
-				velocity.x += WALK_ADD * $Control/AnimatedSprite.scale.x
+			else: start_sliding()
 	elif $StandWindow.is_colliding() == true and sliding == false and state != "small": ducking = true
 	else: ducking == false
 
@@ -375,7 +377,7 @@ func _physics_process(delta):
 				set_animation("buttjumpland")
 			elif skidding == true:
 				set_animation("skid")
-			elif abs(velocity.x) >= 20:
+			elif abs(velocity.x) >= WALK_ADD / 2:
 				$Control/AnimatedSprite.speed_scale = abs(velocity.x) * 0.0035
 				if $Control/AnimatedSprite.speed_scale < 0.4:
 					$Control/AnimatedSprite.speed_scale = 0.4
@@ -503,3 +505,10 @@ func bounce(low, high, cancellable):
 	else:
 		velocity.y = -low
 		jumpcancel = false
+
+# Activate sliding
+func start_sliding():
+	$ButtjumpLandTimer.stop()
+	sliding = true
+	$SFX/Skid.play()
+	velocity.x += WALK_ADD * $Control/AnimatedSprite.scale.x

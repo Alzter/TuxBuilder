@@ -26,6 +26,7 @@ func _process(_delta):
 func _on_Button_pressed():
 	get_tree().current_scene.get_node("Editor").layer_selected = layername
 	get_tree().current_scene.get_node("Editor").layer_selected_type = type
+	get_tree().current_scene.get_node("Editor").layerfile = get_tree().current_scene.get_node(str("Level/", layername))
 
 func _on_LayerSettings_pressed():
 	settings()

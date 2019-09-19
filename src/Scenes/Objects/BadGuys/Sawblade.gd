@@ -1,6 +1,6 @@
 extends Node2D
 
-var clockwise = true
+var clockwise = false
 var direction = 90
 var start = false
 var moving = true

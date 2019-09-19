@@ -1,14 +1,17 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scenes/Objects/Misc/SpawnPoint.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Objects/Misc/SpawnPoint.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Editor/Layers/TileMap.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Tilesets/LevelTiles.tres" type="TileSet" id=4]
 [ext_resource path="res://Scenes/Editor/Layers/TileMap.gd" type="Script" id=5]
-[ext_resource path="res://Scenes/Objects/Bonus/Trampoline_Portable.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/Objects/Bonus/Trampoline_Portable.gd" type="Script" id=7]
-[ext_resource path="res://Scenes/Objects/Bonus/Trampoline_Static.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/Objects/Bonus/Trampoline_Static.gd" type="Script" id=9]
+[ext_resource path="res://Scenes/Editor/Layers/Background.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Editor/Layers/Background.gd" type="Script" id=7]
+[ext_resource path="res://Scenes/Editor/Layers/Backgrounds/Snow.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Editor/Layers/Backgrounds/Background.gd" type="Script" id=9]
+[ext_resource path="res://Scenes/Editor/Layers/Particles.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Editor/Layers/Particles/Snow.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Editor/Layers/Particles/Particles.gd" type="Script" id=12]
 
 [node name="Level" type="Node2D"]
 
@@ -23,7 +26,6 @@ script = ExtResource( 2 )
 "layers",
 "tilemap",
 ] instance=ExtResource( 3 )]
-modulate = Color( 1, 1, 1, 0.25 )
 z_index = -100
 tile_set = ExtResource( 4 )
 cell_size = Vector2( 32, 32 )
@@ -60,7 +62,6 @@ original_name = "TileMap"
 "layers",
 "tilemap",
 ] instance=ExtResource( 3 )]
-modulate = Color( 1, 1, 1, 0.25 )
 z_index = 100
 tile_set = ExtResource( 4 )
 cell_size = Vector2( 32, 32 )
@@ -75,65 +76,30 @@ tint = Color( 1, 1, 1, 1 )
 filepath = ""
 original_name = "TileMap"
 
-[node name="Trampoline_Portable" type="KinematicBody2D" parent="." groups=[
-"trampoline",
-] instance=ExtResource( 6 )]
-position = Vector2( 496, 176 )
-collision_mask = 31
+[node name="Layer" type="Node2D" parent="." instance=ExtResource( 6 )]
+modulate = Color( 0, 0, 0, 1 )
 script = ExtResource( 7 )
+scroll_speed = Vector2( 1, 1 )
+move_speed = Vector2( 0, 0 )
+moving = false
+tint = Color( 0, 0, 0, 1 )
+filepath = "res://Scenes/Editor/Layers/Backgrounds"
+original_name = "Background"
 
-[node name="Trampoline_Static" type="KinematicBody2D" parent="." groups=[
-"trampoline",
-] instance=ExtResource( 8 )]
-position = Vector2( 496, 240 )
-collision_mask = 31
+[node name="@ParallaxBackground@99" type="ParallaxBackground" parent="Layer" instance=ExtResource( 8 )]
+scroll_offset = Vector2( 443, 128.58 )
 script = ExtResource( 9 )
 
-[node name="@Trampoline_Portable@32" type="KinematicBody2D" parent="." groups=[
-"trampoline",
-] instance=ExtResource( 6 )]
-position = Vector2( 496, 112 )
-collision_mask = 31
+[node name="Layer15" type="Node2D" parent="." instance=ExtResource( 10 )]
 script = ExtResource( 7 )
+scroll_speed = Vector2( 1, 1 )
+move_speed = Vector2( 0, 0 )
+moving = false
+tint = Color( 1, 1, 1, 1 )
+filepath = "res://Scenes/Editor/Layers/Particles"
+original_name = "Particles"
 
-[node name="@Trampoline_Portable@33" type="KinematicBody2D" parent="." groups=[
-"trampoline",
-] instance=ExtResource( 6 )]
-position = Vector2( 496, 48 )
-collision_mask = 31
-script = ExtResource( 7 )
-
-[node name="@Trampoline_Portable@34" type="KinematicBody2D" parent="." groups=[
-"trampoline",
-] instance=ExtResource( 6 )]
-position = Vector2( 496, -16 )
-collision_mask = 31
-script = ExtResource( 7 )
-
-[node name="@Trampoline_Portable@35" type="KinematicBody2D" parent="." groups=[
-"trampoline",
-] instance=ExtResource( 6 )]
-position = Vector2( 496, -80 )
-collision_mask = 31
-script = ExtResource( 7 )
-
-[node name="@Trampoline_Portable@36" type="KinematicBody2D" parent="." groups=[
-"trampoline",
-] instance=ExtResource( 6 )]
-position = Vector2( 496, -144 )
-collision_mask = 31
-script = ExtResource( 7 )
-
-[node name="@Trampoline_Portable@37" type="KinematicBody2D" parent="." groups=[
-"trampoline",
-] instance=ExtResource( 6 )]
-position = Vector2( 496, -208 )
-collision_mask = 31
-script = ExtResource( 7 )
-
-[node name="@Trampoline_Portable@38" type="KinematicBody2D" parent="." groups=[
-"trampoline",
-] instance=ExtResource( 6 )]
-position = Vector2( 304, 80 )
-collision_mask = 31
-script = ExtResource( 7 )
+[node name="@ParallaxBackground@372" type="ParallaxBackground" parent="Layer15" instance=ExtResource( 11 )]
+layer = 1
+scroll_offset = Vector2( 443, 128.58 )
+script = ExtResource( 12 )
