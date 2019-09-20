@@ -23,8 +23,6 @@ var movetime_right = 0
 var player_drag_half = "bottom"
 var player_hovered = false
 var stop = false
-var files = []
-var files2 = []
 var dir = Directory.new()
 
 func _ready():
@@ -369,26 +367,26 @@ func update_objects(): # Update the objects list from the editor using the scene
 		child.queue_free()
 	
 	# Find all the folders in Scenes/Objects
-	list_files_in_directory("res://Scenes/Objects/")
+	var categories = list_files_in_directory("res://Scenes/Objects/")
 	
 	# For every folder in Scenes/Objects
-	for i in files.size():
+	for i in categories.size():
 		
 		# Create a category
 		var child = load("res://Scenes/Editor/Category.tscn").instance()
-		var category = files[i]
+		var category = categories[i]
 		child.item = category
 		$UI/SideBar/ScrollContainer/SidebarList.add_child(child)
 		
 		# Then for every file inside each folder
-		list_files_in_directory_2(str("res://Scenes/Objects/", category, "/"))
-		for i in files2.size():
+		var objects = list_files_in_directory(str("res://Scenes/Objects/", category, "/"))
+		for i in objects.size():
 			
 			# If it's a scene, create an object button inside that category
-			if ".tscn" in files2[i]:
+			if ".tscn" in objects[i]:
 				var child2 = load("res://Scenes/Editor/Object.tscn").instance()
 				child2.object_category = category
-				child2.object_type = files2[i]
+				child2.object_type = objects[i]
 				child.get_node("VBoxContainer/Content").add_child(child2)
 				
 				# Set the object selected to this object if none are selected
@@ -433,11 +431,11 @@ func _on_LayerAdd_button_down():
 	$UI/AddLayer/VBoxContainer/OptionButton.clear()
 	
 	# Get all the files from Scenes/Editor/Layers
-	list_files_in_directory("res://Scenes/Editor/Layers/")
-	for i in files.size():
+	var layers = list_files_in_directory("res://Scenes/Editor/Layers/")
+	for i in layers.size():
 		# If the file is a scene, add it to the OptionButton
-		if ".tscn" in files[i]:
-			var item = files[i]
+		if ".tscn" in layers[i]:
+			var item = layers[i]
 			item.erase(item.length() - 5,5)
 			$UI/AddLayer/VBoxContainer/OptionButton.add_icon_item(load(str("res://Sprites/Editor/LayerIcons/", item, ".png")),item)
 	
@@ -504,7 +502,7 @@ func select_first_solid_tilemap():
 				return
 
 func list_files_in_directory(path):
-    files = []
+    var files = []
     dir = Directory.new()
     dir.open(path)
     dir.list_dir_begin()
@@ -519,23 +517,6 @@ func list_files_in_directory(path):
     dir.list_dir_end()
 
     return files
-
-func list_files_in_directory_2(path): # Dupe of list files in directory used to list sub-files
-    files2 = []
-    dir = Directory.new()
-    dir.open(path)
-    dir.list_dir_begin()
-
-    while true:
-        var file = dir.get_next()
-        if file == "":
-            break
-        elif not file.begins_with("."):
-            files2.append(file)
-
-    dir.list_dir_end()
-
-    return files2
 
 func _on_ZoomIn_pressed():
 	get_tree().current_scene.camera_zoom -= 0.25
