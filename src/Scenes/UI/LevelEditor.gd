@@ -370,23 +370,22 @@ func update_objects(): # Update the objects list from the editor using the scene
 	var categories = list_files_in_directory("res://Scenes/Objects/")
 	
 	# For every folder in Scenes/Objects
-	for i in categories.size():
+	for category in categories:
 		
 		# Create a category
 		var child = load("res://Scenes/Editor/Category.tscn").instance()
-		var category = categories[i]
 		child.item = category
 		$UI/SideBar/ScrollContainer/SidebarList.add_child(child)
 		
 		# Then for every file inside each folder
 		var objects = list_files_in_directory(str("res://Scenes/Objects/", category, "/"))
-		for i in objects.size():
+		for object in objects:
 			
 			# If it's a scene, create an object button inside that category
-			if ".tscn" in objects[i]:
+			if ".tscn" in object:
 				var child2 = load("res://Scenes/Editor/Object.tscn").instance()
 				child2.object_category = category
-				child2.object_type = objects[i]
+				child2.object_type = object
 				child.get_node("VBoxContainer/Content").add_child(child2)
 				
 				# Set the object selected to this object if none are selected
@@ -432,10 +431,10 @@ func _on_LayerAdd_button_down():
 	
 	# Get all the files from Scenes/Editor/Layers
 	var layers = list_files_in_directory("res://Scenes/Editor/Layers/")
-	for i in layers.size():
+	for layer in layers:
 		# If the file is a scene, add it to the OptionButton
-		if ".tscn" in layers[i]:
-			var item = layers[i]
+		if ".tscn" in layer:
+			var item = layer
 			item.erase(item.length() - 5,5)
 			$UI/AddLayer/VBoxContainer/OptionButton.add_icon_item(load(str("res://Sprites/Editor/LayerIcons/", item, ".png")),item)
 	
