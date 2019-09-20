@@ -107,18 +107,18 @@ func _process(_delta):
 	else: movetime_right = 0
 	
 	# Round player position
-	get_tree().current_scene.get_node("Player").position.x = (floor(get_tree().current_scene.get_node("Player").position.x / 32) * 32) + 16
-	get_tree().current_scene.get_node("Player").position.y = round(get_tree().current_scene.get_node("Player").position.y / 32) * 32
+	UIHelpers.get_player().position.x = (floor(UIHelpers.get_player().position.x / 32) * 32) + 16
+	UIHelpers.get_player().position.y = round(UIHelpers.get_player().position.y / 32) * 32
 	
 	# Delay the player movement by one frame to sync with the camera
 	if movetime_up != 1 and movetime_up != 0:
-		get_tree().current_scene.get_node("Player").position.y -= CAMERA_MOVE_SPEED
+		UIHelpers.get_player().position.y -= CAMERA_MOVE_SPEED
 	if movetime_down != 1 and movetime_down != 0:
-		get_tree().current_scene.get_node("Player").position.y += CAMERA_MOVE_SPEED
+		UIHelpers.get_player().position.y += CAMERA_MOVE_SPEED
 	if movetime_left != 1 and movetime_left != 0:
-		get_tree().current_scene.get_node("Player").position.x -= CAMERA_MOVE_SPEED
+		UIHelpers.get_player().position.x -= CAMERA_MOVE_SPEED
 	if movetime_right != 1 and movetime_right != 0:
-		get_tree().current_scene.get_node("Player").position.x += CAMERA_MOVE_SPEED
+		UIHelpers.get_player().position.x += CAMERA_MOVE_SPEED
 	
 	# Disable rectangle select for objects
 	if category_selected == "Objects":
@@ -140,7 +140,7 @@ func _process(_delta):
 		dragging_object = true
 		object_dragged = "Player"
 		get_tree().current_scene.get_node("Player/Control/AnimatedSprite").scale += Vector2(0.25,0.25)
-		if $SelectedTile.position == Vector2(get_tree().current_scene.get_node("Player").position.x,get_tree().current_scene.get_node("Player").position.y - 16):
+		if $SelectedTile.position == Vector2(UIHelpers.get_player().position.x,UIHelpers.get_player().position.y - 16):
 			player_drag_half = "top"
 		else: player_drag_half = "bottom"
 	
@@ -176,10 +176,10 @@ func _process(_delta):
 		if object_dragged != "Player":
 			get_tree().current_scene.get_node(str("Level/", object_dragged)).position = $SelectedTile.position
 		else:
-			get_tree().current_scene.get_node("Player").position = $SelectedTile.position
+			UIHelpers.get_player().position = $SelectedTile.position
 			if player_drag_half == "top":
-				get_tree().current_scene.get_node("Player").position.y += 16
-			else: get_tree().current_scene.get_node("Player").position.y -= 16
+				UIHelpers.get_player().position.y += 16
+			else: UIHelpers.get_player().position.y -= 16
 	
 	if Input.is_action_pressed("click_left") and dragging_object == false:
 		# If the mouse isn't on the level editor UI or zoom buttons
@@ -272,7 +272,7 @@ func update_selected_tile():
 		$SelectedTile.position.x = (tile_selected.x + 0.5) * 32
 		$SelectedTile.position.y = (tile_selected.y + 0.5) * 32
 	
-	if ($SelectedTile.position == Vector2(get_tree().current_scene.get_node("Player").position.x,get_tree().current_scene.get_node("Player").position.y - 16) and get_tree().current_scene.get_node("Player").state != "small") or $SelectedTile.position == Vector2(get_tree().current_scene.get_node("Player").position.x,get_tree().current_scene.get_node("Player").position.y + 16) and dragging_object == false:
+	if ($SelectedTile.position == Vector2(UIHelpers.get_player().position.x,UIHelpers.get_player().position.y - 16) and UIHelpers.get_player().state != "small") or $SelectedTile.position == Vector2(UIHelpers.get_player().position.x,UIHelpers.get_player().position.y + 16) and dragging_object == false:
 		player_hovered = true
 		return
 	
