@@ -19,6 +19,10 @@ config/name="Tux Builder"
 run/main_scene="res://Scenes/UI/MainMenu.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+UIHelpers="*res://Scenes/UI/Helpers.gd"
+
 [debug]
 
 settings/crash_handler/message="Please report this bug at https://github.com/Alzter/TuxBuilder/issues"

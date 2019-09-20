@@ -53,8 +53,8 @@ func _process(_delta):
 	$UI/SideBar/VBoxContainer/TilesButton.text = ""
 	$UI/SideBar/VBoxContainer/ObjectsButton.text = ""
 	
-	$Grid.rect_size = Vector2((get_viewport().size.x + 32) * 4 * get_tree().current_scene.get_node("Camera2D").zoom.x, (get_viewport().size.y + 32) * 4 * get_tree().current_scene.get_node("Camera2D").zoom.y)
-	$Grid.rect_position = Vector2(get_tree().current_scene.get_node("Camera2D").position.x - (get_viewport().size.x / 2) * get_tree().current_scene.get_node("Camera2D").zoom.x, get_tree().current_scene.get_node("Camera2D").position.y - (get_viewport().size.y / 2) * get_tree().current_scene.get_node("Camera2D").zoom.y)
+	$Grid.rect_size = Vector2((get_viewport().size.x + 32) * 4 * UIHelpers.get_camera().zoom.x, (get_viewport().size.y + 32) * 4 * UIHelpers.get_camera().zoom.y)
+	$Grid.rect_position = Vector2(UIHelpers.get_camera().position.x - (get_viewport().size.x / 2) * UIHelpers.get_camera().zoom.x, UIHelpers.get_camera().position.y - (get_viewport().size.y / 2) * UIHelpers.get_camera().zoom.y)
 	$Grid.rect_position = Vector2(floor($Grid.rect_position.x / 32) * 32, floor($Grid.rect_position.y / 32) * 32)
 	if layer_selected_type == "TileMap" and category_selected == "Tiles":
 		$Grid.rect_position += Vector2(fmod(layerfile.position.x, 32),fmod(layerfile.position.y, 32))
@@ -85,25 +85,25 @@ func _process(_delta):
 	
 	# Navigation
 	if Input.is_action_pressed("ui_up"):
-		get_tree().current_scene.get_node("Camera2D").position.y -= CAMERA_MOVE_SPEED
+		UIHelpers.get_camera().position.y -= CAMERA_MOVE_SPEED
 		movetime_up += 1
 	elif Input.is_action_just_released("ui_up"): movetime_up = -1
 	else: movetime_up = 0
 	
 	if Input.is_action_pressed("ui_down"):
-		get_tree().current_scene.get_node("Camera2D").position.y += CAMERA_MOVE_SPEED
+		UIHelpers.get_camera().position.y += CAMERA_MOVE_SPEED
 		movetime_down += 1
 	elif Input.is_action_just_released("ui_down"): movetime_down = -1
 	else: movetime_down = 0
 	
 	if Input.is_action_pressed("ui_left"):
-		get_tree().current_scene.get_node("Camera2D").position.x -= CAMERA_MOVE_SPEED
+		UIHelpers.get_camera().position.x -= CAMERA_MOVE_SPEED
 		movetime_left += 1
 	elif Input.is_action_just_released("ui_left"): movetime_left = -1
 	else: movetime_left = 0
 	
 	if Input.is_action_pressed("ui_right"):
-		get_tree().current_scene.get_node("Camera2D").position.x += CAMERA_MOVE_SPEED
+		UIHelpers.get_camera().position.x += CAMERA_MOVE_SPEED
 		movetime_right += 1
 	elif Input.is_action_just_released("ui_right"): movetime_right = -1
 	else: movetime_right = 0
@@ -133,7 +133,7 @@ func _process(_delta):
 	
 	# Placing tiles / objects
 	if layer_selected_type == "TileMap" and category_selected == "Tiles":
-		tile_selected = layerfile.world_to_map(Vector2(get_global_mouse_position().x - ((1 - layerfile.scroll_speed.x) * get_tree().current_scene.get_node("Camera2D").position.x), get_global_mouse_position().y - ((1 - layerfile.scroll_speed.y) * get_tree().current_scene.get_node("Camera2D").position.y)))
+		tile_selected = layerfile.world_to_map(Vector2(get_global_mouse_position().x - ((1 - layerfile.scroll_speed.x) * UIHelpers.get_camera().position.x), get_global_mouse_position().y - ((1 - layerfile.scroll_speed.y) * UIHelpers.get_camera().position.y)))
 	else: tile_selected = $TileMap.world_to_map(get_global_mouse_position())
 	update_selected_tile()
 	
@@ -268,8 +268,8 @@ func update_selected_tile():
 		return
 	
 	if layer_selected_type == "TileMap" and category_selected == "Tiles":
-		$SelectedTile.position.x = ((tile_selected.x + 0.5) * 32) + (get_tree().current_scene.get_node("Camera2D").position.x * (1 - layerfile.scroll_speed.x))
-		$SelectedTile.position.y = ((tile_selected.y + 0.5) * 32) + (get_tree().current_scene.get_node("Camera2D").position.y * (1 - layerfile.scroll_speed.y))
+		$SelectedTile.position.x = ((tile_selected.x + 0.5) * 32) + (UIHelpers.get_camera().position.x * (1 - layerfile.scroll_speed.x))
+		$SelectedTile.position.y = ((tile_selected.y + 0.5) * 32) + (UIHelpers.get_camera().position.y * (1 - layerfile.scroll_speed.y))
 	else:
 		$SelectedTile.position.x = (tile_selected.x + 0.5) * 32
 		$SelectedTile.position.y = (tile_selected.y + 0.5) * 32
