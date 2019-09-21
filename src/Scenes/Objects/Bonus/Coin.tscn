@@ -1,6 +1,6 @@
 [gd_scene load_steps=27 format=2]
 
-[ext_resource path="res://Scenes/Objects/Bonus/Coin.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Objects/Bonus/Powerup.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Objects/Coin/coin-0.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/Objects/Coin/coin-1.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/Objects/Coin/coin-2.png" type="Texture" id=4]
@@ -121,22 +121,28 @@ tracks/5/keys = {
 "values": [ true ]
 }
 
-[node name="Coin" type="Area2D" groups=[
-"coin",
-]]
+[node name="Coin" type="KinematicBody2D"]
 script = ExtResource( 1 )
+coins = 1
+collect_on_appear = true
+pickup_animation = "Pickup"
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
-frame = 4
+frame = 11
 playing = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 2 )
 
 [node name="PickupSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 18 )
 bus = "SFX"
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2( 0.440125, -3.96114 )
+collision_layer = 0
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( -0.440125, 3.96114 )
+shape = SubResource( 2 )
 
 [node name="CollectGlow" type="CPUParticles2D" parent="."]
 position = Vector2( 0.440125, -3.96114 )
@@ -178,4 +184,3 @@ anims/Pickup = SubResource( 6 )
 position = Vector2( -0.174824, -0.0874083 )
 scale = Vector2( 1.6993, 1.69056 )
 rect = Rect2( -16, -16, 32, 32 )
-[connection signal="body_entered" from="." to="." method="_on_Coin_body_entered"]
