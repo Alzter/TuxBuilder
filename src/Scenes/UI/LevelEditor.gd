@@ -23,8 +23,6 @@ var movetime_right = 0
 var player_drag_half = "bottom"
 var player_hovered = false
 var stop = false
-var files = []
-var files2 = []
 var dir = Directory.new()
 
 func _ready():
@@ -53,8 +51,8 @@ func _process(_delta):
 	$UI/SideBar/VBoxContainer/TilesButton.text = ""
 	$UI/SideBar/VBoxContainer/ObjectsButton.text = ""
 	
-	$Grid.rect_size = Vector2((get_viewport().size.x + 32) * 4 * get_tree().current_scene.get_node("Camera2D").zoom.x, (get_viewport().size.y + 32) * 4 * get_tree().current_scene.get_node("Camera2D").zoom.y)
-	$Grid.rect_position = Vector2(get_tree().current_scene.get_node("Camera2D").position.x - (get_viewport().size.x / 2) * get_tree().current_scene.get_node("Camera2D").zoom.x, get_tree().current_scene.get_node("Camera2D").position.y - (get_viewport().size.y / 2) * get_tree().current_scene.get_node("Camera2D").zoom.y)
+	$Grid.rect_size = Vector2((get_viewport().size.x + 32) * 4 * UIHelpers.get_camera().zoom.x, (get_viewport().size.y + 32) * 4 * UIHelpers.get_camera().zoom.y)
+	$Grid.rect_position = Vector2(UIHelpers.get_camera().position.x - (get_viewport().size.x / 2) * UIHelpers.get_camera().zoom.x, UIHelpers.get_camera().position.y - (get_viewport().size.y / 2) * UIHelpers.get_camera().zoom.y)
 	$Grid.rect_position = Vector2(floor($Grid.rect_position.x / 32) * 32, floor($Grid.rect_position.y / 32) * 32)
 	if layer_selected_type == "TileMap" and category_selected == "Tiles":
 		$Grid.rect_position += Vector2(fmod(layerfile.position.x, 32),fmod(layerfile.position.y, 32))
@@ -85,42 +83,42 @@ func _process(_delta):
 	
 	# Navigation
 	if Input.is_action_pressed("ui_up"):
-		get_tree().current_scene.get_node("Camera2D").position.y -= CAMERA_MOVE_SPEED
+		UIHelpers.get_camera().position.y -= CAMERA_MOVE_SPEED
 		movetime_up += 1
 	elif Input.is_action_just_released("ui_up"): movetime_up = -1
 	else: movetime_up = 0
 	
 	if Input.is_action_pressed("ui_down"):
-		get_tree().current_scene.get_node("Camera2D").position.y += CAMERA_MOVE_SPEED
+		UIHelpers.get_camera().position.y += CAMERA_MOVE_SPEED
 		movetime_down += 1
 	elif Input.is_action_just_released("ui_down"): movetime_down = -1
 	else: movetime_down = 0
 	
 	if Input.is_action_pressed("ui_left"):
-		get_tree().current_scene.get_node("Camera2D").position.x -= CAMERA_MOVE_SPEED
+		UIHelpers.get_camera().position.x -= CAMERA_MOVE_SPEED
 		movetime_left += 1
 	elif Input.is_action_just_released("ui_left"): movetime_left = -1
 	else: movetime_left = 0
 	
 	if Input.is_action_pressed("ui_right"):
-		get_tree().current_scene.get_node("Camera2D").position.x += CAMERA_MOVE_SPEED
+		UIHelpers.get_camera().position.x += CAMERA_MOVE_SPEED
 		movetime_right += 1
 	elif Input.is_action_just_released("ui_right"): movetime_right = -1
 	else: movetime_right = 0
 	
 	# Round player position
-	get_tree().current_scene.get_node("Player").position.x = (floor(get_tree().current_scene.get_node("Player").position.x / 32) * 32) + 16
-	get_tree().current_scene.get_node("Player").position.y = round(get_tree().current_scene.get_node("Player").position.y / 32) * 32
+	UIHelpers.get_player().position.x = (floor(UIHelpers.get_player().position.x / 32) * 32) + 16
+	UIHelpers.get_player().position.y = round(UIHelpers.get_player().position.y / 32) * 32
 	
 	# Delay the player movement by one frame to sync with the camera
 	if movetime_up != 1 and movetime_up != 0:
-		get_tree().current_scene.get_node("Player").position.y -= CAMERA_MOVE_SPEED
+		UIHelpers.get_player().position.y -= CAMERA_MOVE_SPEED
 	if movetime_down != 1 and movetime_down != 0:
-		get_tree().current_scene.get_node("Player").position.y += CAMERA_MOVE_SPEED
+		UIHelpers.get_player().position.y += CAMERA_MOVE_SPEED
 	if movetime_left != 1 and movetime_left != 0:
-		get_tree().current_scene.get_node("Player").position.x -= CAMERA_MOVE_SPEED
+		UIHelpers.get_player().position.x -= CAMERA_MOVE_SPEED
 	if movetime_right != 1 and movetime_right != 0:
-		get_tree().current_scene.get_node("Player").position.x += CAMERA_MOVE_SPEED
+		UIHelpers.get_player().position.x += CAMERA_MOVE_SPEED
 	
 	# Disable rectangle select for objects
 	if category_selected == "Objects":
@@ -133,7 +131,7 @@ func _process(_delta):
 	
 	# Placing tiles / objects
 	if layer_selected_type == "TileMap" and category_selected == "Tiles":
-		tile_selected = layerfile.world_to_map(Vector2(get_global_mouse_position().x - ((1 - layerfile.scroll_speed.x) * get_tree().current_scene.get_node("Camera2D").position.x), get_global_mouse_position().y - ((1 - layerfile.scroll_speed.y) * get_tree().current_scene.get_node("Camera2D").position.y)))
+		tile_selected = layerfile.world_to_map(Vector2(get_global_mouse_position().x - ((1 - layerfile.scroll_speed.x) * UIHelpers.get_camera().position.x), get_global_mouse_position().y - ((1 - layerfile.scroll_speed.y) * UIHelpers.get_camera().position.y)))
 	else: tile_selected = $TileMap.world_to_map(get_global_mouse_position())
 	update_selected_tile()
 	
@@ -142,7 +140,7 @@ func _process(_delta):
 		dragging_object = true
 		object_dragged = "Player"
 		get_tree().current_scene.get_node("Player/Control/AnimatedSprite").scale += Vector2(0.25,0.25)
-		if $SelectedTile.position == Vector2(get_tree().current_scene.get_node("Player").position.x,get_tree().current_scene.get_node("Player").position.y - 16):
+		if $SelectedTile.position == Vector2(UIHelpers.get_player().position.x,UIHelpers.get_player().position.y - 16):
 			player_drag_half = "top"
 		else: player_drag_half = "bottom"
 	
@@ -178,10 +176,10 @@ func _process(_delta):
 		if object_dragged != "Player":
 			get_tree().current_scene.get_node(str("Level/", object_dragged)).position = $SelectedTile.position
 		else:
-			get_tree().current_scene.get_node("Player").position = $SelectedTile.position
+			UIHelpers.get_player().position = $SelectedTile.position
 			if player_drag_half == "top":
-				get_tree().current_scene.get_node("Player").position.y += 16
-			else: get_tree().current_scene.get_node("Player").position.y -= 16
+				UIHelpers.get_player().position.y += 16
+			else: UIHelpers.get_player().position.y -= 16
 	
 	if Input.is_action_pressed("click_left") and dragging_object == false:
 		# If the mouse isn't on the level editor UI or zoom buttons
@@ -268,13 +266,13 @@ func update_selected_tile():
 		return
 	
 	if layer_selected_type == "TileMap" and category_selected == "Tiles":
-		$SelectedTile.position.x = ((tile_selected.x + 0.5) * 32) + (get_tree().current_scene.get_node("Camera2D").position.x * (1 - layerfile.scroll_speed.x))
-		$SelectedTile.position.y = ((tile_selected.y + 0.5) * 32) + (get_tree().current_scene.get_node("Camera2D").position.y * (1 - layerfile.scroll_speed.y))
+		$SelectedTile.position.x = ((tile_selected.x + 0.5) * 32) + (UIHelpers.get_camera().position.x * (1 - layerfile.scroll_speed.x))
+		$SelectedTile.position.y = ((tile_selected.y + 0.5) * 32) + (UIHelpers.get_camera().position.y * (1 - layerfile.scroll_speed.y))
 	else:
 		$SelectedTile.position.x = (tile_selected.x + 0.5) * 32
 		$SelectedTile.position.y = (tile_selected.y + 0.5) * 32
 	
-	if ($SelectedTile.position == Vector2(get_tree().current_scene.get_node("Player").position.x,get_tree().current_scene.get_node("Player").position.y - 16) and get_tree().current_scene.get_node("Player").state != "small") or $SelectedTile.position == Vector2(get_tree().current_scene.get_node("Player").position.x,get_tree().current_scene.get_node("Player").position.y + 16) and dragging_object == false:
+	if ($SelectedTile.position == Vector2(UIHelpers.get_player().position.x,UIHelpers.get_player().position.y - 16) and UIHelpers.get_player().powerup != "small") or $SelectedTile.position == Vector2(UIHelpers.get_player().position.x,UIHelpers.get_player().position.y + 16) and dragging_object == false:
 		player_hovered = true
 		return
 	
@@ -369,26 +367,25 @@ func update_objects(): # Update the objects list from the editor using the scene
 		child.queue_free()
 	
 	# Find all the folders in Scenes/Objects
-	list_files_in_directory("res://Scenes/Objects/")
+	var categories = list_files_in_directory("res://Scenes/Objects/")
 	
 	# For every folder in Scenes/Objects
-	for i in files.size():
+	for category in categories:
 		
 		# Create a category
 		var child = load("res://Scenes/Editor/Category.tscn").instance()
-		var category = files[i]
 		child.item = category
 		$UI/SideBar/ScrollContainer/SidebarList.add_child(child)
 		
 		# Then for every file inside each folder
-		list_files_in_directory_2(str("res://Scenes/Objects/", category, "/"))
-		for i in files2.size():
+		var objects = list_files_in_directory(str("res://Scenes/Objects/", category, "/"))
+		for object in objects:
 			
 			# If it's a scene, create an object button inside that category
-			if ".tscn" in files2[i]:
+			if ".tscn" in object:
 				var child2 = load("res://Scenes/Editor/Object.tscn").instance()
 				child2.object_category = category
-				child2.object_type = files2[i]
+				child2.object_type = object
 				child.get_node("VBoxContainer/Content").add_child(child2)
 				
 				# Set the object selected to this object if none are selected
@@ -433,11 +430,11 @@ func _on_LayerAdd_button_down():
 	$UI/AddLayer/VBoxContainer/OptionButton.clear()
 	
 	# Get all the files from Scenes/Editor/Layers
-	list_files_in_directory("res://Scenes/Editor/Layers/")
-	for i in files.size():
+	var layers = list_files_in_directory("res://Scenes/Editor/Layers/")
+	for layer in layers:
 		# If the file is a scene, add it to the OptionButton
-		if ".tscn" in files[i]:
-			var item = files[i]
+		if ".tscn" in layer:
+			var item = layer
 			item.erase(item.length() - 5,5)
 			$UI/AddLayer/VBoxContainer/OptionButton.add_icon_item(load(str("res://Sprites/Editor/LayerIcons/", item, ".png")),item)
 	
@@ -504,7 +501,7 @@ func select_first_solid_tilemap():
 				return
 
 func list_files_in_directory(path):
-    files = []
+    var files = []
     dir = Directory.new()
     dir.open(path)
     dir.list_dir_begin()
@@ -519,23 +516,6 @@ func list_files_in_directory(path):
     dir.list_dir_end()
 
     return files
-
-func list_files_in_directory_2(path): # Dupe of list files in directory used to list sub-files
-    files2 = []
-    dir = Directory.new()
-    dir.open(path)
-    dir.list_dir_begin()
-
-    while true:
-        var file = dir.get_next()
-        if file == "":
-            break
-        elif not file.begins_with("."):
-            files2.append(file)
-
-    dir.list_dir_end()
-
-    return files2
 
 func _on_ZoomIn_pressed():
 	get_tree().current_scene.camera_zoom -= 0.25

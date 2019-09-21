@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://Scenes/Objects/Bonus/1Up.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Objects/Bonus/Powerup.gd" type="Script" id=1]
 [ext_resource path="res://Audio/SoundEffects/Bonus/lifeup.wav" type="AudioStream" id=2]
 [ext_resource path="res://Sprites/Objects/1Up/1up.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/Objects/1Up/glimmer.png" type="Texture" id=4]
@@ -214,9 +214,14 @@ _data = [ Vector2( 0, 0 ), 0.0, 5.51816, 0, 0, Vector2( 0.661592, 0.7266 ), -1.4
 offsets = PoolRealArray( 0, 0.587719, 1 )
 colors = PoolColorArray( 1, 1, 1, 0.517647, 1, 1, 1, 0, 1, 1, 1, 0 )
 
-[node name="1Up" type="Area2D"]
+[node name="1Up" type="KinematicBody2D"]
 collision_layer = 0
 script = ExtResource( 1 )
+gravity_when_appeared = true
+initial_speed = Vector2( 200, -500 )
+coins = 100
+appear_animation = "appear"
+pickup_animation = "collect"
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 rect = Rect2( -64, -512, 128, 1024 )
@@ -230,7 +235,9 @@ anims/default = SubResource( 3 )
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 3 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 4 )
 
 [node name="PickupSFX" type="AudioStreamPlayer" parent="."]
@@ -279,4 +286,3 @@ initial_velocity = 40.0
 scale_amount = 3.0
 scale_amount_curve = SubResource( 6 )
 color_ramp = SubResource( 10 )
-[connection signal="body_entered" from="." to="." method="_on_1Up_body_entered"]

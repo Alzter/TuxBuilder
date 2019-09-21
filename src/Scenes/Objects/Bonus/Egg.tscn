@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://Scenes/Objects/Bonus/Egg.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Objects/Bonus/Powerup.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Objects/Egg/egg-merged.png" type="Texture" id=2]
 [ext_resource path="res://Audio/SoundEffects/Bonus/grow.ogg" type="AudioStream" id=3]
 
@@ -96,6 +96,14 @@ extents = Vector2( 15, 15 )
 collision_layer = 4
 collision_mask = 0
 script = ExtResource( 1 )
+physics = true
+gravity_when_static = true
+gravity_when_appeared = true
+move_speed = 100
+powerup_state = "big"
+ignore_small = true
+appear_animation = "appear"
+pickup_animation = "collect"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "default"
@@ -130,4 +138,3 @@ shape = SubResource( 5 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 1 )
 shape = SubResource( 6 )
-[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

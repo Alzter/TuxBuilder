@@ -46,13 +46,14 @@ func hit(hitdirection, hitdown):
 	
 	# Spawn contents
 	if stored != "":
+		childstored.player = player
 		
 		$AnimatedSprite.play("empty")
 		if hitdown == true:
 			$AnimationPlayer.play("hitdown")
 		else: $AnimationPlayer.play("hit")
 		
-		if not childstored.is_in_group("coin"):
+		if childstored.collect_on_appear == false:
 			$Upgrade.play()
 			
 			if hitdown == true:
@@ -71,8 +72,8 @@ func hit(hitdirection, hitdown):
 func _on_TopHitbox_area_entered(area):
 	if area.get_parent().is_in_group("badguys"):
 		area.get_parent().kill()
-	if area.is_in_group("coin"):
-		area.appear(0,false)
+	if area.get_parent().collect_on_appear:
+		area.get_parent().appear(0,false)
 
 func _on_TopHitbox_body_entered(body):
 	if body.is_in_group("bonusblock") and body.name != name:

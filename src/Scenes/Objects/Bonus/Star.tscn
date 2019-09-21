@@ -1,6 +1,6 @@
 [gd_scene load_steps=20 format=2]
 
-[ext_resource path="res://Scenes/Objects/Bonus/Star.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Objects/Bonus/Powerup.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Objects/Star/star-0.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/Objects/Star/star-1.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/Objects/Star/star-2.png" type="Texture" id=4]
@@ -173,6 +173,15 @@ extents = Vector2( 15, 15 )
 collision_layer = 4
 collision_mask = 0
 script = ExtResource( 1 )
+physics = true
+gravity_when_static = true
+gravity_when_appeared = true
+move_speed = 200
+bounce_height = -500
+initial_speed = Vector2( 200, -500 )
+powerup_state = "star"
+pickup_animation = "pickup"
+bounce_animation = "bounce"
 
 [node name="Control" type="Control" parent="."]
 editor/display_folded = true
@@ -183,7 +192,7 @@ anchor_bottom = 0.5
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
 frames = SubResource( 1 )
-frame = 4
+frame = 8
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

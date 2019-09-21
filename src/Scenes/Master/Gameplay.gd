@@ -74,7 +74,12 @@ func restart_level():
 
 func save_edited_level():
 	var packed_scene = PackedScene.new()
+	var directory = Directory.new()
 	packed_scene.pack(get_tree().get_current_scene().get_node("Level"))
+
+	if not directory.dir_exists("res://Scenes/Levels/EditedLevel"):
+		directory.make_dir_recursive("res://Scenes/Levels/EditedLevel")
+
 	ResourceSaver.save("res://Scenes/Levels/EditedLevel/EditedLevel.tscn", packed_scene)
 	editsaved = true
 
