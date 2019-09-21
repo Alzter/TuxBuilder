@@ -129,7 +129,7 @@ pickup_animation = "Pickup"
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
-frame = 11
+frame = 1
 playing = true
 
 [node name="PickupSFX" type="AudioStreamPlayer" parent="."]

@@ -174,7 +174,8 @@ collision_layer = 4
 collision_mask = 0
 script = ExtResource( 1 )
 physics = true
-gravity = true
+gravity_when_static = true
+gravity_when_appeared = true
 move_speed = 200
 bounce_height = -500
 initial_speed = Vector2( 200, -500 )
@@ -191,7 +192,7 @@ anchor_bottom = 0.5
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
 frames = SubResource( 1 )
-frame = 2
+frame = 8
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

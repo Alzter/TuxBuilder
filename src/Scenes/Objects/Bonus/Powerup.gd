@@ -1,7 +1,8 @@
 extends KinematicBody2D
 
 export var physics = false
-export var gravity = false
+export var gravity_when_static = false
+export var gravity_when_appeared = false
 export var move_speed = 0
 export var bounce_height = 0
 export var initial_speed = Vector2(0,0)
@@ -15,13 +16,21 @@ export var bounce_animation = ""
 var collected = false
 var direction = 1
 var velocity = Vector2()
+var appeared = false
 var player = null
+var gravity = false
 
 func _physics_process(delta):
+	gravity = false
+	if appeared == true and gravity_when_appeared == true:
+		gravity = true
+	if appeared == false and gravity_when_static == true:
+		gravity = true
+	
 	if get_tree().current_scene.editmode == false and collected == false:
 		if physics:
 			if move_speed != 0: velocity.x = move_speed * direction
-			if not is_on_floor() and gravity:
+			if not is_on_floor():
 				velocity.y += 20
 			if is_on_ceiling():
 				velocity.y = 0
@@ -58,6 +67,7 @@ func collect_check():
 			counter.coins += coins
 
 func appear(dir, hitdown):
+	appeared = true
 	direction = dir
 	velocity = initial_speed
 	velocity.x *= dir

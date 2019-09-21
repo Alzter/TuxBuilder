@@ -82,7 +82,8 @@ collision_layer = 4
 collision_mask = 0
 script = ExtResource( 1 )
 physics = true
-gravity = true
+gravity_when_static = true
+gravity_when_appeared = true
 powerup_state = "fire"
 appear_animation = "appear"
 pickup_animation = "collect"
@@ -96,7 +97,7 @@ anchor_bottom = 0.5
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
 frames = SubResource( 1 )
-frame = 4
+frame = 1
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

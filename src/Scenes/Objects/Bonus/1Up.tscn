@@ -217,7 +217,7 @@ colors = PoolColorArray( 1, 1, 1, 0.517647, 1, 1, 1, 0, 1, 1, 1, 0 )
 [node name="1Up" type="KinematicBody2D"]
 collision_layer = 0
 script = ExtResource( 1 )
-gravity = true
+gravity_when_appeared = true
 initial_speed = Vector2( 200, -500 )
 coins = 100
 appear_animation = "appear"
