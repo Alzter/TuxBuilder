@@ -336,7 +336,7 @@ anims/Stop = SubResource( 10 )
 [node name="HitboxBig" type="CollisionShape2D" parent="." groups=[
 "player",
 ]]
-position = Vector2( 0, -7 )
+position = Vector2( 0, -8 )
 shape = SubResource( 13 )
 
 [node name="HitboxSmall" type="CollisionShape2D" parent="." groups=[
@@ -348,21 +348,16 @@ shape = SubResource( 14 )
 position = Vector2( 0, 8 )
 shape = SubResource( 15 )
 
-[node name="GroundLeft" type="RayCast2D" parent="."]
-position = Vector2( -15, 0 )
-cast_to = Vector2( 0, 48 )
-
-[node name="GroundRight" type="RayCast2D" parent="."]
-position = Vector2( 15, 0 )
-cast_to = Vector2( 0, 48 )
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2( 0, 8 )
+enabled = true
+cast_to = Vector2( 0, 24 )
 
 [node name="ShootLocation" type="Position2D" parent="."]
-position = Vector2( 16, 0 )
-
-[node name="GrabLocation" type="Position2D" parent="."]
-position = Vector2( 16, 0 )
+position = Vector2( 8, 0 )
 
 [node name="ButtjumpHitbox" type="Area2D" parent="."]
+editor/display_folded = true
 position = Vector2( 0, 32 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ButtjumpHitbox"]

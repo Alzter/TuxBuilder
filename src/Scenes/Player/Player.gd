@@ -56,7 +56,7 @@ var backflip_rotation = 0 # Backflip rotation
 var buttjump = false # Butt-jumping
 var powerup = "fire" # Tux's power-up powerup
 var camera_offset = 0 # Moves camera horizontally for extended view
-var camera_position = Vector2(0,0) # Camera Position
+var camera_position = Vector2() # Camera Position
 var dead = false # Stop doing stuff if true
 var restarted = false # Should Tux call restart level
 var invincible_damage = false
@@ -64,6 +64,7 @@ var invincible = false
 var using_star = false
 var holding_object = false
 var object_held = ""
+var ground_normal = Vector2()
 
 # Set Tux's current playing animation
 func set_animation(anim):
@@ -279,6 +280,7 @@ func _physics_process(delta):
 
 	# Sliding
 	if sliding == true:
+		rotation_degrees = rad2deg($RayCast2D.get_collision_normal().angle_to(Vector2(0, -1))) * -1
 		invincible = true
 		if $StandWindow.is_colliding() == true: # Push Tux forward when stuck in a one block space to prevent getting stuck
 			velocity.x += 4 * $Control/AnimatedSprite.scale.x
@@ -286,6 +288,7 @@ func _physics_process(delta):
 			sliding = false
 			if $StandWindow.is_colliding() == true: ducking = true
 	elif using_star == false: invincible = false
+	else: rotation_degrees = 0
 
 	# Jump buffering
 	if Input.is_action_pressed("jump"):
@@ -386,14 +389,11 @@ func _physics_process(delta):
 		$HitboxBig.disabled = true
 		$HitboxSmall.disabled = false
 		$ShootLocation.position.y = 16
-		$GrabLocation.position.y = 16
 	else:
 		$HitboxBig.disabled = false
 		$HitboxSmall.disabled = true
 		$ShootLocation.position.y = 0
-		$GrabLocation.position.y = 0
 	$ShootLocation.position.x = $Control/AnimatedSprite.scale.x * 8
-	$GrabLocation.position.x = $Control/AnimatedSprite.scale.x * 16
 
 	# Buttjump hitboxes
 	if buttjump == true and $ButtjumpTimer.time_left == 0:
@@ -441,7 +441,7 @@ func _physics_process(delta):
 	# Carry objects
 	if holding_object == true:
 		# Set the object's position
-		get_tree().current_scene.get_node(str("Level/", object_held)).position = Vector2(position.x + $GrabLocation.position.x, position.y + $GrabLocation.position.y)
+		get_tree().current_scene.get_node(str("Level/", object_held)).position = Vector2(position.x + $ShootLocation.position.x, position.y + $ShootLocation.position.y)
 		
 		# Set the object's direction
 		if get_tree().current_scene.get_node(str("Level/", object_held)).has_node("Sprite"): get_tree().current_scene.get_node(str("Level/", object_held, "/Sprite")).scale.x = $Control/AnimatedSprite.scale.x * -1
@@ -505,6 +505,3 @@ func start_sliding():
 	sliding = true
 	$SFX/Skid.play()
 	velocity.x += WALK_ADD * $Control/AnimatedSprite.scale.x
-
-# Is Tux grounded
-#func on_ground()
