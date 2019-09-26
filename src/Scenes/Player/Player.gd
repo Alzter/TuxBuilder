@@ -280,15 +280,17 @@ func _physics_process(delta):
 
 	# Sliding
 	if sliding == true:
-		rotation_degrees = rad2deg($RayCast2D.get_collision_normal().angle_to(Vector2(0, -1))) * -1
+		var angle = rad2deg($RayCast2D.get_collision_normal().angle_to(Vector2(0, -1))) * -1
+		rotation_degrees = rotation_degrees + (angle - rotation_degrees) / 1
 		invincible = true
 		if $StandWindow.is_colliding() == true: # Push Tux forward when stuck in a one block space to prevent getting stuck
 			velocity.x += 4 * $Control/AnimatedSprite.scale.x
 		if abs(velocity.x) < 20 and on_ground == 0:
 			sliding = false
 			if $StandWindow.is_colliding() == true: ducking = true
-	elif using_star == false: invincible = false
-	else: rotation_degrees = 0
+	else:
+		rotation_degrees = rotation_degrees + (0 - rotation_degrees) / 5
+		if using_star == false: invincible = false
 
 	# Jump buffering
 	if Input.is_action_pressed("jump"):
