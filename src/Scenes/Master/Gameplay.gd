@@ -84,11 +84,7 @@ func save_edited_level():
 	editsaved = true
 
 func load_edited_level():
-	var packed_scene = load("res://Scenes/Levels/EditedLevel/EditedLevel.tscn")
-	var scene_instance = packed_scene.instance()
-	scene_instance.set_name("Level")
-	add_child(scene_instance)
-	level_to_grid()
+	load_level("EditedLevel/EditedLevel")
 
 func load_level(level):
 	current_level = str(level)
