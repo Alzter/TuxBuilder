@@ -93,6 +93,9 @@ func hurt():
 
 # Kill Tux
 func kill():
+	if dead:
+		return
+
 	invincible = false
 	invincible_damage = false
 	powerup = "small"

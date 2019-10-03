@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/thud.ogg-75e1877db4d0329a604565d2a23cc357.oggstr"
+
+[deps]
+
+source_file="res://Audio/SoundEffects/Enemy/thud.ogg"
+dest_files=[ "res://.import/thud.ogg-75e1877db4d0329a604565d2a23cc357.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
