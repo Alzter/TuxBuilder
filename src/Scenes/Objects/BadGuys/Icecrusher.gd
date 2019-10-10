@@ -20,7 +20,7 @@ func _move(delta):
 	
 	var player = UIHelpers.get_player()
 	if player != null and not recovering:
-		var target = player.position
+		var target = player.get_center_point()
 		$Control/lefteye.look_at(target)
 		$Control/righteye.look_at(target)
 	

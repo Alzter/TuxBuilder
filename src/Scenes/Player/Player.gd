@@ -510,3 +510,6 @@ func start_sliding():
 	sliding = true
 	$SFX/Skid.play()
 	velocity.x += WALK_ADD * $Control/AnimatedSprite.scale.x
+	
+func get_center_point():
+	return $CenterPoint.global_position
