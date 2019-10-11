@@ -77,10 +77,10 @@ func save_edited_level():
 	var directory = Directory.new()
 	packed_scene.pack(get_tree().get_current_scene().get_node("Level"))
 
-	if not directory.dir_exists("res://Scenes/Levels/EditedLevel"):
-		directory.make_dir_recursive("res://Scenes/Levels/EditedLevel")
+	if not directory.dir_exists("user://Scenes/Levels/EditedLevel"):
+		directory.make_dir_recursive("user://Scenes/Levels/EditedLevel")
 
-	ResourceSaver.save("res://Scenes/Levels/EditedLevel/EditedLevel.tscn", packed_scene)
+	ResourceSaver.save("user://Scenes/Levels/EditedLevel/EditedLevel.tscn", packed_scene)
 	editsaved = true
 
 func load_edited_level():
@@ -88,7 +88,13 @@ func load_edited_level():
 
 func load_level(level):
 	current_level = str(level)
-	var scene = load(str("res://Scenes/Levels/", level ,".tscn"))
+	var directory = Directory.new()
+	var scene
+	if directory.file_exists(str("user://Scenes/Levels/", level ,".tscn")):
+		scene = load(str("user://Scenes/Levels/", level ,".tscn"))
+	else:
+		scene = load(str("res://Scenes/Levels/", level ,".tscn"))
+	
 	var scene_instance = scene.instance()
 	scene_instance.set_name("Level")
 	add_child(scene_instance)
