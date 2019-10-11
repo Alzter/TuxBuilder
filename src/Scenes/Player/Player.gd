@@ -23,19 +23,19 @@ const SLIDE_FRICTION = 0.99
 const TURN_ACCEL = 1800.0
 
 # Jump velocity
-const JUMP_POWER = 580
+const JUMP_POWER = 650
 # Running Jump / Backflip velocity
-const RUNJUMP_POWER = 640
+const RUNJUMP_POWER = 700
 # Amount of frames you can hold jump before landing and still jump
 const JUMP_BUFFER_TIME = 15
 # Gravity
-const GRAVITY = 20.0
+const GRAVITY = 25.0
 # Gravity when buttjumping
 const BUTTJUMP_GRAVITY = 120.0
 # Amount of frames Tux can still jump after falling off a ledge
 const LEDGE_JUMP = 3
 # Falling speedcap
-const FALL_SPEED = 1280.0
+const FALL_SPEED = 1500.0
 # Buttjumping speedcap
 const BUTTJUMP_FALL_SPEED = 2000.0
 # How long to stay in the buttjump landing pose
@@ -142,6 +142,61 @@ func _physics_process(delta):
 		return
 
 	# Horizontal movement
+	horizontal_movement(delta)
+	
+	# Speedcap
+	speedcap()
+
+	# Friction
+	friction()
+
+	# Stop skidding if low velocity
+	if abs(velocity.x) < 75 and skidding == true:
+		skidding = false
+		velocity.x = 0
+
+	# Move
+	move()
+
+	# Gravity
+	gravity()
+
+	# Floor check
+	floor_check()
+
+	# Ceiling bump sound
+	if is_on_ceiling():
+		$SFX/Thud.play()
+
+	# Ducking / Sliding
+	duck_and_slide()
+
+	# Jumping
+	jump()
+
+	# Backflip speed and rotation
+	backflip()
+
+	# Buttjump
+	buttjump()
+
+	# Animations
+	animations()
+
+	# Hitboxes
+	hitboxes(delta)
+
+	# Shooting
+	shooting()
+
+	# Camera Positioning
+	camera()
+
+	# Carry objects
+	carry()
+
+# Horizontal movement
+func horizontal_movement(delta):
 	if (ducking == false or on_ground != 0) and backflip == false and skidding == false and sliding == false and $ButtjumpLandTimer.time_left == 0:
 		if Input.is_action_pressed("move_right"):
 			$Control/AnimatedSprite.scale.x = 1
@@ -184,14 +239,16 @@ func _physics_process(delta):
 			# Air turning
 			else: velocity.x -= TURN_ACCEL * delta
 
-	# Speedcap
+# Speedcap
+func speedcap():
 	if sliding == false:
 		if velocity.x >= RUN_MAX:
 			velocity.x = RUN_MAX
 		if velocity.x <= -RUN_MAX:
 			velocity.x = -RUN_MAX
 
-	# Friction
+# Friction
+func friction():
 	if backflip == false and (skidding == true or (ducking == true and on_ground == 0) or (not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"))):
 		
 		# Turn when skidding
@@ -208,12 +265,8 @@ func _physics_process(delta):
 		if abs(velocity.x) < 80:
 			velocity.x = 0
 
-	# Stop skidding if low velocity
-	if abs(velocity.x) < 75 and skidding == true:
-		skidding = false
-		velocity.x = 0
-
-	# Move
+# Move
+func move():
 	var oldvelocity = velocity
 	if on_ground == 0:
 		velocity = move_and_slide_with_snap(velocity, Vector2(0, 20), FLOOR)
@@ -221,7 +274,8 @@ func _physics_process(delta):
 	if abs(velocity.x) > abs(oldvelocity.x) and $ButtjumpLandTimer.time_left > 0:
 		start_sliding()
 
-	# Gravity
+# Gravity
+func gravity():
 	if $ButtjumpTimer.time_left > 0:
 		velocity *= 0.5
 	elif buttjump == false or velocity.y <= 0:
@@ -233,7 +287,8 @@ func _physics_process(delta):
 			velocity.y += BUTTJUMP_GRAVITY
 			if velocity.y > BUTTJUMP_FALL_SPEED: velocity.y = BUTTJUMP_FALL_SPEED
 
-	# Floor check
+# Floor check
+func floor_check():
 	if is_on_floor(): #on_ground():
 		if on_ground != 0:
 			$AnimationPlayer.stop()
@@ -258,11 +313,8 @@ func _physics_process(delta):
 		on_ground += 1
 		$ButtjumpLandTimer.stop()
 
-	# Ceiling bump sound
-	if is_on_ceiling():
-		$SFX/Thud.play()
-
-	# Ducking / Sliding
+# Ducking and sliding
+func duck_and_slide():
 	if on_ground == 0:
 		# Stop ducking in certain situations
 		if not Input.is_action_pressed("duck") or powerup == "small": ducking = false
@@ -292,12 +344,14 @@ func _physics_process(delta):
 		rotation_degrees = rotation_degrees + (0 - rotation_degrees) / 5
 		if using_star == false: invincible = false
 
+# Jump
+func jump():
 	# Jump buffering
 	if Input.is_action_pressed("jump"):
 		jumpheld += 1
 	else: jumpheld = 0
-
-	# Jumping
+	
+	# Jump
 	if Input.is_action_pressed("jump") and jumpheld <= JUMP_BUFFER_TIME:
 		if on_ground <= LEDGE_JUMP and $ButtjumpLandTimer.time_left <= BUTTJUMP_LAND_TIME - 0.02:
 			if powerup != "small" and Input.is_action_pressed("duck") == true and $StandWindow.is_colliding() == false and sliding == false and $ButtjumpLandTimer.time_left == 0:
@@ -324,7 +378,7 @@ func _physics_process(delta):
 			skidding = false
 			ducking = false
 			if $StandWindow.is_colliding() == true and powerup != "small": ducking = true
-
+			
 	# Jump cancelling
 	if on_ground != 0 and not Input.is_action_pressed("jump") and backflip == false and jumpcancel == true:
 		if velocity.y < 0:
@@ -333,7 +387,8 @@ func _physics_process(delta):
 		else:
 			jumpcancel = false
 
-	# Backflip speed and rotation
+# Backflip speed and rotation
+func backflip():
 	$Control/AnimatedSprite.rotation_degrees = 0
 	if backflip == true:
 		if $Control/AnimatedSprite.scale.x == 1:
@@ -344,7 +399,9 @@ func _physics_process(delta):
 			backflip_rotation += 15
 		$Control/AnimatedSprite.rotation_degrees = backflip_rotation
 
-	# Buttjump
+# Buttjump
+func buttjump():
+	# Start buttjump
 	if on_ground != 0 and Input.is_action_just_pressed("duck") and powerup != "small" and backflip == false and buttjump == false:
 		buttjump = true
 		$AnimationPlayer.stop()
@@ -358,7 +415,8 @@ func _physics_process(delta):
 		$AnimationPlayer.play("Stop")
 		set_animation("fall")
 
-	# Animations
+# Animations
+func animations():
 	$Control/AnimatedSprite.speed_scale = 1
 	if buttjump == true:
 		set_animation("buttjump")
@@ -386,6 +444,8 @@ func _physics_process(delta):
 			else: set_animation("fall")
 		else: set_animation("jump")
 
+# Hitboxes
+func hitboxes(delta):
 	# Duck Hitboxes
 	if ducking == true or sliding == true or powerup == "small" or buttjump == true:
 		$HitboxBig.disabled = true
@@ -412,7 +472,8 @@ func _physics_process(delta):
 		$ButtjumpHitbox/CollisionShape2D.shape.extents = Vector2(0,0)
 		$ButtjumpHitbox/CollisionShape2D.disabled = true
 
-	# Shooting
+# Shooting
+func shooting():
 	if Input.is_action_just_pressed("action") and powerup == "fire" and get_tree().get_nodes_in_group("bullets").size() < 2:
 		$SFX/Shoot.play()
 		var fireball = load("res://Scenes/Player/Objects/Fireball.tscn").instance()
@@ -421,14 +482,15 @@ func _physics_process(delta):
 		fireball.add_collision_exception_with(self) # Prevent fireball colliding with player
 		get_parent().add_child(fireball) # Shoot fireball as child of player
 
-	# Camera Positioning
+# Camera positioning
+func camera():
 	if abs(velocity.x) > WALK_ADD:
 		camera_offset += 2 * (velocity.x / abs(velocity.x))
 		if abs(camera_offset) >= (get_viewport().size.x * 0.1) * get_tree().current_scene.get_node("Camera2D").zoom.x:
 			camera_offset = (get_viewport().size.x * 0.1) * get_tree().current_scene.get_node("Camera2D").zoom.x * (camera_offset / abs(camera_offset))
 	camera_position.x = camera_position.x + (camera_offset - camera_position.x) / 5
 	get_tree().current_scene.get_node("Camera2D").position = Vector2(position.x + camera_position.x,position.y + camera_position.y)
-
+	
 	# Block player leaving screen
 	if position.x <= get_tree().current_scene.get_node("Camera2D").limit_left + 16:
 		position.x = get_tree().current_scene.get_node("Camera2D").limit_left + 16
@@ -440,7 +502,8 @@ func _physics_process(delta):
 		position.y = get_tree().current_scene.get_node("Camera2D").limit_bottom
 		kill()
 
-	# Carry objects
+# Carry objects
+func carry():
 	if holding_object == true:
 		# Set the object's position
 		get_tree().current_scene.get_node(str("Level/", object_held)).position = Vector2(position.x + $ShootLocation.position.x, position.y + $ShootLocation.position.y)
