@@ -1,0 +1,177 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Scenes/Objects/BadGuys/Icecrusher.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Creatures/Icecrusher/iceblock_main.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Creatures/Icecrusher/iceblock_lefteye.png" type="Texture" id=3]
+[ext_resource path="res://Audio/SoundEffects/Bonus/brick.wav" type="AudioStream" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 32.6109, 31.4121 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": false,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 33.3097, 0.691383 )
+
+[sub_resource type="Animation" id=5]
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control/AnimatedSprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Control/AnimatedSprite:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Control/AnimatedSprite:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "broken" ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Control/AnimatedSprite:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control/AnimatedSprite:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 0 ), Vector2( -3, 0 ), Vector2( 0, 0 ), Vector2( 3, 0 ), Vector2( 0, 0 ), Vector2( -3, 0 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "spinning_eyes"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control/lefteye:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 180.0, 360.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Control/righteye:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 180.0, 360.0, 540.0 ]
+}
+
+[node name="Icecrusher" type="KinematicBody2D"]
+position = Vector2( 1, 0 )
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 1, 0 )
+shape = SubResource( 1 )
+
+[node name="backdrop" type="Panel" parent="."]
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+custom_styles/panel = SubResource( 2 )
+
+[node name="Control" type="Control" parent="."]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
+position = Vector2( 0, -0.3 )
+frames = SubResource( 3 )
+
+[node name="lefteye" type="Sprite" parent="Control"]
+position = Vector2( -7.948, 1 )
+texture = ExtResource( 3 )
+flip_h = true
+region_rect = Rect2( 100, 0, 0, 0 )
+
+[node name="righteye" type="Sprite" parent="Control"]
+position = Vector2( 12, 1 )
+texture = ExtResource( 3 )
+flip_h = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 1.33987, 32.3816 )
+shape = SubResource( 4 )
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="thud" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 4 )
+bus = "SFX"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/broken = SubResource( 5 )
+anims/shake = SubResource( 6 )
+anims/spinning_eyes = SubResource( 7 )
+
+[node name="trigger_ray" type="RayCast2D" parent="."]
+position = Vector2( 0, 29.28 )
+scale = Vector2( 22, 1 )
+enabled = true
+cast_to = Vector2( 0, 1000 )
+
+[node name="recover_timer" type="Timer" parent="."]
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="timeout" from="recover_timer" to="." method="_on_recover_timer_timeout"]

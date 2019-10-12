@@ -93,6 +93,9 @@ func hurt():
 
 # Kill Tux
 func kill():
+	if dead:
+		return
+
 	invincible = false
 	invincible_damage = false
 	powerup = "small"
@@ -507,3 +510,6 @@ func start_sliding():
 	sliding = true
 	$SFX/Skid.play()
 	velocity.x += WALK_ADD * $Control/AnimatedSprite.scale.x
+	
+func get_center_point():
+	return $CenterPoint.global_position
