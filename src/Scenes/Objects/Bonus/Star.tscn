@@ -183,16 +183,12 @@ powerup_state = "star"
 pickup_animation = "pickup"
 bounce_animation = "bounce"
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Node2D" parent="."]
 editor/display_folded = true
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
 frames = SubResource( 1 )
-frame = 8
+frame = 4
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
