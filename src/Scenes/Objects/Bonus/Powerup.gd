@@ -55,10 +55,10 @@ func collect_check():
 			player = body
 			collected = true
 	if collected == true:
-		if player.powerup == "small" or ignore_small == false:
+		if player.state == "small" or ignore_small == false:
 			if powerup_state == "star":
 				player.star_invincibility()
-			else: player.powerup = powerup_state
+			else: player.state = powerup_state
 		if pickup_animation != "":
 			$AnimationPlayer.stop()
 			$AnimationPlayer.play(pickup_animation)

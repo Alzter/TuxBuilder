@@ -272,7 +272,7 @@ func update_selected_tile():
 		$SelectedTile.position.x = (tile_selected.x + 0.5) * 32
 		$SelectedTile.position.y = (tile_selected.y + 0.5) * 32
 	
-	if ($SelectedTile.position == Vector2(UIHelpers.get_player().position.x,UIHelpers.get_player().position.y - 16) and UIHelpers.get_player().powerup != "small") or $SelectedTile.position == Vector2(UIHelpers.get_player().position.x,UIHelpers.get_player().position.y + 16) and dragging_object == false:
+	if ($SelectedTile.position == Vector2(UIHelpers.get_player().position.x,UIHelpers.get_player().position.y - 16) and UIHelpers.get_player().state != "small") or $SelectedTile.position == Vector2(UIHelpers.get_player().position.x,UIHelpers.get_player().position.y + 16) and dragging_object == false:
 		player_hovered = true
 		return
 	

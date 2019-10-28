@@ -54,7 +54,7 @@ var ducking = false # Ducking
 var backflip = false # Backflipping
 var backflip_rotation = 0 # Backflip rotation
 var buttjump = false # Butt-jumping
-var powerup = "fire" # Tux's power-up powerup
+var state = "fire" # Tux's power-up state
 var camera_offset = 0 # Moves camera horizontally for extended view
 var camera_position = Vector2() # Camera Position
 var dead = false # Stop doing stuff if true
@@ -68,16 +68,16 @@ var ground_normal = Vector2()
 
 # Set Tux's current playing animation
 func set_animation(anim):
-	if powerup == "small": $Control/AnimatedSprite.play(str(anim, "_small"))
+	if state == "small": $Control/AnimatedSprite.play(str(anim, "_small"))
 	else: $Control/AnimatedSprite.play(anim)
 
 # Damage Tux
 func hurt():
 	if invincible_damage == false and invincible == false:
-		if powerup == "small":
+		if state == "small":
 			kill()
-		elif powerup == "big":
-			powerup = "small"
+		elif state == "big":
+			state = "small"
 			backflip = false
 			buttjump = false
 			ducking = false
@@ -87,7 +87,7 @@ func hurt():
 			set_animation($Control/AnimatedSprite.animation)
 			$Control/AnimatedSprite.frame = frame
 		else:
-			powerup = "big"
+			state = "big"
 			$SFX/Hurt.play()
 			damage_invincibility()
 
@@ -95,7 +95,7 @@ func hurt():
 func kill():
 	invincible = false
 	invincible_damage = false
-	powerup = "small"
+	state = "small"
 	$SFX/Kill.play()
 	$AnimationPlayerInvincibility.play("Stop")
 	$Control/AnimatedSprite.rotation_degrees = 0
@@ -118,8 +118,7 @@ func _physics_process(delta):
 
 	if get_tree().current_scene.editmode == true:
 		set_animation("idle")
-		$HitboxBig.disabled = true
-		$HitboxSmall.disabled = true
+		$Hitbox.disabled = true
 		return
 
 	if dead == true:
@@ -134,8 +133,7 @@ func _physics_process(delta):
 			self.visible = false
 			return
 		$Control/AnimatedSprite.z_index = 999
-		$HitboxBig.disabled = true
-		$HitboxSmall.disabled = true
+		$Hitbox.disabled = true
 		$ButtjumpHitbox/CollisionShape2D.disabled = true
 		position += velocity * delta
 		velocity.y += GRAVITY
@@ -265,32 +263,22 @@ func _physics_process(delta):
 	# Ducking / Sliding
 	if on_ground == 0:
 		# Stop ducking in certain situations
-		if not Input.is_action_pressed("duck") or powerup == "small": ducking = false
+		if not Input.is_action_pressed("duck") or state == "small": ducking = false
 		
 		# Duck if in one block space
-		if $StandWindow.is_colliding() == true and sliding == false and powerup != "small": ducking = true
+		if $StandWindow.is_colliding() == true and sliding == false and state != "small": ducking = true
 		
 		# Ducking / Sliding
 		elif Input.is_action_pressed("duck") and sliding == false and $ButtjumpLandTimer.time_left == 0:
 			if abs(velocity.x) < WALK_MAX:
-				if powerup != "small": ducking = true
+				if state != "small": ducking = true
 			else: start_sliding()
-	elif $StandWindow.is_colliding() == true and sliding == false and powerup != "small": ducking = true
+	elif $StandWindow.is_colliding() == true and sliding == false and state != "small": ducking = true
 	else: ducking == false
 
 	# Sliding
 	if sliding == true:
-		var angle = rad2deg($RayCast2D.get_collision_normal().angle_to(Vector2(0, -1))) * -1
-		rotation_degrees = rotation_degrees + (angle - rotation_degrees) / 1
-		invincible = true
-		if $StandWindow.is_colliding() == true: # Push Tux forward when stuck in a one block space to prevent getting stuck
-			velocity.x += 4 * $Control/AnimatedSprite.scale.x
-		if abs(velocity.x) < 20 and on_ground == 0:
-			sliding = false
-			if $StandWindow.is_colliding() == true: ducking = true
-	else:
-		rotation_degrees = rotation_degrees + (0 - rotation_degrees) / 5
-		if using_star == false: invincible = false
+		pass
 
 	# Jump buffering
 	if Input.is_action_pressed("jump"):
@@ -300,7 +288,7 @@ func _physics_process(delta):
 	# Jumping
 	if Input.is_action_pressed("jump") and jumpheld <= JUMP_BUFFER_TIME:
 		if on_ground <= LEDGE_JUMP and $ButtjumpLandTimer.time_left <= BUTTJUMP_LAND_TIME - 0.02:
-			if powerup != "small" and Input.is_action_pressed("duck") == true and $StandWindow.is_colliding() == false and sliding == false and $ButtjumpLandTimer.time_left == 0:
+			if state != "small" and Input.is_action_pressed("duck") == true and $StandWindow.is_colliding() == false and sliding == false and $ButtjumpLandTimer.time_left == 0:
 				backflip = true
 				backflip_rotation = 0
 				velocity.y = -RUNJUMP_POWER
@@ -309,7 +297,7 @@ func _physics_process(delta):
 				velocity.y = -RUNJUMP_POWER
 			else:
 				velocity.y = -JUMP_POWER
-			if powerup == "small":
+			if state == "small":
 				$SFX/Jump.play()
 			else: $SFX/BigJump.play()
 			on_ground = LEDGE_JUMP + 1
@@ -323,7 +311,7 @@ func _physics_process(delta):
 			sliding = false
 			skidding = false
 			ducking = false
-			if $StandWindow.is_colliding() == true and powerup != "small": ducking = true
+			if $StandWindow.is_colliding() == true and state != "small": ducking = true
 
 	# Jump cancelling
 	if on_ground != 0 and not Input.is_action_pressed("jump") and backflip == false and jumpcancel == true:
@@ -345,14 +333,14 @@ func _physics_process(delta):
 		$Control/AnimatedSprite.rotation_degrees = backflip_rotation
 
 	# Buttjump
-	if on_ground != 0 and Input.is_action_just_pressed("duck") and powerup != "small" and backflip == false and buttjump == false:
+	if on_ground != 0 and Input.is_action_just_pressed("duck") and state != "small" and backflip == false and buttjump == false:
 		buttjump = true
 		$AnimationPlayer.stop()
 		$AnimationPlayer.play("Buttjump")
 		$ButtjumpTimer.start(0.15)
 
 	# Stop buttjump if small
-	if buttjump == true and powerup == "small":
+	if buttjump == true and state == "small":
 		buttjump = false
 		$AnimationPlayer.stop()
 		$AnimationPlayer.play("Stop")
@@ -387,14 +375,14 @@ func _physics_process(delta):
 		else: set_animation("jump")
 
 	# Duck Hitboxes
-	if ducking == true or sliding == true or powerup == "small" or buttjump == true:
-		$HitboxBig.disabled = true
-		$HitboxSmall.disabled = false
-		$ShootLocation.position.y = 16
+	if ducking == true or sliding == true or state == "small" or buttjump == true:
+		$Hitbox.shape.extents.y = 15
+		$Hitbox.position.y = 17
+		$ShootLocation.position.y = 17
 	else:
-		$HitboxBig.disabled = false
-		$HitboxSmall.disabled = true
-		$ShootLocation.position.y = 0
+		$Hitbox.shape.extents.y = 31
+		$Hitbox.position.y = 1
+		$ShootLocation.position.y = 1
 	$ShootLocation.position.x = $Control/AnimatedSprite.scale.x * 8
 
 	# Buttjump hitboxes
@@ -413,7 +401,7 @@ func _physics_process(delta):
 		$ButtjumpHitbox/CollisionShape2D.disabled = true
 
 	# Shooting
-	if Input.is_action_just_pressed("action") and powerup == "fire" and get_tree().get_nodes_in_group("bullets").size() < 2:
+	if Input.is_action_just_pressed("action") and state == "fire" and get_tree().get_nodes_in_group("bullets").size() < 2:
 		$SFX/Shoot.play()
 		var fireball = load("res://Scenes/Player/Objects/Fireball.tscn").instance()
 		fireball.position = $ShootLocation.global_position
