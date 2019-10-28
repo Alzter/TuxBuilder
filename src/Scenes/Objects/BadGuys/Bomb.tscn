@@ -454,7 +454,6 @@ rect_pivot_offset = Vector2( 0, 14 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
 position = Vector2( 0, 6.31594e-013 )
 frames = SubResource( 1 )
-frame = 3
 playing = true
 offset = Vector2( 0, -2 )
 

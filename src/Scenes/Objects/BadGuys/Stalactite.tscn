@@ -62,42 +62,42 @@ tracks/2/keys = {
 "values": [ true, false ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Control/AnimatedSprite:position")
+tracks/3/path = NodePath("Control/AnimatedSprite:self_modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, -4 ) ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Control/AnimatedSprite:self_modulate")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
 "times": PoolRealArray( 0, 0.7, 0.9 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
-tracks/5/type = "method"
-tracks/5/path = NodePath(".")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
+tracks/4/type = "method"
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
 "times": PoolRealArray( 1 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
 "method": "queue_free"
 } ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Control/AnimatedSprite:offset")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -4 ) ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -112,7 +112,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ) ]
+"values": [ Vector2( -1, 8 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Control/AnimatedSprite:self_modulate")
@@ -138,6 +138,18 @@ tracks/2/keys = {
 "update": 1,
 "values": [ "default" ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("Control/AnimatedSprite:offset")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
 
 [sub_resource type="Animation" id=5]
 resource_name = "shake"
@@ -145,7 +157,7 @@ length = 0.08
 loop = true
 step = 0.02
 tracks/0/type = "value"
-tracks/0/path = NodePath("Control/AnimatedSprite:position")
+tracks/0/path = NodePath("Control/AnimatedSprite:offset")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -154,43 +166,45 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.02, 0.04, 0.06 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( -2, 0 ), Vector2( 0, 0 ), Vector2( 2, 0 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 2, 0 ), Vector2( 0, 0 ), Vector2( -2, 0 ) ]
 }
 
 [node name="Stalactite" type="KinematicBody2D"]
 position = Vector2( 1, 0 )
-collision_layer = 4
-collision_mask = 0
+collision_layer = 0
+collision_mask = 4
 script = ExtResource( 1 )
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 8 )
 shape = SubResource( 1 )
 
 [node name="Control" type="Control" parent="."]
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
+position = Vector2( -1, 8 )
 frames = SubResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2( -0.714695, -1.19116 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 0, -1 )
+position = Vector2( 0, 7 )
 shape = SubResource( 3 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+position = Vector2( 0, 8 )
 rect = Rect2( -24, -32, 48, 64 )
 
 [node name="SFX" type="Node" parent="."]
-editor/display_folded = true
 
-[node name="Cracking" type="AudioStreamPlayer2D" parent="SFX"]
+[node name="Cracking" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 4 )
 
-[node name="Icecrash" type="AudioStreamPlayer2D" parent="SFX"]
+[node name="Icecrash" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -201,6 +215,7 @@ anims/shake = SubResource( 5 )
 
 [node name="trigger_ray" type="RayCast2D" parent="."]
 position = Vector2( 0, 22 )
+scale = Vector2( 7.51, 1 )
 enabled = true
 cast_to = Vector2( 0, 1000 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

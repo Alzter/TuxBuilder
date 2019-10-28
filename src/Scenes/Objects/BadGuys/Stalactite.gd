@@ -14,13 +14,12 @@ func _process(delta):
 func _move(delta):
 	if iciclestate == "active":
 		if is_on_floor():
-			iciclestate == "broken"
+			iciclestate = "broken"
 			$SFX/Icecrash.play()
 			$AnimationPlayer.play("broken")
 			
 			collision_layer = 4
 			collision_mask = 0
-			$CollisionShape2D.disabled = false
 			return
 		
 		velocity.y += 20
@@ -32,7 +31,7 @@ func _on_Timer_timeout():
 		iciclestate = "active"
 
 func _on_Area2D_body_entered(body):
-	if iciclestate == "active":
+	if iciclestate != "broken":
 		if body.is_in_group('player'):
 			body.hurt()
 		
