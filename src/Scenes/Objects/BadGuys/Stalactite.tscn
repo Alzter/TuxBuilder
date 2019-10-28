@@ -141,20 +141,20 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id=5]
 resource_name = "shake"
-length = 0.16
+length = 0.08
 loop = true
 step = 0.02
 tracks/0/type = "value"
-tracks/0/path = NodePath("Control/AnimatedSprite:offset")
+tracks/0/path = NodePath("Control/AnimatedSprite:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.04, 0.08, 0.12 ),
+"times": PoolRealArray( 0, 0.02, 0.04, 0.06 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ Vector2( 0, 0 ), Vector2( -3, 0 ), Vector2( 0, 0 ), Vector2( 3, 0 ) ]
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -2, 0 ), Vector2( 0, 0 ), Vector2( 2, 0 ) ]
 }
 
 [node name="Stalactite" type="KinematicBody2D"]
