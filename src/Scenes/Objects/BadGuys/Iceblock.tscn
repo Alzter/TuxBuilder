@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Scenes/Objects/BadGuys/Iceblock.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Creatures/Iceblock/iceblock-0.png" type="Texture" id=2]
@@ -37,6 +37,9 @@ extents = Vector2( 15, 15 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 15, 15 )
+
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 25, 15 )
 
 [sub_resource type="Animation" id=4]
 resource_name = "active"
@@ -402,7 +405,7 @@ rect_pivot_offset = Vector2( 0, 14 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
 frames = SubResource( 1 )
-frame = 1
+frame = 3
 playing = true
 offset = Vector2( 0, -2 )
 
@@ -419,6 +422,13 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 3 )
 
+[node name="BlockBreaker" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlockBreaker"]
+shape = SubResource( 12 )
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "active"
 anims/active = SubResource( 4 )
@@ -429,7 +439,6 @@ anims/stop = SubResource( 8 )
 anims/wakeup = SubResource( 9 )
 
 [node name="SFX" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="Fall" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 11 )
@@ -499,5 +508,7 @@ color_ramp = SubResource( 11 )
 [connection signal="screen_exited" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_exited"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="area_entered" from="BlockBreaker" to="." method="_on_Area2D_area_entered"]
+[connection signal="body_entered" from="BlockBreaker" to="." method="_on_Area2D_body_entered"]
 [connection signal="timeout" from="WakeupTimer" to="." method="_on_WakeupTimer_timeout"]
 [connection signal="timeout" from="ShakeTimer" to="." method="_on_ShakeTimer_timeout"]

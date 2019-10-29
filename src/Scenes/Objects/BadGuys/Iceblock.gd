@@ -27,9 +27,13 @@ func on_physics_process(delta):
 		velocity.y += 20
 		velocity = move_and_slide(velocity, FLOOR)
 		if is_on_wall():
+			for body in $BlockBreaker.get_overlapping_bodies():
+				if body.is_in_group("bonusblock") or body.is_in_group("brick"):
+					body.hit($Control/AnimatedSprite.scale.x, false)
 			$Control/AnimatedSprite.scale.x *= -1
 			velocity.x *= -1
 			$SFX/Bump.play()
+			
 
 # Fireball death animation
 func on_fireball_kill():
