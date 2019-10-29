@@ -192,6 +192,31 @@ func _process(_delta):
 					if $GrabArea/C1.is_hovered() or $GrabArea/C2.is_hovered() or $GrabArea/C3.is_hovered() or $GrabArea/C4.is_hovered():
 						$SelectedTile.visible = false
 						object_hovered = true
+					
+					if $GrabArea/C1.pressed:
+						expanding = true
+						expandingobject = child.get_name()
+						expandingdir = ""
+						expandpos = Vector2(child.position.x + (child.get_node("Control").rect_size.x - 32), child.position.y + (child.get_node("Control").rect_size.y - 32))
+					
+					if $GrabArea/C2.pressed:
+						expanding = true
+						expandingobject = child.get_name()
+						expandingdir = ""
+						expandpos = Vector2(child.position.x, child.position.y + (child.get_node("Control").rect_size.y - 32))
+						
+					if $GrabArea/C3.pressed:
+						expanding = true
+						expandingobject = child.get_name()
+						expandingdir = ""
+						expandpos = Vector2(child.position.x + (child.get_node("Control").rect_size.x - 32), child.position.y)
+					
+					if $GrabArea/C4.pressed:
+						expanding = true
+						expandingobject = child.get_name()
+						expandingdir = ""
+						expandpos = Vector2(child.position.x, child.position.y)
+						
 	
 	# Let go of dragged objects
 	if not Input.is_action_pressed("click_left") and dragging_object == true:
