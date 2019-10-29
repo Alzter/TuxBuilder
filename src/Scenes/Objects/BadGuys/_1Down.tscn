@@ -347,13 +347,13 @@ texture = ExtResource( 5 )
 [node name="Sprite2" type="Sprite" parent="Sprite"]
 self_modulate = Color( 1, 0, 0, 1 )
 position = Vector2( -3, -9.5 )
-scale = Vector2( 1e-005, 1e-005 )
+scale = Vector2( 1e-05, 1e-05 )
 texture = ExtResource( 6 )
 
 [node name="Sprite3" type="Sprite" parent="Sprite"]
 self_modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 3, -9.5 )
-scale = Vector2( 1e-005, 1e-005 )
+scale = Vector2( 1e-05, 1e-05 )
 texture = ExtResource( 6 )
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]

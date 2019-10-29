@@ -116,12 +116,7 @@ rect = Rect2( -64, -512, 128, 1024 )
 process_parent = true
 physics_process_parent = true
 
-[node name="Control" type="Control" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-rect_pivot_offset = Vector2( 0, 16 )
+[node name="Control" type="Node2D" parent="."]
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
 frames = SubResource( 4 )

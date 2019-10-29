@@ -1,20 +1,21 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Scenes/Objects/BadGuys/Bomb.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Creatures/Bomb/bomb-0.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/Creatures/Bomb/bomb-1.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/Creatures/Bomb/bomb-2.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Creatures/Bomb/triggered.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/Creatures/Bomb/redglow.png" type="Texture" id=6]
-[ext_resource path="res://Sprites/Creatures/Bomb/whiteflash.png" type="Texture" id=7]
-[ext_resource path="res://Sprites/Objects/Fireball/fireballambient.png" type="Texture" id=8]
-[ext_resource path="res://Audio/SoundEffects/Enemy/fall.wav" type="AudioStream" id=9]
-[ext_resource path="res://Audio/SoundEffects/Enemy/squish.wav" type="AudioStream" id=10]
-[ext_resource path="res://Audio/SoundEffects/Enemy/splash.ogg" type="AudioStream" id=11]
-[ext_resource path="res://Audio/SoundEffects/Enemy/hiss.wav" type="AudioStream" id=12]
-[ext_resource path="res://Audio/SoundEffects/Enemy/beep.wav" type="AudioStream" id=13]
-[ext_resource path="res://Audio/SoundEffects/Enemy/beepfast.wav" type="AudioStream" id=14]
-[ext_resource path="res://Audio/SoundEffects/Enemy/explode.wav" type="AudioStream" id=15]
+[ext_resource path="res://Sprites/Creatures/Bomb/explosion.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Creatures/Bomb/triggered.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Objects/Fireball/fireballambient.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Creatures/Bomb/redglow.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Creatures/Bomb/explosion_light.png" type="Texture" id=9]
+[ext_resource path="res://Audio/SoundEffects/Enemy/beep.wav" type="AudioStream" id=10]
+[ext_resource path="res://Audio/SoundEffects/Enemy/fall.wav" type="AudioStream" id=11]
+[ext_resource path="res://Audio/SoundEffects/Enemy/squish.wav" type="AudioStream" id=12]
+[ext_resource path="res://Audio/SoundEffects/Enemy/splash.ogg" type="AudioStream" id=13]
+[ext_resource path="res://Audio/SoundEffects/Enemy/hiss.wav" type="AudioStream" id=14]
+[ext_resource path="res://Audio/SoundEffects/Enemy/beepfast.wav" type="AudioStream" id=15]
+[ext_resource path="res://Audio/SoundEffects/Enemy/explode.wav" type="AudioStream" id=16]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -24,41 +25,30 @@ animations = [ {
 "speed": 8.0
 }, {
 "frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "explode",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ) ],
 "loop": false,
 "name": "triggered",
 "speed": 2.0
 } ]
 
-[sub_resource type="SpriteFrames" id=2]
-animations = [ {
-"frames": [ ExtResource( 6 ) ],
-"loop": true,
-"name": "default",
-"speed": 5.0
-} ]
-
-[sub_resource type="SpriteFrames" id=3]
-animations = [ {
-"frames": [ ExtResource( 7 ) ],
-"loop": true,
-"name": "default",
-"speed": 5.0
-} ]
-
-[sub_resource type="Gradient" id=4]
+[sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0, 0.470588, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 15, 15 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 0, 0 )
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 15, 15 )
 
-[sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 0, 0 )
-
-[sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 15, 15 )
-
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=6]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Control/AnimatedSprite:animation")
 tracks/0/interp = 1
@@ -96,7 +86,7 @@ tracks/2/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Control:rect_scale")
+tracks/3/path = NodePath("Control:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -120,7 +110,7 @@ tracks/4/keys = {
 "values": [ 0.0 ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("Control/AnimatedSprite/RedGlow:visible")
+tracks/5/path = NodePath("Control/AnimatedSprite/Sparks:emitting")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -132,7 +122,7 @@ tracks/5/keys = {
 "values": [ false ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("Control/AnimatedSprite/WhiteFlash:visible")
+tracks/6/path = NodePath("SFX/Hiss:playing")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -144,7 +134,7 @@ tracks/6/keys = {
 "values": [ false ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("Control/AnimatedSprite/Sparks:emitting")
+tracks/7/path = NodePath("ExplosionRadius/CollisionShape2D:disabled")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
@@ -153,10 +143,10 @@ tracks/7/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ false ]
+"values": [ true ]
 }
 tracks/8/type = "value"
-tracks/8/path = NodePath("SFX/Hiss:playing")
+tracks/8/path = NodePath("ExplosionRadius/CollisionShape2D:shape")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
@@ -165,10 +155,10 @@ tracks/8/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ false ]
+"values": [ SubResource( 4 ) ]
 }
 tracks/9/type = "value"
-tracks/9/path = NodePath("ExplosionRadius/CollisionShape2D:disabled")
+tracks/9/path = NodePath("Control/AnimatedSprite/Triggered:visible")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/imported = false
@@ -177,10 +167,10 @@ tracks/9/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ true ]
+"values": [ false ]
 }
 tracks/10/type = "value"
-tracks/10/path = NodePath("ExplosionRadius/CollisionShape2D:shape")
+tracks/10/path = NodePath("Control/AnimatedSprite:offset")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/imported = false
@@ -188,14 +178,38 @@ tracks/10/enabled = true
 tracks/10/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -2 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("Control/AnimatedSprite/Light2D:enabled")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ SubResource( 6 ) ]
+"values": [ false ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("Control/AnimatedSprite:modulate")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="CircleShape2D" id=9]
-radius = 80.0
+[sub_resource type="CircleShape2D" id=7]
+radius = 56.6313
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=8]
 length = 1.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Control/AnimatedSprite:visible")
@@ -204,10 +218,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ false ]
+"values": [ true, false ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Control/AnimatedSprite/Sparks:emitting")
@@ -234,16 +248,16 @@ tracks/2/keys = {
 "values": [ false ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("SFX/Explode:playing")
-tracks/3/interp = 1
+tracks/3/path = NodePath("Control:scale")
+tracks/3/interp = 2
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
+"times": PoolRealArray( 0, 0.09, 0.17, 0.25, 0.35, 0.43, 0.52, 0.6, 0.7, 0.78 ),
+"transitions": PoolRealArray( 0.68302, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.8, 0.8 ), Vector2( 1, 1 ), Vector2( 0.99, 0.99 ), Vector2( 1, 1 ), Vector2( 0.99, 0.99 ), Vector2( 1, 1 ), Vector2( 0.99, 0.99 ), Vector2( 1, 1 ), Vector2( 0.99, 0.99 ), Vector2( 1, 1 ) ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("ExplosionRadius/CollisionShape2D:disabled")
@@ -267,7 +281,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ SubResource( 9 ) ]
+"values": [ SubResource( 7 ) ]
 }
 tracks/6/type = "method"
 tracks/6/path = NodePath(".")
@@ -276,16 +290,101 @@ tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 1.2 ),
+"times": PoolRealArray( 0.95 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
 "method": "queue_free"
 } ]
 }
+tracks/7/type = "value"
+tracks/7/path = NodePath("Control/AnimatedSprite:animation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "explode" ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Control/AnimatedSprite:offset")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 3.17, 1.49 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("SFX/Explode:playing")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("Control/AnimatedSprite/Light2D:enabled")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("Control/AnimatedSprite:modulate")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0.04, 0.12, 0.2, 0.29, 0.36, 0.67 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 0.764706, 0.764706, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0.721569, 0.721569, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("Control/AnimatedSprite/Triggered:visible")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("Control/AnimatedSprite/Light2D:energy")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.4, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 1.0, 1.0, 0.01 ]
+}
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=9]
 length = 2.6
+step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath("Control/AnimatedSprite:animation")
 tracks/0/interp = 1
@@ -299,43 +398,45 @@ tracks/0/keys = {
 "values": [ "triggered" ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Control/AnimatedSprite/RedGlow:visible")
+tracks/1/path = NodePath("Control:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
+"times": PoolRealArray( 0, 0.2, 1.4, 2.5 ),
+"transitions": PoolRealArray( 1, 2, 1.8025, 1 ),
+"update": 0,
+"values": [ Vector2( 1.6, 0.5 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1.5, 1.5 ) ]
 }
-tracks/2/type = "value"
-tracks/2/path = NodePath("Control/AnimatedSprite/RedGlow:self_modulate")
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 1.9 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+"times": PoolRealArray( 2.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "explode"
+} ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Control:rect_scale")
+tracks/3/path = NodePath("Control/AnimatedSprite/Sparks:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.2, 1.3, 2.25, 2.5 ),
-"transitions": PoolRealArray( 1, 2, 2, 2, 1 ),
-"update": 0,
-"values": [ Vector2( 1.6, 0.5 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1.25, 1.25 ), Vector2( 1.5, 1.5 ) ]
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("Control/AnimatedSprite/WhiteFlash:visible")
+tracks/4/path = NodePath("SFX/Hiss:playing")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -347,33 +448,31 @@ tracks/4/keys = {
 "values": [ true ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("Control/AnimatedSprite/WhiteFlash:self_modulate")
+tracks/5/path = NodePath("SFX/Hiss:volume_db")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0, 1.35, 1.4, 1.5, 1.65, 1.7, 1.8, 1.95, 2, 2.1, 2.25, 2.3, 2.35, 2.4, 2.45, 2.5 ),
-"transitions": PoolRealArray( 1, 2, 0.5, 1, 2, 0.5, 1, 2, 0.5, 1, 2, 0.5, 2, 0.5, 2, 0.5 ),
+"times": PoolRealArray( 0, 0.85 ),
+"transitions": PoolRealArray( 0.5, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+"values": [ -80.0, -30.0 ]
 }
-tracks/6/type = "method"
-tracks/6/path = NodePath(".")
-tracks/6/interp = 1
+tracks/6/type = "value"
+tracks/6/path = NodePath("Control/AnimatedSprite/Triggered:modulate")
+tracks/6/interp = 2
 tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 2.52 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "explode"
-} ]
+"times": PoolRealArray( 0, 0.4, 0.8, 1.15, 1.45, 1.7, 1.9, 2.1, 2.3, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("Control/AnimatedSprite/Sparks:emitting")
+tracks/7/path = NodePath("Control/AnimatedSprite/Triggered:visible")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
@@ -384,53 +483,59 @@ tracks/7/keys = {
 "update": 1,
 "values": [ true ]
 }
-tracks/8/type = "value"
-tracks/8/path = NodePath("SFX/Hiss:playing")
+tracks/8/type = "audio"
+tracks/8/path = NodePath("SFX/Beep")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
 tracks/8/enabled = true
 tracks/8/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/9/type = "value"
-tracks/9/path = NodePath("SFX/Hiss:volume_db")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/keys = {
-"times": PoolRealArray( 0, 0.4 ),
-"transitions": PoolRealArray( 0.5, 1 ),
-"update": 0,
-"values": [ -80.0, -20.0 ]
-}
-tracks/10/type = "value"
-tracks/10/path = NodePath("SFX/Beep:playing")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/keys = {
-"times": PoolRealArray( 1.4, 1.7, 2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ true, true, true ]
-}
-tracks/11/type = "value"
-tracks/11/path = NodePath("SFX/Beepfast:playing")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/keys = {
-"times": PoolRealArray( 2.3 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 10 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 10 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 10 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 10 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 10 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 10 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 10 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 10 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 10 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 10 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 10 )
+} ],
+"times": PoolRealArray( 0.2, 0.633333, 1.11, 1.52, 1.91, 2.05, 2.17, 2.27, 2.36, 2.42, 2.48 )
 }
 
 [node name="Bomb" type="KinematicBody2D" groups=[
@@ -444,27 +549,12 @@ __meta__ = {
 }
 smart = true
 
-[node name="Control" type="Control" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-rect_pivot_offset = Vector2( 0, 14 )
+[node name="Control" type="Node2D" parent="."]
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
-position = Vector2( 0, 6.31594e-013 )
+position = Vector2( 0, 6.31594e-13 )
 frames = SubResource( 1 )
 playing = true
-offset = Vector2( 0, -2 )
-
-[node name="RedGlow" type="AnimatedSprite" parent="Control/AnimatedSprite"]
-visible = false
-frames = SubResource( 2 )
-offset = Vector2( 0, -2 )
-
-[node name="WhiteFlash" type="AnimatedSprite" parent="Control/AnimatedSprite"]
-visible = false
-frames = SubResource( 3 )
 offset = Vector2( 0, -2 )
 
 [node name="Sparks" type="CPUParticles2D" parent="Control/AnimatedSprite"]
@@ -474,7 +564,7 @@ emitting = false
 lifetime = 0.5
 speed_scale = 3.0
 local_coords = false
-texture = ExtResource( 8 )
+texture = ExtResource( 7 )
 spread = 50.0
 gravity = Vector2( 0, 0 )
 initial_velocity = 150.0
@@ -484,18 +574,32 @@ angle = 360.0
 angle_random = 1.0
 scale_amount = 0.25
 scale_amount_random = 1.0
-color_ramp = SubResource( 4 )
+color_ramp = SubResource( 2 )
+
+[node name="Triggered" type="Sprite" parent="Control/AnimatedSprite"]
+visible = false
+modulate = Color( 1, 1, 1, 0.52 )
+texture = ExtResource( 8 )
+offset = Vector2( 0, -2 )
+
+[node name="Light2D" type="Light2D" parent="Control/AnimatedSprite"]
+position = Vector2( 7.62939e-06, 0 )
+enabled = false
+texture = ExtResource( 9 )
+texture_scale = 1.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 5 )
+visible = false
+shape = SubResource( 3 )
 
 [node name="ExplosionRadius" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionRadius"]
-shape = SubResource( 6 )
+shape = SubResource( 4 )
 disabled = true
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+visible = false
 rect = Rect2( -64, -512, 128, 1024 )
 physics_process_parent = true
 
@@ -503,39 +607,41 @@ physics_process_parent = true
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 7 )
+visible = false
+shape = SubResource( 5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "active"
-anims/active = SubResource( 8 )
-anims/explode = SubResource( 10 )
-anims/triggered = SubResource( 11 )
+anims/active = SubResource( 6 )
+anims/explode = SubResource( 8 )
+anims/triggered = SubResource( 9 )
 
 [node name="SFX" type="Node" parent="."]
 
 [node name="Fall" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource( 9 )
-
-[node name="Squish" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource( 10 )
-
-[node name="Melt" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 11 )
 
-[node name="Hiss" type="AudioStreamPlayer" parent="SFX"]
+[node name="Squish" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 12 )
-volume_db = -20.0
+
+[node name="Melt" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 13 )
+
+[node name="Hiss" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 14 )
+volume_db = -30.0
 
 [node name="Beep" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource( 13 )
-volume_db = -5.0
+stream = ExtResource( 10 )
+volume_db = -20.0
+pitch_scale = 1.09206
 
 [node name="Beepfast" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource( 14 )
+stream = ExtResource( 15 )
 volume_db = -5.0
 
-[node name="Explode" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource( 15 )
+[node name="Explode" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource( 16 )
 [connection signal="area_entered" from="ExplosionRadius" to="." method="_on_ExplosionRadius_area_entered"]
 [connection signal="body_entered" from="ExplosionRadius" to="." method="_on_ExplosionRadius_body_entered"]
 [connection signal="screen_exited" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_exited"]

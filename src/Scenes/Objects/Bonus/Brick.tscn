@@ -435,10 +435,10 @@ tracks/5/keys = {
 "values": [ Vector2( 0, -26 ) ]
 }
 
-[sub_resource type="RectangleShape2D" id=15]
+[sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 0, 0 )
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=12]
 resource_name = "hit_small"
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:position")
@@ -474,7 +474,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ SubResource( 2 ), SubResource( 15 ) ]
+"values": [ SubResource( 2 ), SubResource( 11 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("TopHitbox/CollisionShape2D:disabled")
@@ -501,7 +501,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, -26 ) ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=13]
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:position")
 tracks/0/interp = 1
@@ -575,11 +575,10 @@ tracks/5/keys = {
 "values": [ Vector2( 0, 26 ) ]
 }
 
-[sub_resource type="RectangleShape2D" id=16]
+[sub_resource type="RectangleShape2D" id=14]
 extents = Vector2( 0, 0 )
 
-[sub_resource type="Animation" id=14]
-resource_name = "hitdown_small"
+[sub_resource type="Animation" id=15]
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:position")
 tracks/0/interp = 1
@@ -614,7 +613,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ SubResource( 2 ), SubResource( 16 ) ]
+"values": [ SubResource( 2 ), SubResource( 14 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("TopHitbox/CollisionShape2D:disabled")
@@ -641,7 +640,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 26 ) ]
 }
 
-[sub_resource type="SpriteFrames" id=12]
+[sub_resource type="SpriteFrames" id=16]
 animations = [ {
 "frames": [ ExtResource( 4 ) ],
 "loop": true,
@@ -679,12 +678,12 @@ anims/breakdown = SubResource( 4 )
 anims/buttjumpbreak = SubResource( 5 )
 anims/default = SubResource( 9 )
 anims/hit = SubResource( 10 )
-anims/hit_small = SubResource( 13 )
-anims/hitdown = SubResource( 11 )
-anims/hitdown_small = SubResource( 14 )
+anims/hit_small = SubResource( 12 )
+anims/hitdown = SubResource( 13 )
+anims/hitdown_small = SubResource( 15 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-frames = SubResource( 12 )
+frames = SubResource( 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 7 )

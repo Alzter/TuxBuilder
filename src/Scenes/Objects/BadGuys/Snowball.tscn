@@ -235,17 +235,12 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Control" type="Control" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-rect_pivot_offset = Vector2( 0, 14 )
+[node name="Control" type="Node2D" parent="."]
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
-position = Vector2( 0, 6.31594e-013 )
+position = Vector2( 0, 6.31594e-13 )
 frames = SubResource( 1 )
-frame = 5
+frame = 3
 playing = true
 offset = Vector2( 0, -2 )
 

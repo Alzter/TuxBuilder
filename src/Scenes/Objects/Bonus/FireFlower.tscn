@@ -88,16 +88,12 @@ powerup_state = "fire"
 appear_animation = "appear"
 pickup_animation = "collect"
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Node2D" parent="."]
 editor/display_folded = true
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
 frames = SubResource( 1 )
-frame = 1
+frame = 2
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

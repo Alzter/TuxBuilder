@@ -182,7 +182,7 @@ one_shot = true
 position = Vector2( 0, 8 )
 shape = SubResource( 1 )
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Node2D" parent="."]
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
 position = Vector2( -1, 8 )

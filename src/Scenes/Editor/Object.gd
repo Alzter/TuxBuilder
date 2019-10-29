@@ -20,7 +20,7 @@ func get_object_texture(object_location):
 	# If the object has an animated sprite, set the thumbnail to that
 	if load(object_location).instance().has_node("Control/AnimatedSprite"):
 		var selected_texture = load(object_location).instance().get_node("Control/AnimatedSprite").get_sprite_frames().get_frame("default",0)
-		$Control/Sprite.scale = load(object_location).instance().get_node("Control").rect_scale
+		$Control/Sprite.scale = load(object_location).instance().get_node("Control").scale
 		$Control/Sprite.position += load(object_location).instance().get_node("Control/AnimatedSprite").offset
 		$Control/Sprite.position += load(object_location).instance().get_node("Control/AnimatedSprite").position
 		$Control/Sprite.texture = (selected_texture)
