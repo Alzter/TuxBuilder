@@ -22,6 +22,10 @@ var movetime_left = 0
 var movetime_right = 0
 var player_drag_half = "bottom"
 var player_hovered = false
+var expanding = false
+var expandingobject = ""
+var expandingdir = ""
+var expandpos = Vector2()
 var stop = false
 var dir = Directory.new()
 
@@ -136,7 +140,7 @@ func _process(_delta):
 	update_selected_tile()
 	
 	# Drag the player
-	if player_hovered == true and Input.is_action_just_pressed("click_left") and dragging_object == false:
+	if player_hovered and Input.is_action_just_pressed("click_left") and !dragging_object and !expanding:
 		dragging_object = true
 		object_dragged = "Player"
 		get_tree().current_scene.get_node("Player/Control/AnimatedSprite").scale += Vector2(0.25,0.25)
@@ -145,7 +149,7 @@ func _process(_delta):
 		else: player_drag_half = "bottom"
 	
 	# If clicking on a tile occupied by an object, pick up the object
-	if $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == false and dragging_object == false:
+	if $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == false and !dragging_object and !expanding:
 		for child in get_tree().current_scene.get_node("Level").get_children():
 			if not child.is_in_group("layers"):
 				if child.position == $SelectedTile.position:
@@ -180,8 +184,33 @@ func _process(_delta):
 			if player_drag_half == "top":
 				UIHelpers.get_player().position.y += 16
 			else: UIHelpers.get_player().position.y -= 16
-	
-	if Input.is_action_pressed("click_left") and dragging_object == false:
+
+	# Expand resizable areas
+	if expanding:
+		var expobject = get_tree().current_scene.get_node(str("Level/", expandingobject))
+		var expandposmap = $TileMap.world_to_map(expandpos)
+		if Input.is_action_pressed("click_left"):
+			# Drag Horizontal
+			if $TileMap.world_to_map(get_global_mouse_position()).x >= expandposmap.x:
+				expobject.position.x = expandpos.x
+				expobject.get_node("Control").rect_size.x = (($TileMap.world_to_map(get_global_mouse_position()).x - expandposmap.x) * 32) + 32
+			else:
+				expobject.position.x = ($TileMap.world_to_map(get_global_mouse_position()).x * 32) + 16
+				expobject.get_node("Control").rect_size.x = ((expandposmap.x - $TileMap.world_to_map(get_global_mouse_position()).x) * 32) + 32
+			expobject.size.x = expobject.get_node("Control").rect_size.x
+			
+			# Drag Vertical
+			if $TileMap.world_to_map(get_global_mouse_position()).y >= expandposmap.y:
+				expobject.position.y = expandpos.y
+				expobject.get_node("Control").rect_size.y = (($TileMap.world_to_map(get_global_mouse_position()).y - expandposmap.y) * 32) + 32
+			else:
+				expobject.position.y = ($TileMap.world_to_map(get_global_mouse_position()).y * 32) + 16
+				expobject.get_node("Control").rect_size.y = ((expandposmap.y - $TileMap.world_to_map(get_global_mouse_position()).y) * 32) + 32
+			expobject.size.y = expobject.get_node("Control").rect_size.y
+			
+		else: expanding = false
+
+	if Input.is_action_pressed("click_left") and !dragging_object and !expanding:
 		# If the mouse isn't on the level editor UI or zoom buttons
 		if get_viewport().get_mouse_position().x < get_viewport().size.x - 128 and get_viewport().get_mouse_position().y < get_viewport().size.y - 64 and (tile_selected != old_tile_selected or mouse_down == false) and $UI/AddLayer.visible == false and $UI/BottomBar/Zoom/ZoomIn.is_hovered() == false and $UI/BottomBar/Zoom/ZoomDefault.is_hovered() == false and $UI/BottomBar/Zoom/ZoomOut.is_hovered() == false:
 			
@@ -238,8 +267,15 @@ func _process(_delta):
 								if child.name != object.name: child.queue_free()
 						object.set_name(objectname)
 					
-					# Drag object by default
-					if not Input.is_action_pressed("action") or object.is_in_group("oneonly"):
+					# Resize expandable objects
+					if object.is_in_group("expandable"):
+						expanding = true
+						expandingobject = object.get_name()
+						expandingdir = ""
+						expandpos = object.position
+					
+					# If the object isn't expandable drag it instead
+					elif not Input.is_action_pressed("action") or object.is_in_group("oneonly"):
 						dragging_object = true
 						object_dragged = object.get_name()
 						object.scale += Vector2(0.25,0.25)
@@ -276,7 +312,7 @@ func update_selected_tile():
 		player_hovered = true
 		return
 	
-	if dragging_object == true:
+	if dragging_object or expanding:
 		return
 	
 	# Rectangle selection
