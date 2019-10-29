@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Scenes/Objects/BadGuys/Iceblock.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Creatures/IceblockSmart/smartblock-0.png" type="Texture" id=2]
@@ -14,7 +14,7 @@
 [ext_resource path="res://Sprites/Creatures/Iceblock/shard.png" type="Texture" id=12]
 [ext_resource path="res://Sprites/Creatures/Snowball/droplet.png" type="Texture" id=13]
 
-[sub_resource type="SpriteFrames" id=12]
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 3 ) ],
 "loop": true,
@@ -33,8 +33,10 @@ extents = Vector2( 15, 15 )
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 15, 15 )
 
-[sub_resource type="Animation" id=4]
-resource_name = "active"
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 25, 15 )
+
+[sub_resource type="Animation" id=5]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Control/AnimatedSprite:animation")
 tracks/0/interp = 1
@@ -108,8 +110,7 @@ tracks/5/keys = {
 "values": [ Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "explode"
+[sub_resource type="Animation" id=6]
 length = 2.0
 tracks/0/type = "method"
 tracks/0/path = NodePath(".")
@@ -162,8 +163,7 @@ tracks/3/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "shake"
+[sub_resource type="Animation" id=7]
 length = 0.1
 loop = true
 step = 0.05
@@ -180,7 +180,7 @@ tracks/0/keys = {
 "values": [ -10.0, 10.0, -10.0 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=8]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Control/AnimatedSprite:animation")
@@ -243,8 +243,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=8]
-resource_name = "stop"
+[sub_resource type="Animation" id=9]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Control/AnimatedSprite:visible")
 tracks/0/interp = 1
@@ -306,7 +305,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=10]
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Control:rect_scale")
@@ -369,11 +368,11 @@ tracks/4/keys = {
 "values": [ "default" ]
 }
 
-[sub_resource type="Gradient" id=10]
+[sub_resource type="Gradient" id=11]
 offsets = PoolRealArray( 0, 0.646552, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0.941176, 0.339844, 0.922334, 1, 0 )
 
-[sub_resource type="Gradient" id=11]
+[sub_resource type="Gradient" id=12]
 offsets = PoolRealArray( 0, 0.467949, 1 )
 colors = PoolColorArray( 1, 1, 1, 0.847059, 0.625, 0.936279, 1, 0.556863, 0, 0.478516, 1, 0 )
 
@@ -396,7 +395,7 @@ anchor_bottom = 0.5
 rect_pivot_offset = Vector2( 0, 14 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
-frames = SubResource( 12 )
+frames = SubResource( 1 )
 frame = 1
 playing = true
 offset = Vector2( 0, -2 )
@@ -414,14 +413,20 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 3 )
 
+[node name="BlockBreaker" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlockBreaker"]
+shape = SubResource( 4 )
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "active"
-anims/active = SubResource( 4 )
-anims/explode = SubResource( 5 )
-anims/shake = SubResource( 6 )
-anims/squished = SubResource( 7 )
-anims/stop = SubResource( 8 )
-anims/wakeup = SubResource( 9 )
+anims/active = SubResource( 5 )
+anims/explode = SubResource( 6 )
+anims/shake = SubResource( 7 )
+anims/squished = SubResource( 8 )
+anims/stop = SubResource( 9 )
+anims/wakeup = SubResource( 10 )
 
 [node name="SFX" type="Node" parent="."]
 editor/display_folded = true
@@ -464,7 +469,7 @@ angle = 720.0
 angle_random = 1.0
 scale_amount = 0.1
 scale_amount_random = 0.5
-color_ramp = SubResource( 10 )
+color_ramp = SubResource( 11 )
 
 [node name="ExplodeDroplets" type="CPUParticles2D" parent="."]
 emitting = false
@@ -486,7 +491,7 @@ angle = 360.0
 angle_random = 1.0
 scale_amount = 0.1
 scale_amount_random = 0.3
-color_ramp = SubResource( 11 )
+color_ramp = SubResource( 12 )
 
 [node name="WakeupTimer" type="Timer" parent="."]
 
@@ -494,5 +499,7 @@ color_ramp = SubResource( 11 )
 [connection signal="screen_exited" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_exited"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="area_entered" from="BlockBreaker" to="." method="_on_Area2D_area_entered"]
+[connection signal="body_entered" from="BlockBreaker" to="." method="_on_Area2D_body_entered"]
 [connection signal="timeout" from="WakeupTimer" to="." method="_on_WakeupTimer_timeout"]
 [connection signal="timeout" from="ShakeTimer" to="." method="_on_ShakeTimer_timeout"]
