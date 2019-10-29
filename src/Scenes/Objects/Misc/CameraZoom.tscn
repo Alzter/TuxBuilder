@@ -1,10 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scenes/Objects/Misc/CameraZoom.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Objects/Misc/zoom.png" type="Texture" id=2]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 16, 16 )
 
 [node name="ZoomTrigger" type="Node2D" groups=[
 "expandable",
@@ -31,11 +28,3 @@ rect_min_size = Vector2( 32, 32 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0.45, 1, 0.5 )
-
-[node name="Area2D" type="Area2D" parent="."]
-monitorable = false
-collision_layer = 31
-collision_mask = 31
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 1 )

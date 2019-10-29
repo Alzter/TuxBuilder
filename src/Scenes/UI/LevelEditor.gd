@@ -189,6 +189,7 @@ func _process(_delta):
 					$GrabArea/C3.rect_position = Vector2((child.position.x) - 16, (child.position.y + (child.get_node("Control").rect_size.y - 32) + 16))
 					$GrabArea/C4.rect_position = Vector2((child.position.x + (child.get_node("Control").rect_size.x - 32) + 16), (child.position.y + (child.get_node("Control").rect_size.y - 32) + 16))
 					$GrabArea.offset = (UIHelpers.get_camera().position * -1) - Vector2(get_viewport().size.x * -0.5, get_viewport().size.y * -0.5) - Vector2(11,11)
+					$GrabArea.scale = Vector2(1,1) / UIHelpers.get_camera().zoom
 					if $GrabArea/C1.is_hovered() or $GrabArea/C2.is_hovered() or $GrabArea/C3.is_hovered() or $GrabArea/C4.is_hovered():
 						$SelectedTile.visible = false
 						object_hovered = true
