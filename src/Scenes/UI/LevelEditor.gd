@@ -305,12 +305,16 @@ func _process(_delta):
 			else:
 				
 				# Object erasing (also happens when placing objects so they don't stack)
+				var erasedobject = false
 				for child in get_tree().current_scene.get_node("Level").get_children():
-					if child.position == $SelectedTile.position:
+					if child.position == $SelectedTile.position and not child.is_in_group("expandable"):
 						child.queue_free()
-					if child.is_in_group("expandable"):
-						if $SelectedTile.position.x >= child.position.x and $SelectedTile.position.y >= child.position.y and $SelectedTile.position.x <= child.position.x + (child.get_node("Control").rect_size.x - 32) and $SelectedTile.position.y <= child.position.y + (child.get_node("Control").rect_size.y - 32):
-							child.queue_free()
+						erasedobject = true
+				if !erasedobject:
+					for child in get_tree().current_scene.get_node("Level").get_children():
+						if child.is_in_group("expandable"):
+							if $SelectedTile.position.x >= child.position.x and $SelectedTile.position.y >= child.position.y and $SelectedTile.position.x <= child.position.x + (child.get_node("Control").rect_size.x - 32) and $SelectedTile.position.y <= child.position.y + (child.get_node("Control").rect_size.y - 32):
+								child.queue_free()
 				
 				# Object placing
 				if $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == false and object_type != "":
