@@ -179,17 +179,19 @@ func _process(_delta):
 						return
 	
 	# Show expandable area buttons
-	$GrabArea.visible = false
+	$GrabArea.offset = Vector2(9999999,99999999)
 	if $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == false and !dragging_object and !expanding:
 		for child in get_tree().current_scene.get_node("Level").get_children():
 			if child.is_in_group("expandable"):
 				if $SelectedTile.position.x >= child.position.x - 32 and $SelectedTile.position.y >= child.position.y - 32 and $SelectedTile.position.x <= child.position.x + (child.get_node("Control").rect_size.x - 32) + 32 and $SelectedTile.position.y <= child.position.y + (child.get_node("Control").rect_size.y - 32) + 32:
-					$GrabArea.visible = true
 					$GrabArea/C1.rect_position = Vector2((child.position.x) - 16, (child.position.y) - 16)
 					$GrabArea/C2.rect_position = Vector2((child.position.x + (child.get_node("Control").rect_size.x - 32) + 16), (child.position.y) - 16)
 					$GrabArea/C3.rect_position = Vector2((child.position.x) - 16, (child.position.y + (child.get_node("Control").rect_size.y - 32) + 16))
 					$GrabArea/C4.rect_position = Vector2((child.position.x + (child.get_node("Control").rect_size.x - 32) + 16), (child.position.y + (child.get_node("Control").rect_size.y - 32) + 16))
-					
+					$GrabArea.offset = (UIHelpers.get_camera().position * -1) - Vector2(get_viewport().size.x * -0.5, get_viewport().size.y * -0.5) - Vector2(11,11)
+					if $GrabArea/C1.is_hovered() or $GrabArea/C2.is_hovered() or $GrabArea/C3.is_hovered() or $GrabArea/C4.is_hovered():
+						$SelectedTile.visible = false
+						object_hovered = true
 	
 	# Let go of dragged objects
 	if not Input.is_action_pressed("click_left") and dragging_object == true:
