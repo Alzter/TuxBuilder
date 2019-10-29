@@ -29,7 +29,6 @@ var expandingdir = ""
 var expandpos = Vector2()
 var stop = false
 var dir = Directory.new()
-var grabhovered = false
 
 func _ready():
 	anim_in = get_tree().current_scene.editmode
@@ -180,29 +179,17 @@ func _process(_delta):
 						return
 	
 	# Show expandable area buttons
-	$GrabArea/C1.visible = false
-	$GrabArea/C2.visible = false
-	$GrabArea/C3.visible = false
-	$GrabArea/C4.visible = false
+	$GrabArea.visible = false
 	if $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == false and !dragging_object and !expanding:
 		for child in get_tree().current_scene.get_node("Level").get_children():
 			if child.is_in_group("expandable"):
 				if $SelectedTile.position.x >= child.position.x - 32 and $SelectedTile.position.y >= child.position.y - 32 and $SelectedTile.position.x <= child.position.x + (child.get_node("Control").rect_size.x - 32) + 32 and $SelectedTile.position.y <= child.position.y + (child.get_node("Control").rect_size.y - 32) + 32:
-					$GrabArea/C1.visible = true
-					$GrabArea/C2.visible = true
-					$GrabArea/C3.visible = true
-					$GrabArea/C4.visible = true
+					$GrabArea.visible = true
 					$GrabArea/C1.rect_position = Vector2((child.position.x) - 16, (child.position.y) - 16)
 					$GrabArea/C2.rect_position = Vector2((child.position.x + (child.get_node("Control").rect_size.x - 32) + 16), (child.position.y) - 16)
 					$GrabArea/C3.rect_position = Vector2((child.position.x) - 16, (child.position.y + (child.get_node("Control").rect_size.y - 32) + 16))
 					$GrabArea/C4.rect_position = Vector2((child.position.x + (child.get_node("Control").rect_size.x - 32) + 16), (child.position.y + (child.get_node("Control").rect_size.y - 32) + 16))
-					$GrabArea/C1.rect_position -= Vector2(11,11)
-					$GrabArea/C2.rect_position -= Vector2(11,11)
-					$GrabArea/C3.rect_position -= Vector2(11,11)
-					$GrabArea/C4.rect_position -= Vector2(11,11)
 					
-					if $GrabArea/C1.is_hovered() or $GrabArea/C2.is_hovered() or $GrabArea/C3.is_hovered() or $GrabArea/C4.is_hovered():
-						grabhovered = true
 	
 	# Let go of dragged objects
 	if not Input.is_action_pressed("click_left") and dragging_object == true:
@@ -361,7 +348,7 @@ func update_selected_tile():
 		player_hovered = true
 		return
 	
-	if dragging_object or expanding or grabhovered:
+	if dragging_object or expanding:
 		return
 	
 	# Rectangle selection
