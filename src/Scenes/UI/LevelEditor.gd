@@ -197,7 +197,6 @@ func _process(_delta):
 			else:
 				expobject.position.x = ($TileMap.world_to_map(get_global_mouse_position()).x * 32) + 16
 				expobject.get_node("Control").rect_size.x = ((expandposmap.x - $TileMap.world_to_map(get_global_mouse_position()).x) * 32) + 32
-			expobject.size.x = expobject.get_node("Control").rect_size.x
 			
 			# Drag Vertical
 			if $TileMap.world_to_map(get_global_mouse_position()).y >= expandposmap.y:
@@ -206,7 +205,9 @@ func _process(_delta):
 			else:
 				expobject.position.y = ($TileMap.world_to_map(get_global_mouse_position()).y * 32) + 16
 				expobject.get_node("Control").rect_size.y = ((expandposmap.y - $TileMap.world_to_map(get_global_mouse_position()).y) * 32) + 32
-			expobject.size.y = expobject.get_node("Control").rect_size.y
+			
+			expobject.boxsize.x = expobject.get_node("Control").rect_size.x
+			expobject.boxsize.y = expobject.get_node("Control").rect_size.y
 			
 		else: expanding = false
 
