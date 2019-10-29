@@ -8,6 +8,7 @@ extents = Vector2( 16, 16 )
 
 [node name="ZoomTrigger" type="Node2D" groups=[
 "expandable",
+"stackable",
 ]]
 script = ExtResource( 1 )
 
@@ -29,7 +30,7 @@ rect_min_size = Vector2( 32, 32 )
 [node name="ColorRect" type="ColorRect" parent="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0, 0, 1 )
+color = Color( 0, 0.45, 1, 0.5 )
 
 [node name="Area2D" type="Area2D" parent="."]
 monitorable = false

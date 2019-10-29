@@ -16,8 +16,8 @@ func _process(delta):
 			activate()
 	
 	$Control.rect_size = boxsize
-	hitbox.position = ($Control.rect_size * 0.5) - Vector2(16,16)
-	hitbox.shape.extents = $Control.rect_size * 0.5
+	hitbox.position = (boxsize * 0.5) - Vector2(16,16)
+	hitbox.shape.extents = boxsize * 0.5
 
 # To be overwritten by sub-classes
 func activate():

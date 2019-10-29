@@ -15,6 +15,7 @@ var mouse_down = false
 var anim_in = false
 var rect_start_pos = Vector2() # Where you started clicking for the rectangle select
 var dragging_object = false
+var dragpos = Vector2()
 var object_dragged = ""
 var movetime_up = 0
 var movetime_down = 0
@@ -28,6 +29,7 @@ var expandingdir = ""
 var expandpos = Vector2()
 var stop = false
 var dir = Directory.new()
+var grabhovered = false
 
 func _ready():
 	anim_in = get_tree().current_scene.editmode
@@ -143,29 +145,72 @@ func _process(_delta):
 	if player_hovered and Input.is_action_just_pressed("click_left") and !dragging_object and !expanding:
 		dragging_object = true
 		object_dragged = "Player"
+		dragpos = Vector2(0,0)
 		get_tree().current_scene.get_node("Player/Control/AnimatedSprite").scale += Vector2(0.25,0.25)
 		if $SelectedTile.position == Vector2(UIHelpers.get_player().position.x,UIHelpers.get_player().position.y - 16):
 			player_drag_half = "top"
 		else: player_drag_half = "bottom"
 	
+	var object_hovered = false
 	# If clicking on a tile occupied by an object, pick up the object
 	if $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == false and !dragging_object and !expanding:
 		for child in get_tree().current_scene.get_node("Level").get_children():
-			if not child.is_in_group("layers"):
+			if not child.is_in_group("layers") and not child.is_in_group("expandable"):
 				if child.position == $SelectedTile.position:
 						$SelectedTile.visible = false
+						object_hovered = true
 						if Input.is_action_just_pressed("click_left"):
 							dragging_object = true
 							object_dragged = child.get_name()
 							child.scale += Vector2(0.25,0.25)
+							dragpos = Vector2(0,0)
 							return
+	
+	# If clicking on an expandable area, drag it
+	if !object_hovered and $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == false and !dragging_object and !expanding:
+		for child in get_tree().current_scene.get_node("Level").get_children():
+			if child.is_in_group("expandable"):
+				if $SelectedTile.position.x >= child.position.x and $SelectedTile.position.y >= child.position.y and $SelectedTile.position.x <= child.position.x + (child.get_node("Control").rect_size.x - 32) and $SelectedTile.position.y <= child.position.y + (child.get_node("Control").rect_size.y - 32):
+					$SelectedTile.visible = false
+					object_hovered = true
+					if Input.is_action_just_pressed("click_left"):
+						dragging_object = true
+						object_dragged = child.get_name()
+						dragpos = Vector2(child.position.x - $SelectedTile.position.x, child.position.y - $SelectedTile.position.y)
+						return
+	
+	# Show expandable area buttons
+	$GrabArea/C1.visible = false
+	$GrabArea/C2.visible = false
+	$GrabArea/C3.visible = false
+	$GrabArea/C4.visible = false
+	if $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == false and !dragging_object and !expanding:
+		for child in get_tree().current_scene.get_node("Level").get_children():
+			if child.is_in_group("expandable"):
+				if $SelectedTile.position.x >= child.position.x - 32 and $SelectedTile.position.y >= child.position.y - 32 and $SelectedTile.position.x <= child.position.x + (child.get_node("Control").rect_size.x - 32) + 32 and $SelectedTile.position.y <= child.position.y + (child.get_node("Control").rect_size.y - 32) + 32:
+					$GrabArea/C1.visible = true
+					$GrabArea/C2.visible = true
+					$GrabArea/C3.visible = true
+					$GrabArea/C4.visible = true
+					$GrabArea/C1.rect_position = Vector2((child.position.x) - 16, (child.position.y) - 16)
+					$GrabArea/C2.rect_position = Vector2((child.position.x + (child.get_node("Control").rect_size.x - 32) + 16), (child.position.y) - 16)
+					$GrabArea/C3.rect_position = Vector2((child.position.x) - 16, (child.position.y + (child.get_node("Control").rect_size.y - 32) + 16))
+					$GrabArea/C4.rect_position = Vector2((child.position.x + (child.get_node("Control").rect_size.x - 32) + 16), (child.position.y + (child.get_node("Control").rect_size.y - 32) + 16))
+					$GrabArea/C1.rect_position -= Vector2(11,11)
+					$GrabArea/C2.rect_position -= Vector2(11,11)
+					$GrabArea/C3.rect_position -= Vector2(11,11)
+					$GrabArea/C4.rect_position -= Vector2(11,11)
+					
+					if $GrabArea/C1.is_hovered() or $GrabArea/C2.is_hovered() or $GrabArea/C3.is_hovered() or $GrabArea/C4.is_hovered():
+						grabhovered = true
 	
 	# Let go of dragged objects
 	if not Input.is_action_pressed("click_left") and dragging_object == true:
 		dragging_object = false
 		$GrabSprite.visible = false
 		if object_dragged != "Player":
-			get_tree().current_scene.get_node(str("Level/", object_dragged)).scale -= Vector2(0.25,0.25)
+			if not get_tree().current_scene.get_node(str("Level/", object_dragged)).is_in_group("expandable"):
+				get_tree().current_scene.get_node(str("Level/", object_dragged)).scale -= Vector2(0.25,0.25)
 			if not get_tree().current_scene.get_node(str("Level/", object_dragged)).is_in_group("stackable"):
 				for child in get_tree().current_scene.get_node("Level").get_children():
 					if child.position == $SelectedTile.position and child.get_name() != object_dragged and not child.is_in_group("stackable"):
@@ -178,7 +223,7 @@ func _process(_delta):
 		$GrabSprite.visible = true
 		$GrabSprite.position = $SelectedTile.position
 		if object_dragged != "Player":
-			get_tree().current_scene.get_node(str("Level/", object_dragged)).position = $SelectedTile.position
+			get_tree().current_scene.get_node(str("Level/", object_dragged)).position = $SelectedTile.position + dragpos
 		else:
 			UIHelpers.get_player().position = $SelectedTile.position
 			if player_drag_half == "top":
@@ -248,6 +293,9 @@ func _process(_delta):
 				for child in get_tree().current_scene.get_node("Level").get_children():
 					if child.position == $SelectedTile.position:
 						child.queue_free()
+					if child.is_in_group("expandable"):
+						if $SelectedTile.position.x >= child.position.x and $SelectedTile.position.y >= child.position.y and $SelectedTile.position.x <= child.position.x + (child.get_node("Control").rect_size.x - 32) and $SelectedTile.position.y <= child.position.y + (child.get_node("Control").rect_size.y - 32):
+							child.queue_free()
 				
 				# Object placing
 				if $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == false and object_type != "":
@@ -277,6 +325,7 @@ func _process(_delta):
 					# If the object isn't expandable drag it instead
 					elif not Input.is_action_pressed("action") or object.is_in_group("oneonly"):
 						dragging_object = true
+						dragpos = Vector2(0,0)
 						object_dragged = object.get_name()
 						object.scale += Vector2(0.25,0.25)
 		
@@ -312,7 +361,7 @@ func update_selected_tile():
 		player_hovered = true
 		return
 	
-	if dragging_object or expanding:
+	if dragging_object or expanding or grabhovered:
 		return
 	
 	# Rectangle selection

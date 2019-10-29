@@ -1,20 +1,22 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Scenes/UI/LevelEditor.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/Editor/Grid.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/Editor/Grab.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/Editor/Eraser.png" type="Texture" id=4]
-[ext_resource path="res://Scenes/UI/UITheme.tres" type="Theme" id=5]
-[ext_resource path="res://Fonts/SuperTux-Medium.ttf" type="DynamicFontData" id=6]
-[ext_resource path="res://Sprites/Editor/Line.png" type="Texture" id=7]
-[ext_resource path="res://Sprites/Editor/Rectangle.png" type="Texture" id=8]
-[ext_resource path="res://Sprites/Editor/Plus.png" type="Texture" id=9]
-[ext_resource path="res://Sprites/Editor/Equals.png" type="Texture" id=10]
-[ext_resource path="res://Sprites/Editor/Minus.png" type="Texture" id=11]
-[ext_resource path="res://Sprites/Editor/Save.png" type="Texture" id=12]
-[ext_resource path="res://Sprites/Editor/Wrench.png" type="Texture" id=13]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Jump3.png" type="Texture" id=14]
-[ext_resource path="res://Tilesets/LevelTiles.tres" type="TileSet" id=15]
+[ext_resource path="res://Sprites/Editor/GrabPoint.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Editor/GrabPointHover.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Editor/Grid.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Editor/Grab.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Editor/Eraser.png" type="Texture" id=6]
+[ext_resource path="res://Scenes/UI/UITheme.tres" type="Theme" id=7]
+[ext_resource path="res://Fonts/SuperTux-Medium.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://Sprites/Editor/Line.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/Editor/Rectangle.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/Editor/Plus.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/Editor/Equals.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/Editor/Minus.png" type="Texture" id=13]
+[ext_resource path="res://Sprites/Editor/Save.png" type="Texture" id=14]
+[ext_resource path="res://Sprites/Editor/Wrench.png" type="Texture" id=15]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Jump3.png" type="Texture" id=16]
+[ext_resource path="res://Tilesets/LevelTiles.tres" type="TileSet" id=17]
 
 [sub_resource type="Animation" id=1]
 resource_name = "MoveIn"
@@ -255,7 +257,7 @@ size = 18
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
-font_data = ExtResource( 6 )
+font_data = ExtResource( 8 )
 
 [sub_resource type="StreamTexture" id=6]
 flags = 5
@@ -307,7 +309,55 @@ corner_radius_bottom_left = 4
 
 [node name="Node2D" type="Node2D"]
 pause_mode = 2
+z_as_relative = false
 script = ExtResource( 1 )
+
+[node name="GrabArea" type="Node2D" parent="."]
+z_index = 999
+
+[node name="C1" type="TextureButton" parent="GrabArea"]
+margin_right = 22.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 22, 22 )
+focus_mode = 1
+enabled_focus_mode = 1
+texture_normal = ExtResource( 2 )
+texture_pressed = ExtResource( 2 )
+texture_hover = ExtResource( 3 )
+expand = true
+
+[node name="C2" type="TextureButton" parent="GrabArea"]
+visible = false
+margin_right = 22.0
+margin_bottom = 22.0
+focus_mode = 1
+enabled_focus_mode = 1
+texture_normal = ExtResource( 2 )
+texture_pressed = ExtResource( 2 )
+texture_hover = ExtResource( 3 )
+expand = true
+
+[node name="C3" type="TextureButton" parent="GrabArea"]
+visible = false
+margin_right = 22.0
+margin_bottom = 22.0
+focus_mode = 1
+enabled_focus_mode = 1
+texture_normal = ExtResource( 2 )
+texture_pressed = ExtResource( 2 )
+texture_hover = ExtResource( 3 )
+expand = true
+
+[node name="C4" type="TextureButton" parent="GrabArea"]
+visible = false
+margin_right = 22.0
+margin_bottom = 22.0
+focus_mode = 1
+enabled_focus_mode = 1
+texture_normal = ExtResource( 2 )
+texture_pressed = ExtResource( 2 )
+texture_hover = ExtResource( 3 )
+expand = true
 
 [node name="Grid" type="TextureRect" parent="."]
 self_modulate = Color( 1, 1, 1, 0.5 )
@@ -321,7 +371,7 @@ margin_right = 112.0
 margin_bottom = 112.0
 rect_scale = Vector2( 0.25, 0.25 )
 mouse_filter = 2
-texture = ExtResource( 2 )
+texture = ExtResource( 4 )
 expand = true
 stretch_mode = 2
 
@@ -336,14 +386,14 @@ region_filter_clip = true
 visible = false
 scale = Vector2( 0.25, 0.25 )
 z_index = 4096
-texture = ExtResource( 3 )
+texture = ExtResource( 5 )
 offset = Vector2( 64, 32 )
 
 [node name="EraserSprite" type="Sprite" parent="."]
 visible = false
 scale = Vector2( 0.25, 0.25 )
 z_index = 4096
-texture = ExtResource( 4 )
+texture = ExtResource( 6 )
 offset = Vector2( 64, 64 )
 flip_h = true
 region_enabled = true
@@ -388,7 +438,7 @@ grow_vertical = 0
 rect_min_size = Vector2( 0, 32 )
 focus_mode = 1
 size_flags_horizontal = 3
-theme = ExtResource( 5 )
+theme = ExtResource( 7 )
 custom_styles/hover = SubResource( 3 )
 custom_styles/pressed = SubResource( 4 )
 custom_styles/focus = SubResource( 4 )
@@ -426,7 +476,7 @@ text = "Tiles"
 margin_top = 32.0
 margin_right = 128.0
 margin_bottom = 34.0
-texture = ExtResource( 7 )
+texture = ExtResource( 9 )
 
 [node name="ObjectsButton" type="Button" parent="UI/SideBar/VBoxContainer"]
 editor/display_folded = true
@@ -438,7 +488,7 @@ grow_vertical = 0
 rect_min_size = Vector2( 0, 32 )
 focus_mode = 1
 size_flags_horizontal = 3
-theme = ExtResource( 5 )
+theme = ExtResource( 7 )
 custom_styles/hover = SubResource( 3 )
 custom_styles/pressed = SubResource( 4 )
 custom_styles/focus = SubResource( 4 )
@@ -476,7 +526,7 @@ text = "Objects"
 margin_top = 66.0
 margin_right = 128.0
 margin_bottom = 68.0
-texture = ExtResource( 7 )
+texture = ExtResource( 9 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/SideBar/VBoxContainer"]
 editor/display_folded = true
@@ -492,7 +542,7 @@ margin_right = 56.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 focus_mode = 0
-theme = ExtResource( 5 )
+theme = ExtResource( 7 )
 custom_styles/hover = SubResource( 3 )
 custom_styles/pressed = SubResource( 4 )
 custom_styles/focus = SubResource( 3 )
@@ -504,7 +554,7 @@ enabled_focus_mode = 0
 [node name="TextureRect" type="TextureRect" parent="UI/SideBar/VBoxContainer/HBoxContainer/EraserButton"]
 margin_right = 32.0
 margin_bottom = 32.0
-texture = ExtResource( 4 )
+texture = ExtResource( 6 )
 expand = true
 
 [node name="SelectButton" type="Button" parent="UI/SideBar/VBoxContainer/HBoxContainer"]
@@ -513,7 +563,7 @@ margin_right = 104.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 focus_mode = 0
-theme = ExtResource( 5 )
+theme = ExtResource( 7 )
 custom_styles/hover = SubResource( 3 )
 custom_styles/pressed = SubResource( 4 )
 custom_styles/focus = SubResource( 3 )
@@ -525,14 +575,14 @@ enabled_focus_mode = 0
 [node name="TextureRect" type="TextureRect" parent="UI/SideBar/VBoxContainer/HBoxContainer/SelectButton"]
 margin_right = 32.0
 margin_bottom = 32.0
-texture = ExtResource( 8 )
+texture = ExtResource( 10 )
 expand = true
 
 [node name="Line3" type="TextureRect" parent="UI/SideBar/VBoxContainer"]
 margin_top = 100.0
 margin_right = 128.0
 margin_bottom = 102.0
-texture = ExtResource( 7 )
+texture = ExtResource( 9 )
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/SideBar"]
 anchor_left = 1.0
@@ -542,7 +592,7 @@ margin_left = -122.0
 margin_top = 110.0
 margin_right = -8.0
 margin_bottom = 98.0
-theme = ExtResource( 5 )
+theme = ExtResource( 7 )
 scroll_horizontal_enabled = false
 
 [node name="SidebarList" type="VBoxContainer" parent="UI/SideBar/ScrollContainer"]
@@ -579,7 +629,7 @@ margin_top = 2.0
 margin_right = 62.0
 margin_bottom = 62.0
 focus_mode = 0
-theme = ExtResource( 5 )
+theme = ExtResource( 7 )
 custom_styles/hover = SubResource( 8 )
 custom_styles/pressed = SubResource( 9 )
 custom_styles/focus = SubResource( 8 )
@@ -597,7 +647,7 @@ margin_top = -32.0
 margin_right = 32.0
 margin_bottom = 32.0
 mouse_filter = 2
-texture = ExtResource( 9 )
+texture = ExtResource( 11 )
 expand = true
 
 [node name="Zoom" type="HBoxContainer" parent="UI/BottomBar"]
@@ -639,7 +689,7 @@ margin_right = 23.0
 margin_bottom = 23.0
 rect_min_size = Vector2( 32, 32 )
 mouse_filter = 2
-texture = ExtResource( 9 )
+texture = ExtResource( 11 )
 expand = true
 
 [node name="ZoomDefault" type="Button" parent="UI/BottomBar/Zoom"]
@@ -667,7 +717,7 @@ margin_right = 23.0
 margin_bottom = 23.0
 rect_min_size = Vector2( 32, 32 )
 mouse_filter = 2
-texture = ExtResource( 10 )
+texture = ExtResource( 12 )
 expand = true
 
 [node name="ZoomOut" type="Button" parent="UI/BottomBar/Zoom"]
@@ -695,7 +745,7 @@ margin_right = 23.0
 margin_bottom = 23.0
 rect_min_size = Vector2( 32, 32 )
 mouse_filter = 2
-texture = ExtResource( 11 )
+texture = ExtResource( 13 )
 expand = true
 
 [node name="Save" type="Button" parent="UI/BottomBar"]
@@ -723,7 +773,7 @@ margin_left = 2.0
 margin_top = 2.0
 margin_right = -4.0
 margin_bottom = -4.0
-texture = ExtResource( 12 )
+texture = ExtResource( 14 )
 expand = true
 stretch_mode = 6
 
@@ -734,7 +784,7 @@ margin_left = 2.0
 margin_top = 2.0
 margin_right = 232.0
 margin_bottom = -64.0
-theme = ExtResource( 5 )
+theme = ExtResource( 7 )
 
 [node name="Panel" type="Panel" parent="UI/AddLayer"]
 anchor_right = 1.0
@@ -765,7 +815,7 @@ margin_top = 26.0
 margin_right = 218.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 0, 2 )
-texture = ExtResource( 7 )
+texture = ExtResource( 9 )
 expand = true
 
 [node name="Name" type="HBoxContainer" parent="UI/AddLayer/VBoxContainer"]
@@ -794,7 +844,7 @@ margin_top = 60.0
 margin_right = 218.0
 margin_bottom = 62.0
 rect_min_size = Vector2( 0, 2 )
-texture = ExtResource( 7 )
+texture = ExtResource( 9 )
 expand = true
 
 [node name="Zaxis" type="HBoxContainer" parent="UI/AddLayer/VBoxContainer"]
@@ -827,7 +877,7 @@ margin_top = 94.0
 margin_right = 218.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 0, 2 )
-texture = ExtResource( 7 )
+texture = ExtResource( 9 )
 expand = true
 
 [node name="Label3" type="Label" parent="UI/AddLayer/VBoxContainer"]
@@ -861,7 +911,7 @@ anchor_right = 1.0
 margin_top = -2.0
 margin_bottom = -12.0
 rect_min_size = Vector2( 0, 2 )
-texture = ExtResource( 7 )
+texture = ExtResource( 9 )
 expand = true
 
 [node name="Play" type="CanvasLayer" parent="."]
@@ -894,7 +944,7 @@ margin_left = 4.0
 margin_top = 4.0
 margin_right = -6.0
 margin_bottom = -6.0
-texture = ExtResource( 13 )
+texture = ExtResource( 15 )
 expand = true
 stretch_mode = 6
 
@@ -905,10 +955,10 @@ margin_left = -4.0
 margin_top = -24.0
 margin_right = 30.0
 margin_bottom = 56.0
-texture = ExtResource( 14 )
+texture = ExtResource( 16 )
 
 [node name="TileMap" type="TileMap" parent="."]
-tile_set = ExtResource( 15 )
+tile_set = ExtResource( 17 )
 cell_size = Vector2( 32, 32 )
 collision_layer = 0
 collision_mask = 0
