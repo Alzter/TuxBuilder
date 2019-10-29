@@ -396,7 +396,7 @@ rect_pivot_offset = Vector2( 0, 14 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
 frames = SubResource( 1 )
-frame = 3
+frame = 1
 playing = true
 offset = Vector2( 0, -2 )
 
@@ -414,6 +414,7 @@ collision_mask = 2
 shape = SubResource( 3 )
 
 [node name="BlockBreaker" type="Area2D" parent="."]
+collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BlockBreaker"]
