@@ -29,6 +29,7 @@ var expandingdir = ""
 var expandpos = Vector2()
 var stop = false
 var dir = Directory.new()
+var clickdisable = false
 
 func _ready():
 	anim_in = get_tree().current_scene.editmode
@@ -134,6 +135,10 @@ func _process(_delta):
 		$UI/SideBar/VBoxContainer/HBoxContainer/SelectButton.disabled = false
 		$UI/SideBar/VBoxContainer/HBoxContainer/SelectButton/TextureRect.self_modulate = Color(1,1,1,1)
 	
+	# Click disable
+	if not Input.is_action_pressed("click_left"):
+		clickdisable = false
+	
 	# Placing tiles / objects
 	if layer_selected_type == "TileMap" and category_selected == "Tiles":
 		tile_selected = layerfile.world_to_map(Vector2(get_global_mouse_position().x - ((1 - layerfile.scroll_speed.x) * UIHelpers.get_camera().position.x), get_global_mouse_position().y - ((1 - layerfile.scroll_speed.y) * UIHelpers.get_camera().position.y)))
@@ -166,13 +171,16 @@ func _process(_delta):
 							return
 	
 	# If clicking on an expandable area, drag it
-	if !object_hovered and $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == false and !dragging_object and !expanding:
+	if !object_hovered and not($GrabArea/C1.is_hovered()) and not($GrabArea/C2.is_hovered()) and not($GrabArea/C3.is_hovered()) and not($GrabArea/C4.is_hovered()) and $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == false and !dragging_object and !expanding:
 		for child in get_tree().current_scene.get_node("Level").get_children():
 			if child.is_in_group("expandable"):
 				if $SelectedTile.position.x >= child.position.x and $SelectedTile.position.y >= child.position.y and $SelectedTile.position.x <= child.position.x + (child.get_node("Control").rect_size.x - 32) and $SelectedTile.position.y <= child.position.y + (child.get_node("Control").rect_size.y - 32):
 					$SelectedTile.visible = false
 					object_hovered = true
-					if Input.is_action_just_pressed("click_left"):
+					if Input.is_action_just_pressed("click_right") and child.is_in_group("popup"):
+						child.get_node("CanvasLayer/Popup").popup()
+						clickdisable = true
+					elif Input.is_action_just_pressed("click_left"):
 						dragging_object = true
 						object_dragged = child.get_name()
 						dragpos = Vector2(child.position.x - $SelectedTile.position.x, child.position.y - $SelectedTile.position.y)
@@ -180,9 +188,14 @@ func _process(_delta):
 	
 	# Show expandable area buttons
 	$GrabArea.offset = Vector2(9999999,99999999)
-	if $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == false and !dragging_object and !expanding:
+	if UIHelpers._get_scene().editmode and $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == false and !dragging_object and !expanding:
 		for child in get_tree().current_scene.get_node("Level").get_children():
 			if child.is_in_group("expandable"):
+				if child.is_in_group("popup"):
+					if child.get_node("CanvasLayer/Popup").visible:
+						object_hovered = true
+						$SelectedTile.visible = false
+						return
 				if $SelectedTile.position.x >= child.position.x - 32 and $SelectedTile.position.y >= child.position.y - 32 and $SelectedTile.position.x <= child.position.x + (child.get_node("Control").rect_size.x - 32) + 32 and $SelectedTile.position.y <= child.position.y + (child.get_node("Control").rect_size.y - 32) + 32:
 					$GrabArea/C1.rect_position = Vector2((child.position.x) - 16, (child.position.y) - 16)
 					$GrabArea/C2.rect_position = Vector2((child.position.x + (child.get_node("Control").rect_size.x - 32) + 16), (child.position.y) - 16)
@@ -271,7 +284,7 @@ func _process(_delta):
 			
 		else: expanding = false
 
-	if Input.is_action_pressed("click_left") and !dragging_object and !expanding:
+	if Input.is_action_pressed("click_left") and !dragging_object and !expanding and !clickdisable:
 		# If the mouse isn't on the level editor UI or zoom buttons
 		if get_viewport().get_mouse_position().x < get_viewport().size.x - 128 and get_viewport().get_mouse_position().y < get_viewport().size.y - 64 and (tile_selected != old_tile_selected or mouse_down == false) and $UI/AddLayer.visible == false and $UI/BottomBar/Zoom/ZoomIn.is_hovered() == false and $UI/BottomBar/Zoom/ZoomDefault.is_hovered() == false and $UI/BottomBar/Zoom/ZoomOut.is_hovered() == false:
 			

@@ -372,6 +372,7 @@ anims/MoveIn = SubResource( 1 )
 anims/MoveOut = SubResource( 2 )
 
 [node name="SideBar" type="ColorRect" parent="UI"]
+editor/display_folded = true
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -556,6 +557,7 @@ rect_clip_content = true
 custom_constants/separation = 0
 
 [node name="BottomBar" type="ColorRect" parent="UI"]
+editor/display_folded = true
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -920,6 +922,7 @@ collision_mask = 0
 format = 1
 
 [node name="GrabArea" type="CanvasLayer" parent="."]
+editor/display_folded = true
 layer = 2
 
 [node name="C1" type="TextureButton" parent="GrabArea"]

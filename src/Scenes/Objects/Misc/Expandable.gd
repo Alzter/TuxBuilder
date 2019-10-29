@@ -17,6 +17,13 @@ func _process(delta):
 				activate()
 	
 	$Control.rect_size = boxsize
+	
+	if is_in_group("popup"):
+		if $CanvasLayer/Popup.visible:
+			UIHelpers._get_scene().get_node("Editor").clickdisable = true
+			
+			if $CanvasLayer/Popup/Panel/Button.pressed:
+				$CanvasLayer/Popup.hide()
 
 # To be overwritten by sub-classes
 func activate():
