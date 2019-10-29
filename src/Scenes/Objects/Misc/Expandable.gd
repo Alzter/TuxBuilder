@@ -5,22 +5,17 @@ export var min_size = Vector2(1,1)
 export var scale_h = true
 export var scale_v = true
 
-# Make Area2D fit control box
+onready var hitbox = $Area2D/CollisionShape2D
+
 func _process(delta):
-	if has_node("Control"):
-		$Control.rect_size = size
+	$Control.rect_size = size
+	hitbox.position = (size * 0.5) - Vector2(16,16)
+	hitbox.shape.extents = size * 0.5
 	
-	if has_node("Area2D/CollisionShape2D") and has_node("Control"):
-		$Area2D/CollisionShape2D.shape.extents.x = $Control.rect_size.x / 2
-		$Area2D/CollisionShape2D.position.x = max(0, ($Control.rect_size.x - 32) / 2)
-		$Area2D/CollisionShape2D.shape.extents.y = $Control.rect_size.y / 2
-		$Area2D/CollisionShape2D.position.y = max(0, ($Control.rect_size.y - 32) / 2)
-	
-	if get_tree().current_scene.editmode == false:
-		for body in $Area2D.get_overlapping_bodies():
-			if body.is_in_group("Player"):
-				activate(body)
+	for body in $Area2D.get_overlapping_bodies():
+		if body.is_in_group("player"):
+			activate()
 
 # To be overwritten by sub-classes
-func activate(body):
-	pass
+func activate():
+	pass;

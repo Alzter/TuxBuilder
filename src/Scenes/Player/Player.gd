@@ -116,9 +116,9 @@ func _ready():
 
 func _physics_process(delta):
 
+	$Hitbox.disabled = get_tree().current_scene.editmode
 	if get_tree().current_scene.editmode == true:
 		set_animation("idle")
-		$Hitbox.disabled = true
 		return
 
 	if dead == true:

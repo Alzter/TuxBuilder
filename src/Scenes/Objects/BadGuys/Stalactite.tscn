@@ -100,7 +100,7 @@ tracks/5/keys = {
 "values": [ Vector2( 0, -4 ) ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 resource_name = "default"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Control/AnimatedSprite:position")
@@ -151,8 +151,7 @@ tracks/3/keys = {
 "values": [ Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "shake"
+[sub_resource type="Animation" id=6]
 length = 0.08
 loop = true
 step = 0.02
@@ -185,7 +184,7 @@ shape = SubResource( 1 )
 [node name="Control" type="Control" parent="."]
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
-position = Vector2( -1, 8 )
+position = Vector2( 0, 8 )
 frames = SubResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -210,12 +209,11 @@ stream = ExtResource( 5 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "default"
 anims/broken = SubResource( 4 )
-anims/default = SubResource( 6 )
-anims/shake = SubResource( 5 )
+anims/default = SubResource( 5 )
+anims/shake = SubResource( 6 )
 
 [node name="trigger_ray" type="RayCast2D" parent="."]
 position = Vector2( 0, 22 )
-scale = Vector2( 7.51, 1 )
 enabled = true
 cast_to = Vector2( 0, 1000 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

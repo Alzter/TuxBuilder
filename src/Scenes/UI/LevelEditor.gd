@@ -257,7 +257,6 @@ func _process(_delta):
 					
 					var objectname = object_type
 					objectname.erase(objectname.length() -5, 5)
-					object.set_name(objectname)
 					
 					# If the object is in the group "oneonly", delete all other instances of it
 					if object.is_in_group("oneonly"):

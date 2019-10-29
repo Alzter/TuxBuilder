@@ -5,7 +5,7 @@ onready var trigger_ray = get_node('trigger_ray')
 
 func _process(delta):
 	if iciclestate == "" and trigger_ray.is_colliding():
-		if trigger_ray.get_collider().is_in_group('player'):
+		if trigger_ray.get_collider().is_in_group("player"):
 			$Timer.start(0.5)
 			iciclestate = "shaking"
 			$SFX/Cracking.play()

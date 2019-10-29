@@ -46,21 +46,30 @@ func hit(hitdirection, hitdown):
 	
 	# Spawn contents
 	if stored != "":
-		childstored.player = player
+		if childstored.get("player"):
+			childstored.player = player
 		
 		$AnimatedSprite.play("empty")
 		if hitdown == true:
 			$AnimationPlayer.play("hitdown")
 		else: $AnimationPlayer.play("hit")
 		
-		if childstored.collect_on_appear == false:
+		if childstored.get("collect_on_appear") == true:
+			if childstored.collect_on_appear == false:
+				$Upgrade.play()
+				
+				if hitdown == true:
+					childstored.position.y += 32
+				else: childstored.position.y -= 32
+			
+			else: $Brick.play()
+		else:
 			$Upgrade.play()
 			
 			if hitdown == true:
 				childstored.position.y += 32
 			else: childstored.position.y -= 32
-			
-		else: $Brick.play()
+		
 		get_tree().current_scene.get_node("Level").add_child(childstored)
 		if childstored.has_method("appear"):
 			childstored.appear(hitdirection,hitdown)
