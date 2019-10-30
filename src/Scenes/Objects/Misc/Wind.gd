@@ -5,7 +5,7 @@ export var speed_y = 0
 
 func activate():
 	body.velocity.x += speed_x
-	body.velocity.y += speed_y * 0.25
+	body.velocity.y += speed_y * 0.5
 	body.wind = 3
 	if body.run_max < abs(speed_x) * 2:
 		body.run_max = abs(speed_x) * 2

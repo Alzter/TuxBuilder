@@ -24,7 +24,7 @@ func _on_Area2D_area_entered(area):
 	if area.get_parent().is_in_group("player"):
 		if area.get_parent().buttjump == true and stored == "":
 			# Prevent brick from breaking if Tux is outside its hitbox
-			if area.get_parent().position.x > position.x - 31.5 and area.get_parent().position.x < position.x + 31.5:
+			if area.get_parent().position.x > position.x - 31 and area.get_parent().position.x < position.x + 31:
 				area.get_parent().velocity.y *= 0.9
 				
 				# We need a special break animation for buttjumps
