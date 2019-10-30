@@ -37,3 +37,7 @@ func _on_Area2D_body_entered(body):
 		
 		elif body.is_in_group('badguys'):
 			body.kill()
+
+func _on_VisibilityEnabler2D_screen_exited():
+	if iciclestate != "":
+		queue_free()
