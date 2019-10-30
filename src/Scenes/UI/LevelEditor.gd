@@ -157,7 +157,7 @@ func _process(_delta):
 	
 	var object_hovered = false
 	# If clicking on a tile occupied by an object, pick up the object
-	if $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == false and !dragging_object and !expanding:
+	if !clickdisable and $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == false and !dragging_object and !expanding:
 		for child in get_tree().current_scene.get_node("Level").get_children():
 			if not child.is_in_group("layers") and not child.is_in_group("expandable"):
 				if child.position == $SelectedTile.position:
@@ -171,7 +171,7 @@ func _process(_delta):
 							return
 	
 	# If clicking on an expandable area, drag it
-	if !object_hovered and not($GrabArea/C1.is_hovered()) and not($GrabArea/C2.is_hovered()) and not($GrabArea/C3.is_hovered()) and not($GrabArea/C4.is_hovered()) and $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == false and !dragging_object and !expanding:
+	if !clickdisable and !object_hovered and not($GrabArea/C1.is_hovered()) and not($GrabArea/C2.is_hovered()) and not($GrabArea/C3.is_hovered()) and not($GrabArea/C4.is_hovered()) and $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == false and !dragging_object and !expanding:
 		for child in get_tree().current_scene.get_node("Level").get_children():
 			if child.is_in_group("expandable"):
 				if $SelectedTile.position.x >= child.position.x and $SelectedTile.position.y >= child.position.y and $SelectedTile.position.x <= child.position.x + (child.get_node("Control").rect_size.x - 32) and $SelectedTile.position.y <= child.position.y + (child.get_node("Control").rect_size.y - 32):
@@ -188,7 +188,7 @@ func _process(_delta):
 	
 	# Show expandable area buttons
 	$GrabArea.offset = Vector2(9999999,99999999)
-	if UIHelpers._get_scene().editmode and $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == false and !dragging_object and !expanding:
+	if !clickdisable and UIHelpers._get_scene().editmode and $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == false and !dragging_object and !expanding:
 		for child in get_tree().current_scene.get_node("Level").get_children():
 			if child.is_in_group("expandable"):
 				if child.is_in_group("popup"):
@@ -293,23 +293,41 @@ func _process(_delta):
 				
 				# Only works if the layer selected is a TileMap
 				if layer_selected_type == "TileMap":
+					
+					# Rectangle Tile Placing / Erasing
+					if $UI/SideBar/VBoxContainer/HBoxContainer/SelectButton.pressed:
+						var startx = 0
+						var endx = 0
+						var starty = 0
+						var endy = 0
+						if tile_selected.x >= rect_start_pos.x:
+							startx = rect_start_pos.x
+							endx = tile_selected.x + 1
+						else:
+							endx = rect_start_pos.x + 1
+							startx = tile_selected.x
+						
+						if tile_selected.y >= rect_start_pos.y:
+							starty = rect_start_pos.y
+							endy = tile_selected.y + 1
+						else:
+							endy = rect_start_pos.y + 1
+							starty = tile_selected.y
+						
+						for i in range(startx, endx):
+							for i2 in range(starty, endy):
+								if $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed:
+									layerfile.set_cellv(Vector2(i,i2), -1)
+								else:
+									layerfile.set_cellv(Vector2(i,i2), tile_type)
+						layerfile.update_bitmask_region(Vector2(startx,starty),Vector2(endx,endy))
+					
 					# Tile erasing
-					if $UI/SideBar/VBoxContainer/HBoxContainer/SelectButton.pressed == true:
-						
-						# Rectangle Tile Erasing
-						pass
-						
-					elif $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == true:
+					elif $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed:
 						layerfile.set_cellv(tile_selected, -1)
 						layerfile.update_bitmask_area(tile_selected)
 					
-					
 					# Tile placing
-					elif $UI/SideBar/VBoxContainer/HBoxContainer/SelectButton.pressed == true:
-						
-						# Rectangle Tile Placing
-						pass
-						
 					else:
 						layerfile.set_cellv(tile_selected, tile_type)
 						layerfile.update_bitmask_area(tile_selected)

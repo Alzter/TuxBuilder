@@ -11,8 +11,10 @@
 "stackable",
 ]]
 script = ExtResource( 1 )
+camera_zoom_speed = 20
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 6
 
 [node name="Popup" type="Popup" parent="CanvasLayer"]
 visible = true
@@ -87,6 +89,7 @@ value = 1.0
 align = 1
 
 [node name="ZoomSpeed" type="HBoxContainer" parent="CanvasLayer/Popup/Panel/VBoxContainer"]
+editor/display_folded = true
 margin_top = 66.0
 margin_right = 284.0
 margin_bottom = 98.0

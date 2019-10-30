@@ -21,7 +21,6 @@ func _process(delta):
 	if is_in_group("popup"):
 		if $CanvasLayer/Popup.visible:
 			UIHelpers._get_scene().get_node("Editor").clickdisable = true
-			
 			if $CanvasLayer/Popup/Panel/Button.pressed:
 				$CanvasLayer/Popup.hide()
 
