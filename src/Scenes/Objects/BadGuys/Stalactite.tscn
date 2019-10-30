@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scenes/Objects/BadGuys/Stalactite.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Creatures/Stalactite/falling.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/Creatures/Stalactite/broken.png" type="Texture" id=3]
 [ext_resource path="res://Audio/SoundEffects/Enemy/cracking.wav" type="AudioStream" id=4]
 [ext_resource path="res://Audio/SoundEffects/Enemy/icecrash.ogg" type="AudioStream" id=5]
+[ext_resource path="res://Sprites/Creatures/Stalactite/stalactiteshard.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -99,6 +100,18 @@ tracks/5/keys = {
 "update": 0,
 "values": [ Vector2( 0, -4 ) ]
 }
+tracks/6/type = "value"
+tracks/6/path = NodePath("CPUParticles2D:emitting")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=5]
 resource_name = "default"
@@ -138,6 +151,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Vector2( 0, 0 ) ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("CPUParticles2D:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=6]
 length = 0.08
@@ -155,6 +180,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 2, 0 ), Vector2( 0, 0 ), Vector2( -2, 0 ) ]
 }
+
+[sub_resource type="Curve" id=7]
+min_value = -360.0
+max_value = 720.0
+_data = [ Vector2( 0, 720 ), 0.0, -1630.36, 0, 0, Vector2( 1, -360 ), -467.115, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=8]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -2.57309, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=9]
+offsets = PoolRealArray( 0, 0.739535, 1 )
+colors = PoolColorArray( 1, 1, 1, 0.635294, 1, 1, 1, 0.737255, 1, 1, 1, 0 )
 
 [node name="Stalactite" type="KinematicBody2D"]
 position = Vector2( 1, 0 )
@@ -205,6 +242,25 @@ anims/shake = SubResource( 6 )
 position = Vector2( 0, 22 )
 enabled = true
 cast_to = Vector2( 0, 1000 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+rotation = -1.5708
+emitting = false
+amount = 6
+lifetime = 0.75
+one_shot = true
+explosiveness = 1.0
+local_coords = false
+texture = ExtResource( 6 )
+gravity = Vector2( 0, 550 )
+initial_velocity = 250.0
+damping = 20.0
+angle = 360.0
+angle_random = 1.0
+angle_curve = SubResource( 7 )
+scale_amount = 0.8
+scale_amount_curve = SubResource( 8 )
+color_ramp = SubResource( 9 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="screen_exited" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_exited"]
