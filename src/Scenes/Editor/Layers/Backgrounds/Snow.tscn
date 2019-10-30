@@ -28,7 +28,6 @@ texture = ExtResource( 3 )
 centered = false
 
 [node name="FG" type="ParallaxLayer" parent="."]
-editor/display_folded = true
 motion_scale = Vector2( 0.2, 0.2 )
 motion_offset = Vector2( 0, -400 )
 motion_mirroring = Vector2( 1700, 0 )

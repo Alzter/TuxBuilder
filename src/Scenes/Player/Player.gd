@@ -11,7 +11,7 @@ const RUN_ACCEL = 400.0
 # Speed you need to start running
 const WALK_MAX = 230.0
 # Maximum horizontal speed
-const RUN_MAX = 320.0
+var run_max = 320.0
 # Backflip horizontal speed
 const BACKFLIP_SPEED = -128
 
@@ -65,6 +65,7 @@ var using_star = false
 var holding_object = false
 var object_held = ""
 var ground_normal = Vector2()
+var wind = 0
 
 # Set Tux's current playing animation
 func set_animation(anim):
@@ -154,7 +155,7 @@ func _physics_process(delta):
 			
 			# Skidding
 			elif on_ground == 0 and abs(velocity.x) >= WALK_MAX:
-				if skidding == false:
+				if !skidding:
 					skidding = true
 					$SFX/Skid.play()
 			
@@ -183,37 +184,37 @@ func _physics_process(delta):
 			else: velocity.x -= TURN_ACCEL * delta
 
 	# Speedcap
-	if sliding == false:
-		if velocity.x >= RUN_MAX:
-			velocity.x = RUN_MAX
-		if velocity.x <= -RUN_MAX:
-			velocity.x = -RUN_MAX
+	if !sliding:
+		if velocity.x >= run_max:
+			velocity.x = run_max
+		if velocity.x <= -run_max:
+			velocity.x = -run_max
 
 	# Friction
-	if backflip == false and (skidding == true or (ducking == true and on_ground == 0) or (not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"))):
+	if backflip == false and (skidding or (ducking and on_ground == 0) or (not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"))):
 		
 		# Turn when skidding
-		if skidding == true:
+		if skidding:
 			if velocity.x > 0:
 				$Control/AnimatedSprite.scale.x = -1
 			if velocity.x < 0:
 				$Control/AnimatedSprite.scale.x = 1
 		
 		# Friction
-		if sliding == false:
+		if !sliding:
 			velocity.x *= FRICTION
 		elif on_ground == 0: velocity.x *= SLIDE_FRICTION
-		if abs(velocity.x) < 80:
+		if abs(velocity.x) < 80 and wind == 0:
 			velocity.x = 0
 
 	# Stop skidding if low velocity
-	if abs(velocity.x) < 75 and skidding == true:
+	if abs(velocity.x) < 75 and skidding:
 		skidding = false
 		velocity.x = 0
 
 	# Move
 	var oldvelocity = velocity
-	if on_ground == 0:
+	if on_ground == 0 and wind == 0:
 		velocity = move_and_slide_with_snap(velocity, Vector2(0, 20), FLOOR)
 	else: velocity = move_and_slide(velocity, FLOOR)
 	if abs(velocity.x) > abs(oldvelocity.x) and $ButtjumpLandTimer.time_left > 0:
@@ -232,7 +233,7 @@ func _physics_process(delta):
 			if velocity.y > BUTTJUMP_FALL_SPEED: velocity.y = BUTTJUMP_FALL_SPEED
 
 	# Floor check
-	if is_on_floor(): #on_ground():
+	if is_on_floor():
 		if on_ground != 0:
 			$AnimationPlayer.stop()
 			$AnimationPlayer.playback_speed = 1
@@ -293,7 +294,7 @@ func _physics_process(delta):
 				backflip_rotation = 0
 				velocity.y = -RUNJUMP_POWER
 				$SFX/Flip.play()
-			elif abs(velocity.x) >= RUN_MAX or $ButtjumpLandTimer.time_left > 0:
+			elif abs(velocity.x) >= run_max or $ButtjumpLandTimer.time_left > 0:
 				velocity.y = -RUNJUMP_POWER
 			else:
 				velocity.y = -JUMP_POWER
@@ -444,6 +445,13 @@ func _physics_process(delta):
 			if get_tree().current_scene.get_node(str("Level/", object_held)).has_method("throw"):
 				get_tree().current_scene.get_node(str("Level/", object_held)).throw()
 				if not Input.is_action_pressed("duck"): get_tree().current_scene.get_node(str("Level/", object_held)).velocity.x = velocity.x + (200 * $Control/AnimatedSprite.scale.x)
+	
+	# Decrease Wind
+	if wind > 0:
+		wind -= 1
+	else:
+		wind = 0
+		run_max = 320.0
 
 # Star invincibility
 func star_invincibility():

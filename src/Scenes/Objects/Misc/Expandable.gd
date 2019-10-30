@@ -4,6 +4,7 @@ export var boxsize = Vector2(1,1)
 export var min_size = Vector2(1,1)
 export var scale_h = true
 export var scale_v = true
+var body = null
 
 func _ready():
 	$Control.rect_min_size = min_size * 32
@@ -14,6 +15,7 @@ func _process(delta):
 	for i in get_tree().get_nodes_in_group("player"):
 		if UIHelpers._get_scene().editmode == false:
 			if i.position.x >= position.x and i.position.x <= position.x + boxsize.x and i.position.y >= position.y and i.position.y <= position.y + boxsize.y:
+				body = i
 				activate()
 	
 	$Control.rect_size = boxsize
