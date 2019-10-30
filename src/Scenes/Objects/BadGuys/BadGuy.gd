@@ -7,10 +7,10 @@ var startpos = Vector2(0,0)
 var state = "active"
 var direction = 1
 var rotate = 0
-var squishable = true
 var invincible_time = 0
 var areastored = null
 export var smart = false
+export var squishable = true
 
 const WALK_SPEED = 80
 var SQUISHED_ANIMATION = "squished"
