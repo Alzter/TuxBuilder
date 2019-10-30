@@ -7,7 +7,7 @@
 [ext_resource path="res://Sprites/Objects/Misc/wind.png" type="Texture" id=5]
 
 [sub_resource type="Gradient" id=1]
-offsets = PoolRealArray( 0, 0.197531, 0.753086, 1 )
+offsets = PoolRealArray( 0, 0.358025, 0.753086, 1 )
 colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
 
 [node name="ZoomTrigger" type="Node2D" groups=[

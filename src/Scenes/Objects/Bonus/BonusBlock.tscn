@@ -1,10 +1,14 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Scenes/Objects/Bonus/BonusBlock.gd" type="Script" id=1]
 [ext_resource path="res://Audio/SoundEffects/Bonus/brick.wav" type="AudioStream" id=2]
 [ext_resource path="res://Audio/SoundEffects/Bonus/upgrade.wav" type="AudioStream" id=3]
 [ext_resource path="res://Sprites/Objects/BonusBlock/empty.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/Objects/BonusBlock/block.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Objects/BonusBlock/block-0.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Objects/BonusBlock/block-1.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Objects/BonusBlock/block-2.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Objects/BonusBlock/block-3.png" type="Texture" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 0, 0 )
@@ -230,7 +234,7 @@ animations = [ {
 "name": "empty",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 5 ) ],
+"frames": [ ExtResource( 5 ), ExtResource( 5 ), ExtResource( 5 ), ExtResource( 5 ), ExtResource( 5 ), ExtResource( 5 ), ExtResource( 5 ), ExtResource( 5 ), ExtResource( 5 ), ExtResource( 5 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 6 ) ],
 "loop": true,
 "name": "default",
 "speed": 15.0
@@ -268,6 +272,8 @@ anims/hitdown = SubResource( 5 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 6 )
+frame = 13
+playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 7 )
