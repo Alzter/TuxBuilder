@@ -18,7 +18,7 @@ func _move(delta):
 			$SFX/Icecrash.play()
 			$AnimationPlayer.play("broken")
 			
-			collision_layer = 4
+			collision_layer = 0
 			collision_mask = 0
 			return
 		

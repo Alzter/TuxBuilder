@@ -59,6 +59,8 @@ func _process(_delta):
 		camera_smooth_time = 0
 
 func restart_level():
+	camera_zoom = 1
+	camera_zoom_speed = 1
 	editmode = false
 	$CanvasLayer/AnimationPlayer.play("Circle Out")
 	yield(get_node("CanvasLayer/AnimationPlayer"), "animation_finished")
