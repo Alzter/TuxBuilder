@@ -29,7 +29,7 @@ func on_physics_process(delta):
 		if is_on_wall():
 			for body in $BlockBreaker.get_overlapping_bodies():
 				if body.is_in_group("bonusblock") or body.is_in_group("brick"):
-					body.hit($Control/AnimatedSprite.scale.x, false)
+					body.hit($Control/AnimatedSprite.scale.x, true)
 			$Control/AnimatedSprite.scale.x *= -1
 			velocity.x *= -1
 			$SFX/Bump.play()
