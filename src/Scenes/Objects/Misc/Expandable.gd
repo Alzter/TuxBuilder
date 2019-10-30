@@ -10,7 +10,7 @@ func _ready():
 	$Control.rect_min_size = min_size * 32
 
 func _process(delta):
-	visible = UIHelpers._get_scene().editmode
+	appear(UIHelpers._get_scene().editmode)
 	
 	for i in get_tree().get_nodes_in_group("player"):
 		if UIHelpers._get_scene().editmode == false:
@@ -29,3 +29,7 @@ func _process(delta):
 # To be overwritten by sub-classes
 func activate():
 	pass;
+
+# Can be overridden
+func appear(appear):
+	visible = appear
