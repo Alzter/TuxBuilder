@@ -185,10 +185,7 @@ func _physics_process(delta):
 
 	# Speedcap
 	if !sliding:
-		if velocity.x >= run_max:
-			velocity.x = run_max
-		if velocity.x <= -run_max:
-			velocity.x = -run_max
+		velocity.x = clamp(velocity.x, -run_max, run_max)
 
 	# Friction
 	if backflip == false and (skidding or (ducking and on_ground == 0) or (not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"))):
