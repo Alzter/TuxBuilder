@@ -4,7 +4,8 @@ export var speed_x = 0
 export var speed_y = 0
 
 func activate():
-	body.velocity.x += speed_x
+	if not body.skidding and not body.sliding:
+		body.velocity.x += speed_x
 	body.velocity.y += speed_y * 0.5
 	body.wind = 3
 	if body.run_max < abs(speed_x) * 2:

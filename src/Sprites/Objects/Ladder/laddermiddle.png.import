@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Backflip.png-02913577f45b8c2f2ed64d4b54c816cc.stex"
+path="res://.import/laddermiddle.png-967b1bf6971e4e28321fab60854bd7a9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Creatures/Tux/Big/Backflip.png"
-dest_files=[ "res://.import/Backflip.png-02913577f45b8c2f2ed64d4b54c816cc.stex" ]
+source_file="res://Sprites/Objects/Ladder/laddermiddle.png"
+dest_files=[ "res://.import/laddermiddle.png-967b1bf6971e4e28321fab60854bd7a9.stex" ]
 
 [params]
 

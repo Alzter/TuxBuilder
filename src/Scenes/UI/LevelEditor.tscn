@@ -924,6 +924,7 @@ collision_mask = 0
 format = 1
 
 [node name="GrabArea" type="CanvasLayer" parent="."]
+editor/display_folded = true
 layer = 2
 
 [node name="C1" type="TextureButton" parent="GrabArea"]

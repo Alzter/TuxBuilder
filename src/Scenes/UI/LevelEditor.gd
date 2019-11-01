@@ -41,6 +41,7 @@ func _ready():
 	select_first_solid_tilemap()
 
 func _process(_delta):
+	$GrabArea.offset = Vector2(9999999,99999999)
 	layerfile = get_tree().current_scene.get_node(str("Level/", layer_selected))
 	if layerfile == null:
 		layer_selected == ""
@@ -187,7 +188,6 @@ func _process(_delta):
 						return
 	
 	# Show expandable area buttons
-	$GrabArea.offset = Vector2(9999999,99999999)
 	if !clickdisable and UIHelpers._get_scene().editmode and $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == false and !dragging_object and !expanding:
 		for child in get_tree().current_scene.get_node("Level").get_children():
 			if child.is_in_group("expandable"):
@@ -264,20 +264,22 @@ func _process(_delta):
 		var expandposmap = $TileMap.world_to_map(expandpos)
 		if Input.is_action_pressed("click_left"):
 			# Drag Horizontal
-			if $TileMap.world_to_map(get_global_mouse_position()).x >= expandposmap.x:
-				expobject.position.x = expandpos.x
-				expobject.get_node("Control").rect_size.x = (($TileMap.world_to_map(get_global_mouse_position()).x - expandposmap.x) * 32) + 32
-			else:
-				expobject.position.x = ($TileMap.world_to_map(get_global_mouse_position()).x * 32) + 16
-				expobject.get_node("Control").rect_size.x = ((expandposmap.x - $TileMap.world_to_map(get_global_mouse_position()).x) * 32) + 32
+			if expobject.scale_h:
+				if $TileMap.world_to_map(get_global_mouse_position()).x >= expandposmap.x:
+					expobject.position.x = expandpos.x
+					expobject.get_node("Control").rect_size.x = (($TileMap.world_to_map(get_global_mouse_position()).x - expandposmap.x) * 32) + 32
+				else:
+					expobject.position.x = ($TileMap.world_to_map(get_global_mouse_position()).x * 32) + 16
+					expobject.get_node("Control").rect_size.x = ((expandposmap.x - $TileMap.world_to_map(get_global_mouse_position()).x) * 32) + 32
 			
 			# Drag Vertical
-			if $TileMap.world_to_map(get_global_mouse_position()).y >= expandposmap.y:
-				expobject.position.y = expandpos.y
-				expobject.get_node("Control").rect_size.y = (($TileMap.world_to_map(get_global_mouse_position()).y - expandposmap.y) * 32) + 32
-			else:
-				expobject.position.y = ($TileMap.world_to_map(get_global_mouse_position()).y * 32) + 16
-				expobject.get_node("Control").rect_size.y = ((expandposmap.y - $TileMap.world_to_map(get_global_mouse_position()).y) * 32) + 32
+			if expobject.scale_v:
+				if $TileMap.world_to_map(get_global_mouse_position()).y >= expandposmap.y:
+					expobject.position.y = expandpos.y
+					expobject.get_node("Control").rect_size.y = (($TileMap.world_to_map(get_global_mouse_position()).y - expandposmap.y) * 32) + 32
+				else:
+					expobject.position.y = ($TileMap.world_to_map(get_global_mouse_position()).y * 32) + 16
+					expobject.get_node("Control").rect_size.y = ((expandposmap.y - $TileMap.world_to_map(get_global_mouse_position()).y) * 32) + 32
 			
 			expobject.boxsize.x = expobject.get_node("Control").rect_size.x
 			expobject.boxsize.y = expobject.get_node("Control").rect_size.y
