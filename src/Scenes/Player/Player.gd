@@ -39,9 +39,8 @@ var using_star = false
 var holding_object = false
 var object_held = ""
 var wind = 0 # Is Tux being blown by wind (changes some movement properties)
-var climbing = false
-var climb_h = false
-var climb_v = false
+var climbtop = 0 # How high Tux can climb
+var climbbottom = 0 # How low Tux can climb
 
 # Set Tux's current playing animation
 func set_animation(anim):
@@ -94,23 +93,11 @@ func _step(delta):
 	
 	# Move
 	var oldvelocity = velocity
-	if on_ground == 0 and wind == 0:
-		velocity = move_and_slide_with_snap(velocity, Vector2(0, 20), FLOOR)
+	if on_ground == 0 and wind == 0 and player_state != "Climbing":
+		velocity = move_and_slide_with_snap(velocity, Vector2(0, 10), FLOOR)
 	else: velocity = move_and_slide(velocity, FLOOR)
 	if abs(velocity.x) > abs(oldvelocity.x) and $ButtjumpLandTimer.time_left > 0:
 		start_sliding()
-
-	# Gravity
-	if $ButtjumpTimer.time_left > 0:
-		velocity = Vector2(0,0)
-	elif player_state != "Buttjump" or velocity.y <= 0:
-		if on_ground:
-			velocity.y += GRAVITY
-			if velocity.y > FALL_SPEED: velocity.y = FALL_SPEED
-	else:
-		if on_ground:
-			velocity.y += BUTTJUMP_GRAVITY
-			if velocity.y > BUTTJUMP_FALL_SPEED: velocity.y = BUTTJUMP_FALL_SPEED
 
 	# Floor check
 	if is_on_floor():
@@ -264,3 +251,36 @@ func start_sliding():
 	player_state = "Sliding"
 	$SFX/Skid.play()
 	velocity.x += WALK_ADD * $Control/AnimatedSprite.scale.x
+
+func can_jump(can_backflip, aerial):
+	# Jumping
+	if Input.is_action_pressed("jump") and jumpheld <= JUMP_BUFFER_TIME:
+		if (on_ground <= LEDGE_JUMP or aerial) and $ButtjumpLandTimer.time_left <= BUTTJUMP_LAND_TIME - 0.02:
+			
+			player_state = "Movement"
+			# Backflip
+			if can_backflip and state != "small" and Input.is_action_pressed("duck") and $StandWindow.is_colliding() == false and $ButtjumpLandTimer.time_left == 0:
+				player_state = "Backflip"
+				backflip_rotation = 0
+				velocity.y = -RUNJUMP_POWER
+				$SFX/Flip.play()
+			
+			# Running jump
+			elif abs(velocity.x) >= run_max:
+				velocity.y = -RUNJUMP_POWER
+			
+			# Normal jump
+			else:
+				velocity.y = -JUMP_POWER
+			if state == "small":
+				$SFX/Jump.play()
+			else: $SFX/BigJump.play()
+			$AnimationPlayer.playback_speed = 1
+			$AnimationPlayer.play("Stop")
+			set_animation("jump")
+			jumpheld = JUMP_BUFFER_TIME + 1
+			on_ground = LEDGE_JUMP + 1
+			jumpcancel = true
+			skidding = false
+			ducking = false
+			if $StandWindow.is_colliding() and state != "small": ducking = true

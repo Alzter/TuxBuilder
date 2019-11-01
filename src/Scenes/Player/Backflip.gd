@@ -17,3 +17,9 @@ func _step(delta):
 		host.velocity.x = -host.BACKFLIP_SPEED
 		host.backflip_rotation += 15
 	host.get_node("Control/AnimatedSprite").rotation_degrees = host.backflip_rotation
+	
+	# Gravity
+	if host.on_ground > 0:
+		host.velocity.y += host.GRAVITY
+		if host.velocity.y > host.FALL_SPEED: host.velocity.y = host.FALL_SPEED
+	else: host.velocity.y = 0

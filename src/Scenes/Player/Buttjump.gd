@@ -22,3 +22,9 @@ func _step(delta):
 	else:
 		host.get_node("ButtjumpHitbox/CollisionShape2D").shape.extents = Vector2(0,0)
 		host.get_node("ButtjumpHitbox/CollisionShape2D").disabled = true
+	
+	# Gravity
+	if host.on_ground > 0 and host.get_node("ButtjumpTimer").time_left == 0:
+		host.velocity.y += host.BUTTJUMP_GRAVITY
+		if host.velocity.y > host.BUTTJUMP_FALL_SPEED: host.velocity.y = host.BUTTJUMP_FALL_SPEED
+	else: host.velocity = Vector2(0,0)
