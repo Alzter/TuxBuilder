@@ -126,7 +126,7 @@ func _kill(delta):
 # Buttjump detection
 func _on_Area2D_area_entered(area):
 	if area.get_parent().is_in_group("player") and squishable == true and state == "active":
-		if area.get_parent().player_state == "Buttjump":
+		if area.get_parent().buttjump == true:
 			area.get_parent().velocity.y *= 0.9
 			buttjump_kill()
 
@@ -137,10 +137,10 @@ func _on_Area2D_body_entered(body):
 		if state == "active" and invincible_time == 0:
 			
 			# Squished
-			if body.player_state == "Sliding":
+			if body.sliding == true:
 				kill()
 				return
-			if body.player_state == "Buttjump":
+			if body.buttjump == true:
 				body.velocity.y *= 0.9
 				buttjump_kill()
 			disable()

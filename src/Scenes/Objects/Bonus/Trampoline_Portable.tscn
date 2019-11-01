@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://Scenes/Objects/Bonus/Trampoline.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Objects/Bonus/Trampoline_Portable.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Objects/Trampoline/trampoline_portable-1.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/Objects/Trampoline/trampoline_portable-2.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/Objects/Trampoline/trampoline_portable-3.png" type="Texture" id=4]
@@ -43,7 +43,6 @@ extents = Vector2( 15.5, 22 )
 ]]
 collision_mask = 31
 script = ExtResource( 1 )
-portable = true
 
 [node name="Control" type="Control" parent="."]
 rect_pivot_offset = Vector2( 0, -2 )

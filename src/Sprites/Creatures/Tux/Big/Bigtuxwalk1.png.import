@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/backflip.png-a8c3a00bc4954b1979318f80a206950b.stex"
+path="res://.import/Bigtuxwalk1.png-ba3a34383171d3956d23ae1def2557a7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Creatures/Tux/Big/backflip.png"
-dest_files=[ "res://.import/backflip.png-a8c3a00bc4954b1979318f80a206950b.stex" ]
+source_file="res://Sprites/Creatures/Tux/Big/Bigtuxwalk1.png"
+dest_files=[ "res://.import/Bigtuxwalk1.png-ba3a34383171d3956d23ae1def2557a7.stex" ]
 
 [params]
 

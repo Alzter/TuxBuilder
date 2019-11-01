@@ -55,10 +55,10 @@ func _on_Area2D_body_entered(body):
 		if state == "active" and invincible_time == 0:
 			
 			# Squished
-			if body.player_state == "Sliding":
+			if body.sliding == true:
 				kill()
 				return
-			if body.player_state == "Buttjump":
+			if body.buttjump == true:
 				body.velocity.y *= 0.9
 				buttjump_kill()
 			disable()

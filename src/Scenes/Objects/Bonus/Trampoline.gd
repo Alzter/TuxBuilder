@@ -9,8 +9,8 @@ var wallcling = ""
 var on_ground = true
 var state = "active"
 
-export var cling_to_walls = false
-export var portable = false
+var cling_to_walls = false
+var portable = false
 
 func _ready():
 	collision_mask = 31
@@ -43,7 +43,7 @@ func _physics_process(delta):
 		var bodies = $GrabRadius.get_overlapping_bodies()
 		for body in bodies:
 			if body.is_in_group("player"):
-				if Input.is_action_pressed("action") and body.holding_object == false and body.player_state != "Sliding":
+				if Input.is_action_pressed("action") and body.holding_object == false and body.sliding == false:
 					body.holding_object = true
 					body.object_held = name
 					state = "grabbed"
@@ -67,7 +67,7 @@ func _on_Area2D_body_entered(body):
 				elif wallcling == "top":
 					body.velocity.y = BOUNCE_LOW
 				else:
-					body.player_state == "Movement"
+					body.backflip = false
 					if wallcling == "left":
 						body.velocity.x = BOUNCE_LOW
 						body.get_node("Control/AnimatedSprite").scale.x = 1
