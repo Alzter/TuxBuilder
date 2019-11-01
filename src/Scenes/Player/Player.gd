@@ -86,11 +86,7 @@ func _ready():
 		if child.is_in_group("spawnpoint"):
 			position = child.position
 
-#=============================================================================
-# PHYSICS
-
 func _step(delta):
-	
 	# Move
 	var oldvelocity = velocity
 	if on_ground == 0 and wind == 0 and player_state != "Climbing":
@@ -147,9 +143,6 @@ func _step(delta):
 		$AnimationPlayer.stop()
 		$AnimationPlayer.play("Stop")
 		set_animation("fall")
-
-	# Shoot hitbox
-	$ShootLocation.position.x = $Control/AnimatedSprite.scale.x * 8
 
 	# Shooting
 	if Input.is_action_just_pressed("action") and state == "fire" and get_tree().get_nodes_in_group("bullets").size() < 2:
@@ -284,3 +277,27 @@ func can_jump(can_backflip, aerial):
 			skidding = false
 			ducking = false
 			if $StandWindow.is_colliding() and state != "small": ducking = true
+
+func hitbox(delta):
+	# Hitboxes
+	if ducking or state == "small" or player_state == "Sliding":
+		$Hitbox.disabled = true
+		$SmallHitbox.disabled = false
+		$ShootLocation.position.y = 17
+	else:
+		$Hitbox.disabled = false
+		$SmallHitbox.disabled = true
+		$ShootLocation.position.y = 1
+	$ShootLocation.position.x = $Control/AnimatedSprite.scale.x * 8
+	
+	# Buttjump hitboxes
+	if $ButtjumpTimer.time_left == 0 and player_state == "Buttjump":
+		$ButtjumpHitbox/CollisionShape2D.disabled = false
+		$ButtjumpHitbox/CollisionShape2D.position.y = 0
+		
+		# Change the buttjump hitbox's size so it always collides before Tux hits the ground
+		if velocity.y > 0:
+			$ButtjumpHitbox/CollisionShape2D.position.y = (velocity.y * delta)
+	else:
+		$ButtjumpHitbox/CollisionShape2D.disabled = true
+		$ButtjumpHitbox/CollisionShape2D.position.y = 0

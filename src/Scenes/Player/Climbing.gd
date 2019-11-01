@@ -32,8 +32,10 @@ func _step(delta):
 	# Climbable boundaries
 	if host.position.y < host.climbtop + 16:
 		host.position.y = host.climbtop + 16
+		host.get_node("Control/AnimatedSprite").stop()
 	
 	if host.position.y > host.climbbottom - 48:
 		host.position.y = host.climbbottom - 48
+		host.get_node("Control/AnimatedSprite").stop()
 	
 	host.can_jump(false, true)

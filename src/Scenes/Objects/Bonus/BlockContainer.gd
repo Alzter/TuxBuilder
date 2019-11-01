@@ -31,7 +31,7 @@ func _on_Area2D_body_entered(body):
 				hit(-1,false)
 			else: hit(1,false)
 		
-		elif body.buttjump == true or body.get_node("ButtjumpLandTimer").time_left > 0:
+		elif body.player_state == "Buttjump" or body.get_node("ButtjumpLandTimer").time_left > 0:
 			if body.position.x > self.position.x:
 				hit(-1,true)
 			else: hit(1,true)
