@@ -151,3 +151,18 @@ func _step(delta):
 				host.set_animation("fall_transition")
 			else: host.set_animation("fall")
 		else: host.set_animation("jump")
+	
+	# Hitbox
+	# Duck Hitboxes
+	if host.ducking or host.state == "small":
+		host.get_node("Hitbox").shape.extents.y = 15
+		host.get_node("Hitbox").position.y = 17
+		host.get_node("ShootLocation").position.y = 17
+	else:
+		host.get_node("Hitbox").shape.extents.y = 31
+		host.get_node("Hitbox").position.y = 1
+		host.get_node("ShootLocation").position.y = 1
+	
+	# Disable buttjump hitbox
+	host.get_node("ButtjumpHitbox/CollisionShape2D").shape.extents = Vector2(0,0)
+	host.get_node("ButtjumpHitbox/CollisionShape2D").disabled = true

@@ -4,8 +4,9 @@ onready var host = get_owner()
 
 func _step(delta):
 	host.set_animation("slide")
-	host.skidding = false
-	host.ducking = false
+	host.get_node("Hitbox").shape.extents.y = 15
+	host.get_node("Hitbox").position.y = 17
+	host.get_node("ShootLocation").position.y = 17
 	
 	# Jumping
 	if Input.is_action_pressed("jump") and host.jumpheld <= host.JUMP_BUFFER_TIME:

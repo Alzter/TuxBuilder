@@ -4,6 +4,9 @@ onready var host = get_owner()
 
 func _step(delta):
 	host.set_animation("buttjump")
+	host.get_node("Hitbox").shape.extents.y = 15
+	host.get_node("Hitbox").position.y = 17
+	host.get_node("ShootLocation").position.y = 17
 	
 	# Buttjump hitboxes
 	if host.get_node("ButtjumpTimer").time_left == 0:

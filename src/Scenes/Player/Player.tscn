@@ -16,43 +16,43 @@
 [ext_resource path="res://Sprites/Creatures/Tux/Big/Buttjump5.png" type="Texture" id=14]
 [ext_resource path="res://Sprites/Creatures/Tux/Big/Buttjump6.png" type="Texture" id=15]
 [ext_resource path="res://Sprites/Creatures/Tux/Big/Buttjump7.png" type="Texture" id=16]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Backflip.png" type="Texture" id=17]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Jump1.png" type="Texture" id=18]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Jump2.png" type="Texture" id=19]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Jump3.png" type="Texture" id=20]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Dead1.png" type="Texture" id=21]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Dead2.png" type="Texture" id=22]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Skid.png" type="Texture" id=23]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Walk8.png" type="Texture" id=24]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Walk1.png" type="Texture" id=25]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Walk2.png" type="Texture" id=26]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Walk3.png" type="Texture" id=27]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Walk4.png" type="Texture" id=28]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Walk5.png" type="Texture" id=29]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Walk6.png" type="Texture" id=30]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Walk7.png" type="Texture" id=31]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Fall1.png" type="Texture" id=32]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Fall2.png" type="Texture" id=33]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Fall3.png" type="Texture" id=34]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Fall4.png" type="Texture" id=35]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Jump1.png" type="Texture" id=36]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Jump2.png" type="Texture" id=37]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Jump3.png" type="Texture" id=38]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Fall1.png" type="Texture" id=39]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Fall2.png" type="Texture" id=40]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Fall3.png" type="Texture" id=41]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Fall4.png" type="Texture" id=42]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Walk8.png" type="Texture" id=43]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Walk1.png" type="Texture" id=44]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Walk2.png" type="Texture" id=45]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Walk3.png" type="Texture" id=46]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Walk4.png" type="Texture" id=47]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Walk5.png" type="Texture" id=48]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Walk6.png" type="Texture" id=49]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Walk7.png" type="Texture" id=50]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Skid.png" type="Texture" id=51]
-[ext_resource path="res://Sprites/Creatures/Tux/Big/Duck.png" type="Texture" id=52]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Stand.png" type="Texture" id=53]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Skid.png" type="Texture" id=17]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Backflip.png" type="Texture" id=18]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Dead1.png" type="Texture" id=19]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Dead2.png" type="Texture" id=20]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Fall1.png" type="Texture" id=21]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Fall2.png" type="Texture" id=22]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Fall3.png" type="Texture" id=23]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Fall4.png" type="Texture" id=24]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Jump1.png" type="Texture" id=25]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Jump2.png" type="Texture" id=26]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Jump3.png" type="Texture" id=27]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Walk8.png" type="Texture" id=28]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Walk1.png" type="Texture" id=29]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Walk2.png" type="Texture" id=30]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Walk3.png" type="Texture" id=31]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Walk4.png" type="Texture" id=32]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Walk5.png" type="Texture" id=33]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Walk6.png" type="Texture" id=34]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Walk7.png" type="Texture" id=35]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Duck.png" type="Texture" id=36]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Stand.png" type="Texture" id=37]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Jump1.png" type="Texture" id=38]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Jump2.png" type="Texture" id=39]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Jump3.png" type="Texture" id=40]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Fall4.png" type="Texture" id=41]
+[ext_resource path="res://Sprites/Creatures/Tux/Big/Skid.png" type="Texture" id=42]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Fall1.png" type="Texture" id=43]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Fall2.png" type="Texture" id=44]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Fall3.png" type="Texture" id=45]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Walk8.png" type="Texture" id=46]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Walk1.png" type="Texture" id=47]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Walk2.png" type="Texture" id=48]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Walk3.png" type="Texture" id=49]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Walk4.png" type="Texture" id=50]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Walk5.png" type="Texture" id=51]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Walk6.png" type="Texture" id=52]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Walk7.png" type="Texture" id=53]
 [ext_resource path="res://Audio/SoundEffects/Player/jump.wav" type="AudioStream" id=54]
 [ext_resource path="res://Audio/SoundEffects/Player/bigjump.wav" type="AudioStream" id=55]
 [ext_resource path="res://Audio/SoundEffects/Player/flip.wav" type="AudioStream" id=56]
@@ -82,88 +82,88 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 17 ) ],
 "loop": true,
+"name": "skid_small",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 18 ) ],
+"loop": true,
 "name": "backflip",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ) ],
-"loop": false,
-"name": "jump",
-"speed": 18.0
-}, {
-"frames": [ ExtResource( 21 ), ExtResource( 22 ) ],
+"frames": [ ExtResource( 19 ), ExtResource( 20 ) ],
 "loop": true,
 "name": "gameover",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 21 ), ExtResource( 22 ) ],
-"loop": true,
-"name": "gameover_small",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 23 ) ],
-"loop": true,
-"name": "skid_small",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 31 ) ],
-"loop": true,
-"name": "walk_small",
-"speed": 20.0
-}, {
-"frames": [ ExtResource( 32 ), ExtResource( 33 ), ExtResource( 34 ), ExtResource( 35 ) ],
+"frames": [ ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ) ],
 "loop": false,
-"name": "fall_transition_small",
+"name": "fall_transition",
 "speed": 16.0
 }, {
-"frames": [ ExtResource( 16 ) ],
-"loop": true,
-"name": "buttjumpland",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 35 ) ],
-"loop": false,
-"name": "fall_small",
-"speed": 16.0
-}, {
-"frames": [ ExtResource( 36 ), ExtResource( 37 ), ExtResource( 38 ) ],
+"frames": [ ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ) ],
 "loop": false,
 "name": "jump_small",
 "speed": 18.0
+}, {
+"frames": [ ExtResource( 24 ) ],
+"loop": false,
+"name": "fall",
+"speed": 16.0
+}, {
+"frames": [ ExtResource( 28 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 33 ), ExtResource( 34 ), ExtResource( 35 ) ],
+"loop": true,
+"name": "walk",
+"speed": 20.0
+}, {
+"frames": [ ExtResource( 36 ) ],
+"loop": true,
+"name": "duck",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 37 ) ],
+"loop": true,
+"name": "idle_small",
+"speed": 5.0
 }, {
 "frames": [ ExtResource( 8 ) ],
 "loop": true,
 "name": "slide_small",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 39 ), ExtResource( 40 ), ExtResource( 41 ), ExtResource( 42 ) ],
+"frames": [ ExtResource( 19 ), ExtResource( 20 ) ],
+"loop": true,
+"name": "gameover_small",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 38 ), ExtResource( 39 ), ExtResource( 40 ) ],
 "loop": false,
-"name": "fall_transition",
+"name": "jump",
+"speed": 18.0
+}, {
+"frames": [ ExtResource( 16 ) ],
+"loop": true,
+"name": "buttjumpland",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 41 ) ],
+"loop": false,
+"name": "fall_small",
 "speed": 16.0
 }, {
-"frames": [ ExtResource( 43 ), ExtResource( 44 ), ExtResource( 45 ), ExtResource( 46 ), ExtResource( 47 ), ExtResource( 48 ), ExtResource( 49 ), ExtResource( 50 ) ],
-"loop": true,
-"name": "walk",
-"speed": 20.0
-}, {
-"frames": [ ExtResource( 51 ) ],
+"frames": [ ExtResource( 42 ) ],
 "loop": true,
 "name": "skid",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 52 ) ],
-"loop": true,
-"name": "duck",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 53 ) ],
-"loop": true,
-"name": "idle_small",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 42 ) ],
+"frames": [ ExtResource( 43 ), ExtResource( 44 ), ExtResource( 45 ), ExtResource( 41 ) ],
 "loop": false,
-"name": "fall",
+"name": "fall_transition_small",
 "speed": 16.0
+}, {
+"frames": [ ExtResource( 46 ), ExtResource( 47 ), ExtResource( 48 ), ExtResource( 49 ), ExtResource( 50 ), ExtResource( 51 ), ExtResource( 52 ), ExtResource( 53 ) ],
+"loop": true,
+"name": "walk_small",
+"speed": 20.0
 } ]
 
 [sub_resource type="Animation" id=2]

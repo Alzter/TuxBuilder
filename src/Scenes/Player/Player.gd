@@ -161,6 +161,9 @@ func _step(delta):
 		$AnimationPlayer.play("Stop")
 		set_animation("fall")
 
+	# Shoot hitbox
+	$ShootLocation.position.x = $Control/AnimatedSprite.scale.x * 8
+
 	# Shooting
 	if Input.is_action_just_pressed("action") and state == "fire" and get_tree().get_nodes_in_group("bullets").size() < 2:
 		$SFX/Shoot.play()
