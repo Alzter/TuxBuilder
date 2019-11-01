@@ -181,15 +181,15 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 2, 0 ), Vector2( 0, 0 ), Vector2( -2, 0 ) ]
 }
 
-[sub_resource type="Curve" id=7]
+[sub_resource type="Curve" id=8]
 min_value = -360.0
 max_value = 720.0
 _data = [ Vector2( 0, 720 ), 0.0, -1630.36, 0, 0, Vector2( 1, -360 ), -467.115, 0.0, 0, 0 ]
 
-[sub_resource type="Curve" id=8]
+[sub_resource type="Curve" id=9]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -2.57309, 0.0, 0, 0 ]
 
-[sub_resource type="Gradient" id=9]
+[sub_resource type="Gradient" id=10]
 offsets = PoolRealArray( 0, 0.739535, 1 )
 colors = PoolColorArray( 1, 1, 1, 0.635294, 1, 1, 1, 0.737255, 1, 1, 1, 0 )
 
@@ -257,10 +257,10 @@ initial_velocity = 250.0
 damping = 20.0
 angle = 360.0
 angle_random = 1.0
-angle_curve = SubResource( 7 )
+angle_curve = SubResource( 8 )
 scale_amount = 0.8
-scale_amount_curve = SubResource( 8 )
-color_ramp = SubResource( 9 )
+scale_amount_curve = SubResource( 9 )
+color_ramp = SubResource( 10 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="screen_exited" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_exited"]
