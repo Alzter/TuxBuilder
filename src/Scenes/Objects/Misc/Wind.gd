@@ -4,7 +4,7 @@ export var speed_x = 0
 export var speed_y = 0
 
 func activate():
-	if not body.skidding and not body.sliding:
+	if not body.skidding and not body.player_state == "Sliding":
 		body.velocity.x += speed_x
 	body.velocity.y += speed_y * 0.5
 	body.wind = 3
