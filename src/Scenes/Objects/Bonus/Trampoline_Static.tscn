@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://Scenes/Objects/Bonus/Trampoline_Static.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Objects/Bonus/Trampoline.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Objects/Trampoline/trampoline_static-1.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/Objects/Trampoline/trampoline_static-2.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/Objects/Trampoline/trampoline_static-3.png" type="Texture" id=4]
@@ -40,6 +40,7 @@ extents = Vector2( 15.5, 22 )
 collision_layer = 0
 collision_mask = 31
 script = ExtResource( 1 )
+cling_to_walls = true
 
 [node name="Control" type="Control" parent="."]
 editor/display_folded = true

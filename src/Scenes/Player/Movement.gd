@@ -98,7 +98,7 @@ func _step(delta):
 		if host.on_ground <= host.LEDGE_JUMP and host.get_node("ButtjumpLandTimer").time_left <= host.BUTTJUMP_LAND_TIME - 0.02:
 			
 			# Backflip
-			if host.state != "small" and Input.is_action_pressed("duck") and host.get_node("StandWindow").is_colliding() == false and !host.sliding and host.get_node("ButtjumpLandTimer").time_left == 0:
+			if host.state != "small" and Input.is_action_pressed("duck") and host.get_node("StandWindow").is_colliding() == false and host.get_node("ButtjumpLandTimer").time_left == 0:
 				host.player_state = "Backflip"
 				host.backflip_rotation = 0
 				host.velocity.y = -host.RUNJUMP_POWER

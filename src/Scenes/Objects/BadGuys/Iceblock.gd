@@ -55,10 +55,10 @@ func _on_Area2D_body_entered(body):
 		if (state == "active" or state == "kicked"):
 			
 			# Squished
-			if body.sliding == true:
+			if body.player_state == "Sliding":
 				kill()
 				return
-			if body.buttjump == true:
+			if body.player_state == "Buttjump":
 				body.velocity.y *= 0.9
 				buttjump_kill()
 			state = "squished"
@@ -69,10 +69,10 @@ func _on_Area2D_body_entered(body):
 		
 		# Kicked
 		elif state == "squished":
-			if body.sliding == true:
+			if body.player_state == "Sliding":
 				kill()
 				return
-			if body.buttjump == true:
+			if body.player_state == "Buttjump" == true:
 				body.velocity.y *= 0.9
 				buttjump_kill()
 			state = "kicked"

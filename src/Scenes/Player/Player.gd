@@ -28,11 +28,8 @@ var on_ground = 999 # Frames Tux has been in air (0 if grounded)
 var jumpheld = 0 # Amount of frames jump has been held
 var jumpcancel = false # Can let go of jump to stop vertical ascent
 var skidding = false # Skidding
-var sliding = false # Sliding
 var ducking = false # Ducking
-var backflip = false # Backflipping
 var backflip_rotation = 0 # Backflip rotation
-var buttjump = false # Butt-jumping
 var state = "fire" # Tux's power-up state
 var camera_offset = 0 # Moves camera horizontally for extended view
 var camera_position = Vector2() # Camera Position
@@ -244,9 +241,7 @@ func _on_InvincibilityTimer_timeout():
 # Bounce off squished enemies
 func bounce(low, high, cancellable):
 	on_ground = LEDGE_JUMP + 1
-	sliding = false
-	backflip = false
-	buttjump = false
+	player_state = "Movement"
 	on_ground = LEDGE_JUMP + 1
 	$ButtjumpTimer.stop()
 	$ButtjumpLandTimer.stop()
