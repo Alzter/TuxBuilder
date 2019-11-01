@@ -25,9 +25,9 @@ func _process(delta):
 	
 	# Scrolling
 	if scroll_speed.x != 1:
-		position.x = get_tree().current_scene.get_node("Camera2D").position.x * (1 - scroll_speed.x)
+		position.x = UIHelpers.get_camera().position.x * (1 - scroll_speed.x)
 	if scroll_speed.y != 1:
-		position.y = get_tree().current_scene.get_node("Camera2D").position.y * (1 - scroll_speed.y)
+		position.y = UIHelpers.get_camera().position.y * (1 - scroll_speed.y)
 	
 	# Moving
 	if moving and get_tree().current_scene.editmode == false:

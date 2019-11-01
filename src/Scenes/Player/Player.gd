@@ -127,7 +127,7 @@ func _physics_process(delta):
 			if restarted == false:
 					get_tree().current_scene.call("restart_level")
 					restarted = true
-		if position.y >= get_tree().current_scene.get_node("Camera2D").limit_bottom and velocity.y > 0:
+		if position.y >= UIHelpers.get_camera().limit_bottom and velocity.y > 0:
 			if restarted == false:
 				get_tree().current_scene.call("restart_level")
 				restarted = true
@@ -410,20 +410,20 @@ func _physics_process(delta):
 	# Camera Positioning
 	if abs(velocity.x) > WALK_ADD:
 		camera_offset += 2 * (velocity.x / abs(velocity.x))
-		if abs(camera_offset) >= (get_viewport().size.x * 0.1) * get_tree().current_scene.get_node("Camera2D").zoom.x:
-			camera_offset = (get_viewport().size.x * 0.1) * get_tree().current_scene.get_node("Camera2D").zoom.x * (camera_offset / abs(camera_offset))
+		if abs(camera_offset) >= (get_viewport().size.x * 0.1) * UIHelpers.get_camera().zoom.x:
+			camera_offset = (get_viewport().size.x * 0.1) * UIHelpers.get_camera().zoom.x * (camera_offset / abs(camera_offset))
 	camera_position.x = camera_position.x + (camera_offset - camera_position.x) / 5
-	get_tree().current_scene.get_node("Camera2D").position = Vector2(position.x + camera_position.x,position.y + camera_position.y)
+	UIHelpers.get_camera().position = Vector2(position.x + camera_position.x,position.y + camera_position.y)
 
 	# Block player leaving screen
-	if position.x <= get_tree().current_scene.get_node("Camera2D").limit_left + 16:
-		position.x = get_tree().current_scene.get_node("Camera2D").limit_left + 16
+	if position.x <= UIHelpers.get_camera().limit_left + 16:
+		position.x = UIHelpers.get_camera().limit_left + 16
 		velocity.x = 0
-	if position.x >= get_tree().current_scene.get_node("Camera2D").limit_right - 16:
-		position.x = get_tree().current_scene.get_node("Camera2D").limit_right - 16
+	if position.x >= UIHelpers.get_camera().limit_right - 16:
+		position.x = UIHelpers.get_camera().limit_right - 16
 		velocity.x = 0
-	if position.y >= get_tree().current_scene.get_node("Camera2D").limit_bottom:
-		position.y = get_tree().current_scene.get_node("Camera2D").limit_bottom
+	if position.y >= UIHelpers.get_camera().limit_bottom:
+		position.y = UIHelpers.get_camera().limit_bottom
 		kill()
 
 	# Carry objects
