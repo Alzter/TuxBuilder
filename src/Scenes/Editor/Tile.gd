@@ -1,4 +1,4 @@
-extends Control
+extends "EditorBase.gd"
 
 var tile_type = ""
 
@@ -13,5 +13,5 @@ func _ready():
 	$Control/Sprite.region_rect.position = get_tree().current_scene.get_node("Editor/TileMap").get_tileset().autotile_get_icon_coordinate(tile_type) * 32
 
 func _on_Button_pressed():
-	get_tree().current_scene.get_node("Editor").tile_type = tile_type
+	get_editor().tile_type = tile_type
 	get_tree().current_scene.get_node("Editor/UI/SideBar/VBoxContainer/HBoxContainer/EraserButton").pressed = false

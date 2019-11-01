@@ -1,4 +1,4 @@
-extends Control
+extends "EditorBase.gd"
 
 var type = ""
 var layername = ""
@@ -9,7 +9,7 @@ func _ready():
 	$Panel/Label.text = str(layername)
 	$Panel/Panel/Zaxis.text = str(z_axis)
 	$Panel/Icon.texture = load(str("res://Sprites/Editor/LayerIcons/", type, ".png"))
-	if layername == get_tree().current_scene.get_node("Editor").layer_selected and get_tree().current_scene.get_node(str("Level/",layername)).filepath != "":
+	if layername == get_editor().layer_selected and get_tree().current_scene.get_node(str("Level/",layername)).filepath != "":
 		settings()
 
 func _process(_delta):
@@ -20,13 +20,13 @@ func _process(_delta):
 	
 	# Highlight if selected
 	$Panel.modulate = Color(0.5,0.5,0.5,1)
-	if layername == get_tree().current_scene.get_node("Editor").layer_selected:
+	if layername == get_editor().layer_selected:
 		$Panel.modulate = Color(1,1,1,1)
 
 func _on_Button_pressed():
-	get_tree().current_scene.get_node("Editor").layer_selected = layername
-	get_tree().current_scene.get_node("Editor").layer_selected_type = type
-	get_tree().current_scene.get_node("Editor").layerfile = get_tree().current_scene.get_node(str("Level/", layername))
+	get_editor().layer_selected = layername
+	get_editor().layer_selected_type = type
+	get_editor().layerfile = get_tree().current_scene.get_node(str("Level/", layername))
 
 func _on_LayerSettings_pressed():
 	settings()

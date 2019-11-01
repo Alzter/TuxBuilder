@@ -1,4 +1,4 @@
-extends Control
+extends "EditorBase.gd"
 
 var object_type = ""
 var object_category = ""
@@ -9,8 +9,8 @@ func _ready():
 	get_object_texture(str("res://Scenes/Objects/", object_category, "/", object_type))
 
 func _on_Button_pressed():
-	get_tree().current_scene.get_node("Editor").object_type = object_type
-	get_tree().current_scene.get_node("Editor").object_category = object_category
+	get_editor().object_type = object_type
+	get_editor().object_category = object_category
 	get_tree().current_scene.get_node("Editor/UI/SideBar/VBoxContainer/HBoxContainer/EraserButton").pressed = false
 
 func get_object_texture(object_location):
