@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/SnowSlopes2.png-d11ad365523c71718d2dc6ad6e426a0d.stex"
+path="res://.import/SnowOverlay.png-82bc760e09111294735e94c3c726da27.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Tiles/SnowSlopes2.png"
-dest_files=[ "res://.import/SnowSlopes2.png-d11ad365523c71718d2dc6ad6e426a0d.stex" ]
+source_file="res://Sprites/Tiles/Worldmap/SnowOverlay.png"
+dest_files=[ "res://.import/SnowOverlay.png-82bc760e09111294735e94c3c726da27.stex" ]
 
 [params]
 

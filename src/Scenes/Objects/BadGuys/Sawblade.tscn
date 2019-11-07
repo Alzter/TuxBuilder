@@ -28,11 +28,12 @@ extents = Vector2( 4, 4 )
 extents = Vector2( 16, 16 )
 
 [node name="Sawblade" type="Node2D"]
-z_index = -1
+z_index = -2
 script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
+frame = 1
 playing = true
 
 [node name="Left" type="RayCast2D" parent="."]

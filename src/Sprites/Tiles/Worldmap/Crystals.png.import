@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Snow.png-f8133d32a545fc646f78249f716d1deb.stex"
+path="res://.import/Crystals.png-20b7115d5c24c608361ee923b2d9c757.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Tiles/Snow.png"
-dest_files=[ "res://.import/Snow.png-f8133d32a545fc646f78249f716d1deb.stex" ]
+source_file="res://Sprites/Tiles/Worldmap/Crystals.png"
+dest_files=[ "res://.import/Crystals.png-20b7115d5c24c608361ee923b2d9c757.stex" ]
 
 [params]
 
@@ -21,7 +21,7 @@ compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
 flags/filter=true
-flags/mipmaps=false
+flags/mipmaps=true
 flags/anisotropic=false
 flags/srgb=2
 process/fix_alpha_border=true
