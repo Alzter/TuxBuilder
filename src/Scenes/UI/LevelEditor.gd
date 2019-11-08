@@ -618,14 +618,18 @@ func _on_LayerAdd_button_down():
 	
 	# Get all the files from Scenes/Editor/Layers
 	var layers = list_files_in_directory("res://Scenes/Editor/Layers/")
+	var tilemappos = 0
 	for layer in layers:
 		# If the file is a scene, add it to the OptionButton
 		if ".tscn" in layer:
+			if "tilemap" in layer:
+				tilemappos = $UI/AddLayer/VBoxContainer/OptionButton.items.size()
 			var item = layer
 			item.erase(item.length() - 5,5)
 			$UI/AddLayer/VBoxContainer/OptionButton.add_icon_item(load(str("res://Sprites/Editor/LayerIcons/", item, ".png")),item)
 	
 	$UI/AddLayer.popup()
+	$UI/AddLayer/VBoxContainer/OptionButton.selected = tilemappos
 
 func _on_AddLayer_popup_hide():
 	$UI/BottomBar/LayerAdd.pressed = false
