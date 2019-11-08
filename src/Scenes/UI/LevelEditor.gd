@@ -152,14 +152,15 @@ func _process(_delta):
 	UIHelpers.get_player().position.y = round(UIHelpers.get_player().position.y / 32) * 32
 	
 	# Delay the player movement by one frame to sync with the camera
-	if movetime_up != 1 and movetime_up != 0:
-		UIHelpers.get_player().position.y -= CAMERA_MOVE_SPEED
-	if movetime_down != 1 and movetime_down != 0:
-		UIHelpers.get_player().position.y += CAMERA_MOVE_SPEED
-	if movetime_left != 1 and movetime_left != 0:
-		UIHelpers.get_player().position.x -= CAMERA_MOVE_SPEED
-	if movetime_right != 1 and movetime_right != 0:
-		UIHelpers.get_player().position.x += CAMERA_MOVE_SPEED
+	if !UIHelpers.get_level().worldmap:
+		if movetime_up != 1 and movetime_up != 0:
+			UIHelpers.get_player().position.y -= CAMERA_MOVE_SPEED
+		if movetime_down != 1 and movetime_down != 0:
+			UIHelpers.get_player().position.y += CAMERA_MOVE_SPEED
+		if movetime_left != 1 and movetime_left != 0:
+			UIHelpers.get_player().position.x -= CAMERA_MOVE_SPEED
+		if movetime_right != 1 and movetime_right != 0:
+			UIHelpers.get_player().position.x += CAMERA_MOVE_SPEED
 	
 	# Disable rectangle select for objects
 	if category_selected == "Objects":
@@ -185,7 +186,7 @@ func _process(_delta):
 		dragging_object = true
 		object_dragged = "Player"
 		dragpos = Vector2(0,0)
-		UIHelpers.get_player().get_node("/Control/AnimatedSprite").scale += Vector2(0.25,0.25)
+		UIHelpers.get_player().get_node("Control/AnimatedSprite").scale += Vector2(0.25,0.25)
 		if $SelectedTile.position == Vector2(UIHelpers.get_player().position.x,UIHelpers.get_player().position.y - 16):
 			player_drag_half = "top"
 		else: player_drag_half = "bottom"
@@ -444,7 +445,7 @@ func update_selected_tile():
 		$SelectedTile.position.x = (tile_selected.x + 0.5) * 32
 		$SelectedTile.position.y = (tile_selected.y + 0.5) * 32
 	
-	if ($SelectedTile.position == Vector2(UIHelpers.get_player().position.x,UIHelpers.get_player().position.y - 16) and UIHelpers.get_player().state != "small" and !UIHelpers.get_level().worldmap) or $SelectedTile.position == Vector2(UIHelpers.get_player().position.x,UIHelpers.get_player().position.y + 16) and dragging_object == false:
+	if ($SelectedTile.position == Vector2(UIHelpers.get_player().position.x,UIHelpers.get_player().position.y - 16) and (UIHelpers.get_player().state != "small" or UIHelpers.get_level().worldmap)) or $SelectedTile.position == Vector2(UIHelpers.get_player().position.x,UIHelpers.get_player().position.y + 16) and dragging_object == false:
 		player_hovered = true
 		return
 	
@@ -549,30 +550,28 @@ func update_objects(): # Update the objects list from the editor using the scene
 	
 	# For every folder in Scenes/Objects
 	for category in categories:
-		
-		if (category == "Worldmap" and !UIHelpers.get_level().worldmap) or (category != "Worldmap" and UIHelpers.get_level().worldmap):
-			return
-		
-		# Create a category
-		var child = load("res://Scenes/Editor/Category.tscn").instance()
-		child.item = category
-		$UI/SideBar/ScrollContainer/SidebarList.add_child(child)
-		
-		# Then for every file inside each folder
-		var objects = list_files_in_directory(str("res://Scenes/Objects/", category, "/"))
-		for object in objects:
+		if (category != "Map" and !UIHelpers.get_level().worldmap) or (category == "Map" and UIHelpers.get_level().worldmap): # Change category for Worldmaps
 			
-			# If it's a scene, create an object button inside that category
-			if ".tscn" in object:
-				var child2 = load("res://Scenes/Editor/Object.tscn").instance()
-				child2.object_category = category
-				child2.object_type = object
-				child.get_node("VBoxContainer/Content").add_child(child2)
+			# Create a category
+			var child = load("res://Scenes/Editor/Category.tscn").instance()
+			child.item = category
+			$UI/SideBar/ScrollContainer/SidebarList.add_child(child)
+			
+			# Then for every file inside each folder
+			var objects = list_files_in_directory(str("res://Scenes/Objects/", category, "/"))
+			for object in objects:
 				
-				# Set the object selected to this object if none are selected
-				if object_type == "":
-					object_type = child2.object_type
-					object_category = child2.object_category
+				# If it's a scene, create an object button inside that category
+				if ".tscn" in object:
+					var child2 = load("res://Scenes/Editor/Object.tscn").instance()
+					child2.object_category = category
+					child2.object_type = object
+					child.get_node("VBoxContainer/Content").add_child(child2)
+					
+					# Set the object selected to this object if none are selected
+					if object_type == "":
+						object_type = child2.object_type
+						object_category = child2.object_category
 
 func get_object_texture(object_location): # Get the texture for an object
 	if object_type == "":

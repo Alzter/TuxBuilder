@@ -4,8 +4,8 @@
 [ext_resource path="res://Sprites/Objects/Misc/spawnpoint.png" type="Texture" id=2]
 
 [node name="SpawnPoint" type="Position2D" groups=[
-"oneonly",
 "spawnpoint",
+"oneonly",
 ]]
 script = ExtResource( 1 )
 
