@@ -15,7 +15,7 @@
 0/tile_mode = 1
 0/autotile/bitmask_mode = 1
 0/autotile/bitmask_flags = [ Vector2( 0, 0 ), 176, Vector2( 0, 1 ), 50, Vector2( 0, 2 ), 48, Vector2( 0, 3 ), 18, Vector2( 1, 0 ), 152, Vector2( 1, 1 ), 26, Vector2( 1, 2 ), 144, Vector2( 1, 3 ), 24, Vector2( 2, 0 ), 178, Vector2( 2, 1 ), 58, Vector2( 2, 2 ), 56, Vector2( 2, 3 ), 186, Vector2( 3, 0 ), 184, Vector2( 3, 1 ), 154, Vector2( 3, 2 ), 146 ]
-0/autotile/icon_coordinate = Vector2( 0, 0 )
+0/autotile/icon_coordinate = Vector2( 2, 3 )
 0/autotile/tile_size = Vector2( 32, 32 )
 0/autotile/spacing = 0
 0/autotile/occluder_map = [  ]

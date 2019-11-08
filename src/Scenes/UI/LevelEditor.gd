@@ -32,6 +32,19 @@ var dir = Directory.new()
 var clickdisable = false
 
 func _ready():
+	$Settings/Popup/Panel/VBoxContainer/Name/LevelName.text = UIHelpers._get_scene().get_node("Level").level_name
+	$Settings/Popup/Panel/VBoxContainer/Creator/LevelCreator.text = UIHelpers._get_scene().get_node("Level").level_creator
+	$Settings/Popup/Panel/VBoxContainer/Music/OptionButton.clear()
+	
+	# Get all the files from Scenes/Editor/Layers
+	var music = list_files_in_directory("res://Audio/Music/")
+	for file in music:
+		# If the file is a scene, add it to the OptionButton
+		if ".ogg" in file and not ".import" in file:
+			var item = file
+			item.erase(item.length() - 4,4)
+			$Settings/Popup/Panel/VBoxContainer/Music/OptionButton.add_item(item)
+	
 	anim_in = get_tree().current_scene.editmode
 	visible = false
 	$UI.offset = Vector2(get_viewport().size.x * 9999,get_viewport().size.y * 9999)
@@ -45,7 +58,7 @@ func _process(_delta):
 	if layerfile == null:
 		layer_selected == ""
 		layer_selected_type = ""
-		print("ERROR! The level unloaded because I don't know. Try restarting Godot.")
+		print("ERROR! There is no level loaded!")
 	
 	if stop == true:
 		$SelectedArea.visible = false
@@ -86,6 +99,21 @@ func _process(_delta):
 			$UI/AnimationPlayer.play("MoveIn")
 		visible = true
 		$UI.offset = Vector2(0,0)
+	
+	
+	# Editor settings menu
+	if Input.is_action_just_pressed("pause"):
+		if $Settings/Popup.visible:
+			$Settings/Popup.hide()
+		else:
+			$Settings/Popup.popup()
+	
+	if $Settings/Popup.visible or $Settings/Exit.visible or $UI/AddLayer.visible:
+		$SelectedTile.visible = false
+		clickdisable = true
+		UIHelpers._get_scene().get_node("Level").level_name = $Settings/Popup/Panel/VBoxContainer/Name/LevelName.text
+		UIHelpers._get_scene().get_node("Level").level_creator = $Settings/Popup/Panel/VBoxContainer/Creator/LevelCreator.text
+		return
 	
 	# Navigation
 	if Input.is_action_pressed("ui_up"):
@@ -286,7 +314,7 @@ func _process(_delta):
 
 	if Input.is_action_pressed("click_left") and !dragging_object and !expanding and !clickdisable:
 		# If the mouse isn't on the level editor UI or zoom buttons
-		if get_viewport().get_mouse_position().x < get_viewport().size.x - 128 and get_viewport().get_mouse_position().y < get_viewport().size.y - 64 and (tile_selected != old_tile_selected or mouse_down == false) and $UI/AddLayer.visible == false and $UI/BottomBar/Zoom/ZoomIn.is_hovered() == false and $UI/BottomBar/Zoom/ZoomDefault.is_hovered() == false and $UI/BottomBar/Zoom/ZoomOut.is_hovered() == false:
+		if get_viewport().get_mouse_position().x < get_viewport().size.x - 128 and get_viewport().get_mouse_position().y < get_viewport().size.y - 64 and (tile_selected != old_tile_selected or mouse_down == false) and $UI/BottomBar/Zoom/ZoomIn.is_hovered() == false and $UI/BottomBar/Zoom/ZoomDefault.is_hovered() == false and $UI/BottomBar/Zoom/ZoomOut.is_hovered() == false:
 			
 			# Tile placing / erasing
 			if category_selected == "Tiles":
@@ -391,7 +419,7 @@ func update_selected_tile():
 	$SelectedTile.region_enabled = false
 	player_hovered = false
 	
-	if not (get_viewport().get_mouse_position().x < get_viewport().size.x - 128 and get_viewport().get_mouse_position().y < get_viewport().size.y - 64) or $UI/AddLayer.visible == true:
+	if not (get_viewport().get_mouse_position().x < get_viewport().size.x - 128 and get_viewport().get_mouse_position().y < get_viewport().size.y - 64):
 		return
 	
 	if layer_selected_type != "TileMap" and category_selected == "Tiles":
@@ -666,3 +694,19 @@ func _on_ZoomOut_pressed():
 
 func _on_Play_pressed():
 	get_tree().current_scene.editmode_toggle()
+
+func _on_SettingsConfirmation_pressed():
+	$Settings/Popup.hide()
+
+func _on_ReturnMenu_pressed():
+	$Settings/Popup.hide()
+	$Settings/Exit.popup()
+
+func _on_Yes_pressed():
+	get_tree().current_scene.get_node("CanvasLayer/AnimationPlayer").play("Circle Out")
+	yield(get_tree().current_scene.get_node("CanvasLayer/AnimationPlayer"), "animation_finished")
+	get_tree().paused = false
+	get_tree().change_scene("res://Scenes/UI/MainMenu.tscn")
+
+func _on_No_pressed():
+	$Settings/Exit.hide()

@@ -4,17 +4,17 @@
 [ext_resource path="res://Sprites/Editor/Grid.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/Editor/Grab.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/Editor/Eraser.png" type="Texture" id=4]
-[ext_resource path="res://Scenes/UI/UITheme.tres" type="Theme" id=5]
-[ext_resource path="res://Fonts/SuperTux-Medium.ttf" type="DynamicFontData" id=6]
-[ext_resource path="res://Sprites/Editor/Line.png" type="Texture" id=7]
-[ext_resource path="res://Sprites/Editor/Rectangle.png" type="Texture" id=8]
-[ext_resource path="res://Sprites/Editor/Plus.png" type="Texture" id=9]
-[ext_resource path="res://Sprites/Editor/Equals.png" type="Texture" id=10]
-[ext_resource path="res://Sprites/Editor/Minus.png" type="Texture" id=11]
-[ext_resource path="res://Sprites/Editor/Save.png" type="Texture" id=12]
-[ext_resource path="res://Sprites/Editor/Wrench.png" type="Texture" id=13]
-[ext_resource path="res://Sprites/Creatures/Tux/Small/Jump3.png" type="Texture" id=14]
-[ext_resource path="res://Tilesets/LevelTiles.tres" type="TileSet" id=15]
+[ext_resource path="res://Tilesets/LevelTiles.tres" type="TileSet" id=5]
+[ext_resource path="res://Scenes/UI/UITheme.tres" type="Theme" id=6]
+[ext_resource path="res://Fonts/SuperTux-Medium.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://Sprites/Editor/Line.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Editor/Rectangle.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/Editor/Plus.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/Editor/Equals.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/Editor/Minus.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/Editor/Save.png" type="Texture" id=13]
+[ext_resource path="res://Sprites/Editor/Wrench.png" type="Texture" id=14]
+[ext_resource path="res://Sprites/Creatures/Tux/Small/Jump3.png" type="Texture" id=15]
 [ext_resource path="res://Sprites/Editor/GrabPoint.png" type="Texture" id=16]
 [ext_resource path="res://Sprites/Editor/GrabPointHover.png" type="Texture" id=17]
 
@@ -257,7 +257,7 @@ size = 18
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
-font_data = ExtResource( 6 )
+font_data = ExtResource( 7 )
 
 [sub_resource type="StreamTexture" id=6]
 flags = 5
@@ -364,8 +364,14 @@ margin_bottom = 16.0
 mouse_filter = 2
 color = Color( 0, 1, 0, 0.501961 )
 
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 5 )
+cell_size = Vector2( 32, 32 )
+collision_layer = 0
+collision_mask = 0
+format = 1
+
 [node name="UI" type="CanvasLayer" parent="."]
-editor/display_folded = true
 layer = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI"]
@@ -394,7 +400,7 @@ grow_vertical = 0
 rect_min_size = Vector2( 0, 32 )
 focus_mode = 1
 size_flags_horizontal = 3
-theme = ExtResource( 5 )
+theme = ExtResource( 6 )
 custom_styles/hover = SubResource( 3 )
 custom_styles/pressed = SubResource( 4 )
 custom_styles/focus = SubResource( 4 )
@@ -432,7 +438,7 @@ text = "Tiles"
 margin_top = 32.0
 margin_right = 128.0
 margin_bottom = 34.0
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 
 [node name="ObjectsButton" type="Button" parent="UI/SideBar/VBoxContainer"]
 editor/display_folded = true
@@ -444,7 +450,7 @@ grow_vertical = 0
 rect_min_size = Vector2( 0, 32 )
 focus_mode = 1
 size_flags_horizontal = 3
-theme = ExtResource( 5 )
+theme = ExtResource( 6 )
 custom_styles/hover = SubResource( 3 )
 custom_styles/pressed = SubResource( 4 )
 custom_styles/focus = SubResource( 4 )
@@ -482,7 +488,7 @@ text = "Objects"
 margin_top = 66.0
 margin_right = 128.0
 margin_bottom = 68.0
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/SideBar/VBoxContainer"]
 editor/display_folded = true
@@ -498,7 +504,7 @@ margin_right = 56.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 focus_mode = 0
-theme = ExtResource( 5 )
+theme = ExtResource( 6 )
 custom_styles/hover = SubResource( 3 )
 custom_styles/pressed = SubResource( 4 )
 custom_styles/focus = SubResource( 3 )
@@ -519,7 +525,7 @@ margin_right = 104.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 focus_mode = 0
-theme = ExtResource( 5 )
+theme = ExtResource( 6 )
 custom_styles/hover = SubResource( 3 )
 custom_styles/pressed = SubResource( 4 )
 custom_styles/focus = SubResource( 3 )
@@ -531,14 +537,14 @@ enabled_focus_mode = 0
 [node name="TextureRect" type="TextureRect" parent="UI/SideBar/VBoxContainer/HBoxContainer/SelectButton"]
 margin_right = 32.0
 margin_bottom = 32.0
-texture = ExtResource( 8 )
+texture = ExtResource( 9 )
 expand = true
 
 [node name="Line3" type="TextureRect" parent="UI/SideBar/VBoxContainer"]
 margin_top = 100.0
 margin_right = 128.0
 margin_bottom = 102.0
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/SideBar"]
 anchor_left = 1.0
@@ -548,7 +554,7 @@ margin_left = -122.0
 margin_top = 110.0
 margin_right = -8.0
 margin_bottom = 98.0
-theme = ExtResource( 5 )
+theme = ExtResource( 6 )
 scroll_horizontal_enabled = false
 
 [node name="SidebarList" type="VBoxContainer" parent="UI/SideBar/ScrollContainer"]
@@ -586,7 +592,7 @@ margin_top = 2.0
 margin_right = 62.0
 margin_bottom = 62.0
 focus_mode = 0
-theme = ExtResource( 5 )
+theme = ExtResource( 6 )
 custom_styles/hover = SubResource( 8 )
 custom_styles/pressed = SubResource( 9 )
 custom_styles/focus = SubResource( 8 )
@@ -604,7 +610,7 @@ margin_top = -32.0
 margin_right = 32.0
 margin_bottom = 32.0
 mouse_filter = 2
-texture = ExtResource( 9 )
+texture = ExtResource( 10 )
 expand = true
 
 [node name="Zoom" type="HBoxContainer" parent="UI/BottomBar"]
@@ -646,7 +652,7 @@ margin_right = 23.0
 margin_bottom = 23.0
 rect_min_size = Vector2( 32, 32 )
 mouse_filter = 2
-texture = ExtResource( 9 )
+texture = ExtResource( 10 )
 expand = true
 
 [node name="ZoomDefault" type="Button" parent="UI/BottomBar/Zoom"]
@@ -674,7 +680,7 @@ margin_right = 23.0
 margin_bottom = 23.0
 rect_min_size = Vector2( 32, 32 )
 mouse_filter = 2
-texture = ExtResource( 10 )
+texture = ExtResource( 11 )
 expand = true
 
 [node name="ZoomOut" type="Button" parent="UI/BottomBar/Zoom"]
@@ -702,7 +708,7 @@ margin_right = 23.0
 margin_bottom = 23.0
 rect_min_size = Vector2( 32, 32 )
 mouse_filter = 2
-texture = ExtResource( 11 )
+texture = ExtResource( 12 )
 expand = true
 
 [node name="Save" type="Button" parent="UI/BottomBar"]
@@ -730,7 +736,7 @@ margin_left = 2.0
 margin_top = 2.0
 margin_right = -4.0
 margin_bottom = -4.0
-texture = ExtResource( 12 )
+texture = ExtResource( 13 )
 expand = true
 stretch_mode = 6
 
@@ -742,7 +748,7 @@ margin_left = 2.0
 margin_top = 2.0
 margin_right = 232.0
 margin_bottom = -64.0
-theme = ExtResource( 5 )
+theme = ExtResource( 6 )
 
 [node name="Panel" type="Panel" parent="UI/AddLayer"]
 anchor_right = 1.0
@@ -773,10 +779,10 @@ margin_top = 26.0
 margin_right = 218.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 0, 2 )
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 expand = true
 
-[node name="Name" type="HBoxContainer" parent="UI/AddLayer/VBoxContainer"]
+[node name="Name" type="HSplitContainer" parent="UI/AddLayer/VBoxContainer"]
 margin_top = 34.0
 margin_right = 218.0
 margin_bottom = 54.0
@@ -791,8 +797,8 @@ text = "Name:"
 align = 1
 
 [node name="LineEdit" type="LineEdit" parent="UI/AddLayer/VBoxContainer/Name"]
-margin_left = 69.0
-margin_right = 209.0
+margin_left = 77.0
+margin_right = 218.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 140, 0 )
 text = "Layer"
@@ -802,18 +808,16 @@ margin_top = 60.0
 margin_right = 218.0
 margin_bottom = 62.0
 rect_min_size = Vector2( 0, 2 )
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 expand = true
 
-[node name="Zaxis" type="HBoxContainer" parent="UI/AddLayer/VBoxContainer"]
+[node name="Zaxis" type="HSplitContainer" parent="UI/AddLayer/VBoxContainer"]
 margin_top = 68.0
 margin_right = 218.0
 margin_bottom = 88.0
-alignment = 1
 
 [node name="Label2" type="Label" parent="UI/AddLayer/VBoxContainer/Zaxis"]
-margin_left = 14.0
-margin_right = 92.0
+margin_right = 78.0
 margin_bottom = 20.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
@@ -822,8 +826,8 @@ text = "Z axis:"
 align = 1
 
 [node name="SpinBox" type="SpinBox" parent="UI/AddLayer/VBoxContainer/Zaxis"]
-margin_left = 96.0
-margin_right = 204.0
+margin_left = 90.0
+margin_right = 218.0
 margin_bottom = 20.0
 min_value = -4096.0
 max_value = 4096.0
@@ -835,7 +839,7 @@ margin_top = 94.0
 margin_right = 218.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 0, 2 )
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 expand = true
 
 [node name="Label3" type="Label" parent="UI/AddLayer/VBoxContainer"]
@@ -869,7 +873,7 @@ anchor_right = 1.0
 margin_top = -2.0
 margin_bottom = -12.0
 rect_min_size = Vector2( 0, 2 )
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 expand = true
 
 [node name="Play" type="CanvasLayer" parent="."]
@@ -903,7 +907,7 @@ margin_left = 4.0
 margin_top = 4.0
 margin_right = -6.0
 margin_bottom = -6.0
-texture = ExtResource( 13 )
+texture = ExtResource( 14 )
 expand = true
 stretch_mode = 6
 
@@ -914,16 +918,10 @@ margin_left = -4.0
 margin_top = -24.0
 margin_right = 30.0
 margin_bottom = 56.0
-texture = ExtResource( 14 )
-
-[node name="TileMap" type="TileMap" parent="."]
-tile_set = ExtResource( 15 )
-cell_size = Vector2( 32, 32 )
-collision_layer = 0
-collision_mask = 0
-format = 1
+texture = ExtResource( 15 )
 
 [node name="GrabArea" type="CanvasLayer" parent="."]
+editor/display_folded = true
 layer = 2
 
 [node name="C1" type="TextureButton" parent="GrabArea"]
@@ -983,6 +981,222 @@ texture_normal = ExtResource( 16 )
 texture_pressed = ExtResource( 16 )
 texture_hover = ExtResource( 17 )
 expand = true
+
+[node name="Settings" type="CanvasLayer" parent="."]
+layer = 4
+
+[node name="Popup" type="Popup" parent="Settings"]
+editor/display_folded = true
+visible = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -230.0
+margin_top = -210.0
+margin_right = 230.0
+margin_bottom = 210.0
+theme = ExtResource( 6 )
+
+[node name="Panel" type="Panel" parent="Settings/Popup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings/Popup/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -39.0
+
+[node name="Label" type="Label" parent="Settings/Popup/Panel/VBoxContainer"]
+margin_right = 444.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 0, 32 )
+custom_colors/font_color = Color( 0, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+text = "Level Settings"
+align = 1
+valign = 1
+
+[node name="Line" type="TextureRect" parent="Settings/Popup/Panel/VBoxContainer"]
+margin_top = 36.0
+margin_right = 444.0
+margin_bottom = 38.0
+rect_min_size = Vector2( 0, 2 )
+texture = ExtResource( 8 )
+expand = true
+
+[node name="Name" type="HSplitContainer" parent="Settings/Popup/Panel/VBoxContainer"]
+editor/display_folded = true
+margin_top = 42.0
+margin_right = 444.0
+margin_bottom = 74.0
+rect_min_size = Vector2( 0, 32 )
+
+[node name="Label" type="Label" parent="Settings/Popup/Panel/VBoxContainer/Name"]
+margin_top = 6.0
+margin_right = 136.0
+margin_bottom = 26.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+text = "Level Name:"
+
+[node name="LevelName" type="LineEdit" parent="Settings/Popup/Panel/VBoxContainer/Name"]
+margin_left = 148.0
+margin_right = 444.0
+margin_bottom = 32.0
+text = "SuperTux Level"
+align = 2
+
+[node name="Creator" type="HSplitContainer" parent="Settings/Popup/Panel/VBoxContainer"]
+editor/display_folded = true
+margin_top = 78.0
+margin_right = 444.0
+margin_bottom = 110.0
+rect_min_size = Vector2( 0, 32 )
+
+[node name="Label" type="Label" parent="Settings/Popup/Panel/VBoxContainer/Creator"]
+margin_top = 6.0
+margin_right = 169.0
+margin_bottom = 26.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+text = "Level Creator:"
+
+[node name="LevelCreator" type="LineEdit" parent="Settings/Popup/Panel/VBoxContainer/Creator"]
+margin_left = 181.0
+margin_right = 444.0
+margin_bottom = 32.0
+text = "SuperTux Player"
+align = 2
+
+[node name="Music" type="HSplitContainer" parent="Settings/Popup/Panel/VBoxContainer"]
+margin_top = 114.0
+margin_right = 444.0
+margin_bottom = 146.0
+rect_min_size = Vector2( 0, 32 )
+
+[node name="Label2" type="Label" parent="Settings/Popup/Panel/VBoxContainer/Music"]
+margin_top = 6.0
+margin_right = 137.0
+margin_bottom = 26.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+text = "Level Music:"
+
+[node name="OptionButton" type="OptionButton" parent="Settings/Popup/Panel/VBoxContainer/Music"]
+margin_left = 149.0
+margin_right = 444.0
+margin_bottom = 32.0
+
+[node name="ReturnMenu" type="Button" parent="Settings/Popup/Panel/VBoxContainer"]
+margin_top = 150.0
+margin_right = 444.0
+margin_bottom = 182.0
+rect_min_size = Vector2( 0, 32 )
+text = "Return to Menu"
+
+[node name="SettingsConfirmation" type="Button" parent="Settings/Popup/Panel"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -37.0
+margin_bottom = -5.0
+rect_min_size = Vector2( 0, 32 )
+text = "OK"
+
+[node name="Line" type="TextureRect" parent="Settings/Popup/Panel/SettingsConfirmation"]
+anchor_right = 1.0
+margin_top = -2.0
+margin_bottom = -12.0
+rect_min_size = Vector2( 0, 2 )
+texture = ExtResource( 8 )
+expand = true
+
+[node name="Exit" type="Popup" parent="Settings"]
+visible = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -179.5
+margin_top = -51.0
+margin_right = 179.5
+margin_bottom = 51.0
+theme = ExtResource( 6 )
+
+[node name="Panel" type="Panel" parent="Settings/Exit"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Line" type="TextureRect" parent="Settings/Exit/Panel"]
+visible = false
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -37.0
+margin_bottom = -35.0
+rect_min_size = Vector2( 0, 2 )
+texture = ExtResource( 8 )
+expand = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings/Exit/Panel"]
+editor/display_folded = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -39.0
+
+[node name="Label" type="Label" parent="Settings/Exit/Panel/VBoxContainer"]
+margin_right = 343.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 0, 32 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+text = "Exit Level Editor?"
+align = 1
+valign = 1
+
+[node name="Line" type="TextureRect" parent="Settings/Exit/Panel/VBoxContainer"]
+margin_top = 36.0
+margin_right = 343.0
+margin_bottom = 38.0
+rect_min_size = Vector2( 0, 2 )
+texture = ExtResource( 8 )
+expand = true
+
+[node name="ExitButtons" type="HBoxContainer" parent="Settings/Exit/Panel"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -46.0
+margin_bottom = -14.0
+rect_min_size = Vector2( 0, 32 )
+custom_constants/separation = 64
+alignment = 1
+
+[node name="Yes" type="Button" parent="Settings/Exit/Panel/ExitButtons"]
+margin_left = 114.0
+margin_right = 152.0
+margin_bottom = 32.0
+text = "Yes"
+
+[node name="No" type="Button" parent="Settings/Exit/Panel/ExitButtons"]
+margin_left = 216.0
+margin_right = 244.0
+margin_bottom = 32.0
+text = "No"
 [connection signal="button_down" from="UI/SideBar/VBoxContainer/TilesButton" to="." method="_on_TilesButton_pressed"]
 [connection signal="button_down" from="UI/SideBar/VBoxContainer/ObjectsButton" to="." method="_on_ObjectsButton_pressed"]
 [connection signal="button_down" from="UI/BottomBar/LayerAdd" to="." method="_on_LayerAdd_button_down"]
@@ -993,3 +1207,7 @@ expand = true
 [connection signal="popup_hide" from="UI/AddLayer" to="." method="_on_AddLayer_popup_hide"]
 [connection signal="pressed" from="UI/AddLayer/LayerConfirmation" to="." method="_on_LayerConfirmation_pressed"]
 [connection signal="pressed" from="Play/Play" to="." method="_on_Play_pressed"]
+[connection signal="pressed" from="Settings/Popup/Panel/VBoxContainer/ReturnMenu" to="." method="_on_ReturnMenu_pressed"]
+[connection signal="pressed" from="Settings/Popup/Panel/SettingsConfirmation" to="." method="_on_SettingsConfirmation_pressed"]
+[connection signal="pressed" from="Settings/Exit/Panel/ExitButtons/Yes" to="." method="_on_Yes_pressed"]
+[connection signal="pressed" from="Settings/Exit/Panel/ExitButtons/No" to="." method="_on_No_pressed"]
