@@ -16,7 +16,7 @@ var camera_zoom_speed = 20
 func _ready():
 	editmode = false
 	editsaved = false
-	load_level("TEST")
+	load_map("Main")
 	load_player()
 	load_editor()
 	load_ui()
@@ -101,6 +101,9 @@ func load_level(level):
 	scene_instance.set_name("Level")
 	add_child(scene_instance)
 	level_to_grid()
+
+func load_map(map):
+	load_level(str("../Worldmaps/", map))
 
 func level_to_grid():
 	for child in get_tree().current_scene.get_node("Level").get_children():

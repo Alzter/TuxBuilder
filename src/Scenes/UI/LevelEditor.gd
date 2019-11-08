@@ -30,10 +30,17 @@ var expandpos = Vector2()
 var stop = false
 var dir = Directory.new()
 var clickdisable = false
+var tilemap = null
 
 func _ready():
-	$Settings/Popup/Panel/VBoxContainer/Name/LevelName.text = UIHelpers._get_scene().get_node("Level").level_name
-	$Settings/Popup/Panel/VBoxContainer/Creator/LevelCreator.text = UIHelpers._get_scene().get_node("Level").level_creator
+	if UIHelpers.get_level().worldmap: # Worldmap Tiles
+		tilemap = $WorldMap
+	else:
+		tilemap = $Tilemap # Level Tiles
+	
+	$GrabArea.offset = Vector2(9999999,99999999)
+	$Settings/Popup/Panel/VBoxContainer/Name/LevelName.text = UIHelpers.get_level().level_name
+	$Settings/Popup/Panel/VBoxContainer/Creator/LevelCreator.text = UIHelpers.get_level().level_creator
 	$Settings/Popup/Panel/VBoxContainer/Music/OptionButton.clear()
 	
 	# Get all the files from Scenes/Editor/Layers
@@ -111,8 +118,8 @@ func _process(_delta):
 	if $Settings/Popup.visible or $Settings/Exit.visible or $UI/AddLayer.visible:
 		$SelectedTile.visible = false
 		clickdisable = true
-		UIHelpers._get_scene().get_node("Level").level_name = $Settings/Popup/Panel/VBoxContainer/Name/LevelName.text
-		UIHelpers._get_scene().get_node("Level").level_creator = $Settings/Popup/Panel/VBoxContainer/Creator/LevelCreator.text
+		UIHelpers.get_level().level_name = $Settings/Popup/Panel/VBoxContainer/Name/LevelName.text
+		UIHelpers.get_level().level_creator = $Settings/Popup/Panel/VBoxContainer/Creator/LevelCreator.text
 		return
 	
 	# Navigation
@@ -170,7 +177,7 @@ func _process(_delta):
 	# Placing tiles / objects
 	if layer_selected_type == "TileMap" and category_selected == "Tiles":
 		tile_selected = layerfile.world_to_map(Vector2(get_global_mouse_position().x - ((1 - layerfile.scroll_speed.x) * UIHelpers.get_camera().position.x), get_global_mouse_position().y - ((1 - layerfile.scroll_speed.y) * UIHelpers.get_camera().position.y)))
-	else: tile_selected = $TileMap.world_to_map(get_global_mouse_position())
+	else: tile_selected = tilemap.world_to_map(get_global_mouse_position())
 	update_selected_tile()
 	
 	# Drag the player
@@ -289,23 +296,23 @@ func _process(_delta):
 	# Expand resizable areas
 	if expanding:
 		var expobject = get_tree().current_scene.get_node(str("Level/", expandingobject))
-		var expandposmap = $TileMap.world_to_map(expandpos)
+		var expandposmap = tilemap.world_to_map(expandpos)
 		if Input.is_action_pressed("click_left"):
 			# Drag Horizontal
-			if $TileMap.world_to_map(get_global_mouse_position()).x >= expandposmap.x:
+			if tilemap.world_to_map(get_global_mouse_position()).x >= expandposmap.x:
 				expobject.position.x = expandpos.x
-				expobject.get_node("Control").rect_size.x = (($TileMap.world_to_map(get_global_mouse_position()).x - expandposmap.x) * 32) + 32
+				expobject.get_node("Control").rect_size.x = ((tilemap.world_to_map(get_global_mouse_position()).x - expandposmap.x) * 32) + 32
 			else:
-				expobject.position.x = ($TileMap.world_to_map(get_global_mouse_position()).x * 32) + 16
-				expobject.get_node("Control").rect_size.x = ((expandposmap.x - $TileMap.world_to_map(get_global_mouse_position()).x) * 32) + 32
+				expobject.position.x = (tilemap.world_to_map(get_global_mouse_position()).x * 32) + 16
+				expobject.get_node("Control").rect_size.x = ((expandposmap.x - tilemap.world_to_map(get_global_mouse_position()).x) * 32) + 32
 			
 			# Drag Vertical
-			if $TileMap.world_to_map(get_global_mouse_position()).y >= expandposmap.y:
+			if tilemap.world_to_map(get_global_mouse_position()).y >= expandposmap.y:
 				expobject.position.y = expandpos.y
-				expobject.get_node("Control").rect_size.y = (($TileMap.world_to_map(get_global_mouse_position()).y - expandposmap.y) * 32) + 32
+				expobject.get_node("Control").rect_size.y = ((tilemap.world_to_map(get_global_mouse_position()).y - expandposmap.y) * 32) + 32
 			else:
-				expobject.position.y = ($TileMap.world_to_map(get_global_mouse_position()).y * 32) + 16
-				expobject.get_node("Control").rect_size.y = ((expandposmap.y - $TileMap.world_to_map(get_global_mouse_position()).y) * 32) + 32
+				expobject.position.y = (tilemap.world_to_map(get_global_mouse_position()).y * 32) + 16
+				expobject.get_node("Control").rect_size.y = ((expandposmap.y - tilemap.world_to_map(get_global_mouse_position()).y) * 32) + 32
 			
 			expobject.boxsize.x = expobject.get_node("Control").rect_size.x
 			expobject.boxsize.y = expobject.get_node("Control").rect_size.y
@@ -484,9 +491,9 @@ func update_selected_tile():
 		
 		# Tile selection
 		if category_selected == "Tiles":
-			var selected_texture = $TileMap.get_tileset().tile_get_texture(tile_type)
+			var selected_texture = tilemap.get_tileset().tile_get_texture(tile_type)
 			$SelectedTile.texture = (selected_texture)
-			$SelectedTile.region_rect.position = $TileMap.get_tileset().autotile_get_icon_coordinate(tile_type) * 32
+			$SelectedTile.region_rect.position = tilemap.get_tileset().autotile_get_icon_coordinate(tile_type) * 32
 			$SelectedTile.region_enabled = true
 			old_object_type = ""
 			$SelectedTile.offset = Vector2(0,0)
@@ -518,10 +525,10 @@ func update_tiles():
 	child.item = "Tiles"
 	$UI/SideBar/ScrollContainer/SidebarList.add_child(child)
 	
-	var tiles = $TileMap.get_tileset().get_tiles_ids()
+	var tiles = tilemap.get_tileset().get_tiles_ids()
 	for i in tiles.size():
 		var child2 = load("res://Scenes/Editor/Tile.tscn").instance()
-		child2.tile_type = $TileMap.get_tileset().tile_get_name(tiles[i])
+		child2.tile_type = tilemap.get_tileset().tile_get_name(tiles[i])
 		child.get_node("VBoxContainer/Content").add_child(child2)
 
 func update_objects(): # Update the objects list from the editor using the scenes from Scenes/Objects
@@ -534,6 +541,9 @@ func update_objects(): # Update the objects list from the editor using the scene
 	
 	# For every folder in Scenes/Objects
 	for category in categories:
+		
+		if (category == "Worldmap" and !UIHelpers.get_level().worldmap) or (category != "Worldmap" and UIHelpers.get_level().worldmap):
+			return
 		
 		# Create a category
 		var child = load("res://Scenes/Editor/Category.tscn").instance()
@@ -703,6 +713,7 @@ func _on_ReturnMenu_pressed():
 	$Settings/Exit.popup()
 
 func _on_Yes_pressed():
+	$UI/AnimationPlayer.play("MoveOut")
 	get_tree().current_scene.get_node("CanvasLayer/AnimationPlayer").play("Circle Out")
 	yield(get_tree().current_scene.get_node("CanvasLayer/AnimationPlayer"), "animation_finished")
 	get_tree().paused = false
