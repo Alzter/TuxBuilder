@@ -149,7 +149,10 @@ func _process(_delta):
 	
 	# Round player position
 	UIHelpers.get_player().position.x = (floor(UIHelpers.get_player().position.x / 32) * 32) + 16
-	UIHelpers.get_player().position.y = round(UIHelpers.get_player().position.y / 32) * 32
+	if UIHelpers.get_level().worldmap:
+		UIHelpers.get_player().position.y = (floor(UIHelpers.get_player().position.y / 32) * 32) + 16
+	else:
+		UIHelpers.get_player().position.y = round(UIHelpers.get_player().position.y / 32) * 32
 	
 	# Delay the player movement by one frame to sync with the camera
 	if !UIHelpers.get_level().worldmap:
@@ -290,9 +293,10 @@ func _process(_delta):
 			get_tree().current_scene.get_node(str("Level/", object_dragged)).position = $SelectedTile.position + dragpos
 		else:
 			UIHelpers.get_player().position = $SelectedTile.position
-			if player_drag_half == "top":
-				UIHelpers.get_player().position.y += 16
-			else: UIHelpers.get_player().position.y -= 16
+			if !UIHelpers.get_level().worldmap:
+				if player_drag_half == "top":
+					UIHelpers.get_player().position.y += 16
+				else: UIHelpers.get_player().position.y -= 16
 
 	# Expand resizable areas
 	if expanding:
@@ -445,7 +449,10 @@ func update_selected_tile():
 		$SelectedTile.position.x = (tile_selected.x + 0.5) * 32
 		$SelectedTile.position.y = (tile_selected.y + 0.5) * 32
 	
-	if ($SelectedTile.position == Vector2(UIHelpers.get_player().position.x,UIHelpers.get_player().position.y - 16) and (UIHelpers.get_player().state != "small" or UIHelpers.get_level().worldmap)) or $SelectedTile.position == Vector2(UIHelpers.get_player().position.x,UIHelpers.get_player().position.y + 16) and dragging_object == false:
+	if UIHelpers.get_level().worldmap and ($SelectedTile.position == Vector2(UIHelpers.get_player().position.x,UIHelpers.get_player().position.y - 16) and UIHelpers.get_player().state != "small") or $SelectedTile.position == Vector2(UIHelpers.get_player().position.x,UIHelpers.get_player().position.y + 16) and dragging_object == false:
+		player_hovered = true
+		return
+	if UIHelpers.get_level().worldmap and ($SelectedTile.position == Vector2(UIHelpers.get_player().position.x,UIHelpers.get_player().position.y)) and dragging_object == false:
 		player_hovered = true
 		return
 	
