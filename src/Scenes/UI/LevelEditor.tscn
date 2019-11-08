@@ -886,6 +886,7 @@ texture = ExtResource( 9 )
 expand = true
 
 [node name="Play" type="CanvasLayer" parent="."]
+editor/display_folded = true
 layer = 3
 
 [node name="Play" type="Button" parent="Play"]

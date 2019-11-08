@@ -185,7 +185,7 @@ func _process(_delta):
 		dragging_object = true
 		object_dragged = "Player"
 		dragpos = Vector2(0,0)
-		get_tree().current_scene.get_node("Player/Control/AnimatedSprite").scale += Vector2(0.25,0.25)
+		UIHelpers.get_player().get_node("/Control/AnimatedSprite").scale += Vector2(0.25,0.25)
 		if $SelectedTile.position == Vector2(UIHelpers.get_player().position.x,UIHelpers.get_player().position.y - 16):
 			player_drag_half = "top"
 		else: player_drag_half = "bottom"
@@ -278,7 +278,7 @@ func _process(_delta):
 				for child in get_tree().current_scene.get_node("Level").get_children():
 					if child.position == $SelectedTile.position and child.get_name() != object_dragged and not child.is_in_group("stackable"):
 						child.queue_free()
-		else: get_tree().current_scene.get_node("Player/Control/AnimatedSprite").scale -= Vector2(0.25,0.25)
+		else: UIHelpers.get_player().get_node("Control/AnimatedSprite").scale -= Vector2(0.25,0.25)
 	
 	# Drag the object
 	if Input.is_action_pressed("click_left") and dragging_object == true:
@@ -423,6 +423,8 @@ func update_selected_tile():
 	$EraserSprite.visible = false
 	$SelectedTile.visible = false
 	$SelectedTile.scale = Vector2(1,1)
+	$SelectedTile.region_rect.size = Vector2(32,32)
+	$SelectedTile.centered = true
 	$SelectedTile.region_enabled = false
 	player_hovered = false
 	
@@ -442,7 +444,7 @@ func update_selected_tile():
 		$SelectedTile.position.x = (tile_selected.x + 0.5) * 32
 		$SelectedTile.position.y = (tile_selected.y + 0.5) * 32
 	
-	if ($SelectedTile.position == Vector2(UIHelpers.get_player().position.x,UIHelpers.get_player().position.y - 16) and UIHelpers.get_player().state != "small") or $SelectedTile.position == Vector2(UIHelpers.get_player().position.x,UIHelpers.get_player().position.y + 16) and dragging_object == false:
+	if ($SelectedTile.position == Vector2(UIHelpers.get_player().position.x,UIHelpers.get_player().position.y - 16) and UIHelpers.get_player().state != "small" and !UIHelpers.get_level().worldmap) or $SelectedTile.position == Vector2(UIHelpers.get_player().position.x,UIHelpers.get_player().position.y + 16) and dragging_object == false:
 		player_hovered = true
 		return
 	
@@ -491,12 +493,18 @@ func update_selected_tile():
 		
 		# Tile selection
 		if category_selected == "Tiles":
+			$SelectedTile.offset = Vector2(0,0)
 			var selected_texture = tilemap.get_tileset().tile_get_texture(tile_type)
 			$SelectedTile.texture = (selected_texture)
-			$SelectedTile.region_rect.position = tilemap.get_tileset().autotile_get_icon_coordinate(tile_type) * 32
+			if tilemap.get_tileset().tile_get_tile_mode(tile_type) == 1:
+				$SelectedTile.region_rect.position = tilemap.get_tileset().autotile_get_icon_coordinate(tile_type) * 32
+			else:
+				$SelectedTile.region_rect.position = tilemap.get_tileset().tile_get_region(tile_type).position
+				$SelectedTile.region_rect.size = tilemap.get_tileset().tile_get_region(tile_type).size
+				$SelectedTile.centered = false
+				$SelectedTile.offset = Vector2(-16,-16)
 			$SelectedTile.region_enabled = true
 			old_object_type = ""
-			$SelectedTile.offset = Vector2(0,0)
 
 		else:
 			# Object Selection

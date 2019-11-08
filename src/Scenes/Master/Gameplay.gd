@@ -145,7 +145,10 @@ func clear_ui():
 	_clear_node("LevelUI")
 
 func load_player():
-	_load_node("res://Scenes/Player/Player.tscn", "Player")
+	if UIHelpers.get_level().worldmap:
+		_load_node("res://Scenes/Player/Worldmap.tscn", "Player")
+	else:
+		_load_node("res://Scenes/Player/Player.tscn", "Player")
 
 func clear_player():
 	_clear_node("Player")
@@ -201,7 +204,7 @@ func editmode_toggle():
 	if $CanvasLayer/AnimationPlayer.is_playing() == false and can_edit == true:
 		if editmode == false:
 			editmode = true
-			player_position = get_node("Player").position
+			player_position = UIHelpers.get_player().position
 			clear_ui()
 			clear_player()
 			clear_level()
@@ -209,7 +212,7 @@ func editmode_toggle():
 				load_level(current_level)
 			else: load_edited_level()
 			load_player()
-			get_node("Player").position = player_position
+			UIHelpers.get_player().position = player_position
 		elif get_node("Editor").dragging_object == false:
 			editmode = false
 			camera_smooth_time = 20

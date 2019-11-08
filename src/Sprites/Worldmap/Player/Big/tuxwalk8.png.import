@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Crystals.png-20b7115d5c24c608361ee923b2d9c757.stex"
+path="res://.import/tuxwalk8.png-a5af3343ae5beec6566701176a3b9bca.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Tiles/Worldmap/Crystals.png"
-dest_files=[ "res://.import/Crystals.png-20b7115d5c24c608361ee923b2d9c757.stex" ]
+source_file="res://Sprites/Worldmap/Player/Big/tuxwalk8.png"
+dest_files=[ "res://.import/tuxwalk8.png-a5af3343ae5beec6566701176a3b9bca.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Pathing.png-0cc6836441ce70708277d13207e68e54.stex"
+path="res://.import/smalltux.png-03b1c4d270a6e63a00497eb8ab7d318a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Tiles/Worldmap/Pathing.png"
-dest_files=[ "res://.import/Pathing.png-0cc6836441ce70708277d13207e68e54.stex" ]
+source_file="res://Sprites/Worldmap/Player/Small/smalltux.png"
+dest_files=[ "res://.import/smalltux.png-03b1c4d270a6e63a00497eb8ab7d318a.stex" ]
 
 [params]
 

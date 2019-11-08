@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/SnowOverlay.png-82bc760e09111294735e94c3c726da27.stex"
+path="res://.import/smalltuxwalk5.png-ce9b5d241e5ff201509e7d360ff6a01c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Tiles/Worldmap/SnowOverlay.png"
-dest_files=[ "res://.import/SnowOverlay.png-82bc760e09111294735e94c3c726da27.stex" ]
+source_file="res://Sprites/Worldmap/Player/Small/smalltuxwalk5.png"
+dest_files=[ "res://.import/smalltuxwalk5.png-ce9b5d241e5ff201509e7d360ff6a01c.stex" ]
 
 [params]
 

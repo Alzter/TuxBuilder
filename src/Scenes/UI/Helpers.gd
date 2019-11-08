@@ -11,3 +11,6 @@ func get_player():
 
 func get_level():
 	return _get_scene().get_node("Level")
+
+func get_editor():
+	return _get_scene().get_node("Editor")
