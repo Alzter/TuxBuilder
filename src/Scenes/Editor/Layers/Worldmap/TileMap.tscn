@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/Editor/Layers/TileMap.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Tilesets/MapTiles.tres" type="TileSet" id=2]
+
+[node name="TileMap" index="0" instance=ExtResource( 1 )]
+tile_set = ExtResource( 2 )

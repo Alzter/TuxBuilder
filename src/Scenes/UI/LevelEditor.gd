@@ -618,6 +618,8 @@ func _on_LayerAdd_button_down():
 	
 	# Get all the files from Scenes/Editor/Layers
 	var layers = list_files_in_directory("res://Scenes/Editor/Layers/")
+	if UIHelpers.get_level().worldmap:
+		layers = list_files_in_directory("res://Scenes/Editor/Layers/Worldmap/") # Different layers for Worldmap editing
 	var tilemappos = 0
 	for layer in layers:
 		# If the file is a scene, add it to the OptionButton
