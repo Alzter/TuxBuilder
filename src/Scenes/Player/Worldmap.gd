@@ -5,10 +5,10 @@ var state = "big"
 var moving = false
 var direction = 180
 var newdirection = 180
-var directionbuffer = 0 # How long Tux should attempt to turn an intersection
+var directionbuffer = 0
 
-const MOVE_SPEED = 8
-const BUFFER = 3
+const MOVE_SPEED = 4 # Must be a power of 2 that's lower than 32
+const BUFFER = 3 # If you press a direction, Tux will turn if he finds an intersection in that direction within the next 2 tiles
 
 func _ready():
 	position = Vector2(0,0)
@@ -117,5 +117,20 @@ func _process(delta):
 						if direction == -90 and not bitmask in left_tiles:
 							moving = false
 	
+	# Move
 	if moving:
 		position += Vector2(MOVE_SPEED, 0).rotated(deg2rad(direction - 90))
+	
+	# Camera
+	UIHelpers.get_camera().position = position
+	UIHelpers.get_camera().align()
+	
+	# Animations
+	if moving:
+		set_animation("walk")
+	else: set_animation("idle")
+
+# Set Tux's current playing animation
+func set_animation(anim):
+	if state == "small": $Control/AnimatedSprite.play(str(anim, "_small"))
+	else: $Control/AnimatedSprite.play(anim)

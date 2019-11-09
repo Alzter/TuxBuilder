@@ -41,10 +41,11 @@ func _process(_delta):
 	if editmode == false:
 		level_bounds()
 		camera_to_level_bounds()
-		if camera_smooth_time == 0:
+		if camera_smooth_time == 0 and !UIHelpers.get_level().worldmap:
 			$Camera2D.drag_margin_v_enabled = true
 	else:
 		camera_bounds_remove()
+		$Camera2D.drag_margin_h_enabled = false
 		$Camera2D.drag_margin_v_enabled = false
 	
 	if camera_smooth_time > 0:
