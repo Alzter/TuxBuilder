@@ -39,7 +39,7 @@
 1/autotile/spacing = 0
 1/autotile/occluder_map = [  ]
 1/autotile/navpoly_map = [  ]
-1/autotile/priority_map = [ Vector3( 1, 1, 19 ) ]
+1/autotile/priority_map = [ Vector3( 1, 1, 39 ) ]
 1/autotile/z_index_map = [ Vector3( 4, 2, 2 ), Vector3( 4, 3, 2 ) ]
 1/occluder_offset = Vector2( 0, 0 )
 1/navigation_offset = Vector2( 0, 0 )

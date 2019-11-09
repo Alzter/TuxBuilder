@@ -6,6 +6,8 @@ var moving = false
 var direction = 180
 var newdirection = 180
 var directionbuffer = 0
+var level_passable = false # If the level dot you're standing on has been cleared (is true if you're not standing on one)
+var movedirection = null # Direction you moved onto a level dot (so you can't pass uncleared levels)
 
 const MOVE_SPEED = 4 # Must be a power of 2 that's lower than 32
 const BUFFER = 3 # If you press a direction, Tux will turn if he finds an intersection in that direction within the next 2 tiles
@@ -36,6 +38,18 @@ func _process(delta):
 	
 	var rndx = (floor(position.x / 32) * 32) + 16
 	var rndy = (floor(position.y / 32) * 32) + 16
+	
+	# Stop at level dots
+	level_passable = true
+	for child in UIHelpers.get_level().get_children():
+		if child.is_in_group("leveldot"):
+			if child.position == position:
+				level_passable = child.cleared
+				if moving:
+					movedirection = direction
+					moving = false
+					newdirection = null
+					directionbuffer = 0
 	
 	# Change direction from the grid
 	if position.x == rndx and position.y == rndy:
@@ -107,14 +121,14 @@ func _process(delta):
 								direction = -90
 								newdirection = direction
 						
-						# Stop at edges
-						if direction == 0 and not bitmask in up_tiles:
+						# Stop at edges or when trying to pass uncleared level dots
+						if direction == 0 and (not bitmask in up_tiles or (!level_passable and movedirection != 180)):
 							moving = false
-						if direction == 180 and not bitmask in down_tiles:
+						if direction == 180 and (not bitmask in down_tiles or (!level_passable and movedirection != 0)):
 							moving = false
-						if direction == 90 and not bitmask in right_tiles:
+						if direction == 90 and (not bitmask in right_tiles or (!level_passable and movedirection != -90)):
 							moving = false
-						if direction == -90 and not bitmask in left_tiles:
+						if direction == -90 and (not bitmask in left_tiles or (!level_passable and movedirection != 90)):
 							moving = false
 	
 	# Move

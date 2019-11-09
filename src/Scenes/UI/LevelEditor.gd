@@ -36,7 +36,7 @@ func _ready():
 	if UIHelpers.get_level().worldmap: # Worldmap Tiles
 		tilemap = $WorldMap
 	else:
-		tilemap = $Tilemap # Level Tiles
+		tilemap = $TileMap # Level Tiles
 	
 	$GrabArea.offset = Vector2(9999999,99999999)
 	$Settings/Popup/Panel/VBoxContainer/Name/LevelName.text = UIHelpers.get_level().level_name
