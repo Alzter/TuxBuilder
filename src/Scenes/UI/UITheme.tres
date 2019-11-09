@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=24 format=2]
+[gd_resource type="Theme" load_steps=23 format=2]
 
 [ext_resource path="res://Sprites/Editor/Line.png" type="Texture" id=1]
 [ext_resource path="res://Fonts/SuperTux-Medium.ttf" type="DynamicFontData" id=2]
@@ -28,12 +28,12 @@ corner_radius_bottom_left = 12
 [sub_resource type="ImageTexture" id=7]
 
 [sub_resource type="StyleBoxFlat" id=8]
-bg_color = Color( 0.39, 0.5, 0.57, 0.9 )
+bg_color = Color( 0.388235, 0.501961, 0.568627, 0.960784 )
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
 border_width_bottom = 4
-border_color = Color( 0.16, 0.28, 0.4, 0.8 )
+border_color = Color( 0.160784, 0.278431, 0.4, 0.8 )
 corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
@@ -82,8 +82,6 @@ corner_radius_bottom_left = 4
 [sub_resource type="StyleBoxFlat" id=20]
 bg_color = Color( 1, 1, 1, 0 )
 draw_center = false
-
-[sub_resource type="StyleBoxFlat" id=22]
 
 [sub_resource type="DynamicFont" id=21]
 size = 18
@@ -166,4 +164,3 @@ ToolButton/styles/focus = SubResource( 20 )
 ToolButton/styles/hover = SubResource( 20 )
 ToolButton/styles/normal = SubResource( 20 )
 ToolButton/styles/pressed = SubResource( 20 )
-TooltipPanel/styles/panel = SubResource( 22 )

@@ -4,6 +4,7 @@ var directory = null
 var dir = Directory.new()
 var selectedfile = null
 var selectdir = null
+var cancel = true
 
 func _ready():
 	$Popup.popup()
@@ -17,6 +18,7 @@ func _process(delta):
 		if selectedfile == child.text:
 			child.pressed = true
 		else: child.pressed = false
+	selectdir = str(directory, "/", selectedfile)
 
 func reload():
 	
@@ -51,6 +53,7 @@ func _on_Reload_pressed():
 	reload()
 
 func _on_OK_pressed():
+	cancel = false
 	queue_free()
 
 func _on_Cancel_pressed():
