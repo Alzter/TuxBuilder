@@ -4,6 +4,7 @@ var dead = false
 var state = "big"
 var moving = false
 var direction = 180
+var newdirection = 180
 
 const MOVE_SPEED = 8
 
@@ -15,27 +16,26 @@ func _ready():
 
 func _process(delta):
 	if UIHelpers._get_scene().editmode:
-		return
+		pass#return
 	
 	# Setting the direction to move
 	if Input.is_action_just_pressed("up"):
-		moving = true
-		direction = 0
+		newdirection = 0
 	
 	if Input.is_action_just_pressed("duck"):
-		moving = true
-		direction = 180
+		newdirection = 180
 	
 	if Input.is_action_just_pressed("move_left"):
-		moving = true
-		direction = -90
+		newdirection = -90
 	
 	if Input.is_action_just_pressed("move_right"):
-		moving = true
-		direction = 90
+		newdirection = 90
 	
-	# Moving across the path
-	if moving:
+	var rndx = (floor(position.x / 32) * 32) + 16
+	var rndy = (floor(position.x / 32) * 32) + 16
+	
+	# Change direction from the grid
+	if true:#position.x == rndx and position.y == rndy:
 		for child in UIHelpers.get_level().get_children():
 			if child.is_in_group("tilemap"):
 				var playerpos = child.world_to_map(UIHelpers.get_player().position)
@@ -44,6 +44,5 @@ func _process(delta):
 				
 				if tile_name == "Pathing":
 					var tile_pos = child.get_cell_autotile_coord(playerpos.x, playerpos.y)
-					
-					var up_tiles = []
-					var down_tiles = [Vector2(2,0), Vector2(3,0), Vector2(3,1), Vector2(3,2), Vector2(2,3)]
+					var bitmask = child.get_tileset().autotile_get_bitmask(tile_id, tile_pos)
+					print(bitmask)
