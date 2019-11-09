@@ -129,9 +129,10 @@ custom_constants/separation = 80
 alignment = 1
 
 [node name="OK" type="Button" parent="Popup/Panel/HBoxContainer"]
-margin_left = 101.0
-margin_right = 139.0
+margin_left = 91.0
+margin_right = 129.0
 margin_bottom = 32.0
+rect_min_size = Vector2( 38, 0 )
 focus_mode = 0
 enabled_focus_mode = 0
 text = "OK"
@@ -140,6 +141,7 @@ text = "OK"
 margin_left = 209.0
 margin_right = 298.0
 margin_bottom = 32.0
+rect_min_size = Vector2( 89, 0 )
 focus_mode = 0
 enabled_focus_mode = 0
 text = "Cancel"
