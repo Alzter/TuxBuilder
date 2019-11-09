@@ -17,4 +17,5 @@ func get_editor():
 
 func file_dialog():
 	var dialog = load("res://Scenes/UI/FileSelect.tscn").instance()
+	dialog.set_name("FileSelect")
 	_get_scene().add_child(dialog)

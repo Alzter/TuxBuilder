@@ -136,4 +136,5 @@ margin_left = 209.0
 margin_right = 288.0
 margin_bottom = 32.0
 text = "Cancel"
+[connection signal="pressed" from="Popup/Panel/HBoxContainer/OK" to="." method="_on_OK_pressed"]
 [connection signal="pressed" from="Popup/Panel/HBoxContainer/Cancel" to="." method="_on_Cancel_pressed"]

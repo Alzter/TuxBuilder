@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/UI/UITheme.tres" type="Theme" id=1]
 [ext_resource path="res://Fonts/SuperTux-Medium.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Scenes/Editor/FileSelectButton.gd" type="Script" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=2]
 
 [sub_resource type="DynamicFont" id=1]
 size = 17
@@ -18,8 +21,13 @@ margin_right = 374.0
 margin_bottom = 24.0
 focus_mode = 1
 theme = ExtResource( 1 )
+custom_styles/hover = SubResource( 2 )
 custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
 toggle_mode = true
 shortcut_in_tooltip = false
+action_mode = 0
 enabled_focus_mode = 1
 text = "File"
+script = ExtResource( 3 )
+[connection signal="pressed" from="." to="." method="_on_Button_pressed"]
