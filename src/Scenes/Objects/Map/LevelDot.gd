@@ -17,4 +17,5 @@ func _on_Button_pressed():
 
 func _on_Load_pressed():
 	$CanvasLayer/Popup.hide()
-	UIHelpers.file_dialog()
+	UIHelpers.file_dialog("res://Scenes//Levels/")
+	

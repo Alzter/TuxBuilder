@@ -387,7 +387,6 @@ anims/MoveIn = SubResource( 1 )
 anims/MoveOut = SubResource( 2 )
 
 [node name="SideBar" type="ColorRect" parent="UI"]
-editor/display_folded = true
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -773,7 +772,7 @@ custom_constants/separation = 6
 
 [node name="Label" type="Label" parent="UI/AddLayer/VBoxContainer"]
 margin_right = 218.0
-margin_bottom = 24.0
+margin_bottom = 20.0
 custom_colors/font_color = Color( 0, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
@@ -782,21 +781,21 @@ text = "Add layer"
 align = 1
 
 [node name="Line" type="TextureRect" parent="UI/AddLayer/VBoxContainer"]
-margin_top = 30.0
+margin_top = 26.0
 margin_right = 218.0
-margin_bottom = 32.0
+margin_bottom = 28.0
 rect_min_size = Vector2( 0, 2 )
 texture = ExtResource( 9 )
 expand = true
 
 [node name="Name" type="HSplitContainer" parent="UI/AddLayer/VBoxContainer"]
-margin_top = 38.0
+margin_top = 34.0
 margin_right = 218.0
-margin_bottom = 62.0
+margin_bottom = 54.0
 
 [node name="Label2" type="Label" parent="UI/AddLayer/VBoxContainer/Name"]
 margin_right = 65.0
-margin_bottom = 24.0
+margin_bottom = 20.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
@@ -806,26 +805,26 @@ align = 1
 [node name="LineEdit" type="LineEdit" parent="UI/AddLayer/VBoxContainer/Name"]
 margin_left = 77.0
 margin_right = 218.0
-margin_bottom = 24.0
+margin_bottom = 20.0
 rect_min_size = Vector2( 140, 0 )
 text = "Layer"
 
 [node name="Line3" type="TextureRect" parent="UI/AddLayer/VBoxContainer"]
-margin_top = 68.0
+margin_top = 60.0
 margin_right = 218.0
-margin_bottom = 70.0
+margin_bottom = 62.0
 rect_min_size = Vector2( 0, 2 )
 texture = ExtResource( 9 )
 expand = true
 
 [node name="Zaxis" type="HSplitContainer" parent="UI/AddLayer/VBoxContainer"]
-margin_top = 76.0
+margin_top = 68.0
 margin_right = 218.0
-margin_bottom = 100.0
+margin_bottom = 88.0
 
 [node name="Label2" type="Label" parent="UI/AddLayer/VBoxContainer/Zaxis"]
 margin_right = 78.0
-margin_bottom = 24.0
+margin_bottom = 20.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
@@ -835,24 +834,24 @@ align = 1
 [node name="SpinBox" type="SpinBox" parent="UI/AddLayer/VBoxContainer/Zaxis"]
 margin_left = 90.0
 margin_right = 218.0
-margin_bottom = 24.0
+margin_bottom = 20.0
 min_value = -4096.0
 max_value = 4096.0
 rounded = true
 align = 2
 
 [node name="Line2" type="TextureRect" parent="UI/AddLayer/VBoxContainer"]
-margin_top = 106.0
+margin_top = 94.0
 margin_right = 218.0
-margin_bottom = 108.0
+margin_bottom = 96.0
 rect_min_size = Vector2( 0, 2 )
 texture = ExtResource( 9 )
 expand = true
 
 [node name="Label3" type="Label" parent="UI/AddLayer/VBoxContainer"]
-margin_top = 114.0
+margin_top = 102.0
 margin_right = 218.0
-margin_bottom = 138.0
+margin_bottom = 122.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
@@ -860,9 +859,9 @@ text = "Layer type:"
 align = 1
 
 [node name="OptionButton" type="OptionButton" parent="UI/AddLayer/VBoxContainer"]
-margin_top = 144.0
+margin_top = 128.0
 margin_right = 218.0
-margin_bottom = 168.0
+margin_bottom = 148.0
 
 [node name="LayerConfirmation" type="Button" parent="UI/AddLayer"]
 anchor_top = 1.0
@@ -1045,9 +1044,9 @@ margin_bottom = 74.0
 rect_min_size = Vector2( 0, 32 )
 
 [node name="Label" type="Label" parent="Settings/Popup/Panel/VBoxContainer/Name"]
-margin_top = 4.0
+margin_top = 6.0
 margin_right = 136.0
-margin_bottom = 28.0
+margin_bottom = 26.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
@@ -1068,9 +1067,9 @@ margin_bottom = 110.0
 rect_min_size = Vector2( 0, 32 )
 
 [node name="Label" type="Label" parent="Settings/Popup/Panel/VBoxContainer/Creator"]
-margin_top = 4.0
+margin_top = 6.0
 margin_right = 169.0
-margin_bottom = 28.0
+margin_bottom = 26.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
@@ -1090,9 +1089,9 @@ margin_bottom = 146.0
 rect_min_size = Vector2( 0, 32 )
 
 [node name="Label2" type="Label" parent="Settings/Popup/Panel/VBoxContainer/Music"]
-margin_top = 4.0
+margin_top = 6.0
 margin_right = 137.0
-margin_bottom = 28.0
+margin_bottom = 26.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2

@@ -1,14 +1,17 @@
 extends CanvasLayer
 
-var directory = "res://Scenes//Levels"
+var directory = null
 var dir = Directory.new()
 var selectedfile = null
+var selectdir = null
 
 func _ready():
 	$Popup.popup()
 	reload()
 
 func _process(delta):
+	if $Popup.visible == false:
+		queue_free()
 	UIHelpers.get_editor().clickdisable = true
 	for child in $Popup/Panel/VBoxContainer/ScrollContainer/Files.get_children():
 		if selectedfile == child.text:
@@ -16,10 +19,17 @@ func _process(delta):
 		else: child.pressed = false
 
 func reload():
+	
+	# Make sure directory ends in /
+	if !directory.ends_with("/"):
+		directory = str(directory, "/")
+	
+	selectedfile = null # Clear selected file
+	
 	# Delete existing children
 	for child in $Popup/Panel/VBoxContainer/ScrollContainer/Files.get_children():
 		child.queue_free()
-	
+		
 	$Popup/Panel/VBoxContainer/TopBar/DirectoryName.text = directory # Update top text
 	
 	# Get all the files in the directory, then add each as a button node
@@ -28,6 +38,17 @@ func reload():
 		var child = load("res://Scenes/Editor/FileSelectButton.tscn").instance()
 		child.text = file
 		$Popup/Panel/VBoxContainer/ScrollContainer/Files.add_child(child)
+
+func _on_Back_pressed():
+	var dir2 = directory.trim_suffix("/")
+	var end = dir2.rfind("/")
+	dir2.erase(end, dir2.length() - end)
+	if dir2.length() > 1:
+		directory = dir2
+	reload()
+
+func _on_Reload_pressed():
+	reload()
 
 func _on_OK_pressed():
 	queue_free()
