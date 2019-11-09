@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/UI/UITheme.tres" type="Theme" id=1]
+[ext_resource path="res://Fonts/SuperTux-Medium.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 17
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
+extra_spacing_top = 6
+extra_spacing_char = -1
+font_data = ExtResource( 2 )
+
+[node name="Button" type="Button"]
+margin_right = 374.0
+margin_bottom = 24.0
+focus_mode = 1
+theme = ExtResource( 1 )
+custom_fonts/font = SubResource( 1 )
+toggle_mode = true
+shortcut_in_tooltip = false
+enabled_focus_mode = 1
+text = "File"

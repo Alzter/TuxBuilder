@@ -28,12 +28,12 @@ corner_radius_bottom_left = 12
 [sub_resource type="ImageTexture" id=7]
 
 [sub_resource type="StyleBoxFlat" id=8]
-bg_color = Color( 0.443137, 0.521569, 0.603922, 0.8 )
+bg_color = Color( 0.39, 0.5, 0.57, 0.9 )
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
 border_width_bottom = 4
-border_color = Color( 0.207843, 0.282353, 0.380392, 1 )
+border_color = Color( 0.16, 0.28, 0.4, 0.8 )
 corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
@@ -77,25 +77,13 @@ corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxEmpty" id=17]
 
-[sub_resource type="StyleBoxFlat" id=18]
-content_margin_left = 0.0
-content_margin_right = 0.0
-bg_color = Color( 0.419608, 0.521569, 0.619608, 1 )
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color( 0.243137, 0.333333, 0.447059, 1 )
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-
 [sub_resource type="ImageTexture" id=19]
 
 [sub_resource type="StyleBoxFlat" id=20]
 bg_color = Color( 1, 1, 1, 0 )
 draw_center = false
+
+[sub_resource type="StyleBoxFlat" id=22]
 
 [sub_resource type="DynamicFont" id=21]
 size = 18
@@ -119,10 +107,6 @@ Button/styles/focus = SubResource( 2 )
 Button/styles/hover = SubResource( 3 )
 Button/styles/normal = SubResource( 2 )
 Button/styles/pressed = SubResource( 3 )
-FileDialog/colors/files_disabled = Color( 0, 0, 0, 0.7 )
-FileDialog/icons/folder = null
-FileDialog/icons/parent_folder = null
-FileDialog/icons/reload = null
 LineEdit/colors/clear_button_color = Color( 0.878431, 0.878431, 0.878431, 1 )
 LineEdit/colors/clear_button_color_pressed = Color( 1, 1, 1, 1 )
 LineEdit/colors/cursor_color = Color( 0.941176, 0.941176, 0.941176, 1 )
@@ -169,7 +153,7 @@ PopupMenu/styles/labeled_separator_right = SubResource( 15 )
 PopupMenu/styles/panel = SubResource( 16 )
 PopupMenu/styles/panel_disabled = SubResource( 17 )
 PopupMenu/styles/separator = SubResource( 15 )
-PopupPanel/styles/panel = SubResource( 18 )
+PopupPanel/styles/panel = SubResource( 8 )
 SpinBox/icons/updown = SubResource( 19 )
 ToolButton/colors/font_color = Color( 1, 1, 1, 1 )
 ToolButton/colors/font_color_disabled = Color( 0.403922, 0.403922, 0.403922, 1 )
@@ -182,3 +166,4 @@ ToolButton/styles/focus = SubResource( 20 )
 ToolButton/styles/hover = SubResource( 20 )
 ToolButton/styles/normal = SubResource( 20 )
 ToolButton/styles/pressed = SubResource( 20 )
+TooltipPanel/styles/panel = SubResource( 22 )

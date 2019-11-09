@@ -1,26 +1,127 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/Objects/Map/LevelDot.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/Worldmap/LevelDot/leveldot_green.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/Worldmap/LevelDot/leveldot_red.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/UI/UITheme.tres" type="Theme" id=2]
+[ext_resource path="res://Sprites/Editor/Line.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Worldmap/LevelDot/leveldot_green.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Worldmap/LevelDot/leveldot_red.png" type="Texture" id=5]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 2 ) ],
+"frames": [ ExtResource( 4 ) ],
 "loop": true,
 "name": "clear",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 3 ) ],
+"frames": [ ExtResource( 5 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
 } ]
 
 [node name="LevelDot" type="Node2D" groups=[
+"popup",
 "leveldot",
 ]]
 script = ExtResource( 1 )
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 6
+
+[node name="Popup" type="Popup" parent="CanvasLayer"]
+visible = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -115.0
+margin_top = -115.0
+margin_right = 115.0
+margin_bottom = 115.0
+theme = ExtResource( 2 )
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Popup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Popup/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -38.0
+
+[node name="Label" type="Label" parent="CanvasLayer/Popup/Panel/VBoxContainer"]
+margin_right = 214.0
+margin_bottom = 20.0
+custom_colors/font_color = Color( 0, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+text = "Level Properties"
+align = 1
+valign = 1
+
+[node name="Line2" type="TextureRect" parent="CanvasLayer/Popup/Panel/VBoxContainer"]
+margin_top = 24.0
+margin_right = 214.0
+margin_bottom = 26.0
+rect_min_size = Vector2( 0, 2 )
+texture = ExtResource( 3 )
+expand = true
+
+[node name="Load" type="Button" parent="CanvasLayer/Popup/Panel/VBoxContainer"]
+margin_top = 30.0
+margin_right = 214.0
+margin_bottom = 50.0
+text = "Level to load"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Popup/Panel/VBoxContainer"]
+margin_top = 54.0
+margin_right = 214.0
+margin_bottom = 74.0
+custom_constants/separation = 16
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/Popup/Panel/VBoxContainer/HBoxContainer"]
+margin_left = 34.0
+margin_right = 148.0
+margin_bottom = 20.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+text = "Auto play"
+
+[node name="CheckBox" type="CheckBox" parent="CanvasLayer/Popup/Panel/VBoxContainer/HBoxContainer"]
+margin_left = 164.0
+margin_right = 180.0
+margin_bottom = 20.0
+focus_mode = 1
+action_mode = 0
+enabled_focus_mode = 1
+align = 1
+
+[node name="Button" type="Button" parent="CanvasLayer/Popup/Panel"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -36.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 0, 32 )
+focus_mode = 1
+action_mode = 0
+enabled_focus_mode = 1
+text = "OK"
+
+[node name="Line" type="TextureRect" parent="CanvasLayer/Popup/Panel/Button"]
+anchor_right = 1.0
+margin_top = -2.0
+rect_min_size = Vector2( 0, 2 )
+texture = ExtResource( 3 )
+expand = true
+
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
+[connection signal="pressed" from="CanvasLayer/Popup/Panel/VBoxContainer/Load" to="." method="_on_Load_pressed"]
+[connection signal="pressed" from="CanvasLayer/Popup/Panel/Button" to="." method="_on_Button_pressed"]

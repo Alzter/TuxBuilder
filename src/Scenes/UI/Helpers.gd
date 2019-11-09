@@ -14,3 +14,7 @@ func get_level():
 
 func get_editor():
 	return _get_scene().get_node("Editor")
+
+func file_dialog():
+	var dialog = load("res://Scenes/UI/FileSelect.tscn").instance()
+	_get_scene().add_child(dialog)

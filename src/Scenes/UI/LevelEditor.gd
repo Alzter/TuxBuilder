@@ -174,15 +174,15 @@ func _process(_delta):
 		$UI/SideBar/VBoxContainer/HBoxContainer/SelectButton.disabled = false
 		$UI/SideBar/VBoxContainer/HBoxContainer/SelectButton/TextureRect.self_modulate = Color(1,1,1,1)
 	
-	# Click disable
-	if not Input.is_action_pressed("click_left"):
-		clickdisable = false
-	
 	# Placing tiles / objects
 	if layer_selected_type == "TileMap" and category_selected == "Tiles":
 		tile_selected = layerfile.world_to_map(Vector2(get_global_mouse_position().x - ((1 - layerfile.scroll_speed.x) * UIHelpers.get_camera().position.x), get_global_mouse_position().y - ((1 - layerfile.scroll_speed.y) * UIHelpers.get_camera().position.y)))
 	else: tile_selected = tilemap.world_to_map(get_global_mouse_position())
 	update_selected_tile()
+	
+	# Click disable
+	if not Input.is_action_pressed("click_left"):
+		clickdisable = false
 	
 	# Drag the player
 	if player_hovered and Input.is_action_just_pressed("click_left") and !dragging_object and !expanding:
@@ -208,6 +208,9 @@ func _process(_delta):
 							child.scale += Vector2(0.25,0.25)
 							dragpos = Vector2(0,0)
 							return
+						if Input.is_action_just_pressed("click_right") and child.is_in_group("popup"):
+							child.get_node("CanvasLayer/Popup").popup()
+							clickdisable = true
 	
 	# If clicking on an expandable area, drag it
 	if !clickdisable and !object_hovered and not($GrabArea/C1.is_hovered()) and not($GrabArea/C2.is_hovered()) and not($GrabArea/C3.is_hovered()) and not($GrabArea/C4.is_hovered()) and $UI/SideBar/VBoxContainer/HBoxContainer/EraserButton.pressed == false and !dragging_object and !expanding:
@@ -433,7 +436,9 @@ func update_selected_tile():
 	$SelectedTile.region_enabled = false
 	player_hovered = false
 	
-	if not (get_viewport().get_mouse_position().x < get_viewport().size.x - 128 and get_viewport().get_mouse_position().y < get_viewport().size.y - 64):
+	if clickdisable or not (get_viewport().get_mouse_position().x < get_viewport().size.x - 128 and get_viewport().get_mouse_position().y < get_viewport().size.y - 64):
+		if clickdisable:
+			$SelectedTile.visible = false
 		return
 	
 	if layer_selected_type != "TileMap" and category_selected == "Tiles":
