@@ -4,7 +4,9 @@ var editmode = false
 var editsaved = false # Using an edited version of a level
 var can_edit = true
 var current_level = ""
-var player_position = Vector2(0,0)
+var player_position = Vector2()
+var player_position_map = Vector2() # If the player entered the level from the map
+var map_camera = Vector2() # The worldmap's camera position
 var level_bound_left = 0
 var level_bound_right = 0
 var level_bound_bottom = 0
@@ -59,6 +61,22 @@ func _process(_delta):
 		$Camera2D.smoothing_enabled = false
 		$Camera2D.smoothing_speed = 10
 		camera_smooth_time = 0
+
+func load_level_from_map(level):
+	camera_zoom = 1
+	camera_zoom_speed = 1
+	editmode = false
+	player_position_map = UIHelpers.get_player().position
+	map_camera = UIHelpers.get_camera().position
+	$CanvasLayer/AnimationPlayer.play("Circle Out")
+	yield(get_node("CanvasLayer/AnimationPlayer"), "animation_finished")
+	clear_ui()
+	clear_player()
+	clear_level()
+	load_level(level)
+	load_ui()
+	load_player()
+	$CanvasLayer/AnimationPlayer.play("Circle In")
 
 func restart_level():
 	camera_zoom = 1
@@ -200,6 +218,8 @@ func editmode_toggle():
 	if $CanvasLayer/AnimationPlayer.is_playing() == false and can_edit == true:
 		if editmode == false:
 			editmode = true
+			# Store if the previous level was a worldmap
+			var prevworldmap = UIHelpers.get_level().worldmap
 			player_position = UIHelpers.get_player().position
 			clear_ui()
 			clear_player()
@@ -208,7 +228,14 @@ func editmode_toggle():
 				load_level(current_level)
 			else: load_edited_level()
 			load_player()
-			UIHelpers.get_player().position = player_position
+			
+			# Only move the player if the current level is the same type as the previous
+			if UIHelpers.get_level().worldmap == prevworldmap:
+				UIHelpers.get_player().position = player_position
+			else:
+				UIHelpers.get_player().position = player_position_map
+				UIHelpers.get_camera().position = map_camera
+			
 		elif get_node("Editor").dragging_object == false:
 			editmode = false
 			camera_smooth_time = 20

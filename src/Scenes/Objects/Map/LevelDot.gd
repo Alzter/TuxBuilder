@@ -35,12 +35,7 @@ func _process(delta):
 	if !UIHelpers._get_scene().editmode and UIHelpers.get_player().position == position: # Level hovered
 		$CanvasLayer/BottomName.show()
 		if level != "" and (Input.is_action_just_pressed("jump") or (autoplay and !cleared)): # Play level
-			play()
-
-func play(): # Play the level
-	get_tree().current_scene.get_node("CanvasLayer/AnimationPlayer").play("Circle Out")
-	yield(get_tree().current_scene.get_node("CanvasLayer/AnimationPlayer"), "animation_finished")
-	
+			UIHelpers._get_scene().load_level_from_map(level)
 
 func _on_Button_pressed():
 	$CanvasLayer/Popup.hide()

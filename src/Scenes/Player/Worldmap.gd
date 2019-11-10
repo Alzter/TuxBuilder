@@ -17,6 +17,11 @@ func _ready():
 	for child in get_tree().current_scene.get_node("Level").get_children():
 		if child.is_in_group("spawnpoint"):
 			position = child.position
+	
+	# The player needs to be on a grid space to move
+	var rndx = (floor(position.x / 32) * 32) + 16
+	var rndy = (floor(position.y / 32) * 32) + 16
+	position = Vector2(rndx,rndy) 
 
 func _process(delta):
 	if UIHelpers._get_scene().editmode:
