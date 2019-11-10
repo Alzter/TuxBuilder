@@ -109,7 +109,7 @@ func _process(_delta):
 	
 	
 	# Editor settings menu
-	if Input.is_action_just_pressed("pause"):
+	if Input.is_action_just_pressed("pause") and !clickdisable:
 		if $Settings/Popup.visible:
 			$Settings/Popup.hide()
 		else:

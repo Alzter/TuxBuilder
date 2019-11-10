@@ -58,7 +58,8 @@ func _on_Load_pressed():
 		var selectdir = UIHelpers._get_scene().get_node("FileSelect").selectdir
 		if ".tscn" in selectdir:
 			if load(selectdir).instance().get("level_name") != null:
-				$DisplayName.text = load(selectdir).instance().level_name
+				level = selectdir
+				$DisplayName.text = load(level).instance().level_name
 				$CanvasLayer/Popup.popup()
 			
 			else:
