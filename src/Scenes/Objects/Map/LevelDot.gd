@@ -48,18 +48,12 @@ func _on_Load_pressed():
 	
 	# After exiting the file select, attempt to load the level if "OK" was pressed
 	if UIHelpers._get_scene().get_node("FileSelect").cancel == false:
-		
-		# Make sure the level is valid by checking its filetype and if it has a level name (utterly foolproof)
 		var selectdir = UIHelpers._get_scene().get_node("FileSelect").selectdir
-		if ".tscn" in selectdir:
-			if load(selectdir).instance().get("level_name") != null:
-				level = selectdir
-				$DisplayName.text = load(level).instance().level_name
-				$CanvasLayer/Popup.popup()
-			
-			else:
-				$CanvasLayer/Error.popup()
-		
+		# Pass to Gameplay.gd to check if the level is valid
+		if UIHelpers._get_scene().check_level_valid(selectdir) == true:
+			level = selectdir
+			$DisplayName.text = load(level).instance().level_name
+			$CanvasLayer/Popup.popup()
 		else:
 			$CanvasLayer/Error.popup()
 	

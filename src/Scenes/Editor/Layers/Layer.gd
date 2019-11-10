@@ -19,8 +19,8 @@ func _process(delta):
 	
 	# Hide unselected TileMaps if a TileMap is selected
 	if get_tree().current_scene.editmode == true and get_class() == "TileMap":
-		if get_tree().current_scene.get_node("Editor").layer_selected_type == "TileMap":
-			if get_tree().current_scene.get_node("Editor").layer_selected != name:
+		if UIHelpers.get_editor().layer_selected_type == "TileMap":
+			if UIHelpers.get_editor().layer_selected != name:
 				modulate *= Color(1,1,1,0.25)
 	
 	# Scrolling

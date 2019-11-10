@@ -115,15 +115,17 @@ func open_level():
 	
 	yield(UIHelpers._get_scene().get_node("FileSelect"), "tree_exiting")
 	var selectdir = UIHelpers._get_scene().get_node("FileSelect").selectdir
-	
-	camera_zoom = 1
-	camera_zoom_speed = 1
-	clear_ui()
-	clear_player()
-	clear_level()
-	load_level(selectdir)
-	load_ui()
-	load_player()
+	if check_level_valid(selectdir) == true:
+		camera_zoom = 1
+		camera_zoom_speed = 1
+		editsaved = false
+		clear_level()
+		clear_player()
+		load_level(selectdir)
+		load_player()
+		yield(UIHelpers.get_level(), "ready")
+		yield(UIHelpers.get_player(), "ready")
+		UIHelpers.get_editor()._ready()
 
 func save_level():
 	var packed_scene = PackedScene.new()
@@ -189,10 +191,9 @@ func load_ui():
 	_load_node("res://Scenes/UI/LevelUI.tscn", "LevelUI")
 
 func _load_node(scene_path, node_name):
-	var scene = load(scene_path)
-	var scene_instance = scene.instance()
-	scene_instance.set_name(node_name)
-	add_child(scene_instance)
+	var scene = load(scene_path).instance()
+	scene.set_name(node_name)
+	add_child(scene)
 
 func _clear_node(node_name):
 	var node = get_node(node_name)
@@ -293,3 +294,11 @@ func editmode_toggle():
 				load_level(current_level)
 			else: load_edited_level()
 			load_ui()
+
+# Make sure a level is valid by checking its filetype and if it has a level name (utterly foolproof)
+func check_level_valid(dir):
+	if ".tscn" in dir:
+		if load(dir).instance().get("level_name") != null:
+			return true
+		else: return false
+	else: return false

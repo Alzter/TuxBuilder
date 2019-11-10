@@ -61,11 +61,15 @@ func _ready():
 	select_first_solid_tilemap()
 
 func _process(_delta):
-	layerfile = get_tree().current_scene.get_node(str("Level/", layer_selected))
+	layerfile = UIHelpers.get_level().get_node(layer_selected)
 	if layerfile == null:
 		layer_selected == ""
 		layer_selected_type = ""
+		$SelectedArea.visible = false
+		$EraserSprite.visible = false
+		$SelectedTile.visible = false
 		print("ERROR! There is no level loaded!")
+		return
 	
 	if stop == true:
 		$SelectedArea.visible = false
@@ -106,7 +110,6 @@ func _process(_delta):
 			$UI/AnimationPlayer.play("MoveIn")
 		visible = true
 		$UI.offset = Vector2(0,0)
-	
 	
 	# Editor settings menu
 	if Input.is_action_just_pressed("pause") and !clickdisable:
@@ -758,6 +761,7 @@ func _on_LevelSaveAs_pressed():
 	UIHelpers._get_scene().save_level_as()
 
 func _on_LevelOpen_pressed():
+	$Menu/Editor.hide()
 	UIHelpers._get_scene().open_level()
 
 func _on_LevelProperties_pressed():

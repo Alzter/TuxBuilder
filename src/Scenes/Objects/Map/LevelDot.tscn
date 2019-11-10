@@ -4,8 +4,8 @@
 [ext_resource path="res://Scenes/UI/UITheme.tres" type="Theme" id=2]
 [ext_resource path="res://Sprites/Editor/Line.png" type="Texture" id=3]
 [ext_resource path="res://Fonts/SuperTux-Medium.ttf" type="DynamicFontData" id=4]
-[ext_resource path="res://Sprites/Worldmap/LevelDot/leveldot_red.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/Worldmap/LevelDot/leveldot_green.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Worldmap/LevelDot/leveldot_green.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Worldmap/LevelDot/leveldot_red.png" type="Texture" id=6]
 [ext_resource path="res://Sprites/Worldmap/LevelDot/leveldot_invisible.png" type="Texture" id=7]
 
 [sub_resource type="DynamicFont" id=1]
@@ -21,12 +21,12 @@ font_data = ExtResource( 4 )
 animations = [ {
 "frames": [ ExtResource( 5 ) ],
 "loop": true,
-"name": "default",
+"name": "clear",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 6 ) ],
 "loop": true,
-"name": "clear",
+"name": "default",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 7 ) ],
