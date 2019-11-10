@@ -12,11 +12,12 @@ var level_bound_top = 0
 var camera_smooth_time = 0
 var camera_zoom = 1
 var camera_zoom_speed = 20
+var worldmap = "" # The worldmap you started in
 
 func _ready():
 	editmode = false
 	editsaved = false
-	load_map("Main")
+	load_level("res://Scenes//Worldmaps//Main.tscn")
 	load_player()
 	load_editor()
 	load_ui()
@@ -87,24 +88,18 @@ func save_edited_level():
 	editsaved = true
 
 func load_edited_level():
-	load_level("EditedLevel/EditedLevel")
+	load_level("user://Scenes/Levels/EditedLevel/EditedLevel.tscn")
 
 func load_level(level):
-	current_level = str(level)
+	current_level = level
 	var directory = Directory.new()
-	var scene
-	if directory.file_exists(str("user://Scenes/Levels/", level ,".tscn")):
-		scene = load(str("user://Scenes/Levels/", level ,".tscn"))
-	else:
-		scene = load(str("res://Scenes/Levels/", level ,".tscn"))
-	
-	var scene_instance = scene.instance()
-	scene_instance.set_name("Level")
-	add_child(scene_instance)
-	level_to_grid()
-
-func load_map(map):
-	load_level(str("../Worldmaps/", map))
+	if directory.file_exists(level):
+		var levelinstance = load(level).instance()
+		if levelinstance.worldmap:
+			worldmap = level
+		levelinstance.set_name("Level")
+		add_child(levelinstance)
+		level_to_grid()
 
 func level_to_grid():
 	for child in get_tree().current_scene.get_node("Level").get_children():

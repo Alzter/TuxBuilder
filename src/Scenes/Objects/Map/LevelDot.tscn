@@ -4,11 +4,11 @@
 [ext_resource path="res://Scenes/UI/UITheme.tres" type="Theme" id=2]
 [ext_resource path="res://Sprites/Editor/Line.png" type="Texture" id=3]
 [ext_resource path="res://Fonts/SuperTux-Medium.ttf" type="DynamicFontData" id=4]
-[ext_resource path="res://Sprites/Worldmap/LevelDot/leveldot_green.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/Worldmap/LevelDot/leveldot_red.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Worldmap/LevelDot/leveldot_red.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Worldmap/LevelDot/leveldot_green.png" type="Texture" id=6]
 [ext_resource path="res://Sprites/Worldmap/LevelDot/leveldot_invisible.png" type="Texture" id=7]
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=1]
 size = 18
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
@@ -17,16 +17,16 @@ use_filter = true
 extra_spacing_top = 2
 font_data = ExtResource( 4 )
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="SpriteFrames" id=2]
 animations = [ {
 "frames": [ ExtResource( 5 ) ],
 "loop": true,
-"name": "clear",
+"name": "default",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 6 ) ],
 "loop": true,
-"name": "default",
+"name": "clear",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 7 ) ],
@@ -35,7 +35,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 size = 12
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
@@ -66,6 +66,7 @@ margin_bottom = 115.0
 theme = ExtResource( 2 )
 
 [node name="Panel" type="Panel" parent="CanvasLayer/Popup"]
+editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -174,18 +175,68 @@ rect_min_size = Vector2( 0, 2 )
 texture = ExtResource( 3 )
 expand = true
 
+[node name="Error" type="Popup" parent="CanvasLayer"]
+visible = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -115.0
+margin_top = -40.0
+margin_right = 115.0
+margin_bottom = 40.0
+theme = ExtResource( 2 )
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Error"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Label" type="Label" parent="CanvasLayer/Error/Panel"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -107.0
+margin_top = 12.0
+margin_right = 107.0
+margin_bottom = 32.0
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+text = "Invalid Level!"
+align = 1
+valign = 1
+
+[node name="ErrorButton" type="Button" parent="CanvasLayer/Error/Panel"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -36.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 0, 32 )
+focus_mode = 1
+action_mode = 0
+enabled_focus_mode = 1
+text = "OK"
+
+[node name="Line" type="TextureRect" parent="CanvasLayer/Error/Panel/ErrorButton"]
+anchor_right = 1.0
+margin_top = -2.0
+rect_min_size = Vector2( 0, 2 )
+texture = ExtResource( 3 )
+expand = true
+
 [node name="BottomName" type="Label" parent="CanvasLayer"]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -30.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 0.6, 1 )
 text = "No Level Assigned"
 align = 1
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-frames = SubResource( 1 )
+frames = SubResource( 2 )
 
 [node name="DisplayName" type="Label" parent="."]
 anchor_left = 0.5
@@ -195,7 +246,7 @@ anchor_bottom = 1.0
 margin_left = -92.5
 margin_top = -43.0
 margin_right = 92.5
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 1, 1, 0.6, 1 )
 text = "No Level Assigned"
 align = 1
@@ -204,3 +255,4 @@ autowrap = true
 clip_text = true
 [connection signal="pressed" from="CanvasLayer/Popup/Panel/VBoxContainer/Load" to="." method="_on_Load_pressed"]
 [connection signal="pressed" from="CanvasLayer/Popup/Panel/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Error/Panel/ErrorButton" to="." method="_on_ErrorButton_pressed"]
