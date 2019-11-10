@@ -103,12 +103,42 @@ func restart_level():
 	clear_ui()
 	clear_player()
 	clear_level()
-	if editsaved == false or (worldmap != "" and current_level != worldmap):
+	if !editsaved or (worldmap != "" and current_level != worldmap):
 		load_level(current_level)
 	else: load_edited_level()
 	load_ui()
 	load_player()
 	$CanvasLayer/AnimationPlayer.play("Circle In")
+
+func open_level():
+	UIHelpers.file_dialog("res://Scenes//Levels/") # Bring up file select
+	
+	yield(UIHelpers._get_scene().get_node("FileSelect"), "tree_exiting")
+	var selectdir = UIHelpers._get_scene().get_node("FileSelect").selectdir
+	
+	camera_zoom = 1
+	camera_zoom_speed = 1
+	clear_ui()
+	clear_player()
+	clear_level()
+	load_level(selectdir)
+	load_ui()
+	load_player()
+
+func save_level():
+	var packed_scene = PackedScene.new()
+	packed_scene.pack(get_tree().get_current_scene().get_node("Level"))
+	ResourceSaver.save(current_level, packed_scene)
+
+func save_level_as():
+	UIHelpers.file_dialog("res://Scenes//Levels/") # Bring up file select
+	
+	yield(UIHelpers._get_scene().get_node("FileSelect"), "tree_exiting")
+	var selectdir = UIHelpers._get_scene().get_node("FileSelect").selectdir
+	
+	var packed_scene = PackedScene.new()
+	packed_scene.pack(get_tree().get_current_scene().get_node("Level"))
+	ResourceSaver.save(selectdir, packed_scene)
 
 func save_edited_level():
 	var packed_scene = PackedScene.new()

@@ -748,6 +748,7 @@ expand = true
 stretch_mode = 6
 
 [node name="AddLayer" type="Popup" parent="UI"]
+editor/display_folded = true
 visible = true
 anchor_bottom = 1.0
 margin_left = 2.0
@@ -987,28 +988,113 @@ texture_pressed = ExtResource( 17 )
 texture_hover = ExtResource( 18 )
 expand = true
 
-[node name="Settings" type="CanvasLayer" parent="."]
-editor/display_folded = true
+[node name="Menu" type="CanvasLayer" parent="."]
 layer = 4
 
-[node name="Popup" type="Popup" parent="Settings"]
+[node name="Editor" type="Popup" parent="Menu"]
 visible = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -230.0
-margin_top = -210.0
-margin_right = 230.0
-margin_bottom = 210.0
+margin_left = -179.0
+margin_top = -138.5
+margin_right = 179.0
+margin_bottom = 138.5
 theme = ExtResource( 7 )
 
-[node name="Panel" type="Panel" parent="Settings/Popup"]
-editor/display_folded = true
+[node name="Panel" type="Panel" parent="Menu/Editor"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Settings/Popup/Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/Editor/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -8.0
+
+[node name="Label" type="Label" parent="Menu/Editor/Panel/VBoxContainer"]
+margin_right = 342.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 0, 32 )
+custom_colors/font_color = Color( 0, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+text = "Level Editor"
+align = 1
+valign = 1
+
+[node name="Line" type="TextureRect" parent="Menu/Editor/Panel/VBoxContainer"]
+margin_top = 36.0
+margin_right = 342.0
+margin_bottom = 38.0
+rect_min_size = Vector2( 0, 2 )
+texture = ExtResource( 9 )
+expand = true
+
+[node name="Return" type="Button" parent="Menu/Editor/Panel/VBoxContainer"]
+margin_top = 42.0
+margin_right = 342.0
+margin_bottom = 74.0
+rect_min_size = Vector2( 0, 32 )
+text = "Return to Editor"
+
+[node name="LevelSave" type="Button" parent="Menu/Editor/Panel/VBoxContainer"]
+margin_top = 78.0
+margin_right = 342.0
+margin_bottom = 110.0
+rect_min_size = Vector2( 0, 32 )
+text = "Save the level"
+
+[node name="LevelSaveAs" type="Button" parent="Menu/Editor/Panel/VBoxContainer"]
+margin_top = 114.0
+margin_right = 342.0
+margin_bottom = 146.0
+rect_min_size = Vector2( 0, 32 )
+text = "Save in a new directory"
+
+[node name="LevelOpen" type="Button" parent="Menu/Editor/Panel/VBoxContainer"]
+margin_top = 150.0
+margin_right = 342.0
+margin_bottom = 182.0
+rect_min_size = Vector2( 0, 32 )
+text = "Open another level"
+
+[node name="LevelProperties" type="Button" parent="Menu/Editor/Panel/VBoxContainer"]
+margin_top = 186.0
+margin_right = 342.0
+margin_bottom = 218.0
+rect_min_size = Vector2( 0, 32 )
+text = "Level properties"
+
+[node name="ReturnMenu2" type="Button" parent="Menu/Editor/Panel/VBoxContainer"]
+margin_top = 222.0
+margin_right = 342.0
+margin_bottom = 254.0
+rect_min_size = Vector2( 0, 32 )
+text = "Exit to Menu"
+
+[node name="Settings" type="Popup" parent="Menu"]
+editor/display_folded = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -237.0
+margin_top = -99.5
+margin_right = 237.0
+margin_bottom = 99.5
+theme = ExtResource( 7 )
+
+[node name="Panel" type="Panel" parent="Menu/Settings"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/Settings/Panel"]
+editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -1016,8 +1102,8 @@ margin_top = 8.0
 margin_right = -8.0
 margin_bottom = -39.0
 
-[node name="Label" type="Label" parent="Settings/Popup/Panel/VBoxContainer"]
-margin_right = 444.0
+[node name="Label" type="Label" parent="Menu/Settings/Panel/VBoxContainer"]
+margin_right = 458.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 0, 32 )
 custom_colors/font_color = Color( 0, 1, 1, 1 )
@@ -1028,22 +1114,21 @@ text = "Level Settings"
 align = 1
 valign = 1
 
-[node name="Line" type="TextureRect" parent="Settings/Popup/Panel/VBoxContainer"]
+[node name="Line" type="TextureRect" parent="Menu/Settings/Panel/VBoxContainer"]
 margin_top = 36.0
-margin_right = 444.0
+margin_right = 458.0
 margin_bottom = 38.0
 rect_min_size = Vector2( 0, 2 )
 texture = ExtResource( 9 )
 expand = true
 
-[node name="Name" type="HSplitContainer" parent="Settings/Popup/Panel/VBoxContainer"]
-editor/display_folded = true
+[node name="Name" type="HSplitContainer" parent="Menu/Settings/Panel/VBoxContainer"]
 margin_top = 42.0
-margin_right = 444.0
+margin_right = 458.0
 margin_bottom = 74.0
 rect_min_size = Vector2( 0, 32 )
 
-[node name="Label" type="Label" parent="Settings/Popup/Panel/VBoxContainer/Name"]
+[node name="Label" type="Label" parent="Menu/Settings/Panel/VBoxContainer/Name"]
 margin_top = 6.0
 margin_right = 136.0
 margin_bottom = 26.0
@@ -1052,21 +1137,21 @@ custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
 text = "Level Name:"
 
-[node name="LevelName" type="LineEdit" parent="Settings/Popup/Panel/VBoxContainer/Name"]
+[node name="LevelName" type="LineEdit" parent="Menu/Settings/Panel/VBoxContainer/Name"]
 margin_left = 148.0
-margin_right = 444.0
+margin_right = 458.0
 margin_bottom = 32.0
 text = "SuperTux Level"
 align = 2
 
-[node name="Creator" type="HSplitContainer" parent="Settings/Popup/Panel/VBoxContainer"]
+[node name="Creator" type="HSplitContainer" parent="Menu/Settings/Panel/VBoxContainer"]
 editor/display_folded = true
 margin_top = 78.0
-margin_right = 444.0
+margin_right = 458.0
 margin_bottom = 110.0
 rect_min_size = Vector2( 0, 32 )
 
-[node name="Label" type="Label" parent="Settings/Popup/Panel/VBoxContainer/Creator"]
+[node name="Label" type="Label" parent="Menu/Settings/Panel/VBoxContainer/Creator"]
 margin_top = 6.0
 margin_right = 169.0
 margin_bottom = 26.0
@@ -1075,20 +1160,21 @@ custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
 text = "Level Creator:"
 
-[node name="LevelCreator" type="LineEdit" parent="Settings/Popup/Panel/VBoxContainer/Creator"]
+[node name="LevelCreator" type="LineEdit" parent="Menu/Settings/Panel/VBoxContainer/Creator"]
 margin_left = 181.0
-margin_right = 444.0
+margin_right = 458.0
 margin_bottom = 32.0
 text = "SuperTux Player"
 align = 2
 
-[node name="Music" type="HSplitContainer" parent="Settings/Popup/Panel/VBoxContainer"]
+[node name="Music" type="HSplitContainer" parent="Menu/Settings/Panel/VBoxContainer"]
+editor/display_folded = true
 margin_top = 114.0
-margin_right = 444.0
+margin_right = 458.0
 margin_bottom = 146.0
 rect_min_size = Vector2( 0, 32 )
 
-[node name="Label2" type="Label" parent="Settings/Popup/Panel/VBoxContainer/Music"]
+[node name="Label2" type="Label" parent="Menu/Settings/Panel/VBoxContainer/Music"]
 margin_top = 6.0
 margin_right = 137.0
 margin_bottom = 26.0
@@ -1097,19 +1183,13 @@ custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
 text = "Level Music:"
 
-[node name="OptionButton" type="OptionButton" parent="Settings/Popup/Panel/VBoxContainer/Music"]
+[node name="OptionButton" type="OptionButton" parent="Menu/Settings/Panel/VBoxContainer/Music"]
 margin_left = 149.0
-margin_right = 444.0
+margin_right = 458.0
 margin_bottom = 32.0
 
-[node name="ReturnMenu" type="Button" parent="Settings/Popup/Panel/VBoxContainer"]
-margin_top = 150.0
-margin_right = 444.0
-margin_bottom = 182.0
-rect_min_size = Vector2( 0, 32 )
-text = "Exit to Menu"
-
-[node name="SettingsConfirmation" type="Button" parent="Settings/Popup/Panel"]
+[node name="SettingsConfirmation" type="Button" parent="Menu/Settings/Panel"]
+editor/display_folded = true
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1118,7 +1198,7 @@ margin_bottom = -5.0
 rect_min_size = Vector2( 0, 32 )
 text = "OK"
 
-[node name="Line" type="TextureRect" parent="Settings/Popup/Panel/SettingsConfirmation"]
+[node name="Line" type="TextureRect" parent="Menu/Settings/Panel/SettingsConfirmation"]
 anchor_right = 1.0
 margin_top = -2.0
 margin_bottom = -12.0
@@ -1126,7 +1206,7 @@ rect_min_size = Vector2( 0, 2 )
 texture = ExtResource( 9 )
 expand = true
 
-[node name="Exit" type="Popup" parent="Settings"]
+[node name="Exit" type="Popup" parent="Menu"]
 editor/display_folded = true
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1138,11 +1218,12 @@ margin_right = 179.5
 margin_bottom = 51.0
 theme = ExtResource( 7 )
 
-[node name="Panel" type="Panel" parent="Settings/Exit"]
+[node name="Panel" type="Panel" parent="Menu/Exit"]
+editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Line" type="TextureRect" parent="Settings/Exit/Panel"]
+[node name="Line" type="TextureRect" parent="Menu/Exit/Panel"]
 visible = false
 anchor_top = 1.0
 anchor_right = 1.0
@@ -1153,16 +1234,16 @@ rect_min_size = Vector2( 0, 2 )
 texture = ExtResource( 9 )
 expand = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Settings/Exit/Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/Exit/Panel"]
 editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
 margin_top = 8.0
 margin_right = -8.0
-margin_bottom = -39.0
+margin_bottom = -56.0
 
-[node name="Label" type="Label" parent="Settings/Exit/Panel/VBoxContainer"]
+[node name="Label" type="Label" parent="Menu/Exit/Panel/VBoxContainer"]
 margin_right = 343.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 0, 32 )
@@ -1170,11 +1251,11 @@ custom_colors/font_color = Color( 1, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
-text = "Exit Level Editor?"
+text = "Exit and save?"
 align = 1
 valign = 1
 
-[node name="Line" type="TextureRect" parent="Settings/Exit/Panel/VBoxContainer"]
+[node name="Line" type="TextureRect" parent="Menu/Exit/Panel/VBoxContainer"]
 margin_top = 36.0
 margin_right = 343.0
 margin_bottom = 38.0
@@ -1182,7 +1263,8 @@ rect_min_size = Vector2( 0, 2 )
 texture = ExtResource( 9 )
 expand = true
 
-[node name="ExitButtons" type="HBoxContainer" parent="Settings/Exit/Panel"]
+[node name="ExitButtons" type="HBoxContainer" parent="Menu/Exit/Panel"]
+editor/display_folded = true
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1192,17 +1274,23 @@ rect_min_size = Vector2( 0, 32 )
 custom_constants/separation = 64
 alignment = 1
 
-[node name="Yes" type="Button" parent="Settings/Exit/Panel/ExitButtons"]
-margin_left = 114.0
-margin_right = 152.0
+[node name="Yes" type="Button" parent="Menu/Exit/Panel/ExitButtons"]
+margin_left = 43.0
+margin_right = 81.0
 margin_bottom = 32.0
 text = "Yes"
 
-[node name="No" type="Button" parent="Settings/Exit/Panel/ExitButtons"]
-margin_left = 216.0
-margin_right = 244.0
+[node name="No" type="Button" parent="Menu/Exit/Panel/ExitButtons"]
+margin_left = 145.0
+margin_right = 173.0
 margin_bottom = 32.0
 text = "No"
+
+[node name="Cancel" type="Button" parent="Menu/Exit/Panel/ExitButtons"]
+margin_left = 237.0
+margin_right = 316.0
+margin_bottom = 32.0
+text = "Cancel"
 [connection signal="button_down" from="UI/SideBar/VBoxContainer/TilesButton" to="." method="_on_TilesButton_pressed"]
 [connection signal="button_down" from="UI/SideBar/VBoxContainer/ObjectsButton" to="." method="_on_ObjectsButton_pressed"]
 [connection signal="button_down" from="UI/BottomBar/LayerAdd" to="." method="_on_LayerAdd_button_down"]
@@ -1213,7 +1301,13 @@ text = "No"
 [connection signal="popup_hide" from="UI/AddLayer" to="." method="_on_AddLayer_popup_hide"]
 [connection signal="pressed" from="UI/AddLayer/LayerConfirmation" to="." method="_on_LayerConfirmation_pressed"]
 [connection signal="pressed" from="Play/Play" to="." method="_on_Play_pressed"]
-[connection signal="pressed" from="Settings/Popup/Panel/VBoxContainer/ReturnMenu" to="." method="_on_ReturnMenu_pressed"]
-[connection signal="pressed" from="Settings/Popup/Panel/SettingsConfirmation" to="." method="_on_SettingsConfirmation_pressed"]
-[connection signal="pressed" from="Settings/Exit/Panel/ExitButtons/Yes" to="." method="_on_Yes_pressed"]
-[connection signal="pressed" from="Settings/Exit/Panel/ExitButtons/No" to="." method="_on_No_pressed"]
+[connection signal="pressed" from="Menu/Editor/Panel/VBoxContainer/Return" to="." method="_on_Return_pressed"]
+[connection signal="pressed" from="Menu/Editor/Panel/VBoxContainer/LevelSave" to="." method="_on_LevelSave_pressed"]
+[connection signal="pressed" from="Menu/Editor/Panel/VBoxContainer/LevelSaveAs" to="." method="_on_LevelSaveAs_pressed"]
+[connection signal="pressed" from="Menu/Editor/Panel/VBoxContainer/LevelOpen" to="." method="_on_LevelOpen_pressed"]
+[connection signal="pressed" from="Menu/Editor/Panel/VBoxContainer/LevelProperties" to="." method="_on_LevelProperties_pressed"]
+[connection signal="pressed" from="Menu/Editor/Panel/VBoxContainer/ReturnMenu2" to="." method="_on_ReturnMenu_pressed"]
+[connection signal="pressed" from="Menu/Settings/Panel/SettingsConfirmation" to="." method="_on_SettingsConfirmation_pressed"]
+[connection signal="pressed" from="Menu/Exit/Panel/ExitButtons/Yes" to="." method="_on_Yes_pressed"]
+[connection signal="pressed" from="Menu/Exit/Panel/ExitButtons/No" to="." method="_on_No_pressed"]
+[connection signal="pressed" from="Menu/Exit/Panel/ExitButtons/Cancel" to="." method="_on_Cancel_pressed"]

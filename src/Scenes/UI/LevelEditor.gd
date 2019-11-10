@@ -39,9 +39,9 @@ func _ready():
 		tilemap = $TileMap # Level Tiles
 	
 	$GrabArea.offset = Vector2(9999999,99999999)
-	$Settings/Popup/Panel/VBoxContainer/Name/LevelName.text = UIHelpers.get_level().level_name
-	$Settings/Popup/Panel/VBoxContainer/Creator/LevelCreator.text = UIHelpers.get_level().level_creator
-	$Settings/Popup/Panel/VBoxContainer/Music/OptionButton.clear()
+	$Menu/Settings/Panel/VBoxContainer/Name/LevelName.text = UIHelpers.get_level().level_name
+	$Menu/Settings/Panel/VBoxContainer/Creator/LevelCreator.text = UIHelpers.get_level().level_creator
+	$Menu/Settings/Panel/VBoxContainer/Music/OptionButton.clear()
 	
 	# Get all the files from Scenes/Editor/Layers
 	var music = list_files_in_directory("res://Audio/Music/")
@@ -50,7 +50,7 @@ func _ready():
 		if ".ogg" in file and not ".import" in file:
 			var item = file
 			item.erase(item.length() - 4,4)
-			$Settings/Popup/Panel/VBoxContainer/Music/OptionButton.add_item(item)
+			$Menu/Settings/Panel/VBoxContainer/Music/OptionButton.add_item(item)
 	
 	anim_in = get_tree().current_scene.editmode
 	visible = false
@@ -110,16 +110,16 @@ func _process(_delta):
 	
 	# Editor settings menu
 	if Input.is_action_just_pressed("pause") and !clickdisable:
-		if $Settings/Popup.visible:
-			$Settings/Popup.hide()
+		if $Menu/Editor.visible:
+			$Menu/Editor.hide()
 		else:
-			$Settings/Popup.popup()
+			$Menu/Editor.popup()
 	
-	if $Settings/Popup.visible or $Settings/Exit.visible or $UI/AddLayer.visible:
+	if $Menu/Editor.visible or $Menu/Settings.visible or $Menu/Exit.visible or $UI/AddLayer.visible:
 		$SelectedTile.visible = false
 		clickdisable = true
-		UIHelpers.get_level().level_name = $Settings/Popup/Panel/VBoxContainer/Name/LevelName.text
-		UIHelpers.get_level().level_creator = $Settings/Popup/Panel/VBoxContainer/Creator/LevelCreator.text
+		UIHelpers.get_level().level_name = $Menu/Settings/Panel/VBoxContainer/Name/LevelName.text
+		UIHelpers.get_level().level_creator = $Menu/Settings/Panel/VBoxContainer/Creator/LevelCreator.text
 		return
 	
 	# Navigation
@@ -734,18 +734,39 @@ func _on_Play_pressed():
 	get_tree().current_scene.editmode_toggle()
 
 func _on_SettingsConfirmation_pressed():
-	$Settings/Popup.hide()
-
-func _on_ReturnMenu_pressed():
-	$Settings/Popup.hide()
-	$Settings/Exit.popup()
+	$Menu/Settings.hide()
+	$Menu/Editor.popup()
 
 func _on_Yes_pressed():
+	pass
+
+func _on_No_pressed():
 	$UI/AnimationPlayer.play("MoveOut")
 	get_tree().current_scene.get_node("CanvasLayer/AnimationPlayer").play("Circle Out")
 	yield(get_tree().current_scene.get_node("CanvasLayer/AnimationPlayer"), "animation_finished")
 	get_tree().paused = false
 	get_tree().change_scene("res://Scenes/UI/MainMenu.tscn")
 
-func _on_No_pressed():
-	$Settings/Exit.hide()
+func _on_Cancel_pressed():
+	$Menu/Settings.hide()
+	$Menu/Editor.popup()
+
+func _on_LevelSave_pressed():
+	UIHelpers._get_scene().save_level()
+
+func _on_LevelSaveAs_pressed():
+	UIHelpers._get_scene().save_level_as()
+
+func _on_LevelOpen_pressed():
+	UIHelpers._get_scene().open_level()
+
+func _on_LevelProperties_pressed():
+	$Menu/Editor.hide()
+	$Menu/Settings.popup()
+
+func _on_ReturnMenu_pressed():
+	$Menu/Editor.hide()
+	$Menu/Exit.popup()
+
+func _on_Return_pressed():
+	$Menu/Editor.hide()

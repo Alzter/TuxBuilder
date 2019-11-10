@@ -15,7 +15,6 @@ font_data = ExtResource( 3 )
 
 [node name="PauseMenu" type="Popup"]
 pause_mode = 2
-visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 focus_mode = 2
@@ -74,40 +73,40 @@ expand = true
 [node name="Continue" type="Button" parent="Panel/VBoxContainer"]
 margin_top = 37.0
 margin_right = 164.0
-margin_bottom = 60.0
+margin_bottom = 62.0
 rect_pivot_offset = Vector2( -488.794, -160.987 )
 focus_neighbour_top = NodePath("../Quit")
 size_flags_vertical = 3
 text = "Continue"
 
 [node name="Restart" type="Button" parent="Panel/VBoxContainer"]
-margin_top = 65.0
+margin_top = 67.0
 margin_right = 164.0
-margin_bottom = 88.0
+margin_bottom = 92.0
 rect_pivot_offset = Vector2( -488.794, -160.987 )
 size_flags_vertical = 3
 text = "Restart"
 
 [node name="Options" type="Button" parent="Panel/VBoxContainer"]
-margin_top = 93.0
+margin_top = 97.0
 margin_right = 164.0
-margin_bottom = 116.0
+margin_bottom = 122.0
 rect_pivot_offset = Vector2( -488.794, -160.987 )
 size_flags_vertical = 3
 text = "Options"
 
 [node name="ExitLevel" type="Button" parent="Panel/VBoxContainer"]
-margin_top = 121.0
+margin_top = 127.0
 margin_right = 164.0
-margin_bottom = 144.0
+margin_bottom = 152.0
 rect_pivot_offset = Vector2( -488.794, -160.987 )
 size_flags_vertical = 3
 text = "Exit Level"
 
 [node name="Quit" type="Button" parent="Panel/VBoxContainer"]
-margin_top = 149.0
+margin_top = 157.0
 margin_right = 164.0
-margin_bottom = 176.0
+margin_bottom = 182.0
 rect_pivot_offset = Vector2( -488.794, -160.987 )
 focus_neighbour_bottom = NodePath("../Continue")
 size_flags_vertical = 3
