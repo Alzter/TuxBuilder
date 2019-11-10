@@ -1,4 +1,4 @@
-extends "EditorBase.gd"
+extends Control
 
 var layername2 = ""
 var hide = false
@@ -10,7 +10,7 @@ var filepathold = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Stop editor doing stuff
-	get_editor().stop = true
+	UIHelpers.get_editor().stop = true
 	
 	# Get the layer
 	layer = get_tree().current_scene.get_node(str("Level/", get_parent().layername))
@@ -71,8 +71,8 @@ func _process(_delta):
 	
 	# Change layer name
 	if get_parent().layername != $Popup/Panel/VBoxContainer/Name/LineEdit.text:
-		if get_editor().layer_selected == get_parent().layername:
-			get_editor().layer_selected = $Popup/Panel/VBoxContainer/Name/LineEdit.text
+		if UIHelpers.get_editor().layer_selected == get_parent().layername:
+			UIHelpers.get_editor().layer_selected = $Popup/Panel/VBoxContainer/Name/LineEdit.text
 		get_tree().current_scene.get_node(str("Level/", get_parent().layername)).name = $Popup/Panel/VBoxContainer/Name/LineEdit.text
 		get_parent().layername = $Popup/Panel/VBoxContainer/Name/LineEdit.text
 		layer = get_tree().current_scene.get_node(str("Level/", get_parent().layername))
@@ -114,16 +114,16 @@ func _process(_delta):
 	
 	# Delete if not in edit mode
 	if get_tree().current_scene.editmode == false:
-		get_editor().stop = false
+		UIHelpers.get_editor().stop = false
 		queue_free()
 
 func _on_OK_pressed():
-	get_editor().stop = false
+	UIHelpers.get_editor().stop = false
 	queue_free()
 
 func _on_Popup_popup_hide():
 	if hide == false:
-		get_editor().stop = false
+		UIHelpers.get_editor().stop = false
 		queue_free()
 
 func _on_DeleteButton_pressed():
@@ -132,12 +132,12 @@ func _on_DeleteButton_pressed():
 	$DeleteConfirmation.show()
 
 func _on_DeleteYes_pressed():
-	if get_editor().layer_selected == get_parent().layername:
-		get_editor().layer_selected = ""
-		get_editor().layer_selected_type = ""
+	if UIHelpers.get_editor().layer_selected == get_parent().layername:
+		UIHelpers.get_editor().layer_selected = ""
+		UIHelpers.get_editor().layer_selected_type = ""
 	get_parent().queue_free()
 	layer.queue_free()
-	get_editor().stop = false
+	UIHelpers.get_editor().stop = false
 	queue_free()
 
 func _on_DeleteNo_pressed():

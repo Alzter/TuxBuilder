@@ -62,7 +62,7 @@ func _ready():
 
 func _process(_delta):
 	layerfile = UIHelpers.get_level().get_node(layer_selected)
-	if layerfile == null:
+	if layerfile == null or UIHelpers.get_level() == null:
 		layer_selected == ""
 		layer_selected_type = ""
 		$SelectedArea.visible = false

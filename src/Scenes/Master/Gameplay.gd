@@ -1,9 +1,9 @@
 extends Node2D
 
-onready var editmode = false
+onready var editmode = true
 onready var editsaved = false # Using an edited version of a level
+export var current_level = ""
 var can_edit = true
-var current_level = ""
 var player_position = Vector2()
 var player_position_map = Vector2() # If the player entered the level from the map
 var map_camera = Vector2() # The worldmap's camera position
@@ -20,7 +20,6 @@ func _ready():
 	load_level("res://Scenes//Worldmaps//Main.tscn")
 	load_player()
 	load_editor()
-	load_ui()
 	level_bounds()
 
 func _process(_delta):
@@ -42,7 +41,7 @@ func _process(_delta):
 	if editmode == false:
 		level_bounds()
 		camera_to_level_bounds()
-		if camera_smooth_time == 0 and !UIHelpers.get_level().worldmap:
+		if camera_smooth_time == 0 and !get_node("Level").worldmap:
 			$Camera2D.drag_margin_v_enabled = true
 	else:
 		camera_bounds_remove()
@@ -63,8 +62,8 @@ func _process(_delta):
 func load_level_from_map(level):
 	current_level = level
 	editmode = false
-	player_position_map = UIHelpers.get_player().position
-	map_camera = UIHelpers.get_camera().position
+	player_position_map = get_node("Player").position
+	map_camera = get_node("Camera2D").position
 	$CanvasLayer/AnimationPlayer.play("Circle Out")
 	yield(get_node("CanvasLayer/AnimationPlayer"), "animation_finished")
 	camera_zoom = 1
@@ -90,8 +89,9 @@ func return_to_map():
 		load_level(worldmap)
 		load_ui()
 		load_player()
-		UIHelpers.get_player().position = player_position_map
-		UIHelpers.get_camera().position = map_camera
+		get_node("Player").position = player_position_map
+		get_node("Camera2D").position = map_camera
+		get_node("Editor").select_first_solid_tilemap()
 		$CanvasLayer/AnimationPlayer.play("Circle In")
 
 func restart_level():
@@ -113,21 +113,11 @@ func restart_level():
 func open_level():
 	UIHelpers.file_dialog("res://Scenes//Levels/") # Bring up file select
 	
-	yield(UIHelpers._get_scene().get_node("FileSelect"), "tree_exiting")
-	var selectdir = UIHelpers._get_scene().get_node("FileSelect").selectdir
+	yield(get_node("FileSelect"), "tree_exiting")
+	var selectdir = get_node("FileSelect").selectdir
 	if check_level_valid(selectdir) == true:
-		camera_zoom = 1
-		camera_zoom_speed = 1
-		editsaved = false
-		clear_level()
-		clear_player()
-		clear_editor()
-		
-		load_level(selectdir)
-		load_player()
-		load_editor()
-		load_ui()
-		level_bounds()
+		var current_level = selectdir
+		get_tree().reload_current_scene()
 
 func save_level():
 	var packed_scene = PackedScene.new()
@@ -137,8 +127,8 @@ func save_level():
 func save_level_as():
 	UIHelpers.file_dialog("res://Scenes//Levels/") # Bring up file select
 	
-	yield(UIHelpers._get_scene().get_node("FileSelect"), "tree_exiting")
-	var selectdir = UIHelpers._get_scene().get_node("FileSelect").selectdir
+	yield(get_node("FileSelect"), "tree_exiting")
+	var selectdir = get_node("FileSelect").selectdir
 	
 	var packed_scene = PackedScene.new()
 	packed_scene.pack(get_tree().get_current_scene().get_node("Level"))
@@ -208,7 +198,7 @@ func clear_ui():
 	_clear_node("LevelUI")
 
 func load_player():
-	if UIHelpers.get_level().worldmap:
+	if get_node("Level").worldmap:
 		_load_node("res://Scenes/Player/Worldmap.tscn", "Player")
 	else:
 		_load_node("res://Scenes/Player/Player.tscn", "Player")
@@ -268,8 +258,8 @@ func editmode_toggle():
 		if editmode == false:
 			editmode = true
 			# Store if the previous level was a worldmap
-			var prevworldmap = UIHelpers.get_level().worldmap
-			player_position = UIHelpers.get_player().position
+			var prevworldmap = get_node("Level").worldmap
+			player_position = get_node("Player").position
 			clear_ui()
 			clear_player()
 			clear_level()
@@ -281,11 +271,12 @@ func editmode_toggle():
 			load_player()
 			
 			# Only move the player if the current level is the same type as the previous
-			if UIHelpers.get_level().worldmap == prevworldmap:
-				UIHelpers.get_player().position = player_position
+			if get_node("Level").worldmap == prevworldmap:
+				get_node("Player").position = player_position
 			else:
-				UIHelpers.get_player().position = player_position_map
-				UIHelpers.get_camera().position = map_camera
+				get_node("Player").position = player_position_map
+				get_node("Camera2D").position = map_camera
+				get_node("Editor").select_first_solid_tilemap()
 			
 		elif get_node("Editor").dragging_object == false:
 			editmode = false

@@ -1,4 +1,4 @@
-extends "EditorBase.gd"
+extends Control
 
 var tile_type = ""
 var tileset = null
@@ -21,5 +21,5 @@ func _ready():
 	else: $Control/Sprite.region_rect.position = tileset.get_tileset().tile_get_region(tile_type).position
 
 func _on_Button_pressed():
-	get_editor().tile_type = tile_type
+	UIHelpers.get_editor().tile_type = tile_type
 	UIHelpers.get_editor().get_node("UI/SideBar/VBoxContainer/HBoxContainer/EraserButton").pressed = false

@@ -13,9 +13,6 @@ func _ready():
 	pass # Replace with function body.
 
 func _process(delta):
-	if UIHelpers.get_editor() == null:
-		return
-	
 	position = Vector2(0,0)
 	
 	modulate = tint
