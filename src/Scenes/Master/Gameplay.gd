@@ -1,7 +1,7 @@
 extends Node2D
 
-var editmode = false
-var editsaved = false # Using an edited version of a level
+onready var editmode = false
+onready var editsaved = false # Using an edited version of a level
 var can_edit = true
 var current_level = ""
 var player_position = Vector2()
@@ -14,11 +14,9 @@ var level_bound_top = 0
 var camera_smooth_time = 0
 var camera_zoom = 1
 var camera_zoom_speed = 20
-var worldmap = "" # The worldmap you started in
+onready var worldmap = "" # The worldmap you started in
 
 func _ready():
-	editmode = false
-	editsaved = false
 	load_level("res://Scenes//Worldmaps//Main.tscn")
 	load_player()
 	load_editor()
@@ -63,13 +61,14 @@ func _process(_delta):
 		camera_smooth_time = 0
 
 func load_level_from_map(level):
-	camera_zoom = 1
-	camera_zoom_speed = 1
+	current_level = level
 	editmode = false
 	player_position_map = UIHelpers.get_player().position
 	map_camera = UIHelpers.get_camera().position
 	$CanvasLayer/AnimationPlayer.play("Circle Out")
 	yield(get_node("CanvasLayer/AnimationPlayer"), "animation_finished")
+	camera_zoom = 1
+	camera_zoom_speed = 1
 	clear_ui()
 	clear_player()
 	clear_level()
@@ -78,16 +77,33 @@ func load_level_from_map(level):
 	load_player()
 	$CanvasLayer/AnimationPlayer.play("Circle In")
 
+func return_to_map():
+	if worldmap != "":
+		editmode = false
+		$CanvasLayer/AnimationPlayer.play("Circle Out")
+		yield(get_node("CanvasLayer/AnimationPlayer"), "animation_finished")
+		camera_zoom = 1
+		camera_zoom_speed = 1
+		clear_ui()
+		clear_player()
+		clear_level()
+		load_level(worldmap)
+		load_ui()
+		load_player()
+		UIHelpers.get_player().position = player_position_map
+		UIHelpers.get_camera().position = map_camera
+		$CanvasLayer/AnimationPlayer.play("Circle In")
+
 func restart_level():
-	camera_zoom = 1
-	camera_zoom_speed = 1
 	editmode = false
 	$CanvasLayer/AnimationPlayer.play("Circle Out")
 	yield(get_node("CanvasLayer/AnimationPlayer"), "animation_finished")
+	camera_zoom = 1
+	camera_zoom_speed = 1
 	clear_ui()
 	clear_player()
 	clear_level()
-	if editsaved == false:
+	if editsaved == false or (worldmap != "" and current_level != worldmap):
 		load_level(current_level)
 	else: load_edited_level()
 	load_ui()
@@ -225,7 +241,9 @@ func editmode_toggle():
 			clear_player()
 			clear_level()
 			if editsaved == false:
-				load_level(current_level)
+				if worldmap == "":
+					load_level(current_level)
+				else: load_level(worldmap)
 			else: load_edited_level()
 			load_player()
 			

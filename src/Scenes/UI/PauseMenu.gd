@@ -41,14 +41,14 @@ func _on_Resume_pressed():
 	get_tree().paused = false
 
 func _on_Restart_pressed():
-	get_tree().current_scene.call("restart_level")
+	get_tree().current_scene.restart_level()
 
 func _on_Options_pressed():
 	$Options.show()
 	$Panel.hide()
 
 func _on_QuitLevel_pressed():
-	pass # Replace with function body.
+	get_tree().current_scene.return_to_map()
 
 func _on_MainMenu_pressed():
 	get_tree().current_scene.get_node("CanvasLayer/AnimationPlayer").play("Circle Out")
