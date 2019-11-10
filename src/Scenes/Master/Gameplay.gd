@@ -121,11 +121,13 @@ func open_level():
 		editsaved = false
 		clear_level()
 		clear_player()
+		clear_editor()
+		
 		load_level(selectdir)
 		load_player()
-		yield(UIHelpers.get_level(), "ready")
-		yield(UIHelpers.get_player(), "ready")
-		UIHelpers.get_editor()._ready()
+		load_editor()
+		load_ui()
+		level_bounds()
 
 func save_level():
 	var packed_scene = PackedScene.new()

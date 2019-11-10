@@ -13,6 +13,9 @@ func _ready():
 		settings()
 
 func _process(_delta):
+	if UIHelpers.get_editor() == null:
+		return
+	
 	# Update text
 	$Panel/Label.text = str(layername)
 	$Panel/Panel/Zaxis.text = str(z_axis)
