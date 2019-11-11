@@ -7,7 +7,7 @@
 [ext_resource path="res://Sprites/UI/FileDialog/FileReload.png" type="Texture" id=5]
 [ext_resource path="res://Sprites/Editor/Line.png" type="Texture" id=6]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 size = 12
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
@@ -71,7 +71,7 @@ margin_right = 342.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 300, 0 )
 rect_clip_content = true
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2

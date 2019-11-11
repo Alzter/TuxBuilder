@@ -52,7 +52,7 @@ func _on_Load_pressed():
 		# Pass to Gameplay.gd to check if the level is valid
 		if UIHelpers._get_scene().check_level_valid(selectdir) == true:
 			level = selectdir
-			$DisplayName.text = load(level).instance().level_name
+			$DisplayName.text = load(str(level)).instance().level_name
 			$CanvasLayer/Popup.popup()
 		else:
 			$CanvasLayer/Error.popup()
