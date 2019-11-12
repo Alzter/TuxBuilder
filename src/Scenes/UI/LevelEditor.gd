@@ -33,6 +33,10 @@ var clickdisable = false
 var tilemap = null
 
 func _ready():
+	if UIHelpers.get_level() == null:
+		initial_menu()
+		return
+	
 	if UIHelpers.get_level().worldmap: # Worldmap Tiles
 		tilemap = $WorldMap
 	else:
@@ -62,7 +66,7 @@ func _ready():
 
 func _process(_delta):
 	layerfile = UIHelpers.get_level().get_node(layer_selected)
-	if layerfile == null or UIHelpers.get_level() == null:
+	if layerfile == null:
 		layer_selected == ""
 		layer_selected_type = ""
 		$SelectedArea.visible = false
@@ -763,6 +767,10 @@ func _on_LevelSaveAs_pressed():
 func _on_LevelOpen_pressed():
 	$Menu/Editor.hide()
 	UIHelpers._get_scene().open_level()
+	yield(UIHelpers._get_scene().get_node("FileSelect"), "tree_exiting")
+	if UIHelpers._get_scene().get_node("FileSelect").cancel == true:
+		$Menu/Editor.show()
+		return
 
 func _on_LevelProperties_pressed():
 	$Menu/Editor.hide()
@@ -770,7 +778,24 @@ func _on_LevelProperties_pressed():
 
 func _on_ReturnMenu_pressed():
 	$Menu/Editor.hide()
-	$Menu/Exit.popup()
+	if UIHelpers.get_level() != null:
+		$Menu/Exit.popup()
+	else:
+		get_tree().change_scene("res://Scenes/UI/MainMenu.tscn")
 
 func _on_Return_pressed():
 	$Menu/Editor.hide()
+
+func _on_LevelCreate_pressed():
+	$Menu/Editor.hide()
+
+func initial_menu():
+	$Menu/Editor.popup()
+	$Menu/Editor/Panel/VBoxContainer/Return.hide()
+	$Menu/Editor/Panel/VBoxContainer/LevelSave.hide()
+	$Menu/Editor/Panel/VBoxContainer/LevelSaveAs.hide()
+	$Menu/Editor/Panel/VBoxContainer/LevelProperties.hide()
+	visible = false
+	$UI.offset = Vector2 (get_viewport().size.x * 9999,get_viewport().size.y * 9999)
+	$GrabArea.offset = Vector2(9999999,99999999)
+	$Play.offset = Vector2(9999999,99999999)

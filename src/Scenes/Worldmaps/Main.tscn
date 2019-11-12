@@ -72,8 +72,8 @@ filepath = ""
 original_name = ""
 
 [node name="SpawnPoint" type="Position2D" parent="." groups=[
-"oneonly",
 "spawnpoint",
+"oneonly",
 ] instance=ExtResource( 5 )]
 position = Vector2( 144, 112 )
 script = ExtResource( 6 )

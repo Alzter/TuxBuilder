@@ -36,6 +36,7 @@ func _process(delta):
 		$CanvasLayer/BottomName.show()
 		if level != "" and (Input.is_action_just_pressed("jump") or (autoplay and !cleared)): # Play level
 			UIHelpers._get_scene().load_level_from_map(level)
+			UIHelpers.get_player().can_move = false
 
 func _on_Button_pressed():
 	$CanvasLayer/Popup.hide()

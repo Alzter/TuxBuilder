@@ -141,7 +141,6 @@ focus_neighbour_bottom = NodePath("../StartGame")
 text = "Quit"
 
 [node name="Options" parent="." instance=ExtResource( 5 )]
-visible = false
 margin_top = -10.0
 margin_bottom = 150.0
 

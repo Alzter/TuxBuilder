@@ -5,7 +5,6 @@ onready var editsaved = false # Using an edited version of a level
 var current_level = "res://Scenes//Worldmaps//Main.tscn"
 var can_edit = true
 var player_position = Vector2()
-var player_position_map = Vector2() # If the player entered the level from the map
 var level_bound_left = 0
 var level_bound_right = 0
 var level_bound_bottom = 0
@@ -16,10 +15,8 @@ var camera_zoom_speed = 20
 onready var worldmap = "" # The worldmap you started in
 
 func _ready():
-	load_level(current_level)
-	load_player()
 	load_editor()
-	level_bounds()
+	UIHelpers.get_editor().set_process(false)
 
 func _process(_delta):
 	if UIHelpers.get_level() == null or UIHelpers.get_editor() == null or UIHelpers.get_player() == null:
@@ -62,7 +59,6 @@ func _process(_delta):
 		camera_smooth_time = 0
 
 func load_level_from_map(level):
-	player_position_map = get_node("Player").position
 	worldmap = current_level
 	editmode = false
 	$CanvasLayer/AnimationPlayer.play("Circle Out")
@@ -83,8 +79,7 @@ func load_level_from_map(level):
 
 func return_to_map():
 	if worldmap != "":
-		current_level = worldmap
-		get_tree().reload_current_scene()
+		enter_level(worldmap)
 
 func restart_level():
 	editmode = false
@@ -106,27 +101,60 @@ func open_level():
 	UIHelpers.file_dialog("res://Scenes//Levels/") # Bring up file select
 	
 	yield(get_node("FileSelect"), "tree_exiting")
-	var level = get_node("FileSelect").selectdir
-	if check_level_valid(level) == true:
-		$CanvasLayer/AnimationPlayer.play("Circle Out")
-		yield(get_node("CanvasLayer/AnimationPlayer"), "animation_finished")
+	if UIHelpers._get_scene().get_node("FileSelect").cancel == false:
+		var level = get_node("FileSelect").selectdir
+		var dir = get_node("FileSelect").directory
+		if check_level_valid(level) == true:
+			if UIHelpers.get_level() != null:
+				enter_level(level)
+			else:
+				enter_level_init(level)
+		else:
+			UIHelpers._get_scene().get_node("FileSelect").cancel = true
+
+func enter_level_init(level):
+	$CanvasLayer/AnimationPlayer.play("Circle Out")
+	yield(get_node("CanvasLayer/AnimationPlayer"), "animation_finished")
+	editsaved = false
+	worldmap = ""
+	camera_zoom = 1
+	camera_zoom_speed = 1
+	UIHelpers.get_editor().set_process(true)
+	clear_editor()
+	
+	editmode = false
+	
+	load_level(level)
+	load_player()
+	load_ui()
+	load_editor()
+	editmode_toggle()
+	$CanvasLayer/AnimationPlayer.play("Circle In")
+
+func enter_level(level):
+	$CanvasLayer/AnimationPlayer.play("Circle Out")
+	yield(get_node("CanvasLayer/AnimationPlayer"), "animation_finished")
+	var edit = editmode
+	if editmode == true:
 		editmode_toggle()
-		editsaved = false
-		worldmap = ""
-		camera_zoom = 1
-		camera_zoom_speed = 1
-		clear_player()
-		clear_level()
-		clear_editor()
-		clear_ui()
-		
-		load_level(level)
-		load_player()
-		load_ui()
-		load_editor()
+	editsaved = false
+	worldmap = ""
+	camera_zoom = 1
+	camera_zoom_speed = 1
+	clear_player()
+	clear_level()
+	clear_editor()
+	clear_ui()
+	
+	editmode = false
+	
+	load_level(level)
+	load_player()
+	load_ui()
+	load_editor()
+	if edit:
 		editmode_toggle()
-		$CanvasLayer/AnimationPlayer.play("Circle In")
-		print(current_level)
+	$CanvasLayer/AnimationPlayer.play("Circle In")
 
 func save_level():
 	var packed_scene = PackedScene.new()
@@ -284,7 +312,6 @@ func editmode_toggle():
 			if get_node("Level").worldmap == prevworldmap:
 				get_node("Player").position = player_position
 			else:
-				get_node("Player").position = player_position_map
 				get_node("Camera2D").position = get_node("Player").position
 				clear_editor()
 				load_editor()

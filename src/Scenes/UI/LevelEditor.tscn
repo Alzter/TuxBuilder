@@ -998,10 +998,11 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -179.0
-margin_top = -138.5
+margin_top = -163.0
 margin_right = 179.0
-margin_bottom = 138.5
+margin_bottom = 163.0
 theme = ExtResource( 7 )
+popup_exclusive = true
 
 [node name="Panel" type="Panel" parent="Menu/Editor"]
 anchor_right = 1.0
@@ -1038,43 +1039,50 @@ expand = true
 [node name="Return" type="Button" parent="Menu/Editor/Panel/VBoxContainer"]
 margin_top = 42.0
 margin_right = 342.0
-margin_bottom = 74.0
-rect_min_size = Vector2( 0, 32 )
+margin_bottom = 76.0
+size_flags_vertical = 3
 text = "Return to Editor"
 
 [node name="LevelSave" type="Button" parent="Menu/Editor/Panel/VBoxContainer"]
-margin_top = 78.0
+margin_top = 80.0
 margin_right = 342.0
-margin_bottom = 110.0
-rect_min_size = Vector2( 0, 32 )
+margin_bottom = 114.0
+size_flags_vertical = 3
 text = "Save the level"
 
 [node name="LevelSaveAs" type="Button" parent="Menu/Editor/Panel/VBoxContainer"]
-margin_top = 114.0
+margin_top = 118.0
 margin_right = 342.0
-margin_bottom = 146.0
-rect_min_size = Vector2( 0, 32 )
+margin_bottom = 152.0
+size_flags_vertical = 3
 text = "Save in a new directory"
 
-[node name="LevelOpen" type="Button" parent="Menu/Editor/Panel/VBoxContainer"]
-margin_top = 150.0
+[node name="LevelCreate" type="Button" parent="Menu/Editor/Panel/VBoxContainer"]
+margin_top = 156.0
 margin_right = 342.0
-margin_bottom = 182.0
-rect_min_size = Vector2( 0, 32 )
-text = "Open another level"
+margin_bottom = 190.0
+size_flags_vertical = 3
+text = "Create new level"
+
+[node name="LevelOpen" type="Button" parent="Menu/Editor/Panel/VBoxContainer"]
+margin_top = 194.0
+margin_right = 342.0
+margin_bottom = 228.0
+size_flags_vertical = 3
+text = "Open a level"
 
 [node name="LevelProperties" type="Button" parent="Menu/Editor/Panel/VBoxContainer"]
-margin_top = 186.0
+margin_top = 232.0
 margin_right = 342.0
-margin_bottom = 218.0
-rect_min_size = Vector2( 0, 32 )
+margin_bottom = 266.0
+size_flags_vertical = 3
 text = "Level properties"
 
 [node name="ReturnMenu2" type="Button" parent="Menu/Editor/Panel/VBoxContainer"]
-margin_top = 222.0
+margin_top = 270.0
 margin_right = 342.0
-margin_bottom = 254.0
-rect_min_size = Vector2( 0, 32 )
+margin_bottom = 310.0
+size_flags_vertical = 3
 text = "Exit to Menu"
 
 [node name="Settings" type="Popup" parent="Menu"]
@@ -1304,6 +1312,7 @@ text = "Cancel"
 [connection signal="pressed" from="Menu/Editor/Panel/VBoxContainer/Return" to="." method="_on_Return_pressed"]
 [connection signal="pressed" from="Menu/Editor/Panel/VBoxContainer/LevelSave" to="." method="_on_LevelSave_pressed"]
 [connection signal="pressed" from="Menu/Editor/Panel/VBoxContainer/LevelSaveAs" to="." method="_on_LevelSaveAs_pressed"]
+[connection signal="pressed" from="Menu/Editor/Panel/VBoxContainer/LevelCreate" to="." method="_on_LevelCreate_pressed"]
 [connection signal="pressed" from="Menu/Editor/Panel/VBoxContainer/LevelOpen" to="." method="_on_LevelOpen_pressed"]
 [connection signal="pressed" from="Menu/Editor/Panel/VBoxContainer/LevelProperties" to="." method="_on_LevelProperties_pressed"]
 [connection signal="pressed" from="Menu/Editor/Panel/VBoxContainer/ReturnMenu2" to="." method="_on_ReturnMenu_pressed"]

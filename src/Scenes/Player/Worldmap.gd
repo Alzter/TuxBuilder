@@ -8,6 +8,7 @@ var newdirection = 180
 var directionbuffer = 0
 var level_passable = false # If the level dot you're standing on has been cleared (is true if you're not standing on one)
 var movedirection = null # Direction you moved onto a level dot (so you can't pass uncleared levels)
+var can_move = true
 
 const MOVE_SPEED = 4 # Must be a power of 2 that's lower than 32
 const BUFFER = 3 # If you press a direction, Tux will turn if he finds an intersection in that direction within the next 2 tiles
@@ -24,7 +25,7 @@ func _ready():
 	position = Vector2(rndx,rndy) 
 
 func _process(delta):
-	if UIHelpers._get_scene().editmode:
+	if UIHelpers._get_scene().editmode or !can_move:
 		return
 	
 	# Setting the direction to move

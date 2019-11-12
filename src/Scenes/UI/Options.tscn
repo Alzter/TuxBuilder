@@ -5,7 +5,6 @@
 [ext_resource path="res://Sprites/Editor/Line.png" type="Texture" id=3]
 
 [node name="Options" type="Popup"]
-visible = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -73,6 +72,7 @@ text = "Fullscreen"
 margin_left = 136.0
 margin_right = 152.0
 margin_bottom = 23.0
+action_mode = 0
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
 editor/display_folded = true
@@ -96,6 +96,7 @@ text = "V-sync"
 margin_left = 116.0
 margin_right = 132.0
 margin_bottom = 23.0
+action_mode = 0
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]
 anchor_top = 1.0
@@ -118,6 +119,7 @@ margin_top = 6.0
 margin_right = 164.0
 margin_bottom = 31.0
 rect_min_size = Vector2( 0, 25 )
+action_mode = 0
 text = "Back"
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/FullscreenCheck" to="." method="_on_FullscreenCheck_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer2/VSyncCheck" to="." method="_on_VSyncCheck_pressed"]
