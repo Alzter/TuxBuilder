@@ -166,7 +166,10 @@ func save_level():
 	ResourceSaver.save(current_level, packed_scene)
 
 func save_level_as():
-	UIHelpers.file_dialog("res://Scenes//Levels/", true) # Bring up file select
+	if get_node("Level").worldmap:
+		UIHelpers.file_dialog("res://Scenes//Worldmaps/", true) # Bring up file select
+	else:
+		UIHelpers.file_dialog("res://Scenes//Levels/", true) # Bring up file select
 	
 	yield(get_node("FileSelect"), "tree_exiting")
 	

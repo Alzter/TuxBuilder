@@ -72,8 +72,8 @@ filepath = ""
 original_name = ""
 
 [node name="SpawnPoint" type="Position2D" parent="." groups=[
-"spawnpoint",
 "oneonly",
+"spawnpoint",
 ] instance=ExtResource( 5 )]
 position = Vector2( 144, 112 )
 script = ExtResource( 6 )
@@ -88,3 +88,4 @@ level = "res://Scenes//Levels//TEST.tscn"
 invisible = false
 autoplay = false
 cleared = false
+movedirection = 1
