@@ -54,5 +54,5 @@ filepath = "res://Scenes/Editor/Layers/Backgrounds"
 original_name = "Background"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="Background" instance=ExtResource( 9 )]
-scroll_offset = Vector2( 683, 352.5 )
+scroll_offset = Vector2( 619, 224.5 )
 script = ExtResource( 10 )

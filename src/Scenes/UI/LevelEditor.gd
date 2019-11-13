@@ -764,7 +764,13 @@ func _on_Cancel_pressed():
 	$Menu/Editor.popup()
 
 func _on_LevelSave_pressed():
-	UIHelpers._get_scene().save_level()
+	if UIHelpers._get_scene().current_level != "user://Scenes/Levels/EditedLevel/EditedLevel.tscn":
+		UIHelpers._get_scene().save_level()
+	else:
+		$Menu/Editor.hide()
+		UIHelpers._get_scene().save_level_as()
+		yield(UIHelpers._get_scene().get_node("FileSelect"), "tree_exiting")
+		$Menu/Editor.popup()
 
 func _on_LevelSaveAs_pressed():
 	$Menu/Editor.hide()
@@ -823,7 +829,11 @@ func _on_CancelCreation_pressed():
 	$Menu/Editor.popup()
 
 func _on_Save_pressed():
-	UIHelpers._get_scene().save_level()
+	if UIHelpers._get_scene().current_level != "user://Scenes/Levels/EditedLevel/EditedLevel.tscn":
+		UIHelpers._get_scene().save_level()
+	else:
+		UIHelpers._get_scene().save_level_as()
+		yield(UIHelpers._get_scene().get_node("FileSelect"), "tree_exiting")
 
 func initial_menu():
 	$Menu/Editor.popup()
