@@ -101,6 +101,7 @@ func open_level():
 	UIHelpers.file_dialog("res://Scenes//Levels/", false) # Bring up file select
 	
 	yield(get_node("FileSelect"), "tree_exiting")
+	
 	if UIHelpers._get_scene().get_node("FileSelect").cancel == false:
 		var level = get_node("FileSelect").selectdir
 		var dir = get_node("FileSelect").directory
@@ -168,13 +169,13 @@ func save_level_as():
 	UIHelpers.file_dialog("res://Scenes//Levels/", true) # Bring up file select
 	
 	yield(get_node("FileSelect"), "tree_exiting")
-	var selectdir = str(get_node("FileSelect").directory, "/", get_node("FileSelect").savename, ".tscn")
 	
-	print(selectdir)
-	
-	var packed_scene = PackedScene.new()
-	packed_scene.pack(get_tree().get_current_scene().get_node("Level"))
-	ResourceSaver.save(selectdir, packed_scene)
+	if UIHelpers._get_scene().get_node("FileSelect").cancel == false:
+		var selectdir = str(get_node("FileSelect").directory, "/", get_node("FileSelect").savename, ".tscn")
+		var packed_scene = PackedScene.new()
+		packed_scene.pack(get_tree().get_current_scene().get_node("Level"))
+		ResourceSaver.save(selectdir, packed_scene)
+		current_level = selectdir
 
 func save_edited_level():
 	var packed_scene = PackedScene.new()
