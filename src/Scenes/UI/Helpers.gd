@@ -15,8 +15,9 @@ func get_level():
 func get_editor():
 	return _get_scene().get_node("Editor")
 
-func file_dialog(directory):
+func file_dialog(directory, save):
 	var dialog = load("res://Scenes/UI/FileSelect.tscn").instance()
 	dialog.set_name("FileSelect")
+	dialog.save = save
 	dialog.directory = directory
 	_get_scene().add_child(dialog)

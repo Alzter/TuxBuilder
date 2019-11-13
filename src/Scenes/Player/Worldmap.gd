@@ -3,8 +3,8 @@ extends Node2D
 var dead = false
 var state = "big"
 var moving = false
-var direction = 180
-var newdirection = 180
+var direction = null
+var newdirection = null
 var directionbuffer = 0
 var level_passable = false # If the level dot you're standing on has been cleared (is true if you're not standing on one)
 var movedirection = null # Direction you moved onto a level dot (so you can't pass uncleared levels)
@@ -47,15 +47,18 @@ func _process(delta):
 	
 	# Stop at level dots
 	level_passable = true
+	movedirection = null
 	for child in UIHelpers.get_level().get_children():
 		if child.is_in_group("leveldot"):
 			if child.position == position:
-				level_passable = child.cleared
 				if moving:
-					movedirection = direction
+					if direction != null:
+						child.movedirection = direction
 					moving = false
 					newdirection = null
 					directionbuffer = 0
+				movedirection = child.movedirection
+				level_passable = child.cleared
 	
 	# Change direction from the grid
 	if position.x == rndx and position.y == rndy:

@@ -122,7 +122,7 @@ func _process(_delta):
 		else:
 			$Menu/Editor.popup()
 	
-	if $Menu/Editor.visible or $Menu/Settings.visible or $Menu/Exit.visible or $UI/AddLayer.visible:
+	if $Menu/Editor.visible or $Menu/Create.visible or $Menu/Settings.visible or $Menu/Exit.visible or $UI/AddLayer.visible:
 		$SelectedTile.visible = false
 		clickdisable = true
 		UIHelpers.get_level().level_name = $Menu/Settings/Panel/VBoxContainer/Name/LevelName.text
@@ -745,7 +745,12 @@ func _on_SettingsConfirmation_pressed():
 	$Menu/Editor.popup()
 
 func _on_Yes_pressed():
-	pass
+	UIHelpers._get_scene().save_level()
+	$UI/AnimationPlayer.play("MoveOut")
+	get_tree().current_scene.get_node("CanvasLayer/AnimationPlayer").play("Circle Out")
+	yield(get_tree().current_scene.get_node("CanvasLayer/AnimationPlayer"), "animation_finished")
+	get_tree().paused = false
+	get_tree().change_scene("res://Scenes/UI/MainMenu.tscn")
 
 func _on_No_pressed():
 	$UI/AnimationPlayer.play("MoveOut")
@@ -762,7 +767,10 @@ func _on_LevelSave_pressed():
 	UIHelpers._get_scene().save_level()
 
 func _on_LevelSaveAs_pressed():
+	$Menu/Editor.hide()
 	UIHelpers._get_scene().save_level_as()
+	yield(UIHelpers._get_scene().get_node("FileSelect"), "tree_exiting")
+	$Menu/Editor.popup()
 
 func _on_LevelOpen_pressed():
 	$Menu/Editor.hide()
@@ -788,6 +796,20 @@ func _on_Return_pressed():
 
 func _on_LevelCreate_pressed():
 	$Menu/Editor.hide()
+	$Menu/Create.popup()
+
+func _on_CreateLevel_pressed():
+	pass # Replace with function body.
+
+func _on_CreateMap_pressed():
+	pass # Replace with function body.
+
+func _on_CancelCreation_pressed():
+	$Menu/Create.hide()
+	$Menu/Editor.popup()
+
+func _on_Save_pressed():
+	UIHelpers._get_scene().save_level()
 
 func initial_menu():
 	$Menu/Editor.popup()

@@ -4,6 +4,7 @@ export var level = ""
 export var invisible = false
 export var autoplay = false
 export var cleared = false
+export var movedirection = 1
 
 func _ready():
 	if level != "":

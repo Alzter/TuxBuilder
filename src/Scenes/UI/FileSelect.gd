@@ -5,14 +5,28 @@ var dir = Directory.new()
 var selectedfile = null
 var selectdir = null
 var cancel = true
+var save = false
+var savename = ""
 
 func _ready():
+	$Popup/Panel/VBoxContainer/FileName.visible = save
 	$Popup.popup()
 	reload()
 
 func _process(delta):
-	if $Popup.visible == false:
-		queue_free()
+	$Popup/Panel/HBoxContainer/OK.disabled = false
+	if save and savename == "":
+		$Popup/Panel/HBoxContainer/OK.disabled = true
+	
+	if selectedfile == null:
+		savename = $Popup/Panel/VBoxContainer/FileName/HSplitContainer/LineEdit.text
+	else:
+		savename = selectedfile
+		var end = savename.rfind(".")
+		savename.erase(end, savename.length() - end)
+		if $Popup/Panel/VBoxContainer/FileName/HSplitContainer/LineEdit.text != savename:
+			$Popup/Panel/VBoxContainer/FileName/HSplitContainer/LineEdit.text = savename
+	
 	UIHelpers.get_editor().clickdisable = true
 	for child in $Popup/Panel/VBoxContainer/ScrollContainer/Files.get_children():
 		if selectedfile == child.text:
@@ -53,8 +67,13 @@ func _on_Reload_pressed():
 	reload()
 
 func _on_OK_pressed():
-	cancel = false
-	queue_free()
+	var files = list_files_in_directory(directory)
+	if save and (selectedfile != null or (str(savename, ".tscn") in files)):
+		$Popup.hide()
+		$Overwrite.popup()
+	else:
+		cancel = false
+		queue_free()
 
 func _on_Cancel_pressed():
 	queue_free()
@@ -75,3 +94,14 @@ func list_files_in_directory(path):
 	dir.list_dir_end()
 	
 	return files
+
+func _on_LineEdit_text_changed(new_text):
+	selectedfile = null
+
+func _on_OverwriteYes_pressed():
+	cancel = false
+	queue_free()
+
+func _on_OverwriteNo_pressed():
+	$Overwrite.hide()
+	$Popup.popup()
