@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Scenes/UI/LevelEditor.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Editor/Grid.png" type="Texture" id=2]
@@ -293,16 +293,6 @@ corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
 [sub_resource type="StyleBoxFlat" id=11]
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0, 0, 0, 0.5 )
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-
-[sub_resource type="StyleBoxFlat" id=12]
-bg_color = Color( 1, 1, 1, 1 )
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color( 0, 0, 0, 0.5 )
@@ -739,7 +729,7 @@ margin_right = -66.0
 margin_bottom = -2.0
 focus_mode = 0
 custom_styles/hover = SubResource( 11 )
-custom_styles/pressed = SubResource( 12 )
+custom_styles/pressed = SubResource( 11 )
 custom_styles/focus = SubResource( 11 )
 custom_styles/disabled = SubResource( 13 )
 custom_styles/normal = SubResource( 11 )
