@@ -5,8 +5,6 @@
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 1 )
-level_name = "The Test Worldmap"
-level_creator = "Also Alzter"
 worldmap = true
 
 [node name="TileMap" parent="." instance=ExtResource( 2 )]

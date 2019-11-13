@@ -64,7 +64,6 @@ var invincible = false
 var using_star = false
 var holding_object = false
 var object_held = ""
-var ground_normal = Vector2()
 var wind = 0
 
 # Set Tux's current playing animation

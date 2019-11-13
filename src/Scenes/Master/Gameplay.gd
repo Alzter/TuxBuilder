@@ -108,11 +108,11 @@ func open_level():
 			if UIHelpers.get_level() != null:
 				enter_level(level)
 			else:
-				enter_level_init(level)
+				enter_level_init(level, false)
 		else:
 			UIHelpers._get_scene().get_node("FileSelect").cancel = true
 
-func enter_level_init(level):
+func enter_level_init(level, properties):
 	$CanvasLayer/AnimationPlayer.play("Circle Out")
 	yield(get_node("CanvasLayer/AnimationPlayer"), "animation_finished")
 	editsaved = false
@@ -130,6 +130,8 @@ func enter_level_init(level):
 	load_editor()
 	editmode_toggle()
 	$CanvasLayer/AnimationPlayer.play("Circle In")
+	if properties:
+		UIHelpers.get_editor().get_node("Menu/Settings").popup()
 
 func enter_level(level):
 	$CanvasLayer/AnimationPlayer.play("Circle Out")

@@ -805,6 +805,7 @@ func _on_CreateMap_pressed():
 	create_level("res://Scenes/Editor/LevelTemplates/Worldmap.tscn")
 
 func create_level(level):
+	var createlevel = true
 	set_process(false)
 	$Menu/Create.hide()
 	if UIHelpers.get_level() != null:
@@ -815,7 +816,7 @@ func create_level(level):
 	UIHelpers._get_scene().add_child(levelinstance)
 	UIHelpers._get_scene().save_edited_level()
 	UIHelpers.get_level().queue_free()
-	UIHelpers._get_scene().enter_level_init("user://Scenes/Levels/EditedLevel/EditedLevel.tscn")
+	UIHelpers._get_scene().enter_level_init("user://Scenes/Levels/EditedLevel/EditedLevel.tscn", true)
 
 func _on_CancelCreation_pressed():
 	$Menu/Create.hide()
