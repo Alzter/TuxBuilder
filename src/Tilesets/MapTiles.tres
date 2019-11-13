@@ -54,7 +54,7 @@
 2/occluder_offset = Vector2( 0, 0 )
 2/navigation_offset = Vector2( 0, 0 )
 2/shapes = [  ]
-2/z_index = 0
+2/z_index = 2
 3/name = "Snow Trees"
 3/texture = ExtResource( 3 )
 3/tex_offset = Vector2( 0, 0 )
