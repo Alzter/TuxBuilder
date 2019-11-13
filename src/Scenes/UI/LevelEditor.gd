@@ -799,10 +799,23 @@ func _on_LevelCreate_pressed():
 	$Menu/Create.popup()
 
 func _on_CreateLevel_pressed():
-	pass # Replace with function body.
+	create_level("res://Scenes/Editor/LevelTemplates/Level.tscn")
 
 func _on_CreateMap_pressed():
-	pass # Replace with function body.
+	create_level("res://Scenes/Editor/LevelTemplates/Worldmap.tscn")
+
+func create_level(level):
+	set_process(false)
+	$Menu/Create.hide()
+	if UIHelpers.get_level() != null:
+		UIHelpers._get_scene().clear_level()
+		UIHelpers._get_scene().clear_player()
+	var levelinstance = load(level).instance()
+	levelinstance.set_name("Level")
+	UIHelpers._get_scene().add_child(levelinstance)
+	UIHelpers._get_scene().save_edited_level()
+	UIHelpers.get_level().queue_free()
+	UIHelpers._get_scene().enter_level_init("user://Scenes/Levels/EditedLevel/EditedLevel.tscn")
 
 func _on_CancelCreation_pressed():
 	$Menu/Create.hide()

@@ -18,8 +18,8 @@ level_creator = "Alzter"
 worldmap = false
 
 [node name="SpawnPoint" type="Position2D" parent="." groups=[
-"spawnpoint",
 "oneonly",
+"spawnpoint",
 ] instance=ExtResource( 2 )]
 position = Vector2( 16, 16 )
 script = ExtResource( 3 )
@@ -55,5 +55,5 @@ filepath = "res://Scenes/Editor/Layers/Backgrounds"
 original_name = "Background"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="Background" instance=ExtResource( 9 )]
-scroll_offset = Vector2( 363, 160.5 )
+scroll_offset = Vector2( 587, 160.5 )
 script = ExtResource( 10 )

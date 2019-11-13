@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scenes/UI/Level.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Objects/Misc/SpawnPoint.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Editor/Layers/TileMap.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Editor/Layers/Background.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Editor/Layers/Backgrounds/Snow.tscn" type="PackedScene" id=5]
+
+[node name="Level" type="Node2D"]
+script = ExtResource( 1 )
+level_name = "The Test Level"
+level_creator = "Alzter"
+
+[node name="SpawnPoint" parent="." instance=ExtResource( 2 )]
+position = Vector2( 16, 16 )
+
+[node name="Interactive" parent="." instance=ExtResource( 3 )]
+original_name = "TileMap"
+
+[node name="Background" parent="." instance=ExtResource( 4 )]
+modulate = Color( 0, 0, 0, 1 )
+tint = Color( 0, 0, 0, 1 )
+original_name = "Background"
+
+[node name="ParallaxBackground" parent="Background" instance=ExtResource( 5 )]
+scroll_offset = Vector2( 587, 160.5 )

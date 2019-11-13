@@ -2,7 +2,7 @@ extends Node2D
 
 onready var editmode = true
 onready var editsaved = false # Using an edited version of a level
-var current_level = "res://Scenes//Worldmaps//Main.tscn"
+var current_level = ""
 var can_edit = true
 var player_position = Vector2()
 var level_bound_left = 0
@@ -143,6 +143,7 @@ func enter_level(level):
 	camera_zoom_speed = 1
 	clear_player()
 	clear_level()
+	UIHelpers.get_editor().set_process(true)
 	clear_editor()
 	clear_ui()
 	

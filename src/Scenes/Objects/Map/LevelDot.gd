@@ -44,7 +44,7 @@ func _on_Button_pressed():
 
 func _on_Load_pressed():
 	$CanvasLayer/Popup.hide()
-	UIHelpers.file_dialog("res://Scenes//Levels/") # Bring up file select
+	UIHelpers.file_dialog("res://Scenes//Levels/", false) # Bring up file select
 	
 	yield(UIHelpers._get_scene().get_node("FileSelect"), "tree_exiting")
 	
