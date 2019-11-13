@@ -7,9 +7,11 @@ var selectdir = null
 var cancel = true
 var save = false
 var savename = ""
+var filetype = ""
 
 func _ready():
 	$Popup/Panel/VBoxContainer/FileName.visible = save
+	$Popup/Panel/VBoxContainer/FileName/HSplitContainer/FileType.text = filetype
 	$Popup.popup()
 	reload()
 
@@ -51,9 +53,10 @@ func reload():
 	# Get all the files in the directory, then add each as a button node
 	var files = list_files_in_directory(directory)
 	for file in files:
-		var child = load("res://Scenes/Editor/FileSelectButton.tscn").instance()
-		child.text = file
-		$Popup/Panel/VBoxContainer/ScrollContainer/Files.add_child(child)
+		if (filetype in file or not "." in file or filetype == "") and not ".import" in file:
+			var child = load("res://Scenes/Editor/FileSelectButton.tscn").instance()
+			child.text = file
+			$Popup/Panel/VBoxContainer/ScrollContainer/Files.add_child(child)
 
 func _on_Back_pressed():
 	var dir2 = directory.trim_suffix("/")
@@ -68,7 +71,7 @@ func _on_Reload_pressed():
 
 func _on_OK_pressed():
 	var files = list_files_in_directory(directory)
-	if save and (selectedfile != null or (str(savename, ".tscn") in files)):
+	if save and (selectedfile != null or (str(savename, filetype) in files)):
 		$Popup.hide()
 		$Overwrite.popup()
 	else:

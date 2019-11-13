@@ -15,6 +15,7 @@
 script = ExtResource( 1 )
 level_name = "The Test Level"
 level_creator = "Alzter"
+music = "res://Audio/Music//theme.ogg"
 worldmap = false
 
 [node name="SpawnPoint" type="Position2D" parent="." groups=[
@@ -55,5 +56,5 @@ filepath = "res://Scenes/Editor/Layers/Backgrounds"
 original_name = "Background"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="Background" instance=ExtResource( 9 )]
-scroll_offset = Vector2( 587, 160.5 )
+scroll_offset = Vector2( 683, 352.5 )
 script = ExtResource( 10 )

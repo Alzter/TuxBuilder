@@ -42,19 +42,12 @@ func _ready():
 	else:
 		tilemap = $TileMap # Level Tiles
 	
+	if UIHelpers.get_level().music != "":
+		$Menu/Settings/Panel/VBoxContainer/Music/MusicSelect.text = UIHelpers.get_level().music
+	
 	$GrabArea.offset = Vector2(9999999,99999999)
 	$Menu/Settings/Panel/VBoxContainer/Name/LevelName.text = UIHelpers.get_level().level_name
 	$Menu/Settings/Panel/VBoxContainer/Creator/LevelCreator.text = UIHelpers.get_level().level_creator
-	$Menu/Settings/Panel/VBoxContainer/Music/OptionButton.clear()
-	
-	# Get all the files from Scenes/Editor/Layers
-	var music = list_files_in_directory("res://Audio/Music/")
-	for file in music:
-		# If the file is a scene, add it to the OptionButton
-		if ".ogg" in file and not ".import" in file:
-			var item = file
-			item.erase(item.length() - 4,4)
-			$Menu/Settings/Panel/VBoxContainer/Music/OptionButton.add_item(item)
 	
 	anim_in = get_tree().current_scene.editmode
 	visible = false
@@ -845,3 +838,14 @@ func initial_menu():
 	$UI.offset = Vector2 (get_viewport().size.x * 9999,get_viewport().size.y * 9999)
 	$GrabArea.offset = Vector2(9999999,99999999)
 	$Play.offset = Vector2(9999999,99999999)
+
+func _on_MusicSelect_pressed():
+	$Menu/Settings.hide()
+	UIHelpers.file_dialog("res://Audio/Music", ".ogg", false) # Bring up file select
+	
+	yield(UIHelpers._get_scene().get_node("FileSelect"), "tree_exiting")
+	
+	if UIHelpers._get_scene().get_node("FileSelect").cancel == false:
+		UIHelpers.get_level().music = UIHelpers._get_scene().get_node("FileSelect").selectdir
+		$Menu/Settings/Panel/VBoxContainer/Music/MusicSelect.text = UIHelpers.get_level().music
+	$Menu/Settings.popup()

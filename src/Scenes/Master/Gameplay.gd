@@ -98,7 +98,7 @@ func restart_level():
 	$CanvasLayer/AnimationPlayer.play("Circle In")
 
 func open_level():
-	UIHelpers.file_dialog("res://Scenes//Levels/", false) # Bring up file select
+	UIHelpers.file_dialog("res://Scenes//Levels/", ".tscn", false) # Bring up file select
 	
 	yield(get_node("FileSelect"), "tree_exiting")
 	
@@ -167,9 +167,9 @@ func save_level():
 
 func save_level_as():
 	if get_node("Level").worldmap:
-		UIHelpers.file_dialog("res://Scenes//Worldmaps/", true) # Bring up file select
+		UIHelpers.file_dialog("res://Scenes//Worldmaps/", ".tscn", true) # Bring up file select
 	else:
-		UIHelpers.file_dialog("res://Scenes//Levels/", true) # Bring up file select
+		UIHelpers.file_dialog("res://Scenes//Levels/", ".tscn", true) # Bring up file select
 	
 	yield(get_node("FileSelect"), "tree_exiting")
 	
