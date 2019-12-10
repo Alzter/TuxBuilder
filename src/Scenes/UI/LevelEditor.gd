@@ -674,6 +674,9 @@ func _on_LayerConfirmation_pressed():
 	# And update the layers list to reflect this
 	update_layers()
 
+func _on_LayerCancel_pressed():
+	$UI/AddLayer.hide()
+
 func update_layers(): # Updates the list of layers at the bottom
 	# Clear the existing layer list
 	for child in $UI/BottomBar/ScrollContainer/HBoxContainer.get_children():

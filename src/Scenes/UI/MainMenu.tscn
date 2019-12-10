@@ -51,21 +51,19 @@ anims/Appear = SubResource( 1 )
 
 [node name="BottomText" type="Label" parent="."]
 anchor_top = 1.0
-anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
-margin_top = -65.0
-margin_right = -368.0
+margin_top = -53.0
+margin_right = 277.0
 margin_bottom = -4.0
+size_flags_vertical = 1
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
-text = "Godot SuperTux v0.1
-
-This is a work-in-progress port of
-SuperTux to the Godot Engine."
+text = "This is a work-in-progress port of SuperTux to the Godot Engine, with new features and mechanics."
 valign = 2
+autowrap = true
 
 [node name="Title" type="TextureRect" parent="."]
 anchor_left = 0.5
@@ -80,7 +78,6 @@ texture = ExtResource( 3 )
 stretch_mode = 5
 
 [node name="Panel" type="Panel" parent="."]
-editor/display_folded = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -95,7 +92,6 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
-editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 10.0
@@ -109,27 +105,31 @@ margin_right = 160.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 0, 25 )
 focus_neighbour_top = NodePath("../Quit")
+size_flags_vertical = 3
 text = "Start Game"
 
-[node name="Options" type="Button" parent="Panel/VBoxContainer"]
+[node name="LevelEditor" type="Button" parent="Panel/VBoxContainer"]
 margin_top = 29.0
 margin_right = 160.0
 margin_bottom = 54.0
 rect_min_size = Vector2( 0, 25 )
-text = "Options"
+size_flags_vertical = 3
+text = "Level Editor"
 
-[node name="LevelEditor" type="Button" parent="Panel/VBoxContainer"]
+[node name="Options" type="Button" parent="Panel/VBoxContainer"]
 margin_top = 58.0
 margin_right = 160.0
 margin_bottom = 83.0
 rect_min_size = Vector2( 0, 25 )
-text = "Level Editor"
+size_flags_vertical = 3
+text = "Options"
 
 [node name="Credits" type="Button" parent="Panel/VBoxContainer"]
 margin_top = 87.0
 margin_right = 160.0
 margin_bottom = 112.0
 rect_min_size = Vector2( 0, 25 )
+size_flags_vertical = 3
 text = "Credits"
 
 [node name="Quit" type="Button" parent="Panel/VBoxContainer"]
@@ -138,6 +138,7 @@ margin_right = 160.0
 margin_bottom = 141.0
 rect_min_size = Vector2( 0, 25 )
 focus_neighbour_bottom = NodePath("../StartGame")
+size_flags_vertical = 3
 text = "Quit"
 
 [node name="Options" parent="." instance=ExtResource( 5 )]
@@ -155,8 +156,8 @@ color = Color( 0, 0, 0, 1 )
 stream = ExtResource( 6 )
 autoplay = true
 [connection signal="pressed" from="Panel/VBoxContainer/StartGame" to="." method="_on_StartGame_pressed"]
-[connection signal="pressed" from="Panel/VBoxContainer/Options" to="." method="_on_Options_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/LevelEditor" to="." method="_on_LevelEditor_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Options" to="." method="_on_Options_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Credits" to="." method="_on_Credits_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
 [connection signal="popup_hide" from="Options" to="." method="_on_Options_popup_hide"]

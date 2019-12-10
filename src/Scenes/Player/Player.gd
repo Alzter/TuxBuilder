@@ -214,7 +214,7 @@ func _physics_process(delta):
 		velocity = move_and_slide_with_snap(velocity, Vector2(0, 20), FLOOR)
 	else: velocity = move_and_slide(velocity, FLOOR)
 	if abs(velocity.x) > abs(oldvelocity.x) and $ButtjumpLandTimer.time_left > 0:
-		start_sliding()
+		pass#start_sliding()
 
 	# Gravity
 	if $ButtjumpTimer.time_left > 0:
@@ -263,13 +263,13 @@ func _physics_process(delta):
 		if not Input.is_action_pressed("duck") or state == "small": ducking = false
 		
 		# Duck if in one block space
-		if $StandWindow.is_colliding() == true and sliding == false and state != "small": ducking = true
+		if $StandWindow.is_colliding() == true and !sliding and state != "small": ducking = true
 		
 		# Ducking / Sliding
-		elif Input.is_action_pressed("duck") and sliding == false and $ButtjumpLandTimer.time_left == 0:
+		elif Input.is_action_pressed("duck") and !sliding and !skidding and $ButtjumpLandTimer.time_left == 0:
 			if abs(velocity.x) < WALK_MAX:
 				if state != "small": ducking = true
-			else: start_sliding()
+			else: pass#start_sliding()
 	elif $StandWindow.is_colliding() == true and sliding == false and state != "small": ducking = true
 	else: ducking == false
 

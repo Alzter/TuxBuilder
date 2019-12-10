@@ -53,7 +53,7 @@ func reload():
 	# Get all the files in the directory, then add each as a button node
 	var files = list_files_in_directory(directory)
 	for file in files:
-		if (filetype in file or not "." in file or filetype == "") and not ".import" in file:
+		if (filetype in file or not "." in file or filetype == "") and not ".import" in file and not "EditedLevel" in file:
 			var child = load("res://Scenes/Editor/FileSelectButton.tscn").instance()
 			child.text = file
 			$Popup/Panel/VBoxContainer/ScrollContainer/Files.add_child(child)

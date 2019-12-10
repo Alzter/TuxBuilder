@@ -131,12 +131,12 @@ margin_bottom = -39.0
 rect_clip_content = true
 
 [node name="TopBar" type="HBoxContainer" parent="Popup/Panel/VBoxContainer"]
-editor/display_folded = true
 margin_right = 384.0
 margin_bottom = 30.0
 alignment = 1
 
 [node name="Back" type="TextureButton" parent="Popup/Panel/VBoxContainer/TopBar"]
+visible = false
 margin_left = 8.0
 margin_right = 38.0
 margin_bottom = 30.0
@@ -149,9 +149,9 @@ texture_normal = ExtResource( 4 )
 expand = true
 
 [node name="DirectoryName" type="Label" parent="Popup/Panel/VBoxContainer/TopBar"]
-margin_left = 42.0
+margin_left = 25.0
 margin_top = 5.0
-margin_right = 342.0
+margin_right = 325.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 300, 0 )
 rect_clip_content = true
@@ -166,8 +166,8 @@ valign = 1
 clip_text = true
 
 [node name="Reload" type="TextureButton" parent="Popup/Panel/VBoxContainer/TopBar"]
-margin_left = 346.0
-margin_right = 376.0
+margin_left = 329.0
+margin_right = 359.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 30, 30 )
 focus_mode = 1

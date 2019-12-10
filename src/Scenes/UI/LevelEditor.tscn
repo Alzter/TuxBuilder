@@ -301,14 +301,14 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxFlat" id=13]
+[sub_resource type="StyleBoxFlat" id=12]
 bg_color = Color( 0.3, 0.3, 0.3, 1 )
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="DynamicFont" id=14]
+[sub_resource type="DynamicFont" id=13]
 size = 12
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
@@ -741,7 +741,7 @@ focus_mode = 0
 custom_styles/hover = SubResource( 11 )
 custom_styles/pressed = SubResource( 11 )
 custom_styles/focus = SubResource( 11 )
-custom_styles/disabled = SubResource( 13 )
+custom_styles/disabled = SubResource( 12 )
 custom_styles/normal = SubResource( 11 )
 action_mode = 0
 enabled_focus_mode = 0
@@ -762,7 +762,7 @@ visible = true
 anchor_bottom = 1.0
 margin_left = 2.0
 margin_top = 2.0
-margin_right = 232.0
+margin_right = 252.0
 margin_bottom = -64.0
 theme = ExtResource( 7 )
 
@@ -780,7 +780,7 @@ margin_bottom = -42.0
 rect_clip_content = true
 
 [node name="Label" type="Label" parent="UI/AddLayer/VBoxContainer"]
-margin_right = 218.0
+margin_right = 238.0
 margin_bottom = 20.0
 custom_colors/font_color = Color( 0, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -791,7 +791,7 @@ align = 1
 
 [node name="Line" type="TextureRect" parent="UI/AddLayer/VBoxContainer"]
 margin_top = 24.0
-margin_right = 218.0
+margin_right = 238.0
 margin_bottom = 26.0
 rect_min_size = Vector2( 0, 2 )
 texture = ExtResource( 9 )
@@ -799,7 +799,7 @@ expand = true
 
 [node name="Name" type="HSplitContainer" parent="UI/AddLayer/VBoxContainer"]
 margin_top = 30.0
-margin_right = 218.0
+margin_right = 238.0
 margin_bottom = 62.0
 rect_min_size = Vector2( 0, 32 )
 
@@ -815,14 +815,14 @@ align = 1
 
 [node name="LineEdit" type="LineEdit" parent="UI/AddLayer/VBoxContainer/Name"]
 margin_left = 77.0
-margin_right = 218.0
+margin_right = 238.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 140, 0 )
 text = "Layer"
 
 [node name="Line3" type="TextureRect" parent="UI/AddLayer/VBoxContainer"]
 margin_top = 66.0
-margin_right = 218.0
+margin_right = 238.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 0, 2 )
 texture = ExtResource( 9 )
@@ -830,7 +830,7 @@ expand = true
 
 [node name="Zaxis" type="HSplitContainer" parent="UI/AddLayer/VBoxContainer"]
 margin_top = 72.0
-margin_right = 218.0
+margin_right = 238.0
 margin_bottom = 104.0
 rect_min_size = Vector2( 0, 32 )
 
@@ -846,7 +846,7 @@ align = 1
 
 [node name="SpinBox" type="SpinBox" parent="UI/AddLayer/VBoxContainer/Zaxis"]
 margin_left = 90.0
-margin_right = 218.0
+margin_right = 238.0
 margin_bottom = 32.0
 min_value = -4096.0
 max_value = 4096.0
@@ -855,7 +855,7 @@ align = 2
 
 [node name="Line2" type="TextureRect" parent="UI/AddLayer/VBoxContainer"]
 margin_top = 108.0
-margin_right = 218.0
+margin_right = 238.0
 margin_bottom = 110.0
 rect_min_size = Vector2( 0, 2 )
 texture = ExtResource( 9 )
@@ -863,7 +863,7 @@ expand = true
 
 [node name="Label3" type="Label" parent="UI/AddLayer/VBoxContainer"]
 margin_top = 114.0
-margin_right = 218.0
+margin_right = 238.0
 margin_bottom = 134.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
@@ -873,10 +873,22 @@ align = 1
 
 [node name="OptionButton" type="OptionButton" parent="UI/AddLayer/VBoxContainer"]
 margin_top = 138.0
-margin_right = 218.0
+margin_right = 238.0
 margin_bottom = 158.0
 
-[node name="LayerConfirmation" type="Button" parent="UI/AddLayer"]
+[node name="Line" type="TextureRect" parent="UI/AddLayer"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = -38.0
+margin_right = 4.0
+margin_bottom = -36.0
+rect_min_size = Vector2( 0, 2 )
+texture = ExtResource( 9 )
+expand = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/AddLayer"]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -884,16 +896,21 @@ margin_left = 4.0
 margin_top = -36.0
 margin_right = -4.0
 margin_bottom = -4.0
+rect_min_size = Vector2( 222, 32 )
+
+[node name="LayerConfirmation" type="Button" parent="UI/AddLayer/HBoxContainer"]
+margin_right = 119.0
+margin_bottom = 32.0
 focus_mode = 0
+size_flags_horizontal = 3
 text = "OK"
 
-[node name="Line" type="TextureRect" parent="UI/AddLayer/LayerConfirmation"]
-anchor_right = 1.0
-margin_top = -2.0
-margin_bottom = -12.0
-rect_min_size = Vector2( 0, 2 )
-texture = ExtResource( 9 )
-expand = true
+[node name="LayerCancel" type="Button" parent="UI/AddLayer/HBoxContainer"]
+margin_left = 123.0
+margin_right = 242.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+text = "Cancel"
 
 [node name="Play" type="CanvasLayer" parent="."]
 editor/display_folded = true
@@ -913,7 +930,7 @@ focus_mode = 0
 custom_styles/hover = SubResource( 11 )
 custom_styles/pressed = SubResource( 11 )
 custom_styles/focus = SubResource( 11 )
-custom_styles/disabled = SubResource( 13 )
+custom_styles/disabled = SubResource( 12 )
 custom_styles/normal = SubResource( 11 )
 action_mode = 0
 enabled_focus_mode = 0
@@ -1153,13 +1170,14 @@ expand = true
 [node name="Name" type="HSplitContainer" parent="Menu/Settings/Panel/VBoxContainer"]
 margin_top = 42.0
 margin_right = 458.0
-margin_bottom = 74.0
+margin_bottom = 76.0
 rect_min_size = Vector2( 0, 32 )
+size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="Menu/Settings/Panel/VBoxContainer/Name"]
-margin_top = 6.0
+margin_top = 7.0
 margin_right = 136.0
-margin_bottom = 26.0
+margin_bottom = 27.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
@@ -1168,21 +1186,22 @@ text = "Level Name:"
 [node name="LevelName" type="LineEdit" parent="Menu/Settings/Panel/VBoxContainer/Name"]
 margin_left = 148.0
 margin_right = 458.0
-margin_bottom = 32.0
+margin_bottom = 34.0
 text = "SuperTux Level"
 align = 2
 
 [node name="Creator" type="HSplitContainer" parent="Menu/Settings/Panel/VBoxContainer"]
 editor/display_folded = true
-margin_top = 78.0
+margin_top = 80.0
 margin_right = 458.0
-margin_bottom = 110.0
+margin_bottom = 114.0
 rect_min_size = Vector2( 0, 32 )
+size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="Menu/Settings/Panel/VBoxContainer/Creator"]
-margin_top = 6.0
+margin_top = 7.0
 margin_right = 169.0
-margin_bottom = 26.0
+margin_bottom = 27.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
@@ -1191,20 +1210,21 @@ text = "Level Creator:"
 [node name="LevelCreator" type="LineEdit" parent="Menu/Settings/Panel/VBoxContainer/Creator"]
 margin_left = 181.0
 margin_right = 458.0
-margin_bottom = 32.0
+margin_bottom = 34.0
 text = "SuperTux Player"
 align = 2
 
 [node name="Music" type="HSplitContainer" parent="Menu/Settings/Panel/VBoxContainer"]
-margin_top = 114.0
+margin_top = 118.0
 margin_right = 458.0
-margin_bottom = 146.0
+margin_bottom = 152.0
 rect_min_size = Vector2( 0, 32 )
+size_flags_vertical = 3
 
 [node name="Label2" type="Label" parent="Menu/Settings/Panel/VBoxContainer/Music"]
-margin_top = 6.0
+margin_top = 7.0
 margin_right = 137.0
-margin_bottom = 26.0
+margin_bottom = 27.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
@@ -1213,9 +1233,9 @@ text = "Level Music:"
 [node name="MusicSelect" type="Button" parent="Menu/Settings/Panel/VBoxContainer/Music"]
 margin_left = 149.0
 margin_right = 458.0
-margin_bottom = 32.0
+margin_bottom = 34.0
 focus_mode = 1
-custom_fonts/font = SubResource( 14 )
+custom_fonts/font = SubResource( 13 )
 enabled_focus_mode = 1
 text = "No Music Set"
 clip_text = true
@@ -1416,7 +1436,8 @@ text = "Cancel"
 [connection signal="pressed" from="UI/BottomBar/Zoom/ZoomOut" to="." method="_on_ZoomOut_pressed"]
 [connection signal="pressed" from="UI/BottomBar/Save" to="." method="_on_Save_pressed"]
 [connection signal="popup_hide" from="UI/AddLayer" to="." method="_on_AddLayer_popup_hide"]
-[connection signal="pressed" from="UI/AddLayer/LayerConfirmation" to="." method="_on_LayerConfirmation_pressed"]
+[connection signal="pressed" from="UI/AddLayer/HBoxContainer/LayerConfirmation" to="." method="_on_LayerConfirmation_pressed"]
+[connection signal="pressed" from="UI/AddLayer/HBoxContainer/LayerCancel" to="." method="_on_LayerCancel_pressed"]
 [connection signal="pressed" from="Play/Play" to="." method="_on_Play_pressed"]
 [connection signal="pressed" from="Menu/Editor/Panel/VBoxContainer/Return" to="." method="_on_Return_pressed"]
 [connection signal="pressed" from="Menu/Editor/Panel/VBoxContainer/LevelSave" to="." method="_on_LevelSave_pressed"]
