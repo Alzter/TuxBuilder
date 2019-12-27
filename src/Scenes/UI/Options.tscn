@@ -121,6 +121,6 @@ margin_bottom = 31.0
 rect_min_size = Vector2( 0, 25 )
 action_mode = 0
 text = "Back"
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/FullscreenCheck" to="." method="_on_FullscreenCheck_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer2/VSyncCheck" to="." method="_on_VSyncCheck_pressed"]
+[connection signal="toggled" from="VBoxContainer/HBoxContainer/FullscreenCheck" to="." method="_on_FullscreenCheck_toggled"]
+[connection signal="toggled" from="VBoxContainer/HBoxContainer2/VSyncCheck" to="." method="_on_VSyncCheck_toggled"]
 [connection signal="pressed" from="VBoxContainer2/Back" to="." method="_on_Back_pressed"]
