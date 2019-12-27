@@ -33,6 +33,7 @@ window/size/width=640
 window/size/height=480
 window/size/test_width=1366
 window/size/test_height=750
+window/dpi/allow_hidpi=true
 window/stretch/aspect="expand"
 
 [importer_defaults]
