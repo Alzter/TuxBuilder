@@ -18,33 +18,33 @@ func _ready():
 	for child in get_tree().current_scene.get_node("Level").get_children():
 		if child.is_in_group("spawnpoint"):
 			position = child.position
-	
+
 	# The player needs to be on a grid space to move
 	var rndx = (floor(position.x / 32) * 32) + 16
 	var rndy = (floor(position.y / 32) * 32) + 16
-	position = Vector2(rndx,rndy) 
+	position = Vector2(rndx,rndy)
 
 func _process(delta):
 	if UIHelpers._get_scene().editmode or !can_move:
 		return
-	
+
 	# Setting the direction to move
 	if !moving: newdirection = null
 	if Input.is_action_pressed("up"):
 		newdirection = 0
-	
+
 	if Input.is_action_pressed("duck"):
 		newdirection = 180
-	
+
 	if Input.is_action_pressed("move_left"):
 		newdirection = -90
-	
+
 	if Input.is_action_pressed("move_right"):
 		newdirection = 90
-	
+
 	var rndx = (floor(position.x / 32) * 32) + 16
 	var rndy = (floor(position.y / 32) * 32) + 16
-	
+
 	# Stop at level dots
 	level_passable = true
 	movedirection = null
@@ -59,7 +59,7 @@ func _process(delta):
 					directionbuffer = 0
 				movedirection = child.movedirection
 				level_passable = child.cleared
-	
+
 	# Change direction from the grid
 	if position.x == rndx and position.y == rndy:
 		for child in UIHelpers.get_level().get_children():
@@ -68,7 +68,7 @@ func _process(delta):
 				var tile_id = child.get_cellv(playerpos)
 				if tile_id != null and tile_id != -1:
 					var tile_name = child.get_tileset().tile_get_name(tile_id)
-					
+
 					if tile_name == "Pathing":
 						var tile_pos = child.get_cell_autotile_coord(playerpos.x, playerpos.y)
 						var bitmask = child.get_tileset().autotile_get_bitmask(tile_id, tile_pos)
@@ -76,7 +76,7 @@ func _process(delta):
 						var down_tiles = [186, 146, 176, 152, 184, 178, 154, 144]
 						var left_tiles = [186, 56, 152, 26, 154, 58, 184, 24]
 						var right_tiles = [186, 56, 178, 58, 184, 48, 50, 176]
-						
+
 						# Move regularly
 						if newdirection == 0 and bitmask in up_tiles:
 							moving = true
@@ -99,7 +99,7 @@ func _process(delta):
 							if directionbuffer <= 0:
 								newdirection = null
 								directionbuffer = 0
-						
+
 						# Turn on corner tiles
 						if bitmask == 176: # Bottom Right
 							if direction == 0:
@@ -129,7 +129,7 @@ func _process(delta):
 							if direction == 180:
 								direction = -90
 								newdirection = direction
-						
+
 						# Stop at edges or when trying to pass uncleared level dots
 						if direction == 0 and (not bitmask in up_tiles or (!level_passable and movedirection != 180)):
 							moving = false
@@ -139,15 +139,15 @@ func _process(delta):
 							moving = false
 						if direction == -90 and (not bitmask in left_tiles or (!level_passable and movedirection != 90)):
 							moving = false
-	
+
 	# Move
 	if moving:
 		position += Vector2(MOVE_SPEED, 0).rotated(deg2rad(direction - 90))
-	
+
 	# Camera
 	UIHelpers.get_camera().position = position
 	UIHelpers.get_camera().align()
-	
+
 	# Animations
 	if moving:
 		set_animation("walk")

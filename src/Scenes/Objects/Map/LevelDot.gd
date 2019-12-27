@@ -22,16 +22,16 @@ func _process(delta):
 		else: $AnimatedSprite.hide()
 	elif cleared:
 		$AnimatedSprite.play("clear")
-	else: 
+	else:
 		$AnimatedSprite.play("default")
-	
+
 	if $CanvasLayer/Popup.visible or $CanvasLayer/Error.visible:
 		UIHelpers.get_editor().clickdisable = true
 	$DisplayName.visible = UIHelpers._get_scene().editmode
-	
+
 	invisible = $CanvasLayer/Popup/Panel/VBoxContainer/Invisible/CheckBox.pressed
 	autoplay = $CanvasLayer/Popup/Panel/VBoxContainer/AutoPlay/CheckBox.pressed
-	
+
 	$CanvasLayer/BottomName.hide()
 	if !UIHelpers._get_scene().editmode and UIHelpers.get_player().position == position: # Level hovered
 		$CanvasLayer/BottomName.show()
@@ -45,9 +45,9 @@ func _on_Button_pressed():
 func _on_Load_pressed():
 	$CanvasLayer/Popup.hide()
 	UIHelpers.file_dialog("user://Scenes//Levels/", ".tscn", false) # Bring up file select
-	
+
 	yield(UIHelpers._get_scene().get_node("FileSelect"), "tree_exiting")
-	
+
 	# After exiting the file select, attempt to load the level if "OK" was pressed
 	if UIHelpers._get_scene().get_node("FileSelect").cancel == false:
 		var selectdir = UIHelpers._get_scene().get_node("FileSelect").selectdir
@@ -58,7 +58,7 @@ func _on_Load_pressed():
 			$CanvasLayer/Popup.popup()
 		else:
 			$CanvasLayer/Error.popup()
-	
+
 	# Otherwise don't do anything
 	else:
 		$CanvasLayer/Popup.popup()

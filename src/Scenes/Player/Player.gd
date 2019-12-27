@@ -143,7 +143,7 @@ func _physics_process(delta):
 	if (ducking == false or on_ground != 0) and backflip == false and skidding == false and sliding == false and $ButtjumpLandTimer.time_left == 0:
 		if Input.is_action_pressed("move_right"):
 			$Control/AnimatedSprite.scale.x = 1
-			
+
 			# Moving
 			if velocity.x >= 0:
 				if velocity.x < WALK_ADD:
@@ -151,20 +151,20 @@ func _physics_process(delta):
 				if abs(velocity.x) > WALK_MAX:
 						velocity.x += RUN_ACCEL * delta
 				else: velocity.x += WALK_ACCEL * delta
-			
+
 			# Skidding
 			elif on_ground == 0 and abs(velocity.x) >= WALK_MAX:
 				if !skidding:
 					skidding = true
 					$SFX/Skid.play()
-			
+
 			# Air turning
 			else: velocity.x += TURN_ACCEL * delta
-		
+
 		if Input.is_action_pressed("move_left"):
 			$Control/AnimatedSprite.scale.x = -1
 			if velocity.x <= 0:
-				
+
 				# Moving
 				$Control/AnimatedSprite.scale.x = -1
 				if velocity.x > -WALK_ADD:
@@ -172,13 +172,13 @@ func _physics_process(delta):
 				if abs(velocity.x) > WALK_MAX:
 						velocity.x -= RUN_ACCEL * delta
 				else: velocity.x -= WALK_ACCEL * delta
-			
+
 			# Skidding
 			elif on_ground == 0 and abs(velocity.x) >= WALK_MAX:
 				if skidding == false:
 					skidding = true
 					$SFX/Skid.play()
-			
+
 			# Air turning
 			else: velocity.x -= TURN_ACCEL * delta
 
@@ -188,14 +188,14 @@ func _physics_process(delta):
 
 	# Friction
 	if backflip == false and (skidding or (ducking and on_ground == 0) or (not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"))):
-		
+
 		# Turn when skidding
 		if skidding:
 			if velocity.x > 0:
 				$Control/AnimatedSprite.scale.x = -1
 			if velocity.x < 0:
 				$Control/AnimatedSprite.scale.x = 1
-		
+
 		# Friction
 		if !sliding:
 			velocity.x *= FRICTION
@@ -261,10 +261,10 @@ func _physics_process(delta):
 	if on_ground == 0:
 		# Stop ducking in certain situations
 		if not Input.is_action_pressed("duck") or state == "small": ducking = false
-		
+
 		# Duck if in one block space
 		if $StandWindow.is_colliding() == true and !sliding and state != "small": ducking = true
-		
+
 		# Ducking / Sliding
 		elif Input.is_action_pressed("duck") and !sliding and !skidding and $ButtjumpLandTimer.time_left == 0:
 			if abs(velocity.x) < WALK_MAX:
@@ -385,7 +385,7 @@ func _physics_process(delta):
 	# Buttjump hitboxes
 	if buttjump == true and $ButtjumpTimer.time_left == 0:
 		$ButtjumpHitbox/CollisionShape2D.disabled = false
-		
+
 		# Change the buttjump hitbox's size so it always collides before Tux hits the ground
 		if velocity.y > 0:
 			$ButtjumpHitbox/CollisionShape2D.shape.extents = Vector2(25,16 + (velocity.y * delta))
@@ -429,19 +429,19 @@ func _physics_process(delta):
 	if holding_object == true:
 		# Set the object's position
 		get_tree().current_scene.get_node(str("Level/", object_held)).position = Vector2(position.x + $ShootLocation.position.x, position.y + $ShootLocation.position.y)
-		
+
 		# Set the object's direction
 		if get_tree().current_scene.get_node(str("Level/", object_held)).has_node("Sprite"): get_tree().current_scene.get_node(str("Level/", object_held, "/Sprite")).scale.x = $Control/AnimatedSprite.scale.x * -1
 		if get_tree().current_scene.get_node(str("Level/", object_held)).has_node("AnimatedSprite"): get_tree().current_scene.get_node(str("Level/", object_held, "/AnimatedSprite")).scale.x = $Control/AnimatedSprite.scale.x * -1
 		if get_tree().current_scene.get_node(str("Level/", object_held)).has_node("Control/AnimatedSprite"): get_tree().current_scene.get_node(str("Level/", object_held, "/Control/AnimatedSprite")).scale.x = $Control/AnimatedSprite.scale.x * -1
-		
+
 		# Throw objects
 		if not Input.is_action_pressed("action"):
 			holding_object = false
 			if get_tree().current_scene.get_node(str("Level/", object_held)).has_method("throw"):
 				get_tree().current_scene.get_node(str("Level/", object_held)).throw()
 				if not Input.is_action_pressed("duck"): get_tree().current_scene.get_node(str("Level/", object_held)).velocity.x = velocity.x + (200 * $Control/AnimatedSprite.scale.x)
-	
+
 	# Decrease Wind
 	if wind > 0:
 		wind -= 1

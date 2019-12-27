@@ -17,11 +17,11 @@ func _move(delta):
 			iciclestate = "broken"
 			$SFX/Icecrash.play()
 			$AnimationPlayer.play("broken")
-			
+
 			collision_layer = 0
 			collision_mask = 0
 			return
-		
+
 		velocity.y += 20
 		velocity = move_and_slide(velocity, FLOOR)
 
@@ -34,7 +34,7 @@ func _on_Area2D_body_entered(body):
 	if iciclestate != "broken":
 		if body.is_in_group('player'):
 			body.hurt()
-		
+
 		elif body.is_in_group('badguys'):
 			body.kill()
 

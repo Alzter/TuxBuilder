@@ -16,6 +16,7 @@ func _on_Options_popup_hide():
 	$Panel.show()
 
 func _on_LevelEditor_pressed():
+	# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://Scenes/Master/Gameplay.tscn")
 
 func _on_Credits_pressed():

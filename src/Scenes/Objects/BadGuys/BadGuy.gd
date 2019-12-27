@@ -21,19 +21,19 @@ func on_ready():
 
 func on_kill(delta):
 	pass
-	
+
 func on_move(delta):
 	pass
-	
+
 func on_squish(delta):
 	pass
-	
+
 func on_fireball_kill():
 	pass
-	
+
 func on_buttjump_kill():
 	pass
-	
+
 func on_physics_process(delta):
 	pass
 
@@ -59,21 +59,21 @@ func _physics_process(delta):
 	if get_tree().current_scene.editmode == true:
 		return
 
-	if invincible_time > 0: 
+	if invincible_time > 0:
 		invincible_time -= 1
 	else: invincible_time = 0
 
 	# Movement
 	if state == "active":
 		_move(delta)
-		
+
 	# Kill states
 	if state == "kill":
 		_kill(delta)
-	
+
 	if state == "squished":
 		_squish(delta)
-		
+
 	on_physics_process(delta);
 
 # If hit by bullet or invincible player
@@ -83,7 +83,7 @@ func kill():
 	$AnimationPlayer.stop()
 	state = "kill"
 
-	if velocity.x == 0: 
+	if velocity.x == 0:
 		velocity.x = 1
 
 	velocity = Vector2(300 * (velocity.x / abs(velocity.x)), -350)
@@ -96,10 +96,10 @@ func _move(delta):
 			if not $Smart.is_colliding():
 				$Control/AnimatedSprite.scale.x *= -1
 				velocity.x *= -1
-	
+
 		if (velocity.x / abs(velocity.x)) == $Control/AnimatedSprite.scale.x:
 			$Control/AnimatedSprite.scale.x *= -1
-	
+
 	if abs(velocity.x) <= WALK_SPEED: velocity.x = -WALK_SPEED * $Control/AnimatedSprite.scale.x
 	elif is_on_floor(): velocity.x *= 0.95
 	velocity.y += 20
@@ -135,7 +135,7 @@ func _on_Area2D_body_entered(body):
 	if not body.is_in_group("player"): return
 	if body.position.y + 20 < position.y and squishable == true:
 		if state == "active" and invincible_time == 0:
-			
+
 			# Squished
 			if body.sliding == true:
 				kill()
