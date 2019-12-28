@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/UI/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/SuperTux-Medium.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Sprites/UI/SuperTuxLogo.png" type="Texture" id=3]
 [ext_resource path="res://Scenes/UI/UITheme.tres" type="Theme" id=4]
 [ext_resource path="res://Scenes/UI/Options.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Audio/Music/theme.ogg" type="AudioStream" id=6]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Appear"
@@ -45,6 +44,9 @@ font_data = ExtResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Appear = SubResource( 1 )
@@ -146,15 +148,13 @@ margin_top = -10.0
 margin_bottom = 150.0
 
 [node name="FadeIn" type="ColorRect" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 color = Color( 0, 0, 0, 1 )
-
-[node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 6 )
-autoplay = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="Panel/VBoxContainer/StartGame" to="." method="_on_StartGame_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/LevelEditor" to="." method="_on_LevelEditor_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Options" to="." method="_on_Options_pressed"]

@@ -22,6 +22,7 @@ config/icon="res://icon.png"
 [autoload]
 
 UIHelpers="*res://Scenes/UI/Helpers.gd"
+Music="*res://AutoLoad/Music.tscn"
 
 [debug]
 
