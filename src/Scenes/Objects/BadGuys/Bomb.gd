@@ -53,7 +53,7 @@ func _on_Area2D_body_entered(body):
 	if not body.is_in_group("player"): return
 	if body.position.y + 20 < position.y and squishable == true:
 		if state == "active" and invincible_time == 0:
-			
+
 			# Squished
 			if body.sliding == true:
 				kill()

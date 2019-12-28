@@ -5,7 +5,7 @@ const KICK_SPEED = 500
 
 func on_ready():
 	collision_mask = 2
-	
+
 func _squish(delta):
 	velocity.y += 20
 	velocity = move_and_slide(velocity, FLOOR)
@@ -18,10 +18,10 @@ func on_physics_process(delta):
 	elif state == "kicked":
 		collision_mask = 0
 		collision_layer = 8
-	else: 
+	else:
 		collision_mask = 2
 		collision_layer = 2
-	
+
 	if state == "kicked":
 		velocity.x = KICK_SPEED * -$Control/AnimatedSprite.scale.x
 		velocity.y += 20
@@ -33,7 +33,7 @@ func on_physics_process(delta):
 			$Control/AnimatedSprite.scale.x *= -1
 			velocity.x *= -1
 			$SFX/Bump.play()
-			
+
 
 # Fireball death animation
 func on_fireball_kill():
@@ -53,7 +53,7 @@ func _on_Area2D_body_entered(body):
 	elif not body.is_in_group("player"): return
 	if body.position.y + 20 < position.y and squishable == true:
 		if (state == "active" or state == "kicked"):
-			
+
 			# Squished
 			if body.sliding == true:
 				kill()
@@ -66,7 +66,7 @@ func _on_Area2D_body_entered(body):
 			$SFX/Squish.play()
 			body.bounce(300, body.JUMP_POWER, true)
 			velocity = Vector2(0,0)
-		
+
 		# Kicked
 		elif state == "squished":
 			if body.sliding == true:
@@ -83,7 +83,7 @@ func _on_Area2D_body_entered(body):
 			if body.position.x > position.x:
 				velocity.x = -KICK_SPEED
 				$Control/AnimatedSprite.scale.x = 1
-				
+
 			else:
 				velocity.x = KICK_SPEED
 				$Control/AnimatedSprite.scale.x = -1
@@ -93,7 +93,7 @@ func _on_Area2D_body_entered(body):
 			kill()
 		if (state == "active" or state == "kicked") and body.has_method("hurt"):
 			body.hurt()
-		
+
 		# Kick / Grab Iceblock
 		elif state == "squished":
 			$AnimationPlayer.stop()
@@ -106,11 +106,11 @@ func _on_Area2D_body_entered(body):
 				invincible_time = INVINCIBLE_TIME
 				$Control/AnimatedSprite.play("squished")
 				$SFX/Kick.play()
-				
+
 				if body.position.x > position.x:
 					velocity.x = -KICK_SPEED
 					$Control/AnimatedSprite.scale.x = 1
-					
+
 				else:
 					velocity.x = KICK_SPEED
 					$Control/AnimatedSprite.scale.x = -1

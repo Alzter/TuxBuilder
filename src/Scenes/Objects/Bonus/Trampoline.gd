@@ -21,13 +21,13 @@ func _physics_process(delta):
 	else: $Control/AnimatedSprite.flip_h = true
 	if velocity == Vector2(0,0) and cling_to_walls == true: align()
 	if get_tree().current_scene.editmode == true: return
-	
+
 	if wallcling == "" and state == "active":
 		if portable == true:
 			velocity.y += 20
 		else: velocity.y += 20 * 2
 		velocity = move_and_slide(velocity, FLOOR)
-	
+
 	if is_on_floor():
 		if get_tree().current_scene.editmode == true: return
 		if state != "active": return
@@ -38,7 +38,7 @@ func _physics_process(delta):
 		on_ground = true
 		velocity.x *= 0.9
 	else: on_ground = false
-	
+
 	if portable == true and state == "active" and $SolidTimer.time_left == 0:
 		var bodies = $GrabRadius.get_overlapping_bodies()
 		for body in bodies:
@@ -53,7 +53,7 @@ func _physics_process(delta):
 func _on_Area2D_body_entered(body):
 	if get_tree().current_scene.editmode == true: return
 	if state != "active": return
-	
+
 	if body.is_in_group("player"):
 		if (body.position.y - 20 < position.y and wallcling == "") or wallcling != "":
 			$Control/AnimatedSprite.frame = 0
@@ -81,7 +81,7 @@ func _on_Area2D_body_entered(body):
 			if body.position.x > position.x:
 				velocity.x = -175
 			else: velocity.x = 175
-	
+
 	if body.is_in_group("badguys"):
 		if (body.position.y - 20 < position.y and wallcling == "") or wallcling != "":
 			$Trampoline.play()
@@ -95,7 +95,7 @@ func _on_Area2D_body_entered(body):
 		else:
 			body.buttjump_kill()
 			$Control/AnimatedSprite.play("default")
-	
+
 	if body.is_in_group("trampoline"):
 		if body.portable == true and body.name != name:
 			if (body.position.y - 20 < position.y and wallcling == "") or wallcling != "":
@@ -116,7 +116,7 @@ func align():
 	$CollisionShape2D.rotation_degrees = 0
 	$Area2D/CollisionShape2D.rotation_degrees = 0
 	wallcling = ""
-	
+
 	if $LeftWallDetector.is_colliding() and not $RightWallDetector.is_colliding():
 		wallcling = "left"
 		$Control.rect_pivot_offset.y = -1
@@ -126,7 +126,7 @@ func align():
 		$Area2D/CollisionShape2D.position.y = 0
 		$CollisionShape2D.rotation_degrees = $Control.rect_rotation
 		$Area2D/CollisionShape2D.rotation_degrees = $Control.rect_rotation
-	
+
 	elif $RightWallDetector.is_colliding() and not $LeftWallDetector.is_colliding():
 		wallcling = "right"
 		$Control.rect_pivot_offset.y = -1
@@ -136,7 +136,7 @@ func align():
 		$Area2D/CollisionShape2D.position.y = 0
 		$CollisionShape2D.rotation_degrees = $Control.rect_rotation
 		$Area2D/CollisionShape2D.rotation_degrees = $Control.rect_rotation
-		
+
 	elif $CeilingDetector.is_colliding():
 		wallcling = "top"
 		$Control.rect_pivot_offset.y = 0

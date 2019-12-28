@@ -36,7 +36,7 @@ func _process(_delta):
 	$Panel.rect_size.y = panel_size.y * panel_sizemult
 	$Panel.rect_position.y = round(get_viewport().size.y / 2) + ($Panel.rect_size.y * -0.5)
 	$Background.rect_size = get_viewport().size
-	
+
 	# Hide restart and exit level buttons in worldmap
 	if UIHelpers._get_scene().worldmap == UIHelpers._get_scene().current_level:
 		$Panel/VBoxContainer/Restart.visible = false

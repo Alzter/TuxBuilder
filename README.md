@@ -1,5 +1,5 @@
 # Tux Builder
-A re-implementation of the jump'n'run game SuperTux, coded from the ground up in Godot.  
+A re-implementation of the jump'n'run game SuperTux, coded from the ground up in Godot.
 Some of SuperTux's art, sound and music assets are used or modified here.
 
 To play this game you will need Godot 3.1 and the source code.

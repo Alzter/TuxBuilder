@@ -30,7 +30,7 @@ func _on_Area2D_body_entered(body):
 			if body.position.x > self.position.x:
 				hit(-1,false)
 			else: hit(1,false)
-		
+
 		elif body.buttjump == true or body.get_node("ButtjumpLandTimer").time_left > 0:
 			if body.position.x > self.position.x:
 				hit(-1,true)
@@ -39,37 +39,37 @@ func _on_Area2D_body_entered(body):
 # Hit the block
 func hit(hitdirection, hitdown):
 	if hit == true: return
-	
+
 	hitdirectionstored = hitdirection
 	hitdownstored = hitdown
 	hit = true
-	
+
 	# Spawn contents
 	if stored != "":
 		if childstored.get("player"):
 			childstored.player = player
-		
+
 		$AnimatedSprite.play("empty")
 		if hitdown == true:
 			$AnimationPlayer.play("hitdown")
 		else: $AnimationPlayer.play("hit")
-		
+
 		if childstored.get("collect_on_appear") == true:
 			if childstored.collect_on_appear == false:
 				$Upgrade.play()
-				
+
 				if hitdown == true:
 					childstored.position.y += 32
 				else: childstored.position.y -= 32
-			
+
 			else: $Brick.play()
 		else:
 			$Upgrade.play()
-			
+
 			if hitdown == true:
 				childstored.position.y += 32
 			else: childstored.position.y -= 32
-		
+
 		get_tree().current_scene.get_node("Level").add_child(childstored)
 		if childstored.has_method("appear"):
 			childstored.appear(hitdirection,hitdown)

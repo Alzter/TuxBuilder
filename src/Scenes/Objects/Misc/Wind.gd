@@ -20,7 +20,7 @@ func _process(delta):
 	$CPUParticles2D.gravity = Vector2(speed_x,speed_y) * 10
 	$CPUParticles2D.position += $CPUParticles2D.gravity * -0.05
 	$CPUParticles2D.angle = rad2deg( Vector2($CPUParticles2D.gravity.x,$CPUParticles2D.gravity.y).angle() ) * -1
-	
+
 	speed_x = $CanvasLayer/Popup/Panel/VBoxContainer/SpeedX/SpinBox.value
 	speed_y = $CanvasLayer/Popup/Panel/VBoxContainer/SpeedY/SpinBox.value
 

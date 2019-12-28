@@ -21,13 +21,13 @@ func _ready():
 func _process(_delta):
 	if UIHelpers.get_level() == null or UIHelpers.get_editor() == null or UIHelpers.get_player() == null:
 		return
-	
+
 	if camera_zoom_speed < 1: camera_zoom_speed = 1
 	if camera_zoom < 0.25: camera_zoom = 0.25
 	if camera_zoom > 1.5: camera_zoom = 1.5
 	$Camera2D.zoom.x = $Camera2D.zoom.x + (camera_zoom - $Camera2D.zoom.x) / camera_zoom_speed
 	$Camera2D.zoom.y = $Camera2D.zoom.x
-	
+
 	if get_viewport().size.x > get_viewport().size.y:
 		$CanvasLayer/CircleTransition.rect_size.x = get_viewport().size.x
 		$CanvasLayer/CircleTransition.rect_size.y = get_viewport().size.x
@@ -36,7 +36,7 @@ func _process(_delta):
 		$CanvasLayer/CircleTransition.rect_size.x = get_viewport().size.y
 		$CanvasLayer/CircleTransition.rect_size.y = get_viewport().size.y
 		$CanvasLayer/CircleTransition.rect_position.x = 0.5 * (get_viewport().size.x - get_viewport().size.y)
-	
+
 	if editmode == false:
 		level_bounds()
 		camera_to_level_bounds()
@@ -46,7 +46,7 @@ func _process(_delta):
 		camera_bounds_remove()
 		$Camera2D.drag_margin_h_enabled = false
 		$Camera2D.drag_margin_v_enabled = false
-	
+
 	if camera_smooth_time > 0:
 		$Camera2D.smoothing_enabled = true
 		camera_smooth_time -= 1
@@ -69,7 +69,7 @@ func load_level_from_map(level):
 	clear_level()
 	clear_editor()
 	clear_ui()
-	
+
 	current_level = level
 	load_level(level)
 	load_player()
@@ -99,9 +99,9 @@ func restart_level():
 
 func open_level():
 	UIHelpers.file_dialog("user://Scenes//Levels/", ".tscn", false) # Bring up file select
-	
+
 	yield(get_node("FileSelect"), "tree_exiting")
-	
+
 	if UIHelpers._get_scene().get_node("FileSelect").cancel == false:
 		var level = get_node("FileSelect").selectdir
 		var dir = get_node("FileSelect").directory
@@ -122,9 +122,9 @@ func enter_level_init(level, properties):
 	camera_zoom_speed = 1
 	UIHelpers.get_editor().set_process(true)
 	clear_editor()
-	
+
 	editmode = false
-	
+
 	load_level(level)
 	load_player()
 	load_ui()
@@ -149,9 +149,9 @@ func enter_level(level):
 	UIHelpers.get_editor().set_process(true)
 	clear_editor()
 	clear_ui()
-	
+
 	editmode = false
-	
+
 	load_level(level)
 	load_player()
 	load_ui()
@@ -170,9 +170,9 @@ func save_level_as():
 		UIHelpers.file_dialog("res://Scenes//Worldmaps/", ".tscn", true) # Bring up file select
 	else:
 		UIHelpers.file_dialog("user://Scenes//Levels/", ".tscn", true) # Bring up file select
-	
+
 	yield(get_node("FileSelect"), "tree_exiting")
-	
+
 	if UIHelpers._get_scene().get_node("FileSelect").cancel == false:
 		var selectdir = str(get_node("FileSelect").directory, "/", get_node("FileSelect").savename, ".tscn")
 		var packed_scene = PackedScene.new()
@@ -263,21 +263,21 @@ func level_bounds():
 		var level = get_tree().current_scene.get_node(str("Level/", child_name))
 		var rect = level.get_used_rect()
 		var cell_size = level.get_cell_size()
-		
+
 		var bound_left = rect.position.x * ((cell_size.x * level.scale.x) / level.scroll_speed.x)
 		var bound_right = rect.end.x * ((cell_size.x * level.scale.x) / level.scroll_speed.x)
 		var bound_top = rect.position.y * ((cell_size.y * level.scale.y) / level.scroll_speed.y)
 		var bound_bottom = rect.end.y * ((cell_size.y * level.scale.y) / level.scroll_speed.y)
-		
+
 		if bound_left < level_bound_left:
 			level_bound_left = bound_left
-		
+
 		if bound_right > level_bound_right:
 			level_bound_right = bound_right
-		
+
 		if bound_top < level_bound_top:
 			level_bound_top = bound_top
-		
+
 		if  bound_bottom > level_bound_bottom:
 			level_bound_bottom = bound_bottom
 
@@ -309,14 +309,14 @@ func editmode_toggle():
 			clear_ui()
 			clear_player()
 			clear_level()
-			
+
 			if editsaved == false:
 				if worldmap == "":
 					load_level(current_level)
 				else: load_level(worldmap)
 			else: load_edited_level()
 			load_player()
-			
+
 			# Only move the player if the current level is the same type as the previous
 			if get_node("Level").worldmap == prevworldmap:
 				get_node("Player").position = player_position
@@ -324,7 +324,7 @@ func editmode_toggle():
 				get_node("Camera2D").position = get_node("Player").position
 				clear_editor()
 				load_editor()
-			
+
 		elif get_node("Editor").dragging_object == false:
 			editmode = false
 			camera_smooth_time = 20

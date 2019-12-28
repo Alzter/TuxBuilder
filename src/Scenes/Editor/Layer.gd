@@ -18,7 +18,7 @@ func _process(_delta):
 	$Panel/Label.text = str(layername)
 	$Panel/Panel/Zaxis.text = str(z_axis)
 	set_name(str(layername))
-	
+
 	# Highlight if selected
 	$Panel.modulate = Color(0.5,0.5,0.5,1)
 	if layername == UIHelpers.get_editor().layer_selected:

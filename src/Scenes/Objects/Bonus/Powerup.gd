@@ -26,7 +26,7 @@ func _physics_process(delta):
 		gravity = true
 	if appeared == false and gravity_when_static == true:
 		gravity = true
-	
+
 	if get_tree().current_scene.editmode == false and collected == false:
 		if physics:
 			if move_speed != 0: velocity.x = move_speed * direction

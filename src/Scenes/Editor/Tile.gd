@@ -9,10 +9,10 @@ func _ready():
 		tileset = UIHelpers.get_editor().get_node("WorldMap")
 	else:
 		tileset = UIHelpers.get_editor().get_node("TileMap")
-	
+
 	# Get the tile from the TileMap
 	tile_type = tileset.get_tileset().find_tile_by_name(str(tile_type))
-	
+
 	# Then set the texture to the tile
 	var selected_texture = tileset.get_tileset().tile_get_texture(tile_type)
 	$Control/Sprite.texture = (selected_texture)
