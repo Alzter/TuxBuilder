@@ -288,12 +288,15 @@ func camera_bounds_remove():
 	$Camera2D.limit_bottom = 10000000
 
 func camera_to_level_bounds():
-	$Camera2D.limit_left = level_bound_left
-	$Camera2D.limit_right = level_bound_right
+	$Camera2D.limit_left = level_bound_left + 32
+	$Camera2D.limit_right = level_bound_right - 32
 	if $Camera2D.limit_right < get_viewport().size.x: # If the tilemap is thinner than the window, align the camera to the left
 		$Camera2D.limit_right = get_viewport().size.x
-	$Camera2D.limit_top = level_bound_top - get_viewport().size.y * 0.5
-	$Camera2D.limit_bottom = level_bound_bottom
+	$Camera2D.limit_top = level_bound_top + 32
+	print(str($Camera2D.limit_top , " ", -get_viewport().size.y * 0.5))
+	if $Camera2D.limit_top > -get_viewport().size.y * 0.5: # If the tilemap is thinner than the window, align the camera to the left
+		$Camera2D.limit_top = -get_viewport().size.y * 0.5
+	$Camera2D.limit_bottom = level_bound_bottom - 32
 
 func play_music(music):
 	$Music.stop()
