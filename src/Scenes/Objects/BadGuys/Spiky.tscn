@@ -145,6 +145,18 @@ tracks/2/keys = {
 "update": 1,
 "values": [ "melted" ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("Control/AnimatedSprite:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 1.6, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
 
 [sub_resource type="Gradient" id=7]
 offsets = PoolRealArray( 0, 0.467949, 1 )
@@ -172,7 +184,6 @@ rect_pivot_offset = Vector2( 0, 14 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
 position = Vector2( 0, 6.31594e-13 )
 frames = SubResource( 1 )
-frame = 1
 playing = true
 offset = Vector2( 0, -4 )
 
