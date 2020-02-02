@@ -1,27 +1,38 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Scenes/Objects/BadGuys/Spiky.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Creatures/Spiky/spiky-0.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/Creatures/Spiky/spiky-1.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/Creatures/Spiky/spiky-2.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Creatures/Spiky/gear-cracked.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/Creatures/Snowball/particle.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Creatures/Spiky/spiky-3.png" type="Texture" id=5]
 [ext_resource path="res://Sprites/Creatures/Snowball/droplet.png" type="Texture" id=7]
 [ext_resource path="res://Audio/SoundEffects/Enemy/fall.wav" type="AudioStream" id=8]
 [ext_resource path="res://Audio/SoundEffects/Enemy/squish.wav" type="AudioStream" id=9]
 [ext_resource path="res://Audio/SoundEffects/Enemy/splash.ogg" type="AudioStream" id=10]
+[ext_resource path="res://Sprites/Creatures/Spiky/melting-2.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/Creatures/Spiky/melting-3.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/Creatures/Spiky/melting-0.png" type="Texture" id=13]
+[ext_resource path="res://Sprites/Creatures/Spiky/melting-4.png" type="Texture" id=14]
+[ext_resource path="res://Sprites/Creatures/Spiky/spiky-5.png" type="Texture" id=15]
+[ext_resource path="res://Sprites/Creatures/Spiky/melting-1.png" type="Texture" id=16]
+[ext_resource path="res://Sprites/Creatures/Spiky/melting-6.png" type="Texture" id=17]
+[ext_resource path="res://Sprites/Creatures/Spiky/spiky-6.png" type="Texture" id=18]
+[ext_resource path="res://Sprites/Creatures/Spiky/spiky-7.png" type="Texture" id=19]
+[ext_resource path="res://Sprites/Creatures/Spiky/melting-7.png" type="Texture" id=20]
+[ext_resource path="res://Sprites/Creatures/Spiky/melting-5.png" type="Texture" id=21]
+[ext_resource path="res://Sprites/Creatures/Spiky/spiky-4.png" type="Texture" id=22]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 3 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 22 ), ExtResource( 15 ), ExtResource( 18 ), ExtResource( 19 ) ],
 "loop": true,
 "name": "default",
-"speed": 8.0
+"speed": 15.0
 }, {
-"frames": [ ExtResource( 5 ) ],
-"loop": true,
+"frames": [ ExtResource( 13 ), ExtResource( 16 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 14 ), ExtResource( 21 ), ExtResource( 17 ), ExtResource( 20 ) ],
+"loop": false,
 "name": "melted",
-"speed": 5.0
+"speed": 20.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
@@ -96,25 +107,13 @@ tracks/4/keys = {
 [sub_resource type="Animation" id=5]
 resource_name = "explode"
 length = 2.0
-tracks/0/type = "value"
-tracks/0/path = NodePath("ExplodeSnow:emitting")
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/1/type = "method"
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
 "times": PoolRealArray( 2 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
@@ -122,8 +121,20 @@ tracks/1/keys = {
 "method": "queue_free"
 } ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("ExplodeDroplets:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 tracks/2/type = "value"
-tracks/2/path = NodePath("ExplodeDroplets:emitting")
+tracks/2/path = NodePath("Control/AnimatedSprite:animation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -132,24 +143,8 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ true ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Control/AnimatedSprite:animation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
 "values": [ "melted" ]
 }
-
-[sub_resource type="Gradient" id=6]
-offsets = PoolRealArray( 0, 0.762821, 1 )
-colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0.443137, 0, 1, 0.882813, 0 )
 
 [sub_resource type="Gradient" id=7]
 offsets = PoolRealArray( 0, 0.467949, 1 )
@@ -168,7 +163,6 @@ smart = true
 squishable = false
 
 [node name="Control" type="Control" parent="."]
-editor/display_folded = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -176,10 +170,11 @@ anchor_bottom = 0.5
 rect_pivot_offset = Vector2( 0, 14 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
-position = Vector2( 0, 6.31594e-013 )
+position = Vector2( 0, 6.31594e-13 )
 frames = SubResource( 1 )
+frame = 1
 playing = true
-offset = Vector2( 0, -2 )
+offset = Vector2( 0, -4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
@@ -199,29 +194,6 @@ autoplay = "active"
 anims/active = SubResource( 4 )
 anims/explode = SubResource( 5 )
 
-[node name="ExplodeSnow" type="CPUParticles2D" parent="."]
-rotation = -1.5708
-emitting = false
-amount = 4
-one_shot = true
-speed_scale = 1.5
-explosiveness = 1.0
-local_coords = false
-texture = ExtResource( 6 )
-spread = 60.0
-flatness = 1.0
-gravity = Vector2( 0, 500 )
-initial_velocity = 250.0
-angular_velocity = 720.0
-angular_velocity_random = 1.0
-damping = 80.0
-damping_random = 0.25
-angle = 360.0
-angle_random = 1.0
-scale_amount = 0.2
-scale_amount_random = 0.75
-color_ramp = SubResource( 6 )
-
 [node name="ExplodeDroplets" type="CPUParticles2D" parent="."]
 emitting = false
 amount = 16
@@ -230,9 +202,8 @@ explosiveness = 1.0
 local_coords = false
 texture = ExtResource( 7 )
 spread = 180.0
-flatness = 1.0
 gravity = Vector2( 0, 500 )
-initial_velocity = 300.0
+initial_velocity = 100.0
 initial_velocity_random = 0.75
 angular_velocity = 720.0
 angular_velocity_random = 1.0
@@ -245,7 +216,6 @@ scale_amount_random = 0.3
 color_ramp = SubResource( 7 )
 
 [node name="SFX" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="Fall" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 8 )

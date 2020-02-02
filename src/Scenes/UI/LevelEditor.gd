@@ -705,21 +705,21 @@ func select_first_solid_tilemap():
 				return
 
 func list_files_in_directory(path):
-    var files = []
-    dir = Directory.new()
-    dir.open(path)
-    dir.list_dir_begin()
+	var files = []
+	dir = Directory.new()
+	dir.open(path)
+	dir.list_dir_begin()
 
-    while true:
-        var file = dir.get_next()
-        if file == "":
-            break
-        elif not file.begins_with("."):
-            files.append(file)
+	while true:
+		var file = dir.get_next()
+		if file == "":
+			break
+		elif not file.begins_with("."):
+			files.append(file)
 
-    dir.list_dir_end()
+	dir.list_dir_end()
 
-    return files
+	return files
 
 func _on_ZoomIn_pressed():
 	get_tree().current_scene.camera_zoom -= 0.25

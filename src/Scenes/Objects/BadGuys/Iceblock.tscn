@@ -392,7 +392,6 @@ __meta__ = {
 }
 
 [node name="Control" type="Control" parent="."]
-editor/display_folded = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -401,6 +400,7 @@ rect_pivot_offset = Vector2( 0, 14 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
 frames = SubResource( 1 )
+frame = 3
 playing = true
 offset = Vector2( 0, -2 )
 
@@ -463,7 +463,6 @@ explosiveness = 1.0
 local_coords = false
 texture = ExtResource( 17 )
 spread = 60.0
-flatness = 1.0
 gravity = Vector2( 0, 500 )
 initial_velocity = 250.0
 angular_velocity = 1000.0
@@ -483,7 +482,6 @@ explosiveness = 1.0
 local_coords = false
 texture = ExtResource( 18 )
 spread = 180.0
-flatness = 1.0
 gravity = Vector2( 0, 500 )
 initial_velocity = 300.0
 initial_velocity_random = 0.75

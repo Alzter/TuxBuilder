@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Scenes/Objects/BadGuys/Iceblock.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Creatures/IceblockSmart/smartblock-0.png" type="Texture" id=2]
@@ -11,15 +11,20 @@
 [ext_resource path="res://Audio/SoundEffects/Enemy/iceblock_bump.wav" type="AudioStream" id=9]
 [ext_resource path="res://Audio/SoundEffects/Enemy/splash.ogg" type="AudioStream" id=10]
 [ext_resource path="res://Audio/SoundEffects/Enemy/icecrash.ogg" type="AudioStream" id=11]
-[ext_resource path="res://Sprites/Creatures/Iceblock/shard.png" type="Texture" id=12]
-[ext_resource path="res://Sprites/Creatures/Snowball/droplet.png" type="Texture" id=13]
+[ext_resource path="res://Sprites/Creatures/SnowballSmart/droplet.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/Creatures/IceblockSmart/shard.png" type="Texture" id=13]
+[ext_resource path="res://Sprites/Creatures/IceblockSmart/smartblock-7.png" type="Texture" id=14]
+[ext_resource path="res://Sprites/Creatures/IceblockSmart/smartblock-5.png" type="Texture" id=15]
+[ext_resource path="res://Sprites/Creatures/IceblockSmart/smartblock-3.png" type="Texture" id=16]
+[ext_resource path="res://Sprites/Creatures/IceblockSmart/smartblock-4.png" type="Texture" id=17]
+[ext_resource path="res://Sprites/Creatures/IceblockSmart/smartblock-6.png" type="Texture" id=18]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 3 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 15 ), ExtResource( 18 ), ExtResource( 14 ) ],
 "loop": true,
 "name": "default",
-"speed": 8.0
+"speed": 15.0
 }, {
 "frames": [ ExtResource( 5 ) ],
 "loop": true,
@@ -396,7 +401,7 @@ rect_pivot_offset = Vector2( 0, 14 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
 frames = SubResource( 1 )
-frame = 1
+frame = 3
 playing = true
 offset = Vector2( 0, -2 )
 
@@ -430,7 +435,6 @@ anims/stop = SubResource( 9 )
 anims/wakeup = SubResource( 10 )
 
 [node name="SFX" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="Fall" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 6 )
@@ -458,9 +462,8 @@ lifetime = 0.6
 one_shot = true
 explosiveness = 1.0
 local_coords = false
-texture = ExtResource( 12 )
+texture = ExtResource( 13 )
 spread = 60.0
-flatness = 1.0
 gravity = Vector2( 0, 500 )
 initial_velocity = 250.0
 angular_velocity = 1000.0
@@ -478,9 +481,8 @@ amount = 16
 one_shot = true
 explosiveness = 1.0
 local_coords = false
-texture = ExtResource( 13 )
+texture = ExtResource( 12 )
 spread = 180.0
-flatness = 1.0
 gravity = Vector2( 0, 500 )
 initial_velocity = 300.0
 initial_velocity_random = 0.75

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Scenes/Objects/BadGuys/Snowball.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Creatures/SnowballSmart/smartball-0.png" type="Texture" id=2]
@@ -8,15 +8,20 @@
 [ext_resource path="res://Audio/SoundEffects/Enemy/fall.wav" type="AudioStream" id=6]
 [ext_resource path="res://Audio/SoundEffects/Enemy/squish.wav" type="AudioStream" id=7]
 [ext_resource path="res://Audio/SoundEffects/Enemy/splash.ogg" type="AudioStream" id=8]
-[ext_resource path="res://Sprites/Creatures/Snowball/particle.png" type="Texture" id=9]
-[ext_resource path="res://Sprites/Creatures/Snowball/droplet.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/Creatures/SnowballSmart/particle.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/Creatures/SnowballSmart/droplet.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/Creatures/SnowballSmart/smartball-3.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/Creatures/SnowballSmart/smartball-6.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/Creatures/SnowballSmart/smartball-4.png" type="Texture" id=13]
+[ext_resource path="res://Sprites/Creatures/SnowballSmart/smartball-5.png" type="Texture" id=14]
+[ext_resource path="res://Sprites/Creatures/SnowballSmart/smartball-7.png" type="Texture" id=15]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 3 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 11 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 12 ), ExtResource( 15 ) ],
 "loop": true,
 "name": "default",
-"speed": 8.0
+"speed": 15.0
 }, {
 "frames": [ ExtResource( 5 ) ],
 "loop": true,
@@ -239,11 +244,11 @@ anchor_bottom = 0.5
 rect_pivot_offset = Vector2( 0, 14 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
-position = Vector2( 0, 6.31594e-013 )
+position = Vector2( 0, 6.31594e-13 )
 frames = SubResource( 1 )
-frame = 2
+frame = 3
 playing = true
-offset = Vector2( 0, -2 )
+offset = Vector2( 0, -4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
@@ -265,7 +270,6 @@ anims/explode = SubResource( 5 )
 anims/squished = SubResource( 6 )
 
 [node name="SFX" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="Fall" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 6 )
@@ -286,7 +290,6 @@ explosiveness = 1.0
 local_coords = false
 texture = ExtResource( 9 )
 spread = 60.0
-flatness = 1.0
 gravity = Vector2( 0, 500 )
 initial_velocity = 250.0
 angular_velocity = 720.0
@@ -307,7 +310,6 @@ explosiveness = 1.0
 local_coords = false
 texture = ExtResource( 10 )
 spread = 180.0
-flatness = 1.0
 gravity = Vector2( 0, 500 )
 initial_velocity = 300.0
 initial_velocity_random = 0.75

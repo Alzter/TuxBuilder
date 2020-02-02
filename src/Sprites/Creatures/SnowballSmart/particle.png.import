@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/gear-cracked.png-2fff6013fb3953ce9a50d2fe17382c07.stex"
+path="res://.import/particle.png-054196a4953b60063916b3dec2469a79.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Creatures/Spiky/gear-cracked.png"
-dest_files=[ "res://.import/gear-cracked.png-2fff6013fb3953ce9a50d2fe17382c07.stex" ]
+source_file="res://Sprites/Creatures/SnowballSmart/particle.png"
+dest_files=[ "res://.import/particle.png-054196a4953b60063916b3dec2469a79.stex" ]
 
 [params]
 
