@@ -886,7 +886,7 @@ func pack_level_select(pack):
 		return
 	else:
 		var level = UIHelpers._get_scene().get_node("FileSelect").selectdir
-		if UIHelpers._get_scene().check_level_valid(level) == true:
+		if UIHelpers._get_scene().check_level_valid(level) == true and level != UIHelpers._get_scene().current_level:
 			if UIHelpers.get_level() != null:
 				UIHelpers._get_scene().enter_level(level)
 			else:

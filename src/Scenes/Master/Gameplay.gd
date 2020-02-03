@@ -108,7 +108,7 @@ func open_level():
 
 	if UIHelpers._get_scene().get_node("FileSelect").cancel == false:
 		var level = get_node("FileSelect").selectdir
-		if check_level_valid(level) == true:
+		if check_level_valid(level) == true and level != current_level:
 			if UIHelpers.get_level() != null:
 				enter_level(level)
 			else:
