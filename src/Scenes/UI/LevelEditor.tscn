@@ -407,6 +407,9 @@ color = Color( 0.25098, 0.25098, 0.25098, 0.74902 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TilesButton" type="Button" parent="UI/SideBar/VBoxContainer"]
 margin_right = 128.0
@@ -1183,6 +1186,7 @@ margin_top = 42.0
 margin_right = 384.0
 margin_bottom = 305.0
 rect_min_size = Vector2( 0, 263 )
+scroll_horizontal_enabled = false
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Menu/PackSelect/Panel/VBoxContainer/ScrollContainer"]
 __meta__ = {
@@ -1553,6 +1557,8 @@ text = "Cancel"
 [connection signal="pressed" from="Menu/Editor/Panel/VBoxContainer/LevelOpen" to="." method="_on_LevelOpen_pressed"]
 [connection signal="pressed" from="Menu/Editor/Panel/VBoxContainer/LevelProperties" to="." method="_on_LevelProperties_pressed"]
 [connection signal="pressed" from="Menu/Editor/Panel/VBoxContainer/ReturnMenu" to="." method="_on_ReturnMenu_pressed"]
+[connection signal="about_to_show" from="Menu/PackSelect" to="." method="_on_PackSelect_about_to_show"]
+[connection signal="pressed" from="Menu/PackSelect/HBoxContainer/LevelPackCancel" to="." method="_on_LevelPackCancel_pressed"]
 [connection signal="pressed" from="Menu/Settings/Panel/VBoxContainer/Music/MusicSelect" to="." method="_on_MusicSelect_pressed"]
 [connection signal="pressed" from="Menu/Settings/Panel/SettingsConfirmation" to="." method="_on_SettingsConfirmation_pressed"]
 [connection signal="pressed" from="Menu/Create/Panel/VBoxContainer/CreateLevel" to="." method="_on_CreateLevel_pressed"]

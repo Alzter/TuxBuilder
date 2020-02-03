@@ -98,7 +98,11 @@ func restart_level():
 	$CanvasLayer/AnimationPlayer.play("Circle In")
 
 func open_level():
-	UIHelpers.file_dialog("user://Scenes//Levels/", ".tscn", false) # Bring up file select
+	var directory = Directory.new()
+	if not directory.dir_exists("user://Levels/Individual"):
+		directory.make_dir_recursive("user://Levels/Individual")
+
+	UIHelpers.file_dialog("user://Levels/Individual/", ".tscn", false) # Bring up file select
 
 	yield(get_node("FileSelect"), "tree_exiting")
 
@@ -166,10 +170,15 @@ func save_level():
 	ResourceSaver.save(current_level, packed_scene)
 
 func save_level_as():
+	var directory = Directory.new()
+
+	if not directory.dir_exists("user://Levels/Individual"):
+		directory.make_dir_recursive("user://Levels/Individual")
+	
 	if get_node("Level").worldmap:
-		UIHelpers.file_dialog("res://Scenes//Worldmaps/", ".tscn", true) # Bring up file select
+		UIHelpers.file_dialog("res://Levels/Individual/", ".tscn", true) # Bring up file select
 	else:
-		UIHelpers.file_dialog("user://Scenes//Levels/", ".tscn", true) # Bring up file select
+		UIHelpers.file_dialog("user://Levels/Individual/", ".tscn", true) # Bring up file select
 
 	yield(get_node("FileSelect"), "tree_exiting")
 
@@ -185,14 +194,14 @@ func save_edited_level():
 	var directory = Directory.new()
 	packed_scene.pack(get_tree().get_current_scene().get_node("Level"))
 
-	if not directory.dir_exists("user://Scenes/Levels/EditedLevel"):
-		directory.make_dir_recursive("user://Scenes/Levels/EditedLevel")
+	if not directory.dir_exists("user://EditedLevel"):
+		directory.make_dir_recursive("user://EditedLevel")
 
-	ResourceSaver.save("user://Scenes/Levels/EditedLevel/EditedLevel.tscn", packed_scene)
+	ResourceSaver.save("user://EditedLevel/EditedLevel.tscn", packed_scene)
 	editsaved = true
 
 func load_edited_level():
-	load_level("user://Scenes/Levels/EditedLevel/EditedLevel.tscn")
+	load_level("user://EditedLevel/EditedLevel.tscn")
 
 func load_level(level):
 	current_level = level

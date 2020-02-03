@@ -768,7 +768,7 @@ func _on_Cancel_pressed():
 	$Menu/Editor.popup()
 
 func _on_LevelSave_pressed():
-	if UIHelpers._get_scene().current_level != "user://Scenes/Levels/EditedLevel/EditedLevel.tscn":
+	if UIHelpers._get_scene().current_level != "user://EditedLevel/EditedLevel.tscn":
 		UIHelpers._get_scene().save_level()
 	else:
 		$Menu/Editor.hide()
@@ -826,14 +826,14 @@ func create_level(level):
 	UIHelpers._get_scene().add_child(levelinstance)
 	UIHelpers._get_scene().save_edited_level()
 	UIHelpers.get_level().queue_free()
-	UIHelpers._get_scene().enter_level_init("user://Scenes/Levels/EditedLevel/EditedLevel.tscn", true)
+	UIHelpers._get_scene().enter_level_init("user://EditedLevel/EditedLevel.tscn", true)
 
 func _on_CancelCreation_pressed():
 	$Menu/Create.hide()
 	$Menu/Editor.popup()
 
 func _on_Save_pressed():
-	if UIHelpers._get_scene().current_level != "user://Scenes/Levels/EditedLevel/EditedLevel.tscn":
+	if UIHelpers._get_scene().current_level != "user://EditedLevel/EditedLevel.tscn":
 		UIHelpers._get_scene().save_level()
 	else:
 		UIHelpers._get_scene().save_level_as()
@@ -867,6 +867,15 @@ func _on_PackSelect_pressed():
 	pack = true
 	$Menu/Editor.hide()
 	$Menu/PackSelect.popup()
+
+func _on_PackSelect_about_to_show():
+	for child in $Menu/PackSelect/Panel/VBoxContainer/ScrollContainer/VBoxContainer.get_children():
+		child.queue_free()
+	
+
+func _on_LevelPackCancel_pressed():
+	$Menu/PackSelect.hide()
+	$Menu/Editor.popup()
 
 func _on_PackMenu_pressed():
 	pass # Replace with function body.

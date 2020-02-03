@@ -45,8 +45,8 @@ extra_spacing_top = 2
 font_data = ExtResource( 4 )
 
 [node name="LevelDot" type="Node2D" groups=[
-"popup",
 "leveldot",
+"popup",
 ]]
 script = ExtResource( 1 )
 
@@ -79,7 +79,7 @@ margin_bottom = -38.0
 
 [node name="Label" type="Label" parent="CanvasLayer/Popup/Panel/VBoxContainer"]
 margin_right = 214.0
-margin_bottom = 20.0
+margin_bottom = 21.0
 custom_colors/font_color = Color( 0, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
@@ -89,33 +89,33 @@ align = 1
 valign = 1
 
 [node name="Line2" type="TextureRect" parent="CanvasLayer/Popup/Panel/VBoxContainer"]
-margin_top = 24.0
+margin_top = 25.0
 margin_right = 214.0
-margin_bottom = 26.0
+margin_bottom = 27.0
 rect_min_size = Vector2( 0, 2 )
 texture = ExtResource( 3 )
 expand = true
 
 [node name="Load" type="Button" parent="CanvasLayer/Popup/Panel/VBoxContainer"]
-margin_top = 30.0
+margin_top = 31.0
 margin_right = 214.0
-margin_bottom = 50.0
+margin_bottom = 52.0
 focus_mode = 1
 action_mode = 0
 enabled_focus_mode = 1
 text = "Level to load"
 
 [node name="Invisible" type="HBoxContainer" parent="CanvasLayer/Popup/Panel/VBoxContainer"]
-margin_top = 54.0
+margin_top = 56.0
 margin_right = 214.0
-margin_bottom = 74.0
+margin_bottom = 77.0
 custom_constants/separation = 16
 alignment = 1
 
 [node name="Label" type="Label" parent="CanvasLayer/Popup/Panel/VBoxContainer/Invisible"]
 margin_left = 42.0
 margin_right = 139.0
-margin_bottom = 20.0
+margin_bottom = 21.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
@@ -124,23 +124,23 @@ text = "Invisible"
 [node name="CheckBox" type="CheckBox" parent="CanvasLayer/Popup/Panel/VBoxContainer/Invisible"]
 margin_left = 155.0
 margin_right = 171.0
-margin_bottom = 20.0
+margin_bottom = 21.0
 focus_mode = 1
 action_mode = 0
 enabled_focus_mode = 1
 align = 1
 
 [node name="AutoPlay" type="HBoxContainer" parent="CanvasLayer/Popup/Panel/VBoxContainer"]
-margin_top = 78.0
+margin_top = 81.0
 margin_right = 214.0
-margin_bottom = 98.0
+margin_bottom = 102.0
 custom_constants/separation = 16
 alignment = 1
 
 [node name="Label" type="Label" parent="CanvasLayer/Popup/Panel/VBoxContainer/AutoPlay"]
 margin_left = 34.0
 margin_right = 148.0
-margin_bottom = 20.0
+margin_bottom = 21.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
@@ -149,7 +149,7 @@ text = "Auto play"
 [node name="CheckBox" type="CheckBox" parent="CanvasLayer/Popup/Panel/VBoxContainer/AutoPlay"]
 margin_left = 164.0
 margin_right = 180.0
-margin_bottom = 20.0
+margin_bottom = 21.0
 focus_mode = 1
 action_mode = 0
 enabled_focus_mode = 1
@@ -175,7 +175,6 @@ texture = ExtResource( 3 )
 expand = true
 
 [node name="Error" type="Popup" parent="CanvasLayer"]
-editor/display_folded = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
