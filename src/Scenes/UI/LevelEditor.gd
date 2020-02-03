@@ -891,6 +891,8 @@ func pack_level_select(pack):
 				UIHelpers._get_scene().enter_level(level)
 			else:
 				UIHelpers._get_scene().enter_level_init(level, false)
+			$Menu/Editor.hide()
+			return
 		else:
 			$Menu/Editor.show()
 			return
