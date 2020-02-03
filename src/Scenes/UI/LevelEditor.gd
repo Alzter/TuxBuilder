@@ -31,11 +31,19 @@ var stop = false
 var dir = Directory.new()
 var clickdisable = false
 var tilemap = null
+var pack = false # Whether you're editing a singular level or level pack
 
 func _ready():
 	if UIHelpers.get_level() == null:
 		initial_menu()
 		return
+
+	if pack:
+		$Menu/Editor/Panel/VBoxContainer/LevelSaveAs.hide()
+		$Menu/Editor/Panel/VBoxContainer/LevelOpen.hide()
+	else:
+		$Menu/Editor/Panel/VBoxContainer/PackMenu.hide()
+		$Menu/Editor/Panel/VBoxContainer/PackSelect.hide()
 
 	if UIHelpers.get_level().worldmap: # Worldmap Tiles
 		tilemap = $WorldMap
@@ -832,11 +840,13 @@ func _on_Save_pressed():
 		yield(UIHelpers._get_scene().get_node("FileSelect"), "tree_exiting")
 
 func initial_menu():
+	pack = false
 	$Menu/Editor.popup()
 	$Menu/Editor/Panel/VBoxContainer/Return.hide()
 	$Menu/Editor/Panel/VBoxContainer/LevelSave.hide()
 	$Menu/Editor/Panel/VBoxContainer/LevelSaveAs.hide()
 	$Menu/Editor/Panel/VBoxContainer/LevelProperties.hide()
+	$Menu/Editor/Panel/VBoxContainer/PackMenu.hide()
 	visible = false
 	$UI.offset = Vector2 (get_viewport().size.x * 9999,get_viewport().size.y * 9999)
 	$GrabArea.offset = Vector2(9999999,99999999)
@@ -852,3 +862,11 @@ func _on_MusicSelect_pressed():
 		UIHelpers.get_level().music = UIHelpers._get_scene().get_node("FileSelect").selectdir
 		$Menu/Settings/Panel/VBoxContainer/Music/MusicSelect.text = UIHelpers.get_level().music
 	$Menu/Settings.popup()
+
+func _on_PackSelect_pressed():
+	pack = true
+	$Menu/Editor.hide()
+	$Menu/PackSelect.popup()
+
+func _on_PackMenu_pressed():
+	pass # Replace with function body.

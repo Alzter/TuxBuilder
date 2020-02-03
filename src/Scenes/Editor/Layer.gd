@@ -9,7 +9,6 @@ func _ready():
 	$Panel/Label.text = str(layername)
 	$Panel/Panel/Zaxis.text = str(z_axis)
 	$Panel/Icon.texture = load(str("res://Sprites/Editor/LayerIcons/", original_name, ".png"))
-	print(original_name)
 	if layername == UIHelpers.get_editor().layer_selected and get_tree().current_scene.get_node(str("Level/",layername)).filepath != "":
 		settings()
 

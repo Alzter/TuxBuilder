@@ -11,8 +11,8 @@ offsets = PoolRealArray( 0, 0.358025, 0.753086, 1 )
 colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
 
 [node name="ZoomTrigger" type="Node2D" groups=[
-"popup",
 "expandable",
+"popup",
 "stackable",
 ]]
 script = ExtResource( 1 )
@@ -25,7 +25,6 @@ emission_shape = 2
 emission_rect_extents = Vector2( 1, 1 )
 spread = 0.0
 gravity = Vector2( 0, 0 )
-initial_velocity = 0.0
 scale_amount = 0.5
 scale_amount_random = 1.0
 color_ramp = SubResource( 1 )
@@ -34,7 +33,6 @@ color_ramp = SubResource( 1 )
 layer = 6
 
 [node name="Popup" type="Popup" parent="CanvasLayer"]
-editor/display_folded = true
 visible = true
 anchor_left = 0.5
 anchor_top = 0.5
@@ -62,7 +60,7 @@ margin_bottom = 72.0
 
 [node name="Label" type="Label" parent="CanvasLayer/Popup/Panel/VBoxContainer"]
 margin_right = 284.0
-margin_bottom = 20.0
+margin_bottom = 21.0
 custom_colors/font_color = Color( 0, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
@@ -71,23 +69,23 @@ text = "Wind"
 align = 1
 
 [node name="Line" type="TextureRect" parent="CanvasLayer/Popup/Panel/VBoxContainer"]
-margin_top = 24.0
+margin_top = 25.0
 margin_right = 284.0
-margin_bottom = 26.0
+margin_bottom = 27.0
 rect_min_size = Vector2( 0, 2 )
 texture = ExtResource( 4 )
 expand = true
 
 [node name="SpeedX" type="HBoxContainer" parent="CanvasLayer/Popup/Panel/VBoxContainer"]
-margin_top = 30.0
+margin_top = 31.0
 margin_right = 284.0
-margin_bottom = 62.0
+margin_bottom = 63.0
 rect_min_size = Vector2( 0, 32 )
 alignment = 1
 
 [node name="Label" type="Label" parent="CanvasLayer/Popup/Panel/VBoxContainer/SpeedX"]
 margin_left = 41.0
-margin_top = 6.0
+margin_top = 5.0
 margin_right = 131.0
 margin_bottom = 26.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -105,15 +103,15 @@ allow_lesser = true
 align = 1
 
 [node name="SpeedY" type="HBoxContainer" parent="CanvasLayer/Popup/Panel/VBoxContainer"]
-margin_top = 66.0
+margin_top = 67.0
 margin_right = 284.0
-margin_bottom = 98.0
+margin_bottom = 99.0
 rect_min_size = Vector2( 0, 32 )
 alignment = 1
 
 [node name="Label" type="Label" parent="CanvasLayer/Popup/Panel/VBoxContainer/SpeedY"]
 margin_left = 41.0
-margin_top = 6.0
+margin_top = 5.0
 margin_right = 130.0
 margin_bottom = 26.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -131,7 +129,6 @@ allow_lesser = true
 align = 1
 
 [node name="Button" type="Button" parent="CanvasLayer/Popup/Panel"]
-editor/display_folded = true
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
