@@ -102,13 +102,12 @@ func open_level():
 	if not directory.dir_exists("user://Levels/Individual"):
 		directory.make_dir_recursive("user://Levels/Individual")
 
-	UIHelpers.file_dialog("user://Levels/Individual/", ".tscn", false) # Bring up file select
+	UIHelpers.file_dialog("user://Levels/Individual/", ".tscn", false, true) # Bring up file select
 
 	yield(get_node("FileSelect"), "tree_exiting")
 
 	if UIHelpers._get_scene().get_node("FileSelect").cancel == false:
 		var level = get_node("FileSelect").selectdir
-		var dir = get_node("FileSelect").directory
 		if check_level_valid(level) == true:
 			if UIHelpers.get_level() != null:
 				enter_level(level)
@@ -176,9 +175,9 @@ func save_level_as():
 		directory.make_dir_recursive("user://Levels/Individual")
 	
 	if get_node("Level").worldmap:
-		UIHelpers.file_dialog("res://Levels/Individual/", ".tscn", true) # Bring up file select
+		UIHelpers.file_dialog("res://Levels/Individual/", ".tscn", true, true) # Bring up file select
 	else:
-		UIHelpers.file_dialog("user://Levels/Individual/", ".tscn", true) # Bring up file select
+		UIHelpers.file_dialog("user://Levels/Individual/", ".tscn", true, true) # Bring up file select
 
 	yield(get_node("FileSelect"), "tree_exiting")
 

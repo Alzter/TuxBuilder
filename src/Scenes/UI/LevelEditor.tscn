@@ -1130,112 +1130,8 @@ margin_bottom = 310.0
 size_flags_vertical = 3
 text = "Exit to Menu"
 
-[node name="PackSelect" type="Popup" parent="Menu"]
-visible = true
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -200.0
-margin_top = -180.0
-margin_right = 200.0
-margin_bottom = 180.0
-theme = ExtResource( 7 )
-popup_exclusive = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Panel" type="Panel" parent="Menu/PackSelect"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Menu/PackSelect/Panel"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 8.0
-margin_top = 8.0
-margin_right = -8.0
-margin_bottom = -8.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Menu/PackSelect/Panel/VBoxContainer"]
-margin_right = 384.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 0, 32 )
-custom_colors/font_color = Color( 0, 1, 1, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 2
-custom_constants/shadow_offset_y = 2
-text = "Select Level Pack"
-align = 1
-valign = 1
-
-[node name="Line" type="TextureRect" parent="Menu/PackSelect/Panel/VBoxContainer"]
-margin_top = 36.0
-margin_right = 384.0
-margin_bottom = 38.0
-rect_min_size = Vector2( 0, 2 )
-texture = ExtResource( 9 )
-expand = true
-
-[node name="ScrollContainer" type="ScrollContainer" parent="Menu/PackSelect/Panel/VBoxContainer"]
-margin_top = 42.0
-margin_right = 384.0
-margin_bottom = 305.0
-rect_min_size = Vector2( 0, 263 )
-scroll_horizontal_enabled = false
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Menu/PackSelect/Panel/VBoxContainer/ScrollContainer"]
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Line" type="TextureRect" parent="Menu/PackSelect"]
-anchor_right = 1.0
-margin_top = 318.0
-margin_bottom = 320.0
-rect_min_size = Vector2( 0, 2 )
-texture = ExtResource( 9 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Menu/PackSelect"]
-margin_top = 320.0
-margin_right = 400.0
-margin_bottom = 355.0
-rect_min_size = Vector2( 400, 0 )
-custom_constants/separation = 100
-alignment = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="LevelPackOk" type="Button" parent="Menu/PackSelect/HBoxContainer"]
-margin_left = 96.0
-margin_right = 124.0
-margin_bottom = 35.0
-rect_min_size = Vector2( 0, 32 )
-text = "OK"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="LevelPackCancel" type="Button" parent="Menu/PackSelect/HBoxContainer"]
-margin_left = 224.0
-margin_right = 303.0
-margin_bottom = 35.0
-rect_min_size = Vector2( 0, 32 )
-text = "Cancel"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Settings" type="Popup" parent="Menu"]
+visible = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -1557,8 +1453,6 @@ text = "Cancel"
 [connection signal="pressed" from="Menu/Editor/Panel/VBoxContainer/LevelOpen" to="." method="_on_LevelOpen_pressed"]
 [connection signal="pressed" from="Menu/Editor/Panel/VBoxContainer/LevelProperties" to="." method="_on_LevelProperties_pressed"]
 [connection signal="pressed" from="Menu/Editor/Panel/VBoxContainer/ReturnMenu" to="." method="_on_ReturnMenu_pressed"]
-[connection signal="about_to_show" from="Menu/PackSelect" to="." method="_on_PackSelect_about_to_show"]
-[connection signal="pressed" from="Menu/PackSelect/HBoxContainer/LevelPackCancel" to="." method="_on_LevelPackCancel_pressed"]
 [connection signal="pressed" from="Menu/Settings/Panel/VBoxContainer/Music/MusicSelect" to="." method="_on_MusicSelect_pressed"]
 [connection signal="pressed" from="Menu/Settings/Panel/SettingsConfirmation" to="." method="_on_SettingsConfirmation_pressed"]
 [connection signal="pressed" from="Menu/Create/Panel/VBoxContainer/CreateLevel" to="." method="_on_CreateLevel_pressed"]

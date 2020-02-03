@@ -15,10 +15,22 @@ func get_level():
 func get_editor():
 	return _get_scene().get_node("Editor")
 
-func file_dialog(directory, filetype, save):
+func file_dialog(directory, filetype, save, movable):
 	var dialog = load("res://Scenes/UI/FileSelect.tscn").instance()
 	dialog.set_name("FileSelect")
 	dialog.directory = directory
 	dialog.filetype = filetype
 	dialog.save = save
+	dialog.movable = movable
+	dialog.levelselect = false
+	_get_scene().add_child(dialog)
+
+func pack_level_select(directory):
+	var dialog = load("res://Scenes/UI/FileSelect.tscn").instance()
+	dialog.set_name("FileSelect")
+	dialog.directory = directory
+	dialog.filetype = ".tscn"
+	dialog.save = false
+	dialog.movable = false
+	dialog.levelselect = true
 	_get_scene().add_child(dialog)

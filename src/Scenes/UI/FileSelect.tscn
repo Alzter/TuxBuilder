@@ -60,7 +60,7 @@ alignment = 1
 [node name="Label" type="Label" parent="Overwrite/Panel/VBoxContainer"]
 margin_top = 2.0
 margin_right = 284.0
-margin_bottom = 22.0
+margin_bottom = 23.0
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
@@ -69,17 +69,17 @@ text = "Overwrite the file?"
 align = 1
 
 [node name="Line" type="TextureRect" parent="Overwrite/Panel/VBoxContainer"]
-margin_top = 32.0
+margin_top = 33.0
 margin_right = 284.0
-margin_bottom = 34.0
+margin_bottom = 35.0
 rect_min_size = Vector2( 0, 2 )
 texture = ExtResource( 3 )
 expand = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Overwrite/Panel/VBoxContainer"]
-margin_top = 44.0
+margin_top = 45.0
 margin_right = 284.0
-margin_bottom = 76.0
+margin_bottom = 77.0
 rect_min_size = Vector2( 0, 32 )
 custom_constants/separation = 80
 alignment = 1
@@ -127,14 +127,17 @@ margin_top = 8.0
 margin_right = -8.0
 margin_bottom = -39.0
 rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TopBar" type="HBoxContainer" parent="Popup/Panel/VBoxContainer"]
 margin_right = 384.0
 margin_bottom = 30.0
+rect_min_size = Vector2( 384, 0 )
 alignment = 1
 
 [node name="Back" type="TextureButton" parent="Popup/Panel/VBoxContainer/TopBar"]
-visible = false
 margin_left = 8.0
 margin_right = 38.0
 margin_bottom = 30.0
@@ -147,9 +150,9 @@ texture_normal = ExtResource( 4 )
 expand = true
 
 [node name="DirectoryName" type="Label" parent="Popup/Panel/VBoxContainer/TopBar"]
-margin_left = 25.0
+margin_left = 42.0
 margin_top = 5.0
-margin_right = 325.0
+margin_right = 342.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 300, 0 )
 rect_clip_content = true
@@ -164,8 +167,8 @@ valign = 1
 clip_text = true
 
 [node name="Reload" type="TextureButton" parent="Popup/Panel/VBoxContainer/TopBar"]
-margin_left = 329.0
-margin_right = 359.0
+margin_left = 346.0
+margin_right = 376.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 30, 30 )
 focus_mode = 1
@@ -245,6 +248,41 @@ custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
 text = ".tscn"
 
+[node name="LevelSelect" type="VBoxContainer" parent="Popup/Panel/VBoxContainer"]
+visible = false
+margin_top = 278.0
+margin_right = 384.0
+margin_bottom = 313.0
+custom_constants/separation = 1
+alignment = 1
+
+[node name="Line3" type="TextureRect" parent="Popup/Panel/VBoxContainer/LevelSelect"]
+margin_right = 384.0
+margin_bottom = 2.0
+rect_min_size = Vector2( 0, 2 )
+texture = ExtResource( 3 )
+expand = true
+
+[node name="HSplitContainer" type="HBoxContainer" parent="Popup/Panel/VBoxContainer/LevelSelect"]
+margin_top = 3.0
+margin_right = 384.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 0, 32 )
+custom_constants/separation = 35
+alignment = 1
+
+[node name="PackProperties" type="Button" parent="Popup/Panel/VBoxContainer/LevelSelect/HSplitContainer"]
+margin_left = 35.0
+margin_right = 153.0
+margin_bottom = 32.0
+text = "Properties"
+
+[node name="EditMap" type="Button" parent="Popup/Panel/VBoxContainer/LevelSelect/HSplitContainer"]
+margin_left = 188.0
+margin_right = 349.0
+margin_bottom = 32.0
+text = "Edit Worldmap"
+
 [node name="Line2" type="TextureRect" parent="Popup/Panel"]
 anchor_right = 1.0
 margin_top = 322.0
@@ -282,5 +320,7 @@ text = "Cancel"
 [connection signal="pressed" from="Popup/Panel/VBoxContainer/TopBar/Back" to="." method="_on_Back_pressed"]
 [connection signal="pressed" from="Popup/Panel/VBoxContainer/TopBar/Reload" to="." method="_on_Reload_pressed"]
 [connection signal="text_changed" from="Popup/Panel/VBoxContainer/FileName/HSplitContainer/LineEdit" to="." method="_on_LineEdit_text_changed"]
+[connection signal="pressed" from="Popup/Panel/VBoxContainer/LevelSelect/HSplitContainer/PackProperties" to="." method="_on_PackProperties_pressed"]
+[connection signal="pressed" from="Popup/Panel/VBoxContainer/LevelSelect/HSplitContainer/EditMap" to="." method="_on_EditMap_pressed"]
 [connection signal="pressed" from="Popup/Panel/HBoxContainer/OK" to="." method="_on_OK_pressed"]
 [connection signal="pressed" from="Popup/Panel/HBoxContainer/Cancel" to="." method="_on_Cancel_pressed"]

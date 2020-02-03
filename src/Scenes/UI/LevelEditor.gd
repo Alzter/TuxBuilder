@@ -854,7 +854,7 @@ func initial_menu():
 
 func _on_MusicSelect_pressed():
 	$Menu/Settings.hide()
-	UIHelpers.file_dialog("res://Audio/Music", ".ogg", false) # Bring up file select
+	UIHelpers.file_dialog("res://Audio/Music", ".ogg", false, false) # Bring up file select
 
 	yield(UIHelpers._get_scene().get_node("FileSelect"), "tree_exiting")
 
@@ -866,16 +866,27 @@ func _on_MusicSelect_pressed():
 func _on_PackSelect_pressed():
 	pack = true
 	$Menu/Editor.hide()
-	$Menu/PackSelect.popup()
-
-func _on_PackSelect_about_to_show():
-	for child in $Menu/PackSelect/Panel/VBoxContainer/ScrollContainer/VBoxContainer.get_children():
-		child.queue_free()
+	UIHelpers.file_dialog("user://Levels/Packs", "Folder", false, false)
 	
+	yield(UIHelpers._get_scene().get_node("FileSelect"), "tree_exiting")
+	if UIHelpers._get_scene().get_node("FileSelect").cancel == true:
+		$Menu/Editor.show()
+		return
+	else:
+		pack = UIHelpers._get_scene().get_node("FileSelect").selectedfile
+		yield(UIHelpers._get_scene().get_node("FileSelect"), "tree_exited")
+		pack_level_select(pack)
 
-func _on_LevelPackCancel_pressed():
-	$Menu/PackSelect.hide()
-	$Menu/Editor.popup()
+func pack_level_select(pack):
+	UIHelpers.pack_level_select(str("user://Levels/Packs/", pack))
+	
+	yield(UIHelpers._get_scene().get_node("FileSelect"), "tree_exiting")
+	print(str(UIHelpers._get_scene().get_node("FileSelect").cancel))
+	if UIHelpers._get_scene().get_node("FileSelect").cancel == true:
+		$Menu/Editor.show()
+		return
+	else:
+		UIHelpers._get_scene().load
 
 func _on_PackMenu_pressed():
 	pass # Replace with function body.

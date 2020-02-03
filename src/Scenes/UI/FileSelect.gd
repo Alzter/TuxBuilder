@@ -8,10 +8,14 @@ var cancel = true
 var save = false
 var savename = ""
 var filetype = ""
+var movable = true
+var levelselect = false
 
 func _ready():
+	$Popup/Panel/VBoxContainer/LevelSelect.visible = levelselect
 	$Popup/Panel/VBoxContainer/FileName.visible = save
 	$Popup/Panel/VBoxContainer/FileName/HSplitContainer/FileType.text = filetype
+	$Popup/Panel/VBoxContainer/TopBar/Back.visible = movable
 	$Popup.popup()
 	reload()
 
@@ -53,7 +57,13 @@ func reload():
 	# Get all the files in the directory, then add each as a button node
 	var files = list_files_in_directory(directory)
 	for file in files:
-		if (filetype in file or not "." in file or filetype == "") and not ".import" in file and not "EditedLevel" in file:
+		if filetype == "Folder":
+			if dir.dir_exists(str(file)):
+				var child = load("res://Scenes/Editor/FileSelectButton.tscn").instance()
+				child.text = file
+				$Popup/Panel/VBoxContainer/ScrollContainer/Files.add_child(child)
+		
+		elif (filetype in file or not "." in file or filetype == "") and not ".import" in file and not "EditedLevel" in file:
 			var child = load("res://Scenes/Editor/FileSelectButton.tscn").instance()
 			child.text = file
 			$Popup/Panel/VBoxContainer/ScrollContainer/Files.add_child(child)
@@ -108,3 +118,11 @@ func _on_OverwriteYes_pressed():
 func _on_OverwriteNo_pressed():
 	$Overwrite.hide()
 	$Popup.popup()
+
+
+func _on_PackProperties_pressed():
+	pass # Replace with function body.
+
+
+func _on_EditMap_pressed():
+	pass # Replace with function body.
