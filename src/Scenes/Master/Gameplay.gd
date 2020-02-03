@@ -200,7 +200,9 @@ func save_edited_level():
 	editsaved = true
 
 func load_edited_level():
+	var level_backup = current_level
 	load_level("user://EditedLevel/EditedLevel.tscn")
+	current_level = level_backup
 
 func load_level(level):
 	current_level = level
