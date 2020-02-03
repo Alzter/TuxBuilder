@@ -886,7 +886,15 @@ func pack_level_select(pack):
 		$Menu/Editor.show()
 		return
 	else:
-		UIHelpers._get_scene().load
+		var level = UIHelpers._get_scene().get_node("FileSelect").selectdir
+		if UIHelpers._get_scene().check_level_valid(level) == true:
+			if UIHelpers.get_level() != null:
+				UIHelpers._get_scene().enter_level(level)
+			else:
+				UIHelpers._get_scene().enter_level_init(level, false)
+		else:
+			$Menu/Editor.show()
+			return
 
 func _on_PackMenu_pressed():
 	pass # Replace with function body.
