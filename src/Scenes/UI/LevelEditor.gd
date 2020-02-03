@@ -31,7 +31,7 @@ var stop = false
 var dir = Directory.new()
 var clickdisable = false
 var tilemap = null
-var pack = false # Whether you're editing a singular level or level pack
+var pack = true # Whether you're editing a singular level or level pack
 
 func _ready():
 	if UIHelpers.get_level() == null:
@@ -881,7 +881,6 @@ func pack_level_select(pack):
 	UIHelpers.pack_level_select(str("user://Levels/Packs/", pack))
 	
 	yield(UIHelpers._get_scene().get_node("FileSelect"), "tree_exiting")
-	print(str(UIHelpers._get_scene().get_node("FileSelect").cancel))
 	if UIHelpers._get_scene().get_node("FileSelect").cancel == true:
 		$Menu/Editor.show()
 		return
@@ -897,4 +896,14 @@ func pack_level_select(pack):
 			return
 
 func _on_PackMenu_pressed():
-	pass # Replace with function body.
+	var directory = UIHelpers._get_scene().current_level
+	var dir2 = directory.trim_suffix("/")
+	var end = dir2.rfind("/")
+	dir2.erase(end, dir2.length() - end)
+	if dir2.length() > 1:
+		directory = dir2
+	dir2 = directory.trim_suffix("/")
+	end = dir2.rfind("/")
+	directory = dir2.substr(end,dir2.length() - end)
+	directory = directory.trim_prefix("/")
+	pack_level_select(directory)
