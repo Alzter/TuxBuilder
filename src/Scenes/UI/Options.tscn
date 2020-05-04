@@ -4,7 +4,8 @@
 [ext_resource path="res://Scenes/UI/Options.gd" type="Script" id=2]
 [ext_resource path="res://Sprites/Editor/Line.png" type="Texture" id=3]
 
-[node name="Options" type="Popup"]
+[node name="Options" type="Control"]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -51,7 +52,6 @@ texture = ExtResource( 3 )
 expand = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-editor/display_folded = true
 margin_top = 41.0
 margin_right = 164.0
 margin_bottom = 64.0
@@ -62,7 +62,7 @@ alignment = 1
 margin_left = 12.0
 margin_top = 1.0
 margin_right = 132.0
-margin_bottom = 21.0
+margin_bottom = 22.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 0
@@ -75,7 +75,6 @@ margin_bottom = 23.0
 action_mode = 0
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
-editor/display_folded = true
 margin_top = 69.0
 margin_right = 164.0
 margin_bottom = 92.0
@@ -86,7 +85,7 @@ alignment = 1
 margin_left = 31.0
 margin_top = 1.0
 margin_right = 112.0
-margin_bottom = 21.0
+margin_bottom = 22.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 0

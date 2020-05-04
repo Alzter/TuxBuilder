@@ -12,7 +12,7 @@ var filetype = ""
 func _ready():
 	$Popup/Panel/VBoxContainer/FileName.visible = save
 	$Popup/Panel/VBoxContainer/FileName/HSplitContainer/FileType.text = filetype
-	$Popup.popup()
+	$Popup.show()
 	reload()
 
 func _process(delta):
@@ -73,7 +73,7 @@ func _on_OK_pressed():
 	var files = list_files_in_directory(directory)
 	if save and (selectedfile != null or (str(savename, filetype) in files)):
 		$Popup.hide()
-		$Overwrite.popup()
+		$Overwrite.show()
 	else:
 		cancel = false
 		queue_free()
@@ -107,4 +107,4 @@ func _on_OverwriteYes_pressed():
 
 func _on_OverwriteNo_pressed():
 	$Overwrite.hide()
-	$Popup.popup()
+	$Popup.show()

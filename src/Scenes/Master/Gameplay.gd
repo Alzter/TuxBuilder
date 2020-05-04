@@ -132,7 +132,7 @@ func enter_level_init(level, properties):
 	editmode_toggle()
 	$CanvasLayer/AnimationPlayer.play("Circle In")
 	if properties:
-		UIHelpers.get_editor().get_node("Menu/Settings").popup()
+		UIHelpers.get_editor().get_node("Menu/Settings").show()
 
 func enter_level(level):
 	$CanvasLayer/AnimationPlayer.play("Circle Out")

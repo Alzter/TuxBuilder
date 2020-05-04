@@ -1,4 +1,4 @@
-extends Popup
+extends Control
 
 var background_opacity = 0
 var panel_sizemult = 1
