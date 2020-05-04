@@ -1,4 +1,4 @@
-extends Popup
+extends Control
 
 func _ready():
 	$VBoxContainer/HBoxContainer/FullscreenCheck.pressed = Settings.config.get_value("video", "fullscreen", false)

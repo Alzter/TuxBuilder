@@ -55,15 +55,15 @@ func _on_Load_pressed():
 		if UIHelpers._get_scene().check_level_valid(selectdir) == true:
 			level = selectdir
 			$DisplayName.text = load(str(level)).instance().level_name
-			$CanvasLayer/Popup.popup()
+			$CanvasLayer/Popup.show()
 		else:
-			$CanvasLayer/Error.popup()
+			$CanvasLayer/Error.show()
 
 	# Otherwise don't do anything
 	else:
-		$CanvasLayer/Popup.popup()
+		$CanvasLayer/Popup.show()
 	$CanvasLayer/BottomName.text = $DisplayName.text
 
 func _on_ErrorButton_pressed():
 	$CanvasLayer/Error.hide()
-	$CanvasLayer/Popup.popup()
+	$CanvasLayer/Popup.show()

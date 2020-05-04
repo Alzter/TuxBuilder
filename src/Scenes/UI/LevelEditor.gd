@@ -113,7 +113,7 @@ func _process(_delta):
 		if $Menu/Editor.visible:
 			$Menu/Editor.hide()
 		else:
-			$Menu/Editor.popup()
+			$Menu/Editor.show()
 
 	if $Menu/Editor.visible or $Menu/Create.visible or $Menu/Settings.visible or $Menu/Exit.visible or $UI/AddLayer.visible:
 		$SelectedTile.visible = false
@@ -209,7 +209,7 @@ func _process(_delta):
 							dragpos = Vector2(0,0)
 							return
 						if Input.is_action_just_pressed("click_right") and child.is_in_group("popup"):
-							child.get_node("CanvasLayer/Popup").popup()
+							child.get_node("CanvasLayer/Popup").show()
 							clickdisable = true
 
 	# If clicking on an expandable area, drag it
@@ -220,7 +220,7 @@ func _process(_delta):
 					$SelectedTile.visible = false
 					object_hovered = true
 					if Input.is_action_just_pressed("click_right") and child.is_in_group("popup"):
-						child.get_node("CanvasLayer/Popup").popup()
+						child.get_node("CanvasLayer/Popup").show()
 						clickdisable = true
 					elif Input.is_action_just_pressed("click_left"):
 						dragging_object = true
@@ -635,7 +635,7 @@ func _on_LayerAdd_button_down():
 			item.erase(item.length() - 5,5)
 			$UI/AddLayer/VBoxContainer/OptionButton.add_icon_item(load(str("res://Sprites/Editor/LayerIcons/", item, ".png")),item)
 
-	$UI/AddLayer.popup()
+	$UI/AddLayer.show()
 	$UI/AddLayer/VBoxContainer/OptionButton.selected = tilemappos
 
 func _on_AddLayer_popup_hide():
@@ -738,7 +738,7 @@ func _on_Play_pressed():
 
 func _on_SettingsConfirmation_pressed():
 	$Menu/Settings.hide()
-	$Menu/Editor.popup()
+	$Menu/Editor.show()
 
 func _on_Yes_pressed():
 	UIHelpers._get_scene().save_level()
@@ -757,7 +757,7 @@ func _on_No_pressed():
 
 func _on_Cancel_pressed():
 	$Menu/Settings.hide()
-	$Menu/Editor.popup()
+	$Menu/Editor.show()
 
 func _on_LevelSave_pressed():
 	if UIHelpers._get_scene().current_level != "user://Scenes/Levels/EditedLevel/EditedLevel.tscn":
@@ -766,13 +766,13 @@ func _on_LevelSave_pressed():
 		$Menu/Editor.hide()
 		UIHelpers._get_scene().save_level_as()
 		yield(UIHelpers._get_scene().get_node("FileSelect"), "tree_exiting")
-		$Menu/Editor.popup()
+		$Menu/Editor.show()
 
 func _on_LevelSaveAs_pressed():
 	$Menu/Editor.hide()
 	UIHelpers._get_scene().save_level_as()
 	yield(UIHelpers._get_scene().get_node("FileSelect"), "tree_exiting")
-	$Menu/Editor.popup()
+	$Menu/Editor.show()
 
 func _on_LevelOpen_pressed():
 	$Menu/Editor.hide()
@@ -784,12 +784,12 @@ func _on_LevelOpen_pressed():
 
 func _on_LevelProperties_pressed():
 	$Menu/Editor.hide()
-	$Menu/Settings.popup()
+	$Menu/Settings.show()
 
 func _on_ReturnMenu_pressed():
 	$Menu/Editor.hide()
 	if UIHelpers.get_level() != null:
-		$Menu/Exit.popup()
+		$Menu/Exit.show()
 	else:
 		get_tree().change_scene("res://Scenes/UI/MainMenu.tscn")
 
@@ -798,7 +798,7 @@ func _on_Return_pressed():
 
 func _on_LevelCreate_pressed():
 	$Menu/Editor.hide()
-	$Menu/Create.popup()
+	$Menu/Create.show()
 
 func _on_CreateLevel_pressed():
 	create_level("res://Scenes/Editor/LevelTemplates/Level.tscn")
@@ -822,7 +822,7 @@ func create_level(level):
 
 func _on_CancelCreation_pressed():
 	$Menu/Create.hide()
-	$Menu/Editor.popup()
+	$Menu/Editor.show()
 
 func _on_Save_pressed():
 	if UIHelpers._get_scene().current_level != "user://Scenes/Levels/EditedLevel/EditedLevel.tscn":
@@ -832,7 +832,7 @@ func _on_Save_pressed():
 		yield(UIHelpers._get_scene().get_node("FileSelect"), "tree_exiting")
 
 func initial_menu():
-	$Menu/Editor.popup()
+	$Menu/Editor.show()
 	$Menu/Editor/Panel/VBoxContainer/Return.hide()
 	$Menu/Editor/Panel/VBoxContainer/LevelSave.hide()
 	$Menu/Editor/Panel/VBoxContainer/LevelSaveAs.hide()
@@ -851,4 +851,4 @@ func _on_MusicSelect_pressed():
 	if UIHelpers._get_scene().get_node("FileSelect").cancel == false:
 		UIHelpers.get_level().music = UIHelpers._get_scene().get_node("FileSelect").selectdir
 		$Menu/Settings/Panel/VBoxContainer/Music/MusicSelect.text = UIHelpers.get_level().music
-	$Menu/Settings.popup()
+	$Menu/Settings.show()

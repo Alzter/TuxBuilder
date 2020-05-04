@@ -68,8 +68,6 @@ stream = SubResource( 1 )
 [node name="Camera2D" type="Camera2D" parent="."]
 pause_mode = 2
 current = true
-drag_margin_h_enabled = false
-drag_margin_v_enabled = false
 smoothing_speed = 15.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
