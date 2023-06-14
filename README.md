@@ -13,5 +13,8 @@ If you prefer learning with videos you can find a list of Godot youtubers [here]
 
 # SuperTux Classic
 
+![image](https://github.com/Alzter/TuxBuilder/assets/22513909/d35dd701-5054-44e5-802f-89ffb27804d9)
+
 TuxBuilder has been succeeded by SuperTux Classic, another reimplementation of SuperTux in Godot which is more fully featured, robust, and bug-free.
 https://github.com/Alzter/SuperTux-Classic
+
